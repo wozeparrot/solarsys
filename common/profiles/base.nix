@@ -18,8 +18,9 @@
       coreutils
       binutils
 
-      # git
+      # config building
       git
+      gnumake
 
       # extra utils
       ripgrep
@@ -39,7 +40,7 @@
     shellAliases = {
       # grep
       grep = "rg";
-     
+
       # my public ip
       myip = "dig +short myip.opendns.com @208.67.222.222 2>&1";
     };

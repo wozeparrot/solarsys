@@ -1,7 +1,11 @@
 { pkgs, mpkgs, ... }:
 
 {
-  imports = [ ./components/neovim ./components/intershell ];
+  imports = [
+    ./components/neovim
+    ./components/intershell
+    ./components/git
+  ];
 
   # packages
   home.packages = with pkgs; [
@@ -19,7 +23,7 @@
     kdeApplications.kdenlive
 
     gitAndTools.hub
-    
+
     customGamesPkgs.multimc
     mpkgs.steam
     mpkgs.steam-run
