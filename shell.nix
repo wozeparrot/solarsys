@@ -1,6 +1,6 @@
 { pkgs ? import <nixpkgs> { } }:
 let
-  solarsys-build = pkgs.writeStrictShellScriptBin "solarsys-build" ''
+  solarsys-build = pkgs.writeShellScriptBin "solarsys-build" ''
     host=''${host:-"$(${pkgs.hostname}/bin/hostname)"}
 
     path=.#nixosConfigurations."$host".config.system.build.toplevel
@@ -11,7 +11,7 @@ let
     ${pkgs.nixUnstable}/bin/nix path-info "$@" "$path"
   '';
 
-  solarsys-update = pkgs.writeStrictShellScriptBin "solarsys-update" ''
+  solarsys-update = pkgs.writeShellScriptBin "solarsys-update" ''
     for pkg in $(${pkgs.jq}/bin/jq -r '.nodes | keys[] | select(. != "root")' flake.lock); do
       ${pkgs.nixUnstable}/bin/nix flake update --update-input "$pkg" "$@"
     done
