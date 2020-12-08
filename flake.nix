@@ -31,7 +31,7 @@
       };
     in
     {
-      nixosConfigurations.nixos =
+      nixosConfigurations.woztop =
         let
           specialArgs = { inherit pkgs mpkgs; };
 
