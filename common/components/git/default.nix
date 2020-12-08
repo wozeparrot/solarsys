@@ -22,6 +22,11 @@
 
     lfs.enable = true;
 
+    delta = {
+      enable = true;
+      options.features = "decorations side-by-side line-numbers";
+    };
+
     extraConfig = {
       github.user = "wozeparrot@gmail.com";
 

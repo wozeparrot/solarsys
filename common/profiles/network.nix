@@ -12,4 +12,6 @@
   };
 
   services.resolved.enable = true;
+
+  users.users.woze.extraGroups = [ "networkmanager" ];
 }

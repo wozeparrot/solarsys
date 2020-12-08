@@ -1,16 +1,33 @@
-{ config, pkgs, mpkgs, lib, ... }:
+{ config, pkgs, mpkgs, lib, inputs, ... }:
 {
-  nix.package = pkgs.nixFlakes;
-  nix.systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-  nix.autoOptimiseStore = true;
-  nix.gc.automatic = true;
-  nix.optimise.automatic = true;
-  nix.allowedUsers = [ "@wheel" ];
-  nix.trustedUsers = [ "root" "@wheel" ];
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes ca-references
-    min-free = 536870912
-  '';
+  imports = [
+    ./user.nix
+  ];
+
+  nix = {
+    package = pkgs.nixUnstable;
+    systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+
+    registry.nixpkgs.flake = inputs.unstable;
+
+    nixPath = [ "nixpkgs=${inputs.unstable}" ];
+
+    gc = {
+      automatic = true;
+      dates = "daily";
+      options = "--delete-older-than 7d";
+    };
+
+    extraOptions = ''
+      experimental-features = nix-command flakes ca-references
+      min-free = 536870912
+    '';
+  };
+
+  nixpkgs.config.allowUnfree = true;
+
+  home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
 
   environment = {
     systemPackages = with pkgs; [
@@ -67,6 +84,7 @@
   programs.thefuck.enable = true;
   programs.firejail.enable = true;
   programs.mtr.enable = true;
+  programs.fish.enable = true;
 
   # services
   services.lorri.enable = true;

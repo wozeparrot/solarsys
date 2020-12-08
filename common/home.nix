@@ -24,7 +24,7 @@
 
     gitAndTools.hub
 
-    customGamesPkgs.multimc
+    multimc
     mpkgs.steam
     mpkgs.steam-run
     lutris
@@ -52,7 +52,7 @@
     unzip
     p7zip
 
-    customGooseModPkg
+    discord
   ];
 
   # extra programs
@@ -110,6 +110,7 @@
   };
 
   home.username = "woze";
+
   home.homeDirectory = "/home/woze";
 
   programs.home-manager.enable = true;

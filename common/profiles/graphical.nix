@@ -1,6 +1,6 @@
 { config, pkgs, mpkgs, lib, ... }:
 {
-  imports = [ ./network.nix ];
+  imports = [ ./base.nix ./network.nix ];
 
   # hardware
   hardware = {
@@ -22,6 +22,9 @@
     };
   };
 
+  programs.dconf.enable = true;
+  services.dbus.packages = with pkgs; [ dconf ];
+
   # xserver
   services.xserver = {
     enable = true
@@ -32,6 +35,14 @@
       enable = true;
       disableWhileTyping = false;
     };
+  };
+
+  xdg.portal = {
+    enable = true;
+    gtkUsePortal = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
   };
 
   # environment (mostly for root themes)
