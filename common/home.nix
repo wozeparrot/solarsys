@@ -24,7 +24,7 @@
 
     gitAndTools.hub
 
-    multimc
+    ss-multimc
     mpkgs.steam
     mpkgs.steam-run
     lutris
@@ -48,11 +48,12 @@
     iotop
 
     keepassxc
+    etcher
 
     unzip
     p7zip
 
-    discord
+    ss-discord
   ];
 
   # extra programs
@@ -99,6 +100,8 @@
       }
     '';
   };
+
+  services.kdeconnect.enable = true;
 
   home.sessionVariables = {
     LANG = "en_US.UTF-8";

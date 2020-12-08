@@ -27,9 +27,9 @@
 
   # xserver
   services.xserver = {
-    enable = true
+    enable = true;
 
-      layout = "us";
+    layout = "us";
 
     libinput = {
       enable = true;

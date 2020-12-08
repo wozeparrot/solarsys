@@ -94,4 +94,8 @@
 
   # disable manually creating users
   users.mutableUsers = false;
+
+  # time
+  time.timeZone = "America/Toronto";
+  services.timesyncd.enable = true;
 }

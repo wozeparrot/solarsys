@@ -1,5 +1,7 @@
 self: super:
 {
-  multimc = super.callPackage ./pkgs/multimc { };
-  discord = super.callPackage ./pkgs/discord { };
+  ss-multimc = super.callPackage ./pkgs/multimc { };
+  ss-discord = super.callPackage ./pkgs/discord { };
+  ss-rofi = super.callPackage ./pkgs/rofi { };
+  ss-picom = super.callPackage ./pkgs/picom { };
 }

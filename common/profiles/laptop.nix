@@ -2,7 +2,7 @@
 # base, graphical
 
 { config, pkgs, mpkgs, lib, ... }: {
-  imports = [ ./network.nix ];
+  imports = [ ./base.nix ./graphical.nix ./network.nix ];
 
   # system packages
   environment.systemPackages = with pkgs; [
