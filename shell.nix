@@ -21,17 +21,17 @@ let
     done
   '';
 in
-  pkgs.mkShell {
-    name = "solarsys";
-    nativeBuildInputs = with pkgs; [
-      git
-      nixUnstable
+pkgs.mkShell {
+  name = "solarsys";
+  nativeBuildInputs = with pkgs; [
+    git
+    nixUnstable
 
-      solarsys-build
-      solarsys-update
-    ];
+    solarsys-build
+    solarsys-update
+  ];
 
-    shellHook = ''
-      PATH=${unlockedNix}/bin:$PATH
-    '';
-  }
+  shellHook = ''
+    PATH=${unlockedNix}/bin:$PATH
+  '';
+}

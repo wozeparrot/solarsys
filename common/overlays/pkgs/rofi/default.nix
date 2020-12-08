@@ -1,7 +1,22 @@
-{ stdenv, lib, fetchFromGitHub
-, autoreconfHook, pkgconfig, libxkbcommon, pango, which, git
-, cairo, libxcb, xcbutil, xcbutilwm, xcbutilxrm, libstartup_notification
-, bison, flex, librsvg, check
+{ stdenv
+, lib
+, fetchFromGitHub
+, autoreconfHook
+, pkgconfig
+, libxkbcommon
+, pango
+, which
+, git
+, cairo
+, libxcb
+, xcbutil
+, xcbutilwm
+, xcbutilxrm
+, libstartup_notification
+, bison
+, flex
+, librsvg
+, check
 }:
 
 stdenv.mkDerivation rec {
@@ -23,10 +38,22 @@ stdenv.mkDerivation rec {
   '';
 
   nativeBuildInputs = [ autoreconfHook pkgconfig ];
-  buildInputs = [ libxkbcommon pango cairo git bison flex librsvg check
-    libstartup_notification libxcb xcbutil xcbutilwm xcbutilxrm which
+  buildInputs = [
+    libxkbcommon
+    pango
+    cairo
+    git
+    bison
+    flex
+    librsvg
+    check
+    libstartup_notification
+    libxcb
+    xcbutil
+    xcbutilwm
+    xcbutilxrm
+    which
   ];
 
   doCheck = false;
 }
-

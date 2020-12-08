@@ -54,7 +54,7 @@
         start = ''
           ${pkgs.runtimeShell} $HOME/.hm-xsession &
           waitPID=$!
-        ''
+        '';
       }
     ];
   };
@@ -83,4 +83,4 @@
   };
 
   users.users.woze.extraGroups = [ "docker" "libvirtd" ];
-};
+}
