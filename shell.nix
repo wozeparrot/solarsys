@@ -15,7 +15,7 @@ let
     ${unlockedNix}/bin/nix path-info "$@" "$path"
   '';
 
-  solarsys-switch = pkgs.writeShellScriptBin "solarsys-rebuild" ''
+  solarsys-switch = pkgs.writeShellScriptBin "solarsys-switch" ''
     host=''${host:-"$(${pkgs.hostname}/bin/hostname)"}
 
     sudo nixos-rebuild --flake ".#$host" switch
