@@ -76,7 +76,7 @@
     fonts = with pkgs; [ nerdfonts jetbrains-mono ];
     fontconfig.defaultFonts = {
       monospace = [ "JetBrainsMono Nerd Font" ];
-      sansSerif = [ "JetBrainsMono" ];
+      sansSerif = [ "JetBrains Mono:style=Regular" ];
     };
   };
 
