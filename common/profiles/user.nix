@@ -7,4 +7,4 @@
     extraGroups = [ "wheel" "video" "input" "plugdev" ];
     shell = pkgs.fish;
   };
-};
+}
