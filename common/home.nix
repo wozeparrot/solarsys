@@ -72,7 +72,6 @@
 
   programs.ncmpcpp = {
     enable = true;
-    mpdMusicDir = "~/music";
     settings = {
       visualizer_fifo_path = "/tmp/mpd.fifo";
       visualizer_output_name = "my_fifo";

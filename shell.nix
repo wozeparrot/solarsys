@@ -15,6 +15,24 @@ let
     ${unlockedNix}/bin/nix path-info "$@" "$path"
   '';
 
+  solarsys-switch = pkgs.writeShellScriptBin "solarsys-rebuild" ''
+    host=''${host:-"$(${pkgs.hostname}/bin/hostname)"}
+
+    sudo nixos-rebuild --flake ".$host" switch
+  '';
+
+  solarsys-rollback = pkgs.writeShellScriptBin "solarsys-rollback" ''
+    host=''${host:-"$(${pkgs.hostname}/bin/hostname)"}
+
+    sudo nixos-rebuild --flake ".$host" switch --rollback
+  '';
+
+  solarsys-test = pkgs.writeShellScriptBin "solarsys-test" ''
+    host=''${host:-"$(${pkgs.hostname}/bin/hostname)"}
+
+    sudo nixos-rebuild --flake ".$host" test
+  '';
+
   solarsys-update = pkgs.writeShellScriptBin "solarsys-update" ''
     for pkg in $(${pkgs.jq}/bin/jq -r '.nodes | keys[] | select(. != "root")' flake.lock); do
       ${unlockedNix}/bin/nix flake update --update-input "$pkg" "$@"
@@ -28,6 +46,9 @@ pkgs.mkShell {
     nixUnstable
 
     solarsys-build
+    solarsys-switch
+    solarsys-rollback
+    solarsys-test
     solarsys-update
   ];
 

@@ -13,24 +13,39 @@
 
   outputs = inputs@{ self, unstable, master, home-manager }:
     let
+      inherit (builtins) attrNames attrValues readDir listToAttrs;
+      inherit (unstable) lib;
+      inherit (lib) removeSuffix;
+
+      pathsToImportedAttrs = paths:
+        (values: f: listToAttrs (map f values)) paths (path: {
+        name = removeSuffix ".nix" (baseNameOf path);
+        value = import path;
+      });
+
       system = "x86_64-linux";
 
-      pkgs = import unstable {
-        inherit system;
-        config = { allowUnfree = true; };
-        overlays = [
-          (import ./common/overlays/pkgs.nix)
-        ];
-      };
-      mpkgs = import master {
-        inherit system;
-        config = { allowUnfree = true; };
-        overlays = [
-          (import ./common/overlays/pkgs.nix)
-        ];
-      };
+      pkgsImport = pkgs:
+        import pkgs {
+          inherit system;
+          config = { allowUnfree = true; };
+          overlays = attrValues self.overlays;
+        };
+
+      pkgs = pkgsImport unstable;
+      mpkgs = pkgsImport master;
     in
     {
+      overlay = import ./common/pkgs;
+
+      overlays = 
+        let
+          overlayDir = ./common/overlays;
+          fullPath = name: overlayDir + "/${name}";
+          overlayPaths = map fullPath (attrNames (readDir overlayDir));
+        in
+        pathsToImportedAttrs overlayPaths;
+
       nixosConfigurations.woztop =
         let
           specialArgs = { inherit pkgs mpkgs inputs; };
