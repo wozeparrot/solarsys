@@ -8,7 +8,7 @@
       rust-vim
 
       coc-nvim
-      coc.git
+      coc-git
       coc-json
       coc-yaml
       coc-rust-analyzer
@@ -18,4 +18,4 @@
     ];
     extraConfig = builtins.readFile ./init.vim;
   };
-};
+}

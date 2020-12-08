@@ -5,6 +5,7 @@
   imports = [
     ../common/profiles/graphical.nix
     ../common/profiles/laptop.nix
+    ./hardware.nix
   ];
 
   boot.kernelParams = [ "intel_iommu=on" ];
@@ -83,4 +84,5 @@
   };
 
   users.users.woze.extraGroups = [ "docker" "libvirtd" ];
+  home-manager.users.woze = ./home.nix;
 }

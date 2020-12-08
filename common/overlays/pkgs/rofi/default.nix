@@ -20,7 +20,7 @@
 }:
 
 stdenv.mkDerivation rec {
-  name = "rofi";
+  pname = "rofi";
   commit = "57ee69367d1ffe01c6e5ebb9b2fa5cb83060639f";
 
   src = fetchFromGitHub {

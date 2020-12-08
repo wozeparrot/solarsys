@@ -1,9 +1,9 @@
-{ stdenv, mkDerivation, fetchFromGitHub, cmake, jdk8, zlib, file, makeWrapper, xorg, libpulseaudio, qtbase }:
+{ stdenv, fetchFromGitHub, cmake, jdk8, zlib, file, makeWrapper, xorg, libpulseaudio, qtbase }:
 let
   jdk = jdk8;
   libpath = with xorg; stdenv.lib.makeLibraryPath [ libX11 libXext libXcursor libXrandr libXxf86vm libpulseaudio ];
 in
-mkDerivation rec {
+stdenv.mkDerivation rec {
   pname = "multimc";
   commit = "66b0ed26695a8d6e2009be6c2107d75df91ee2d4";
   src = fetchFromGitHub {

@@ -40,7 +40,7 @@
       mergetool.prompt = true;
       "mergetool \"nvim-merge\"".cmd = "nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'";
 
-      core = editor = "nvim";
+      core.editor = "nvim";
     };
   };
 }
