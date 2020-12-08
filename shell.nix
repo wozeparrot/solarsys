@@ -18,19 +18,19 @@ let
   solarsys-switch = pkgs.writeShellScriptBin "solarsys-rebuild" ''
     host=''${host:-"$(${pkgs.hostname}/bin/hostname)"}
 
-    sudo nixos-rebuild --flake ".$host" switch
+    sudo nixos-rebuild --flake ".#$host" switch
   '';
 
   solarsys-rollback = pkgs.writeShellScriptBin "solarsys-rollback" ''
     host=''${host:-"$(${pkgs.hostname}/bin/hostname)"}
 
-    sudo nixos-rebuild --flake ".$host" switch --rollback
+    sudo nixos-rebuild --flake ".#$host" switch --rollback
   '';
 
   solarsys-test = pkgs.writeShellScriptBin "solarsys-test" ''
     host=''${host:-"$(${pkgs.hostname}/bin/hostname)"}
 
-    sudo nixos-rebuild --flake ".$host" test
+    sudo nixos-rebuild --flake ".#$host" test
   '';
 
   solarsys-update = pkgs.writeShellScriptBin "solarsys-update" ''
