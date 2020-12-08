@@ -1,5 +1,9 @@
 { pkgs ? import <nixpkgs> { } }:
 let
+  unlockedNix = pkgs.writeShellScriptBin "nix" ''
+    ${pkgs.nixUnstable}/bin/nix --option experimental-features "nix-command flakes ca-references" "$@"
+  '';
+
   solarsys-build = pkgs.writeShellScriptBin "solarsys-build" ''
     host=''${host:-"$(${pkgs.hostname}/bin/hostname)"}
 
@@ -7,13 +11,13 @@ let
     
     echo Building "$host" 1>&2
     
-    ${pkgs.nixUnstable}/bin/nix build "$@" "$path" 1>&2
-    ${pkgs.nixUnstable}/bin/nix path-info "$@" "$path"
+    ${unlockedNix}/bin/nix build "$@" "$path" 1>&2
+    ${unlockedNix}/bin/nix path-info "$@" "$path"
   '';
 
   solarsys-update = pkgs.writeShellScriptBin "solarsys-update" ''
     for pkg in $(${pkgs.jq}/bin/jq -r '.nodes | keys[] | select(. != "root")' flake.lock); do
-      ${pkgs.nixUnstable}/bin/nix flake update --update-input "$pkg" "$@"
+      ${unlockedNix}/bin/nix flake update --update-input "$pkg" "$@"
     done
   '';
 in
@@ -28,10 +32,6 @@ in
     ];
 
     shellHook = ''
-      PATH=${
-        pkgs.writeShellScriptBin "nix" ''
-          ${pkgs.nixUnstable}/bin/nix --option experimental-features "nix-command flakes ca-references" "$@"
-        ''
-      }/bin:$PATH
+      PATH=${unlockedNix}/bin:$PATH
     '';
   }
