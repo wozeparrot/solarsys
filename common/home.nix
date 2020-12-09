@@ -102,6 +102,19 @@
 
   services.kdeconnect.enable = true;
 
+  # systemd
+  systemd.user.services.keepassxc = {
+    Unit = {
+      Description = "KeePassXC password manager";
+      After = [ "graphical-session-pre.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+
+    Install = { WantedBy = [ "graphical-session.target" ]; };
+
+    Service = { ExecStart = "${pkgs.keepassxc}/bin/keepassxc"; };
+  };
+
   home.sessionVariables = {
     LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
