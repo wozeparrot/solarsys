@@ -25,7 +25,6 @@
     gitAndTools.hub
 
     ss.multimc
-    mpkgs.steam
     mpkgs.steam-run
     lutris
 
