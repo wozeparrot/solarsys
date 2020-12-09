@@ -36,8 +36,6 @@
       mpkgs = pkgsImport master;
     in
     {
-      overlay = import ./common/pkgs;
-
       overlays = 
         let
           overlayDir = ./common/overlays;
