@@ -31,7 +31,7 @@
     torrential
     audacity
     lmms
-    freecad
+    mpkgs.freecad
 
     radeontop
     simplescreenrecorder
