@@ -8,7 +8,6 @@
   # Packages
   home.packages = with pkgs; [
     lxappearance
-
     ss.rofi
     herbstluftwm
     i3lock-color
@@ -20,6 +19,29 @@
     pypy3
     python3
     python3Packages.python-language-server
+
+    docker-compose
+
+    ghidra
+    krita
+    vlc
+    zathura
+    antimicroX
+    torrential
+    audacity
+    lmms
+
+    radeontop
+    simplescreenrecorder
+
+    the-powder-toy
+
+    teams
+
+    wineWowPackages.staging
+    appimage-run
+    scrcpy
+    flameshot
   ];
 
   programs.obs-studio = {

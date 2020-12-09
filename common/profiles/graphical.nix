@@ -77,6 +77,7 @@
       paper-icon-theme
       libsForQt5.qtstyleplugins
       keepassxc
+      pavucontrol
     ];
   };
 }

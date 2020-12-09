@@ -26,6 +26,7 @@
 
     ss.multimc
     mpkgs.steam-run
+    protontricks
     lutris
 
     xdo
