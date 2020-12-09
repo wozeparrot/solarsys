@@ -30,7 +30,7 @@
 }:
 
 stdenv.mkDerivation rec {
-  pname = "picom";
+  name = "picom";
   commit = "44b4970f70d6b23759a61a2b94d9bfb4351b41b1";
 
   src = fetchFromGitHub {

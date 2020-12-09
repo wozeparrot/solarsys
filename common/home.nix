@@ -24,7 +24,7 @@
 
     gitAndTools.hub
 
-    ss-multimc
+    ss.multimc
     mpkgs.steam
     mpkgs.steam-run
     lutris
@@ -53,7 +53,7 @@
     unzip
     p7zip
 
-    ss-discord
+    ss.discord
   ];
 
   # extra programs

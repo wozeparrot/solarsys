@@ -9,7 +9,7 @@
   home.packages = with pkgs; [
     lxappearance
 
-    ss-rofi
+    ss.rofi
     herbstluftwm
     i3lock-color
     pcmanfm
@@ -79,7 +79,7 @@
     enable = true;
     blur = true;
     blurExclude = [ "class_g = 'slop'" "class_g = 'discord_overlay.py'" ];
-    package = pkgs.ss-picom;
+    package = pkgs.ss.picom;
 
     extraOptions = ''
       blur: {
