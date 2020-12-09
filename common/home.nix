@@ -114,6 +114,10 @@
     Service = { ExecStart = "${pkgs.keepassxc}/bin/keepassxc"; };
   };
 
+  # x config
+  xdg.enable = true;
+
+  # home manager stuff
   home.sessionVariables = {
     LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
@@ -124,7 +128,6 @@
   };
 
   home.username = "woze";
-
   home.homeDirectory = "/home/woze";
 
   programs.home-manager.enable = true;
