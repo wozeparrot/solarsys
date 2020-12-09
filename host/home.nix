@@ -15,6 +15,7 @@
     polybarFull
     sxhkd
     dunst
+    exo
 
     pypy3
     python3
