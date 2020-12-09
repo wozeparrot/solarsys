@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> { } }:
 let
   unlockedNix = pkgs.writeShellScriptBin "nix" ''
-    ${pkgs.nixUnstable}/bin/nix --option experimental-features "nix-command flakes ca-references" "$@"
+    ${pkgs.nixFlakes}/bin/nix --option experimental-features "nix-command flakes ca-references" "$@"
   '';
 
   solarsys-build = pkgs.writeShellScriptBin "solarsys-build" ''
@@ -43,7 +43,7 @@ pkgs.mkShell {
   name = "solarsys";
   nativeBuildInputs = with pkgs; [
     git
-    nixUnstable
+    unlockedNix
 
     solarsys-build
     solarsys-switch
