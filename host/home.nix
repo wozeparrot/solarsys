@@ -15,7 +15,7 @@
     polybarFull
     sxhkd
     dunst
-    exo
+    xfce.exo
 
     pypy3
     python3
