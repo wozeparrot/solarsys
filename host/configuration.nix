@@ -29,6 +29,7 @@
 
   networking.interfaces.enp2s0.useDHCP = true;
   networking.interfaces.wlp3s0.useDHCP = true;
+  networking.interfaces.wlan0.useDHCP = true;
 
   environment.systemPackages = with pkgs; [
     virt-manager
