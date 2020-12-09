@@ -2,6 +2,7 @@
 {
   programs.neovim = {
     enable = true;
+    withNodeJs = true;
     plugins = with pkgs.vimPlugins; [
       zig-vim
       vim-nix
