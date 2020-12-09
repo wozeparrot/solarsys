@@ -85,6 +85,7 @@
   programs.firejail.enable = true;
   programs.mtr.enable = true;
   programs.fish.enable = true;
+  programs.command-not-found.enable = false;
 
   # services
   services.lorri.enable = true;
