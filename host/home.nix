@@ -14,6 +14,8 @@
     i3lock-color
     pcmanfm
     polybarFull
+    sxhkd
+    dunst
 
     pypy3
     python3
