@@ -22,7 +22,7 @@
 
     docker-compose
 
-    ghidra
+    ghidra-bin
     krita
     vlc
     zathura
