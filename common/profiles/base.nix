@@ -86,6 +86,7 @@
   programs.mtr.enable = true;
   programs.fish.enable = true;
   programs.command-not-found.enable = false;
+  programs.ssh.startAgent = true;
 
   # services
   services.lorri.enable = true;
