@@ -37,13 +37,13 @@
     };
   };
 
-  #xdg.portal = {
-  #  enable = true;
-    #gtkUsePortal = true;
-    #extraPortals = with pkgs; [
-    #  xdg-desktop-portal-gtk
-    #];
-  #};
+  xdg.portal = {
+    enable = true;
+    gtkUsePortal = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
+  };
 
   # environment (mostly for root themes)
   environment = {
