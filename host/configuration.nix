@@ -30,6 +30,8 @@
   networking.interfaces.enp2s0.useDHCP = true;
   networking.interfaces.wlan0.useDHCP = true;
 
+  networking.firewall.allowedTCPPorts = [ 29999 ];
+
   environment.systemPackages = with pkgs; [
     virt-manager
     virt-viewer
