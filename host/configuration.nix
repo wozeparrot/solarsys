@@ -63,7 +63,6 @@
     defaultSession = "xfce+home-manager";
   };
   services.xserver.desktopManager = {
-    default = "xfce";
     xterm.enable = false;
     xfce = {
       enable = true;
