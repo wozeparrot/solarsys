@@ -52,7 +52,7 @@
   };
 
   programs.autorandr = {
-    enable = false;
+    enable = true;
     hooks.postswitch = { "update" = "$HOME/scripts/monitor.sh"; };
     profiles = {
       "undocked" = {
