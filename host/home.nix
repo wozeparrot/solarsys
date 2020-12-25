@@ -12,6 +12,7 @@
     i3lock-color
     polybarFull
     dunst
+    sxhkd
 
     pypy3
     python3
@@ -72,6 +73,7 @@
   xsession.enable = true;
   xsession.windowManager.command = "${pkgs.herbstluftwm}/bin/herbstluftwm";
   xsession.initExtra = ''
+    sxhkd &
     dunst &
     $HOME/.config/polybar/launch.sh
     feh --bg-fill $HOME/pictures/wallpapers/984194.jpg
