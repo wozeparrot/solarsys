@@ -68,6 +68,7 @@
       enable = true;
       noDesktop = true;
       enableXfwm = false;
+      thunarPlugins = [ pkgs.xfce.thunar-archive-plugin ];
     };
   };
 
