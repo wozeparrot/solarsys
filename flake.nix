@@ -19,9 +19,9 @@
 
       pathsToImportedAttrs = paths:
         (values: f: listToAttrs (map f values)) paths (path: {
-        name = removeSuffix ".nix" (baseNameOf path);
-        value = import path;
-      });
+          name = removeSuffix ".nix" (baseNameOf path);
+          value = import path;
+        });
 
       system = "x86_64-linux";
 
@@ -36,7 +36,7 @@
       mpkgs = pkgsImport master;
     in
     {
-      overlays = 
+      overlays =
         let
           overlayDir = ./common/overlays;
           fullPath = name: overlayDir + "/${name}";
@@ -62,7 +62,7 @@
           modules = [
             home-manager.nixosModules.home-manager
             hm-nixos-as-super
-            ({...}: {
+            ({ ... }: {
               system.configurationRevision = unstable.lib.mkIf (self ? rev) self.rev;
             })
             ./host/configuration.nix
