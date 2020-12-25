@@ -60,6 +60,16 @@
         '';
       }
     ];
+    defaultSession = "xfce+home-manager";
+  };
+  services.xserver.desktopManager = {
+    default = "xfce";
+    xterm.enable = false;
+    xfce = {
+      enable = true;
+      noDesktop = true;
+      enableXfwm = false;
+    };
   };
 
   services.udev.extraRules = ''

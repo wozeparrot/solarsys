@@ -52,7 +52,7 @@
   };
 
   programs.autorandr = {
-    enable = true;
+    enable = false;
     hooks.postswitch = { "update" = "$HOME/scripts/monitor.sh"; };
     profiles = {
       "undocked" = {
@@ -125,11 +125,9 @@
   xsession.enable = true;
   xsession.windowManager.command = "${pkgs.herbstluftwm}/bin/herbstluftwm";
   xsession.initExtra = ''
-    sxhkd &
     dunst &
     $HOME/.config/polybar/launch.sh
     feh --bg-fill $HOME/pictures/wallpapers/984194.jpg
-    autorandr -c 
   '';
   xsession.scriptPath = ".hm-xsession";
 }
