@@ -28,7 +28,6 @@
     torrential
     audacity
     lmms
-    mpkgs.freecad
     gnome3.file-roller
     kicad
 
