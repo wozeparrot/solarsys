@@ -31,6 +31,7 @@
   networking.interfaces.wlan0.useDHCP = true;
 
   networking.firewall.allowedTCPPorts = [ 29999 ];
+  networking.firewall.allowedUDPPorts = [ 29999 ];
 
   environment.systemPackages = with pkgs; [
     virt-manager
