@@ -14,7 +14,6 @@
     dunst
     sxhkd
 
-    pypy3
     python3
     python3Packages.python-language-server
 
