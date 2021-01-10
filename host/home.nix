@@ -7,7 +7,7 @@
 
   # Packages
   home.packages = with pkgs; [
-    ss.rofi
+    mpkgs.rofi
     herbstluftwm
     i3lock-color
     polybarFull
