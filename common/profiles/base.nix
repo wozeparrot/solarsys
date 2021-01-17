@@ -38,6 +38,7 @@
       # config building
       git
       gnumake
+      cachix
 
       # extra utils
       ripgrep
