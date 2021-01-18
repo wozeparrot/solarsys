@@ -96,6 +96,6 @@
     docker.enable = true;
   };
 
-  users.users.woze.extraGroups = [ "docker" "libvirtd" ];
+  users.users.woze.extraGroups = [ "docker" "libvirtd" "video" "render" ];
   home-manager.users.woze = ./home.nix;
 }
