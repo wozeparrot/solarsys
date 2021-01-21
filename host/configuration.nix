@@ -22,6 +22,7 @@
       vaapiVdpau
       libvdpau-va-gl
       intel-media-driver
+      intel-compute-runtime
       rocm-opencl-icd
       rocm-opencl-runtime
     ];
