@@ -16,15 +16,14 @@
   boot.plymouth.enable = true;
 
   hardware.opengl = {
-    extraPackages32 = with pkgs.pkgsi686Linux; [ vaapiIntel ];
+    extraPackages32 = with pkgs.pkgsi686Linux; [ vaapiIntel amdvlk ];
     extraPackages = with pkgs; [
       vaapiIntel
       vaapiVdpau
       libvdpau-va-gl
       intel-media-driver
       intel-compute-runtime
-      rocm-opencl-icd
-      rocm-opencl-runtime
+      amdvlk
     ];
   };
 
