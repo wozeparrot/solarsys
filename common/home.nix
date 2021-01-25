@@ -20,7 +20,7 @@
     blender
     godot
     gimp
-    kdeApplications.kdenlive
+    libsForQt5.kdenlive
 
     gitAndTools.hub
 
