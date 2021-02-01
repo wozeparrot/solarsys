@@ -1,4 +1,4 @@
-{ config, pkgs, mpkgs, lib, ... }:
+{ config, pkgs, mpkgs, ... }:
 {
   imports = [ ./base.nix ./network.nix ];
 
@@ -33,7 +33,10 @@
 
     libinput = {
       enable = true;
-      disableWhileTyping = false;
+      touchpad = {
+        disableWhileTyping = false;
+        naturalScrolling = true;
+      };
     };
   };
 
