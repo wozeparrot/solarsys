@@ -100,6 +100,11 @@
     '';
   };
 
+  services.mpdris2 = {
+    enable = true;
+    notifications = true;
+  };
+
   services.kdeconnect.enable = true;
 
   # systemd
