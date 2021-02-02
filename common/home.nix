@@ -72,13 +72,37 @@
 
   programs.ncmpcpp = {
     enable = true;
+    package = pkgs.ncmpcpp.override { visualizerSupport = true; };
     settings = {
       visualizer_fifo_path = "/tmp/mpd.fifo";
       visualizer_output_name = "my_fifo";
-      visualizer_sync_interval = "30";
+      visualizer_sync_interval = "12";
       visualizer_in_stereo = "yes";
-      visualizer_type = "wave";
+      visualizer_type = "spectrum";
       visualizer_look = "+|";
+
+      user_interface = "alternative";
+      cyclic_scrolling = "yes";
+      progressbar_look = "=>-";
+      progressbar_boldness = "yes";
+      progressbar_elapsed_color = "white";
+
+      now_playing_prefix = "> ";
+      song_status_format = " $2%a $4⟫$3⟫ $8%t $4⟫$3⟫ $5%b ";
+      autocenter_mode = "yes";
+      centered_cursor = "yes";
+
+      header_text_scrolling = "yes";
+      jump_to_now_playing_song_at_start = "yes";
+
+      browser_display_mode = "columns";
+      autocenter_mode = "yes";
+      fancy_scrolling = "yes";
+      follow_now_playing_lyrics = "yes";
+      display_screens_numbers_on_start = "yes";
+      ignore_leading_the = "yes";
+
+      selected_item_prefix = "* ";
     };
   };
 
