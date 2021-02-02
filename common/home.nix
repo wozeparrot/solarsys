@@ -84,8 +84,6 @@
       user_interface = "alternative";
       cyclic_scrolling = "yes";
       progressbar_look = "=>-";
-      progressbar_boldness = "yes";
-      progressbar_elapsed_color = "white";
 
       now_playing_prefix = "> ";
       song_status_format = " $2%a $4⟫$3⟫ $8%t $4⟫$3⟫ $5%b ";
