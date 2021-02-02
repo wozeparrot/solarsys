@@ -94,12 +94,7 @@
 
       header_text_scrolling = "yes";
       jump_to_now_playing_song_at_start = "yes";
-
       browser_display_mode = "columns";
-      fancy_scrolling = "yes";
-      follow_now_playing_lyrics = "yes";
-      ignore_leading_the = "yes";
-
       selected_item_prefix = "* ";
     };
   };
