@@ -98,7 +98,6 @@
       browser_display_mode = "columns";
       fancy_scrolling = "yes";
       follow_now_playing_lyrics = "yes";
-      display_screens_numbers_on_start = "yes";
       ignore_leading_the = "yes";
 
       selected_item_prefix = "* ";
