@@ -13,7 +13,6 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.plymouth.enable = true;
 
   hardware.opengl = {
     extraPackages32 = with pkgs.pkgsi686Linux; [ vaapiIntel amdvlk ];
