@@ -67,7 +67,6 @@
   };
 
   services.kdeconnect.indicator = true;
-  services.pulseeffects.enable = true;
   services.nextcloud-client.enable = true;
 
   xsession.enable = true;
