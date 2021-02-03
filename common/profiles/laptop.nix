@@ -35,12 +35,6 @@
     ];
   };
 
-  # volume control
-  sound.mediaKeys = {
-    enable = true;
-    volumeStep = "1db";
-  };
-
   # power management
   services.tlp.enable = true;
   services.tlp.settings = {

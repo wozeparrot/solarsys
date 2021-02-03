@@ -97,7 +97,6 @@
       pavucontrol
       paprefs
       qjackctl
-      carla
       patchage
     ];
   };
