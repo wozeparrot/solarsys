@@ -101,4 +101,7 @@
   # time
   time.timeZone = "America/Toronto";
   services.timesyncd.enable = true;
+
+  # rtkit
+  security.rtkit.enable = true;
 }

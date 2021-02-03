@@ -14,12 +14,12 @@
       ];
     };
 
-    # pulseaudio
-    pulseaudio = {
-      enable = true;
-      support32Bit = true;
-      package = pkgs.pulseaudioFull;
-    };
+    # audio
+    #pulseaudio = {
+    #  enable = true;
+    #  support32Bit = true;
+    #  package = pkgs.pulseaudioFull;
+    #};
   };
 
   programs.dconf.enable = true;
@@ -47,6 +47,18 @@
       xdg-desktop-portal-gtk
     ];
   };
+
+  # audio
+  hardware.pulseaudio.enable = pkgs.lib.mkForce false;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    jack.enable = true;
+    pulse.enable = true;
+    sessionManagerArguments = [ "-p" "bluez5.msbc-support=true" ];
+  };
+  hardware.bluetooth.hsphfpd.enable = true;
 
   # environment (mostly for root themes)
   environment = {
@@ -84,6 +96,9 @@
 
       pavucontrol
       paprefs
+      qjackctl
+      carla
+      patchage
     ];
   };
 }
