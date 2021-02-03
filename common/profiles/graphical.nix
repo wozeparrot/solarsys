@@ -56,9 +56,7 @@
     alsa.support32Bit = true;
     jack.enable = true;
     pulse.enable = true;
-    sessionManagerArguments = [ "-p" "bluez5.msbc-support=true" ];
   };
-  hardware.bluetooth.hsphfpd.enable = true;
 
   # environment (mostly for root themes)
   environment = {
