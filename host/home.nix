@@ -58,7 +58,7 @@
     extraOptions = ''
       blur: {
         method = "dual_kawase";
-        strength = 16;
+        strength = 12;
         background = false;
         background-frame = false;
         background-fixed = false;
