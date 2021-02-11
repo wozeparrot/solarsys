@@ -47,7 +47,6 @@
     neofetch
     onefetch
     bottom
-    python3Packages.ueberzug
     iotop
 
     keepassxc
