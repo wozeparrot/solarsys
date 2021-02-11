@@ -79,8 +79,8 @@
       visualizer_sync_interval = "12";
       visualizer_in_stereo = "no";
       visualizer_type = "spectrum";
-      visualizer_look = "+|";
-      visualizer_color = "red";
+      visualizer_look = "||";
+      visualizer_color = "green";
 
       user_interface = "alternative";
       cyclic_scrolling = "yes";
