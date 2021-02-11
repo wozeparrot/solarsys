@@ -33,7 +33,7 @@
       color7 = "#345db5";
       color15 = "#4a3662";
 
-      background_opacity = 0.8;
+      background_opacity = "0.8";
     };
   };
 }
