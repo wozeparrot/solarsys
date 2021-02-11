@@ -10,6 +10,7 @@
   # packages
   home.packages = with pkgs; [
     vscode
+    libreoffice
 
     gdb
     rustup
