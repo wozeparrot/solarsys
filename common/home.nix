@@ -76,17 +76,19 @@
     settings = {
       visualizer_fifo_path = "/tmp/mpd.fifo";
       visualizer_output_name = "my_fifo";
-      visualizer_sync_interval = "12";
-      visualizer_in_stereo = "yes";
+      visualizer_sync_interval = "10";
+      visualizer_in_stereo = "no";
       visualizer_type = "spectrum";
-      visualizer_look = "+|";
+      visualizer_look = "||";
+      visualizer_color = "gray";
 
       user_interface = "alternative";
       cyclic_scrolling = "yes";
-      progressbar_look = "=>-";
+      progressbar_look = "─⊙_";
 
       now_playing_prefix = "> ";
-      song_status_format = " $2%a $4⟫$3⟫ $8%t $4⟫$3⟫ $5%b ";
+      song_status_format = "$b$7♫ $2%a $4⟫$3⟫ $8%t $4⟫$3⟫ $5%b ";
+      song_columns_list_format = "(6)[]{} (23)[red]{a} (26)[yellow]{t|f} (40)[green]{b} (4)[blue]{l}";
       autocenter_mode = "yes";
       centered_cursor = "yes";
 
