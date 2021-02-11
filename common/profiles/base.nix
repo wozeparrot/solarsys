@@ -49,6 +49,8 @@
       less
       nano
       vim
+      pciutils
+      usbutils
 
       # network utils
       dnsutils
@@ -72,22 +74,13 @@
     homeBinInPath = true;
   };
 
-  # fonts
-  fonts = {
-    fonts = with pkgs; [ nerdfonts jetbrains-mono ];
-    fontconfig.defaultFonts = {
-      monospace = [ "JetBrainsMono Nerd Font" ];
-      sansSerif = [ "JetBrains Mono:style=Regular" ];
-    };
-  };
-
   # extra programs
   programs.thefuck.enable = true;
   programs.firejail.enable = true;
   programs.mtr.enable = true;
   programs.fish.enable = true;
   programs.command-not-found.enable = false;
-  programs.ssh.startAgent = true;
+  programs.ssh.startAgent = false;
 
   # services
   services.lorri.enable = true;

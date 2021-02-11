@@ -9,8 +9,6 @@
     acpi
     lm_sensors
     wirelesstools
-    pciutils
-    usbutils
   ];
 
   # enable bluetooth

@@ -5,23 +5,25 @@
     ./components/neovim
     ./components/intershell
     ./components/git
+    ./components/mpdplus
+    ./components/keepassxc
+    ./components/kitty
   ];
 
   # packages
   home.packages = with pkgs; [
     vscode
-    libreoffice
 
     gdb
     rustup
     nixpkgs-fmt
     python3
-    go
 
     blender
     godot
     gimp
     libsForQt5.kdenlive
+    libreoffice
 
     gitAndTools.hub
 
@@ -71,73 +73,8 @@
     package = pkgs.firefox-devedition-bin;
   };
 
-  programs.ncmpcpp = {
-    enable = true;
-    package = pkgs.ncmpcpp.override { visualizerSupport = true; };
-    settings = {
-      visualizer_fifo_path = "/tmp/mpd.fifo";
-      visualizer_output_name = "my_fifo";
-      visualizer_sync_interval = "12";
-      visualizer_in_stereo = "no";
-      visualizer_type = "spectrum";
-      visualizer_look = "||";
-      visualizer_color = "green";
-
-      user_interface = "alternative";
-      cyclic_scrolling = "yes";
-      progressbar_look = "─⊙_";
-
-      now_playing_prefix = "> ";
-      song_status_format = "$b$7♫ $2%a $4⟫$3⟫ $8%t $4⟫$3⟫ $5%b ";
-      song_columns_list_format = "(6)[]{} (23)[red]{a} (26)[yellow]{t|f} (40)[green]{b} (4)[blue]{l}";
-      song_list_format = " $7%l  $2%t $R$5%a ";
-      autocenter_mode = "yes";
-      centered_cursor = "yes";
-
-      header_text_scrolling = "yes";
-      jump_to_now_playing_song_at_start = "yes";
-      browser_display_mode = "columns";
-      selected_item_prefix = "* ";
-    };
-  };
-
   # extra services
-  services.mpd = {
-    enable = true;
-    extraConfig = ''
-      audio_output {
-        type "pulse"
-        name "pulse audio"
-      }
-
-      audio_output {
-        type "fifo"
-        name "my_fifo"
-        path "/tmp/mpd.fifo"
-        format "44100:16:2"
-      }
-    '';
-  };
-
-  services.mpdris2 = {
-    enable = true;
-    notifications = true;
-  };
-
   services.kdeconnect.enable = true;
-
-  # systemd
-  systemd.user.services.keepassxc = {
-    Unit = {
-      Description = "KeePassXC password manager";
-      After = [ "graphical-session-pre.target" ];
-      PartOf = [ "graphical-session.target" ];
-    };
-
-    Install = { WantedBy = [ "graphical-session.target" ]; };
-
-    Service = { ExecStart = "${pkgs.keepassxc}/bin/keepassxc"; };
-  };
 
   # x config
   xdg.enable = true;

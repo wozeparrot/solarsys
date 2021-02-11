@@ -13,13 +13,6 @@
         libva
       ];
     };
-
-    # audio
-    #pulseaudio = {
-    #  enable = true;
-    #  support32Bit = true;
-    #  package = pkgs.pulseaudioFull;
-    #};
   };
 
   programs.dconf.enable = true;
@@ -36,6 +29,9 @@
       touchpad = {
         disableWhileTyping = false;
         naturalScrolling = true;
+      };
+      mouse = {
+        middleEmulation = false;
       };
     };
   };
@@ -55,6 +51,15 @@
     alsa.support32Bit = true;
     jack.enable = true;
     pulse.enable = true;
+  };
+
+  # fonts
+  fonts = {
+    fonts = with pkgs; [ nerdfonts jetbrains-mono ];
+    fontconfig.defaultFonts = {
+      monospace = [ "JetBrainsMono Nerd Font" ];
+      sansSerif = [ "JetBrains Mono:style=Regular" ];
+    };
   };
 
   # environment (mostly for root themes)
@@ -88,8 +93,6 @@
       dracula-theme
       paper-icon-theme
       libsForQt5.qtstyleplugins
-
-      keepassxc
 
       pavucontrol
       paprefs
