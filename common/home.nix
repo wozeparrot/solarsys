@@ -66,8 +66,6 @@
     enableNixDirenvIntegration = true;
   };
 
-  programs.alacritty.enable = true;
-
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-devedition-bin;
