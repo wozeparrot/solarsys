@@ -76,11 +76,11 @@
     settings = {
       visualizer_fifo_path = "/tmp/mpd.fifo";
       visualizer_output_name = "my_fifo";
-      visualizer_sync_interval = "10";
-      visualizer_in_stereo = "yes";
+      visualizer_sync_interval = "12";
+      visualizer_in_stereo = "no";
       visualizer_type = "spectrum";
-      visualizer_look = "||";
-      visualizer_color = "white";
+      visualizer_look = "+|";
+      visualizer_color = "purple";
 
       user_interface = "alternative";
       cyclic_scrolling = "yes";
