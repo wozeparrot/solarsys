@@ -3,9 +3,10 @@
   programs.kitty = {
     enable = true;
     font = {
-      name = "JetBrainsMono Nerd Font 9";
+      name = "JetBrainsMono Nerd Font 8";
     };
     settings = {
+      disable_ligatures = "cursor";
       scrollback_lines = 10000;
       enable_audio_bell = false;
       update_check_interval = 0;
