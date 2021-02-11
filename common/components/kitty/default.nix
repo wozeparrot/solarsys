@@ -3,7 +3,7 @@
   programs.kitty = {
     enable = true;
     font = {
-      name = "JetBrainsMono Nerd Font 8";
+      name = "JetBrainsMono Nerd Font 7";
     };
     settings = {
       disable_ligatures = "cursor";
