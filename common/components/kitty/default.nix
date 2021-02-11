@@ -3,7 +3,7 @@
   programs.kitty = {
     enable = true;
     font = {
-      name = "JetBrainsMono Nerd Font 9"
+      name = "JetBrainsMono Nerd Font 9";
     };
     settings = {
       scrollback_lines = 10000;
