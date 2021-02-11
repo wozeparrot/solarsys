@@ -15,7 +15,7 @@
       cursor = "#345db5";
       cursor_text_color = "#180e1a";
       foreground = "#5d7cbf";
-      foreground = "#5d7cbf";
+      background = "#000000";
       color0 = "#180e1a";
       color8 = "#40558c";
       color1 = "#b867a9";
