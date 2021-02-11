@@ -80,7 +80,7 @@
       visualizer_in_stereo = "no";
       visualizer_type = "spectrum";
       visualizer_look = "||";
-      visualizer_color = "grey";
+      visualizer_color = "white";
 
       user_interface = "alternative";
       cyclic_scrolling = "yes";
