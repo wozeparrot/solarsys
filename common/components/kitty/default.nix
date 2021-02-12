@@ -3,7 +3,7 @@
   programs.kitty = {
     enable = true;
     font = {
-      name = "JetBrainsMono Nerd Font 7";
+      name = "JetBrainsMono Nerd Font 6";
     };
     settings = {
       disable_ligatures = "cursor";
@@ -33,8 +33,13 @@
       color14 = "#b16bd6";
       color7 = "#345db5";
       color15 = "#4a3662";
+      selection_foreground = "none";
+      selection_background = "#b867a9";
 
       background_opacity = "0.8";
+
+      hide_window_decorations = "yes";
+      window_padding_width = 2;
     };
   };
 }
