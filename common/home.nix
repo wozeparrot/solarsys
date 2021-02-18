@@ -70,7 +70,7 @@
     package = pkgs.firefox-devedition-bin;
   };
 
-  programs.keychain.enable = true;
+  programs.keychain.enable = false;
 
   # extra services
   services.kdeconnect.enable = true;
