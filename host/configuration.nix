@@ -8,6 +8,7 @@
     ./hardware.nix
   ];
 
+  boot.kernelPackage = pkgs.linuxPackages_lqx;
   boot.kernelParams = [ "intel_iommu=on" ];
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
@@ -84,7 +85,7 @@
       onShutdown = "shutdown";
     };
     kvmgt = {
-      enable = false;
+      enable = true;
       vgpus = {
         "i915-GVTg_V5_4" = {
           uuid = [ "eb1ec6dc-133e-11eb-a7a0-9714878a69bc" ];
