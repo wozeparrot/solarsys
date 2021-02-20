@@ -8,7 +8,7 @@
     ./hardware.nix
   ];
 
-  boot.kernelPackage = pkgs.linuxPackages_lqx;
+  boot.kernelPackages = pkgs.linuxPackages_lqx;
   boot.kernelParams = [ "intel_iommu=on" ];
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
