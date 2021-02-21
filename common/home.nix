@@ -24,6 +24,9 @@
     gimp
     libsForQt5.kdenlive
     libreoffice
+    solvespace
+    antimony
+    openscad
 
     gitAndTools.hub
 
