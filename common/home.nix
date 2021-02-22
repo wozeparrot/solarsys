@@ -27,6 +27,7 @@
     solvespace
     antimony
     openscad
+    freecad
 
     gitAndTools.hub
 
