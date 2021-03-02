@@ -75,7 +75,7 @@
     sxhkd &
     dunst &
     $HOME/.config/polybar/launch.sh
-    feh --bg-fill $HOME/pictures/wallpapers/984194.jpg
+    feh --bg-fill $HOME/pictures/wallpapers/wp6147953-robot-anime-warrior-hd-wallpapers.jpg
   '';
   xsession.scriptPath = ".hm-xsession";
 }
