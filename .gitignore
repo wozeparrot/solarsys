@@ -2,3 +2,5 @@ result/
 result
 
 .direnv/
+
+.vscode/

@@ -25,17 +25,6 @@
 
       system = "x86_64-linux";
 
-      pkgsImport = pkgs:
-        import pkgs {
-          inherit system;
-          config = { allowUnfree = true; };
-          overlays = attrValues self.overlays;
-        };
-
-      pkgs = pkgsImport unstable;
-      mpkgs = pkgsImport master;
-    in
-    {
       overlays =
         let
           overlayDir = ./common/overlays;
@@ -44,6 +33,17 @@
         in
         pathsToImportedAttrs overlayPaths;
 
+      pkgsImport = pkgs:
+        import pkgs {
+          inherit system;
+          config = { allowUnfree = true; };
+          overlays = attrValues overlays;
+        };
+
+      pkgs = pkgsImport unstable;
+      mpkgs = pkgsImport master;
+    in
+    {
       nixosConfigurations.woztop =
         let
           specialArgs = { inherit pkgs mpkgs inputs; };
