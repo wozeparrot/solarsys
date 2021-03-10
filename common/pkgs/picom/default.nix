@@ -37,7 +37,7 @@ pkgs.stdenv.mkDerivation rec {
     owner = "ibhagwan";
     repo = "picom";
     rev = commit;
-    sha256 = "0iff4bwpc00xbjad0m000midslgx12aihs33mdvfckr75r114ylh";
+    sha256 = "PDQnWB6Gkc/FHNq0L9VX2VBcZAE++jB8NkoLQqH9J9Q=";
     fetchSubmodules = true;
   };
 
