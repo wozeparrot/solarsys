@@ -1,4 +1,4 @@
-{ stdenv
+{ pkgs
 , lib
 , fetchFromGitHub
 , pkgconfig
@@ -29,9 +29,9 @@
 , libxdg_basedir
 }:
 
-stdenv.mkDerivation rec {
+pkgs.stdenv.mkDerivation rec {
   name = "picom";
-  commit = "44b4970f70d6b23759a61a2b94d9bfb4351b41b1";
+  commit = "60eb00ce1b52aee46d343481d0530d5013ab850b";
 
   src = fetchFromGitHub {
     owner = "ibhagwan";

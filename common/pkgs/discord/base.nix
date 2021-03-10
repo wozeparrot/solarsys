@@ -6,7 +6,7 @@
 , autoPatchelfHook
 , fetchurl
 , makeDesktopItem
-, stdenv
+, pkgs
 , wrapGAppsHook
 , alsaLib
 , at-spi2-atk
@@ -49,7 +49,7 @@
 let
   inherit binaryName;
 in
-stdenv.mkDerivation rec {
+pkgs.stdenv.mkDerivation rec {
   inherit pname version src;
 
   nativeBuildInputs = [
@@ -69,11 +69,11 @@ stdenv.mkDerivation rec {
 
   dontWrapGApps = true;
 
-  libPath = stdenv.lib.makeLibraryPath [
+  libPath = pkgs.stdenv.lib.makeLibraryPath [
     libcxx
     systemd
     libpulseaudio
-    stdenv.cc.cc
+    pkgs.stdenv.cc.cc
     alsaLib
     atk
     at-spi2-atk
@@ -114,7 +114,7 @@ stdenv.mkDerivation rec {
     mv * $out/opt/${binaryName}
 
     chmod +x $out/opt/${binaryName}/${binaryName}
-    patchelf --set-interpreter ${stdenv.cc.bintools.dynamicLinker} \
+    patchelf --set-interpreter ${pkgs.stdenv.cc.bintools.dynamicLinker} \
         $out/opt/${binaryName}/${binaryName}
 
     wrapProgram $out/opt/${binaryName}/${binaryName} \
@@ -139,13 +139,4 @@ stdenv.mkDerivation rec {
   };
 
   passthru.updateScript = ./update-discord.sh;
-
-  meta = with stdenv.lib; {
-    description = "All-in-one cross-platform voice and text chat for gamers";
-    homepage = "https://discordapp.com/";
-    downloadPage = "https://discordapp.com/download";
-    license = licenses.unfree;
-    maintainers = with maintainers; [ ldesgoui MP2E tadeokondrak ];
-    platforms = [ "x86_64-linux" ];
-  };
 }

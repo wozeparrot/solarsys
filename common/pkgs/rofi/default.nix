@@ -1,4 +1,4 @@
-{ stdenv
+{ pkgs
 , lib
 , fetchFromGitHub
 , autoreconfHook
@@ -19,7 +19,7 @@
 , check
 }:
 
-stdenv.mkDerivation rec {
+pkgs.stdenv.mkDerivation rec {
   name = "rofi";
   commit = "60eb00ce1b52aee46d343481d0530d5013ab850b";
 
