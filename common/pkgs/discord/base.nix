@@ -133,7 +133,7 @@ pkgs.stdenv.mkDerivation rec {
     exec = binaryName;
     icon = pname;
     inherit desktopName;
-    genericName = meta.description;
+    genericName = "Discord";
     categories = "Network;InstantMessaging;";
     mimeType = "x-scheme-handler/discord";
   };
