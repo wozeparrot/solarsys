@@ -1,4 +1,4 @@
-{ config, pkgs, modulesPath, ... }:
+{ config, stdenv, pkgs, modulesPath, ... }:
 
 {
   imports =
@@ -27,5 +27,5 @@
 
   swapDevices = [ ];
 
-  powerManagement.cpuFreqGovernor = pkgs.stdenv.lib.mkDefault "powersave";
+  powerManagement.cpuFreqGovernor = stdenv.lib.mkDefault "powersave";
 }
