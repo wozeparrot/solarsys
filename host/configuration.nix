@@ -10,7 +10,7 @@
 
   boot.kernelPackages = pkgs.linuxPackages_lqx;
   boot.kernelParams = [ "intel_iommu=on" ];
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  # boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
