@@ -10,7 +10,7 @@ mkDerivation rec {
     owner = "MultiMC";
     repo = "MultiMC5";
     rev = commit;
-    sha256 = "1llfx77mx2y23lx31brg33rd5bagny9pwmpyd7r446fymhil4ixl";
+    sha256 = "MP+l3jB4KagvTK5HdvUCsEQKKu9HWBZuUHgpWhV+4Bg=";
     fetchSubmodules = true;
   };
   nativeBuildInputs = [ cmake file makeWrapper ];

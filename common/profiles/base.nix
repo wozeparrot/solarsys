@@ -1,4 +1,4 @@
-{ config, pkgs, mpkgs, lib, inputs, ... }:
+{ config, pkgs, mpkgs, inputs, ... }:
 {
   imports = [
     ./user.nix
