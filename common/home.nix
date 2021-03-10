@@ -82,6 +82,24 @@
   # x config
   xdg.enable = true;
 
+  # theming
+  gtk = {
+    theme = {
+      package = pkgs.shades-of-gray-theme;
+      name = "Shades-of-gray-Patina";
+    };
+    iconTheme = {
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
+    };
+    enable = true;
+  };
+  
+  qt = {
+    platformTheme = "gtk";
+    style.name = "gtk2";
+  };
+
   # home manager stuff
   home.sessionVariables = {
     LANG = "en_US.UTF-8";

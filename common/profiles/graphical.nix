@@ -62,38 +62,9 @@
     };
   };
 
-  # environment (mostly for root themes)
+  # environment
   environment = {
-    etc = {
-      "xdg/gtk-3.0/settings.ini" = {
-        text = ''
-          [Settings]
-          gtk-icon-theme-name=Paper-Mono_Dark
-          gtk-cursor-theme-name=Paper
-          gtk-theme-name=Dracula
-        '';
-        mode = "444";
-      };
-    };
-    sessionVariables = {
-      QT_QPA_PLATFORMTHEME = "gtk2";
-      GTK2_RC_FILES =
-        let
-          gtk = ''
-            gtk-icon-theme-name="Paper-Mono-Dark"
-            gtk-cursor-theme-name="Paper"
-          '';
-        in
-        [
-          ("${pkgs.writeText "iconrc" "${gtk}"}")
-          "${pkgs.dracula-theme}/share/themes/Dracula/gtk-2.0/gtkrc"
-        ];
-    };
     systemPackages = with pkgs; [
-      dracula-theme
-      paper-icon-theme
-      libsForQt5.qtstyleplugins
-
       pavucontrol
       paprefs
       qjackctl
