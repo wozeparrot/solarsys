@@ -6,7 +6,7 @@
 , autoPatchelfHook
 , fetchurl
 , makeDesktopItem
-, pkgs
+, stdenv
 , wrapGAppsHook
 , alsaLib
 , at-spi2-atk
@@ -49,7 +49,7 @@
 let
   inherit binaryName;
 in
-pkgs.stdenv.mkDerivation rec {
+stdenv.mkDerivation rec {
   inherit pname version src;
 
   nativeBuildInputs = [
@@ -69,11 +69,11 @@ pkgs.stdenv.mkDerivation rec {
 
   dontWrapGApps = true;
 
-  libPath = pkgs.stdenv.lib.makeLibraryPath [
+  libPath = stdenv.lib.makeLibraryPath [
     libcxx
     systemd
     libpulseaudio
-    pkgs.stdenv.cc.cc
+    stdenv.cc.cc
     alsaLib
     atk
     at-spi2-atk
@@ -114,7 +114,7 @@ pkgs.stdenv.mkDerivation rec {
     mv * $out/opt/${binaryName}
 
     chmod +x $out/opt/${binaryName}/${binaryName}
-    patchelf --set-interpreter ${pkgs.stdenv.cc.bintools.dynamicLinker} \
+    patchelf --set-interpreter ${stdenv.cc.bintools.dynamicLinker} \
         $out/opt/${binaryName}/${binaryName}
 
     wrapProgram $out/opt/${binaryName}/${binaryName} \

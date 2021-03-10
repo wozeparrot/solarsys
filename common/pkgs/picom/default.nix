@@ -1,5 +1,4 @@
-{ pkgs
-, lib
+{ stdenv
 , fetchFromGitHub
 , pkgconfig
 , uthash
@@ -29,7 +28,7 @@
 , libxdg_basedir
 }:
 
-pkgs.stdenv.mkDerivation rec {
+stdenv.mkDerivation rec {
   name = "picom";
   commit = "60eb00ce1b52aee46d343481d0530d5013ab850b";
 
@@ -82,6 +81,6 @@ pkgs.stdenv.mkDerivation rec {
 
   postInstall = ''
     wrapProgram $out/bin/picom-trans \
-      --prefix PATH : ${lib.makeBinPath [ xwininfo ]}
+      --prefix PATH : ${stdenv.lib.makeBinPath [ xwininfo ]}
   '';
 }
