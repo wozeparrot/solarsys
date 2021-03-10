@@ -1,4 +1,4 @@
-{ config, pkgs, mpkgs, ... }:
+{ config, pkgs, mpkgs, lib, ... }:
 {
   imports = [ ./base.nix ./network.nix ];
 
@@ -44,7 +44,7 @@
   };
 
   # audio
-  hardware.pulseaudio.enable = pkgs.stdenv.lib.mkForce false;
+  hardware.pulseaudio.enable = lib.mkForce false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;

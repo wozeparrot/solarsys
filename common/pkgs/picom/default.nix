@@ -1,4 +1,5 @@
 { stdenv
+, lib
 , fetchFromGitHub
 , pkgconfig
 , uthash
@@ -81,6 +82,6 @@ stdenv.mkDerivation rec {
 
   postInstall = ''
     wrapProgram $out/bin/picom-trans \
-      --prefix PATH : ${stdenv.lib.makeBinPath [ xwininfo ]}
+      --prefix PATH : ${lib.makeBinPath [ xwininfo ]}
   '';
 }

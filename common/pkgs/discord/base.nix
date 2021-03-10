@@ -3,6 +3,7 @@
 , src
 , binaryName
 , desktopName
+, lib
 , autoPatchelfHook
 , fetchurl
 , makeDesktopItem
@@ -69,7 +70,7 @@ stdenv.mkDerivation rec {
 
   dontWrapGApps = true;
 
-  libPath = stdenv.lib.makeLibraryPath [
+  libPath = lib.makeLibraryPath [
     libcxx
     systemd
     libpulseaudio
