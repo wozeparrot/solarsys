@@ -78,7 +78,7 @@
   '';
 
   services.printing.enable = true;
-  services.printing.drivers = [ ];
+  services.printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
 
   virtualisation = {
     libvirtd = {
