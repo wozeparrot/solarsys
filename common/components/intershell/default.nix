@@ -57,6 +57,11 @@ in
           cat "$argv" | xclip -selection clipboard
         '';
       };
+      insp = {
+        body = ''
+          nix-shell -p "$argv" --run fish
+        '';
+      };
     };
 
     promptInit = ''
