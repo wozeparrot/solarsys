@@ -5,5 +5,6 @@ self: super:
     discord = self.callPackage ./discord { };
     rofi = self.callPackage ./rofi { };
     picom = self.callPackage ./picom { };
+    neovim-nightly = self.callPackage ./neovim-nightly { };
   };
 }
