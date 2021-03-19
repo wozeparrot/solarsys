@@ -78,7 +78,10 @@
 
   # extra services
   services.kdeconnect.enable = true;
-  services.pulseeffects.enable = true;
+  services.pulseeffects = {
+    enable = true;
+    package = pkgs.pulseeffects-pw;
+  };
 
   # x config
   xdg.enable = true;
