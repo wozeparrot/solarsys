@@ -34,9 +34,7 @@ let
   '';
 
   solarsys-update = pkgs.writeShellScriptBin "solarsys-update" ''
-    for pkg in $(${pkgs.jq}/bin/jq -r '.nodes | keys[] | select(. != "root")' flake.lock); do
-      ${unlockedNix}/bin/nix flake update --update-input "$pkg" "$@"
-    done
+    ${unlockedNix}/bin/nix flake update
   '';
 in
 pkgs.mkShell {

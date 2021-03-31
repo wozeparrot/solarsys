@@ -19,7 +19,7 @@
     nixpkgs-fmt
     python3
 
-    #blender #TODO: broken
+    blender
     godot
     gimp
     libsForQt5.kdenlive
