@@ -100,7 +100,7 @@
     };
     enable = true;
   };
-  
+
   qt = {
     enable = true;
     platformTheme = "gtk";

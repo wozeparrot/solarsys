@@ -3,7 +3,7 @@
   home.packages = with pkgs; [
     keepassxc
   ];
-  
+
   systemd.user.services.keepassxc = {
     Unit = {
       Description = "KeePassXC password manager";

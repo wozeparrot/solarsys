@@ -69,7 +69,7 @@
           ];
         in
         unstable.lib.nixosSystem { inherit system modules specialArgs; };
-      
+
       legacyPackages."${system}" = pkgs;
 
       devShell.${system} = import ./shell.nix { inherit pkgs; };
