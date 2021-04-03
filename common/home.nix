@@ -35,6 +35,8 @@
     mpkgs.steam-run
     protontricks
     lutris
+    the-powder-toy
+    osu-lazer
 
     xdo
     xdotool

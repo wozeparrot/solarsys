@@ -33,8 +33,6 @@
     radeontop
     simplescreenrecorder
 
-    the-powder-toy
-
     teams
 
     wineWowPackages.staging
