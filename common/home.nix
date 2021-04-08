@@ -33,8 +33,8 @@
 
     ss.multimc
     mpkgs.steam-run
-    protontricks
-    lutris
+    mpkgs.protontricks
+    mpkgs.lutris
     the-powder-toy
     osu-lazer
 
