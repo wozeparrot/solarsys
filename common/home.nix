@@ -37,7 +37,7 @@
     mpkgs.lutris
     mpkgs.steam
     the-powder-toy
-    osu-lazer
+    mpkgs.osu-lazer
 
     xdo
     xdotool
