@@ -35,6 +35,7 @@
     mpkgs.steam-run
     mpkgs.protontricks
     mpkgs.lutris
+    mpkgs.steam
     the-powder-toy
     osu-lazer
 
