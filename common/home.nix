@@ -35,7 +35,7 @@
     mpkgs.steam-run
     mpkgs.protontricks
     mpkgs.lutris
-    mpkgs.steam
+    #mpkgs.steam #Sandboxed steam is slightly more secure
     the-powder-toy
     mpkgs.osu-lazer
 
