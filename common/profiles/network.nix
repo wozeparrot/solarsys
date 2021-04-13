@@ -8,7 +8,7 @@
     };
     wireless.iwd.enable = true;
 
-    firewall.enable = false;
+    firewall.enable = true;
     firewall.allowedUDPPortRanges = [
       { from = 1714; to = 1764; }
       { from = 29999; to = 29999; }
