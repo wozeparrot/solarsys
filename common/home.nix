@@ -37,7 +37,7 @@
     mpkgs.lutris
     #mpkgs.steam #Sandboxed steam is slightly more secure
     the-powder-toy
-    #mpkgs.osu-lazer
+    mpkgs.osu-lazer
 
     xdo
     xdotool
