@@ -72,8 +72,8 @@
   xsession.initExtra = ''
     sxhkd &
     dunst &
-    $HOME/.config/polybar/launch.sh
-    feh --bg-fill $HOME/pictures/wallpapers/wp6147953-robot-anime-warrior-hd-wallpapers.jpg
+    $HOME/scripts/monitor.sh
+    feh --bg-fill $HOME/pictures/wallpapers/zerotwoditf.jpg
   '';
   xsession.scriptPath = ".hm-xsession";
 }
