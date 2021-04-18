@@ -23,7 +23,7 @@
     godot
     gimp
     libsForQt5.kdenlive
-    libreoffice
+    libreoffice-fresh
     solvespace
     antimony
     openscad
