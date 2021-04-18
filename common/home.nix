@@ -23,7 +23,7 @@
     godot
     gimp
     libsForQt5.kdenlive
-    libreoffice-fresh
+    mpkgs.libreoffice-fresh
     solvespace
     antimony
     openscad
