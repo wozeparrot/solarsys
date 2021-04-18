@@ -1,0 +1,12 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 34a0d20a..f90ce0a6 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -740,7 +740,6 @@ if (VIDEO_PLATFORM STREQUAL "egl-dri")
+ 	amsg("${CL_YEL}egl-dri+privsep${CL_RST}\t${CL_GRN}installing SUID${CL_RST}")
+ 	install(TARGETS arcan DESTINATION bin
+ 		PERMISSIONS
+-			SETUID
+ 			OWNER_WRITE OWNER_READ OWNER_EXECUTE
+ 			GROUP_READ GROUP_EXECUTE
+ 			WORLD_READ WORLD_EXECUTE

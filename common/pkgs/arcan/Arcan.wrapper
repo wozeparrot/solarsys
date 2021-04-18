@@ -1,0 +1,7 @@
+#!/bin/sh
+pushd $Arcan/bin # otherwise `arcan doesn't find system-binaries`
+trap "popd" EXIT # let's not leave the user stranded, though
+./arcan \
+  -T ../share/arcan/scripts \
+  -p ../share/arcan/resources \
+  -t $Appls $@ $Appl
