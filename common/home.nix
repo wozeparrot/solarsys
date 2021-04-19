@@ -28,6 +28,7 @@
     antimony
     openscad
     freecad
+    youtube-dl
 
     gitAndTools.hub
 
@@ -46,6 +47,7 @@
     xclip
     slop
     flameshot
+    cli-visualizer
 
     ranger
     feh
