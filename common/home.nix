@@ -65,7 +65,7 @@
     unzip
     p7zip
 
-    ss.discord
+    mpkgs.discord
   ];
 
   # extra programs
