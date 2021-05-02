@@ -28,6 +28,7 @@
     antimony
     openscad
     freecad
+    zettlr
     youtube-dl
 
     gitAndTools.hub
