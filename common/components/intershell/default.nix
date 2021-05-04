@@ -67,6 +67,11 @@ in
           youtube-dl -x --embed-thumbnail --audio-quality 0 --audio-format m4a -o '%(title)s.%(ext)s' --add-metadata $argv
         '';
       };
+      mpva = {
+        body = ''
+          mpv --vf=format=colorlevels=full $argv
+        '';
+      };
     };
 
     promptInit = ''
