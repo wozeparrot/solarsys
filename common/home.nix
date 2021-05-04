@@ -30,6 +30,7 @@
     freecad
     zettlr
     youtube-dl
+    mpv
 
     gitAndTools.hub
 
