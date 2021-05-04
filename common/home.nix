@@ -33,7 +33,7 @@
 
     gitAndTools.hub
 
-    ss.multimc
+    multimc
     mpkgs.steam-run
     mpkgs.protontricks
     lutris
