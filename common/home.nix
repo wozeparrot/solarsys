@@ -28,6 +28,7 @@
     antimony
     openscad
     freecad
+    kicad-unstable
     zettlr
     youtube-dl
     mpv

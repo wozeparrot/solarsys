@@ -28,7 +28,6 @@
     audacity
     lmms
     gnome3.file-roller
-    kicad
 
     radeontop
     simplescreenrecorder
