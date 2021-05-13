@@ -51,15 +51,10 @@
     blur = true;
     blurExclude = [ "class_g = 'slop'" "class_g = 'discord_overlay.py'" ];
     experimentalBackends = true;
-    backend = "xr_glx_hybrid";
     vSync = true;
     package = pkgs.ss.picom;
 
     extraOptions = ''
-      glx-no-stencil = true;
-      glx-no-rebind-pixmap = true;
-      unredir-if-possible = true;
-      xrender-sync-fence = true;
       blur: {
         method = "dual_kawase";
         strength = 12;
