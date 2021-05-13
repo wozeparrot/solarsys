@@ -55,19 +55,19 @@
     vSync = true;
     package = pkgs.ss.picom;
 
-    settings = {
+    extraOptions = ''
       glx-no-stencil = true;
       glx-no-rebind-pixmap = true;
       unredir-if-possible = true;
       xrender-sync-fence = true;
-      blue = {
+      blur: {
         method = "dual_kawase";
         strength = 12;
         background = false;
         background-frame = false;
         background-fixed = false;
-      };
-    };
+      }
+    '';
   };
 
   services.kdeconnect.indicator = true;
