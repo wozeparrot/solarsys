@@ -50,17 +50,24 @@
     enable = true;
     blur = true;
     blurExclude = [ "class_g = 'slop'" "class_g = 'discord_overlay.py'" ];
+    experimentalBackends = true;
+    backend = "xr_glx_hybrid";
+    vSync = true;
     package = pkgs.ss.picom;
 
-    extraOptions = ''
-      blur: {
+    settings = {
+      glx-no-stencil = true;
+      glx-no-rebind-pixmap = true;
+      unredir-if-possible = true;
+      xrender-sync-fence = true;
+      blue = {
         method = "dual_kawase";
         strength = 12;
         background = false;
         background-frame = false;
         background-fixed = false;
-      }
-    '';
+      };
+    };
   };
 
   services.kdeconnect.indicator = true;
