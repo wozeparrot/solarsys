@@ -10,7 +10,7 @@
 
     registry.nixpkgs.flake = inputs.unstable;
 
-    nixPath = [ "nixpkgs=${inputs.unstable}" "master=${inputs.master}" ];
+    nixPath = [ "nixpkgs=${pkgs}" "master=${inputs.master}" ];
 
     gc = {
       automatic = true;
