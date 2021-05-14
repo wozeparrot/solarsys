@@ -27,7 +27,6 @@
   nixpkgs = {
     config.allowUnfree = true;
     overlays = builtins.attrValues overlays;
-    pkgs = pkgs;
   };
 
   home-manager.useUserPackages = true;
