@@ -6,6 +6,6 @@ self: super:
     rofi = self.callPackage ./rofi { };
     picom = self.callPackage ./picom { };
     neovim-nightly = self.callPackage ./neovim-nightly { };
-    arcan = self.callPackage (import ./arcan) { };
+    arcan = self.callPackage ./arcan { };
   };
 }

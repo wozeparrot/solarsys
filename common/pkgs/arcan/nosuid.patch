@@ -1,0 +1,12 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 2617be6..c7ba1ff 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -800,7 +800,6 @@ else()
+ 		amsg("${CL_YEL}egl-dri+privsep${CL_RST}\t${CL_GRN}installing SUID${CL_RST}")
+ 		install(TARGETS arcan DESTINATION bin
+ 			PERMISSIONS
+-				SETUID
+ 				OWNER_WRITE OWNER_READ OWNER_EXECUTE
+ 				GROUP_READ GROUP_EXECUTE
+ 				WORLD_READ WORLD_EXECUTE
