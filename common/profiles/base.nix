@@ -1,4 +1,4 @@
-{ config, pkgs, mpkgs, inputs, ... }:
+{ config, pkgs, mpkgs, inputs, overlays, ... }:
 {
   imports = [
     ./user.nix
@@ -10,7 +10,7 @@
 
     registry.nixpkgs.flake = inputs.unstable;
 
-    nixPath = [ "nixpkgs=${pkgs}" "master=${inputs.master}" ];
+    nixPath = [ "nixpkgs=${inputs.unstable}" "master=${inputs.master}" ];
 
     gc = {
       automatic = true;
@@ -24,7 +24,10 @@
     '';
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [ overlays ];
+  };
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;

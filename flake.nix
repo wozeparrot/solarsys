@@ -46,7 +46,7 @@
     {
       nixosConfigurations.woztop =
         let
-          specialArgs = { inherit pkgs mpkgs inputs; };
+          specialArgs = { inherit pkgs mpkgs inputs overlays; };
 
           hm-nixos-as-super = { config, ... }: {
             options.home-manager.users = unstable.lib.mkOption {
