@@ -5,7 +5,6 @@ self: super:
       self.mpvScripts.mpris
       self.mpvScripts.autoload
       self.mpvScripts.thumbnail
-
     ];
   };
 }
