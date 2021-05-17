@@ -44,7 +44,8 @@
       mpkgs = pkgsImport master;
     in
     {
-      nixosConfigurations.(builtins.readFile ./host/hostname.system) =
+      nixosConfigurations = {
+        "${builtins.readFile ./host/hostname.system}" =
         let
           specialArgs = { inherit pkgs mpkgs inputs overlays; };
 
@@ -69,6 +70,7 @@
           ];
         in
         unstable.lib.nixosSystem { inherit system modules specialArgs; };
+      };
 
       legacyPackages."${system}" = pkgs;
 
