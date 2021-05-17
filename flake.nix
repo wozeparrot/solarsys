@@ -23,7 +23,7 @@
           value = import path;
         });
 
-      system = "x86_64-linux";
+      system = builtins.readFile ./host/system.system;
 
       overlays =
         let
@@ -44,7 +44,7 @@
       mpkgs = pkgsImport master;
     in
     {
-      nixosConfigurations.woztop =
+      nixosConfigurations.(builtins.readFile ./host/hostname.system) =
         let
           specialArgs = { inherit pkgs mpkgs inputs overlays; };
 
