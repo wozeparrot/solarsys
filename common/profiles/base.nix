@@ -24,10 +24,7 @@
     '';
   };
 
-  nixpkgs = {
-    config.allowUnfree = true;
-    overlays = builtins.attrValues overlays;
-  };
+  nixpkgs = { inherit pkgs; };
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
