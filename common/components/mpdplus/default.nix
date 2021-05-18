@@ -15,6 +15,8 @@
         path "/tmp/mpd.fifo"
         format "44100:16:2"
       }
+
+      replaygain track
     '';
   };
 
