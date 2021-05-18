@@ -37,7 +37,7 @@
       visualizer_in_stereo = "no";
       visualizer_type = "spectrum";
       visualizer_fps = "60";
-      visualizer_spectrum_smooth_look = "yes"
+      visualizer_spectrum_smooth_look = "yes";
       visualizer_color = "green";
 
       user_interface = "alternative";
