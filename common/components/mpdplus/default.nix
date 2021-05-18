@@ -33,7 +33,6 @@
     settings = {
       visualizer_data_source = "/tmp/mpd.fifo";
       visualizer_output_name = "Visualizer feed";
-      visualizer_sync_interval = "0";
       visualizer_in_stereo = "no";
       visualizer_type = "spectrum";
       visualizer_fps = "60";
