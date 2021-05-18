@@ -16,7 +16,7 @@
         format "44100:16:1"
       }
 
-      replaygain track
+      replaygain "track"
     '';
   };
 
