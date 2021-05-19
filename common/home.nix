@@ -22,24 +22,31 @@
     blender
     godot
     gimp
+    lmms
     libsForQt5.kdenlive
+    transmission-gtk
     libreoffice-fresh
+    ghidra-bin
     solvespace
     antimony
     openscad
     freecad
+    krita
     kicad-unstable
     zettlr
+    audacity
+    antimicroX
     youtube-dl
     mpv
+    vlc
 
     gitAndTools.hub
 
     multimc
-    mpkgs.steam-run
-    mpkgs.protontricks
+    steam-run
+    protontricks
     lutris
-    #mpkgs.steam #Sandboxed steam is slightly more secure
+    steam
     the-powder-toy
     mpkgs.osu-lazer
 

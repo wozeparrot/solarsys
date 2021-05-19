@@ -19,14 +19,7 @@
 
     docker-compose
 
-    ghidra-bin
-    krita
-    vlc
     zathura
-    antimicroX
-    torrential
-    audacity
-    lmms
     gnome3.file-roller
 
     radeontop
