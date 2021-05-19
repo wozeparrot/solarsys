@@ -42,7 +42,7 @@
 
   programs.nm-applet.enable = true;
 
-  services.flatpak.enable = true;
+  # services.flatpak.enable = true;
 
   services.xserver.videoDrivers = [ "amdgpu" "modesetting" ];
   services.xserver.displayManager = {
