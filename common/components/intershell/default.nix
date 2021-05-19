@@ -62,14 +62,14 @@ in
           nix-shell -p $argv --run fish
         '';
       };
-      dlmu = {
-        body = ''
-          youtube-dl -x --embed-thumbnail --audio-quality 0 --audio-format m4a -o '%(title)s.%(ext)s' --add-metadata $argv
-        '';
-      };
       mpva = {
         body = ''
           mpv --vf=format=colorlevels=full $argv
+        '';
+      };
+      reemu = {
+        body = ''
+          ffmpeg -i $argv[1] -map_metadata -1 -metadata title=(basename $argv[1] $argv[2]) -metadata artist="---" -c:a libvorbis -q:a 10 -vn (basename $argv[1] $argv[2]).ogg
         '';
       };
     };
