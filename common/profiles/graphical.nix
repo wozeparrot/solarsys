@@ -36,13 +36,13 @@
     };
   };
 
-  xdg.portal = {
-    enable = true;
-    gtkUsePortal = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-    ];
-  };
+  # xdg.portal = {
+  #   enable = true;
+  #   gtkUsePortal = true;
+  #   extraPortals = with pkgs; [
+  #     xdg-desktop-portal-gtk
+  #   ];
+  # };
 
   # audio
   hardware.pulseaudio.enable = lib.mkForce false;
