@@ -24,7 +24,6 @@
     gimp
     lmms
     libsForQt5.kdenlive
-    giara
     transmission-gtk
     libreoffice-fresh
     ghidra-bin
