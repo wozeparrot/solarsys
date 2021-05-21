@@ -13,32 +13,28 @@
 
       tab_bar_style = "powerline";
 
-      cursor = "#345db5";
-      cursor_text_color = "#180e1a";
-      foreground = "#5d7cbf";
-      background = "#000000";
-      color0 = "#180e1a";
-      color8 = "#40558c";
-      color1 = "#b867a9";
-      color9 = "#c542ac";
-      color2 = "#a28bcb";
-      color10 = "#221e2e";
-      color3 = "#b16bd6";
-      color11 = "#1d2748";
-      color4 = "#b74ec5";
-      color12 = "#6b4f8d";
-      color5 = "#b16bd6";
-      color13 = "#283557";
-      color6 = "#5495cf";
-      color14 = "#b16bd6";
-      color7 = "#345db5";
-      color15 = "#4a3662";
-      selection_foreground = "none";
-      selection_background = "#b867a9";
+      foreground = "#DEDBEB";
+      background = "#2A2331";
+      color0 = "#28222d";
+      color8 = "#302838";
+      color1 = "#ed3f7f";
+      color9 = "#fb5c8e";
+      color2 = "#a2baa8";
+      color10 = "#bfd1c3";
+      color3 = "#eacac0";
+      color11 = "#f0ddd8";
+      color4 = "#9985d1";
+      color12 = "#b4a4de";
+      color5 = "#e68ac1";
+      color13 = "#edabd2";
+      color6 = "#aabae7";
+      color14 = "#c4d1f5";
+      color7 = "#dedbeb";
+      color15 = "#edebf7";
 
       background_opacity = "0.8";
 
-      hide_window_decorations = "yes";
+      hide_window_decorations = "no";
       window_padding_width = 2;
     };
   };
