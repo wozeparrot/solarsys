@@ -65,7 +65,7 @@ if exists("syntax_on")
 endif
 
 if ($TERM =~ '256' || &t_Co >= 256) || has("gui_running")
-    hi Normal ctermbg=235 ctermfg=251 cterm=NONE guibg=#111111 guifg=#c6c6c6 gui=NONE
+    hi Normal ctermbg=235 ctermfg=251 cterm=NONE guibg=#000000 guifg=#c6c6c6 gui=NONE
 
     set background=dark
 
@@ -104,8 +104,8 @@ if ($TERM =~ '256' || &t_Co >= 256) || has("gui_running")
     hi FoldColumn ctermbg=NONE ctermfg=241 cterm=NONE guibg=NONE guifg=#626262 gui=NONE
     hi Folded ctermbg=234 ctermfg=243 cterm=NONE guibg=#1c1c1c guifg=#767676 gui=NONE
     hi SpecialKey ctermbg=NONE ctermfg=243 cterm=NONE guibg=NONE guifg=#767676 gui=NONE
-    hi IncSearch ctermbg=167 ctermfg=235 cterm=NONE guibg=#d75f5f guifg=#111111 gui=NONE
-    hi Search ctermbg=140 ctermfg=235 cterm=NONE guibg=#af87d7 guifg=#111111 gui=NONE
+    hi IncSearch ctermbg=167 ctermfg=235 cterm=NONE guibg=#d75f5f guifg=#000000 gui=NONE
+    hi Search ctermbg=140 ctermfg=235 cterm=NONE guibg=#af87d7 guifg=#000000 gui=NONE
     hi Directory ctermbg=NONE ctermfg=140 cterm=NONE guibg=NONE guifg=#af87d7 gui=NONE
     hi MatchParen ctermbg=NONE ctermfg=167 cterm=bold guibg=NONE guifg=#d75f5f gui=bold
     hi SpellBad ctermbg=NONE ctermfg=132 cterm=underline guibg=NONE guifg=#af5f87 gui=underline
@@ -217,7 +217,7 @@ hi! link htmlEndTag htmlTag
 hi! link gitcommitSummary Title
 
 let g:terminal_ansi_colors = [
-        \ '#111111',
+        \ '#000000',
         \ '#ac2c2c',
         \ '#4e9a06',
         \ '#c4a000',
