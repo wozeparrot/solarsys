@@ -37,7 +37,7 @@
       visualizer_type = "spectrum";
       visualizer_fps = "60";
       visualizer_spectrum_smooth_look = "yes";
-      visualizer_color = "green";
+      visualizer_color = "magenta";
 
       user_interface = "alternative";
       cyclic_scrolling = "yes";
