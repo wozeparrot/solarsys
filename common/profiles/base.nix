@@ -10,7 +10,11 @@
 
     registry.nixpkgs.flake = inputs.unstable;
 
-    nixPath = [ "nixpkgs=${inputs.unstable}" "master=${inputs.master}" ];
+    nixPath = [
+      "nixpkgs=${inputs.unstable}"
+      "master=${inputs.master}"
+      "nixpkgs-overlays=/etc/nixos/overlays-compat/"
+    ];
 
     gc = {
       automatic = true;
@@ -75,6 +79,18 @@
     };
 
     homeBinInPath = true;
+
+    # overlays-compat
+    etc."nixos/overlays-compat/overlays.nix".text = ''
+      self: super:
+      with super.lib;
+      let
+        # Load the system config and get the `nixpkgs.overlays` option
+        overlays = (import <nixpkgs/nixos> { }).config.nixpkgs.overlays;
+      in
+        # Apply all overlays to the input of the current "main" overlay
+        foldl' (flip extends) (_: super) overlays self
+    '';
   };
 
   # extra programs
