@@ -32,7 +32,7 @@
       blend-subtitles = true;
 
       glsl-shader = "~~/shaders/sssr.glsl";
-      scale = "bicubic";
+      scale = "haasnsoft";
       dscale = "mitchell";
       cscale = "ewa_lanczossoft";
     };
