@@ -70,6 +70,7 @@ in
       reemu = {
         body = ''
           ffmpeg -i $argv[1] -map_metadata -1 -metadata title=(basename $argv[1] $argv[2]) -metadata artist="---" -c:a libvorbis -q:a 10 -ar 48k -vn (basename $argv[1] $argv[2]).ogg
+          vorbisgain (basename $argv[1] $argv[2]).ogg
           rm $argv[1]
         '';
       };

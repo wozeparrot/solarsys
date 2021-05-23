@@ -38,6 +38,7 @@
     audacity
     antimicroX
     youtube-dl
+    vorbisgain
     vlc
 
     gitAndTools.hub
