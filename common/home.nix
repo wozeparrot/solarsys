@@ -8,6 +8,7 @@
     ./components/mpdplus
     ./components/keepassxc
     ./components/kitty
+    ./components/mpv
   ];
 
   # packages
