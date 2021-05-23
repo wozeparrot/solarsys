@@ -1,7 +1,7 @@
 # must be used with:
 # base, graphical
 
-{ config, pkgs, mpkgs, ... }: {
+{ config, pkgs, master, ... }: {
   imports = [ ./base.nix ./graphical.nix ./network.nix ];
 
   # system packages

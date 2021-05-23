@@ -1,4 +1,4 @@
-{ pkgs, mpkgs, ... }:
+{ pkgs, master, ... }:
 
 {
   imports = [
@@ -50,7 +50,7 @@
     lutris
     steam
     the-powder-toy
-    mpkgs.osu-lazer
+    master.osu-lazer
 
     xdo
     xdotool
@@ -76,7 +76,7 @@
     unzip
     p7zip
 
-    mpkgs.discord
+    master.discord
   ];
 
   # extra programs

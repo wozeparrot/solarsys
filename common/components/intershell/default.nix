@@ -1,5 +1,5 @@
 # interactive shell config
-{ config, pkgs, mpkgs, ... }:
+{ config, pkgs, master, ... }:
 let
   fishConfig = ''
     # color scheme

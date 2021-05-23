@@ -1,4 +1,4 @@
-{ config, pkgs, mpkgs, ... }:
+{ config, pkgs, master, ... }:
 {
   nix.trustedUsers = [ "woze" ];
 

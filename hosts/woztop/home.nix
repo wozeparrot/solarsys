@@ -1,4 +1,4 @@
-{ config, pkgs, mpkgs, ... }:
+{ config, pkgs, master, ... }:
 
 {
   imports = [
@@ -7,7 +7,7 @@
 
   # Packages
   home.packages = with pkgs; [
-    mpkgs.rofi
+    master.rofi
     herbstluftwm
     i3lock-color
     polybarFull

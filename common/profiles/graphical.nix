@@ -1,4 +1,4 @@
-{ config, pkgs, mpkgs, lib, ... }:
+{ config, pkgs, master, lib, ... }:
 {
   imports = [ ./base.nix ./network.nix ];
 
