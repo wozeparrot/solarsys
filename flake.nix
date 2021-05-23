@@ -46,30 +46,30 @@
     {
       nixosConfigurations = {
         "${builtins.readFile ./host/hostname.system}" =
-        let
-          specialArgs = { inherit pkgs mpkgs inputs overlays; };
+          let
+            specialArgs = { inherit pkgs mpkgs inputs overlays; };
 
-          hm-nixos-as-super = { config, ... }: {
-            options.home-manager.users = unstable.lib.mkOption {
-              type = unstable.lib.types.attrsOf (unstable.lib.types.submoduleWith {
-                modules = [ ];
-                specialArgs = specialArgs // {
-                  super = config;
-                };
-              });
+            hm-nixos-as-super = { config, ... }: {
+              options.home-manager.users = unstable.lib.mkOption {
+                type = unstable.lib.types.attrsOf (unstable.lib.types.submoduleWith {
+                  modules = [ ];
+                  specialArgs = specialArgs // {
+                    super = config;
+                  };
+                });
+              };
             };
-          };
 
-          modules = [
-            home-manager.nixosModules.home-manager
-            hm-nixos-as-super
-            ({ ... }: {
-              system.configurationRevision = unstable.lib.mkIf (self ? rev) self.rev;
-            })
-            ./host/configuration.nix
-          ];
-        in
-        unstable.lib.nixosSystem { inherit system modules specialArgs; };
+            modules = [
+              home-manager.nixosModules.home-manager
+              hm-nixos-as-super
+              ({ ... }: {
+                system.configurationRevision = unstable.lib.mkIf (self ? rev) self.rev;
+              })
+              ./host/configuration.nix
+            ];
+          in
+          unstable.lib.nixosSystem { inherit system modules specialArgs; };
       };
 
       legacyPackages."${system}" = pkgs;
