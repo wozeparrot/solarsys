@@ -7,5 +7,6 @@ self: super:
     picom = self.callPackage ./picom { };
     neovim-nightly = self.callPackage ./neovim-nightly { };
     arcan = self.callPackage ./arcan { };
+    zig-master = self.callPackage ./zig-master { };
   };
 }
