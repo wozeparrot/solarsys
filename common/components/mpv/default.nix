@@ -32,9 +32,15 @@
 
       blend-subtitles = true;
 
-      scale = "ewa_lanczossharp";
+      glsl-shader = "~/.config/mpv/shaders/sssr.glsl";
+      scale = "haasnsoft";
       dscale = "mitchell";
       cscale = "ewa_lanczossoft";
     };
+  };
+
+  xdg.configFile.mpv-sssr-glsl = {
+    text = builtins.readFile ./sssr.glsl;
+    target = "mpv/shaders/sssr.glsl";
   };
 }
