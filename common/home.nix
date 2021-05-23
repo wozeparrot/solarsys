@@ -39,6 +39,7 @@
     antimicroX
     youtube-dl
     vorbisgain
+    ffmpeg
     vlc
 
     gitAndTools.hub
