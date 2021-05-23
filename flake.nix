@@ -6,6 +6,7 @@
     nixpkgs.follows = "unstable";
     master.url = "github:NixOS/nixpkgs/master";
 
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "unstable";
@@ -14,71 +15,49 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = { self, unstable, master, home-manager, ... }@inputs:
-    let
-      inherit (builtins) attrNames attrValues readDir listToAttrs;
-      inherit (unstable) lib;
-      inherit (lib) removeSuffix;
+  outputs = inputs@{ self, unstable, master, utils, home-manager, ... }:
+    utils.lib.systemFlake {
+      inherit self inputs;
 
-      pathsToImportedAttrs = paths:
-        (values: f: listToAttrs (map f values)) paths (path: {
-          name = removeSuffix ".nix" (baseNameOf path);
-          value = import path;
-        });
+      devShellBuilder = channels: (import ./shell.nix { pkgs = channels.nixpkgs; });
 
-      system = builtins.readFile ./host/system.system;
-
-      overlays =
+      overlaysDir =
         let
           overlayDir = ./common/overlays;
           fullPath = name: overlayDir + "/${name}";
-          overlayPaths = map fullPath (attrNames (readDir overlayDir));
+          overlayPaths = map fullPath (builtins.attrNames (builtins.readDir overlayDir));
+          pathsToImportedAttrs = paths:
+            (values: f: builtins.listToAttrs (map f values)) paths (path: {
+              name = unstable.lib.removeSuffix ".nix" (baseNameOf path);
+              value = import path;
+            });
         in
-        (attrValues (pathsToImportedAttrs overlayPaths)) ++ [
+        (builtins.attrValues (pathsToImportedAttrs overlayPaths)) ++ [
           inputs.neovim-nightly-overlay.overlay
         ];
 
-      pkgsImport = pkgs:
-        import pkgs {
-          inherit system;
-          config = { allowUnfree = true; };
-          overlays = overlays;
-        };
+      sharedOverlays = self.overlaysDir;
 
-      pkgs = pkgsImport unstable;
-      mpkgs = pkgsImport master;
-    in
-    {
-      nixosConfigurations = {
-        "${builtins.readFile ./host/hostname.system}" =
-          let
-            specialArgs = { inherit pkgs mpkgs inputs overlays; };
+      channels = {
+        nixpkgs.input = unstable;
+        master.input = master;
+      };
+      channelsConfig.allowUnfree = true;
 
-            hm-nixos-as-super = { config, ... }: {
-              options.home-manager.users = unstable.lib.mkOption {
-                type = unstable.lib.types.attrsOf (unstable.lib.types.submoduleWith {
-                  modules = [ ];
-                  specialArgs = specialArgs // {
-                    super = config;
-                  };
-                });
-              };
-            };
-
-            modules = [
-              home-manager.nixosModules.home-manager
-              hm-nixos-as-super
-              ({ ... }: {
-                system.configurationRevision = unstable.lib.mkIf (self ? rev) self.rev;
-              })
-              ./host/configuration.nix
-            ];
-          in
-          unstable.lib.nixosSystem { inherit system modules specialArgs; };
+      hostDefaults = {
+        modules = [
+          home-manager.nixosModules.home-manager
+          ({ ... }: {
+            system.configurationRevision = unstable.lib.mkIf (self ? rev) self.rev;
+          })
+        ];
+        extraArgs = { inherit inputs utils; };
       };
 
-      legacyPackages."${system}" = pkgs;
-
-      devShell.${system} = import ./shell.nix { inherit pkgs; };
+      hosts = {
+        woztop = {
+          modules = [ ./hosts/woztop/host.nix ];
+        };
+      };
     };
 }

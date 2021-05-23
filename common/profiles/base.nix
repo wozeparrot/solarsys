@@ -1,20 +1,16 @@
-{ config, pkgs, mpkgs, inputs, overlays, ... }:
+{ lib, config, pkgs, mpkgs, inputs, overlays, ... }:
 {
   imports = [
     ./user.nix
   ];
 
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixUnstable;
     systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 
-    registry.nixpkgs.flake = inputs.unstable;
-
-    nixPath = [
-      "nixpkgs=${inputs.unstable}"
-      "master=${inputs.master}"
-      "nixpkgs-overlays=/etc/nixos/overlays-compat/"
-    ];
+    registry = builtins.mapAttrs
+      (name: v: { flake = v; })
+      lib.filterAttrs (name: value: value ? outputs) inputs;
 
     gc = {
       automatic = true;
@@ -26,11 +22,6 @@
       experimental-features = nix-command flakes ca-references
       min-free = 536870912
     '';
-  };
-
-  nixpkgs = {
-    config.allowUnfree = true;
-    overlays = overlays;
   };
 
   home-manager.useUserPackages = true;
@@ -79,18 +70,6 @@
     };
 
     homeBinInPath = true;
-
-    # overlays-compat
-    etc."nixos/overlays-compat/overlays.nix".text = ''
-      self: super:
-      with super.lib;
-      let
-        # Load the system config and get the `nixpkgs.overlays` option
-        overlays = (import <nixpkgs/nixos> { }).config.nixpkgs.overlays;
-      in
-        # Apply all overlays to the input of the current "main" overlay
-        foldl' (flip extends) (_: super) overlays self
-    '';
   };
 
   # extra programs
