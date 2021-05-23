@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> { } }:
 let
   unlockedNix = pkgs.writeShellScriptBin "nix" ''
-    ${pkgs.nixFlakes}/bin/nix --option experimental-features "nix-command flakes ca-references" "$@"
+    ${pkgs.nixUnstable}/bin/nix --option experimental-features "nix-command flakes ca-references" "$@"
   '';
 
   solarsys-build = pkgs.writeShellScriptBin "solarsys-build" ''
