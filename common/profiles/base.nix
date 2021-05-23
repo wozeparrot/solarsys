@@ -1,16 +1,22 @@
-{ lib, config, pkgs, master, inputs, overlays, ... }:
+{ lib, config, pkgs, master, inputs, ... }:
 {
   imports = [
     ./user.nix
   ];
 
   nix = {
-    package = pkgs.nixUnstable;
+    package = pkgs.nixFlakes;
     systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 
-    registry = builtins.mapAttrs
-      (name: v: { flake = v; })
-      lib.filterAttrs (name: value: value ? outputs) inputs;
+    registry =
+      let
+        nixRegistry = builtins.mapAttrs
+          (name: v: { flake = v; })
+          lib.filterAttrs
+          (name: value: value ? outputs)
+          inputs;
+      in
+      nixRegistry;
 
     gc = {
       automatic = true;
