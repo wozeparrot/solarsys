@@ -10,7 +10,10 @@
       inputs.nixpkgs.follows = "unstable";
     };
 
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   outputs = inputs@{ self, unstable, master, home-manager }:
