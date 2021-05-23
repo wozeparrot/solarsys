@@ -37,7 +37,6 @@
     audacity
     antimicroX
     youtube-dl
-    mpv
     vlc
 
     gitAndTools.hub
