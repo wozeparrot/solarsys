@@ -1,4 +1,4 @@
-{ lib, config, pkgs, master, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 {
   imports = [
     ./user.nix
@@ -10,11 +10,10 @@
 
     registry =
       let
-        nixRegistry = builtins.mapAttrs
-          (name: v: { flake = v; })
-          lib.filterAttrs
+        nixRegistry = builtins.mapAttrs (name: v: { flake = v; })
+          (lib.filterAttrs
           (name: value: value ? outputs)
-          inputs;
+          inputs);
       in
       nixRegistry;
 

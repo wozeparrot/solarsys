@@ -39,7 +39,14 @@
       sharedOverlays = self.overlaysDir;
 
       channels = {
-        nixpkgs.input = unstable;
+        nixpkgs = {
+          input = unstable;
+          overlaysBuilder = channels: [
+            (self: super: {
+              mpkgs = channels.master;
+            })
+          ];
+        };
         master.input = master;
       };
       channelsConfig.allowUnfree = true;
