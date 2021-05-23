@@ -13,7 +13,6 @@
     config = {
       force-window = true;
       ytdl-format = "bestvideo+bestaudio";
-      cache = 250000;
       save-position-on-quit = true;
     };
     defaultProfiles = [ "gpu-hq" ];
