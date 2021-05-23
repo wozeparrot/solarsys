@@ -34,8 +34,7 @@
           fullPath = name: overlayDir + "/${name}";
           overlayPaths = map fullPath (attrNames (readDir overlayDir));
         in
-        [
-          (attrValues (pathsToImportedAttrs overlayPaths))
+        (attrValues (pathsToImportedAttrs overlayPaths)) ++ [
           inputs.neovim-nightly-overlay.overlay
         ];
 
