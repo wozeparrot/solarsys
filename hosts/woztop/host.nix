@@ -3,8 +3,8 @@
   networking.hostName = "woztop";
 
   imports = [
-    ../common/profiles/graphical.nix
-    ../common/profiles/laptop.nix
+    ../../common/profiles/graphical.nix
+    ../../common/profiles/laptop.nix
     ./hardware.nix
   ];
 
