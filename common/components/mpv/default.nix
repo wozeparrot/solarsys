@@ -10,6 +10,7 @@
       force-window = true;
       ytdl-format = "bestvideo+bestaudio";
       save-position-on-quit = true;
+      osc = false;
     };
     defaultProfiles = [ "gpu-hq" ];
   };
