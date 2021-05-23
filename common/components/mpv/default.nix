@@ -31,6 +31,10 @@
       dither-depth = "auto";
 
       blend-subtitles = true;
+
+      scale = "ewa_lanczossharp";
+      dscale = "mitchell";
+      cscale = "ewa_lanczossoft";
     };
   };
 }
