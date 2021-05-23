@@ -57,7 +57,7 @@ in
       };
       insp = {
         body = ''
-          nix shell -p ${self}#$argv
+          nix shell -p ${toString ../../../}#$argv
         '';
       };
       mpva = {
