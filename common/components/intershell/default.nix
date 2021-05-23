@@ -67,6 +67,11 @@ in
           mpv --vf=format=colorlevels=full $argv
         '';
       };
+      dlmu = {
+        body = ''
+          youtube-dl -x --audio-quality 0 --audio-format flac --yes-playlist -o "%(title)s.%(ext)s" --exec 'reemu {} ".flac"'
+        '';
+      };
       reemu = {
         body = ''
           ffmpeg -i $argv[1] -map_metadata -1 -metadata title=(basename $argv[1] $argv[2]) -metadata artist="---" -c:a libvorbis -q:a 10 -ar 48k -vn (basename $argv[1] $argv[2]).ogg
