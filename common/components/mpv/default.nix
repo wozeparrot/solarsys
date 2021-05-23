@@ -11,13 +11,12 @@
       ytdl-format = "bestvideo[height<=?1080]+bestaudio";
       save-position-on-quit = true;
       osc = false;
+      profile = "gpu-hq";
+      gpu-api = "vulkan";
 
       hwdec = "auto-copy";
       hwdec-codecs = "all";
       hr-seek-framedrop = false;
-
-      profile = "gpu-hq";
-      gpu-api = "vulkan";
 
       alang = "jpn,jp,eng,en";
       slang = "eng,en,enUS";
@@ -33,7 +32,7 @@
       blend-subtitles = true;
 
       glsl-shader = "~~/shaders/sssr.glsl";
-      scale = "haasnsoft";
+      scale = "bicubic";
       dscale = "mitchell";
       cscale = "ewa_lanczossoft";
     };
