@@ -69,7 +69,7 @@ in
       };
       dlmu = {
         body = ''
-          youtube-dl -x --audio-quality 0 --audio-format flac --yes-playlist -o "%(title)s.%(ext)s" --exec 'reemu {} ".flac"'
+          youtube-dl -x --audio-quality 0 --audio-format flac --yes-playlist -o "%(title)s.%(ext)s" --exec 'reemu {} ".flac"' $argv
         '';
       };
       reemu = {
