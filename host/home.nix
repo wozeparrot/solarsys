@@ -66,8 +66,8 @@
   xsession.initExtra = ''
     sxhkd &
     dunst &
-    $HOME/scripts/monitor.sh
-    feh --bg-fill $HOME/pictures/wallpapers/zerotwoditf.jpg
+    $HOME/scripts/monitor.sh &
+    feh --bg-fill $HOME/pictures/wallpapers/starrysky.jpg &
   '';
   xsession.scriptPath = ".hm-xsession";
 }
