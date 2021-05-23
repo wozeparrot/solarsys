@@ -20,7 +20,7 @@
       inherit self inputs;
 
       devShellBuilder = channels: (import ./shell.nix { pkgs = channels.nixpkgs; });
-      packagesBuilder = channel: channels.nixpkgs;
+      packagesBuilder = channels: channels.nixpkgs;
 
       aoverlays =
         let
