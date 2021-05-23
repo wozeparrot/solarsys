@@ -57,7 +57,7 @@ in
       };
       insp = {
         body = ''
-          nix-shell -p $argv --run fish
+          nix shell -p ${self}#$argv
         '';
       };
       mpva = {
