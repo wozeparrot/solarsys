@@ -9,6 +9,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "unstable";
     };
+
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = inputs@{ self, unstable, master, home-manager }:
@@ -31,7 +33,9 @@
           fullPath = name: overlayDir + "/${name}";
           overlayPaths = map fullPath (attrNames (readDir overlayDir));
         in
-        pathsToImportedAttrs overlayPaths;
+        (pathsToImportedAttrs overlayPaths) ++ [
+          inputs.neovim-nightly-overlay.overlay
+        ];
 
       pkgsImport = pkgs:
         import pkgs {
