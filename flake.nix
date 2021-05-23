@@ -1,5 +1,5 @@
 {
-  description = "woze's nix system (branched)";
+  description = "woze's nix system";
 
   inputs = {
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
