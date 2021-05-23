@@ -21,7 +21,7 @@
 
       devShellBuilder = channels: (import ./shell.nix { pkgs = channels.nixpkgs; });
 
-      overlaysDir =
+      aoverlays =
         let
           overlayDir = ./common/overlays;
           fullPath = name: overlayDir + "/${name}";
@@ -36,7 +36,7 @@
           inputs.neovim-nightly-overlay.overlay
         ];
 
-      sharedOverlays = self.overlaysDir;
+      sharedOverlays = self.aoverlays;
 
       channels = {
         nixpkgs = {
