@@ -24,7 +24,10 @@
     '';
   };
 
-  nixpkgs = { inherit pkgs; };
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = overlays;
+  };
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
@@ -75,7 +78,6 @@
   };
 
   # extra programs
-  programs.thefuck.enable = true;
   programs.firejail.enable = true;
   programs.mtr.enable = true;
   programs.fish.enable = true;

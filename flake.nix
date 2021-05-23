@@ -3,6 +3,7 @@
 
   inputs = {
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.follows = "unstable";
     master.url = "github:NixOS/nixpkgs/master";
 
     home-manager = {
@@ -10,13 +11,10 @@
       inputs.nixpkgs.follows = "unstable";
     };
 
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "unstable";
-    };
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = inputs@{ self, unstable, master, home-manager }:
+  outputs = { self, unstable, master, home-manager, ... }@inputs:
     let
       inherit (builtins) attrNames attrValues readDir listToAttrs;
       inherit (unstable) lib;
@@ -36,7 +34,8 @@
           fullPath = name: overlayDir + "/${name}";
           overlayPaths = map fullPath (attrNames (readDir overlayDir));
         in
-        (pathsToImportedAttrs overlayPaths) ++ [
+        [
+          (attrValues (pathsToImportedAttrs overlayPaths))
           inputs.neovim-nightly-overlay.overlay
         ];
 
@@ -44,7 +43,7 @@
         import pkgs {
           inherit system;
           config = { allowUnfree = true; };
-          overlays = attrValues overlays;
+          overlays = overlays;
         };
 
       pkgs = pkgsImport unstable;
