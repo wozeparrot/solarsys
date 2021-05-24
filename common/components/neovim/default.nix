@@ -13,6 +13,7 @@ in
   programs.neovim = {
     enable = true;
     package = pkgs.neovim-nightly;
+    withNodeJs = true;
 
     extraConfig = builtins.concatStringsSep "\n" [
       (lib.strings.fileContents ./theme.vim)
