@@ -85,5 +85,7 @@ vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 -- Treesitter Config
 require'nvim-treesitter.configs'.setup {
     ensure_installed = "maintained";
-    highlight.enable = true;
+    highlight = {
+        enable = true;
+    }
 }
