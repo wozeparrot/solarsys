@@ -35,8 +35,8 @@ in
     ];
 
     plugins = with pkgs.vimPlugins; [
-      (plugin "neovim/nvim-lspconfig")
-      (plugin "nvim-lua/nvim-compe")
+      (pluginH "neovim/nvim-lspconfig")
+      (pluginH "nvim-lua/nvim-compe")
     ];
   };
 }
