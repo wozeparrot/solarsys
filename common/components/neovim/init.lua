@@ -23,9 +23,12 @@ o.inccommand = 'nosplit'
 o.completeopt = 'menuone,noinsert'
 
 -- LSP Config
-require'lspconfig'.pyright.setup()
-require'lspconfig'.rust_analyzer.setup()
-require'lspconfig'.zls.setup()
+local nvim_lsp = require('lspconfig')
+
+local servers = { 'rust_analyzer', 'pyright', 'zls' }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup { on_attach = on_attach }
+end
 
 vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 
