@@ -41,6 +41,8 @@ in
       (pluginGit "hrsh7th/nvim-compe" "5001cd7632b50b65f04d59af85a9dd199ea73b3a")
       (pluginGit "nvim-treesitter/nvim-treesitter" "a1b0e9ebb56f1042bc51e94252902ef14f688aaf")
 
+      which-key-nvim
+
       zig-vim
       vim-nix
     ];
