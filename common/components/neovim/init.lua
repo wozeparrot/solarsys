@@ -7,8 +7,8 @@ o.syntax = 'on'
 o.filetype = 'on'
 o.autoindent = true
 bo.smartindent = true
-vim.cmd('set ts=4')
-vim.cmd('set sw=4')
+bo.tabstop = 4
+bo.shiftwidth = 4
 vim.cmd('set expandtab')
 o.smartcase = true
 o.ignorecase = true
