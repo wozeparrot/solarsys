@@ -1,15 +1,13 @@
-{ config, pkgs, lib, vimUtils, ... }:
+{ config, pkgs, lib, ... }:
 let
-  pluginGit = ref: repo: vimUtils.buildVimPluginFrom2Nix {
-    pname = "${lib.strings.sanitizeDerivationName repo}";
-    version = ref;
+  pluginGit = repo: rev: pkgs.vimUtils.buildVimPluginFrom2Nix {
+    name = "${lib.strings.sanitizeDerivationName repo}";
+    version = rev;
     src = builtins.fetchGit {
       url = "https://github.com/${repo}.git";
-      ref = ref;
+      rev = rev;
     };
   };
-
-  pluginH = pluginGit "HEAD";
 in
 {
   programs.neovim = {
@@ -35,8 +33,8 @@ in
     ];
 
     plugins = with pkgs.vimPlugins; [
-      (pluginH "neovim/nvim-lspconfig")
-      (pluginH "nvim-lua/nvim-compe")
+      (pluginGit "neovim/nvim-lspconfig" "251aa38a3ad87389e4e9dfb4ee745c312c25d740")
+      (pluginGit "hrsh7th/nvim-compe" "5001cd7632b50b65f04d59af85a9dd199ea73b3a")
     ];
   };
 }
