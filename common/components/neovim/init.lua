@@ -19,11 +19,15 @@ o.ruler = true
 o.background = 'dark'
 o.termguicolors = true
 o.mouse = 'a'
+o.inccommand = 'nosplit'
+o.completeopt = 'menuone,noinsert'
 
 -- LSP Config
 require'lspconfig'.pyright.setup()
 require'lspconfig'.rust_analyzer.setup()
 require'lspconfig'.zls.setup()
+
+vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 
 -- Autocompletion Config
 require'compe'.setup {
