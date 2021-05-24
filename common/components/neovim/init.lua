@@ -3,8 +3,8 @@ local wo = vim.wo
 local bo = vim.bo
 
 -- General Config
-o.syntax = true
-o.filetype = true
+o.syntax = 'on'
+o.filetype = 'on'
 o.expandtab = true
 o.bs = 2
 o.tabstop = 2
