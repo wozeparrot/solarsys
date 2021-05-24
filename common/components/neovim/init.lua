@@ -25,7 +25,7 @@ o.completeopt = 'menuone,noinsert'
 -- LSP Config
 local nvim_lsp = require('lspconfig')
 
-local servers = { 'rust_analyzer', 'pyright', 'zls' }
+local servers = { 'rust_analyzer', 'pyright', 'zls', 'rnix', 'dockerls', 'dartls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end

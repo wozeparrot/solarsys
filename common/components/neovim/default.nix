@@ -30,8 +30,11 @@ in
       gcc
 
       nodePackages.pyright
+      nodePackages.dockerfile-language-server-nodejs
       rust-analyzer
+      dart
       zls
+      rnix-lsp
     ];
 
     plugins = with pkgs.vimPlugins; [
