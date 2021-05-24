@@ -5,12 +5,11 @@ local bo = vim.bo
 -- General Config
 o.syntax = 'on'
 o.filetype = 'on'
-o.expandtab = true
-o.bs = '2'
-o.tabstop = 2
-o.shiftwidth = 2
 o.autoindent = true
-o.smartindent = true
+bo.smartindent = true
+vim.cmd('set ts=4')
+vim.cmd('set sw=4')
+vim.cmd('set expandtab')
 o.smartcase = true
 o.ignorecase = true
 o.modeline = true
@@ -21,6 +20,16 @@ o.termguicolors = true
 o.mouse = 'a'
 o.inccommand = 'nosplit'
 o.completeopt = 'menuone,noinsert'
+o.conceallevel = 0
+o.updatetime = 300
+o.backup = false
+o.writebackup = false
+wo.signcolumn = 'yes'
+o.showtabline = 2
+wo.cursorline = true
+o.pumheight = 10
+o.cmdheight = 2
+o.clipboard = 'unnamedplus'
 
 -- LSP Config
 local nvim_lsp = require('lspconfig')
