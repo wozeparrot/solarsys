@@ -27,8 +27,8 @@ in
 
     extraPackages = with pkgs; [
       tree-sitter
-      clang
-      
+      gcc
+
       nodePackages.pyright
       rust-analyzer
       zls
