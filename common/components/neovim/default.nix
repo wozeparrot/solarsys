@@ -1,22 +1,42 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, vimUtils, ... }:
+let
+  pluginGit = ref: repo: vimUtils.buildVimPluginFrom2Nix {
+    pname = "${lib.strings.sanitizeDerivationName repo}";
+    version = ref;
+    src = builtins.fetchGit {
+      url = "https://github.com/${repo}.git";
+      ref = ref;
+    };
+  };
+
+  pluginH = pluginGit "HEAD";
+in
 {
   programs.neovim = {
     enable = true;
-    withNodeJs = true;
-    plugins = with pkgs.vimPlugins; [
-      zig-vim
-      vim-nix
-      rust-vim
+    package = pkgs.neovim-nightly;
 
-      coc-nvim
-      coc-git
-      coc-json
-      coc-yaml
-      coc-rust-analyzer
+    extraConfig = builtins.concatStringsSep "\n" [
+      (lib.strings.fileContents ./theme.vim)
 
-      vim-airline
-      vim-airline-themes
+      ''
+        lua << EOF
+        ${lib.strings.fileContents ./init.lua}
+        EOF
+      ''
     ];
-    extraConfig = builtins.readFile ./init.vim;
+
+    extraPackages = with pkgs; [
+      tree-sitter
+
+      nodePackages.pyright
+      rust-analyzer
+      zls
+    ];
+
+    plugins = with pkgs.vimPlugins; [
+      (plugin "neovim/nvim-lspconfig")
+      (plugin "nvim-lua/nvim-compe")
+    ];
   };
 }
