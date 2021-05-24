@@ -26,7 +26,6 @@ o.backup = false
 o.writebackup = false
 wo.signcolumn = 'yes'
 o.showtabline = 2
-wo.cursorline = true
 o.pumheight = 10
 o.cmdheight = 2
 o.clipboard = 'unnamedplus'
