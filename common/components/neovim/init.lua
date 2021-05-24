@@ -18,7 +18,7 @@ o.encoding = 'utf-8'
 o.nojoinspaces = true
 o.ruler = true
 o.background = 'dark'
-o.termguicolors  
+o.termguicolors = true
 o.mouse = 'a'
 
 -- LSP Config
