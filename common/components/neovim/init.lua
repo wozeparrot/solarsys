@@ -15,7 +15,6 @@ o.smartcase = true
 o.ignorecase = true
 o.modeline = true
 o.encoding = 'utf-8'
-o.nojoinspaces = true
 o.ruler = true
 o.background = 'dark'
 o.termguicolors = true
