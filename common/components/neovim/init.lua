@@ -24,6 +24,7 @@ o.completeopt = 'menuone,noinsert'
 
 -- LSP Config
 local nvim_lsp = require('lspconfig')
+vim.lsp.set_log_level("debug")
 
 local on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
