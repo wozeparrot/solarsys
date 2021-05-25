@@ -45,6 +45,8 @@ in
 
       zig-vim
       vim-nix
+      vim-flutter
+      dart-vim-plugin
     ];
   };
 }
