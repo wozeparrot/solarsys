@@ -80,7 +80,10 @@
     };
 
     homeBinInPath = true;
+  };
 
+  # disable some documentation
+  documentation = {
     info.enable = false;
   };
 
