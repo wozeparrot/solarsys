@@ -80,6 +80,8 @@
     };
 
     homeBinInPath = true;
+
+    info.enable = false;
   };
 
   # extra programs
