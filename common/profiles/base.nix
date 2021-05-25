@@ -90,8 +90,6 @@
   programs.ssh.startAgent = false;
 
   # services
-  services.lorri.enable = true;
-
   ## oom killer
   services.earlyoom.enable = true;
 
