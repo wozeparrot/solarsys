@@ -16,12 +16,7 @@
   };
 
   outputs = inputs@{ self, unstable, master, utils, home-manager, ... }:
-    utils.lib.systemFlake {
-      inherit self inputs;
-
-      devShellBuilder = channels: (import ./shell.nix { pkgs = channels.nixpkgs; });
-      packagesBuilder = channels: channels.nixpkgs;
-
+    let
       aoverlays =
         let
           overlayDir = ./common/overlays;
@@ -36,8 +31,14 @@
         (builtins.attrValues (pathsToImportedAttrs overlayPaths)) ++ [
           inputs.neovim-nightly-overlay.overlay
         ];
+    in
+    utils.lib.systemFlake {
+      inherit self inputs;
 
-      sharedOverlays = self.aoverlays;
+      devShellBuilder = channels: (import ./shell.nix { pkgs = channels.nixpkgs; });
+      packagesBuilder = channels: channels.nixpkgs;
+
+      sharedOverlays = aoverlays;
 
       channels = {
         nixpkgs = {
