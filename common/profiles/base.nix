@@ -17,6 +17,8 @@
       in
       nixRegistry;
 
+    nixPath = [ "nixpkgs=${inputs.unstable}" ];
+
     gc = {
       automatic = true;
       dates = "daily";
