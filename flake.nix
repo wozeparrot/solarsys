@@ -39,7 +39,6 @@
       packagesBuilder = channels: channels.nixpkgs;
 
       sharedOverlays = aoverlays;
-
       channels = {
         nixpkgs = {
           input = unstable;
