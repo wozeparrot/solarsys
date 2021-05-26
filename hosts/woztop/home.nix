@@ -42,7 +42,12 @@
   services.picom = {
     enable = true;
     blur = true;
-    blurExclude = [ "class_g = 'slop'" "class_g = 'discord_overlay.py'" ];
+    blurExclude = [
+      "class_g = 'slop'"
+      "class_g = 'discord_overlay.py'"
+      "window_type = 'dock'"
+      "window_type = 'desktop'"
+    ];
     experimentalBackends = true;
     vSync = true;
     package = pkgs.ss.picom;
