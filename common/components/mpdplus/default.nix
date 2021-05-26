@@ -16,6 +16,13 @@
         format "44100:16:1"
       }
 
+      audio_output {
+        type "fifo"
+        name "glava feed"
+        path "/tmp/mpd_glava.fifo"
+        format "22050:16:2"
+      }
+
       replaygain "track"
     '';
   };
@@ -56,4 +63,7 @@
       selected_item_prefix = "* ";
     };
   };
+
+  # glava
+  home.packages = with pkgs; [ glava ];
 }
