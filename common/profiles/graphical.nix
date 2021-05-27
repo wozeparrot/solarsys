@@ -56,6 +56,7 @@
 
   # fonts
   fonts = {
+    enableDefaultFonts = true;
     fonts = with pkgs; [ nerdfonts jetbrains-mono ];
     fontconfig.defaultFonts = {
       monospace = [ "JetBrainsMono Nerd Font" ];

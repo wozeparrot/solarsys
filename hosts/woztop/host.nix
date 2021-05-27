@@ -6,6 +6,8 @@
     ../../common/profiles/graphical.nix
     ../../common/profiles/laptop.nix
     ./hardware.nix
+
+    ../../common/profiles/desktops/hikari
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_lqx;
