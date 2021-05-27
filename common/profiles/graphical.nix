@@ -18,24 +18,6 @@
   programs.dconf.enable = true;
   services.dbus.packages = with pkgs; [ dconf ];
 
-  # xserver
-  services.xserver = {
-    enable = true;
-
-    layout = "us";
-
-    libinput = {
-      enable = true;
-      touchpad = {
-        disableWhileTyping = false;
-        naturalScrolling = true;
-      };
-      mouse = {
-        middleEmulation = false;
-      };
-    };
-  };
-
   # xdg.portal = {
   #   enable = true;
   #   gtkUsePortal = true;

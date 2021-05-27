@@ -47,33 +47,6 @@
   # services.flatpak.enable = true;
 
   services.xserver.videoDrivers = [ "amdgpu" "modesetting" ];
-  services.xserver.displayManager = {
-    autoLogin = {
-      enable = true;
-      user = "woze";
-    };
-    lightdm.enable = true;
-    session = [
-      {
-        manage = "window";
-        name = "home-manager";
-        start = ''
-          ${pkgs.runtimeShell} $HOME/.hm-xsession &
-          waitPID=$!
-        '';
-      }
-    ];
-    defaultSession = "xfce+home-manager";
-  };
-  services.xserver.desktopManager = {
-    xterm.enable = false;
-    xfce = {
-      enable = true;
-      noDesktop = true;
-      enableXfwm = false;
-      thunarPlugins = [ pkgs.xfce.thunar-archive-plugin ];
-    };
-  };
 
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
