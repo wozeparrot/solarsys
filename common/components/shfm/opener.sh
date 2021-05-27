@@ -2,7 +2,7 @@
 #
 # open file in application based on mime-type
 
-mime_type=$(file -bi)
+mime_type=$(file -bi "$1")
 
 case $mime_type in
     audio/*)
