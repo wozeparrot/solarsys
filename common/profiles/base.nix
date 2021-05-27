@@ -11,13 +11,16 @@
     registry =
       let
         nixRegistry = builtins.mapAttrs (name: v: { flake = v; })
-          (lib.filterAttrs
-          (name: value: value ? outputs)
-          inputs);
+          (
+            lib.filterAttrs
+              (name: value: value ? outputs)
+              inputs
+          );
       in
-      nixRegistry;
+        nixRegistry;
 
     nixPath = [ "nixpkgs=${inputs.unstable}" ];
+    sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh" ];
 
     gc = {
       automatic = true;
