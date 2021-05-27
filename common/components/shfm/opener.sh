@@ -25,7 +25,7 @@ case $mime_type in
         zathura "$1"
     ;;
 
-    text/*|)
+    text/*)
         "${EDITOR}" "$1"
     ;;
 
