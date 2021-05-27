@@ -3,6 +3,12 @@
   # home-manager config
   home-manager.users.woze = {
     xdg.configFile."hikari/hikari.conf".source = ./hikari.conf;
+    xdg.configFile."hikari/autostart" = {
+      executable = true;
+      text = ''
+        exec waybar
+      '';
+    };
 
     home.packages = with pkgs; [
       wofi
@@ -10,6 +16,7 @@
 
     programs.mako = {
       enable = true;
+      defaultTimeout = 2000;
     };
 
     programs.waybar = {
@@ -25,6 +32,25 @@
           modules-left = [ "battery" "network" "cpu" "memory" ];
           modules-center = [ "mpd" ];
           modules-right = [ "backlight" "pulseaudio" "clock" "tray" ];
+          modules = {
+            "mpd" = {
+              format = "{stateIcon} {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})";
+              format-disconnected = "disconnected";
+              format-stopped = "stopped";
+              state-icons = {
+                paused = "";
+                playing = "";
+              };
+            };
+            "network" = {
+              format-wifi = "{signalStrength}%";
+              format-disconnected = "";
+            };
+            "backlight" = {
+              on-scroll-up = "light -A 1";
+              on-scroll-down = "light -U 1";
+            };
+          };
         }
       ];
     };
