@@ -82,11 +82,6 @@
     homeBinInPath = true;
   };
 
-  # disable some documentation
-  documentation = {
-    info.enable = false;
-  };
-
   # extra programs
   programs.firejail.enable = true;
   programs.mtr.enable = true;
