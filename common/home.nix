@@ -9,6 +9,7 @@
     ./components/keepassxc
     ./components/kitty
     ./components/mpv
+    ./components/shfm
   ];
 
   # packages
