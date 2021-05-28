@@ -74,8 +74,6 @@
     unzip
     p7zip
 
-    libsForQt5.qt5.qtwayland
-
     pkgs.mpkgs.discord-canary
   ];
 
