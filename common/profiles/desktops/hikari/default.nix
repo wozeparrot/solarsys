@@ -50,6 +50,11 @@
               on-scroll-up = "light -A 1";
               on-scroll-down = "light -U 1";
             };
+            "clock" = {
+              interval = 1;
+              format = "{:%H:%M:%S}";
+              tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+            };
           };
         }
       ];
