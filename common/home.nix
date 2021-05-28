@@ -60,6 +60,8 @@
     slurp
     wf-recorder
     wl-clipboard
+    xclip
+    xsel
 
     mpc_cli
     neofetch

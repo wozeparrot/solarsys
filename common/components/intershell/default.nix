@@ -79,12 +79,12 @@ in
       };
       screenshot = {
         body = ''
-          grim -g (slurp) - | wl-copy
+          grim -g (slurp) - | wl-copy -t 'image/png'
         '';
       };
       colorpick = {
         body = ''
-          grim -g (slurp -p) -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:- | wl-copy
+          grim -g (slurp -p) -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:- | wl-copy 
         '';
       };
     };
