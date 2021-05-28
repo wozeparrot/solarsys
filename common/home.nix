@@ -59,6 +59,7 @@
     grim
     slurp
     wf-recorder
+    wl-clipboard
 
     mpc_cli
     neofetch
