@@ -32,7 +32,7 @@
       color7 = "#626262";
       color15 = "#c6c6c6";
 
-      background_opacity = "0.8";
+      background_opacity = "0.85";
 
       hide_window_decorations = "no";
       window_padding_width = 2;
