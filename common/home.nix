@@ -53,21 +53,11 @@
     the-powder-toy
     pkgs.mpkgs.osu-lazer
 
-    xdo
-    xdotool
-    shotgun
-    arandr
-    xclip
-    slop
-    flameshot
-    cli-visualizer
-
     ranger
     feh
 
     mpc_cli
     neofetch
-    onefetch
     bottom
     iotop
 
@@ -101,7 +91,7 @@
     package = pkgs.pulseeffects-pw;
   };
 
-  # x config
+  # xdg config
   xdg.enable = true;
 
   # theming

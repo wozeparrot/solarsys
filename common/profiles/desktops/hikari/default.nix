@@ -12,6 +12,9 @@
 
     home.packages = with pkgs; [
       wofi
+      grim
+      slurp
+      wf-recorder
     ];
 
     programs.mako = {
