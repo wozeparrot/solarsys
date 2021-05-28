@@ -17,6 +17,7 @@
     programs.mako = {
       enable = true;
       defaultTimeout = 2000;
+      maxVisible = 7;
     };
 
     programs.waybar = {
