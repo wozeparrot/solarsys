@@ -77,16 +77,6 @@ in
           rm $argv[1]
         '';
       };
-      screenshot = {
-        body = ''
-          grim -g (slurp) - | wl-copy -t 'image/png'
-        '';
-      };
-      colorpick = {
-        body = ''
-          grim -g (slurp -p) -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:- | wl-copy 
-        '';
-      };
     };
 
     promptInit = ''
