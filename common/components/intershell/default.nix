@@ -60,12 +60,12 @@ in
           nix shell ${toString ../../..}#$argv
         '';
       };
-      mpva = {
+      mpvclf = {
         body = ''
           mpv --vf=format=colorlevels=full $argv
         '';
       };
-      dlmu = {
+      ytdlmu = {
         body = ''
           youtube-dl -x --audio-quality 0 --audio-format flac --yes-playlist -o "%(title)s.%(ext)s" --exec 'fish -c "reemu {} \".flac\""' $argv
         '';
@@ -75,6 +75,16 @@ in
           ffmpeg -i $argv[1] -map_metadata -1 -metadata title=(basename $argv[1] $argv[2]) -metadata artist="---" -c:a libvorbis -q:a 10 -ar 48k -vn (basename $argv[1] $argv[2]).ogg
           vorbisgain (basename $argv[1] $argv[2]).ogg
           rm $argv[1]
+        '';
+      };
+      screenshot = {
+        body = ''
+          grim -g (slurp) - | wl-copy
+        '';
+      };
+      colorpick = {
+        body = ''
+          grim -g (slurp -p) -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:- | wl-copy
         '';
       };
     };
