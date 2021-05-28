@@ -60,6 +60,7 @@
           };
         }
       ];
+      style = builtins.readFile ./waybar.css;
     };
   };
 
