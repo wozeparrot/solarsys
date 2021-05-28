@@ -42,20 +42,26 @@
                 paused = "";
                 playing = "";
               };
+              tooltip = false;
             };
             "network" = {
               format-wifi = "{signalStrength}%";
               format-disconnected = "";
+              tooltip = false;
             };
             "backlight" = {
               on-scroll-up = "light -A 1";
               on-scroll-down = "light -U 1";
+              tooltip = false;
             };
             "clock" = {
               interval = 1;
               format = "{:%H:%M:%S}";
               today-format = "<b><big><u>{}</u></big></b>";
               tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+            };
+            "pulseaudio" = {
+              tooltip = false;
             };
           };
         }
