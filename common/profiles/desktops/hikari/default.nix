@@ -53,6 +53,7 @@
             "clock" = {
               interval = 1;
               format = "{:%H:%M:%S}";
+              today-format = "<big><u>{}</u></big>";
               tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
             };
           };
