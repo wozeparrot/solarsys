@@ -56,6 +56,10 @@
     ranger
     feh
 
+    grim
+    slurp
+    wf-recorder
+
     mpc_cli
     neofetch
     bottom
