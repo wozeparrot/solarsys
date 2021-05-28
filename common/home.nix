@@ -74,7 +74,7 @@
     unzip
     p7zip
 
-    pkgs.mpkgs.discord
+    pkgs.mpkgs.discord-canary
   ];
 
   # extra programs
