@@ -52,7 +52,7 @@
 
       now_playing_prefix = "> ";
       song_status_format = "$b$7♫ $2%a $4⟫$3⟫ $8%t $4⟫$3⟫ $5%b ";
-      song_columns_list_format = "(6)[]{} (26)[yellow]{t|f} (4)[blue]{l}";
+      song_columns_list_format = "(6)[]{} (60)[yellow]{t|f} (4)[blue]{l}";
       song_list_format = " $7%l  $2%t $R$5%a ";
       autocenter_mode = "yes";
       centered_cursor = "yes";
