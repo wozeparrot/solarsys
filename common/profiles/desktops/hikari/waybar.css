@@ -1,10 +1,14 @@
-#tray {
-    margin-left: 4px;
-    margin-right: 4px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 0px;
-    transition: none;
-    color: #4d4d4d;
-    background: rgba(119, 136, 153, 0.85);
+@define-color background #111111;
+@define-color foreground #c6c6c6;
+@define-color black      #111111;
+@define-color yellow     #c4a000;
+@define-color red        #ac2c2c;
+@define-color green      #4e9a06;
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: Regular, "JetBrainsMono Nerd Font";
+  font-size: 13px;
+  min-height: 0;
 }

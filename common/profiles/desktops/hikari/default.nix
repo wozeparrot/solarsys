@@ -79,15 +79,15 @@
               format-full = "<span foreground='#929292'>{icon}</span> {capacity}%";
               interval = 30;
               states = {
-                warning = 25;
-                critical = 10;
+                warning = 30;
+                critical = 15;
               };
               tooltip = false;
             };
           };
         }
       ];
-      #style = builtins.readFile ./waybar.css;
+      style = builtins.readFile ./waybar.css;
     };
   };
 
