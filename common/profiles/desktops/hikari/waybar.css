@@ -41,7 +41,9 @@ window#waybar {
 #memory,
 #backlight,
 #battery,
-#clock {
+#pulseaudio,
+#clock,
+#tray {
   padding: 0 6px;
   margin: 0 6px;
 }
