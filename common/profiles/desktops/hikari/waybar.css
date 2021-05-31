@@ -1,4 +1,4 @@
-@define-color background #111111;
+@define-color background #111111aa;
 @define-color foreground #c6c6c6;
 @define-color black      #111111;
 @define-color yellow     #c4a000;
@@ -8,8 +8,8 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: Regular, "JetBrainsMono Nerd Font";
-  font-size: 13px;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 12px;
   min-height: 0;
 }
 
@@ -23,17 +23,17 @@ window#waybar {
 #battery.warning,
 #memory.warning,
 #cpu.warning {
-  border-bottom: 3px solid @yellow;
+  border-top: 3px solid @yellow;
 }
 
 #battery.critical,
 #memory.critical,
 #cpu.critical {
-  border-bottom: 3px solid @red;
+  border-top: 3px solid @red;
 }
 
 #battery.charging {
-  border-bottom: 3px solid @green;
+  border-top: 3px solid @green;
 }
 
 #network,
@@ -44,4 +44,8 @@ window#waybar {
 #clock {
   padding: 0 6px;
   margin: 0 6px;
+}
+
+#tray {
+    margin: 0 6px;
 }
