@@ -45,8 +45,8 @@
               tooltip = false;
             };
             "network" = {
-              format-wifi = "<span foreground='#929292'></span> <span foreground='#929292'>{signalStrength}%</span>";
-              format-ethernet = "<span foreground='#929292'></span>";
+              format-wifi = " {signalStrength}%";
+              format-ethernet = "";
               format-disconnected = "";
               tooltip = false;
             };
@@ -63,20 +63,20 @@
             };
             "pulseaudio" = {
               format = "{icon} {volume}%";
-              format-muted = "<span foreground='#929292'></span>";
+              format-muted = "";
               format-icons = {
-                default = [ "<span foreground='#929292'></span>" ];
-                headphones = [ "<span foreground='#929292'></span>" ];
+                default = [ "" ];
+                headphones = [ "" ];
               };
               on-click = "pavucontrol";
               tooltip = false;
             };
             "battery" = {
               format-icons = ["" "" "" "" ""];
-              format = "<span foreground='#929292'>{icon}</span> {capacity}%";
-              format-charging = "<span foreground='#929292'>{icon}</span> {capacity}%";
-              format-discharging = "<span foreground='#929292'>{icon}</span> {time}";
-              format-full = "<span foreground='#929292'>{icon}</span> {capacity}%";
+              format = "{icon} {capacity}%";
+              format-charging = "{icon} {capacity}%";
+              format-discharging = "{icon} {time}";
+              format-full = "{icon} {capacity}%";
               interval = 30;
               states = {
                 warning = 30;
