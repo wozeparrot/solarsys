@@ -40,6 +40,8 @@
     virt-viewer
 
     corectrl
+
+    cifs-utils
   ];
 
   programs.nm-applet.enable = true;
