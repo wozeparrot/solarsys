@@ -45,7 +45,8 @@
               tooltip = false;
             };
             "network" = {
-              format-wifi = "{signalStrength}%";
+              format-wifi = "<span foreground='#929292'></span> <span foreground='#929292'>{signalStrength}%</span>";
+              format-ethernet = "<span foreground='#929292'></span>";
               format-disconnected = "";
               tooltip = false;
             };
@@ -61,12 +62,32 @@
               tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
             };
             "pulseaudio" = {
+              format = "{icon} {volume}%";
+              format-muted = "<span foreground='#929292'></span>";
+              format-icons = {
+                default = [ "<span foreground='#929292'></span>" ];
+                headphones = [ "<span foreground='#929292'></span>" ];
+              };
+              on-click = "pavucontrol";
+              tooltip = false;
+            };
+            "battery" = {
+              format-icons = ["" "" "" "" ""];
+              format = "<span foreground='#929292'>{icon}</span> {capacity}%";
+              format-charging = "<span foreground='#929292'>{icon}</span> {capacity}%";
+              format-discharging = "<span foreground='#929292'>{icon}</span> {time}";
+              format-full = "<span foreground='#929292'>{icon}</span> {capacity}%";
+              interval = 30;
+              states = {
+                warning = 25;
+                critical = 10;
+              };
               tooltip = false;
             };
           };
         }
       ];
-      style = builtins.readFile ./waybar.css;
+      #style = builtins.readFile ./waybar.css;
     };
   };
 
