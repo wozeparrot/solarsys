@@ -94,7 +94,7 @@
   programs.keychain.enable = false; # currently broken, prevents window manager from starting on boot
 
   # extra services
-  #services.kdeconnect.enable = true;
+  services.kdeconnect.enable = true;
   services.pulseeffects = {
     enable = false; # still broken
     package = pkgs.pulseeffects-pw;

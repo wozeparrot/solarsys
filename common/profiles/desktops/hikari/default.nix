@@ -7,6 +7,7 @@
       executable = true;
       text = ''
         exec waybar
+        exec systemctl --user import-environment
       '';
     };
 
