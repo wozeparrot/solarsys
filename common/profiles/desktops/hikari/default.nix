@@ -53,6 +53,8 @@
             "backlight" = {
               on-scroll-up = "light -A 1";
               on-scroll-down = "light -U 1";
+              format = "{icon} {percent}%";
+              format-icons = [""];
               tooltip = false;
             };
             "clock" = {
@@ -83,6 +85,20 @@
                 critical = 15;
               };
               tooltip = false;
+            };
+            "memory" = {
+              format = " {}%";
+              states = {
+                warning = 70;
+                critical = 90;
+              };
+            };
+            "cpu" = {
+              format = " {usage}%";
+              states = {
+                warning = 70;
+                critical = 90;
+              };
             };
           };
         }

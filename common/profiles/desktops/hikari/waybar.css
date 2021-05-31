@@ -12,3 +12,40 @@
   font-size: 13px;
   min-height: 0;
 }
+
+window#waybar {
+  background: @background;
+  color: @foreground;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+#battery.warning,
+#memory.warning,
+#cpu.warning {
+  border-bottom: 3px solid @yellow;
+}
+
+#battery.critical,
+#memory.critical,
+#cpu.critical {
+  border-bottom: 3px solid @red;
+}
+
+#battery.charging {
+  border-bottom: 3px solid @green;
+}
+
+#network,
+#cpu,
+#memory,
+#backlight,
+#battery,
+#clock {
+  padding: 0 6px;
+  margin: 0 6px;
+}
+
+#tray {
+  margin-left: -1000000px;
+}
