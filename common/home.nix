@@ -75,6 +75,8 @@
     p7zip
 
     pkgs.mpkgs.discord-canary
+
+    qt5.qt-wayland
   ];
 
   # extra programs
