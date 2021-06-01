@@ -7,6 +7,11 @@
       executable = true;
       text = ''
         systemctl --user import-environment
+
+        systemctl --user start kdeconnect.service
+        systemctl --user start kdeconnect-indicator.service
+        systemctl --user start nextcloud-client.service
+
         exec waybar  
       '';
     };
@@ -136,12 +141,10 @@
 
             export MOZ_ENABLE_WAYLAND=1
             export QT_QPA_PLATFORM=wayland-egl
-            export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-            export QT_AUTO_SCREEN_SCALE_FACTOR=1
             export SDL_VIDEODRIVER=wayland
             export _JAVA_AWT_WM_NONREPARENTING=1
 
-            systemd-cat --identifier=hikari hikari
+            systemd-cat --identifier=hikari dbus-run-session hikari
           '';
         in
           "${pkgs.greetd.greetd}/bin/agreety --cmd ${hikari-run}/bin/hikari-run";
