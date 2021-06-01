@@ -77,7 +77,6 @@
     pkgs.mpkgs.discord-canary
 
     qt5.qtwayland
-    dracula-theme
   ];
 
   # extra programs
@@ -103,6 +102,24 @@
 
   # xdg config
   xdg.enable = true;
+
+  # theming
+  gtk = {
+    theme = {
+      package = pkgs.dracula-theme;
+      name = "Dracula";
+    };
+    iconTheme = {
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
+    };
+    enable = true;
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "qt5ct";
+  };
 
   # home manager stuff
   home.sessionVariables = {
