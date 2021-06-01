@@ -107,7 +107,7 @@
   gtk = {
     theme = {
       package = pkgs.gnome3.gnome_themes_standard;
-      name = "Adwaita";
+      name = "Adwaita-dark";
     };
     iconTheme = {
       package = pkgs.gnome.adwaita-icon-theme;
@@ -120,7 +120,7 @@
     enable = true;
     style = {
       package = pkgs.adwaita-qt;
-      name = "adwaita-dark";
+      name = "Adwaita-dark";
     };
   };
 
