@@ -6,8 +6,8 @@
     xdg.configFile."hikari/autostart" = {
       executable = true;
       text = ''
-        exec waybar
-        exec systemctl --user import-environment  
+        systemctl --user import-environment
+        exec waybar  
       '';
     };
 
