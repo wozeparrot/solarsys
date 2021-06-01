@@ -115,8 +115,8 @@
       name = "Adwaita";
     };
     font = {
-      name = "DejaVu Sans";
-      size = 8;
+      name = "JetBrainsMono Nerd Font";
+      size = 10;
     };
     enable = true;
   };
