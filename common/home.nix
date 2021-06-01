@@ -114,6 +114,10 @@
       package = pkgs.gnome.adwaita-icon-theme;
       name = "Adwaita";
     };
+    font = {
+      name = "DejaVu Sans";
+      size = 8;
+    };
     enable = true;
   };
 
