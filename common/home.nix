@@ -116,11 +116,6 @@
     enable = true;
   };
 
-  qt = {
-    enable = true;
-    platformTheme = "qt5ct";
-  };
-
   # home manager stuff
   home.sessionVariables = {
     LANG = "en_US.UTF-8";
