@@ -116,11 +116,11 @@
     enable = true;
   };
 
-  # qt = {
-  #   enable = true;
-  #   platformTheme = "gtk";
-  #   style.name = "gtk2";
-  # };
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
+    style.name = "gtk2";
+  };
 
   # home manager stuff
   home.sessionVariables = {
