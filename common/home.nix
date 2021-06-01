@@ -103,19 +103,6 @@
   # xdg config
   xdg.enable = true;
 
-  # theming
-  gtk = {
-    theme = {
-      package = pkgs.shades-of-gray-theme;
-      name = "Shades-of-gray-Patina";
-    };
-    iconTheme = {
-      package = pkgs.papirus-icon-theme;
-      name = "Papirus-Dark";
-    };
-    enable = true;
-  };
-
   # home manager stuff
   home.sessionVariables = {
     LANG = "en_US.UTF-8";
