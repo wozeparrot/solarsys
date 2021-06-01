@@ -116,15 +116,9 @@
   # system config
   environment.systemPackages = with pkgs; [
     hikari
-
-    gtk-engine-murrine
-    gtk_engines
-    gsettings-desktop-schemas
-    lxappearance
   ];
 
   programs.xwayland.enable = true;
-  programs.qt5ct.enable = true;
 
   services.greetd = {
     enable = true;
