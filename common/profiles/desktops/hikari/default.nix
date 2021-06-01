@@ -119,6 +119,7 @@
   ];
 
   programs.xwayland.enable = true;
+  programs.qt5ct.enable = true;
 
   services.greetd = {
     enable = true;
@@ -135,6 +136,7 @@
 
             export MOZ_ENABLE_WAYLAND=1
             export QT_QPA_PLATFORM=wayland-egl
+            export QT_QPA_PLATFORMTHEME=qt5ct
             export SDL_VIDEODRIVER=wayland
             export _JAVA_AWT_WM_NONREPARENTING=1
 
