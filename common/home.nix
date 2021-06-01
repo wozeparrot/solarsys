@@ -77,6 +77,7 @@
     pkgs.mpkgs.discord-canary
 
     qt5.qtwayland
+    pkgs.adwaita-qt
   ];
 
   # extra programs
