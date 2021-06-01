@@ -106,20 +106,22 @@
   # theming
   gtk = {
     theme = {
-      package = pkgs.dracula-theme;
-      name = "Dracula";
+      package = pkgs.gnome3.gnome_themes_standard;
+      name = "Adwaita Dark";
     };
     iconTheme = {
-      package = pkgs.papirus-icon-theme;
-      name = "Papirus-Dark";
+      package = pkgs.gnome.adwaita-icon-theme;
+      name = "Adwaita";
     };
     enable = true;
   };
 
   qt = {
     enable = true;
-    platformTheme = "gtk";
-    style.name = "gtk2";
+    style = {
+      package = pkgs.adwaita-qt;
+      name = "adwaita-dark";
+    };
   };
 
   # home manager stuff
