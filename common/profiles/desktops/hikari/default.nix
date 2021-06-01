@@ -141,7 +141,7 @@
             export SDL_VIDEODRIVER=wayland
             export _JAVA_AWT_WM_NONREPARENTING=1
 
-            exec dbus-run-session hikari $@
+            systemd-cat --identifier=hikari dbus-run-session hikari $@
           '';
         in
           "${pkgs.greetd.greetd}/bin/agreety --cmd ${hikari-run}/bin/hikari-run";
