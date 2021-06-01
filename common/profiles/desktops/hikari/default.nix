@@ -55,7 +55,7 @@
               on-scroll-up = "light -A 1";
               on-scroll-down = "light -U 1";
               format = "{icon} {percent}%";
-              format-icons = [""];
+              format-icons = [ "" ];
               tooltip = false;
             };
             "clock" = {
@@ -75,7 +75,7 @@
               tooltip = false;
             };
             "battery" = {
-              format-icons = ["" "" "" "" ""];
+              format-icons = [ "" "" "" "" "" ];
               format = "{icon} {capacity}%";
               format-charging = "{icon} {capacity}%";
               format-discharging = "{icon} {time}";
@@ -125,7 +125,8 @@
     enable = true;
     settings = {
       default_session = {
-        let
+
+        command = let
           hikari-run = pkgs.writeShellScriptBin "hikari-run" ''
             #!/bin/sh
 
@@ -143,7 +144,7 @@
             exec dbus-run-session hikari $@
           '';
         in
-        command = "${pkgs.greetd.greetd}/bin/agreety --cmd ${hikari-run}/bin/hikari-run";
+          "${pkgs.greetd.greetd}/bin/agreety --cmd ${hikari-run}/bin/hikari-run";
       };
     };
   };
