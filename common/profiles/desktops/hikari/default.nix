@@ -6,8 +6,8 @@
     xdg.configFile."hikari/autostart" = {
       executable = true;
       text = ''
-        exec systemctl --user import-environment 
         exec waybar
+        exec systemctl --user import-environment  
       '';
     };
 
@@ -141,7 +141,7 @@
             export SDL_VIDEODRIVER=wayland
             export _JAVA_AWT_WM_NONREPARENTING=1
 
-            systemd-cat --identifier=hikari dbus-run-session hikari $@
+            systemd-cat --identifier=hikari dbus-run-session hikari
           '';
         in
           "${pkgs.greetd.greetd}/bin/agreety --cmd ${hikari-run}/bin/hikari-run";
