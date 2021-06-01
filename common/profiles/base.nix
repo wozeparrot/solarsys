@@ -17,7 +17,7 @@
               inputs
           );
       in
-        nixRegistry;
+      nixRegistry;
 
     nixPath = [ "nixpkgs=${inputs.unstable}" ];
     sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh" ];

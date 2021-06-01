@@ -126,27 +126,28 @@
     settings = {
       default_session = {
 
-        command = let
-          hikari-run = pkgs.writeShellScriptBin "hikari-run" ''
-            #!/bin/sh
+        command =
+          let
+            hikari-run = pkgs.writeShellScriptBin "hikari-run" ''
+              #!/bin/sh
 
-            export XDG_SESSION_TYPE=wayland
-            export XDG_SESSION_DESKTOP=hikari
-            export XDG_CURRENT_DESKTOP=hikari
+              export XDG_SESSION_TYPE=wayland
+              export XDG_SESSION_DESKTOP=hikari
+              export XDG_CURRENT_DESKTOP=hikari
 
-            export MOZ_ENABLE_WAYLAND=1
-            export QT_QPA_PLATFORM=wayland-egl
-            export QT_QPA_PLATFORMTHEME=qt5ct
-            export SDL_VIDEODRIVER=wayland
-            export _JAVA_AWT_WM_NONREPARENTING=1
+              export MOZ_ENABLE_WAYLAND=1
+              export QT_QPA_PLATFORM=wayland-egl
+              export QT_QPA_PLATFORMTHEME=qt5ct
+              export SDL_VIDEODRIVER=wayland
+              export _JAVA_AWT_WM_NONREPARENTING=1
 
-            systemd-cat --identifier=hikari dbus-run-session hikari
-          '';
-        in
+              systemd-cat --identifier=hikari dbus-run-session hikari
+            '';
+          in
           "${pkgs.greetd.greetd}/bin/agreety --cmd ${hikari-run}/bin/hikari-run";
       };
     };
   };
 
-  security.pam.services.hikari-unlocker = {};
+  security.pam.services.hikari-unlocker = { };
 }
