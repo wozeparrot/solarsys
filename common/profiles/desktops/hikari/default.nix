@@ -6,8 +6,8 @@
     xdg.configFile."hikari/autostart" = {
       executable = true;
       text = ''
+        exec systemctl --user import-environment 
         exec waybar
-        exec systemctl --user import-environment
       '';
     };
 
@@ -125,7 +125,25 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.greetd}/bin/agreety --cmd hikari";
+        let
+          hikari-run = pkgs.writeShellScriptBin "hikari-run" ''
+            #!/bin/sh
+
+            export XDG_SESSION_TYPE=wayland
+            export XDG_SESSION_DESKTOP=hikari
+            export XDG_CURRENT_DESKTOP=hikari
+
+            export MOZ_ENABLE_WAYLAND=1
+            export QT_QPA_PLATFORM=wayland-egl
+            export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+            export QT_AUTO_SCREEN_SCALE_FACTOR=1
+            export SDL_VIDEODRIVER=wayland
+            export _JAVA_AWT_WM_NONREPARENTING=1
+
+            exec dbus-run-session hikari $@
+          '';
+        in
+        command = "${pkgs.greetd.greetd}/bin/agreety --cmd ${hikari-run}/bin/hikari-run";
       };
     };
   };
