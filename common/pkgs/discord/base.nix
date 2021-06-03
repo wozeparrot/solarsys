@@ -2,7 +2,7 @@
 , autoPatchelfHook, makeDesktopItem, lib, stdenv, wrapGAppsHook
 , alsaLib, at-spi2-atk, at-spi2-core, atk, cairo, cups, dbus, expat, fontconfig
 , freetype, gdk-pixbuf, glib, gtk3, libcxx, libdrm, libnotify, libpulseaudio, libuuid
-, libX11, libXScrnSaver, libXcomposite, libXcursor, libXdamage, libXext
+, libX11, libXScrnSaver, libXcomposite, libXcursor, libXdamage, libXext, libxshmfence
 , libXfixes, libXi, libXrandr, libXrender, libXtst, libxcb
 , mesa, nspr, nss, pango, systemd, libappindicator-gtk3, libdbusmenu
 }:
@@ -23,7 +23,7 @@ in stdenv.mkDerivation rec {
     libXScrnSaver
     libXtst
     libxcb
-    xorg.libxshmfence
+    libxshmfence
     mesa.drivers
     nss
     wrapGAppsHook
@@ -35,7 +35,7 @@ in stdenv.mkDerivation rec {
     libcxx systemd libpulseaudio
     stdenv.cc.cc alsaLib atk at-spi2-atk at-spi2-core cairo cups dbus expat fontconfig freetype
     gdk-pixbuf glib gtk3 libnotify libX11 libXcomposite libuuid
-    libXcursor libXdamage libXext libXfixes libXi libXrandr libXrender xorg.libxshmfence
+    libXcursor libXdamage libXext libXfixes libXi libXrandr libXrender libxshmfence
     libXtst nspr nss libxcb pango systemd libXScrnSaver
     libappindicator-gtk3 libdbusmenu
    ];
