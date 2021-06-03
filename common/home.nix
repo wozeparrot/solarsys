@@ -74,7 +74,7 @@
     unzip
     p7zip
 
-    pkgs.mpkgs.discord-canary
+    pkgs.ss.discord-canary
 
     qt5.qtwayland
     pkgs.adwaita-qt
