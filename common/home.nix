@@ -97,7 +97,7 @@
   # extra services
   services.kdeconnect.enable = true;
   services.pulseeffects = {
-    enable = false; # still broken
+    enable = true;
     package = pkgs.pulseeffects-pw;
   };
 
