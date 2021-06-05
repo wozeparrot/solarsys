@@ -18,15 +18,18 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   hardware.opengl = {
-    extraPackages32 = with pkgs.pkgsi686Linux; [ vaapiIntel amdvlk ];
+    extraPackages32 = with pkgs.pkgsi686Linux; [ vaapiIntel ];
     extraPackages = with pkgs; [
       vaapiIntel
       vaapiVdpau
       libvdpau-va-gl
       intel-media-driver
       intel-compute-runtime
-      amdvlk
+      rocm-opencl-icd
+      rocm-opencl-runtime
     ];
+    driSupport = true;
+    driSupport32Bit = true;
   };
 
   networking.interfaces.enp2s0.useDHCP = true;
