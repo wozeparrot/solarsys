@@ -12,7 +12,7 @@
       save-position-on-quit = true;
       osc = true;
       profile = "gpu-hq";
-      gpu-api = "vulkan";
+      gpu-api = "opengl";
       gpu-context = "wayland";
 
       hwdec = "auto-copy";
