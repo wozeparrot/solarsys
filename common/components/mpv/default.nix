@@ -12,10 +12,10 @@
       save-position-on-quit = true;
       osc = true;
       profile = "gpu-hq";
-      gpu-api = "opengl";
-      gpu-context = "wayland";
+      gpu-api = "vulkan";
+      # gpu-context = "wayland";
 
-      hwdec = "auto-copy";
+      hwdec = "no";
       hwdec-codecs = "all";
       hr-seek-framedrop = false;
 
