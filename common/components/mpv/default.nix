@@ -13,7 +13,7 @@
       osc = true;
       profile = "gpu-hq";
       gpu-api = "vulkan";
-      gpu-context = "wayland";
+      gpu-context = "waylandvk";
 
       hwdec = "no";
       hwdec-codecs = "all";
