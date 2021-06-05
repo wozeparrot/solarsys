@@ -7,15 +7,15 @@
       scripts = with pkgs.mpvScripts; [ mpris autoload ];
     };
     config = {
-      force-window = true;
+      # force-window = true;
       ytdl-format = "bestvideo[height<=?1080]+bestaudio";
       save-position-on-quit = true;
       osc = true;
       profile = "gpu-hq";
-      gpu-api = "vulkan";
-      gpu-context = "waylandvk";
+      gpu-api = "auto";
+      gpu-context = "wayland";
 
-      hwdec = "no";
+      hwdec = "auto-safe";
       hwdec-codecs = "all";
       hr-seek-framedrop = false;
 
