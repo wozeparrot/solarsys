@@ -21,6 +21,12 @@
 
     wineWowPackages.staging
     appimage-run
+
+    (pkgs.writeShellScriptBin "run_gpu" ''
+      #!/usr/bin/env bash
+
+      DRI_PRIME=1 exec "$@"
+    '')
   ];
 
   programs.obs-studio = {

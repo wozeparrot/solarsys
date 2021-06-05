@@ -7,7 +7,7 @@
       scripts = with pkgs.mpvScripts; [ mpris autoload ];
     };
     config = {
-      # force-window = true;
+      force-window = true;
       ytdl-format = "bestvideo[height<=?1080]+bestaudio";
       save-position-on-quit = true;
       osc = true;

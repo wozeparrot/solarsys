@@ -10,7 +10,7 @@ case $mime_type in
     ;;
 
     video/*)
-        mpv "$1"
+        run_gpu mpv "$1"
     ;;
 
     image/*)
