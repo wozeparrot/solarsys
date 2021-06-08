@@ -4,6 +4,7 @@
   home-manager.users.woze = {
     home.packages = with pkgs; [
       wofi
+      oguri
     ];
 
     programs.mako = {
