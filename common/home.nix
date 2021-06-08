@@ -3,6 +3,7 @@
 {
   imports = [
     ./components/neovim
+    ./components/kakoune
     ./components/intershell
     ./components/git
     ./components/mpdplus
