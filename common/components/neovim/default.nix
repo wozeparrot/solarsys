@@ -32,7 +32,7 @@ in
       nodePackages.dockerfile-language-server-nodejs
       rust-analyzer
       dart
-      zls
+      mpkgs.zls
       rnix-lsp
     ];
 
