@@ -6,6 +6,7 @@
       source = ./init;
       executable = true;
     };
+  };
 
   # system config
   environment.systemPackages = with pkgs; [
