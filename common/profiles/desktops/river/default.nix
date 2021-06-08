@@ -10,7 +10,7 @@
 
   # system config
   environment.systemPackages = with pkgs; [
-    river
+    mpkgs.river
   ];
 
   # services.greetd = {
