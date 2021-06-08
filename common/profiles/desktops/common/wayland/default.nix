@@ -101,5 +101,6 @@
   };
 
   programs.xwayland.enable = true;
+  programs.qt5ct.enable = true;
   services.greetd.enable = true;
 }
