@@ -117,9 +117,10 @@ systemctl --user import-environment
 
 systemctl --user start kdeconnect.service
 systemctl --user start kdeconnect-indicator.service
-systemctl --user start nextcloud-client.service
+# systemctl --user start nextcloud-client.service
 
 waybar &
+mako &
 oguri &
 
 # Jump to rivertile
