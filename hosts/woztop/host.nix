@@ -7,7 +7,7 @@
     ../../common/profiles/laptop.nix
     ./hardware.nix
 
-    ../../common/profiles/desktops/hikari
+    # ../../common/profiles/desktops/hikari
     ../../common/profiles/desktops/river
   ];
 
