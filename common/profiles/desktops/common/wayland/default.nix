@@ -10,7 +10,7 @@
     xdg.configFile."oguri/config".text = ''
       [output *]
       image=~/pictures/wallpapers/starrysky.jpg
-      filter=nearest
+      filter=best
       scaling-mode=fill
       anchor=center
     '';
