@@ -18,7 +18,7 @@
   #     default_session = {
   #       command =
   #         let
-  #           hikari-run = pkgs.writeShellScriptBin "river-run" ''
+  #           river-run = pkgs.writeShellScriptBin "river-run" ''
   #             #!/bin/sh
 
   #             export XDG_SESSION_TYPE=wayland
