@@ -7,5 +7,6 @@ self: super:
     picom = self.callPackage ./picom { };
     arcan = self.callPackage ./arcan { };
     zig-master = self.callPackage ./zig-master { };
+    river = self.callPackage ./river { };
   };
 }
