@@ -121,6 +121,7 @@ systemctl --user start kdeconnect-indicator.service
 systemctl --user start nextcloud-client.service
 
 waybar &
+oguri &
 
 # Jump to rivertile
 riverctl default-layout rivertile

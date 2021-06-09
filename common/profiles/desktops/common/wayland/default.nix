@@ -7,6 +7,14 @@
       oguri
     ];
 
+    xdg.configFile."oguri/config".text = ''
+      [output *]
+      image=~/pictures/wallpapers/starrysky.jpg
+      filter=nearest
+      scaling-mode=fill
+      anchor=center
+    '';
+
     programs.mako = {
       enable = true;
       defaultTimeout = 5000;
