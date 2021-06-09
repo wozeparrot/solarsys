@@ -6,8 +6,9 @@ mod="Mod4"
 # Normal mode applications
 riverctl map normal $mod Return           spawn kitty
 riverctl map normal $mod D                spawn wofi --show drun
-riverctl map $normal Control Space        spawn makoctl dismiss
-riverctl map $normal Control+Shift Space  spawn makoctl restore
+riverctl map normal Control Space        spawn makoctl dismiss
+riverctl map normal Control+Shift Space  spawn makoctl restore
+riverctl map normal None Print spawn grim -g \"$(slurp)\" - | wl-copy -t 'image/png'
 
 # Mod+Q to close the focused view
 riverctl map normal $mod Q close
@@ -97,10 +98,8 @@ do
     riverctl map $mode None XF86AudioMute         spawn pamixer -t
 
     riverctl map $mode None XF86AudioPlay     spawn mpc toggle
-    riverctl map $mode Control XF86AudioPrev  spawn mpc prev
-    riverctl map $mode Shift XF86AudioNext    spawn mpc next
-
-    riverctl map $mode None Print spawn grim -g \"$(slurp)\" - | wl-copy -t 'image/png'
+    riverctl map $mode Control XF86AudioPlay  spawn mpc prev
+    riverctl map $mode Shift XF86AudioPlay    spawn mpc next
 done
 
 # Set repeat rate
