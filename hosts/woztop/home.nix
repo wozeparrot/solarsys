@@ -36,5 +36,8 @@
 
   # Services
   services.kdeconnect.indicator = true;
-  services.nextcloud-client.enable = true;
+  services.syncthing = {
+    enable = true;
+    tray.enable = true;
+  };
 }
