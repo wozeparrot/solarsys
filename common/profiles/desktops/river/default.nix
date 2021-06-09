@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 {
+  imports = [
+    ../common/wayland
+  ];
+
   # home-manager config
   home-manager.users.woze = {
     xdg.configFile."river/init" = {
