@@ -9,7 +9,7 @@
 
     xdg.configFile."oguri/config".text = ''
       [output *]
-      image=~/pictures/wallpapers/starrysky.jpg
+      image=~/pictures/wallpapers/starrysky.png
       filter=best
       scaling-mode=fill
       anchor=center
