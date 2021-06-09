@@ -14,7 +14,7 @@
 
   # system config
   environment.systemPackages = with pkgs; [
-    mpkgs.river
+    ss.river
   ];
 
   services.greetd = {
