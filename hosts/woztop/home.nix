@@ -36,8 +36,5 @@
 
   # Services
   services.kdeconnect.indicator = true;
-  services.syncthing = {
-    enable = true;
-    tray.enable = true;
-  };
+  services.syncthing = enable = true;
 }
