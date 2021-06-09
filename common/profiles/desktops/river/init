@@ -8,7 +8,7 @@ riverctl map normal $mod Return           spawn kitty
 riverctl map normal $mod D                spawn wofi --show drun
 riverctl map normal Control Space        spawn makoctl dismiss
 riverctl map normal Control+Shift Space  spawn makoctl restore
-riverctl map normal None Print spawn grim -g "$(slurp)" - | wl-copy -t 'image/png'
+riverctl map normal None Print spawn grim -g '$(slurp)' - | wl-copy -t 'image/png'
 
 # Mod+Q to close the focused view
 riverctl map normal $mod Q close
