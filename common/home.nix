@@ -40,7 +40,7 @@
     audacity
     antimicroX
     youtube-dl
-    vorbisgain
+    r128gain
     ffmpeg
     vlc
 
