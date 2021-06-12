@@ -47,12 +47,12 @@
     gitAndTools.hub
 
     multimc
-    steam-run
-    protontricks
-    lutris
-    steam
+    mpkgs.steam
+    mpkgs.steam.run
+    mpkgs.protontricks
+    mpkgs.lutris
     the-powder-toy
-    pkgs.mpkgs.osu-lazer
+    mpkgs.osu-lazer
 
     ranger
     feh
@@ -75,10 +75,10 @@
     unzip
     p7zip
 
-    pkgs.ss.discord-canary
+    ss.discord-canary
 
     qt5.qtwayland
-    pkgs.adwaita-qt
+    adwaita-qt
   ];
 
   # extra programs
