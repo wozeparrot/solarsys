@@ -78,7 +78,7 @@
               format-icons = [ "" "" "" "" "" ];
               format = "{icon} {capacity}%";
               format-charging = "{icon} {capacity}%";
-              format-discharging = "{icon} {time}";
+              format-discharging = "{icon} {capacity}";
               format-full = "{icon} {capacity}%";
               interval = 30;
               states = {
