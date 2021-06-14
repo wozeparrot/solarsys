@@ -78,6 +78,7 @@
     };
 
     docker.enable = true;
+    anbox.enable = true;
   };
 
   users.users.woze.extraGroups = [ "docker" "libvirtd" "video" "render" ];
