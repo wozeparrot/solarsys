@@ -5,7 +5,7 @@
   ];
 
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixUnstable;
     systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 
     registry =
