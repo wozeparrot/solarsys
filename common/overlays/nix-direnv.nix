@@ -1,3 +1,3 @@
 self: super: {
-  xclip = self.nix-direnv.override { enableFlakes = true; };
+  nix-direnv = self.nix-direnv.override { enableFlakes = true; };
 }
