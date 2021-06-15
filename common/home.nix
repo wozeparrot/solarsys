@@ -85,7 +85,10 @@
   programs.direnv = {
     enable = true;
     enableFishIntegration = true;
-    enableNixDirenvIntegration = true;
+    enableNixDirenvIntegration = {
+      enable = true;
+      enableFlakes = true;
+    };
   };
 
   programs.firefox = {
