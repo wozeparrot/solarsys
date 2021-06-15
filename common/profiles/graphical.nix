@@ -18,13 +18,14 @@
   programs.dconf.enable = true;
   services.dbus.packages = with pkgs; [ dconf ];
 
-  # xdg.portal = {
-  #   enable = true;
-  #   gtkUsePortal = true;
-  #   extraPortals = with pkgs; [
-  #     xdg-desktop-portal-gtk
-  #   ];
-  # };
+  xdg.portal = {
+    enable = true;
+    gtkUsePortal = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr
+    ];
+  };
 
   # audio
   hardware.pulseaudio.enable = lib.mkForce false;
