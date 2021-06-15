@@ -85,7 +85,7 @@
   programs.direnv = {
     enable = true;
     enableFishIntegration = true;
-    enableNixDirenvIntegration = {
+    nix-direnv = {
       enable = true;
       enableFlakes = true;
     };
