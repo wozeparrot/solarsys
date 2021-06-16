@@ -115,9 +115,10 @@ riverctl float-filter-add "popup"
 # Run applications
 systemctl --user import-environment
 
-systemctl --user start kdeconnect.service
-systemctl --user start kdeconnect-indicator.service
-systemctl --user start syncthing.service
+systemctl --user restart kdeconnect.service
+systemctl --user restart kdeconnect-indicator.service
+systemctl --user restart syncthing.service
+systemctl --user restart mpdris2.service
 
 waybar &
 mako &
