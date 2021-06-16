@@ -77,6 +77,11 @@ in
           rm $argv[1]
         '';
       };
+      x11waymir = {
+        body = ''
+          SDL_VIDEODRIVER=x11 wf-recorder -c rawvideo -m sdl -f pipe:xwayland-mirror
+        '';
+      };
     };
 
     promptInit = ''
