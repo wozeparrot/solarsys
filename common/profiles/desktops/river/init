@@ -113,12 +113,13 @@ riverctl float-filter-add "popup"
 # riverctl opacity 1.0 0.75 0.0 0.1 20
 
 # Run applications
-systemctl --user import-environment
+exec systemctl --user import-environment
 
-systemctl --user restart kdeconnect.service
-systemctl --user restart kdeconnect-indicator.service
-systemctl --user restart syncthing.service
-systemctl --user restart mpdris2.service
+exec systemctl --user restart kdeconnect.service
+exec systemctl --user restart kdeconnect-indicator.service
+exec systemctl --user restart syncthing.service
+exec systemctl --user restart mpdris2.service
+exec systemctl --user restart pipewire.socket
 
 waybar &
 mako &
