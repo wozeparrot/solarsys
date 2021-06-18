@@ -22,16 +22,18 @@
     wineWowPackages.staging
     appimage-run
 
-    (pkgs.writeShellScriptBin "run_gpu" ''
-      #!/usr/bin/env bash
+    (
+      pkgs.writeShellScriptBin "run_gpu" ''
+        #!/usr/bin/env bash
 
-      DRI_PRIME=1 exec "$@"
-    '')
+        DRI_PRIME=1 exec "$@"
+      ''
+    )
   ];
 
   programs.obs-studio = {
     enable = true;
-    plugins = [ pkgs.obs-v4l2sink obs-wlrobs obs-move-transition ];
+    plugins = with pkgs; [ obs-v4l2sink obs-wlrobs obs-move-transition ];
   };
 
   # Services
