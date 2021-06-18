@@ -121,7 +121,7 @@ systemctl --user restart kdeconnect-indicator.service
 systemctl --user restart syncthing.service
 systemctl --user restart mpdris2.service
 systemctl --user restart pipewire.socket
-systemctl --user restart xdg-desktop-portal.service
+#systemctl --user restart xdg-desktop-portal.service
 
 waybar &
 mako &
