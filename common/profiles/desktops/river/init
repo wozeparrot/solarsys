@@ -116,11 +116,12 @@ riverctl float-filter-add "popup"
 systemctl --user import-environment
 dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
-systemctl --user restart kdeconnect.service
-systemctl --user restart kdeconnect-indicator.service
-systemctl --user restart syncthing.service
-systemctl --user restart mpdris2.service
-systemctl --user restart pipewire.socket
+
+#systemctl --user restart pipewire.socket
+#systemctl --user restart kdeconnect.service
+#systemctl --user restart kdeconnect-indicator.service
+#systemctl --user restart syncthing.service
+#systemctl --user restart mpdris2.service
 #systemctl --user restart xdg-desktop-portal.service
 
 systemctl --user start graphical-session.target
