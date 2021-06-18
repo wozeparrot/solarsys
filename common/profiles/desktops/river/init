@@ -123,6 +123,8 @@ systemctl --user restart mpdris2.service
 systemctl --user restart pipewire.socket
 #systemctl --user restart xdg-desktop-portal.service
 
+systemctl --user start graphical-session.target
+
 waybar &
 mako &
 oguri &
