@@ -31,7 +31,7 @@
 
   programs.obs-studio = {
     enable = true;
-    plugins = [ pkgs.obs-v4l2sink ];
+    plugins = [ pkgs.obs-v4l2sink obs-wlrobs obs-move-transition ];
   };
 
   # Services

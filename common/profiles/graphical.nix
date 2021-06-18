@@ -52,8 +52,7 @@
     systemPackages = with pkgs; [
       pavucontrol
       paprefs
-      qjackctl
-      patchage
+      helvum
       pamixer
     ];
   };
