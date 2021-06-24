@@ -33,7 +33,7 @@
 
   programs.obs-studio = {
     enable = true;
-    plugins = with pkgs.obs-studio-plugins; [ obs-wlrobs obs-move-transition ];
+    plugins = with pkgs.obs-studio-plugins; [ wlrobs ];
   };
 
   # Services
