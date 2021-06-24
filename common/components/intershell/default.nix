@@ -72,7 +72,7 @@ in
       };
       reemu = {
         body = ''
-          ffmpeg -i $argv[1] -map_metadata -1 -c:a libopus -b:a 128k -vn (basename $argv[1] $argv[2]).ogg
+          ffmpeg -i $argv[1] -map_metadata -1 -c:a libopus -b:a 128k -vn (basename $argv[1] $argv[2]).opus
           r128gain (basename $argv[1] $argv[2]).ogg
           rm $argv[1]
         '';
