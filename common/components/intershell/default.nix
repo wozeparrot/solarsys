@@ -70,6 +70,11 @@ in
           youtube-dl -x --audio-quality 0 --audio-format flac --yes-playlist -o "%(title)s.%(ext)s" --exec 'fish -c "reemu {} \".flac\""' $argv
         '';
       };
+      ytdlmur = {
+        body = ''
+          youtube-dl -x --audio-quality 0 --audio-format flac --yes-playlist -o "%(title)s.%(ext)s" $argv
+        '';
+      };
       reemu = {
         body = ''
           ffmpeg -i $argv[1] -map_metadata -1 -c:a libopus -b:a 128k -vn (basename $argv[1] $argv[2]).opus
