@@ -12,7 +12,7 @@ in
 {
   programs.neovim = {
     enable = true;
-    package = pkgs.neovim;
+    package = pkgs.neovim-nightly;
     withNodeJs = true;
 
     extraConfig = builtins.concatStringsSep "\n" [
