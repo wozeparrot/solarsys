@@ -15,7 +15,7 @@
   # system config
   environment.systemPackages = with pkgs; [
     river
-    swaylock-effects
+    swaylock
   ];
 
   services.greetd = {
