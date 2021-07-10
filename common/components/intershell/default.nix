@@ -87,6 +87,11 @@ in
           SDL_VIDEODRIVER=x11 wf-recorder -c rawvideo -m sdl -f pipe:xwayland-mirror
         '';
       };
+      waylock0 = {
+        body = ''
+          swaylock -i ~/pictures/wallpapers/1573836865427.png -F
+        '';
+      };
     };
 
     promptInit = ''
