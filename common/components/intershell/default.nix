@@ -89,7 +89,7 @@ in
       };
       waylock0 = {
         body = ''
-          swaylock -i ~/pictures/wallpapers/1573836865427.png -F
+          swaylock -i ~/pictures/wallpapers/1573836865427.png -F --effect-pixelate 8 --effect-vignette 0.2:0.2
         '';
       };
     };
