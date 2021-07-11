@@ -77,10 +77,15 @@
       };
     };
 
+    virtualbox.host = {
+      enable = true;
+      enableExtensionPack = true;
+    };
+
     docker.enable = true;
     anbox.enable = false;
   };
 
-  users.users.woze.extraGroups = [ "docker" "libvirtd" "video" "render" ];
+  users.users.woze.extraGroups = [ "docker" "libvirtd" "video" "render" "vboxusers" ];
   home-manager.users.woze = ./home.nix;
 }
