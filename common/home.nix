@@ -102,7 +102,7 @@
   services.kdeconnect.enable = true;
   services.pulseeffects = {
     enable = true;
-    package = pkgs.pulseeffects-pw;
+    package = pkgs.easyeffects;
   };
 
   # xdg config
