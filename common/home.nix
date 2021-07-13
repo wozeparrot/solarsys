@@ -80,7 +80,7 @@
     qt5.qtwayland
     adwaita-qt
 
-    easyeffects
+    mpkgs.easyeffects
   ];
 
   # extra programs
