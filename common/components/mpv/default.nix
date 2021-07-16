@@ -36,6 +36,8 @@
       scale = "haasnsoft";
       dscale = "mitchell";
       cscale = "ewa_lanczossoft";
+
+      demuxer-mkv-subtitle-preroll = true;
     };
   };
 
