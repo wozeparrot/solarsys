@@ -2,7 +2,7 @@ diff --git a/osu.Game/OsuGameBase.cs b/osu.Game/OsuGameBase.cs
 index 98f60d52d..a27ce47ca 100644
 --- a/osu.Game/OsuGameBase.cs
 +++ b/osu.Game/OsuGameBase.cs
-@@ -135,17 +135,7 @@ public OsuGameBase()
+@@ -169,17 +169,7 @@ public OsuGameBase()
          [BackgroundDependencyLoader]
          private void load()
          {
