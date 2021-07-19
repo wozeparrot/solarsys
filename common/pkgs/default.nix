@@ -8,5 +8,6 @@ self: super:
     arcan = self.callPackage ./arcan { };
     zig-master = self.callPackage ./zig-master { };
     river = self.callPackage ./river { };
+    osu-lazer = self.callPackage ./osu-lazer { };
   };
 }
