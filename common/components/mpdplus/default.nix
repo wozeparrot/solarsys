@@ -24,6 +24,8 @@
       }
 
       replaygain "track"
+
+      auto_update "yes"
     '';
   };
 

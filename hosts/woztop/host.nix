@@ -77,10 +77,10 @@
       };
     };
 
-    virtualbox.host = {
-      enable = true;
-      enableExtensionPack = true;
-    };
+    #virtualbox.host = {
+    #  enable = true;
+    #  enableExtensionPack = true;
+    #};
 
     docker.enable = true;
     anbox.enable = false;

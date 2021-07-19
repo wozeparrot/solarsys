@@ -25,7 +25,7 @@ in stdenv.mkDerivation rec {
     sha256 = "UdsN/kvpqZrOiigxGttwrExlOkEFa2xWqDQS/d7y/0k=";
   };
 
-  #patches = [ ./bypass-tamper-detection.patch ];
+  patches = [ ./bypass-tamper-detection.patch ];
   patchFlags = [ "--binary" "-p1" ];
 
   nativeBuildInputs = [
