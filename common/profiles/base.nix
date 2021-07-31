@@ -59,6 +59,7 @@
       vim
       pciutils
       usbutils
+      jq
 
       # network utils
       dnsutils
