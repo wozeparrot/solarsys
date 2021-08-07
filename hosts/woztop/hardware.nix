@@ -25,6 +25,12 @@
       fsType = "vfat";
     };
 
+  fileSystems."/mnt/vms" =
+    {
+      device = "/dev/disk/by-uuid/e37e9b42-3c8f-49ad-be6e-44cc5bd20f61";
+      fsType = "xfs";
+    };
+
   swapDevices = [ ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
