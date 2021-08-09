@@ -32,16 +32,10 @@
 
       blend-subtitles = true;
 
-      # glsl-shader = "~~/shaders/sssr.glsl";
-      # scale = "haasnsoft";
-      # dscale = "mitchell";
-      # cscale = "ewa_lanczossoft";
-
-      scale = "spline36";
-      dscale = "spline36";
-      cscale = "sinc";
-      cscale-window = "blackman";
-      cscale-radius = 3;
+      glsl-shader = "~~/shaders/sssr.glsl";
+      scale = "haasnsoft";
+      dscale = "mitchell";
+      cscale = "ewa_lanczossoft";
 
       demuxer-mkv-subtitle-preroll = true;
     };
