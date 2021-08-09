@@ -37,9 +37,11 @@
       # dscale = "mitchell";
       # cscale = "ewa_lanczossoft";
 
-      scale = "ewa_lanczossharp";
-      dscale = "ewa_lanczos";
-      cscale = "ewa_lanczossoft";
+      scale = "spline36";
+      dscale = "spline36";
+      cscale = "sinc";
+      cscale-window = "blackman";
+      cscale-radius = 3;
 
       demuxer-mkv-subtitle-preroll = true;
     };
