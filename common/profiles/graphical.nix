@@ -52,7 +52,7 @@
     systemPackages = with pkgs; [
       pavucontrol
       paprefs
-      #helvum | currently broken
+      helvum
       pamixer
     ];
   };
