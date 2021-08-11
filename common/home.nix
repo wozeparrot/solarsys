@@ -79,8 +79,6 @@
 
     qt5.qtwayland
     adwaita-qt
-
-    mpkgs.easyeffects
   ];
 
   # extra programs
@@ -102,10 +100,7 @@
 
   # extra services
   services.kdeconnect.enable = true;
-  services.pulseeffects = {
-    enable = false; # currently broken as the paths don't line up with easyeffects
-    package = pkgs.easyeffects;
-  };
+  services.easyeffects.enable = true;
 
   # xdg config
   xdg.enable = true;
