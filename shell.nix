@@ -34,7 +34,7 @@ let
   '';
 
   solarsys-update = pkgs.writeShellScriptBin "solarsys-update" ''
-    ${unlockedNix}/bin/nix flake update && git commit -am "update flake inputs"
+    ${unlockedNix}/bin/nix flake update && git add flake.lock && git commit -m "update flake inputs"
   '';
 in
 pkgs.mkShell {
