@@ -77,6 +77,6 @@
         thumbnail_network=yes
       '';
       target = "mpv/script-opts/mpv_thumbnail_script.conf";
-    }
+    };
   };
 }
