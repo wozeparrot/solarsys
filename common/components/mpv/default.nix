@@ -39,6 +39,9 @@
 
       demuxer-mkv-subtitle-preroll = true;
     };
+    bindings = {
+      b = "vf toggle format=colorlevels=full";
+    };
   };
 
   xdg.configFile.mpv-sssr-glsl = {
