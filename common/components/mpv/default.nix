@@ -10,7 +10,7 @@
       force-window = true;
       ytdl-format = "bestvideo[height<=?1080]+bestaudio";
       save-position-on-quit = true;
-      osc = false;
+      osc = true;
       profile = "gpu-hq";
       gpu-api = "auto";
       gpu-context = "wayland";
@@ -50,33 +50,33 @@
       target = "mpv/shaders/sssr.glsl";
     };
     
-    mpv-thumbnail-script-server-0 = {
-      text = builtins.readFile ./mpv_thumbnail_script_server.lua;
-      target = "mpv/scripts/mpv_thumbnail_script_server-0.lua";
-    };
-    mpv-thumbnail-script-server-1 = {
-      text = builtins.readFile ./mpv_thumbnail_script_server.lua;
-      target = "mpv/scripts/mpv_thumbnail_script_server-1.lua";
-    };
-    mpv-thumbnail-script-server-2 = {
-      text = builtins.readFile ./mpv_thumbnail_script_server.lua;
-      target = "mpv/scripts/mpv_thumbnail_script_server-2.lua";
-    };
-    mpv-thumbnail-script-server-3 = {
-      text = builtins.readFile ./mpv_thumbnail_script_server.lua;
-      target = "mpv/scripts/mpv_thumbnail_script_server-3.lua";
-    };
+    # mpv-thumbnail-script-server-0 = {
+    #   text = builtins.readFile ./mpv_thumbnail_script_server.lua;
+    #   target = "mpv/scripts/mpv_thumbnail_script_server-0.lua";
+    # };
+    # mpv-thumbnail-script-server-1 = {
+    #   text = builtins.readFile ./mpv_thumbnail_script_server.lua;
+    #   target = "mpv/scripts/mpv_thumbnail_script_server-1.lua";
+    # };
+    # mpv-thumbnail-script-server-2 = {
+    #   text = builtins.readFile ./mpv_thumbnail_script_server.lua;
+    #   target = "mpv/scripts/mpv_thumbnail_script_server-2.lua";
+    # };
+    # mpv-thumbnail-script-server-3 = {
+    #   text = builtins.readFile ./mpv_thumbnail_script_server.lua;
+    #   target = "mpv/scripts/mpv_thumbnail_script_server-3.lua";
+    # };
 
-    mpv-thumbnail-script-client-osc = {
-      text = builtins.readFile ./mpv_thumbnail_script_client_osc.lua;
-      target = "mpv/scripts/mpv_thumbnail_script_client_osc.lua";
-    };
+    # mpv-thumbnail-script-client-osc = {
+    #   text = builtins.readFile ./mpv_thumbnail_script_client_osc.lua;
+    #   target = "mpv/scripts/mpv_thumbnail_script_client_osc.lua";
+    # };
 
-    mpv-thumbnail-script-config = {
-      text = ''
-        thumbnail_network=yes
-      '';
-      target = "mpv/script-opts/mpv_thumbnail_script.conf";
-    };
+    # mpv-thumbnail-script-config = {
+    #   text = ''
+    #     thumbnail_network=yes
+    #   '';
+    #   target = "mpv/script-opts/mpv_thumbnail_script.conf";
+    # };
   };
 }
