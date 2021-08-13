@@ -78,5 +78,11 @@
     #   '';
     #   target = "mpv/script-opts/mpv_thumbnail_script.conf";
     # };
+
+    ff2mpv = {
+      text = builtins.readFile ./ff2mpv;
+      target = "mpv/ff2mpv";
+      executable = true;
+    };
   };
 }
