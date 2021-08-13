@@ -21,6 +21,7 @@
     rustup
     nixpkgs-fmt
     python3
+    ruby
 
     blender
     godot
