@@ -101,7 +101,7 @@
 
   # extra services
   services.kdeconnect.enable = true;
-  services.easyeffects.enable = true;
+  services.easyeffects.enable = false; # causes some problems
 
   # xdg config
   xdg.enable = true;
