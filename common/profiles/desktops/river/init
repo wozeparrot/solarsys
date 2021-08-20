@@ -118,7 +118,7 @@ systemctl --user import-environment
 systemctl --user start graphical-session.target
 
 waybar &
-mako &
+fnott &
 oguri &
 
 # Jump to rivertile
