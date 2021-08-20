@@ -8,8 +8,7 @@
     ./hardware.nix
 
     # ../../common/profiles/desktops/hikari
-    # ../../common/profiles/desktops/river
-    ../../common/profiles/desktops/dwl
+     ../../common/profiles/desktops/river
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_lqx;
