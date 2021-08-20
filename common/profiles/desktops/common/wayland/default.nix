@@ -18,7 +18,7 @@
       anchor=center
     '';
 
-    xdg.configFile."fnott/fnott.ini".source = ./fnott.init;
+    xdg.configFile."fnott/fnott.ini".source = ./fnott.ini;
 
     programs.waybar = {
       enable = true;
