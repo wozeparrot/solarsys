@@ -93,13 +93,13 @@ riverctl map passthrough $mod G enter-mode normal
 # Mappings for all modes
 for mode in normal locked
 do
-    riverctl map $mode None XF86AudioRaiseVolume  spawn pamixer -i 1
-    riverctl map $mode None XF86AudioLowerVolume  spawn pamixer -d 1
-    riverctl map $mode None XF86AudioMute         spawn pamixer -t
+    riverctl map $mode None XF86AudioRaiseVolume  spawn "pamixer -i 1"
+    riverctl map $mode None XF86AudioLowerVolume  spawn "pamixer -d 1"
+    riverctl map $mode None XF86AudioMute         spawn "pamixer -t"
 
-    riverctl map $mode None XF86AudioPrev     spawn mpc prev
-    riverctl map $mode None XF86AudioNext     spawn mpc next
-    riverctl map $mode None XF86AudioPlay     spawn mpc toggle
+    riverctl map $mode None XF86AudioPrev     spawn "mpc prev"
+    riverctl map $mode None XF86AudioNext     spawn "mpc next"
+    riverctl map $mode None XF86AudioPlay     spawn "mpc toggle"
 done
 
 # Set repeat rate

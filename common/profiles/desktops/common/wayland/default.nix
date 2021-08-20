@@ -5,6 +5,9 @@
     home.packages = with pkgs; [
       wofi
       oguri
+      fuzzel
+      fnott
+      yambar-wayland
     ];
 
     xdg.configFile."oguri/config".text = ''
