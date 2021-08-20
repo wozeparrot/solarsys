@@ -1,13 +1,12 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # Use the "logo" key as the primary modifier
 mod="Mod4"
 
 # Normal mode applications
 riverctl map normal $mod Return          spawn kitty
-riverctl map normal $mod D               spawn "wofi --show drun"
-riverctl map normal Control+Mod1 Space   spawn "makoctl dismiss"
-riverctl map normal Control+Shift Space  spawn "makoctl restore"
+riverctl map normal $mod D               spawn "fuzzel -r 0 -b 1a1a1aff -t f8f8f2ff -s 6272a4ff -C a968ffff -m e83c6aff -w 40 -l 12 -B 2"
+riverctl map normal $mod+Control Space   spawn "fnottctl dismiss"
 riverctl map normal None Print           spawn "grim -g '$(slurp)' - | wl-copy -t 'image/png'"
 
 # Mod+Q to close the focused view
@@ -37,12 +36,12 @@ riverctl map normal $mod+Shift Comma send-to-output previous
 riverctl map normal $mod Tab zoom
 
 # Mod+H and Mod+L to decrease/increase the main_factor value of rivertile by 0.05
-riverctl map normal $mod H mod-layout-value rivertile fixed main_factor -0.05
-riverctl map normal $mod L mod-layout-value rivertile fixed main_factor +0.05
+riverctl map normal $mod H send-layout-cmd rivertile "main-ratio -0.05"
+riverctl map normal $mod L send-layout-cmd rivertile "main-ratio +0.05"
 
 # Mod+Shift+H and Mod+Shift+L to increment/decrement the main_count value of rivertile.
-riverctl map normal $mod+Shift H mod-layout-value rivertile int main_count +1
-riverctl map normal $mod+Shift L mod-layout-value rivertile int main_count -1
+riverctl map normal $mod+Shift H send-layout-cmd rivertile "main-count +1"
+riverctl map normal $mod+Shift L send-layout-cmd rivertile "main-count -1"
 
 # Mod + Left Mouse Button to move views
 riverctl map-pointer normal $mod BTN_LEFT move-view
@@ -80,10 +79,10 @@ riverctl map normal $mod S toggle-float
 riverctl map normal $mod F toggle-fullscreen
 
 # Mod+{Up,Right,Down,Left} to change layout orientation
-riverctl map normal $mod Up    set-layout-value rivertile string main_location top
-riverctl map normal $mod Right set-layout-value rivertile string main_location right
-riverctl map normal $mod Down  set-layout-value rivertile string main_location bottom
-riverctl map normal $mod Left  set-layout-value rivertile string main_location left
+riverctl map normal $mod Up    send-layout-cmd rivertile "main-location top"
+riverctl map normal $mod Right send-layout-cmd rivertile "main-location right"
+riverctl map normal $mod Down  send-layout-cmd rivertile "main-location bottom"
+riverctl map normal $mod Left  send-layout-cmd rivertile "main-location left"
 
 # Passthrough mode
 riverctl declare-mode passthrough
@@ -102,6 +101,11 @@ do
     riverctl map $mode None XF86AudioPlay     spawn "mpc toggle"
 done
 
+# Set background and border color
+riverctl background-color 0x1a1a1a
+riverctl border-color-focused 0xa978ff
+riverctl border-color-unfocused 0x6272a4
+
 # Set repeat rate
 riverctl set-repeat 50 300
 
@@ -109,20 +113,8 @@ riverctl set-repeat 50 300
 riverctl float-filter-add "float"
 riverctl float-filter-add "popup"
 
-# Set opacity and fade effect
-# riverctl opacity 1.0 0.75 0.0 0.1 20
-
 # Run applications
 systemctl --user import-environment
-#dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-
-#systemctl --user restart pipewire.socket
-#systemctl --user restart kdeconnect.service
-#systemctl --user restart kdeconnect-indicator.service
-#systemctl --user restart syncthing.service
-#systemctl --user restart mpdris2.service
-#systemctl --user restart xdg-desktop-portal.service
-
 systemctl --user start graphical-session.target
 
 waybar &

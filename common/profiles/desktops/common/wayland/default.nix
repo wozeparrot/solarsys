@@ -18,11 +18,7 @@
       anchor=center
     '';
 
-    programs.mako = {
-      enable = true;
-      defaultTimeout = 5000;
-      maxVisible = 7;
-    };
+    xdg.configFile."fnott/fnott.ini".source = ./fnott.init;
 
     programs.waybar = {
       enable = true;
@@ -108,6 +104,13 @@
         }
       ];
       style = builtins.readFile ./waybar.css;
+    };
+
+    systemd.user.targets.tray = {
+      Unit = {
+        Description = "Home Manager System Tray";
+        Requires = [ "graphical-session-pre.target" ];
+      };
     };
   };
 
