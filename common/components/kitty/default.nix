@@ -13,24 +13,24 @@
 
       tab_bar_style = "powerline";
 
-      foreground = "#c6c6c6";
       background = "#000000";
-      color0 = "#1a1a1a";
-      color8 = "#444444";
-      color1 = "#ac2c2c";
-      color9 = "#af5f87";
-      color2 = "#4e9a06";
-      color10 = "#87af87";
-      color3 = "#c4a000";
-      color11 = "#d7af5f";
-      color4 = "#1880bc";
-      color12 = "#369dd8";
-      color5 = "#75507b";
-      color13 = "#af87d7";
-      color6 = "#389aad";
-      color14 = "#34e2e2";
-      color7 = "#9e9e9e";
-      color15 = "#b2b2b2";
+      foreground = "#d2d2cd";
+      color0 = "#151510";
+      color8 = "#353530";
+      color1 = "#852852";
+      color9 = "#e83c6a";
+      color2 = "#009400";
+      color10 = "#00ee37";
+      color3 = "#df5a32";
+      color11 = "#fe9a43";
+      color4 = "#344875";
+      color12 = "#6273a4";
+      color5 = "#3713cd";
+      color13 = "#7d36f4";
+      color6 = "#005ba5";
+      color14 = "#00afff";
+      color7 = "#949494";
+      color15 = "#b4b4b4";
 
       background_opacity = "0.9";
 

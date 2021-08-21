@@ -1,7 +1,16 @@
+" Name:        photon.vim
+" Author:      Alex Vear <alex@vear.uk>
+" Webpage:     https://github.com/axvr/photon.vim
+" Description: An elegant, dark colour scheme with minimal syntax highlighting
+" Licence:     MIT (2019)
+" Last Change: 2021-08-16
+
 hi clear
 if exists("syntax_on")
   syntax reset
 endif
+
+let colors_name = "photon"
 
 if ($TERM =~ '256' || &t_Co >= 256) || has("gui_running")
     hi Normal ctermbg=235 ctermfg=251 cterm=NONE guibg=#000000 guifg=#c6c6c6 gui=NONE
@@ -43,8 +52,8 @@ if ($TERM =~ '256' || &t_Co >= 256) || has("gui_running")
     hi FoldColumn ctermbg=NONE ctermfg=241 cterm=NONE guibg=NONE guifg=#626262 gui=NONE
     hi Folded ctermbg=234 ctermfg=243 cterm=NONE guibg=#1c1c1c guifg=#767676 gui=NONE
     hi SpecialKey ctermbg=NONE ctermfg=243 cterm=NONE guibg=NONE guifg=#767676 gui=NONE
-    hi IncSearch ctermbg=167 ctermfg=235 cterm=NONE guibg=#d75f5f guifg=#000000 gui=NONE
-    hi Search ctermbg=140 ctermfg=235 cterm=NONE guibg=#af87d7 guifg=#000000 gui=NONE
+    hi IncSearch ctermbg=167 ctermfg=235 cterm=NONE guibg=#d75f5f guifg=#262626 gui=NONE
+    hi Search ctermbg=140 ctermfg=235 cterm=NONE guibg=#af87d7 guifg=#262626 gui=NONE
     hi Directory ctermbg=NONE ctermfg=140 cterm=NONE guibg=NONE guifg=#af87d7 gui=NONE
     hi MatchParen ctermbg=NONE ctermfg=167 cterm=bold guibg=NONE guifg=#d75f5f gui=bold
     hi SpellBad ctermbg=NONE ctermfg=132 cterm=underline guibg=NONE guifg=#af5f87 gui=underline
@@ -155,21 +164,42 @@ hi! link htmlTag htmlTagName
 hi! link htmlEndTag htmlTag
 hi! link gitcommitSummary Title
 
-let g:terminal_ansi_colors = [
-        \ '#000000',
-        \ '#ac2c2c',
-        \ '#4e9a06',
-        \ '#c4a000',
-        \ '#3465a4',
-        \ '#75507b',
-        \ '#389aad',
-        \ '#626262',
-        \ '#767676',
-        \ '#af5f87',
-        \ '#87af87',
-        \ '#d7af5f',
-        \ '#729fcf',
-        \ '#af87d7',
-        \ '#34e2e2',
-        \ '#c6c6c6',
-        \ ]
+if has('nvim')
+    let g:terminal_color_0 = '#3a3a3a'
+    let g:terminal_color_1 = '#ac2c2c'
+    let g:terminal_color_2 = '#4e9a06'
+    let g:terminal_color_3 = '#c4a000'
+    let g:terminal_color_4 = '#1880bc'
+    let g:terminal_color_5 = '#75507b'
+    let g:terminal_color_6 = '#389aad'
+    let g:terminal_color_7 = '#9e9e9e'
+    let g:terminal_color_8 = '#444444'
+    let g:terminal_color_9 = '#af5f87'
+    let g:terminal_color_10 = '#87af87'
+    let g:terminal_color_11 = '#d7af5f'
+    let g:terminal_color_12 = '#369dd8'
+    let g:terminal_color_13 = '#af87d7'
+    let g:terminal_color_14 = '#34e2e2'
+    let g:terminal_color_15 = '#b2b2b2'
+else
+    let g:terminal_ansi_colors = [
+            \ '#3a3a3a',
+            \ '#ac2c2c',
+            \ '#4e9a06',
+            \ '#c4a000',
+            \ '#1880bc',
+            \ '#75507b',
+            \ '#389aad',
+            \ '#9e9e9e',
+            \ '#444444',
+            \ '#af5f87',
+            \ '#87af87',
+            \ '#d7af5f',
+            \ '#369dd8',
+            \ '#af87d7',
+            \ '#34e2e2',
+            \ '#b2b2b2',
+            \ ]
+endif
+
+" Generated with RNB (https://github.com/romainl/vim-rnb)
