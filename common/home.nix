@@ -80,6 +80,8 @@
 
     qt5.qtwayland
     adwaita-qt
+
+    xorg.xrdb
   ];
 
   # extra programs
@@ -129,6 +131,27 @@
       package = pkgs.adwaita-qt;
       name = "adwaita-dark";
     };
+  };
+
+  xresources.properties = {
+    background = "#000000";
+    foreground = "#d2cad3";
+    color0 = "#08000e";
+    color8 = "#554d5b";
+    color1 = "#a52e4d";
+    color9 = "#fa83a2";
+    color2 = "#228039";
+    color10 = "#44a29f";
+    color3 = "#996f06";
+    color11 = "#ddc47d";
+    color4 = "#006fc1";
+    color12 = "#6691d2";
+    color5 = "#aa3c9f";
+    color13 = "#c29dd5";
+    color6 = "#33b3f4";
+    color14 = "#88c4f4";
+    color7 = "#bbb3c1";
+    color15 = "#f8f0f8";
   };
 
   # home manager stuff

@@ -117,6 +117,8 @@ riverctl float-filter-add "popup"
 systemctl --user import-environment
 systemctl --user start graphical-session.target
 
+xrdb ~/.Xresources
+
 waybar &
 fnott &
 oguri &
