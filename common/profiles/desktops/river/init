@@ -7,7 +7,7 @@ mod="Mod4"
 riverctl map normal $mod Return          spawn kitty
 riverctl map normal $mod D               spawn "fuzzel -r 0 -b 1a1a1aff -t f8f8f2ff -s 6272a4ff -C a968ffff -m e83c6aff -w 40 -l 12 -B 2"
 riverctl map normal $mod+Control Space   spawn "fnottctl dismiss"
-riverctl map normal None Print           spawn "grim -g '$(slurp)' - | wl-copy -t 'image/png'"
+riverctl map normal None Print           spawn "bash -c \"grim -g '$(slurp)' - | wl-copy -t 'image/png'\""
 
 # Mod+Q to close the focused view
 riverctl map normal $mod Q close
