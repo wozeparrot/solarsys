@@ -5,7 +5,7 @@ mod="Mod4"
 
 # Normal mode applications
 riverctl map normal $mod Return          spawn kitty
-riverctl map normal $mod D               spawn "fuzzel -r 0 -b 151510ff -t d2d2cdff -s 6699ccff -C aa4499ff -m 994455ff -w 40 -l 12 -B 2"
+riverctl map normal $mod D               spawn "fuzzel -r 0 -b 151510ff -t d2cad3ff -s 6691d2ff -C aa3c9fff -m a52e4dff -w 40 -l 12 -B 2"
 riverctl map normal $mod+Control Space   spawn "fnottctl dismiss"
 riverctl map normal None Print           spawn "bash -c \"grim -g \"$(slurp)\" - | wl-copy -t 'image/png'\""
 
@@ -103,8 +103,8 @@ done
 
 # Set background and border color
 riverctl background-color 0x151510
-riverctl border-color-focused 0xc2a5cf
-riverctl border-color-unfocused 0x6699cc
+riverctl border-color-focused 0xc29dd5
+riverctl border-color-unfocused 0x6691d2
 
 # Set repeat rate
 riverctl set-repeat 50 300
