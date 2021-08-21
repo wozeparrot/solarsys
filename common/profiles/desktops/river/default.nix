@@ -15,6 +15,7 @@
   # system config
   environment.systemPackages = with pkgs; [
     river
+    ss.rivercarro
     swaylock-effects
   ];
 
