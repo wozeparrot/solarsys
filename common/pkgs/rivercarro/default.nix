@@ -1,6 +1,7 @@
 { lib
 , stdenv
-, fetchFromSourcehut
+, fetchgit
+, git
 , zig
 , wayland
 , pkg-config
@@ -20,15 +21,14 @@ stdenv.mkDerivation rec {
   pname = "rivercarro";
   version = "55939a96e5df3b712e052270c97843352c64ad7e";
 
-  src = fetchFromSourcehut {
-    owner = "~novakane";
-    repo = pname;
+  src = fetchgit {
+    url = "https://git.sr.ht/~novakane/rivercarro";
     rev = version;
-    sha256 = "000000000000";
+    sha256 = "0v8gkjwl9ivqkq2gj03gsw4syirwnmgb2mrvix7700cnb3xghzbn";
     fetchSubmodules = true;
   };
 
-  nativeBuildInputs = [ zig wayland xwayland scdoc pkg-config ];
+  nativeBuildInputs = [ git zig wayland xwayland scdoc pkg-config ];
 
   buildInputs = [
     wayland-protocols
