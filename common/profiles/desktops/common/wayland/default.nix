@@ -7,7 +7,6 @@
       oguri
       fuzzel
       fnott
-      yambar-wayland
     ];
 
     xdg.configFile."oguri/config".text = ''
@@ -49,6 +48,7 @@
               format-ethernet = "";
               format-disconnected = "";
               tooltip = false;
+              interval = 10;
             };
             "backlight" = {
               on-scroll-up = "light -A 1";
@@ -92,6 +92,7 @@
                 warning = 70;
                 critical = 90;
               };
+              interval = 2;
             };
             "cpu" = {
               format = " {usage}%";
@@ -99,6 +100,7 @@
                 warning = 70;
                 critical = 90;
               };
+              interval = 2;
             };
           };
         }

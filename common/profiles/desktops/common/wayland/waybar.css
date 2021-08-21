@@ -1,8 +1,8 @@
-@define-color background rgba(0.0, 0.0, 0.0, 0.8);
-@define-color foreground #c6c6c6;
-@define-color yellow     #c4a000;
-@define-color red        #ac2c2c;
-@define-color green      #4e9a06;
+@define-color background rgba(0, 0, 0, 0.8);
+@define-color foreground #d2cad3;
+@define-color yellow     #996f06;
+@define-color red        #a52e4d;
+@define-color green      #228039;
 
 * {
   border: none;
@@ -15,8 +15,6 @@
 window#waybar {
   background: @background;
   color: @foreground;
-  transition-property: background-color;
-  transition-duration: 0.5s;
 }
 
 #battery.warning,
@@ -31,8 +29,20 @@ window#waybar {
   border-top: 3px solid @red;
 }
 
+@keyframes blink {
+  to {
+      opacity: 0;
+  }
+}
+
 #battery.charging {
   border-top: 3px solid @green;
+
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 #network,
