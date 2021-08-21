@@ -1,6 +1,6 @@
 { lib
 , stdenv
-, fetchFromGitHub
+, fetchFromSourcehut
 , zig
 , wayland
 , pkg-config
