@@ -14,7 +14,7 @@
       tab_bar_style = "powerline";
 
       background = "#000000";
-      foreground = "#d2d2cd";
+      foreground = "#e4e4de";
       color0 = "#151510";
       color8 = "#353530";
       color1 = "#852852";
