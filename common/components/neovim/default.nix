@@ -17,7 +17,9 @@ in
 
     extraConfig = builtins.concatStringsSep "\n" [
       # (lib.strings.fileContents ./theme.vim)
-      colorscheme xresources
+      ''
+        colorscheme xresources
+      ''
 
       ''
         lua << EOF
