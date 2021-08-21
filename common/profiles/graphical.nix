@@ -54,6 +54,12 @@
       paprefs
       helvum
       pamixer
+
+      hicolor-icon-theme
+      tela-icon-theme
+
+      libnotify
+      xdg-utils
     ];
   };
 }
