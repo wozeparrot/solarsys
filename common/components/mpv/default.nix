@@ -49,7 +49,7 @@
       text = builtins.readFile ./sssr.glsl;
       target = "mpv/shaders/sssr.glsl";
     };
-    
+
     # mpv-thumbnail-script-server-0 = {
     #   text = builtins.readFile ./mpv_thumbnail_script_server.lua;
     #   target = "mpv/scripts/mpv_thumbnail_script_server-0.lua";

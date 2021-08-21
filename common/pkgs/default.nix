@@ -1,13 +1,7 @@
 self: super:
 {
   ss = {
-    multimc = self.qt5.callPackage ./multimc { };
     discord-canary = self.callPackage ./discord { branch = "canary"; };
-    rofi = self.callPackage ./rofi { };
-    picom = self.callPackage ./picom { };
-    arcan = self.callPackage ./arcan { };
-    zig-master = self.callPackage ./zig-master { };
-    river = self.callPackage ./river { };
-    osu-lazer = self.callPackage ./osu-lazer { };
+    rivercarro = self.callPackage ./rivercarro { };
   };
 }
