@@ -15,22 +15,22 @@
 
       foreground = "#c6c6c6";
       background = "#000000";
-      color0 = "#000000";
-      color8 = "#767676";
+      color0 = "#3a3a3a";
+      color8 = "#444444";
       color1 = "#ac2c2c";
       color9 = "#af5f87";
       color2 = "#4e9a06";
       color10 = "#87af87";
       color3 = "#c4a000";
       color11 = "#d7af5f";
-      color4 = "#3465a4";
-      color12 = "#729fcf";
+      color4 = "#1880bc";
+      color12 = "#369dd8";
       color5 = "#75507b";
       color13 = "#af87d7";
       color6 = "#389aad";
       color14 = "#34e2e2";
-      color7 = "#626262";
-      color15 = "#c6c6c6";
+      color7 = "#9e9e9e";
+      color15 = "#b2b2b2";
 
       background_opacity = "0.9";
 
