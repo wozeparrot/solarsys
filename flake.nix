@@ -29,7 +29,7 @@
             });
         in
         (builtins.attrValues (pathsToImportedAttrs overlayPaths)) ++ [
-          inputs.neovim-nightly-overlay.overlay
+          #inputs.neovim-nightly-overlay.overlay
         ];
     in
     utils.lib.systemFlake {
