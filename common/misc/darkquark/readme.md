@@ -8,7 +8,7 @@ lighter_background:     #151510
 foreground:             #d2cad3
 lighter_foreground:     #f8f0f8
 
-black:                  #08000e
+black:                  #08040b
 dark_gray:              #554d5b
 
 red:                    #a52e4d

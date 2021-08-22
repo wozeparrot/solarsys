@@ -136,7 +136,7 @@
   xresources.properties = {
     background = "#000000";
     foreground = "#d2cad3";
-    color0 = "#08000e";
+    color0 = "#08040b";
     color8 = "#554d5b";
     color1 = "#a52e4d";
     color9 = "#fa83a2";
