@@ -29,20 +29,8 @@ window#waybar {
   border-top: 3px solid @red;
 }
 
-@keyframes blink {
-  to {
-      opacity: 0;
-  }
-}
-
 #battery.charging {
   border-top: 3px solid @green;
-
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
 }
 
 #network,
