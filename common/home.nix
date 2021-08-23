@@ -119,8 +119,8 @@
       name = "Adwaita";
     };
     font = {
-      name = "JetBrainsMono Nerd Font";
-      size = 10;
+      name = "Agave Nerd Font";
+      size = 11;
     };
     enable = true;
   };

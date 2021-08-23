@@ -40,10 +40,10 @@
   # fonts
   fonts = {
     enableDefaultFonts = true;
-    fonts = with pkgs; [ nerdfonts jetbrains-mono ];
+    fonts = with pkgs; [ nerdfonts agave ];
     fontconfig.defaultFonts = {
-      monospace = [ "JetBrainsMono Nerd Font" ];
-      sansSerif = [ "JetBrains Mono:style=Regular" ];
+      monospace = [ "Agave Nerd Font" ];
+      sansSerif = [ "Agave:style=Regular" ];
     };
   };
 
