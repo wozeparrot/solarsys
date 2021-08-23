@@ -99,7 +99,7 @@ vec4 hook() {
 //!COMPONENTS 3
 //!DESC SSimDownscaler calc Mean
 
-#define locality    8.0
+#define locality    4.0
 
 #define offset      vec2(0,0)
 
@@ -159,7 +159,7 @@ vec4 hook() {
 //!COMPONENTS 3
 //!DESC SSimDownscaler calc R
 
-#define locality    8.0
+#define locality    4.0
 
 #define offset      vec2(0,0)
 
@@ -219,7 +219,7 @@ vec4 hook() {
 //!WHEN NATIVE_CROPPED.h POSTKERNEL.h >
 //!DESC SSimDownscaler final pass
 
-#define locality    8.0
+#define locality    4.0
 
 #define offset      vec2(0,0)
 
