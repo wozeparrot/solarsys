@@ -37,6 +37,7 @@
       dscale = "mitchell";
       cscale = "spline36";
       linear-downscaling = false;
+      sigmoid-upscaling = false;
 
       demuxer-mkv-subtitle-preroll = true;
     };
@@ -51,6 +52,8 @@
       "Alt+c" = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K/Anime4K_Restore_CNN_Moderate_M.glsl\"; show-text \"Anime4K: Modern 1080p (Fast)\"";
 
       "Alt+v" = "no-osd change-list glsl-shaders set \"~~/shaders/acme-0_5x.glsl\"; show-text \"ACME 0.5x\"";
+      
+      "Alt+b" = "no-osd change-list glsl-shaders toggle \"~~/shaders/adaptive-sharpen.glsl\"; show-text \"Toggled Adaptive Sharpen\"";
 
       "Alt+n" = "no-osd change-list glsl-shaders clr \"\"; show-text \"GLSL shaders cleared\"";
     };
