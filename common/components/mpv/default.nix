@@ -8,6 +8,7 @@
     };
     config = {
       force-window = true;
+      pause = false;
       ytdl-format = "bestvideo[height<=?1080]+bestaudio";
       save-position-on-quit = true;
       osc = true;
@@ -32,55 +33,35 @@
 
       blend-subtitles = true;
 
-      glsl-shader = "~~/shaders/sssr.glsl";
-      scale = "haasnsoft";
+      scale = "spline36";
       dscale = "mitchell";
-      cscale = "ewa_lanczossoft";
+      cscale = "spline36";
+      linear-downscaling = false;
 
       demuxer-mkv-subtitle-preroll = true;
     };
     bindings = {
       b = "vf toggle format=colorlevels=full";
+      "Ctrl+p" = "script-message switch-shaders";
+
+      # Shader toggles
+      "Alt+z" = "no-osd change-list glsl-shaders set \"~~/shaders/sssr.glsl:~~/shaders/ssd.glsl\"; show-text \"SS Shaders\"";
+      
+      "Alt+x" = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K/Anime4K_Restore_CNN_Moderate_M.glsl:~~/shaders/Anime4K/Anime4K_Upscale_CNN_x2_S.glsl\"; show-text \"Anime4K: Modern 1080p->4K (Fast)\"";
+      "Alt+c" = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K/Anime4K_Restore_CNN_Moderate_M.glsl\"; show-text \"Anime4K: Modern 1080p (Fast)\"";
+
+      "Alt+n" = "no-osd change-list glsl-shaders clr ""; show-text \"GLSL shaders cleared\"";
     };
   };
 
   xdg.configFile = {
-    mpv-sssr-glsl = {
-      text = builtins.readFile ./sssr.glsl;
-      target = "mpv/shaders/sssr.glsl";
+    mpv-shaders = {
+      source = ./shaders;
+      target = "mpv/shaders";
     };
 
-    # mpv-thumbnail-script-server-0 = {
-    #   text = builtins.readFile ./mpv_thumbnail_script_server.lua;
-    #   target = "mpv/scripts/mpv_thumbnail_script_server-0.lua";
-    # };
-    # mpv-thumbnail-script-server-1 = {
-    #   text = builtins.readFile ./mpv_thumbnail_script_server.lua;
-    #   target = "mpv/scripts/mpv_thumbnail_script_server-1.lua";
-    # };
-    # mpv-thumbnail-script-server-2 = {
-    #   text = builtins.readFile ./mpv_thumbnail_script_server.lua;
-    #   target = "mpv/scripts/mpv_thumbnail_script_server-2.lua";
-    # };
-    # mpv-thumbnail-script-server-3 = {
-    #   text = builtins.readFile ./mpv_thumbnail_script_server.lua;
-    #   target = "mpv/scripts/mpv_thumbnail_script_server-3.lua";
-    # };
-
-    # mpv-thumbnail-script-client-osc = {
-    #   text = builtins.readFile ./mpv_thumbnail_script_client_osc.lua;
-    #   target = "mpv/scripts/mpv_thumbnail_script_client_osc.lua";
-    # };
-
-    # mpv-thumbnail-script-config = {
-    #   text = ''
-    #     thumbnail_network=yes
-    #   '';
-    #   target = "mpv/script-opts/mpv_thumbnail_script.conf";
-    # };
-
     ff2mpv = {
-      text = builtins.readFile ./ff2mpv;
+      source = ./ff2mpv;
       target = "mpv/ff2mpv";
       executable = true;
     };
