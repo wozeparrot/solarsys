@@ -34,7 +34,7 @@
           modules-right = [ "backlight" "pulseaudio" "clock" "tray" ];
           modules = {
             "mpd" = {
-              format = "{stateIcon} {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})";
+              format = "{stateIcon} - {title} - ({elapsedTime:%M:%S}/{totalTime:%M:%S})";
               format-disconnected = "disconnected";
               format-stopped = "stopped";
               state-icons = {
@@ -44,7 +44,7 @@
               tooltip = false;
             };
             "network" = {
-              format-wifi = " {signalStrength}%";
+              format-wifi = "  {signalStrength}%";
               format-ethernet = "";
               format-disconnected = "";
               tooltip = false;
@@ -74,7 +74,7 @@
               tooltip = false;
             };
             "battery" = {
-              format-icons = [ "" "" "" "" "" ];
+              format-icons = [ " " " " " " " " " " ];
               format = "{icon} {capacity}%";
               format-charging = "{icon} {capacity}%";
               format-discharging = "{icon} {capacity}";
@@ -87,7 +87,7 @@
               tooltip = false;
             };
             "memory" = {
-              format = " {}%";
+              format = "  {}%";
               states = {
                 warning = 70;
                 critical = 90;
@@ -95,7 +95,7 @@
               interval = 2;
             };
             "cpu" = {
-              format = " {usage}%";
+              format = "  {usage}%";
               states = {
                 warning = 70;
                 critical = 90;
