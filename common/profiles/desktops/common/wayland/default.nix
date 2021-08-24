@@ -89,7 +89,7 @@
               format = "R {}%";
               states = {
                 warning = 70;
-                critical = 90;>
+                critical = 90;
               };
               interval = 2;
             };
