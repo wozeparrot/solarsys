@@ -6,13 +6,13 @@
       youtubeSupport = true;
       scripts = with pkgs.mpvScripts; [ mpris autoload ];
     };
+    defaultProfiles = [ "gpu-hq" ];
     config = {
       force-window = true;
       pause = false;
       ytdl-format = "bestvideo[height<=?1080]+bestaudio";
       save-position-on-quit = true;
       osc = true;
-      profile = "gpu-hq";
       gpu-api = "auto";
       gpu-context = "wayland";
 
@@ -35,7 +35,7 @@
 
       scale = "spline36";
       dscale = "mitchell";
-      cscale = "spline36";
+      cscale = "mitchell";
       linear-downscaling = false;
       sigmoid-upscaling = false;
 
@@ -46,10 +46,12 @@
       "Ctrl+p" = "script-message switch-shaders";
 
       # Shader toggles
-      "Alt+z" = "no-osd change-list glsl-shaders set \"~~/shaders/sssr.glsl:~~/shaders/ssd.glsl\"; show-text \"SS Shaders\"";
+      "Alt+z" = "no-osd change-list glsl-shaders set \"~~/shaders/sssr.glsl:~~/shaders/ssd.glsl:~~/shaders/kb.glsl\"; show-text \"SS Shaders\"";
       
       "Alt+x" = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K/Anime4K_Restore_CNN_Moderate_S.glsl:~~/shaders/Anime4K/Anime4K_Upscale_CNN_x2_S.glsl\"; show-text \"Anime4K: Modern 1080p->4K (Fast)\"";
       "Alt+c" = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K/Anime4K_Restore_CNN_Moderate_S.glsl\"; show-text \"Anime4K: Modern 1080p (Fast)\"";
+      "Alt+m" = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K/Anime4K_Restore_CNN_Moderate_UL.glsl:~~/shaders/Anime4K/Anime4K_Upscale_CNN_x2_UL.glsl\"; show-text \"Anime4K: Modern 1080p->4K (HQ)\"";
+      "Alt+," = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K/Anime4K_Restore_CNN_Moderate_UL.glsl\"; show-text \"Anime4K: Modern 1080p (HQ)\""; 
 
       "Alt+v" = "no-osd change-list glsl-shaders set \"~~/shaders/acme-0_5x.glsl\"; show-text \"ACME 0.5x\"";
       
