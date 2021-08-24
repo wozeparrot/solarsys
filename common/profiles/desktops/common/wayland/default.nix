@@ -38,14 +38,14 @@
               format-disconnected = "disconnected";
               format-stopped = "stopped";
               state-icons = {
-                paused = "";
-                playing = "";
+                paused = "#";
+                playing = "^";
               };
               tooltip = false;
             };
             "network" = {
-              format-wifi = "  {signalStrength}%";
-              format-ethernet = "";
+              format-wifi = "W {signalStrength}%";
+              format-ethernet = "E";
               format-disconnected = "";
               tooltip = false;
               interval = 10;
@@ -54,7 +54,7 @@
               on-scroll-up = "light -A 1";
               on-scroll-down = "light -U 1";
               format = "{icon} {percent}%";
-              format-icons = [ "" ];
+              format-icons = [ "B" ];
               tooltip = false;
             };
             "clock" = {
@@ -65,16 +65,15 @@
             };
             "pulseaudio" = {
               format = "{icon} {volume}%";
-              format-muted = "";
+              format-muted = "M";
               format-icons = {
-                default = [ "" ];
-                headphones = [ "" ];
+                default = [ "S" ];
               };
               on-click = "pavucontrol";
               tooltip = false;
             };
             "battery" = {
-              format-icons = [ " " " " " " " " " " ];
+              format-icons = [ "." "," "-" "'" "*" ];
               format = "{icon} {capacity}%";
               format-charging = "{icon} {capacity}%";
               format-discharging = "{icon} {capacity}";
@@ -87,15 +86,15 @@
               tooltip = false;
             };
             "memory" = {
-              format = "  {}%";
+              format = "R {}%";
               states = {
                 warning = 70;
-                critical = 90;
+                critical = 90;>
               };
               interval = 2;
             };
             "cpu" = {
-              format = "  {usage}%";
+              format = "C {usage}%";
               states = {
                 warning = 70;
                 critical = 90;
