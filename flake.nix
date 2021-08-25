@@ -7,10 +7,7 @@
     master.url = "github:NixOS/nixpkgs/master";
 
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "unstable";
-    };
+    home-manager.url = "github:nix-community/home-manager";
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
