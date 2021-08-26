@@ -86,6 +86,6 @@
     anbox.enable = false;
   };
 
-  users.users.woze.extraGroups = [ "docker" "libvirtd" "video" "render" "vboxusers" ];
+  users.users.woze.extraGroups = [ "docker" "libvirtd" "video" "render" "vboxusers" "libvirt" ];
   home-manager.users.woze = ./home.nix;
 }
