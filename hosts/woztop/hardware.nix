@@ -6,15 +6,10 @@
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" "vfio-pci" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-
-  boot.initrd.preDeviceCommands = ''
-    echo "vfio-pci" > /sys/bus/pci/devices/0000:01:00.0/driver_override
-    modprobe -i vfio-pci
-  '';
 
   fileSystems."/" =
     {
