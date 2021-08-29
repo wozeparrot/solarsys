@@ -46,7 +46,7 @@
       g = "cycle deband";
 
       # Shader toggles
-      "Alt+z" = "no-osd change-list glsl-shaders set \"~~/shaders/sssr.glsl:~~/shaders/ssd.glsl:~~/shaders/kb.glsl\"; show-text \"SS Shaders\"";
+      "Alt+z" = "no-osd change-list glsl-shaders set \"~~/shaders/sssr.glsl:~~/shaders/ssd.glsl\"; show-text \"SS Shaders\"";
       
       "Alt+x" = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Restore_CNN_Moderate_S.glsl:~~/shaders/Anime4K/Anime4K_Upscale_CNN_x2_S.glsl\"; show-text \"Anime4K: Modern 1080p->4K (Fast)\"";
       "Alt+c" = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Restore_CNN_Moderate_S.glsl\"; show-text \"Anime4K: Modern 1080p (Fast)\"";
@@ -56,6 +56,7 @@
       "Alt+v" = "no-osd change-list glsl-shaders set \"~~/shaders/acme-0_5x.glsl\"; show-text \"ACME 0.5x\"";
       
       "Alt+m" = "no-osd change-list glsl-shaders pre \"~~/shaders/Anime4K/Anime4K_Clamp_Highlights.glsl\"; show-text \"Prepended Anime4K Clamp\"";
+      "Alt+g" = "no-osd change-list glsl-shaders add \"~~/shaders/kb.glsl\"; show-text \"Appended KrigBilateral\"";
       "Alt+b" = "no-osd change-list glsl-shaders toggle \"~~/shaders/adaptive-sharpen.glsl\"; show-text \"Toggled Adaptive Sharpen\"";
 
       "Alt+n" = "no-osd change-list glsl-shaders clr \"\"; show-text \"GLSL shaders cleared\"";
