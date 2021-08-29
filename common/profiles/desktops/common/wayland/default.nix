@@ -7,6 +7,9 @@
       oguri
       fuzzel
       fnott
+
+      wlr-randr
+      wdisplays
     ];
 
     xdg.configFile."oguri/config".text = ''
