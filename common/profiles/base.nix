@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, inputs, lib, ... }:
 {
   imports = [
     ./user.nix
@@ -8,7 +8,18 @@
     package = pkgs.nixUnstable;
     systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 
-    nixPath = [ "nixpkgs=${pkgs.path}" ];
+    registry =
+      let
+        nixRegistry = builtins.mapAttrs (name: v: { flake = v; })
+          (
+            lib.filterAttrs
+              (name: value: value ? outputs)
+              inputs
+          );
+      in
+      nixRegistry;
+
+    nixPath = [ "nixpkgs=${inputs.unstable}" ];
     sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh" ];
 
     gc = {
