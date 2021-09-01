@@ -19,7 +19,7 @@
       in
       nixRegistry;
 
-    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    nixPath = [ "nixpkgs=${inputs.unstable}" ];
     sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh" ];
 
     gc = {
