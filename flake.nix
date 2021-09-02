@@ -74,47 +74,68 @@
           {
             solar-system = {};
 
-            planets = {
-              desktops = let
-                makeDesktopModules = pkgs: hostFile: [
-                  home-manager.nixosModules.home-manager
-                  (
-                    { lib, ... }: {
-                      system.configurationRevision = lib.mkIf (self ? rev) self.rev;
+            planets = let
+              makeModules = pkgs: hostFile: [
+                (
+                  { lib, ... }: {
+                    system.configurationRevision = lib.mkIf (self ? rev) self.rev;
 
-                      nixpkgs.config = pkgs.config;
-                      nixpkgs.pkgs = pkgs;
+                    nixpkgs.config = pkgs.config;
+                    nixpkgs.pkgs = pkgs;
 
-                      _module.args = {
-                        inherit inputs pkgs;
-                      };
-                    }
-                  )
-                  hostFile
-                ];
-              in
-                {
+                    _module.args = {
+                      inherit inputs pkgs;
+                    };
+                  }
+                )
+                hostFile
+              ];
+            in
+              {
+                desktops = let
+                  makeDesktopModules = pkgs: hostFile: [
+                    home-manager.nixosModules.home-manager
+                  ] ++ makeModules pkgs hostFile;
+                in
+                  {
+                    moons = {
+                      woztop = let
+                        system = "x86_64-linux";
+                        pkgs = configNixpkgs system;
+                      in
+                        {
+                          trajectory = "local";
+                          orbits = [];
+
+                          core = nixpkgs.lib.nixosSystem {
+                            inherit system;
+                            modules = makeDesktopModules pkgs ./planets/desktops/woztop/host.nix;
+                          };
+                        };
+                    };
+                  };
+
+                infra0 = {
                   moons = {
-                    woztop = let
-                      system = "x86_64-linux";
+                    anime_nas = let
+                      system = "aarch64-linux";
                       pkgs = configNixpkgs system;
                     in
                       {
-                        trajectory = "local";
-                        orbits = [];
+                        trajectory = {
+                          host = "192.168.0.131";
+                          port = 21;
+                        };
+                        orbits = [ "nas" ];
 
                         core = nixpkgs.lib.nixosSystem {
-                          system = system;
-                          modules = makeDesktopModules pkgs ./planets/desktops/woztop/host.nix;
+                          inherit system;
+                          modules = makeModules pkgs ./planets/infra0/anime_nas/host.nix;
                         };
                       };
                   };
                 };
-
-              infra0 = {
-                moons = {};
               };
-            };
           }
       );
 }
