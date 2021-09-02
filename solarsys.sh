@@ -130,7 +130,7 @@ function deploy {
         local trajectory trajectory_host trajectory_port
         trajectory="$(get_trajectory "$planet" "$moon")"
         trajectory_host="$(jq -c -r '.host' <<< $trajectory)"
-        trajectory_port="$(jq -c -4 '.port' <<< $trajectory)"
+        trajectory_port="$(jq -c -r '.port' <<< $trajectory)"
 
         echo "Moon: |$moon| is at |$trajectory_host| on port |$trajectory_port|"
     fi
