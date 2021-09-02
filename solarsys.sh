@@ -126,6 +126,13 @@ function deploy {
         local buildpath
         buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"
         sudo "$buildpath"/bin/switch-to-configuration switch
+    else # deploying remotely
+        local trajectory trajectory_host trajectory_port
+        trajectory="$(get_trajectory "$planet" "$moon")"
+        trajectory_host="$(jq -c -r '.host' <<< $trajectory)"
+        trajectory_port="$(jq -c -4 '.port' <<< $trajectory)"
+
+        echo "Moon: |$moon| is at |$trajectory_host| on port |$trajectory_port|"
     fi
 }
 
@@ -299,6 +306,33 @@ function test_moon {
     fi
 }
 
+# lists planets and moons
+function list {
+    local planets
+    readarray -t planets <<< "$(get_planets | jq -c -r '.[]')"
+
+    for planet in "${planets[@]}"; do
+        echo "$planet"
+
+        local moons
+        readarray -t moons <<< "$(get_moons "$planet" | jq -c -r '.[]')"
+
+        for i in "${!moons[@]}"; do
+            if [[ -z "${moons[i]}" ]]; then
+                break
+            fi
+            
+            if [[ "$(($i + 1))" == "${#moons[@]}" ]]; then
+                echo "└───${moons[i]}"
+            else
+                echo "├───${moons[i]}"
+            fi
+        done
+
+        echo
+    done
+}
+
 # prints usage of solarsys
 function print_usage {
     ercho "Usage: $0 <subcommand>"
@@ -312,6 +346,7 @@ function print_usage {
     ercho "  build <planet> <moon> <output> |  Builds <output> for <moon> in <planet>"
     ercho "  rollback <planet> <moon>       |  Rolls back <moon> in <planet>"
     ercho "  test <planet> <moon>           |  Tests <moon> in <planet>"
+    ercho "  list                           |  Lists planets and moons"
     exit 1
 }
 
@@ -396,6 +431,9 @@ function main {
             fi
 
             test_moon "$planet" "$moon"
+            ;;
+        list)
+            list
             ;;
         *)
             ercho "error~ Unknown subcommand: $subcommand"
