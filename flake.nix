@@ -98,7 +98,7 @@
                       pkgs = configNixpkgs system;
                     in
                       {
-                        trajectory = {};
+                        trajectory = "local";
                         orbits = [];
 
                         core = nixpkgs.lib.nixosSystem {

@@ -1,4 +1,4 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
 set -e
 
 # --- utility functions ---
@@ -16,7 +16,7 @@ function yes_or_no {
 
     local yn
     while true; do
-        read -p "$* [y/n]: " yn
+        read -r -p "$* [y/n]: " yn
         case $yn in
             [Yy]*) return 0 ;;  
             [Nn]*) return 1 ;;
@@ -34,20 +34,20 @@ FLK='(builtins.getFlake (builtins.toString ./.))'
 
 # gets planets from flake
 function get_planets {
-    r $(nee "builtins.attrNames $FLK.planets")
+    nee "builtins.attrNames $FLK.planets"
 }
 
 # gets moons from a planet
 function get_moons {
     local planet=$1
-    r $(nee "builtins.attrNames $FLK.planets.$planet.moons")
+    nee "builtins.attrNames $FLK.planets.$planet.moons"
 }
 
 # gets orbits from a moon
 function get_orbits {
     local planet=$1
     local moon=$2
-    r $(nee "$FLK.planets.$planet.moons.$moon.orbits")
+    nee "$FLK.planets.$planet.moons.$moon.orbits"
 }
 
 # checks if planet exists
@@ -79,7 +79,7 @@ function build_moon_output {
 
     # build
     nix build ".#planets.$planet.moons.$moon.core.$output"
-    r $(nix path-info ".#planets.$planet.moons.$moon.core.$output")
+    nix path-info ".#planets.$planet.moons.$moon.core.$output"
 }
 
 
@@ -108,7 +108,8 @@ function deploy {
         yes_or_no "Deploy?" || return
 
         # build and switch to new config
-        local buildpath=$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")
+        local buildpath
+        buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"
         sudo "$buildpath"/bin/switch-to-configuration switch
     fi
 }
@@ -118,11 +119,11 @@ function deploy_all {
     echo "Deploying all moons"
     
     local planets
-    readarray -t planets <<< $(get_planets | jq -c -r '.[]')
+    readarray -t planets <<< "$(get_planets | jq -c -r '.[]')"
 
     for planet in "${planets[@]}"; do
         local moons
-        readarray -t moons <<< $(get_moons "$planet" | jq -c -r '.[]')
+        readarray -t moons <<< "$(get_moons "$planet" | jq -c -r '.[]')"
 
         for moon in "${moons[@]}"; do
             if [[ -z "$moon" ]]; then
@@ -147,7 +148,7 @@ function deploy_planet {
     echo "Deploying all moons in planet: |$planet|"
 
     local moons
-    readarray -t moons <<< $(get_moons "$planet" | jq -c -r '.[]')
+    readarray -t moons <<< "$(get_moons "$planet" | jq -c -r '.[]')"
 
     for moon in "${moons[@]}"; do
         if [[ -z "$moon" ]]; then
@@ -165,11 +166,11 @@ function deploy_orbit {
     echo "Deploying all moons with orbit: |$orbit|"
 
     local planets
-    readarray -t planets <<< $(get_planets | jq -c -r '.[]')
+    readarray -t planets <<< "$(get_planets | jq -c -r '.[]')"
 
     for planet in "${planets[@]}"; do
         local moons
-        readarray -t moons <<< $(get_moons "$planet" | jq -c -r '.[]')
+        readarray -t moons <<< "$(get_moons "$planet" | jq -c -r '.[]')"
 
         for moon in "${moons[@]}"; do
             if [[ -z "$moon" ]]; then
@@ -177,9 +178,9 @@ function deploy_orbit {
             fi
 
             local orbits
-            readarray -t orbits <<< $(get_orbits "$planet" "$moon" | jq -c -r '.[]')
+            readarray -t orbits <<< "$(get_orbits "$planet" "$moon" | jq -c -r '.[]')"
 
-            if [[ ! $(printf "_[%s]_" "${orbits[@]}") =~ .*_\[$orbit\]_.* ]]; then
+            if [[ ! "$(printf "_[%s]_" "${orbits[@]}")" =~ .*_\[$orbit\]_.* ]]; then
                 continue
             fi
             
@@ -206,7 +207,7 @@ function build {
 
     echo "Building output: |$output| for moon: |$moon| in planet: |$planet|"
 
-    echo $(build_moon_output "$planet" "$moon" "$output")
+    build_moon_output "$planet" "$moon" "$output"
 }
 
 # rolls back a moon in a planet
@@ -261,7 +262,8 @@ function test_moon {
         yes_or_no "Test?" || return
 
         # build and test new config
-        local buildpath=$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")
+        local buildpath
+        buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"
         sudo "$buildpath"/bin/switch-to-configuration test
     fi
 }
@@ -373,4 +375,4 @@ function main {
 }
 
 # run main
-main $@
+main "$@"
