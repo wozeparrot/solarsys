@@ -47,6 +47,8 @@
             devShell = pkgs.mkShell {
               nativeBuildInputs = with pkgs; [
                 git
+                jq
+                rsync
               ];
             };
           }
