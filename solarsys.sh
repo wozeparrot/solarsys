@@ -37,13 +37,20 @@ function get_planets {
     nee "builtins.attrNames $FLK.planets"
 }
 
-# gets moons from a planet
+# gets moons for a planet
 function get_moons {
     local planet=$1
     nee "builtins.attrNames $FLK.planets.$planet.moons"
 }
 
-# gets orbits from a moon
+# gets trajectory for a moon
+function get_trajectory {
+    local planet=$1
+    local moon=$2
+    nee "$FLK.planets.$planet.moons.$moon.trajectory"
+}
+
+# gets orbits for a moon
 function get_orbits {
     local planet=$1
     local moon=$2
@@ -92,11 +99,11 @@ function deploy {
 
     # sanity check
     if ! has_planet "$planet"; then
-        ercho "Planet: |$planet| does not exist!"
+        ercho "error~ Planet: |$planet| does not exist!"
         return 1
     fi
     if ! has_moon "$planet" "$moon"; then
-        ercho "Moon: |$moon| does not exist for planet: |$planet|!"
+        ercho "error~ Moon: |$moon| does not exist for planet: |$planet|!"
         return 1
     fi
 
@@ -105,6 +112,14 @@ function deploy {
     # check if we are deploying our current system
     if [[ "$moon" == "$(hostname)" ]]; then
         echo "Moon: |$moon| is the current system..."
+
+        # check for 'local' trajectory
+        if [[ "$(get_trajectory "$planet" "$moon" | jq -c -r .)" != "local" ]]; then
+            ercho "error~ Moon: |$moon| in planet: |$planet| does not have a 'local' trajectory"
+            return 1
+        fi
+
+        # wait for user response
         yes_or_no "Deploy?" || return
 
         # build and switch to new config
@@ -141,7 +156,7 @@ function deploy_planet {
 
     # sanity check
     if ! has_planet "$planet"; then
-        ercho "Planet: |$planet| does not exist!"
+        ercho "error~ Planet: |$planet| does not exist!"
         return 1
     fi
 
@@ -197,11 +212,11 @@ function build {
 
     # sanity check
     if ! has_planet "$planet"; then
-        ercho "Planet: |$planet| does not exist!"
+        ercho "error~ Planet: |$planet| does not exist!"
         return 1
     fi
     if ! has_moon "$planet" "$moon"; then
-        ercho "Moon: |$moon| does not exist for planet: |$planet|!"
+        ercho "error~ Moon: |$moon| does not exist for planet: |$planet|!"
         return 1
     fi
 
@@ -217,11 +232,11 @@ function rollback {
 
     # sanity check
     if ! has_planet "$planet"; then
-        ercho "Planet: |$planet| does not exist!"
+        ercho "error~ Planet: |$planet| does not exist!"
         return 1
     fi
     if ! has_moon "$planet" "$moon"; then
-        ercho "Moon: |$moon| does not exist for planet: |$planet|!"
+        ercho "error~ Moon: |$moon| does not exist for planet: |$planet|!"
         return 1
     fi
 
@@ -230,6 +245,14 @@ function rollback {
     # check if we are testing our current system
     if [[ "$moon" == "$(hostname)" ]]; then
         echo "Moon: |$moon| is the current system..."
+
+        # check for 'local' trajectory
+        if [[ "$(get_trajectory "$planet" "$moon" | jq -c -r .)" != "local" ]]; then
+            ercho "error~ Moon: |$moon| in planet: |$planet| does not have a 'local' trajectory"
+            return 1
+        fi
+
+        # wait for user response
         yes_or_no "Rollback?" || return
 
         # rollback
@@ -246,11 +269,11 @@ function test_moon {
 
     # sanity check
     if ! has_planet "$planet"; then
-        ercho "Planet: |$planet| does not exist!"
+        ercho "error~ Planet: |$planet| does not exist!"
         return 1
     fi
     if ! has_moon "$planet" "$moon"; then
-        ercho "Moon: |$moon| does not exist for planet: |$planet|!"
+        ercho "error~ Moon: |$moon| does not exist for planet: |$planet|!"
         return 1
     fi
 
@@ -259,6 +282,14 @@ function test_moon {
     # check if we are testing our current system
     if [[ "$moon" == "$(hostname)" ]]; then
         echo "Moon: |$moon| is the current system..."
+
+        # check for 'local' trajectory
+        if [[ "$(get_trajectory "$planet" "$moon" | jq -c -r .)" != "local" ]]; then
+            ercho "error~ Moon: |$moon| in planet: |$planet| does not have a 'local' trajectory"
+            return 1
+        fi
+
+        # wait for user response
         yes_or_no "Test?" || return
 
         # build and test new config
