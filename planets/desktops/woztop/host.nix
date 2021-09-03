@@ -3,12 +3,12 @@
   networking.hostName = "woztop";
 
   imports = [
-    ../../../common/profiles/graphical.nix
-    ../../../common/profiles/laptop.nix
+    ../common/profiles/graphical.nix
+    ../common/profiles/laptop.nix
     ./hardware.nix
 
     # ../../common/profiles/desktops/hikari
-    ../../../common/profiles/desktops/river
+    ../common/profiles/desktops/river
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_lqx;

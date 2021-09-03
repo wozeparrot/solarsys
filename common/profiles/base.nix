@@ -1,9 +1,5 @@
 { config, pkgs, inputs, lib, ... }:
 {
-  imports = [
-    ./user.nix
-  ];
-
   nix = {
     package = pkgs.nixUnstable;
     systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
@@ -34,29 +30,20 @@
     '';
   };
 
-  home-manager.useUserPackages = true;
-  home-manager.useGlobalPkgs = true;
-
   environment = {
     systemPackages = with pkgs; [
       # core system utils
       coreutils
       binutils
 
-      # config building
-      git
-      gnumake
-      cachix
-
       # extra utils
       ripgrep
       htop
       curl
-      wget
       file
       less
-      nano
-      vim
+      git
+      neovim
       pciutils
       usbutils
       jq
@@ -79,20 +66,12 @@
       LESS = "-iFJMRWX -z-4 -x4";
       LESSOPEN = "|${pkgs.lesspipe}/bin/lesspipe.sh %s";
     };
-
-    homeBinInPath = true;
   };
 
   # extra programs
-  programs.firejail.enable = true;
-  programs.mtr.enable = true;
   programs.fish.enable = true;
   programs.command-not-found.enable = false;
   programs.ssh.startAgent = false;
-
-  # services
-  ## oom killer
-  services.earlyoom.enable = true;
 
   # disable manually creating users
   users.mutableUsers = false;
@@ -100,7 +79,4 @@
   # time
   time.timeZone = "America/Toronto";
   services.timesyncd.enable = true;
-
-  # rtkit
-  security.rtkit.enable = true;
 }
