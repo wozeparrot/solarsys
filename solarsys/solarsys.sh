@@ -337,11 +337,18 @@ function list {
             if [[ -z "${moons[i]}" ]]; then
                 break
             fi
+
+            local trajectory
+            trajectory="$(get_trajectory "$planet" "${moons[i]}")"
             
+            if [[ -z "$(jq -c -r '.' <<< "$trajectory")" ]]; then
+                trajectory="local"
+            fi
+
             if [[ "$((i + 1))" == "${#moons[@]}" ]]; then
-                echo "└───${moons[i]}"
+                echo "└───${moons[i]} at $trajectory"
             else
-                echo "├───${moons[i]}"
+                echo "├───${moons[i]} at $trajectory"
             fi
         done
 
