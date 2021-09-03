@@ -90,6 +90,9 @@
                 )
                 hostFile
               ];
+              specialArgs = {
+                inherit inputs;
+              };
             in
               {
                 desktops = let
@@ -108,7 +111,7 @@
                           orbits = [];
 
                           core = nixpkgs.lib.nixosSystem {
-                            inherit system;
+                            inherit system specialArgs;
                             modules = makeDesktopModules pkgs ./planets/desktops/woztop/host.nix;
                           };
                         };
@@ -129,7 +132,7 @@
                         orbits = [ "nas" ];
 
                         core = nixpkgs.lib.nixosSystem {
-                          inherit system;
+                          inherit system specialArgs;
                           modules = makeModules pkgs ./planets/infra0/anime_nas/host.nix;
                         };
                       };
