@@ -79,7 +79,4 @@
   # time
   time.timeZone = "America/Toronto";
   services.timesyncd.enable = true;
-
-  # system state
-  system.stateVersion = "21.11";
 }
