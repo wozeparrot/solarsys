@@ -10,6 +10,7 @@
   boot.loader.grub.enable = false;
   boot.loader.generic-extlinux-compatible.enable = true;
 
+  sdImage.compressImage = false;
   sdImage.firmwareSize = 128;
   sdImage.firmwarePartitionName = "NIXOS_BOOT";
   sdImage.populateRootCommands = ''
