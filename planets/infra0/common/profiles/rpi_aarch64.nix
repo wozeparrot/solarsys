@@ -1,7 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs, config, inputs, ... }: {
   imports = [
     ./base.nix
-    <nixpkgs/nixos/modules/installer/sd-card/sd-image.nix>
+    "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image.nix"
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
