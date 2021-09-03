@@ -113,24 +113,25 @@ function deploy {
     if [[ "$moon" == "$(hostname)" ]]; then
         echo "Moon: |$moon| is the current system..."
 
-        # check for 'local' trajectory
-        if [[ "$(get_trajectory "$planet" "$moon" | jq -c -r .)" != "local" ]]; then
-            ercho "error~ Moon: |$moon| in planet: |$planet| does not have a 'local' trajectory"
-            return 1
-        fi
-
         # wait for user response
         yes_or_no "Deploy?" || return
 
         # build and switch to new config
         local buildpath
         buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"
-        sudo "$buildpath"/bin/switch-to-configuration switch
+        "$buildpath"/bin/switch-to-configuration switch
     else # deploying remotely
-        local trajectory trajectory_host trajectory_port
+        local trajectory
         trajectory="$(get_trajectory "$planet" "$moon")"
-        trajectory_host="$(jq -c -r '.host' <<< $trajectory)"
-        trajectory_port="$(jq -c -r '.port' <<< $trajectory)"
+        
+        if [[ -z "$(jq -c -r '.' <<< "$trajectory")" ]]; then
+            ercho "warning~ Moon: |$moon| is set for a local trajectory, skipping."
+            return
+        fi
+
+        local trajectory_host trajectory_port
+        trajectory_host="$(jq -c -r '.host' <<< "$trajectory")"
+        trajectory_port="$(jq -c -r '.port' <<< "$trajectory")"
 
         echo "Moon: |$moon| is at |$trajectory_host| on port |$trajectory_port|"
     fi
@@ -253,20 +254,27 @@ function rollback {
     if [[ "$moon" == "$(hostname)" ]]; then
         echo "Moon: |$moon| is the current system..."
 
-        # check for 'local' trajectory
-        if [[ "$(get_trajectory "$planet" "$moon" | jq -c -r .)" != "local" ]]; then
-            ercho "error~ Moon: |$moon| in planet: |$planet| does not have a 'local' trajectory"
-            return 1
-        fi
-
         # wait for user response
         yes_or_no "Rollback?" || return
 
         # rollback
-        sudo nix-env --rollback -p /nix/var/nix/profiles/system
-        sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch
-    fi
+        nix-env --rollback -p /nix/var/nix/profiles/system
+        /nix/var/nix/profiles/system/bin/switch-to-configuration switch
+    else # rolling back remotely
+        local trajectory
+        trajectory="$(get_trajectory "$planet" "$moon")"
+        
+        if [[ -z "$(jq -c -r '.' <<< "$trajectory")" ]]; then
+            ercho "warning~ Moon: |$moon| is set for a local trajectory, skipping."
+            return
+        fi
 
+        local trajectory_host trajectory_port
+        trajectory_host="$(jq -c -r '.host' <<< "$trajectory")"
+        trajectory_port="$(jq -c -r '.port' <<< "$trajectory")"
+
+        echo "Moon: |$moon| is at |$trajectory_host| on port |$trajectory_port|"
+    fi
 }
 
 # tests a single moon in a planet
@@ -290,19 +298,27 @@ function test_moon {
     if [[ "$moon" == "$(hostname)" ]]; then
         echo "Moon: |$moon| is the current system..."
 
-        # check for 'local' trajectory
-        if [[ "$(get_trajectory "$planet" "$moon" | jq -c -r .)" != "local" ]]; then
-            ercho "error~ Moon: |$moon| in planet: |$planet| does not have a 'local' trajectory"
-            return 1
-        fi
-
         # wait for user response
         yes_or_no "Test?" || return
 
         # build and test new config
         local buildpath
         buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"
-        sudo "$buildpath"/bin/switch-to-configuration test
+        "$buildpath"/bin/switch-to-configuration test
+    else # testing remotely
+        local trajectory
+        trajectory="$(get_trajectory "$planet" "$moon")"
+        
+        if [[ -z "$(jq -c -r '.' <<< "$trajectory")" ]]; then
+            ercho "warning~ Moon: |$moon| is set for a local trajectory, skipping."
+            return
+        fi
+
+        local trajectory_host trajectory_port
+        trajectory_host="$(jq -c -r '.host' <<< "$trajectory")"
+        trajectory_port="$(jq -c -r '.port' <<< "$trajectory")"
+
+        echo "Moon: |$moon| is at |$trajectory_host| on port |$trajectory_port|"
     fi
 }
 
@@ -322,7 +338,7 @@ function list {
                 break
             fi
             
-            if [[ "$(($i + 1))" == "${#moons[@]}" ]]; then
+            if [[ "$((i + 1))" == "${#moons[@]}" ]]; then
                 echo "└───${moons[i]}"
             else
                 echo "├───${moons[i]}"
@@ -352,9 +368,6 @@ function print_usage {
 
 # main function
 function main {
-    # validate sudo
-    sudo -v
-
     # check if subcommand is set
     local subcommand=$1
     if [[ -z "$subcommand" ]]; then
@@ -442,6 +455,12 @@ function main {
             ;;
     esac
 }
+
+# check if we are root
+if [[ ! "$(id -u)" -eq 0 ]]; then
+    ercho "error~ Please run this script as root!"
+    exit 1
+fi
 
 # run main
 main "$@"
