@@ -71,7 +71,6 @@
   # extra programs
   programs.fish.enable = true;
   programs.command-not-found.enable = false;
-  programs.ssh.startAgent = false;
 
   # disable manually creating users
   users.mutableUsers = false;
