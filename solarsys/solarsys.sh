@@ -85,8 +85,12 @@ function build_moon_output {
     local output=$3
 
     # build
-    nix build ".#planets.$planet.moons.$moon.core.$output"
-    nix path-info ".#planets.$planet.moons.$moon.core.$output"
+    if nix build ".#planets.$planet.moons.$moon.core.$output"; then
+        nix path-info ".#planets.$planet.moons.$moon.core.$output"
+        return 0
+    else
+        return 1
+    fi
 }
 
 
@@ -118,8 +122,9 @@ function deploy {
 
         # build and switch to new config
         local buildpath
-        buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"
-        "$buildpath"/bin/switch-to-configuration switch
+        if buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"; then
+            "$buildpath"/bin/switch-to-configuration switch
+        fi
     else # deploying remotely
         local trajectory
         trajectory="$(get_trajectory "$planet" "$moon")"
@@ -308,8 +313,9 @@ function test_moon {
 
         # build and test new config
         local buildpath
-        buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"
-        "$buildpath"/bin/switch-to-configuration test
+        if buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"; then
+            "$buildpath"/bin/switch-to-configuration switch
+        fi
     else # testing remotely
         local trajectory
         trajectory="$(get_trajectory "$planet" "$moon")"
