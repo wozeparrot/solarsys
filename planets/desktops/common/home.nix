@@ -168,5 +168,4 @@
   home.homeDirectory = "/home/woze";
 
   programs.home-manager.enable = true;
-  home.stateVersion = "20.09";
 }

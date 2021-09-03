@@ -39,4 +39,6 @@
   # Services
   services.kdeconnect.indicator = true;
   services.syncthing.enable = true;
+
+  home.stateVersion = "20.09";
 }
