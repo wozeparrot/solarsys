@@ -13,7 +13,12 @@
 
   boot.kernelPackages = pkgs.linuxPackages_lqx;
   boot.kernelParams = [ "intel_iommu=on" ];
-  # boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  
+  # nix cross build support
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  nix.extraOptions = ''
+    extra-platforms = aarch64-linux arm-linux
+  '';
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
