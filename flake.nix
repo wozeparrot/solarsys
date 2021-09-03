@@ -14,7 +14,6 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     # overlays
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = inputs@{ self, nixpkgs, master, home-manager, flake-utils, ... }:
@@ -33,7 +32,6 @@
             );
         in
           (builtins.attrValues (pathsToImportedAttrs overlayPaths)) ++ [
-            inputs.neovim-nightly-overlay.overlay
           ];
     in
       flake-utils.lib.eachSystem [
