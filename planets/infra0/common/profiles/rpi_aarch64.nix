@@ -24,4 +24,12 @@
       options = [ "noatime" ];
     };
   };
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      ripgrep = prev.ripgrep.overrideAttrs (oldAttrs: {
+        doCheck = false;
+      });
+    })
+  ];
 }
