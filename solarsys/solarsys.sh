@@ -134,6 +134,11 @@ function deploy {
         trajectory_port="$(jq -c -r '.port' <<< "$trajectory")"
 
         echo "Moon: |$moon| is at |$trajectory_host| on port |$trajectory_port|"
+        
+        # build config
+        local buildpath
+        buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"
+        echo "$buildpath"
     fi
 }
 
