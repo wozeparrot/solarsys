@@ -142,8 +142,9 @@ function deploy {
         
         # build config
         local buildpath
-        buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"
-        echo "$buildpath"
+        if buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"; then
+            echo "$buildpath"
+        fi
     fi
 }
 
