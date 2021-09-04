@@ -123,6 +123,7 @@ function deploy {
         # build and switch to new config
         local buildpath
         if buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"; then
+            nix-env -p /nix/var/nix/profiles/system --set "$buildpath"
             "$buildpath"/bin/switch-to-configuration switch
         fi
     else # deploying remotely
@@ -269,7 +270,7 @@ function rollback {
         yes_or_no "Rollback?" || return
 
         # rollback
-        nix-env --rollback -p /nix/var/nix/profiles/system
+        nix-env -p /nix/var/nix/profiles/system --rollback
         /nix/var/nix/profiles/system/bin/switch-to-configuration switch
     else # rolling back remotely
         local trajectory
