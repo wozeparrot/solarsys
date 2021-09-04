@@ -118,7 +118,7 @@
 
                 infra0 = {
                   moons = {
-                    anime_nas = let
+                    anime-nas = let
                       system = "aarch64-linux";
                       pkgs = configNixpkgs system;
                     in
@@ -131,7 +131,7 @@
 
                         core = nixpkgs.lib.nixosSystem {
                           inherit system specialArgs;
-                          modules = makeModules pkgs ./planets/infra0/anime_nas/host.nix;
+                          modules = makeModules pkgs ./planets/infra0/anime-nas/host.nix;
                         };
                       };
                   };
