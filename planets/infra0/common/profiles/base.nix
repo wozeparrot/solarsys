@@ -19,7 +19,7 @@
   i18n.supportedLocales = [ (config.i18n.defaultLocale + "/UTF-8") ];
 
   # enable ssh
-  services.openssh.enable = true;
+  services.openssh.enable = lib.mkForce true;
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKPL+OWmcGo4IlL+LUz9uEgOH8hk0JIN3DXEV8sdgxPB wozeparrot"
   ];
