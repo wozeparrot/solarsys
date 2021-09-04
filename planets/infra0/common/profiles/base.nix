@@ -32,6 +32,7 @@
   networking.firewall.allowPing = true;
   networking.firewall.allowedTCPPorts = [ 22 ];
 
-  # store
+  # cleanup
   nix.autoOptimiseStore = true;
+  boot.cleanTmpDir = true;
 }
