@@ -29,8 +29,8 @@
 
   # Firewall
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [ 22 ];
   networking.firewall.allowPing = true;
+  networking.firewall.allowedTCPPorts = [ 22 ];
 
   # store
   nix.autoOptimiseStore = true;
