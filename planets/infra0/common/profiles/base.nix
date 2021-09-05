@@ -26,6 +26,15 @@
 
   # Reboot on kernel panic
   boot.kernelParams = [ "panic=1" "boot.panic_on_fail" ];
+  
+  # no systemd emergency mode
+  systemd.enableEmergencyMode = false;
+
+  # disable ttys
+  systemd.services."serial-getty@ttyS0".enable = false;
+  systemd.services."serial-getty@hvc0".enable = false;
+  systemd.services."getty@tty1".enable = false;
+  systemd.services."autovt@".enable = false;
 
   # Firewall
   networking.firewall.enable = true;
