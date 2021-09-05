@@ -125,7 +125,7 @@
                       {
                         trajectory = {
                           host = "192.168.0.249";
-                          port = 21;
+                          port = 22;
                         };
                         orbits = [ "nas" ];
 
