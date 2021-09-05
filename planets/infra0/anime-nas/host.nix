@@ -11,7 +11,7 @@
     address = [ "fdbe:ef11:2358:1321::1/64" ];
     listenPort = 1400;
 
-    privateKeyFile = "../../../secrets/infra0/anime-nas/wg_private";
+    privateKeyFile = "/run/keys/wg_private";
   };
 
   system.stateVersion = "21.11";
