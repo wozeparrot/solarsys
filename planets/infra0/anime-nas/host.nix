@@ -5,11 +5,11 @@
     ../common/profiles/rpi4.nix
   ];
 
-  networking.firewall.allowedUDPPorts = [ 1400 ];
+  networking.firewall.allowedUDPPorts = [ 5553 ];
 
   networking.wg-quick.interfaces.wg0 = {
     address = [ "fdbe:ef11:2358:1321::1/64" ];
-    listenPort = 1400;
+    listenPort = 5553;
 
     privateKeyFile = "/run/keys/wg_private";
   };
