@@ -99,7 +99,11 @@
     package = pkgs.firefox-devedition-bin;
   };
 
-  programs.keychain.enable = false; # currently broken, prevents window manager from starting on boot
+  programs.keychain = {
+    enable = true;
+    enableXsessionIntegration = false;
+    keys = [ "id_ed25519" ];
+  };
 
   # extra services
   services.kdeconnect.enable = true;
