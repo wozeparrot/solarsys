@@ -106,6 +106,35 @@ function build_moon_output {
     fi
 }
 
+# sends satellites to a moon in a planet
+function send_satellites {
+    local planet=$1
+    local moon=$2
+    local trajectory_host=$3
+    local trajectory_port=$4
+
+    # parse satellites
+    local satellites
+    readarray -t satellites <<< "$(nee "builtins.attrNames $FLK.planets.$planet.moons.$moon.satellites" | jq -c -r '.[]')"
+
+    for satellite in "${satellites[@]}"; do
+        local dest_path
+        dest_path="$(nee "$FLK.planets.$planet.moons.$moon.satellites.$satellite" | jq -c -r '.destination')"
+        if [[ "$dest_path" == "null" ]]; then
+            dest_path="/run/keys/"
+        fi
+
+        echo "[solarsys] Deploying satellite: |$satellite| to destination: |$dest_path|"
+
+        local path
+        path=$(jq -c -r '.path' <<< "$(nee "$FLK.planets.$planet.moons.$moon.satellites.$satellite")")
+        if [[ -n "$path" ]]; then
+            rsync -q -e "ssh -p $trajectory_port" -r "$path" "root@$trajectory_host:$dest_path/$satellite"
+            return
+        fi
+    done
+}
+
 
 # --- script main ---
 # -- script main functions --
@@ -161,9 +190,13 @@ EOF
         # build config
         local buildpath
         if buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"; then
+            # copy built config
             nix copy --to "ssh://root@$trajectory_host" "$buildpath"
-            rsync -e "ssh -p $trajectory_port" "$(dirname "$0")/solarsys-remote.sh" "root@$trajectory_host:/tmp/solarsys-remote.sh"
-            
+            # copy remote deploy script
+            rsync -q -e "ssh -p $trajectory_port" "$(dirname "$0")/solarsys-remote.sh" "root@$trajectory_host:/tmp/solarsys-remote.sh"
+            # send satellites
+            send_satellites "$planet" "$moon" "$trajectory_host" "$trajectory_port"
+
             # deploy stage1 - testing config
             ssh -t "root@$trajectory_host" -p "$trajectory_port" "bash /tmp/solarsys-remote.sh d1 $buildpath" 2> /dev/null
             # wait to see if we can still connect
@@ -402,6 +435,42 @@ function ssh_moon {
     fi
 }
 
+# send satellites to a moon in a planet
+function satellites {
+    local planet=$1
+    local moon=$2
+
+    # sanity check
+    if ! has_planet "$planet"; then
+        ercho "error~ Planet: |$planet| does not exist!"
+        return 1
+    fi
+    if ! has_moon "$planet" "$moon"; then
+        ercho "error~ Moon: |$moon| does not exist for planet: |$planet|!"
+        return 1
+    fi
+
+    # check if the moon we are trying to connect to is the current system
+    if [[ "$moon" == "$(hostname)" ]]; then
+        ercho "error~ Moon: |$moon| is the current system!"
+    else
+        local trajectory
+        trajectory="$(get_trajectory "$planet" "$moon")"
+        
+        if [[ -z "$(jq -c -r '.' <<< "$trajectory")" ]]; then
+            ercho "error~ Moon: |$moon| does not have a set trajectory!"
+            return 1
+        fi
+
+        local trajectory_host trajectory_port
+        trajectory_host="$(jq -c -r '.host' <<< "$trajectory")"
+        trajectory_port="$(jq -c -r '.port' <<< "$trajectory")"
+
+        echo "[solarsys] Moon: |$moon| is at |$trajectory_host| on port |$trajectory_port|"
+        send_satellites "$planet" "$moon" "$trajectory_host" "$trajectory_port"
+    fi
+}
+
 # lists planets and moons
 function list {
     local planets
@@ -450,6 +519,7 @@ function print_usage {
     ercho "  rollback <planet> <moon>       |  Rolls back <moon> in <planet>"
     ercho "  test <planet> <moon>           |  Tests <moon> in <planet>"
     ercho "  ssh <planet> <moon>            |  SSH to <moon> in <planet>"
+    ercho "  satellites <planet> <moon>     |  Send satellites to <moon> in <planet>"
     ercho "  list                           |  Lists planets and moons"
     exit 1
 }
@@ -543,6 +613,17 @@ function main {
             fi
 
             ssh_moon "$planet" "$moon"
+            ;;
+        satellites)
+            local planet=$2
+            local moon=$3
+            if [[ -z "$planet" ]] || [[ -z "$moon" ]]; then
+                ercho "error! No planet and/or moon specified"
+                ercho
+                print_usage
+            fi
+
+            satellites "$planet" "$moon"
             ;;
         list)
             list

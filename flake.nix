@@ -128,6 +128,7 @@
                           port = 22;
                         };
                         orbits = [ "nas" ];
+                        satellites.wg_private.path = "./satellites/infra0/anime-nas/wg_private";
 
                         core = nixpkgs.lib.nixosSystem {
                           inherit system specialArgs;
