@@ -18,6 +18,10 @@
         publicKey = "3U2Nu7UvYIzOHPLjwKCB5iQzSNO+6hL4fTvZ+AhGHT4=";
         allowedIPs = [ "fdbe:ef11:2358:1321::99/128" ];
       }
+      { # wone
+        publicKey = "DNY6opgAbjMJh8o4O7h9dXiO4BCzg+0RM4zVNvQg3xs=";
+        allowedIPs = [ "fdbe:ef11:2358:1321::88/128" ];
+      }
     ];
   };
 
