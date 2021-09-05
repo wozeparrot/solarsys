@@ -8,6 +8,19 @@ function ercho { printf "%s\n" "$*" >&2; }
 # shortcut to return values
 function r { printf "%s" "$*"; }
 
+# sleep that counts
+function visible_sleep {
+    local DELAY=$1
+
+    for i in $(seq "$DELAY" -1 1); do
+        for s in / - \\ \|; do
+            printf "\r%s = $i        " "$s"
+            sleep 0.25
+        done
+    done
+    printf "\r                \r"
+}
+
 # prompt user for y or n
 function yes_or_no {
     if [[ -n "$ALWAYS_YES" ]]; then
@@ -111,20 +124,24 @@ function deploy {
         return 1
     fi
 
-    echo "Deploying moon: |$moon| in planet: |$planet|"
+    echo "[solarsys] Deploying moon: |$moon| in planet: |$planet|"
 
     # check if we are deploying our current system
     if [[ "$moon" == "$(hostname)" ]]; then
-        echo "Moon: |$moon| is the current system..."
+        echo "[solarsys] Moon: |$moon| is the current system..."
 
         # wait for user response
-        yes_or_no "Deploy?" || return
+        yes_or_no "[solarsys] Deploy?" || return
 
         # build and switch to new config
         local buildpath
         if buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"; then
-            nix-env -p /nix/var/nix/profiles/system --set "$buildpath"
-            "$buildpath"/bin/switch-to-configuration switch
+            echo "[solarsys] Press enter to continue..."
+            read -r
+            sudo bash <<EOF
+nix-env -p /nix/var/nix/profiles/system --set "$buildpath"
+"$buildpath"/bin/switch-to-configuration switch
+EOF
         fi
     else # deploying remotely
         local trajectory
@@ -139,19 +156,29 @@ function deploy {
         trajectory_host="$(jq -c -r '.host' <<< "$trajectory")"
         trajectory_port="$(jq -c -r '.port' <<< "$trajectory")"
 
-        echo "Moon: |$moon| is at |$trajectory_host| on port |$trajectory_port|"
+        echo "[solarsys] Moon: |$moon| is at |$trajectory_host| on port |$trajectory_port|"
         
         # build config
         local buildpath
         if buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"; then
-            echo "$buildpath"
+            nix copy --to "ssh://root@$trajectory_host" "$buildpath"
+            rsync -e "ssh -p $trajectory_port" "$(dirname "$0")/solarsys-remote.sh" "root@$trajectory_host:/tmp/solarsys-remote.sh"
+            
+            # deploy stage1 - testing config
+            ssh -t "root@$trajectory_host" -p "$trajectory_port" "bash /tmp/solarsys-remote.sh d1 $buildpath" 2> /dev/null
+            # wait to see if we can still connect
+            echo "[solarsys] Waiting for reconnection..."
+            visible_sleep 5
+            # deploy stage2 - real deploy
+            ssh -t "root@$trajectory_host" -p "$trajectory_port" "bash /tmp/solarsys-remote.sh d2 $buildpath" 2> /dev/null
+            echo "[solarsys] Deployed moon: |$moon|"
         fi
     fi
 }
 
 # deploys all moons
 function deploy_all {
-    echo "Deploying all moons"
+    echo "[solarsys] Deploying all moons"
     
     local planets
     readarray -t planets <<< "$(get_planets | jq -c -r '.[]')"
@@ -180,7 +207,7 @@ function deploy_planet {
         return 1
     fi
 
-    echo "Deploying all moons in planet: |$planet|"
+    echo "[solarsys] Deploying all moons in planet: |$planet|"
 
     local moons
     readarray -t moons <<< "$(get_moons "$planet" | jq -c -r '.[]')"
@@ -198,7 +225,7 @@ function deploy_planet {
 function deploy_orbit {
     local orbit=$1
 
-    echo "Deploying all moons with orbit: |$orbit|"
+    echo "[solarsys] Deploying all moons with orbit: |$orbit|"
 
     local planets
     readarray -t planets <<< "$(get_planets | jq -c -r '.[]')"
@@ -240,7 +267,7 @@ function build {
         return 1
     fi
 
-    echo "Building output: |$output| for moon: |$moon| in planet: |$planet|"
+    echo "[solarsys] Building output: |$output| for moon: |$moon| in planet: |$planet|"
 
     build_moon_output "$planet" "$moon" "$output"
 }
@@ -260,18 +287,20 @@ function rollback {
         return 1
     fi
 
-    echo "Rolling back moon: |$moon| in planet: |$planet|"
+    echo "[solarsys] Rolling back moon: |$moon| in planet: |$planet|"
 
     # check if we are testing our current system
     if [[ "$moon" == "$(hostname)" ]]; then
-        echo "Moon: |$moon| is the current system..."
+        echo "[solarsys] Moon: |$moon| is the current system..."
 
         # wait for user response
         yes_or_no "Rollback?" || return
 
         # rollback
-        nix-env -p /nix/var/nix/profiles/system --rollback
-        /nix/var/nix/profiles/system/bin/switch-to-configuration switch
+        sudo bash <<EOF
+nix-env -p /nix/var/nix/profiles/system --rollback
+/nix/var/nix/profiles/system/bin/switch-to-configuration switch
+EOF
     else # rolling back remotely
         local trajectory
         trajectory="$(get_trajectory "$planet" "$moon")"
@@ -285,7 +314,7 @@ function rollback {
         trajectory_host="$(jq -c -r '.host' <<< "$trajectory")"
         trajectory_port="$(jq -c -r '.port' <<< "$trajectory")"
 
-        echo "Moon: |$moon| is at |$trajectory_host| on port |$trajectory_port|"
+        echo "[solarsys] Moon: |$moon| is at |$trajectory_host| on port |$trajectory_port|"
     fi
 }
 
@@ -304,7 +333,7 @@ function test_moon {
         return 1
     fi
 
-    echo "Testing moon: |$moon| in planet: |$planet|"
+    echo "[solarsys] Testing moon: |$moon| in planet: |$planet|"
 
     # check if we are testing our current system
     if [[ "$moon" == "$(hostname)" ]]; then
@@ -316,7 +345,9 @@ function test_moon {
         # build and test new config
         local buildpath
         if buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"; then
-            "$buildpath"/bin/switch-to-configuration switch
+            echo "[solarsys] Press enter to continue..."
+            read -r
+            sudo "$buildpath"/bin/switch-to-configuration test
         fi
     else # testing remotely
         local trajectory
@@ -331,7 +362,43 @@ function test_moon {
         trajectory_host="$(jq -c -r '.host' <<< "$trajectory")"
         trajectory_port="$(jq -c -r '.port' <<< "$trajectory")"
 
-        echo "Moon: |$moon| is at |$trajectory_host| on port |$trajectory_port|"
+        echo "[solarsys] Moon: |$moon| is at |$trajectory_host| on port |$trajectory_port|"
+    fi
+}
+
+# ssh to a moon in a planet
+function ssh_moon {
+    local planet=$1
+    local moon=$2
+
+    # sanity check
+    if ! has_planet "$planet"; then
+        ercho "error~ Planet: |$planet| does not exist!"
+        return 1
+    fi
+    if ! has_moon "$planet" "$moon"; then
+        ercho "error~ Moon: |$moon| does not exist for planet: |$planet|!"
+        return 1
+    fi
+
+    # check if the moon we are trying to connect to is the current system
+    if [[ "$moon" == "$(hostname)" ]]; then
+        ercho "error~ Moon: |$moon| is the current system!"
+    else
+        local trajectory
+        trajectory="$(get_trajectory "$planet" "$moon")"
+        
+        if [[ -z "$(jq -c -r '.' <<< "$trajectory")" ]]; then
+            ercho "error~ Moon: |$moon| does not have a set trajectory!"
+            return 1
+        fi
+
+        local trajectory_host trajectory_port
+        trajectory_host="$(jq -c -r '.host' <<< "$trajectory")"
+        trajectory_port="$(jq -c -r '.port' <<< "$trajectory")"
+
+        echo "[solarsys] Moon: |$moon| is at |$trajectory_host| on port |$trajectory_port|"
+        exec ssh "root@$trajectory_host" -p "$trajectory_port" 
     fi
 }
 
@@ -382,6 +449,7 @@ function print_usage {
     ercho "  build <planet> <moon> <output> |  Builds <output> for <moon> in <planet>"
     ercho "  rollback <planet> <moon>       |  Rolls back <moon> in <planet>"
     ercho "  test <planet> <moon>           |  Tests <moon> in <planet>"
+    ercho "  ssh <planet> <moon>            |  SSH to <moon> in <planet>"
     ercho "  list                           |  Lists planets and moons"
     exit 1
 }
@@ -465,6 +533,17 @@ function main {
 
             test_moon "$planet" "$moon"
             ;;
+        ssh)
+            local planet=$2
+            local moon=$3
+            if [[ -z "$planet" ]] || [[ -z "$moon" ]]; then
+                ercho "error! No planet and/or moon specified"
+                ercho
+                print_usage
+            fi
+
+            ssh_moon "$planet" "$moon"
+            ;;
         list)
             list
             ;;
@@ -475,12 +554,6 @@ function main {
             ;;
     esac
 }
-
-# check if we are root
-if [[ ! "$(id -u)" -eq 0 ]]; then
-    ercho "error~ Please run this script as root!"
-    exit 1
-fi
 
 # run main
 main "$@"
