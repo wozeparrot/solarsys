@@ -9,6 +9,8 @@
 
     # ../../common/profiles/desktops/hikari
     ../common/profiles/desktops/river
+
+    ../common/profiles/wireguard.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_lqx;
