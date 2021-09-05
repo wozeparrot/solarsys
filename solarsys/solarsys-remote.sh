@@ -23,7 +23,7 @@ case "$1" in
         ;;
     dt) # deploy testing auto rollback
         sleep 10
-        touch /tmp/ohno
+        reboot
         ;;
     *) exit ;;
 esac
