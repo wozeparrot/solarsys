@@ -129,7 +129,7 @@ function send_satellites {
         local path
         path=$(jq -c -r '.path' <<< "$(nee "$FLK.planets.$planet.moons.$moon.satellites.$satellite")")
         if [[ -n "$path" ]]; then
-            rsync -q -e "ssh -p $trajectory_port" -r "$path" "root@$trajectory_host:$dest_path/$satellite"
+            rsync -q -e "ssh -p $trajectory_port" -r "$path" "root@[$trajectory_host]:$dest_path/$satellite"
             return
         fi
     done
@@ -193,7 +193,7 @@ EOF
             # copy built config
             nix copy --to "ssh://root@$trajectory_host" "$buildpath"
             # copy remote deploy script
-            rsync -q -e "ssh -p $trajectory_port" "$(dirname "$0")/solarsys-remote.sh" "root@$trajectory_host:/tmp/solarsys-remote.sh"
+            rsync -q -e "ssh -p $trajectory_port" "$(dirname "$0")/solarsys-remote.sh" "root@[$trajectory_host]:/tmp/solarsys-remote.sh"
             # send satellites
             send_satellites "$planet" "$moon" "$trajectory_host" "$trajectory_port"
 
