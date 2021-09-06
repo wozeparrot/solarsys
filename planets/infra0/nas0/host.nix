@@ -17,7 +17,7 @@
   networking.nat = {
     enable = true;
     externalInterface = "eth0";
-    internalInferfaces = [ "wg0" ];
+    internalInterfaces = [ "wg0" ];
   };
 
   # enable dns over wireguard
