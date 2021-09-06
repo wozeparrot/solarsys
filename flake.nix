@@ -118,7 +118,7 @@
 
                 infra0 = {
                   moons = {
-                    anime-nas = let
+                    nas0 = let
                       system = "aarch64-linux";
                       pkgs = configNixpkgs system;
                     in
@@ -128,11 +128,11 @@
                           port = 22;
                         };
                         orbits = [ "nas" ];
-                        satellites.wg_private.path = "./satellites/infra0/anime-nas/wg_private";
+                        satellites.wg_private.path = "./satellites/infra0/nas0/wg_private";
 
                         core = nixpkgs.lib.nixosSystem {
                           inherit system specialArgs;
-                          modules = makeModules pkgs ./planets/infra0/anime-nas/host.nix;
+                          modules = makeModules pkgs ./planets/infra0/nas0/host.nix;
                         };
                       };
                   };
