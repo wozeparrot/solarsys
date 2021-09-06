@@ -5,8 +5,10 @@
     ../common/profiles/rpi4.nix
   ];
 
+  networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedUDPPorts = [ 5553 ];
 
+  # wireguard setup
   networking.wg-quick.interfaces.wg0 = {
     address = [ "fdbe:ef11:2358:1321::1/64" ];
     listenPort = 5553;
