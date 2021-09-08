@@ -64,8 +64,7 @@
   boot.kernel.sysctl."net.ipv6.conf.all.forwarding" = 1;
 
   # open ports
-  networking.firewall.allowedUDPPorts = [ 53 5553 ];
-  networking.firewall.allowedTCPPorts = [ 53 ];
+  networking.firewall.allowedUDPPorts = [ 5553 ];
   networking.firewall.interfaces.wg0 = {
     allowedUDPPorts = [ 53 ];
     allowedTCPPorts = [ 53 ];
