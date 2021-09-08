@@ -1,6 +1,7 @@
 { ... }: {
   networking.wg-quick.interfaces.wg0 = {
     address = [ "10.11.235.99/32" "fdbe:ef11:2358:1321::99/128" ];
+    dns = [ "10.11.235.1" "fdbe:ef11:2358:1321::1" ];
     
     privateKeyFile = "/home/woze/projects/nix/solarsys/satellites/desktops/woztop/wg_private";
 
