@@ -191,7 +191,7 @@ EOF
         local buildpath
         if buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"; then
             # copy built config
-            nix copy --to "ssh://root@$trajectory_host" "$buildpath"
+            NIX_SSHOPTS="-p $trajectory_port" nix copy --to "ssh://root@$trajectory_host" "$buildpath"
             # copy remote deploy script
             rsync -q -e "ssh -p $trajectory_port" "$(dirname "$0")/solarsys-remote.sh" "root@[$trajectory_host]:/tmp/solarsys-remote.sh"
             # send satellites
