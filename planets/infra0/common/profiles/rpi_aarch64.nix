@@ -1,10 +1,10 @@
-{ pkgs, config, inputs, ... }: {
+{ pkgs, config, inputs, lib, ... }: {
   imports = [
     ./base.nix
     "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image.nix"
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
   boot.kernelParams = [ "cma=32M" ];
 
   boot.loader.grub.enable = false;

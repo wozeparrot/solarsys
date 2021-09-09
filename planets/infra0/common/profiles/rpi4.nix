@@ -3,6 +3,8 @@
     ./rpi_aarch64.nix
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages;
+
   sdImage.populateFirmwareCommands = let
     configTxt = pkgs.writeText "config.txt" ''
       kernel=u-boot.bin
