@@ -14,6 +14,7 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     # overlays
+    aninarr.url = "git+ssh://git@github.com/wozeparrot/aninarr.git?ref=main";
   };
 
   outputs = inputs@{ self, nixpkgs, master, home-manager, flake-utils, ... }:
@@ -124,7 +125,7 @@
                     in
                       {
                         trajectory = {
-                          host = "fdbe:ef11:2358:1321::1";
+                          host = "192.168.0.11";
                           port = 22;
                         };
                         orbits = [ "nas" ];

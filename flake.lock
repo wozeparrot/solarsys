@@ -1,5 +1,29 @@
 {
   "nodes": {
+    "aninarr": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1631147387,
+        "narHash": "sha256-C2MNBjNo/vkq0akxfIMjr0yKCzei4eapY2K9pVOWfOQ=",
+        "ref": "main",
+        "rev": "c13ac839f6b31d4983bbd2d9c549802bc2932ff7",
+        "revCount": 173,
+        "type": "git",
+        "url": "ssh://git@github.com/wozeparrot/aninarr.git"
+      },
+      "original": {
+        "ref": "main",
+        "type": "git",
+        "url": "ssh://git@github.com/wozeparrot/aninarr.git"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1629481132,
@@ -64,6 +88,7 @@
     },
     "root": {
       "inputs": {
+        "aninarr": "aninarr",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "master": "master",
