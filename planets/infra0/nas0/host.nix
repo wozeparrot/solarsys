@@ -20,6 +20,7 @@
   # dns
   services.unbound = {
     enable = true;
+    enableRootTrustAnchor = true;
     settings.server = {
       interface = [ "0.0.0.0" "::0" ];
       access-control = [
@@ -35,6 +36,9 @@
       do-udp = true;
       do-tcp = true;
 
+      do-ip6 = true;
+      prefer-ip6 = false;
+
       harden-glue = true;
 
       harden-dnssec-stripped = true;
@@ -46,8 +50,6 @@
       prefetch = true;
 
       num-threads = 1;
-
-      so-rcvbuf = "1m";
 
       private-address = [
         "192.168.0.0/16"
@@ -66,8 +68,18 @@
   # open ports
   networking.firewall.allowedUDPPorts = [ 5553 ];
   networking.firewall.interfaces.wg0 = {
-    allowedUDPPorts = [ 53 ];
-    allowedTCPPorts = [ 53 ];
+    allowedUDPPorts = [ 
+      53 # dns
+      8080 # glowing-bear
+      9001 # weechat
+      9091 # transmission
+    ];
+    allowedTCPPorts = [
+      53 # dns
+      8080 # glowing-bear
+      9001 # weechat
+      9091 # transmission
+    ];
   };
 
   # define wireguard interface
@@ -97,6 +109,51 @@
         allowedIPs = [ "10.11.235.88/32" "fdbe:ef11:2358:1321::88/128" ];
       }
     ];
+  };
+
+  # --- weechat ---
+  services.weechat.enable = true;
+  services.darkhttpd = {
+    enable = true;
+    address = "all";
+    port = 8080;
+    rootDir = pkgs.glowing-bear;
+  };
+
+  # --- transmission ---
+  services.transmission = {
+    enable = true;
+    settings = {
+      bind-address-ipv4 = "10.11.235.1";
+      bind-address-ipv6 = "fdbe:ef11:2358:1321::1";
+      
+      rpc-bind-address = "::";
+      rpc-port = 9091;
+      rpc-whitelist-enabled = false;
+
+      incomplete-dir-enabled = false;
+
+      max-peers-global = 120;
+      peer-limit-global = 120;
+      peer-limit-per-torrent = 50;
+
+      download-queue-size = 3;
+      download-queue-enabled = true;
+
+      idle-seeding-limit = 1;
+      idle-seeding-limit-enabled = true;
+
+      ratio-limit = 0;
+      ratio-limit-enabled = true;
+
+      speed-limit-up = 0;
+      speed-limit-up-enabled = true;
+
+      blocklist-url = "https://github.com/Naunter/BT_BlockLists/raw/master/bt_blocklists.gz";
+      blocklist-enabled = true;
+
+      encryption = 2;
+    };
   };
 
   system.stateVersion = "21.11";
