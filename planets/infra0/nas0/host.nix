@@ -7,6 +7,7 @@
 
   # --- packages ---
   environment.systemPackages = with pkgs; [
+    aninarr.aninarr
   ];
 
   # --- wireguard vpn setup ---

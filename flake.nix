@@ -15,6 +15,8 @@
 
     # overlays
     aninarr.url = "git+ssh://git@github.com/wozeparrot/aninarr.git?ref=main";
+    aninarr.inputs.nixpkgs.follows = "nixpkgs";
+    aninarr.inputs.flake-utils.follows = "flake-utils";
   };
 
   outputs = inputs@{ self, nixpkgs, master, home-manager, flake-utils, ... }:
@@ -33,6 +35,7 @@
             );
         in
           (builtins.attrValues (pathsToImportedAttrs overlayPaths)) ++ [
+            inputs.aninarr.overlay
           ];
     in
       flake-utils.lib.eachSystem [

@@ -10,11 +10,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1631147387,
-        "narHash": "sha256-C2MNBjNo/vkq0akxfIMjr0yKCzei4eapY2K9pVOWfOQ=",
+        "lastModified": 1631196254,
+        "narHash": "sha256-mOMCmmpkfIJNG7B4CyKotx6FxHdUVvxlCT7PyGuSfdI=",
         "ref": "main",
-        "rev": "c13ac839f6b31d4983bbd2d9c549802bc2932ff7",
-        "revCount": 173,
+        "rev": "2f1ebca286d70a5e5adde205250aad72adfee60a",
+        "revCount": 183,
         "type": "git",
         "url": "ssh://git@github.com/wozeparrot/aninarr.git"
       },
