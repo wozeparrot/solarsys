@@ -157,5 +157,10 @@
     };
   };
 
+  # --- samba ---
+  services.samba = {
+    enable = true;
+  };
+
   system.stateVersion = "21.11";
 }
