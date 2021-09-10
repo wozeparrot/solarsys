@@ -53,6 +53,8 @@
     corectrl
 
     cifs-utils
+
+    lxqt.lxqt-policykit
   ];
 
   programs.nm-applet.enable = true;
@@ -67,6 +69,8 @@
 
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
+
+  services.gvfs.enable = true;
 
   virtualisation = {
     libvirtd = {
