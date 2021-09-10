@@ -2,13 +2,13 @@
   networking = {
     networkmanager = {
       enable = true;
-      dhcp = "internal";
-      dns = "default";
+      dhcp = "dhcpcd";
+      dns = "systemd-resolved";
       wifi.backend = "iwd";
     };
     wireless.iwd.enable = true;
 
-    resolvconf.enable = true;
+    resolvconf.enable = false;
 
     firewall.enable = true;
     firewall.allowedUDPPortRanges = [
@@ -21,7 +21,7 @@
     ];
   };
 
-  services.resolved.enable = false;
+  services.resolved.enable = true;
 
   users.users.woze.extraGroups = [ "networkmanager" ];
 }
