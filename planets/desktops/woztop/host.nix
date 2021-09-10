@@ -40,8 +40,8 @@
     driSupport32Bit = true;
   };
 
-  networking.interfaces.enp2s0.useDHCP = true;
-  networking.interfaces.wlan0.useDHCP = true;
+  #networking.interfaces.enp2s0.useDHCP = true;
+  #networking.interfaces.wlan0.useDHCP = true;
 
   networking.firewall.allowedTCPPorts = [ 29999 ];
   networking.firewall.allowedUDPPorts = [ 29999 ];
