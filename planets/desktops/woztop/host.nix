@@ -97,6 +97,12 @@
     anbox.enable = false;
   };
 
+  fileSystems."/mnt/ss/infra0/nas0" = {
+    device = "10.11.235.1:/";
+    fsType = "nfs";
+    options = [ "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" ];
+  };
+
   users.users.woze.extraGroups = [ "docker" "libvirtd" "video" "render" "vboxusers" "libvirt" ];
   home-manager.users.woze = ./home.nix;
 
