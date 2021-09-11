@@ -18,7 +18,10 @@
   };
 
   # --- open ports ---
-  networking.firewall.allowedUDPPorts = [ 5553 ];
+  networking.firewall.allowedUDPPorts = [ 5553 ]; # only wireguard traffic
+  networking.firewall.allowedTCPPorts = [
+    5072 # aninarr web dir
+  ];
   networking.firewall.interfaces.wg0 = {
     allowedUDPPorts = [
       53 # dns
@@ -55,6 +58,7 @@
 
       5070 # aninarr
       5071 # aninarrl
+      5072 # aninarr web dir
     ];
   };
 
@@ -208,10 +212,20 @@
     mountdPort = 4002;
     statdPort = 4000;
     exports = ''
-      /export               10.11.235.0/24(insecure,ro,no_root_squash,async,no_subtree_check,crossmnt,fsid=0)
-      /export/music         10.11.235.0/24(insecure,ro,no_root_squash,async,no_subtree_check)
-      /export/anime         10.11.235.0/24(insecure,ro,no_root_squash,async,no_subtree_check)
-      /export/store         10.11.235.0/24(insecure,ro,no_root_squash,async,no_subtree_check)
+      /export               *(insecure,ro,no_root_squash,async,no_subtree_check,crossmnt,fsid=0)
+      /export/music         *(insecure,ro,no_root_squash,async,no_subtree_check)
+      /export/anime         *(insecure,ro,no_root_squash,async,no_subtree_check)
+      /export/store         *(insecure,ro,no_root_squash,async,no_subtree_check)
+    '';
+  };
+
+  services.lighttpd = {
+    enable = true;
+    port = 5072;
+    document-root = "/export";
+    extraConfig = ''
+      server.dir-listing = "enable"
+      server.follow-symlinks = "enable"
     '';
   };
 
