@@ -5,6 +5,59 @@
     ../common/profiles/rpi4.nix
   ];
 
+  # --- mount disks --- 
+  fileSystems = {
+    "/mnt/pstore0" = {
+      device = "/dev/disk/by-uuid/7591e656-ea01-4841-a6e8-fcf585be0190";
+      fsType = "ext4";
+    };
+    "/mnt/pstore1" = {
+      device = "/dev/disk/by-uuid/823e9830-4af1-42cc-929c-05fcf078326c";
+      fsType = "xfs";
+    };
+  };
+
+  # --- open ports ---
+  networking.firewall.allowedUDPPorts = [ 5553 ];
+  networking.firewall.interfaces.wg0 = {
+    allowedUDPPorts = [
+      53 # dns
+
+      8384 # syncthing
+      22000
+
+      9091 # transmission
+
+      111 # nfs
+      2049
+      4000
+      4001
+      4002
+      20048
+
+      5070 # aninarr
+      5071 # aninarrl
+    ];
+    allowedTCPPorts = [
+      53 # dns
+
+      8384 # syncthing
+      22000
+
+      9091 # transmission
+
+      111 # nfs
+      2049
+      4000
+      4001
+      4002
+      20048
+
+      5070 # aninarr
+      5071 # aninarrl
+    ];
+  };
+
   # --- packages ---
   environment.systemPackages = with pkgs; [
     aninarr.aninarr
@@ -66,23 +119,6 @@
   # set sysctl for ipv6
   boot.kernel.sysctl."net.ipv6.conf.all.forwarding" = 1;
 
-  # open ports
-  networking.firewall.allowedUDPPorts = [ 5553 ];
-  networking.firewall.interfaces.wg0 = {
-    allowedUDPPorts = [ 
-      53 # dns
-      8080 # glowing-bear
-      9001 # weechat
-      9091 # transmission
-    ];
-    allowedTCPPorts = [
-      53 # dns
-      8080 # glowing-bear
-      9001 # weechat
-      9091 # transmission
-    ];
-  };
-
   # define wireguard interface
   networking.wg-quick.interfaces.wg0 = {
     address = [ "10.11.235.1/24" "fdbe:ef11:2358:1321::1/64" ];
@@ -101,11 +137,13 @@
     '';
 
     peers = [
-      { # woztop
+      {
+        # woztop
         publicKey = "3U2Nu7UvYIzOHPLjwKCB5iQzSNO+6hL4fTvZ+AhGHT4=";
         allowedIPs = [ "10.11.235.99/32" "fdbe:ef11:2358:1321::99/128" ];
       }
-      { # wone
+      {
+        # wone
         publicKey = "DNY6opgAbjMJh8o4O7h9dXiO4BCzg+0RM4zVNvQg3xs=";
         allowedIPs = [ "10.11.235.88/32" "fdbe:ef11:2358:1321::88/128" ];
       }
@@ -114,12 +152,6 @@
 
   # --- weechat ---
   services.weechat.enable = true;
-  services.darkhttpd = {
-    enable = true;
-    address = "all";
-    port = 8080;
-    rootDir = pkgs.glowing-bear;
-  };
 
   # --- transmission ---
   services.transmission = {
@@ -127,7 +159,7 @@
     settings = {
       bind-address-ipv4 = "10.11.235.1";
       bind-address-ipv6 = "fdbe:ef11:2358:1321::1";
-      
+
       rpc-bind-address = "::";
       rpc-port = 9091;
       rpc-whitelist-enabled = false;
@@ -157,9 +189,70 @@
     };
   };
 
-  # --- samba ---
-  services.samba = {
+  # --- nfs ---
+  fileSystems."/export/music" = {
+    device = "/mnt/pstore0/datas/sync/music";
+    options = [ "bind" ];
+  };
+  fileSystems."/export/anime" = {
+    device = "/mnt/pstore1/datas/aninarr/anime";
+    options = [ "bind" ];
+  };
+  fileSystems."/export/store" = {
+    device = "/mnt/pstore1/datas/aninarr/store";
+    options = [ "bind" ];
+  };
+  services.nfs.server = {
     enable = true;
+    lockdPort = 4001;
+    mountdPort = 4002;
+    statdPort = 4000;
+    exports = ''
+      /export               10.11.235.0/24(insecure,ro,no_root_squash,async,no_subtree_check,crossmnt,fsid=0)
+      /export/music         10.11.235.0/24(insecure,ro,no_root_squash,async,no_subtree_check)
+      /export/anime         10.11.235.0/24(insecure,ro,no_root_squash,async,no_subtree_check)
+      /export/store         10.11.235.0/24(insecure,ro,no_root_squash,async,no_subtree_check)
+    '';
+  };
+
+  # --- syncthing ---
+  services.syncthing = {
+    enable = true;
+    openDefaultPorts = false;
+    guiAddress = "0.0.0.0:8384";
+  };
+
+  # --- aninarr ---
+  # aninarr
+  systemd.services."aninarr" = {
+    description = "aninarr daemon";
+
+    serviceConfig = {
+      ExecStart = "${pkgs.aninarr.aninarr}/bin/aninarr";
+      WorkingDirectory = "/mnt/pstore1/datas/aninarr";
+      Restart = "always";
+      RestartSec = "5s";
+      User = "root";
+    };
+
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+  };
+  # aninarrl
+  systemd.services."aninarrl" = {
+    description = "aninarrl daemon";
+
+    serviceConfig = {
+      ExecStart = "${pkgs.python3}/bin/python -u main.py localhost 5071";
+      WorkingDirectory = "${pkgs.aninarr.aninarrl}";
+      StandardOutput = "inherit";
+      StandardError = "inherit";
+      Restart = "always";
+      RestartSec = "5s";
+    };
+
+    after = [ "aninarr.service" ];
+    wantedBy = [ "multi-user.target" ];
   };
 
   system.stateVersion = "21.11";
