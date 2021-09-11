@@ -41,6 +41,7 @@
       htop
       curl
       file
+      tree
       less
       git
       neovim
