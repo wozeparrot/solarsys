@@ -5,7 +5,6 @@
     package = pkgs.wrapMpv (
       pkgs.mpv-unwrapped.override {
         vapoursynthSupport = true;
-        sixelSupport = true;
       }
     ) {
       youtubeSupport = true;
