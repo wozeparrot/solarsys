@@ -60,6 +60,9 @@
             import nixpkgs {
               inherit system;
               config.allowUnfree = true;
+              config.permittedInsecurePackages = [
+                "libsixel-1.8.6"
+              ];
               overlays = [
                 (
                   final: prev: {

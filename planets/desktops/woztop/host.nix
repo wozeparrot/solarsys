@@ -13,10 +13,6 @@
     ../common/profiles/wireguard.nix
   ];
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "libsixel-1.8.6"
-  ];
-
   boot.kernelPackages = pkgs.linuxPackages_lqx;
   boot.kernelParams = [ "intel_iommu=on" ];
 
