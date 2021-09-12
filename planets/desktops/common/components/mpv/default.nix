@@ -1,9 +1,5 @@
 { pkgs, ... }:
 {
-  nixpkgs.config.permittedInsecurePackages = [
-    "libsixel-1.8.6"
-  ];
-
   programs.mpv = {
     enable = true;
     package = pkgs.wrapMpv (
