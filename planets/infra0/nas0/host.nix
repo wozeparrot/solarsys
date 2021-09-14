@@ -168,6 +168,7 @@
       rpc-port = 9091;
       rpc-whitelist-enabled = false;
 
+      download-dir = "/mnt/pstore1/datas";
       incomplete-dir-enabled = false;
 
       max-peers-global = 120;
