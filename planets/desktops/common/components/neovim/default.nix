@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let
   pluginGit = repo: rev: pkgs.vimUtils.buildVimPluginFrom2Nix {
-    name = "${lib.strings.sanitizeDerivationName repo}";
+    pname = "${lib.strings.sanitizeDerivationName repo}-${rev}";
     version = rev;
     src = builtins.fetchGit {
       url = "https://github.com/${repo}.git";
