@@ -171,11 +171,11 @@
       download-dir = "/mnt/pstore1/tmps";
       incomplete-dir-enabled = false;
 
-      max-peers-global = 120;
-      peer-limit-global = 120;
+      max-peers-global = 200;
+      peer-limit-global = 200;
       peer-limit-per-torrent = 50;
 
-      download-queue-size = 3;
+      download-queue-size = 4;
       download-queue-enabled = true;
 
       idle-seeding-limit = 1;
