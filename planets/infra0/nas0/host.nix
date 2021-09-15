@@ -207,6 +207,10 @@
     device = "/mnt/pstore1/datas/aninarr/store";
     options = [ "bind" ];
   };
+  fileSystems."/export/books" = {
+    device = "/mnt/pstore0/datas/books";
+    options = [ "bind" ];
+  };
   services.nfs.server = {
     enable = true;
     lockdPort = 4001;
@@ -217,6 +221,7 @@
       /export/music         *(insecure,ro,no_root_squash,async,no_subtree_check)
       /export/anime         *(insecure,ro,no_root_squash,async,no_subtree_check)
       /export/store         *(insecure,ro,no_root_squash,async,no_subtree_check)
+      /export/books         *(insecure,ro,no_root_squash,async,no_subtree_check)
     '';
   };
 
