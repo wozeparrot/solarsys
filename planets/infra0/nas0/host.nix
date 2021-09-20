@@ -37,9 +37,6 @@
       4001
       4002
       20048
-
-      5070 # aninarr
-      5071 # aninarrl
     ];
     allowedTCPPorts = [
       53 # dns
@@ -56,16 +53,15 @@
       4002
       20048
 
+      5069 # aninarc
       5070 # aninarr
-      5071 # aninarrl
+      5071 # aninarrh
       5072 # aninarr web dir
     ];
   };
 
   # --- packages ---
-  environment.systemPackages = with pkgs; [
-    aninarr.aninarr
-  ];
+  environment.systemPackages = with pkgs; [];
 
   # --- wireguard vpn setup ---
   # enable nat
@@ -260,13 +256,13 @@
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
   };
-  # aninarrl
-  systemd.services."aninarrl" = {
-    description = "aninarrl daemon";
+  # aninarrh
+  systemd.services."aninarrh" = {
+    description = "aninarrh daemon";
 
     serviceConfig = {
-      ExecStart = "${pkgs.python3}/bin/python -u main.py localhost 5071";
-      WorkingDirectory = "${pkgs.aninarr.aninarrl}";
+      ExecStart = "${pkgs.aninarr.aninarrh}/bin/aninarrh localhost 5071";
+      WorkingDirectory = "${pkgs.aninarr.aninarrh}";
       StandardOutput = "inherit";
       StandardError = "inherit";
       Restart = "always";
@@ -290,6 +286,13 @@
 
     after = [ "aninarr.service" ];
     wantedBy = [ "multi-user.target" ];
+  };
+  # aninarc
+  services.darkhttpd = {
+    enable = true;
+    address = "all";
+    port = 5069;
+    rootDir = pkgs.aninarr.aninarc;
   };
 
   system.stateVersion = "21.11";
