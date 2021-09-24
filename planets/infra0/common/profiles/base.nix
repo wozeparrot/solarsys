@@ -4,7 +4,7 @@
   ];
 
   # disabled unneeded stuff
-  environment.noXlibs = true;
+  environment.noXlibs = lib.mkDefault true;
   security.polkit.enable = false;
   security.audit.enable = false;
   services.udisks2.enable = false;
@@ -29,13 +29,6 @@
   
   # no systemd emergency mode
   systemd.enableEmergencyMode = false;
-
-  # disable ttys
-  systemd.services."serial-getty@ttyS0".enable = false;
-  systemd.services."serial-gett@ttyS1".enable = false;
-  systemd.services."serial-getty@hvc0".enable = false;
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@".enable = false;
 
   # Firewall
   networking.firewall.enable = true;
