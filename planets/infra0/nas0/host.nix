@@ -53,7 +53,6 @@
       4002
       20048
 
-      5069 # aninarc
       5070 # aninarr
       5071 # aninarrh
       5072 # aninarr web dir
@@ -61,7 +60,14 @@
   };
 
   # --- packages ---
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [
+    (libcec.override {
+      libraspberrypi = libraspberrypi;
+    })
+    cage
+    aninarr.aninarc
+    mpv
+  ];
 
   # --- wireguard vpn setup ---
   # enable nat
@@ -286,13 +292,6 @@
 
     after = [ "aninarr.service" ];
     wantedBy = [ "multi-user.target" ];
-  };
-  # aninarc
-  services.darkhttpd = {
-    enable = true;
-    address = "all";
-    port = 5069;
-    rootDir = pkgs.aninarr.aninarc;
   };
 
   system.stateVersion = "21.11";
