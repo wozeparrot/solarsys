@@ -5,7 +5,7 @@
 
   # disabled unneeded stuff
   environment.noXlibs = lib.mkDefault true;
-  security.polkit.enable = false;
+  security.polkit.enable = lib.mkDefault false;
   security.audit.enable = false;
   services.udisks2.enable = false;
 

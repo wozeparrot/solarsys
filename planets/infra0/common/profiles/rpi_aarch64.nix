@@ -5,7 +5,6 @@
   ];
 
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
-  boot.kernelParams = [ "cma=32M" ];
 
   boot.loader.grub.enable = false;
   boot.loader.generic-extlinux-compatible.enable = true;

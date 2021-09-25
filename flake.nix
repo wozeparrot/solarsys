@@ -134,6 +134,7 @@
                         };
                         orbits = [ "nas" ];
                         satellites.wg_private.path = "./satellites/infra0/nas0/wg_private";
+                        satellites.wg_private.destination = "/keys/";
 
                         core = nixpkgs.lib.nixosSystem {
                           inherit system specialArgs;

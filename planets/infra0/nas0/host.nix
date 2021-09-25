@@ -60,14 +60,7 @@
   };
 
   # --- packages ---
-  environment.systemPackages = with pkgs; [
-    (libcec.override {
-      libraspberrypi = libraspberrypi;
-    })
-    cage
-    aninarr.aninarc
-    mpv
-  ];
+  environment.systemPackages = with pkgs; [];
 
   # --- wireguard vpn setup ---
   # enable nat
@@ -130,7 +123,7 @@
     address = [ "10.11.235.1/24" "fdbe:ef11:2358:1321::1/64" ];
     listenPort = 5553;
 
-    privateKeyFile = "/run/keys/wg_private";
+    privateKeyFile = "/keys/wg_private";
 
     postUp = ''
       ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.11.235.1/24 -o eth0 -j MASQUERADE
@@ -293,6 +286,6 @@
     after = [ "aninarr.service" ];
     wantedBy = [ "multi-user.target" ];
   };
-
+  
   system.stateVersion = "21.11";
 }
