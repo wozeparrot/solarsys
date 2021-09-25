@@ -82,6 +82,8 @@
     adwaita-qt
 
     xorg.xrdb
+
+    pkgs.aninarr.aninarc
   ];
 
   # extra programs
