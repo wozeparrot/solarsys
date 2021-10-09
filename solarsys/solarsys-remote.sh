@@ -22,7 +22,7 @@ case "$1" in
         "$2"/bin/switch-to-configuration switch
         ;;
     dt) # deploy testing auto rollback
-        sleep 15
+        sleep 60
         reboot
         ;;
     *) exit ;;
