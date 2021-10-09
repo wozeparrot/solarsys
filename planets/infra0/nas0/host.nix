@@ -278,7 +278,7 @@
 
     path = with pkgs; [ bash jq ];
     serviceConfig = {
-      ExecStart = "${pkgs.bash}/bin/bash helper.bash localhost no";
+      ExecStart = "${pkgs.bash}/bin/bash helper.bash localhost yes";
       WorkingDirectory = "${pkgs.aninarr.aninarrx}";
       Restart = "always";
       RestartSec = "5s";
