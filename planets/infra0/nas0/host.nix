@@ -60,7 +60,7 @@
   };
 
   # --- packages ---
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [ ];
 
   # --- wireguard vpn setup ---
   # enable nat
@@ -151,6 +151,7 @@
 
   # --- weechat ---
   services.weechat.enable = true;
+  services.weechat.binary = "${pkgs.mpkgs.weechat}/bin/weechat";
 
   # --- transmission ---
   services.transmission = {
@@ -273,7 +274,7 @@
   };
   # aninarrx
   systemd.services."aninarrx" = {
-    description = "aninarrx daemon"; 
+    description = "aninarrx daemon";
 
     path = with pkgs; [ bash jq ];
     serviceConfig = {
@@ -286,6 +287,21 @@
     after = [ "aninarr.service" ];
     wantedBy = [ "multi-user.target" ];
   };
-  
+
+  # --- wozey.service ---
+  #systemd.services."wozey" = {
+  #  description = "wozey.service daemon";
+
+  #  serviceConfig = {
+  #    ExecStart = "${pkgs.wozey.wozey}/bin/wozey";
+  #    WorkingDirectory = "/tmp";
+  #    Restart = "always";
+  #    RestartSec = "5s";
+  #  };
+
+  #  after = [ "network.target" ];
+  #  wantedBy = [ "multi-user.target" ];
+  #};
+
   system.stateVersion = "21.11";
 }

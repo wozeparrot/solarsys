@@ -18,6 +18,10 @@
     aninarr.url = "git+ssh://git@github.com/wozeparrot/aninarr.git?ref=main";
     aninarr.inputs.nixpkgs.follows = "nixpkgs";
     aninarr.inputs.flake-utils.follows = "flake-utils";
+
+    wozey.url = "git+ssh://git@github.com/wozeparrot/wozey.service.git?ref=main";
+    wozey.inputs.nixpkgs.follows = "nixpkgs";
+    wozey.inputs.flake-utils.follows = "flake-utils";
   };
 
   outputs = inputs@{ self, nixpkgs, master, home-manager, flake-utils, ... }:
@@ -37,6 +41,7 @@
         in
           (builtins.attrValues (pathsToImportedAttrs overlayPaths)) ++ [
             inputs.aninarr.overlay
+            inputs.wozey.overlay
           ];
     in
       flake-utils.lib.eachSystem [
