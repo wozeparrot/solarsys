@@ -10,11 +10,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1633575198,
-        "narHash": "sha256-t9TtGMd0JHvHbYltJFk4Ffeocy+6xuoOl/2Mm5VSFrw=",
+        "lastModified": 1634174418,
+        "narHash": "sha256-YDsv1yafj0FmI6NILq0iuD8Ht+rpsh5FXLwGqXsIwc8=",
         "ref": "main",
-        "rev": "eb946667681f973c8086c227ea937dc370fd581a",
-        "revCount": 251,
+        "rev": "a5a351037b2912b4879f39fab6318871469de66c",
+        "revCount": 256,
         "type": "git",
         "url": "ssh://git@github.com/wozeparrot/aninarr.git"
       },
@@ -114,11 +114,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1633704190,
-        "narHash": "sha256-47Ze400YwEnItuaANppMKVHvdQuzAr0PDkBfUV4iGtI=",
+        "lastModified": 1634173597,
+        "narHash": "sha256-WgfW+Ua3y9mUBqUjJMK21W3S5QsoifWMQWH9QHbQCig=",
         "ref": "main",
-        "rev": "aa06e169f8415163af2fc839d95491c4f608eed6",
-        "revCount": 4,
+        "rev": "8aa393b592c2b1ee708d8135dfa69b11efb3531a",
+        "revCount": 39,
         "type": "git",
         "url": "ssh://git@github.com/wozeparrot/wozey.service.git"
       },
