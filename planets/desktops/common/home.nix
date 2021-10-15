@@ -40,7 +40,7 @@
     zettlr
     audacity
     antimicroX
-    youtube-dl
+    yt-dlp
     r128gain
     ffmpeg
     vlc

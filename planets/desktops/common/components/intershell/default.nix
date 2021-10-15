@@ -67,7 +67,7 @@ in
       };
       ytdlmu = {
         body = ''
-          youtube-dl -x --audio-quality 0 --audio-format flac --yes-playlist -o "%(title)s.%(ext)s" $argv
+          yt-dlp -x --audio-quality 0 --audio-format flac --yes-playlist -o "%(title)s.%(ext)s" $argv
         '';
       };
       x11waymir = {
