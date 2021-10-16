@@ -13,7 +13,7 @@
     device = "/dev/sda";
   };
 
-  networking.userDHCP = false;
+  networking.useDHCP = false;
   networking.interfaces.enp2s0.useDHCP = true;
   networking.interfaces.enp3s6.useDHCP = true;
 
