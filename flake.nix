@@ -146,7 +146,7 @@
                     orbits = [ "nas" ];
                     satellites.wg_private = {
                       path = "./satellites/infra0/nas0/wg_private";
-                      destination = "/keys/";
+                      destination = "/keys/wg_private";
                     };
 
                     core = nixpkgs.lib.nixosSystem {
@@ -166,8 +166,8 @@
                     };
                     orbits = [ "runners" ];
                     satellites.wozey_token = {
-                      path = "./satellites/infra0/x86runner0/wozey/.token";
-                      destination = "/var/lib/wozey/";
+                      path = "./satellites/infra0/x86runner0/wozey_token";
+                      destination = "/var/lib/wozey/.token";
                     };
 
                     core = nixpkgs.lib.nixosSystem {

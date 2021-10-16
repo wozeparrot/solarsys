@@ -121,7 +121,7 @@ function send_satellites {
         local dest_path
         dest_path="$(nee "$FLK.planets.$planet.moons.$moon.satellites.$satellite" | jq -c -r '.destination')"
         if [[ "$dest_path" == "null" ]]; then
-            dest_path="/run/keys/"
+            dest_path="/run/keys/$satellite"
         fi
 
         echo "[solarsys] Deploying satellite: |$satellite| to destination: |$dest_path|"
@@ -129,8 +129,8 @@ function send_satellites {
         local path
         path=$(jq -c -r '.path' <<< "$(nee "$FLK.planets.$planet.moons.$moon.satellites.$satellite")")
         if [[ -n "$path" ]]; then
-            ssh -t "root@$trajectory_host" -p "$trajectory_port" "mkdir $dest_path" 2> /dev/null
-            rsync -q -e "ssh -p $trajectory_port" -r "$path" "root@[$trajectory_host]:$dest_path/$satellite"
+            ssh -t "root@$trajectory_host" -p "$trajectory_port" "mkdir $(basename $dest_path)" 2> /dev/null
+            rsync -q -e "ssh -p $trajectory_port" -r "$path" "root@[$trajectory_host]:$dest_path"
             return
         fi
     done
