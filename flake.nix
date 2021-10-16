@@ -172,7 +172,7 @@
 
                     core = nixpkgs.lib.nixosSystem {
                       inherit system specialArgs;
-                      modules = makeModules pkgs ./planets/infra0/nas0/host.nix;
+                      modules = makeModules pkgs ./planets/infra0/x86runner0/host.nix;
                     };
                   };
               };
