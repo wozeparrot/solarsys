@@ -129,6 +129,7 @@ function send_satellites {
         local path
         path=$(jq -c -r '.path' <<< "$(nee "$FLK.planets.$planet.moons.$moon.satellites.$satellite")")
         if [[ -n "$path" ]]; then
+            ssh -t "root@$trajectory_host" -p "$trajectory_port" "mkdir $dest_path" 2> /dev/null
             rsync -q -e "ssh -p $trajectory_port" -r "$path" "root@[$trajectory_host]:$dest_path/$satellite"
             return
         fi

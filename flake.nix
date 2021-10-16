@@ -166,8 +166,8 @@
                     };
                     orbits = [ "runners" ];
                     satellites.wozey_token = {
-                      path = "./satellites/infra0/x86runner0/wozey_token";
-                      destination = "/var/lib/wozey/.token";
+                      path = "./satellites/infra0/x86runner0/wozey/.token";
+                      destination = "/var/lib/wozey/";
                     };
 
                     core = nixpkgs.lib.nixosSystem {
