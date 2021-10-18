@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  home.packages = with pkgs; [ yt-dlp ];
+
   programs.mpv = {
     enable = true;
     package = pkgs.wrapMpv (
@@ -14,7 +16,6 @@
     config = {
       force-window = true;
       pause = false;
-      ytdl-format = "bestvideo[height<=?1080]+bestaudio";
       save-position-on-quit = true;
       osc = true;
       gpu-api = "auto";
@@ -44,6 +45,10 @@
       sigmoid-upscaling = false;
 
       demuxer-mkv-subtitle-preroll = true;
+
+      script-opts-append = "ytdl_hook-ytdl_path=yt-dlp";
+
+      native-keyrepeat = true;
     };
     bindings = {
       b = "vf toggle format=colorlevels=full";
