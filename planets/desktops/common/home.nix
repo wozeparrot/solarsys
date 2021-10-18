@@ -107,6 +107,18 @@
     keys = [ "id_ed25519" ];
   };
 
+  programs.mangohud = {
+    enable = true;
+    settings = {
+      full = true;
+    };
+    settingsPerApplication = {
+      mpv = {
+        no_display = true;
+      };
+    };
+  };
+
   # extra services
   services.kdeconnect.enable = true;
   services.easyeffects.enable = false; # causes some problems
