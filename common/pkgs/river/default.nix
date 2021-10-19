@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
     owner = "ifreund";
     repo = pname;
     rev = version;
-    sha256 = lib.fakeSha256;
+    sha256 = "sha256-bJfB0qcSRy8eA48b/WzRypS9p3sSkFd1DS4lZ7bsLSw=";
     fetchSubmodules = true;
   };
 
