@@ -289,19 +289,19 @@
   };
 
   # --- wozey.service ---
-  #systemd.services."wozey" = {
-  #  description = "wozey.service daemon";
+  systemd.services."wozey" = {
+    description = "wozey.service daemon";
 
-  #  serviceConfig = {
-  #    ExecStart = "${pkgs.wozey.wozey}/bin/wozey";
-  #    WorkingDirectory = "/tmp";
-  #    Restart = "always";
-  #    RestartSec = "5s";
-  #  };
+    serviceConfig = {
+      ExecStart = "${pkgs.wozey.wozey}/bin/wozey";
+      WorkingDirectory = "/mnt/pstore0/datas/wozey";
+      Restart = "always";
+      RestartSec = "5s";
+    };
 
-  #  after = [ "network.target" ];
-  #  wantedBy = [ "multi-user.target" ];
-  #};
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+  };
 
   system.stateVersion = "21.11";
 }

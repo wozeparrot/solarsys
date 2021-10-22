@@ -144,9 +144,15 @@
                       port = 22;
                     };
                     orbits = [ "nas" ];
-                    satellites.wg_private = {
-                      path = "./satellites/infra0/nas0/wg_private";
-                      destination = "/keys/wg_private";
+                    satellites = {
+                      wg_private = {
+                        path = "./satellites/infra0/nas0/wg_private";
+                        destination = "/keys/wg_private";
+                      };
+                      wozey_token = {
+                        path = "./satellites/infra0/nas0/wozey_token";
+                        destination = "/mnt/pstore0/datas/wozey/.token";
+                      };
                     };
 
                     core = nixpkgs.lib.nixosSystem {
