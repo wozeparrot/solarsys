@@ -114,11 +114,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1634862006,
-        "narHash": "sha256-7zOSigTkI3wp2z7sPACh0aqmAwGjp0BghmHqp5E/iG8=",
+        "lastModified": 1634926849,
+        "narHash": "sha256-jGPbPrFPH0PuAp7WvoO+E08eojQCtr8aAoq2QbZL37M=",
         "ref": "main",
-        "rev": "f05d53f0a6ec5d342b59fbdfc2eedfdbd3c57e4b",
-        "revCount": 79,
+        "rev": "5f098fd07b61b398aa6c1a95e1dd28ce35cf1fac",
+        "revCount": 80,
         "type": "git",
         "url": "ssh://git@github.com/wozeparrot/wozey.service.git"
       },
