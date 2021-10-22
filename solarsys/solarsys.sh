@@ -131,7 +131,6 @@ function send_satellites {
         if [[ -n "$path" ]]; then
             ssh -t "root@$trajectory_host" -p "$trajectory_port" "mkdir -p $(dirname $dest_path)" 2> /dev/null
             rsync -q -e "ssh -p $trajectory_port" -r "$path" "root@[$trajectory_host]:$dest_path"
-            return
         fi
     done
 }
