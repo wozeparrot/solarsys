@@ -101,6 +101,8 @@
     package = pkgs.firefox-devedition-bin;
   };
 
+  programs.chromium.enable = true;
+
   programs.keychain = {
     enable = true;
     enableXsessionIntegration = false;
