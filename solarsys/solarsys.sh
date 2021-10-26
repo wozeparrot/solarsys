@@ -491,13 +491,13 @@ function list {
             trajectory="$(get_trajectory "$planet" "${moons[i]}")"
             
             if [[ -z "$(jq -c -r '.' <<< "$trajectory")" ]]; then
-                trajectory="local"
+                trajectory="{\"host\":\"localhost\",\"port\":0}"
             fi
 
             if [[ "$((i + 1))" == "${#moons[@]}" ]]; then
-                echo "└───${moons[i]} at $trajectory"
+                echo "└───${moons[i]} at [$(jq -c -r '.host' <<< "$trajectory")]:$(jq -c -r '.port' <<< "$trajectory")"
             else
-                echo "├───${moons[i]} at $trajectory"
+                echo "├───${moons[i]} at [$(jq -c -r '.host' <<< "$trajectory")]:$(jq -c -r '.port' <<< "$trajectory")"
             fi
         done
 
