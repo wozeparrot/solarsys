@@ -5,6 +5,7 @@
 , zig
 , wayland
 , pkg-config
+, river
 , scdoc
 , xwayland
 , wayland-protocols
@@ -19,16 +20,16 @@
 
 stdenv.mkDerivation rec {
   pname = "rivercarro";
-  version = "55939a96e5df3b712e052270c97843352c64ad7e";
+  version = "a4b925083497d5321300d64f9f5ef3a1afd91a56";
 
   src = fetchgit {
     url = "https://git.sr.ht/~novakane/rivercarro";
     rev = version;
-    sha256 = "0v8gkjwl9ivqkq2gj03gsw4syirwnmgb2mrvix7700cnb3xghzbn";
+    sha256 = lib.fakeSha256;
     fetchSubmodules = true;
   };
 
-  nativeBuildInputs = [ git zig wayland xwayland scdoc pkg-config ];
+  nativeBuildInputs = [ git zig wayland xwayland scdoc pkg-config river ];
 
   buildInputs = [
     wayland-protocols
