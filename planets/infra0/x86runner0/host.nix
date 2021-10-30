@@ -19,10 +19,18 @@
 
   # --- open ports ---
   networking.firewall.allowedUDPPorts = [];
-  networking.firewall.allowedTCPPorts = [];
+  networking.firewall.allowedUDPPortRanges = [
+    {
+      from = 52000;
+      to = 52100;
+    }
+  ];
+  networking.firewall.allowedTCPPorts = [ 8080 ];
 
   # --- packages ---
-  environment.systemPackages = with pkgs; [ ];
+  environment.systemPackages = with pkgs; [
+    docker-compose
+  ];
 
   # --- wireguard vpn setup ---
   
@@ -41,6 +49,10 @@
   #  after = [ "network.target" ];
   #  wantedBy = [ "multi-user.target" ];
   #};
+
+  virtualisation.docker = {
+    enable = true;
+  };
 
   system.stateVersion = "21.11";
 }
