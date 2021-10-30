@@ -207,6 +207,10 @@
     device = "/mnt/pstore0/datas/books";
     options = [ "bind" ];
   };
+  fileSystems."/export/random" = {
+    device = "/mnt/pstore0/datas/export";
+    options = [ "bind" ];
+  };
   services.nfs.server = {
     enable = true;
     lockdPort = 4001;
@@ -218,6 +222,7 @@
       /export/anime         *(insecure,ro,no_root_squash,async,no_subtree_check)
       /export/store         *(insecure,ro,no_root_squash,async,no_subtree_check)
       /export/books         *(insecure,ro,no_root_squash,async,no_subtree_check)
+      /export/random        *(insecure,ro,no_root_squash,async,no_subtree_check)
     '';
   };
 
