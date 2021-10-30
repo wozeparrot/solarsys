@@ -98,7 +98,7 @@ function build_moon_output {
     local output=$3
 
     # build
-    if nix build --verbose --no-link ".#planets.$planet.moons.$moon.core.$output"; then
+    if nix build --no-link ".#planets.$planet.moons.$moon.core.$output"; then
         nix path-info ".#planets.$planet.moons.$moon.core.$output"
         return 0
     else
