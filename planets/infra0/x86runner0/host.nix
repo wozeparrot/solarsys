@@ -15,7 +15,9 @@
 
   networking.useDHCP = false;
   networking.interfaces.enp2s0.useDHCP = true;
+  networking.interfaces.enp2s0.wakeOnLan.enable = true;
   networking.interfaces.enp3s6.useDHCP = true;
+  networking.interfaces.enp3s6.wakeOnLan.enable = true;
 
   # --- open ports ---
   networking.firewall.allowedUDPPorts = [ 25565 ];
