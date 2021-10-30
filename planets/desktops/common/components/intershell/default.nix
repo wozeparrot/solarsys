@@ -32,6 +32,8 @@ let
     set -x GOPATH ~/local/Go
     set -x HISTSIZE 20000
     set -x HISTFILESIZE 20000
+
+    source ("${pkgs.starship}/bin/starship" init fish --print-full-init | psub)
   '';
 in
 {
@@ -81,10 +83,6 @@ in
         '';
       };
     };
-
-    promptInit = ''
-      source ("${pkgs.starship}/bin/starship" init fish --print-full-init | psub)
-    '';
   };
 
   programs.starship.enable = true;
