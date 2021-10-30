@@ -18,14 +18,14 @@
   networking.interfaces.enp3s6.useDHCP = true;
 
   # --- open ports ---
-  networking.firewall.allowedUDPPorts = [];
+  networking.firewall.allowedUDPPorts = [ 25565 ];
   networking.firewall.allowedUDPPortRanges = [
     {
       from = 52000;
       to = 52100;
     }
   ];
-  networking.firewall.allowedTCPPorts = [ 8080 ];
+  networking.firewall.allowedTCPPorts = [ 8080 25565 ];
 
   # --- packages ---
   environment.systemPackages = with pkgs; [
