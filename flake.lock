@@ -46,11 +46,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1635017514,
-        "narHash": "sha256-tdV/y8nJZqKDoqFVE8ORB0drdGdSze2xeWfhWz9M3oo=",
+        "lastModified": 1635522650,
+        "narHash": "sha256-9tDPrrPSszMYvdub0sh39e4/0MSomvqQvDjlm3xGH6c=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "406eeec0b98903561767ce7aca311034d298d53e",
+        "rev": "bc0acdad8c001843d4e22cfa20a6ce84b462ab19",
         "type": "github"
       },
       "original": {
@@ -61,11 +61,11 @@
     },
     "master": {
       "locked": {
-        "lastModified": 1635110579,
-        "narHash": "sha256-QJzT/ts3reR1wtezw6/05lOur2BhF8ec1IsD7PQ1yEs=",
+        "lastModified": 1635610494,
+        "narHash": "sha256-PMIHaSvF9xxiA2ugtfrnIWo4A8o6e7Wjzr0o4CkstlY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "6b23e8fc7820366e489377b5b00890f088f36a01",
+        "rev": "90bd1ade2093697acae6ac07b329bf338f0d158e",
         "type": "github"
       },
       "original": {
@@ -90,11 +90,11 @@
     },
     "unstable": {
       "locked": {
-        "lastModified": 1634782485,
-        "narHash": "sha256-psfh4OQSokGXG0lpq3zKFbhOo3QfoeudRcaUnwMRkQo=",
+        "lastModified": 1635403963,
+        "narHash": "sha256-0actzfzBAXvvDJ/EvPSGbtCPXUwSObQrcq0RpsPWZgA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "34ad3ffe08adfca17fcb4e4a47bb5f3b113687be",
+        "rev": "2deb07f3ac4eeb5de1c12c4ba2911a2eb1f6ed61",
         "type": "github"
       },
       "original": {
@@ -114,11 +114,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1635048182,
-        "narHash": "sha256-cYhI9faGo1c5GmqgWm8ccu4WP3pNMVt5M8sFr0YPC7c=",
+        "lastModified": 1635549928,
+        "narHash": "sha256-kYz0SutsL4kOkd+OI/5/vFd3zi4b58Js8AF8W9XRk9c=",
         "ref": "main",
-        "rev": "730953fa876556ac404f0c27c6a6997d1605cb20",
-        "revCount": 88,
+        "rev": "4368556b3701a43969f23902a678cba20c240fad",
+        "revCount": 94,
         "type": "git",
         "url": "ssh://git@github.com/wozeparrot/wozey.service.git"
       },
