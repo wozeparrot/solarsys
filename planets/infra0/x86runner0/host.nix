@@ -38,19 +38,19 @@
   
 
   # --- wozey.service ---
-  #systemd.services."wozey" = {
-  #  description = "wozey.service daemon";
+  systemd.services."wozey" = {
+    description = "wozey.service daemon";
 
-  #  serviceConfig = {
-  #    ExecStart = "${pkgs.wozey.wozey}/bin/wozey";
-  #    WorkingDirectory = "/var/lib/wozey";
-  #    Restart = "always";
-  #    RestartSec = "5s";
-  #  };
+    serviceConfig = {
+      ExecStart = "${pkgs.wozey.wozey}/bin/wozey";
+      WorkingDirectory = "/var/lib/wozey";
+      Restart = "always";
+      RestartSec = "5s";
+    };
 
-  #  after = [ "network.target" ];
-  #  wantedBy = [ "multi-user.target" ];
-  #};
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+  };
 
   virtualisation.docker = {
     enable = true;
