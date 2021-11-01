@@ -13,7 +13,7 @@
     ../common/profiles/wireguard.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_lqx;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod;
   boot.kernelParams = [ "intel_iommu=on" ];
 
   # nix cross build support
