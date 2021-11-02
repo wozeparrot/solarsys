@@ -14,7 +14,7 @@
     # flake stuff
     flake-utils.url = "github:numtide/flake-utils";
 
-    # overlays
+    # overlays + extra package sets
     aninarr.url = "git+ssh://git@github.com/wozeparrot/aninarr.git?ref=main";
     aninarr.inputs.nixpkgs.follows = "nixpkgs";
     aninarr.inputs.flake-utils.follows = "flake-utils";
@@ -22,6 +22,9 @@
     wozey.url = "git+ssh://git@github.com/wozeparrot/wozey.service.git?ref=main";
     wozey.inputs.nixpkgs.follows = "nixpkgs";
     wozey.inputs.flake-utils.follows = "flake-utils";
+
+    nix-gaming.url = "github:fufexan/nix-gaming";
+    nix-gaming.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ self, nixpkgs, master, home-manager, flake-utils, ... }:
@@ -43,6 +46,9 @@
           inputs.aninarr.overlay
           inputs.wozey.overlay
         ];
+      pkgSetsFor = system: {
+        nix-gaming = inputs.nix-gaming.packages."${system}";
+      };
     in
     flake-utils.lib.eachSystem [
       "x86_64-linux"
@@ -78,7 +84,7 @@
                 }
               )
             ] ++ overlays;
-          }
+          } // pkgSetsFor system
         );
       in
       {
