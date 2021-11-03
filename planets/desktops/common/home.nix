@@ -101,7 +101,10 @@
     package = pkgs.firefox-devedition-bin;
   };
 
-  programs.chromium.enable = true;
+  programs.chromium = {
+    enable = true;
+    package = pkgs.ungoogled-chromium;
+  };
 
   programs.keychain = {
     enable = true;
