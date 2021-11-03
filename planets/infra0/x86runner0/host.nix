@@ -35,7 +35,25 @@
   ];
 
   # --- wireguard vpn setup ---
-  
+
+  # --- home-assistant ---
+  services.home-assistant = {
+    enable = true;
+    package = (pkgs.home-assistant.override {
+      extraPackages = py: with py; [ psycopg2 ];
+    });
+  };
+
+  services.postgresql = {
+    enable = true;
+    ensureDatabases = [ "hass" ];
+    ensureUsers = [{
+      name = "hass";
+      ensurePermissions = {
+        "DATABASE hass" = "ALL PRIVILEGES";
+      };
+    }];
+  };
 
   # --- wozey.service ---
   systemd.services."wozey" = {
