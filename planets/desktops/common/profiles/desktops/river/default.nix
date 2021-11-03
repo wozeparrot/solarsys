@@ -37,7 +37,6 @@
               export SDL_VIDEODRIVER=wayland
               export _JAVA_AWT_WM_NONREPARENTING=1
 
-              systemctl --user import-environment
               systemd-cat --identifier=river dbus-run-session river
             '';
           in

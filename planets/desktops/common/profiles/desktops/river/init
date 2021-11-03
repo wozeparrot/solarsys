@@ -7,7 +7,7 @@ mod="Mod4"
 riverctl map normal $mod Return          spawn kitty
 riverctl map normal $mod D               spawn "fuzzel -r 0 -b 151510ff -t d2cad3ff -s 6691d2ff -C aa3c9fff -m a52e4dff -w 40 -l 12 -B 2"
 riverctl map normal $mod+Control Space   spawn "fnottctl dismiss"
-riverctl map normal None Print           spawn "bash -c \"grim -g '\$(slurp)' - | wl-copy -t 'image/png'\""
+riverctl map normal None Print           spawn "bash -c \"grim -g '\$(slurp -d -s \"#12345655\" -b \"#65432155\")' - | wl-copy -t 'image/png'\""
 
 # Mod+Q to close the focused view
 riverctl map normal $mod Q close
@@ -114,7 +114,7 @@ riverctl float-filter-add app-id "float"
 riverctl float-filter-add app-id "popup"
 
 # Run applications
-systemctl --user import-environment
+systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 systemctl --user start graphical-session.target
 
 xrdb ~/.Xresources
