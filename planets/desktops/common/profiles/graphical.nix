@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 {
-  imports = [ ./base.nix ./network.nix ];
+  imports = [ ./base.nix ./network.nix "${inputs.nix-gaming}/modules/pipewireLowLatency.nix" ];
 
   # hardware
   hardware = {
@@ -21,10 +21,16 @@
   xdg.portal = {
     enable = true;
     gtkUsePortal = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-wlr
-    ];
+    wlr = {
+      enable = true;
+      settings = {
+        screencast = {
+          max_fps = 60;
+          choose_type = "simple";
+          chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or -s '#12345655' -b '#65432155'";
+        };
+      };
+    };
   };
 
   # audio
@@ -35,6 +41,8 @@
     alsa.support32Bit = true;
     jack.enable = true;
     pulse.enable = true;
+
+    lowLatency.enable = true;
   };
 
   # fonts
