@@ -146,6 +146,11 @@
         publicKey = "DNY6opgAbjMJh8o4O7h9dXiO4BCzg+0RM4zVNvQg3xs=";
         allowedIPs = [ "10.11.235.88/32" "fdbe:ef11:2358:1321::88/128" ];
       }
+      {
+        # x86runner0
+        publicKey = "XM6CRHIBPyAvCs8VYUmPkgT8bwX32tXnwRZJp9ztMFg=";
+        allowedIPs = [ "10.11.235.11/32" "fdb3:ef11:2358:1321::11/128" ];
+      }
     ];
   };
 

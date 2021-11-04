@@ -177,9 +177,15 @@
                       port = 22;
                     };
                     orbits = [ "runners" ];
-                    satellites.wozey_token = {
-                      path = "./satellites/infra0/x86runner0/wozey_token";
-                      destination = "/var/lib/wozey/.token";
+                    satellites = {
+                      wg_private = {
+                        path = "./satellites/infra0/x86runner0/wg_private";
+                        destination = "/keys/wg_private";
+                      };
+                      wozey_token = {
+                        path = "./satellites/infra0/x86runner0/wozey_token";
+                        destination = "/var/lib/wozey/.token";
+                      };
                     };
 
                     core = nixpkgs.lib.nixosSystem {
