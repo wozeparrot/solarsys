@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 {
   imports = [ ./base.nix ./network.nix "${inputs.nix-gaming}/modules/pipewireLowLatency.nix" ];
 
