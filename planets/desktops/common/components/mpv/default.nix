@@ -35,12 +35,13 @@
       deband-grain = 5;
 
       dither-depth = "auto";
+      temporal-dither = true;
 
       blend-subtitles = true;
 
-      scale = "spline36";
+      scale = "ewa_lanczossharp";
       dscale = "mitchell";
-      cscale = "mitchell";
+      cscale = "spline36";
       linear-downscaling = false;
       sigmoid-upscaling = false;
 
@@ -49,6 +50,12 @@
       script-opts-append = "ytdl_hook-ytdl_path=yt-dlp";
 
       native-keyrepeat = true;
+
+      video-sync = "display-resample";
+      tscale = "box";
+      tscale-window = "sphinx";
+      tscale-radius = 1.0;
+      tscale-clamp = 0.0;
     };
     bindings = {
       b = "vf toggle format=colorlevels=full";
@@ -57,10 +64,12 @@
       # Shader toggles
       "Alt+z" = "no-osd change-list glsl-shaders set \"~~/shaders/sssr.glsl:~~/shaders/ssd.glsl\"; show-text \"SS Shaders\"";
 
-      "Alt+x" = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Restore_CNN_Moderate_S.glsl:~~/shaders/Anime4K/Anime4K_Upscale_CNN_x2_S.glsl\"; show-text \"Anime4K: Modern 1080p->4K (Fast)\"";
-      "Alt+c" = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Restore_CNN_Moderate_S.glsl\"; show-text \"Anime4K: Modern 1080p (Fast)\"";
-      "Alt+," = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Restore_CNN_Moderate_UL.glsl:~~/shaders/Anime4K/Anime4K_Upscale_CNN_x2_UL.glsl\"; show-text \"Anime4K: Modern 1080p->4K (HQ)\"";
-      "Alt+." = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Restore_CNN_Moderate_UL.glsl\"; show-text \"Anime4K: Modern 1080p (HQ)\"";
+      "Alt+q" = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Restore_CNN_M.glsl;~~/shaders/Anime4K/Anime4K_Upscale_CNN_x2_M.glsl;~~/shaders/Anime4K/Anime4K_AutoDownscalePre_x2.glsl;~~/shaders/Anime4K/Anime4K_AutoDownscalePre_x4.glsl;~~/shaders/Anime4K/Anime4K_Upscale_CNN_x2_S.glsl\"; show-text \"Anime4K: Mode A (Fast)\"";
+      "Alt+w" = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Restore_CNN_Soft_M.glsl;~~/shaders/Anime4K/Anime4K_Upscale_CNN_x2_M.glsl;~~/shaders/Anime4K/Anime4K_AutoDownscalePre_x2.glsl;~~/shaders/Anime4K/Anime4K_AutoDownscalePre_x4.glsl;~~/shaders/Anime4K/Anime4K_Upscale_CNN_x2_S.glsl\"; show-text \"Anime4K: Mode B (Fast)\"";
+      "Alt+e" = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Upscale_Denoise_CNN_x2_M.glsl;~~/shaders/Anime4K/Anime4K_AutoDownscalePre_x2.glsl;~~/shaders/Anime4K/Anime4K_AutoDownscalePre_x4.glsl;~~/shaders/Anime4K/Anime4K_Upscale_CNN_x2_S.glsl\"; show-text \"Anime4K: Mode C (Fast)\"";
+      "Alt+r" = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Restore_CNN_M.glsl;~~/shaders/Anime4K/Anime4K_Upscale_CNN_x2_M.glsl;~~/shaders/Anime4K/Anime4K_Restore_CNN_S.glsl;~~/shaders/Anime4K/Anime4K_AutoDownscalePre_x2.glsl;~~/shaders/Anime4K/Anime4K_AutoDownscalePre_x4.glsl;~~/shaders/Anime4K/Anime4K_Upscale_CNN_x2_S.glsl\"; show-text \"Anime4K: Mode A+A (Fast)\"";
+      "Alt+t" = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Restore_CNN_Soft_M.glsl;~~/shaders/Anime4K/Anime4K_Upscale_CNN_x2_M.glsl;~~/shaders/Anime4K/Anime4K_AutoDownscalePre_x2.glsl;~~/shaders/Anime4K/Anime4K_AutoDownscalePre_x4.glsl;~~/shaders/Anime4K/Anime4K_Restore_CNN_Soft_S.glsl;~~/shaders/Anime4K/Anime4K_Upscale_CNN_x2_S.glsl\"; show-text \"Anime4K: Mode B+B (Fast)\"";
+      "Alt+y" = "no-osd change-list glsl-shaders set \"~~/shaders/Anime4K/Anime4K_Upscale_Denoise_CNN_x2_M.glsl;~~/shaders/Anime4K/Anime4K_AutoDownscalePre_x2.glsl;~~/shaders/Anime4K/Anime4K_AutoDownscalePre_x4.glsl;~~/shaders/Anime4K/Anime4K_Restore_CNN_S.glsl;~~/shaders/Anime4K/Anime4K_Upscale_CNN_x2_S.glsl\"; show-text \"Anime4K: Mode C+A (Fast)\"";
 
       "Alt+v" = "no-osd change-list glsl-shaders set \"~~/shaders/acme-0_5x.glsl\"; show-text \"ACME 0.5x\"";
 
@@ -69,6 +78,8 @@
       "Alt+b" = "no-osd change-list glsl-shaders toggle \"~~/shaders/adaptive-sharpen.glsl\"; show-text \"Toggled Adaptive Sharpen\"";
 
       "Alt+n" = "no-osd change-list glsl-shaders clr \"\"; show-text \"GLSL shaders cleared\"";
+
+      "Alt+h" = "cycle-values interpolation \"yes\" \"no\"";
     };
   };
 
