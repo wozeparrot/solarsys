@@ -27,7 +27,7 @@
       to = 52100;
     }
   ];
-  networking.firewall.allowedTCPPorts = [ 8080 25565 ];
+  networking.firewall.allowedTCPPorts = [ 8123 8080 25565 ];
 
   # --- packages ---
   environment.systemPackages = with pkgs; [
@@ -39,20 +39,10 @@
   # --- home-assistant ---
   services.home-assistant = {
     enable = true;
-    package = (pkgs.home-assistant.override {
-      extraPackages = py: with py; [ psycopg2 ];
-    });
-  };
-
-  services.postgresql = {
-    enable = true;
-    ensureDatabases = [ "hass" ];
-    ensureUsers = [{
-      name = "hass";
-      ensurePermissions = {
-        "DATABASE hass" = "ALL PRIVILEGES";
-      };
-    }];
+    config = {
+      default_config = {};
+      met = {};
+    };
   };
 
   # --- wozey.service ---
