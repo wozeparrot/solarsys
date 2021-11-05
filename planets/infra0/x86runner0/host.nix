@@ -58,6 +58,23 @@
     config = {
       default_config = {};
       met = {};
+      transmission = {
+        host = "10.11.235.1";
+      };
+      syncthing = {
+        url = "http://10.11.235.1:8384";
+        token = "f2Q4LYRPzFiMtmpDUPcwpbxaFdVaHJXx";
+        verify_ssl_token = false;
+      };
+      speedtestdotnet = {};
+      environment_canada = {};
+
+      media_player = [{
+        platform = "androidtv";
+        device_class = "firetv";
+        name = "Upstairs Fire";
+        host = "192.168.0.181";
+      }];
     };
   };
 
