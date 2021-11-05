@@ -50,12 +50,6 @@
       script-opts-append = "ytdl_hook-ytdl_path=yt-dlp";
 
       native-keyrepeat = true;
-
-      video-sync = "display-resample";
-      tscale = "box";
-      tscale-window = "sphinx";
-      tscale-radius = 1.0;
-      tscale-clamp = 0.0;
     };
     bindings = {
       b = "vf toggle format=colorlevels=full";
@@ -78,8 +72,6 @@
       "Alt+b" = "no-osd change-list glsl-shaders toggle \"~~/shaders/adaptive-sharpen.glsl\"; show-text \"Toggled Adaptive Sharpen\"";
 
       "Alt+n" = "no-osd change-list glsl-shaders clr \"\"; show-text \"GLSL shaders cleared\"";
-
-      "Alt+h" = "cycle-values interpolation \"yes\" \"no\"";
     };
   };
 
