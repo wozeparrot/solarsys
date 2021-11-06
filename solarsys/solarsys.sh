@@ -129,7 +129,7 @@ function send_satellites {
         local path
         path=$(jq -c -r '.path' <<< "$(nee "$FLK.planets.$planet.moons.$moon.satellites.$satellite")")
         if [[ -n "$path" ]]; then
-            ssh -t "root@$trajectory_host" -p "$trajectory_port" "mkdir -p $(dirname $dest_path)" 2> /dev/null
+            ssh -t "root@$trajectory_host" -p "$trajectory_port" "mkdir -p $(dirname "$dest_path")" 2> /dev/null
             rsync -q -e "ssh -p $trajectory_port" -r "$path" "root@[$trajectory_host]:$dest_path"
         fi
     done
@@ -431,7 +431,7 @@ function ssh_moon {
         trajectory_port="$(jq -c -r '.port' <<< "$trajectory")"
 
         echo "[solarsys] Moon: |$moon| is at |$trajectory_host| on port |$trajectory_port|"
-        exec ssh "root@$trajectory_host" -p "$trajectory_port" 
+        exec ssh -A "root@$trajectory_host" -p "$trajectory_port"
     fi
 }
 
