@@ -27,7 +27,7 @@
       to = 52100;
     }
   ];
-  networking.firewall.allowedTCPPorts = [ 8123 8080 25565 ];
+  networking.firewall.allowedTCPPorts = [ 8123 8080 8083 25565 ];
 
   # --- packages ---
   environment.systemPackages = with pkgs; [
@@ -76,6 +76,17 @@
         host = "192.168.0.181";
       }];
     };
+  };
+
+  # --- calibre-web ---
+  services.calibre-web = {
+    enable = true;
+    listen.ip = "0.0.0.0";
+    openFirewall = true;
+    options.calibreLibrary = "/opt/stuff/books";
+
+    user = "root";
+    group = "root";
   };
 
   # --- wozey.service ---
