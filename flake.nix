@@ -146,7 +146,7 @@
                   in
                   {
                     trajectory = {
-                      host = "fdbe:ef11:2358:1321::1";
+                      host = "192.168.0.11";
                       port = 22;
                     };
                     orbits = [ "nas" ];
