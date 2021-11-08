@@ -37,6 +37,33 @@ function yes_or_no {
     done
 }
 
+# retry with exponential backoff
+function retry {
+    local max="$1"
+    shift 1
+
+    local delay=1
+    local attempts=1
+    local output=
+
+    while [[ "$attempts" -le "$max" ]]; do
+        if eval "$@"; then
+            break
+        fi
+
+        if [[ "$attempts" -lt "$max" ]]; then
+            echo "Retrying in $delay seconds..."
+            visible_sleep "$delay"
+        elif [[ "$attempts" -eq "$max" ]]; then
+            echo "Failed after $attempts attempts"
+            return 1
+        fi
+
+        attempts=$((attempts + 1))
+        delay=$((delay * 2))
+    done
+}
+
 
 # --- script helper functions ---
 # shortcut for nix eval --json --impure --expr
@@ -198,11 +225,13 @@ EOF
             send_satellites "$planet" "$moon" "$trajectory_host" "$trajectory_port"
 
             # deploy stage1 - testing config
+            echo "[solarsys] Deploying & Testing Config"
             ssh -t "root@$trajectory_host" -p "$trajectory_port" "bash /tmp/solarsys-remote.sh d1 $buildpath" 2> /dev/null
             # wait to see if we can still connect
             echo "[solarsys] Waiting for reconnection..."
-            visible_sleep 5
+            retry 5 ssh -o ConnectTimeout=5 -q "root@$trajectory_host" -p "$trajectory_port" exit
             # deploy stage2 - real deploy
+            echo "[solarsys] Deploying & Switching to Config"
             ssh -t "root@$trajectory_host" -p "$trajectory_port" "bash /tmp/solarsys-remote.sh d2 $buildpath" 2> /dev/null
             echo "[solarsys] Deployed moon: |$moon|"
         fi
