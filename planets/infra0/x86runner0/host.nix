@@ -121,6 +121,7 @@
     listen.ip = "0.0.0.0";
     openFirewall = true;
     options.calibreLibrary = "/opt/stuff/books";
+    options.enableBookConversion = true;
 
     user = "root";
     group = "root";
