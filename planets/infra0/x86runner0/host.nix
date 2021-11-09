@@ -66,15 +66,15 @@
   hardware.pulseaudio = {
     enable = true;
     systemWide = true;
+    support32Bit = true;
   };
 
   environment.noXlibs = false;
   users.users.user = {
     initialPassword = "toor";
     isNormalUser = true;
-    extraGroups = [ "audio" "video" "wheel" ];
+    extraGroups = [ "audio" "video" ];
   };
-  security.sudo.wheelNeedsPassword = false;
 
   services.cage = {
     enable = true;
