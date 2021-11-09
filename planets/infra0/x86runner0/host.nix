@@ -70,11 +70,15 @@
   };
 
   environment.noXlibs = false;
+  users.groups.pulse-access = {};
   users.users.user = {
     initialPassword = "toor";
     isNormalUser = true;
-    extraGroups = [ "audio" "video" ];
+    extraGroups = [ "audio" "video" "pulse" "pulse-access" ];
   };
+  system.activationScripts.fix-pulse-permissions = ''
+    chmod 755 /run/pulse
+  '';
 
   services.cage = {
     enable = true;
