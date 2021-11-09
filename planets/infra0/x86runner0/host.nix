@@ -72,8 +72,9 @@
   users.users.user = {
     initialPassword = "toor";
     isNormalUser = true;
-    extraGroups = [ "audio" "video" ];
+    extraGroups = [ "audio" "video" "wheel" ];
   };
+  security.sudo.wheelNeedsPassword = false;
 
   services.cage = {
     enable = true;
