@@ -69,7 +69,7 @@
   '';
 
   services.printing.enable = true;
-  services.printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
+  services.printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin pkgs.hplip ];
 
   services.gvfs.enable = true;
 
