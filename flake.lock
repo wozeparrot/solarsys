@@ -61,11 +61,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1637398047,
-        "narHash": "sha256-H6yh2VvABMhrkjYrPccc0Buak4L9jtFzsb98FsNDM2Q=",
+        "lastModified": 1637915295,
+        "narHash": "sha256-jWW2Q83O4O/TV3PDsZkEo0bhKzlLBhJ5CGqQFMM05lE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "c82bc787b8990c89f2f7d57df652ce2424129b92",
+        "rev": "a28cf79a78040b4e6d8d50a39760a296d5e95dd6",
         "type": "github"
       },
       "original": {
@@ -76,11 +76,11 @@
     },
     "master": {
       "locked": {
-        "lastModified": 1637446623,
-        "narHash": "sha256-LUSRlW99RsBclAI45hXC046y5eJa5Ks4j7EbHdQyQ1U=",
+        "lastModified": 1638045166,
+        "narHash": "sha256-HguPozGbLldZ9BBQbD02S+LkgLkB2szsAyCf22Wx0Cs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "09b01aa435a5214376d71a787717c07bed60ed4c",
+        "rev": "16eb003524804f7c6d6f522a238e8ab2557eedf9",
         "type": "github"
       },
       "original": {
@@ -100,11 +100,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1634476655,
-        "narHash": "sha256-pwcDKloge7RF/5HXNp5odu3dOPL6t0XYtjf3Xkfew2w=",
+        "lastModified": 1637691862,
+        "narHash": "sha256-ZkUW8JfjDmFZnRQKeBKQvqlWLRgIq4p6v2QfLrjSm0s=",
         "owner": "fufexan",
         "repo": "nix-gaming",
-        "rev": "20f978640c9897d1080621a9189e5b4e7d5efe34",
+        "rev": "caf86b1dd4b4cdd59970590eaaa9c009c9f1e6ea",
         "type": "github"
       },
       "original": {
@@ -163,11 +163,11 @@
     },
     "unstable": {
       "locked": {
-        "lastModified": 1637155076,
-        "narHash": "sha256-26ZPNiuzlsnXpt55Q44+yzXvp385aNAfevzVEKbrU5Q=",
+        "lastModified": 1637841632,
+        "narHash": "sha256-QYqiKHdda0EOnLGQCHE+GluD/Lq2EJj4hVTooPM55Ic=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "715f63411952c86c8f57ab9e3e3cb866a015b5f2",
+        "rev": "73369f8d0864854d1acfa7f1e6217f7d6b6e3fa1",
         "type": "github"
       },
       "original": {
@@ -206,11 +206,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1635648589,
-        "narHash": "sha256-tEQ4rzenoHEnCdRsw2YsYrnonm0qfAGKqjNNY0iLUDE=",
+        "lastModified": 1637468989,
+        "narHash": "sha256-3dOr7+wGeMob8cDbOAkAz6vs4/OBcc0RkE7Fv0i1lzE=",
         "ref": "main",
-        "rev": "adc44203bc31337c0b05d275e474175ee50bbaa5",
-        "revCount": 95,
+        "rev": "a48212df53f7ea9319f1a8df3d607e5311b4c175",
+        "revCount": 96,
         "type": "git",
         "url": "ssh://git@github.com/wozeparrot/wozey.service.git"
       },
