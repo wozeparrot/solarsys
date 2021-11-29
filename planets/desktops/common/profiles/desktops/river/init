@@ -114,8 +114,8 @@ riverctl float-filter-add app-id "float"
 riverctl float-filter-add app-id "popup"
 
 # Run applications
-exec systemctl --user import-environment WAYLAND_DISPLAY DISPLAY DBUS_SESSION_BUS_ADDRESS XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
-exec dbus-update-activation-environment WAYLAND_DISPLAY
+systemctl --user import-environment WAYLAND_DISPLAY DISPLAY DBUS_SESSION_BUS_ADDRESS XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
+dbus-update-activation-environment WAYLAND_DISPLAY
 systemctl --user start graphical-session.target
 
 xrdb ~/.Xresources
