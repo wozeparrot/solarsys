@@ -26,7 +26,7 @@
       pkgs.writeShellScriptBin "run_gpu" ''
         #!/usr/bin/env bash
 
-        DRI_PRIME=1 exec "$@"
+        DRI_PRIME=1 exec -a "$0" "$@"
       ''
     )
   ];
