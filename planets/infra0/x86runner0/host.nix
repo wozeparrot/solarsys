@@ -97,6 +97,9 @@
   # --- home-assistant ---
   services.home-assistant = {
     enable = true;
+    package = pkgs.mpkgs.home-assistant.overrideAttrs (oldAttrs: {
+      doInstallCheck = false;
+    });
     config = {
       default_config = {};
       met = {};
