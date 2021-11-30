@@ -1,6 +1,6 @@
 { lib
 , buildPythonPackage
-, fetchPypi
+, fetchFromGitHub
 , ffmpeg
 , rtmpdump
 , phantomjs2
@@ -19,10 +19,11 @@ buildPythonPackage rec {
   pname = "yt-dlp";
   version = "717216b0930c742dab5bbd065e9c58caace74a8c";
 
-  src = fetchPypi {
-    inherit pname;
-    version = version;
-    sha256 = lib.fakeSha256;
+  src = fetchFromGitHub {
+    owner = "yt-dlp";
+    repo = pname;
+    rev = version;
+    sha256 = "sha256-ICKj2749op55G0dbI0idZElIosJ+cbcis1FDk5yAVJY=";
   };
 
   propagatedBuildInputs = [ websockets mutagen ]
@@ -49,7 +50,7 @@ buildPythonPackage rec {
   doCheck = false;
 
   postInstall = lib.optionalString withAlias ''
-      ln -s "$out/bin/yt-dlp" "$out/bin/youtube-dl"
+    ln -s "$out/bin/yt-dlp" "$out/bin/youtube-dl"
   '';
 }
 

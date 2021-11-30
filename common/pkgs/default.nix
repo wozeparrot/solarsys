@@ -5,6 +5,6 @@ self: super:
     rivercarro = self.callPackage ./rivercarro { };
     river = self.callPackage ./river { };
     shotcut = self.libsForQt5.callPackage ./shotcut { };
-    yt-dlp = self.callPackage ./yt-dlp { };
+    yt-dlp = self.python3Packages.callPackage ./yt-dlp { };
   };
 }
