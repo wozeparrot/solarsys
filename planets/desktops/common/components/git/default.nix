@@ -41,8 +41,15 @@
       "mergetool \"nvim-merge\"".cmd = "nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'";
 
       core.editor = "nvim";
+
+      #gpg.format = "ssh";
+      #user.signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKPL+OWmcGo4IlL+LUz9uEgOH8hk0JIN3DXEV8sdgxPB wozeparrot";
+      #gpg.ssh.allowedSignersFile = "~/.local/share/git_allowed_signers";
     };
   };
+  xdg.dataFile.git_allowed_signers.text = ''
+    wozeparrot@gmail.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKPL+OWmcGo4IlL+LUz9uEgOH8hk0JIN3DXEV8sdgxPB wozeparrot
+  '';
 
   programs.gh = {
     enable = true;
