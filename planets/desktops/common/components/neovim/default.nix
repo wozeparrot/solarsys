@@ -17,7 +17,11 @@ in
     extraConfig = builtins.concatStringsSep "\n" [
       # (lib.strings.fileContents ./theme.vim)
       ''
-        colorscheme xresources
+        if exists('g:vscode')
+          colorscheme default
+        else
+          colorscheme xresources
+        endif
       ''
 
       ''
