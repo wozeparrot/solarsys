@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  home.packages = with pkgs; [ gh ];
+
   programs.git = {
     enable = true;
 
@@ -50,9 +52,4 @@
   xdg.dataFile.git_allowed_signers.text = ''
     wozeparrot@gmail.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKPL+OWmcGo4IlL+LUz9uEgOH8hk0JIN3DXEV8sdgxPB wozeparrot
   '';
-
-  programs.gh = {
-    enable = true;
-    enableGitCredentialHelper = false;
-  };
 }
