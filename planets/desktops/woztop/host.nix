@@ -52,6 +52,8 @@
 
     corectrl
 
+    piper
+
     cifs-utils
 
     lxqt.lxqt-policykit
@@ -72,6 +74,8 @@
   services.printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin pkgs.hplip ];
 
   services.gvfs.enable = true;
+
+  services.ratbagd.enable = true;
 
   virtualisation = {
     libvirtd = {
