@@ -44,10 +44,10 @@
         in
         (builtins.attrValues (pathsToImportedAttrs overlayPaths)) ++ [
           inputs.aninarr.overlay
-          inputs.wozey.overlay
         ];
       pkgSetsFor = system: {
         nix-gaming = inputs.nix-gaming.packages."${system}";
+        wozey = inputs.wozey.packages."${system}";
       };
     in
     flake-utils.lib.eachSystem [
