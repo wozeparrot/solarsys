@@ -155,9 +155,9 @@
                         path = "./satellites/infra0/nas0/wg_private";
                         destination = "/keys/wg_private";
                       };
-                      wozey_token = {
-                        path = "./satellites/infra0/nas0/wozey_token";
-                        destination = "/mnt/pstore0/datas/wozey/.token";
+                      dsvpn = {
+                        path = "./satellites/common/dsvpn";
+                        destination = "/keys/dsvpn";
                       };
                     };
 
