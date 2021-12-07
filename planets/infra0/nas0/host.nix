@@ -18,7 +18,9 @@
   };
 
   # --- open ports ---
-  networking.firewall.allowedUDPPorts = [ 5553 ]; # only wireguard traffic
+  networking.firewall.allowedUDPPorts = [
+    5553 # wireguard
+  ];
   networking.firewall.allowedTCPPorts = [
     5072 # aninarr web dir
   ];
