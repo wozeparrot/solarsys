@@ -37,7 +37,7 @@
           modules-right = [ "backlight" "pulseaudio" "clock" "tray" ];
           modules = {
             "mpd" = {
-              format = "{stateIcon} : {title} : ({elapsedTime:%M:%S}/{totalTime:%H:%M:%S})";
+              format = "{stateIcon} : {title} : ({elapsedTime::%H:%M:%S}/{totalTime:%H:%M:%S})";
               format-disconnected = "disconnected";
               format-stopped = "stopped";
               state-icons = {
