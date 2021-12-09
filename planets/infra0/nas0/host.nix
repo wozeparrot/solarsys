@@ -166,7 +166,7 @@
       gawk iproute2
     ];
     serviceConfig = {
-      ExecStart = "${pkgs.dsvpn}/bin/dsvpn server /keys/dsvpn";
+      ExecStart = "${pkgs.screen}/bin/screen ${pkgs.dsvpn}/bin/dsvpn server /keys/dsvpn";
       Restart = "always";
       RestartSec = "5s";
       User = "root";
