@@ -8,7 +8,7 @@
 
   # important config
   boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.canTouchEfiVariables = false;
 
   networking.useDHCP = false;
   networking.interfaces.eno1.useDHCP = true;
@@ -47,6 +47,7 @@
   };
 
   # --- calibre-web ---
+  environment.noXlibs = false;
   services.calibre-web = {
     enable = true;
     listen.ip = "0.0.0.0";
@@ -76,7 +77,7 @@
     description = "wozey.service compute daemon";
 
     serviceConfig = {
-      ExecStart = "${pkgs.wozey.wozey-compute}/bin/wozey";
+      ExecStart = "${pkgs.wozey.wozey-compute}/bin/wozey-compute";
       WorkingDirectory = "/var/lib/wozey";
       Restart = "always";
       RestartSec = "5s";
