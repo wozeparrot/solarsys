@@ -81,6 +81,8 @@
       WorkingDirectory = "/var/lib/wozey";
       Restart = "always";
       RestartSec = "5s";
+      User = "root";
+      Group = "root";
     };
 
     after = [ "network.target" ];
