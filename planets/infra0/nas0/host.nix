@@ -153,7 +153,12 @@
       {
         # x86runner0
         publicKey = "XM6CRHIBPyAvCs8VYUmPkgT8bwX32tXnwRZJp9ztMFg=";
-        allowedIPs = [ "10.11.235.11/32" "fdb3:ef11:2358:1321::11/128" ];
+        allowedIPs = [ "10.11.235.11/32" "fdbe:ef11:2358:1321::11/128" ];
+      }
+      {
+        # x86runner1
+        publicKey = "EYBKX22REQWG5VmC9VeXhiwvH6Gr2FTQ35m4TDQ9Fh0=";
+        allowedIPs = [ "10.11.235.12/32" "fdbe:ef11:2358:1321::12/128" ];
       }
     ];
   };
@@ -320,21 +325,6 @@
     after = [ "aninarr.service" ];
     wantedBy = [ "multi-user.target" ];
   };
-
-  # --- wozey.service ---
-  #systemd.services."wozey" = {
-  #  description = "wozey.service daemon";
-
-  #  serviceConfig = {
-  #    ExecStart = "${pkgs.wozey.wozey}/bin/wozey";
-  #    WorkingDirectory = "/mnt/pstore0/datas/wozey";
-  #    Restart = "always";
-  #    RestartSec = "5s";
-  #  };
-
-  #  after = [ "network.target" ];
-  #  wantedBy = [ "multi-user.target" ];
-  #};
 
   system.stateVersion = "21.11";
 }

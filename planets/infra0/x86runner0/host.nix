@@ -20,14 +20,8 @@
   networking.interfaces.enp3s6.wakeOnLan.enable = true;
 
   # --- open ports ---
-  networking.firewall.allowedUDPPorts = [ 25565 ];
-  networking.firewall.allowedUDPPortRanges = [
-    {
-      from = 52000;
-      to = 52100;
-    }
-  ];
-  networking.firewall.allowedTCPPorts = [ 8123 8080 8083 25565 ];
+  networking.firewall.allowedUDPPorts = [ ];
+  networking.firewall.allowedTCPPorts = [ ];
 
   # --- packages ---
   environment.systemPackages = with pkgs; [
@@ -92,62 +86,6 @@
       WLR_LIBINPUT_NO_DEVICES = "1";
       NO_AT_BRIDGE = "1";
     };
-  };
-
-  # --- home-assistant ---
-  services.home-assistant = {
-    enable = true;
-    package = pkgs.mpkgs.home-assistant.overrideAttrs (oldAttrs: {
-      doInstallCheck = false;
-    });
-    config = {
-      default_config = {};
-      met = {};
-      transmission = {
-        host = "10.11.235.1";
-      };
-      syncthing = {
-        url = "http://10.11.235.1:8384";
-        token = "f2Q4LYRPzFiMtmpDUPcwpbxaFdVaHJXx";
-        verify_ssl_token = false;
-      };
-      speedtestdotnet = {};
-      environment_canada = {};
-
-      media_player = [{
-        platform = "androidtv";
-        device_class = "firetv";
-        name = "Upstairs Fire";
-        host = "192.168.0.181";
-      }];
-    };
-  };
-
-  # --- calibre-web ---
-  services.calibre-web = {
-    enable = true;
-    listen.ip = "0.0.0.0";
-    openFirewall = true;
-    options.calibreLibrary = "/opt/stuff/books";
-    options.enableBookConversion = true;
-
-    user = "root";
-    group = "root";
-  };
-
-  # --- wozey.service ---
-  systemd.services."wozey" = {
-    description = "wozey.service daemon";
-
-    serviceConfig = {
-      ExecStart = "${pkgs.wozey.wozey}/bin/wozey";
-      WorkingDirectory = "/var/lib/wozey";
-      Restart = "always";
-      RestartSec = "5s";
-    };
-
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
   };
 
   virtualisation.docker = {

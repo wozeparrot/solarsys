@@ -65,6 +65,7 @@
               git
               jq
               rsync
+              rnix-lsp
             ];
           };
         }
@@ -191,6 +192,33 @@
                     core = nixpkgs.lib.nixosSystem {
                       inherit system specialArgs;
                       modules = makeModules pkgs ./planets/infra0/x86runner0/host.nix;
+                    };
+                  };
+                x86runner1 =
+                  let
+                    system = "x86_64-linux";
+                    pkgs = configNixpkgs system;
+                  in
+                  {
+                    trajectory = {
+                      host = "192.168.0.243";
+                      port = 22;
+                    };
+                    orbits = [ "runners" ];
+                    satellites = {
+                      wg_private = {
+                        path = "./satellites/infra0/x86runner1/wg_private";
+                        destination = "/keys/wg_private";
+                      };
+                      wozey_token = {
+                        path = "./satellites/infra0/x86runner1/wozey_token";
+                        destination = "/var/lib/wozey/.token";
+                      };
+                    };
+
+                    core = nixpkgs.lib.nixosSystem {
+                      inherit system specialArgs;
+                      modules = makeModules pkgs ./planets/infra0/x86runner1/host.nix;
                     };
                   };
               };
