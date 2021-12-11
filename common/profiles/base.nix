@@ -25,7 +25,7 @@
     };
 
     extraOptions = ''
-      experimental-features = nix-command flakes ca-references
+      experimental-features = nix-command flakes
       min-free = 536870912
     '';
   };
