@@ -65,9 +65,9 @@
 
   services.xserver.videoDrivers = [ "amdgpu" "modesetting" ];
 
+  services.uinput.enable = true;
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
-    KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
   '';
 
   services.printing.enable = true;
