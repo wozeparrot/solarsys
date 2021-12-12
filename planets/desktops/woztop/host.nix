@@ -39,6 +39,7 @@
     driSupport = true;
     driSupport32Bit = true;
   };
+  hardware.uinput.enable = true;
 
   #networking.interfaces.enp2s0.useDHCP = true;
   #networking.interfaces.wlan0.useDHCP = true;
@@ -65,7 +66,6 @@
 
   services.xserver.videoDrivers = [ "amdgpu" "modesetting" ];
 
-  services.uinput.enable = true;
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
   '';
