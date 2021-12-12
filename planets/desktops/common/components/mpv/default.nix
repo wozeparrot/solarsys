@@ -10,14 +10,15 @@
       }
     ) {
       youtubeSupport = true;
-      scripts = with pkgs.mpvScripts; [ mpris autoload ];
+      scripts = with pkgs.mpvScripts; [ mpris ];
     };
     defaultProfiles = [ "gpu-hq" ];
     config = {
       force-window = true;
       pause = false;
       save-position-on-quit = true;
-      osc = true;
+      osc = false;
+      border = false;
       gpu-api = "auto";
       gpu-context = "wayland";
 
@@ -79,6 +80,16 @@
     mpv-shaders = {
       source = ./shaders;
       target = "mpv/shaders";
+    };
+
+    mpv-scripts = {
+      source = ./scripts;
+      target = "mpv/scripts";
+    };
+
+    mpv-fonts = {
+      source = ./fonts;
+      target = "mpv/fonts";
     };
 
     ff2mpv = {
