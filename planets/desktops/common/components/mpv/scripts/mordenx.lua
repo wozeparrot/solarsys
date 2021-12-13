@@ -22,17 +22,17 @@ local user_opts = {
     scalefullscreen = 0.6,      -- scaling of the controller when fullscreen
     scaleforcedwindow = 0.6,    -- scaling when rendered on a forced window
     vidscale = true,            -- scale the controller with the video?
-    hidetimeout = 1000,         -- duration in ms until the OSC hides if no
+    hidetimeout = 1500,         -- duration in ms until the OSC hides if no
                                 -- mouse movement. enforced non-negative for the
                                 -- user, but internally negative is 'always-on'.
-    fadeduration = 0,         -- duration of fade out in ms, 0 = no fade
+    fadeduration = 200,         -- duration of fade out in ms, 0 = no fade
     minmousemove = 4,           -- minimum amount of pixels the mouse has to
                                 -- move between ticks to make the OSC show up
     iamaprogrammer = false,     -- use native mpv values and disable OSC
                                 -- internal track list management (and some
                                 -- functions that depend on it)
     font = 'mpv-osd-symbols',	-- default osc font
-    seekbarhandlesize = 1.0,	-- size ratio of the slider handle, range 0 ~ 1
+    seekbarhandlesize = 0.75,	-- size ratio of the slider handle, range 0 ~ 1
     seekrange = true,		-- show seekrange overlay
     seekrangealpha = 64,      	-- transparency of seekranges
     seekbarkeyframes = true,    -- use keyframes when dragging the seekbar
@@ -94,15 +94,15 @@ local osc_param = { -- calculated by osc_init()
 
 local osc_styles = {
     TransBg = '{\\blur100\\bord150\\1c&H000000&\\3c&H000000&}',
-    SeekbarBg = '{\\blur0\\bord0\\1c&HFFFFFF&}',
-    SeekbarFg = '{\\blur1\\bord1\\1c&HE39C42&}',
-    Ctrl1 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs36\\fnmaterial-design-iconic-font}',
-    Ctrl2 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs24\\fnmaterial-design-iconic-font}',
-    Ctrl3 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs24\\fnmaterial-design-iconic-font}',
-    Time = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&H000000&\\fs17\\fn' .. user_opts.font .. '}',
-    Tooltip = '{\\blur1\\bord0.5\\1c&HFFFFFF&\\3c&H000000&\\fs18\\fn' .. user_opts.font .. '}',
-    Title = '{\\blur1\\bord0.5\\1c&HFFFFFF&\\3c&H0\\fs38\\q2\\fn' .. user_opts.font .. '}',
-    WinCtrl = '{\\blur1\\bord0.5\\1c&HFFFFFF&\\3c&H0\\fs20\\fnmpv-osd-symbols}',
+    SeekbarBg = '{\\blur0\\bord0\\1c&HD2CAD3&}',
+    SeekbarFg = '{\\blur1\\bord1\\1c&HAA3C9F&}',
+    Ctrl1 = '{\\blur0\\bord0\\1c&HD2CAD3&\\3c&HD2CAD3&\\fs36\\fnmaterial-design-iconic-font}',
+    Ctrl2 = '{\\blur0\\bord0\\1c&HD2CAD3&\\3c&HD2CAD3&\\fs24\\fnmaterial-design-iconic-font}',
+    Ctrl3 = '{\\blur0\\bord0\\1c&HD2CAD3&\\3c&HD2CAD3&\\fs24\\fnmaterial-design-iconic-font}',
+    Time = '{\\blur0\\bord0\\1c&HD2CAD3&\\3c&H000000&\\fs17\\fn' .. user_opts.font .. '}',
+    Tooltip = '{\\blur1\\bord0.5\\1c&HD2CAD3&\\3c&H000000&\\fs18\\fn' .. user_opts.font .. '}',
+    Title = '{\\blur1\\bord0.5\\1c&HD2CAD3&\\3c&H0\\fs38\\q2\\fn' .. user_opts.font .. '}',
+    WinCtrl = '{\\blur1\\bord0.5\\1c&HD2CAD3&\\3c&H0\\fs20\\fnmpv-osd-symbols}',
     elementDown = '{\\1c&H999999&}',
 }
 
