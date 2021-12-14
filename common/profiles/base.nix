@@ -47,6 +47,9 @@
       neovim
       pciutils
       usbutils
+      du-dust
+      nix-index
+      fd
       jq
 
       # network utils
