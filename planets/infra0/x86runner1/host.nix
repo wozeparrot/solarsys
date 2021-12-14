@@ -22,6 +22,15 @@
     25565 # minecraft
     8083 # calibre-web
   ];
+  networking.firewall.interfaces.wg0 = {
+    allowedUDPPorts = [
+      25565 # minecraft
+    ];
+    allowedTCPPorts = [
+      25565 # minecraft
+      8083 # calibre-web
+    ];
+  };
 
   # --- packages ---
   environment.systemPackages = with pkgs; [
