@@ -69,6 +69,7 @@
       "Alt+v" = "no-osd change-list glsl-shaders set \"~~/shaders/acme-0_5x.glsl\"; show-text \"ACME 0.5x\"";
 
       "Alt+m" = "no-osd change-list glsl-shaders pre \"~~/shaders/Anime4K/Anime4K_Clamp_Highlights.glsl\"; show-text \"Prepended Anime4K Clamp\"";
+      "Alt+x" = "no-osd change-list glsl-shaders toggle \"~~/shaders/fsr/easu.glsl:~~/shaders/fsr/rcas.glsl\"; show-text \"Toggled FSR\"";
       "Alt+g" = "no-osd change-list glsl-shaders add \"~~/shaders/kb.glsl\"; show-text \"Appended KrigBilateral\"";
       "Alt+b" = "no-osd change-list glsl-shaders toggle \"~~/shaders/adaptive-sharpen-anime.glsl\"; show-text \"Toggled Adaptive Sharpen Anime\"";
       "Alt+Shift+b" = "no-osd change-list glsl-shaders toggle \"~~/shaders/adaptive-sharpen.glsl\"; show-text \"Toggled Adaptive Sharpen\"";
