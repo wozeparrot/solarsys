@@ -8,20 +8,20 @@ in
     pname = "discord";
     binaryName = "Discord";
     desktopName = "Discord";
-    version = "0.0.15";
+    version = "0.0.16";
     src = fetchurl {
       url = "https://dl.discordapp.net/apps/linux/${version}/discord-${version}.tar.gz";
-      sha256 = "0pn2qczim79hqk2limgh88fsn93sa8wvana74mpdk5n6x5afkvdd";
+      sha256 = "1s9qym58cjm8m8kg3zywvwai2i3adiq6sdayygk2zv72ry74ldai";
     };
   };
   ptb = callPackage ./base.nix rec {
     pname = "discord-ptb";
     binaryName = "DiscordPTB";
     desktopName = "Discord PTB";
-    version = "0.0.26";
+    version = "0.0.27";
     src = fetchurl {
       url = "https://dl-ptb.discordapp.net/apps/linux/${version}/discord-ptb-${version}.tar.gz";
-      sha256 = "1rlj76yhxjwwfmdln3azjr69hvfx1bjqdg9jhdn4fp6mlirkrcq4";
+      sha256 = "0yphs65wpyr0ap6y24b0nbhq7sm02dg5c1yiym1fxjbynm1mdvqb";
     };
   };
   canary = callPackage ./base.nix rec {

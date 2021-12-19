@@ -8,7 +8,7 @@
 , lib
 , stdenv
 , wrapGAppsHook
-, alsaLib
+, alsa-lib
 , at-spi2-atk
 , at-spi2-core
 , atk
@@ -32,13 +32,13 @@
 , libXcursor
 , libXdamage
 , libXext
-, libxshmfence
 , libXfixes
 , libXi
 , libXrandr
 , libXrender
 , libXtst
 , libxcb
+, libxshmfence
 , mesa
 , nspr
 , nss
@@ -46,6 +46,7 @@
 , systemd
 , libappindicator-gtk3
 , libdbusmenu
+, useWayland ? false
 }:
 
 let
@@ -55,7 +56,7 @@ stdenv.mkDerivation rec {
   inherit pname version src;
 
   nativeBuildInputs = [
-    alsaLib
+    alsa-lib
     autoPatchelfHook
     cups
     libdrm
@@ -66,7 +67,7 @@ stdenv.mkDerivation rec {
     libXtst
     libxcb
     libxshmfence
-    mesa.drivers
+    mesa
     nss
     wrapGAppsHook
   ];
@@ -77,8 +78,10 @@ stdenv.mkDerivation rec {
     libcxx
     systemd
     libpulseaudio
+    libdrm
+    mesa
     stdenv.cc.cc
-    alsaLib
+    alsa-lib
     atk
     at-spi2-atk
     at-spi2-core
@@ -125,16 +128,19 @@ stdenv.mkDerivation rec {
     wrapProgram $out/opt/${binaryName}/${binaryName} \
         "''${gappsWrapperArgs[@]}" \
         --prefix XDG_DATA_DIRS : "${gtk3}/share/gsettings-schemas/${gtk3.name}/" \
-        --prefix LD_LIBRARY_PATH : ${libPath}
+        --prefix LD_LIBRARY_PATH : ${libPath}:$out/opt/${binaryName} \
+        --add-flags "${lib.optionalString useWayland " --enable-features=UseOzonePlatform --ozone-platform=wayland"}"
 
     ln -s $out/opt/${binaryName}/${binaryName} $out/bin/
+    # Without || true the install would fail on case-insensitive filesystems
+    ln -s $out/opt/${binaryName}/${binaryName} $out/bin/${lib.strings.toLower binaryName} || true
     ln -s $out/opt/${binaryName}/discord.png $out/share/pixmaps/${pname}.png
 
     ln -s "${desktopItem}/share/applications" $out/share/
   '';
 
   desktopItem = makeDesktopItem {
-    name = pname;
+    name = "${pname}${lib.optionalString useWayland " (Wayland)"}";
     exec = binaryName;
     icon = pname;
     inherit desktopName;
