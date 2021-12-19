@@ -105,7 +105,6 @@ stdenv.mkDerivation rec {
     libXi
     libXrandr
     libXrender
-    libxshmfence
     libXtst
     nspr
     nss
