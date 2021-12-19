@@ -1,7 +1,7 @@
 self: super:
 {
   ss = {
-    discord-canary = self.callPackage ./discord { branch = "canary"; useWayland = true; };
+    discord-canary = self.callPackage ./discord { branch = "canary"; useWayland = false; };
     rivercarro = self.callPackage ./rivercarro { };
     river = self.callPackage ./river { };
     shotcut = self.libsForQt5.callPackage ./shotcut { };
