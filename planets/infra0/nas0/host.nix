@@ -168,7 +168,8 @@
     description = "Dead Simple VPN - Server";
 
     path = with pkgs; [
-      gawk iproute2
+      gawk
+      iproute2
     ];
     serviceConfig = {
       ExecStart = "${pkgs.screen}/bin/screen ${pkgs.dsvpn}/bin/dsvpn server /keys/dsvpn";

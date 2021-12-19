@@ -72,20 +72,21 @@
       ) // (
       let
         configNixpkgs = system: (
-          import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-            overlays = [
-              (
-                final: prev: {
-                  mpkgs = import master {
-                    inherit system;
-                    config.allowUnfree = true;
-                  };
-                }
-              )
-            ] ++ overlays;
-          } // pkgSetsFor system
+          import nixpkgs
+            {
+              inherit system;
+              config.allowUnfree = true;
+              overlays = [
+                (
+                  final: prev: {
+                    mpkgs = import master {
+                      inherit system;
+                      config.allowUnfree = true;
+                    };
+                  }
+                )
+              ] ++ overlays;
+            } // pkgSetsFor system
         );
       in
       {

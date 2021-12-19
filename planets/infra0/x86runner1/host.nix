@@ -42,7 +42,7 @@
     wg0 = {
       address = [ "10.11.235.12/24" "fdbe:ef11:2358:1321::12/64" ];
       dns = [ "10.11.235.1" "fdbe:ef11:2358:1321::1" ];
-      
+
       privateKeyFile = "/keys/wg_private";
 
       peers = [

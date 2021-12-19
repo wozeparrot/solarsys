@@ -39,7 +39,7 @@
     wg0 = {
       address = [ "10.11.235.11/24" "fdbe:ef11:2358:1321::11/64" ];
       dns = [ "10.11.235.1" "fdbe:ef11:2358:1321::1" ];
-      
+
       privateKeyFile = "/keys/wg_private";
 
       peers = [
@@ -64,7 +64,7 @@
   };
 
   environment.noXlibs = false;
-  users.groups.pulse-access = {};
+  users.groups.pulse-access = { };
   users.users.user = {
     initialPassword = "toor";
     isNormalUser = true;

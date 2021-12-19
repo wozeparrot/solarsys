@@ -26,7 +26,7 @@
 
   # Reboot on kernel panic
   boot.kernelParams = [ "panic=1" "boot.panic_on_fail" ];
-  
+
   # no systemd emergency mode
   systemd.enableEmergencyMode = false;
 
