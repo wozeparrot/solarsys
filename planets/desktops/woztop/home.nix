@@ -31,14 +31,8 @@
     )
   ];
 
-  programs.obs-studio = {
-    enable = true;
-    plugins = with pkgs.obs-studio-plugins; [ wlrobs ];
-  };
-
   # Services
   services.kdeconnect.indicator = true;
-  services.syncthing.enable = true;
 
   home.stateVersion = "20.09";
 }

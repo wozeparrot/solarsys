@@ -121,9 +121,20 @@
     };
   };
 
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-websocket
+      obs-move-transition
+      obs-gstreamer
+    ];
+  };
+
   # extra services
   services.kdeconnect.enable = true;
   services.easyeffects.enable = false; # causes some problems
+  services.syncthing.enable = true;
 
   # xdg config
   xdg.enable = true;
