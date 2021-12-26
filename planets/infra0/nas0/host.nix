@@ -66,6 +66,19 @@
   # --- packages ---
   environment.systemPackages = with pkgs; [ ];
 
+  # udev rules
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", TEST=="power/autosuspend" ATTR{power/autosuspend}="-1"
+  '';
+
+  # crontab
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "*/1 * * * * date > /mnt/pstore1/.date"
+    ];
+  };
+
   # --- wireguard vpn setup ---
   # enable nat
   networking.nat = {
