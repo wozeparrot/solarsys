@@ -124,7 +124,7 @@ waybar &
 fnott &
 oguri &
 
-
+systemctl --user restart mpdris2.service
 
 # Jump to rivertile
 riverctl default-layout rivertile

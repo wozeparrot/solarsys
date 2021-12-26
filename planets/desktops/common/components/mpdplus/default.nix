@@ -32,7 +32,7 @@
   # mpdris2 for kdeconnect
   services.mpdris2 = {
     enable = true;
-    notifications = true;
+    notifications = false;
   };
 
   # custom ncmpcpp
