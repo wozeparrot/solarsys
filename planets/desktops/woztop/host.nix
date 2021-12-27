@@ -46,8 +46,13 @@
   #networking.interfaces.enp2s0.useDHCP = true;
   #networking.interfaces.wlan0.useDHCP = true;
 
-  networking.firewall.allowedTCPPorts = [ 29999 6504 ];
-  networking.firewall.allowedUDPPorts = [ 29999 6504 ];
+  networking.firewall.allowedTCPPorts = [ 29999 ];
+  networking.firewall.allowedUDPPorts = [ 29999 ];
+
+  networking.firewall.interfaces.wg-ss = {
+    allowedUDPPorts = [ 6504 ];
+    allowedTCPPorts = [ 6504 ];
+  };
 
   environment.systemPackages = with pkgs; [
     virt-manager
