@@ -16,6 +16,8 @@
   boot.kernelPackages = pkgs.linuxPackages_xanmod;
   boot.kernelParams = [ "intel_iommu=on" ];
 
+  hardware.cpu.intel.updateMicrocode = true;
+
   # nix cross build support
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   nix.extraOptions = ''
