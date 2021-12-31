@@ -51,23 +51,24 @@
     fonts = with pkgs; [
       nerdfonts
       agave
-      ipafont
-      kochi-substitute
+      route159
+      tenderness
+      noto-fonts-cjk
     ];
 
     fontconfig = {
       defaultFonts = {
         monospace = [
           "Agave Nerd Font"
-          "IPAGothic"
+          "Noto Sans Japanese"
         ];
         sansSerif = [
-          "Agave:style=Regular"
-          "IPAPGothic"
+          "Route 159"
+          "Noto Sans Japanese"
         ];
         serif = [
-          "DejaVu Serif"
-          "IPAPMincho"
+          "Tenderness"
+          "Noto Serif Japanese"
         ];
       };
     };
