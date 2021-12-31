@@ -48,10 +48,28 @@
   # fonts
   fonts = {
     enableDefaultFonts = true;
-    fonts = with pkgs; [ nerdfonts agave ];
-    fontconfig.defaultFonts = {
-      monospace = [ "Agave Nerd Font" ];
-      sansSerif = [ "Agave:style=Regular" ];
+    fonts = with pkgs; [
+      nerdfonts
+      agave
+      ipafont
+      kochi-substitute
+    ];
+
+    fontconfig = {
+      defaultFonts = {
+        monospace = [
+          "Agave Nerd Font"
+          "IPAGothic"
+        ];
+        sansSerif = [
+          "Agave:style=Regular"
+          "IPAPGothic"
+        ];
+        serif = [
+          "DejaVu Serif"
+          "IPAPMincho"
+        ];
+      };
     };
   };
 
