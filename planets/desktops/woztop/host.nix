@@ -68,6 +68,7 @@
   ];
 
   programs.nm-applet.enable = true;
+  programs.droidcam.enable = true;
 
   # services.flatpak.enable = true;
 
