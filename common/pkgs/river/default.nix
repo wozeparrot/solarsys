@@ -19,13 +19,13 @@
 
 stdenv.mkDerivation rec {
   pname = "river";
-  version = "v0.1.0";
+  version = "0.1.2";
 
   src = fetchFromGitHub {
     owner = "ifreund";
     repo = pname;
-    rev = version;
-    sha256 = "sha256-Z5+ZzaQuHX5humZ3pCrn0jdzfgkoEUGCTqsheVl+7Q4=";
+    rev = "v${version}";
+    sha256 = "sha256-k1OqX2AgAJ3JSiXzzZvGESfVyUxg5lC/y5/HV52R2lc=";
     fetchSubmodules = true;
   };
 
@@ -34,7 +34,6 @@ stdenv.mkDerivation rec {
   buildInputs = [
     wayland-protocols
     wlroots
-    pixman
     libxkbcommon
     pixman
     udev
@@ -52,7 +51,7 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     runHook preInstall
-    zig build -Drelease-safe=true -Dcpu=baseline -Dxwayland -Dman-pages --prefix $out install
+    zig build -Drelease-safe -Dcpu=baseline -Dxwayland -Dman-pages --prefix $out install
     runHook postInstall
   '';
 
