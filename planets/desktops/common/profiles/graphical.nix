@@ -51,7 +51,7 @@
     fonts = with pkgs; [
       nerdfonts
       agave
-      route159
+      vegur
       tenderness
       noto-fonts-cjk
     ];
@@ -63,7 +63,7 @@
           "Noto Sans Japanese"
         ];
         sansSerif = [
-          "Route 159"
+          "Vegur"
           "Noto Sans Japanese"
         ];
         serif = [
