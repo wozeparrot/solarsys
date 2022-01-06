@@ -29,7 +29,7 @@
     lmms
     libsForQt5.kdenlive
     transmission-gtk
-    libreoffice-fresh
+    libreoffice
     ghidra-bin
     solvespace
     antimony
