@@ -43,7 +43,6 @@
     yt-dlp
     r128gain
     ffmpeg
-    vlc
 
     gitAndTools.hub
 
