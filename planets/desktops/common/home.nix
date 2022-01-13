@@ -37,6 +37,7 @@
     freecad
     krita
     kicad-unstable
+    horizon-eda
     zettlr
     audacity
     antimicroX
