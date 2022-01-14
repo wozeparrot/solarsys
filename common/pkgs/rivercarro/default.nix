@@ -1,46 +1,30 @@
 { lib
 , stdenv
 , fetchgit
-, git
 , zig
+, river
 , wayland
 , pkg-config
-, river
 , scdoc
-, xwayland
-, wayland-protocols
-, wlroots
-, libxkbcommon
-, pixman
-, udev
-, libevdev
-, libX11
-, libGL
 }:
 
 stdenv.mkDerivation rec {
   pname = "rivercarro";
-  version = "a4b925083497d5321300d64f9f5ef3a1afd91a56";
+  version = "0.1.1";
 
   src = fetchgit {
     url = "https://git.sr.ht/~novakane/rivercarro";
-    rev = version;
-    sha256 = lib.fakeSha256;
+    rev = "v${version}";
     fetchSubmodules = true;
+    sha256 = "0h1wvl6rlrpr67zl51x71hy7nwkfd5kfv5p2mql6w5fybxxyqnpm";
   };
 
-  nativeBuildInputs = [ git zig wayland xwayland scdoc pkg-config river ];
-
-  buildInputs = [
-    wayland-protocols
-    wlroots
-    pixman
-    libxkbcommon
-    pixman
-    udev
-    libevdev
-    libX11
-    libGL
+  nativeBuildInputs = [
+    pkg-config
+    river
+    scdoc
+    wayland
+    zig
   ];
 
   dontConfigure = true;
@@ -51,14 +35,16 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     runHook preInstall
-    zig build -Drelease-safe -Dcpu=baseline --prefix $out install
+    zig build -Drelease-safe -Dcpu=baseline -Dman-pages --prefix $out install
     runHook postInstall
   '';
 
-  /*
-    Builder patch install dir into river to get default config
-    When installFlags is removed, river becomes half broken.
-    See https://github.com/ifreund/river/blob/7ffa2f4b9e7abf7d152134f555373c2b63ccfc1d/river/main.zig#L56
-  */
-  installFlags = [ "DESTDIR=$(out)" ];
+  meta = with lib; {
+    homepage = "https://git.sr.ht/~novakane/rivercarro";
+    description = "A layout generator for river Wayland compositor, fork of rivertile";
+    license = licenses.gpl3Plus;
+    platforms = platforms.linux;
+    maintainers = with maintainers; [ kraem ];
+  };
 }
+
