@@ -10,13 +10,13 @@
 
 stdenv.mkDerivation rec {
   pname = "rivercarro";
-  version = "0.1.1";
+  version = "0.1.2";
 
   src = fetchgit {
     url = "https://git.sr.ht/~novakane/rivercarro";
     rev = "v${version}";
     fetchSubmodules = true;
-    sha256 = "0h1wvl6rlrpr67zl51x71hy7nwkfd5kfv5p2mql6w5fybxxyqnpm";
+    sha256 = "sha256-53CIbSGcWId5pZ0qdMOfO0s/qOdvI04MsdSDOM9ArR4=";
   };
 
   nativeBuildInputs = [
