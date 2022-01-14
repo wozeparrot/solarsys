@@ -35,13 +35,13 @@ riverctl map normal $mod+Shift Comma send-to-output previous
 # Mod+Return to bump the focused view to the top of the layout stack
 riverctl map normal $mod Tab zoom
 
-# Mod+H and Mod+L to decrease/increase the main_factor value of rivertile by 0.05
-riverctl map normal $mod H send-layout-cmd rivertile "main-ratio -0.05"
-riverctl map normal $mod L send-layout-cmd rivertile "main-ratio +0.05"
+# Mod+H and Mod+L to decrease/increase the main_factor value of rivercarro by 0.05
+riverctl map normal $mod H send-layout-cmd rivercarro "main-ratio -0.05"
+riverctl map normal $mod L send-layout-cmd rivercarro "main-ratio +0.05"
 
-# Mod+Shift+H and Mod+Shift+L to increment/decrement the main_count value of rivertile.
-riverctl map normal $mod+Shift H send-layout-cmd rivertile "main-count +1"
-riverctl map normal $mod+Shift L send-layout-cmd rivertile "main-count -1"
+# Mod+Shift+H and Mod+Shift+L to increment/decrement the main_count value of rivercarro.
+riverctl map normal $mod+Shift H send-layout-cmd rivercarro "main-count +1"
+riverctl map normal $mod+Shift L send-layout-cmd rivercarro "main-count -1"
 
 # Mod + Left Mouse Button to move views
 riverctl map-pointer normal $mod BTN_LEFT move-view
@@ -79,10 +79,13 @@ riverctl map normal $mod S toggle-float
 riverctl map normal $mod F toggle-fullscreen
 
 # Mod+{Up,Right,Down,Left} to change layout orientation
-riverctl map normal $mod Up    send-layout-cmd rivertile "main-location top"
-riverctl map normal $mod Right send-layout-cmd rivertile "main-location right"
-riverctl map normal $mod Down  send-layout-cmd rivertile "main-location bottom"
-riverctl map normal $mod Left  send-layout-cmd rivertile "main-location left"
+riverctl map normal $mod Up    send-layout-cmd rivercarro "main-location top"
+riverctl map normal $mod Right send-layout-cmd rivercarro "main-location right"
+riverctl map normal $mod Down  send-layout-cmd rivercarro "main-location bottom"
+riverctl map normal $mod Left  send-layout-cmd rivercarro "main-location left"
+
+# Monocle mode
+riverctl map normal $mod M     send-layout-cmd rivercarro "main-location monocle"
 
 # Passthrough mode
 riverctl declare-mode passthrough
@@ -126,6 +129,6 @@ oguri &
 
 systemctl --user restart mpdris2.service
 
-# Jump to rivertile
-riverctl default-layout rivertile
-exec rivertile
+# Jump to rivercarro
+riverctl default-layout rivercarro
+exec rivercarro
