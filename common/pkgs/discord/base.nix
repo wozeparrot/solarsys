@@ -46,7 +46,7 @@
 , systemd
 , libappindicator-gtk3
 , libdbusmenu
-, useWayland ? true
+, useWayland ? false
 }:
 
 let
