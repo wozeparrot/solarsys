@@ -69,6 +69,7 @@
 
   programs.nm-applet.enable = true;
   programs.droidcam.enable = true;
+  programs.wireshark.enable = true;
 
   # services.flatpak.enable = true;
 
