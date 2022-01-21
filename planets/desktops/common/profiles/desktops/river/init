@@ -133,4 +133,4 @@ systemctl --user restart mpdris2.service
 
 # Jump to rivercarro
 riverctl default-layout rivercarro
-exec rivercarro -inner-gaps 6 -outer-gaps 12
+exec rivercarro -inner-gaps 0 -outer-gaps 0
