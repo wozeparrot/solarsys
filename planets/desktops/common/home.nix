@@ -47,7 +47,7 @@
 
     gitAndTools.hub
 
-    multimc
+    polymc
     mpkgs.steam
     mpkgs.steam.run
     mpkgs.protontricks
@@ -141,7 +141,7 @@
   # theming
   gtk = {
     theme = {
-      package = pkgs.gnome.gnome-themes-standard;
+      package = pkgs.gnome.gnome-themes-extra;
       name = "Adwaita-dark";
     };
     iconTheme = {
