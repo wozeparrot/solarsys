@@ -141,7 +141,7 @@
   # theming
   gtk = {
     theme = {
-      package = pkgs.gnome3.gnome_themes_standard;
+      package = pkgs.gnome.gnome-themes-standard;
       name = "Adwaita-dark";
     };
     iconTheme = {
