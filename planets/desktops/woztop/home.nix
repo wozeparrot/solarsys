@@ -19,7 +19,7 @@
 
     teams
 
-    wineWowPackages.staging
+    wine
     appimage-run
 
     (
