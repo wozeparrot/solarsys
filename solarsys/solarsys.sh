@@ -524,9 +524,9 @@ function list {
             fi
 
             if [[ "$((i + 1))" == "${#moons[@]}" ]]; then
-                echo "└───${moons[i]} at [$(jq -c -r '.host' <<< "$trajectory")]:$(jq -c -r '.port' <<< "$trajectory")"
+                echo "└───${moons[i]} at [$(jq -c -r '.host' <<< "$trajectory")]:$(jq -c -r '.port' <<< "$trajectory") orbits $(get_orbits "$planet" "${moons[i]}")"
             else
-                echo "├───${moons[i]} at [$(jq -c -r '.host' <<< "$trajectory")]:$(jq -c -r '.port' <<< "$trajectory")"
+                echo "├───${moons[i]} at [$(jq -c -r '.host' <<< "$trajectory")]:$(jq -c -r '.port' <<< "$trajectory") orbits $(get_orbits "$planet" "${moons[i]}")"
             fi
         done
 

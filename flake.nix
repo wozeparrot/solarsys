@@ -151,7 +151,7 @@
                       host = "192.168.0.11";
                       port = 22;
                     };
-                    orbits = [ "nas" ];
+                    orbits = [ "aarch64-build" "nas" ];
                     satellites = {
                       wg_private = {
                         path = "./satellites/infra0/nas0/wg_private";
@@ -178,7 +178,7 @@
                       host = "192.168.0.221";
                       port = 22;
                     };
-                    orbits = [ "runners" ];
+                    orbits = [ "x86-build" "runners" ];
                     satellites = {
                       wg_private = {
                         path = "./satellites/infra0/x86runner0/wg_private";
@@ -201,7 +201,7 @@
                       host = "192.168.0.243";
                       port = 22;
                     };
-                    orbits = [ "runners" ];
+                    orbits = [ "x86-build" "runners" ];
                     satellites = {
                       wg_private = {
                         path = "./satellites/infra0/x86runner1/wg_private";
