@@ -47,7 +47,7 @@
 
     gitAndTools.hub
 
-    polymc
+    mpkgs.polymc
     mpkgs.steam
     mpkgs.steam.run
     mpkgs.protontricks
