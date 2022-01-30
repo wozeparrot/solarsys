@@ -211,6 +211,10 @@
                         path = "./satellites/infra0/x86runner1/wozey_token";
                         destination = "/var/lib/wozey/.token";
                       };
+                      matrix_as_discord_env = {
+                        path = "./satellites/infra0/x86runner1/matrix_as_discord_env";
+                        destination = "/keys/matrix_as_discord_env";
+                      };
                     };
 
                     core = nixpkgs.lib.nixosSystem {
