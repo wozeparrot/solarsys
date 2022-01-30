@@ -83,44 +83,48 @@
   services.unbound = {
     enable = true;
     enableRootTrustAnchor = true;
-    settings.server = {
-      interface = [ "0.0.0.0" "::0" ];
-      access-control = [
-        "0.0.0.0/0 refuse"
-        "::/0 refuse"
-        "10.11.235.0/24 allow"
-        "fdbe:ef11:2358:1321::/64 allow"
-        "127.0.0.0/8 allow"
-        "::1 allow"
-      ];
+    settings = {
+      server = {
+        interface = [ "0.0.0.0" "::0" ];
+        access-control = [
+          "0.0.0.0/0 refuse"
+          "::/0 refuse"
+          "10.11.235.0/24 allow"
+          "fdbe:ef11:2358:1321::/64 allow"
+          "127.0.0.0/8 allow"
+          "::1 allow"
+        ];
 
-      do-ip4 = true;
-      do-udp = true;
-      do-tcp = true;
+        do-ip4 = true;
+        do-udp = true;
+        do-tcp = true;
 
-      do-ip6 = true;
-      prefer-ip6 = false;
+        do-ip6 = true;
+        prefer-ip6 = false;
 
-      harden-glue = true;
+        harden-glue = true;
 
-      harden-dnssec-stripped = true;
+        harden-dnssec-stripped = true;
 
-      use-caps-for-id = false;
+        use-caps-for-id = false;
 
-      edns-buffer-size = 1472;
+        edns-buffer-size = 1472;
 
-      prefetch = true;
+        prefetch = true;
 
-      num-threads = 1;
+        num-threads = 1;
 
-      private-address = [
-        "192.168.0.0/16"
-        "169.254.0.0/16"
-        "172.16.0.0/12"
-        "10.0.0.0/8"
-        "fd00::/8"
-        "fe80::/10"
-      ];
+        private-address = [
+          "192.168.0.0/16"
+          "169.254.0.0/16"
+          "172.16.0.0/12"
+          "10.0.0.0/8"
+          "fd00::/8"
+          "fe80::/10"
+        ];
+
+        local-data = "\"wozenest.duckdns.org A 10.11.235.12\"";
+      };
     };
   };
 
