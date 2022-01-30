@@ -39,6 +39,7 @@
       # extra utils
       ripgrep
       htop
+      btop
       curl
       file
       tree
