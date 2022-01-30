@@ -13,6 +13,9 @@ rustPlatform.buildRustPackage rec {
 
   cargoSha256 = "sha256-zyzgxNBUO+xR/kL3CQHI3gCE0wS7H//ujUvCtrs69tc=";
 
+  buildNoDefaultFeatures = true;
+  buildFeatures = [ "conduit_bin" "backend_sqlite" ];
+
   meta = with lib; {
     description = "A Matrix homeserver written in Rust";
     homepage = "https://conduit.rs/";
