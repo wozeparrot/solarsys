@@ -17,13 +17,13 @@
 
 buildPythonPackage rec {
   pname = "yt-dlp";
-  version = "717216b0930c742dab5bbd065e9c58caace74a8c";
+  version = "d6bc443bdeb8d0246cef1c4b8b9206a18413dbca";
 
   src = fetchFromGitHub {
     owner = "yt-dlp";
     repo = pname;
     rev = version;
-    sha256 = "sha256-ICKj2749op55G0dbI0idZElIosJ+cbcis1FDk5yAVJY=";
+    sha256 = "sha256-0NfJsM+gC9dkabop5pwUwVllAAyPYPRv6yMHwe7NuCM=";
   };
 
   propagatedBuildInputs = [ websockets mutagen ]
