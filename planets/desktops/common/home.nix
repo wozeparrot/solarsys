@@ -77,6 +77,7 @@
     p7zip
 
     ss.discord-canary
+    nheko
 
     qt5.qtwayland
     adwaita-qt
