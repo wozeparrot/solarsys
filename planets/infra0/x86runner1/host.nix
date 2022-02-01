@@ -118,7 +118,7 @@
         server_name = "wozenest.duckdns.org";
 
         database_backend = "sqlite";
-        allow_registration = true;
+        allow_registration = false;
       };
     };
   };
@@ -134,6 +134,9 @@
       };
       auth = {
         usePrivilegedIntents = true;
+      };
+      room = {
+        defaultVisibility = "private";
       };
     };
   };
