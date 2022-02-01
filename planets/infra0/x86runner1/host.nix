@@ -21,7 +21,8 @@
   networking.firewall.allowedTCPPorts = [
     25565 # minecraft
     8083 # calibre-web
-    443 # caddy
+    8448 # matrix
+    443 # caddy | matrix
     80 # caddy
   ];
   networking.firewall.interfaces.wg0 = {
@@ -31,7 +32,8 @@
     allowedTCPPorts = [
       25565 # minecraft
       8083 # calibre-web
-      443 # caddy
+      8448 # matrix
+      443 # caddy | matrix
       80 # caddy
     ];
   };
@@ -133,16 +135,13 @@
       auth = {
         usePrivilegedIntents = true;
       };
-      channel = {
-        # namePattern = "[] :name";
-      };
     };
   };
 
   # --- caddy ---
   services.caddy = {
     enable = true;
-    logFormat = "level INFO";
+    logFormat = "level ERROR";
     virtualHosts = {
       "wozenest.duckdns.org" = {
         extraConfig = ''
