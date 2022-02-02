@@ -2,7 +2,7 @@
 {
   nix = {
     package = pkgs.nixUnstable;
-    systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+    settings.system-features = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 
     registry =
       let
@@ -16,7 +16,7 @@
       nixRegistry;
 
     nixPath = [ "nixpkgs=${inputs.unstable}" ];
-    sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh" ];
+    settings.extra-sandbox-paths = [ "/bin/sh=${pkgs.bash}/bin/sh" ];
 
     gc = {
       automatic = true;
