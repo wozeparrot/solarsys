@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
-  nix.trustedUsers = [ "woze" ];
+  nix.settings.trusted-users = [ "woze" ];
 
   users.users.woze = {
     isNormalUser = true;
