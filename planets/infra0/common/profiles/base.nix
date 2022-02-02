@@ -36,6 +36,6 @@
   networking.firewall.allowedTCPPorts = [ 22 ];
 
   # cleanup
-  nix.autoOptimiseStore = true;
+  nix.settings.auto-optimise-store = true;
   boot.cleanTmpDir = true;
 }
