@@ -53,7 +53,7 @@
     mpkgs.protontricks
     mpkgs.lutris
     the-powder-toy
-    mpkgs.osu-lazer
+    nix-gaming.osu-lazer-bin
 
     ranger
     feh
