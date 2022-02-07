@@ -56,6 +56,7 @@
       # network utils
       dnsutils
       nmap
+      whois
     ];
 
     shellAliases = {
