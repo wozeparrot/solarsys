@@ -59,7 +59,7 @@ in
       };
       insp = {
         body = ''
-          nix shell nixpkgs#$argv
+          nix shell ${builtins.toString ../../../../../.}#$argv
         '';
       };
       mpvclf = {
