@@ -49,6 +49,23 @@
         nix-gaming = inputs.nix-gaming.packages."${system}";
         wozey = inputs.wozey.packages."${system}";
       };
+      configNixpkgs = system: (
+        import nixpkgs
+          {
+            inherit system;
+            config.allowUnfree = true;
+            overlays = [
+              (
+                final: prev: {
+                  mpkgs = import master {
+                    inherit system;
+                    config.allowUnfree = true;
+                  };
+                }
+              )
+            ] ++ overlays;
+          } // pkgSetsFor system
+      );
     in
     flake-utils.lib.eachSystem [
       "x86_64-linux"
@@ -57,9 +74,11 @@
       (
         system:
         let
-          pkgs = import nixpkgs { inherit system; };
+          pkgs = configNixpkgs system;
         in
         {
+          legacyPackages = pkgs;
+
           devShell = pkgs.mkShell {
             nativeBuildInputs = with pkgs; [
               git
@@ -69,162 +88,142 @@
             ];
           };
         }
-      ) // (
-      let
-        configNixpkgs = system: (
-          import nixpkgs
-            {
-              inherit system;
-              config.allowUnfree = true;
-              overlays = [
-                (
-                  final: prev: {
-                    mpkgs = import master {
-                      inherit system;
-                      config.allowUnfree = true;
-                    };
-                  }
-                )
-              ] ++ overlays;
-            } // pkgSetsFor system
-        );
-      in
-      {
-        solar-system = { };
+      ) //
+    {
+      solar-system = { };
 
-        planets =
-          let
-            makeModules = pkgs: hostFile: [
-              (
-                { lib, ... }: {
-                  system.configurationRevision = lib.mkIf (self ? rev) self.rev;
+      planets =
+        let
+          makeModules = pkgs: hostFile: [
+            (
+              { lib, ... }: {
+                system.configurationRevision = lib.mkIf (self ? rev) self.rev;
 
-                  nixpkgs.config = pkgs.config;
-                  nixpkgs.pkgs = pkgs;
+                nixpkgs.config = pkgs.config;
+                nixpkgs.pkgs = pkgs;
 
-                  _module.args = {
-                    inherit inputs pkgs;
-                  };
-                }
-              )
-              hostFile
-            ];
-            specialArgs = {
-              inherit inputs;
-            };
-          in
-          {
-            desktops =
-              let
-                makeDesktopModules = pkgs: hostFile: [
-                  home-manager.nixosModules.home-manager
-                ] ++ makeModules pkgs hostFile;
-              in
-              {
-                moons = {
-                  woztop =
-                    let
-                      system = "x86_64-linux";
-                      pkgs = configNixpkgs system;
-                    in
-                    {
-                      trajectory = "";
-                      orbits = [ ];
-
-                      core = nixpkgs.lib.nixosSystem {
-                        inherit system specialArgs;
-                        modules = makeDesktopModules pkgs ./planets/desktops/woztop/host.nix;
-                      };
-                    };
+                _module.args = {
+                  inherit inputs pkgs;
                 };
-              };
-
-            infra0 = {
+              }
+            )
+            hostFile
+          ];
+          specialArgs = {
+            inherit inputs;
+          };
+        in
+        {
+          desktops =
+            let
+              makeDesktopModules = pkgs: hostFile: [
+                home-manager.nixosModules.home-manager
+              ] ++ makeModules pkgs hostFile;
+            in
+            {
               moons = {
-                nas0 =
-                  let
-                    system = "aarch64-linux";
-                    pkgs = configNixpkgs system;
-                  in
-                  {
-                    trajectory = {
-                      host = "192.168.0.11";
-                      port = 22;
-                    };
-                    orbits = [ "aarch64-build" "nas" ];
-                    satellites = {
-                      wg_private = {
-                        path = "./satellites/infra0/nas0/wg_private";
-                        destination = "/keys/wg_private";
-                      };
-                      dsvpn = {
-                        path = "./satellites/common/dsvpn";
-                        destination = "/keys/dsvpn";
-                      };
-                    };
-
-                    core = nixpkgs.lib.nixosSystem {
-                      inherit system specialArgs;
-                      modules = makeModules pkgs ./planets/infra0/nas0/host.nix;
-                    };
-                  };
-                x86runner0 =
+                woztop =
                   let
                     system = "x86_64-linux";
                     pkgs = configNixpkgs system;
                   in
                   {
-                    trajectory = {
-                      host = "192.168.0.221";
-                      port = 22;
-                    };
-                    orbits = [ "x86-build" "runners" ];
-                    satellites = {
-                      wg_private = {
-                        path = "./satellites/infra0/x86runner0/wg_private";
-                        destination = "/keys/wg_private";
-                      };
-                    };
+                    trajectory = "";
+                    orbits = [ ];
 
                     core = nixpkgs.lib.nixosSystem {
                       inherit system specialArgs;
-                      modules = makeModules pkgs ./planets/infra0/x86runner0/host.nix;
-                    };
-                  };
-                x86runner1 =
-                  let
-                    system = "x86_64-linux";
-                    pkgs = configNixpkgs system;
-                  in
-                  {
-                    trajectory = {
-                      host = "192.168.0.243";
-                      port = 22;
-                    };
-                    orbits = [ "x86-build" "runners" ];
-                    satellites = {
-                      wg_private = {
-                        path = "./satellites/infra0/x86runner1/wg_private";
-                        destination = "/keys/wg_private";
-                      };
-                      wozey_token = {
-                        path = "./satellites/infra0/x86runner1/wozey_token";
-                        destination = "/var/lib/wozey/.token";
-                      };
-                      matrix_as_discord_env = {
-                        path = "./satellites/infra0/x86runner1/matrix_as_discord_env";
-                        destination = "/keys/matrix_as_discord_env";
-                      };
-                    };
-
-                    core = nixpkgs.lib.nixosSystem {
-                      inherit system specialArgs;
-                      modules = makeModules pkgs ./planets/infra0/x86runner1/host.nix;
+                      modules = makeDesktopModules pkgs ./planets/desktops/woztop/host.nix;
                     };
                   };
               };
+            };
+
+          infra0 = {
+            moons = {
+              nas0 =
+                let
+                  system = "aarch64-linux";
+                  pkgs = configNixpkgs system;
+                in
+                {
+                  trajectory = {
+                    host = "192.168.0.11";
+                    port = 22;
+                  };
+                  orbits = [ "aarch64-build" "nas" ];
+                  satellites = {
+                    wg_private = {
+                      path = "./satellites/infra0/nas0/wg_private";
+                      destination = "/keys/wg_private";
+                    };
+                    dsvpn = {
+                      path = "./satellites/common/dsvpn";
+                      destination = "/keys/dsvpn";
+                    };
+                  };
+
+                  core = nixpkgs.lib.nixosSystem {
+                    inherit system specialArgs;
+                    modules = makeModules pkgs ./planets/infra0/nas0/host.nix;
+                  };
+                };
+              x86runner0 =
+                let
+                  system = "x86_64-linux";
+                  pkgs = configNixpkgs system;
+                in
+                {
+                  trajectory = {
+                    host = "192.168.0.221";
+                    port = 22;
+                  };
+                  orbits = [ "x86-build" "runners" ];
+                  satellites = {
+                    wg_private = {
+                      path = "./satellites/infra0/x86runner0/wg_private";
+                      destination = "/keys/wg_private";
+                    };
+                  };
+
+                  core = nixpkgs.lib.nixosSystem {
+                    inherit system specialArgs;
+                    modules = makeModules pkgs ./planets/infra0/x86runner0/host.nix;
+                  };
+                };
+              x86runner1 =
+                let
+                  system = "x86_64-linux";
+                  pkgs = configNixpkgs system;
+                in
+                {
+                  trajectory = {
+                    host = "192.168.0.243";
+                    port = 22;
+                  };
+                  orbits = [ "x86-build" "runners" ];
+                  satellites = {
+                    wg_private = {
+                      path = "./satellites/infra0/x86runner1/wg_private";
+                      destination = "/keys/wg_private";
+                    };
+                    wozey_token = {
+                      path = "./satellites/infra0/x86runner1/wozey_token";
+                      destination = "/var/lib/wozey/.token";
+                    };
+                    matrix_as_discord_env = {
+                      path = "./satellites/infra0/x86runner1/matrix_as_discord_env";
+                      destination = "/keys/matrix_as_discord_env";
+                    };
+                  };
+
+                  core = nixpkgs.lib.nixosSystem {
+                    inherit system specialArgs;
+                    modules = makeModules pkgs ./planets/infra0/x86runner1/host.nix;
+                  };
+                };
             };
           };
-      }
-    );
+        };
+    };
 }

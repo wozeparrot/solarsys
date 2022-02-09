@@ -15,7 +15,7 @@
       in
       nixRegistry;
 
-    nixPath = [ "nixpkgs=${inputs.unstable}" ];
+    nixPath = [ "nixpkgs=${builtins.toString ../../.}" ];
     settings.extra-sandbox-paths = [ "/bin/sh=${pkgs.bash}/bin/sh" ];
 
     gc = {
