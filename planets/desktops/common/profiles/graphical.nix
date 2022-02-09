@@ -42,7 +42,11 @@
     jack.enable = true;
     pulse.enable = true;
 
-    lowLatency.enable = true;
+    lowLatency = {
+      enable = true;
+      quantum = 48;
+      rate = 48000;
+    };
   };
 
   # fonts
