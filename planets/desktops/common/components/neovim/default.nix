@@ -15,7 +15,6 @@ in
     withNodeJs = true;
 
     extraConfig = builtins.concatStringsSep "\n" [
-      # (lib.strings.fileContents ./theme.vim)
       ''
         if exists('g:vscode')
           colorscheme default
