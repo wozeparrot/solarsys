@@ -15,7 +15,7 @@
 
   # packages
   home.packages = with pkgs; [
-    vscode
+    #vscode
 
     gdb
     rustup
@@ -128,6 +128,43 @@
       obs-websocket
       obs-move-transition
       obs-gstreamer
+    ];
+  };
+
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscodium;
+    extensions = with pkgs.vscode-extensions; [
+      yzhang.markdown-all-in-one
+      redhat.java
+      tiehuis.zig
+      bbenoist.nix
+      jnoortheen.nix-ide
+      eamodio.gitlens
+      antyos.openscad
+      mikestead.dotenv
+      vadimcn.vscode-lldb
+      timonwong.shellcheck
+      matklad.rust-analyzer
+      tamasfe.even-better-toml
+      asvetliakov.vscode-neovim
+      arrterian.nix-env-selector
+      streetsidesoftware.code-spell-checker
+      mads-hartmann.bash-ide-vscode
+      asciidoctor.asciidoctor-vscode
+    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      {
+        name = "xresources-theme";
+        publisher = "JackVandergriff";
+        version = "1.1.0";
+        sha256 = "sha256-pzs9Y6bYxG8cEjBxU2VPW9rq/VPWo/gl7JilheNJ6v8=";
+      }
+      {
+        name = "vscode-direnv";
+        publisher = "cab404";
+        version = "1.0.0";
+        sha256 = "sha256-+nLH+T9v6TQCqKZw6HPN/ZevQ65FVm2SAo2V9RecM3Y=";
+      }
     ];
   };
 
