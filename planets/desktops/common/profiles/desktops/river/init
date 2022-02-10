@@ -110,8 +110,10 @@ riverctl border-color-focused 0xc29dd5
 riverctl border-color-unfocused 0x6691d2
 riverctl border-width 1
 
+riverctl attach-mode top
+
 # Set input stuff
-riverctl set-repeat 50 300
+riverctl set-repeat 75 300
 riverctl set-cursor-warp on-output-change
 
 # Set app-ids of views which should float
