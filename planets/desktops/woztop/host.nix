@@ -85,6 +85,8 @@
 
   services.ratbagd.enable = true;
 
+  services.tlp.settings.WIFI_PWR_ON_BAT = "off";
+
   virtualisation = {
     libvirtd = {
       enable = true;
