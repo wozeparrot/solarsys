@@ -14,7 +14,7 @@ in
     enable = true;
     withNodeJs = true;
 
-    extraConfig = builtins.concatStringsSep "\n" [    
+    extraConfig = builtins.concatStringsSep "\n" [
       ''
         if exists('g:vscode')
           colorscheme default
@@ -32,16 +32,10 @@ in
     ];
 
     extraPackages = with pkgs; [
-      # nodePackages.pyright
-      # nodePackages.dockerfile-language-server-nodejs
-      # rust-analyzer
-      # dart
-      # mpkgs.zls
-      # rnix-lsp
-
       # libraries
       sqlite
       # treesitter
+      tree-sitter
       gcc
       # telescope
       ripgrep
@@ -55,11 +49,16 @@ in
       black
       sumneko-lua-language-server
       java-language-server
+      nodePackages.vscode-json-languageserver
+      nodePackages.bash-language-server
     ];
 
     plugins = with pkgs.vimPlugins; [
-      # themes
+      # ricing
       (pluginGit "nekonako/xresources-nvim" "745b4df924a6c4a7d8026a3fb3a7fa5f78e6f582")
+      lualine-nvim
+      bufferline-nvim
+      bufdelete-nvim
 
       # libraries
       plenary-nvim
@@ -99,6 +98,10 @@ in
       nvim-cursorline
       # nvim-web-devicons
       nvim-web-devicons
+      # comment-nvim
+      comment-nvim
+      # nvim-tree-lua
+      nvim-tree-lua
 
       # language support
       zig-vim

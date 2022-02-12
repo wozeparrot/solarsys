@@ -19,8 +19,8 @@ vim.opt.cmdheight = 1
 vim.opt.updatetime = 300
 vim.opt.tm = 500
 vim.cmd("set shortmess+=c")
--- disable hidden bufferrs
-vim.opt.hidden = false
+-- enable hidden bufferrs
+vim.opt.hidden = true
 -- split config
 vim.opt.splitbelow = true
 vim.opt.splitright = true
@@ -42,6 +42,125 @@ vim.cmd("set t_Co=256")
 vim.cmd("let mapleader=\" \"")
 vim.cmd("let maplocalleader=\" \"")
 nnoremap("<space>", "<nop>")
+
+---- Keybindings ----
+nnoremap("<leader>tt", "<cmd>tabnew<CR>")
+nnoremap("<leader>tm", "<cmd>tabp<CR>")
+nnoremap("<leader>tn", "<cmd>tabn<CR>")
+nnoremap("<leader>bd", "<cmd>lua require('bufdelete').bufdelete(0, false)<CR>")
+
+---- Ricing ----
+-- lualine
+-- require("lualine").setup({})
+require("lualine").setup({
+    options = {
+        icons_enabled = true,
+        theme = "auto",
+        component_separators = "⏽",
+        section_separators = { left = '', right = '' },
+    },
+    sections = {
+        lualine_a = { "mode" },
+        lualine_b = {
+            { "branch", separator = "" },
+            "diff",
+        },
+        lualine_c = {
+            "filename",
+            {
+                "diagnostics",
+                sources = { "nvim_lsp" },
+                symbols = { error = "", warn = "", info = "", hint = "" }
+            },
+        },
+        lualine_x = {
+            "filetype",
+            {
+                "fileformat",
+                icons_enabled = true,
+                symbols = {
+                    unix = "LF",
+                    dos = "CRLF",
+                    mac = "CR",
+                },
+            },
+            "encoding",
+        },
+        lualine_y = {
+            "progress"
+        },
+        lualine_z = {
+            "location",
+        },
+    },
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { "filename" },
+        lualine_x = { "location" },
+        lualine_y = {},
+        lualine_z = {},
+    },
+    tabline = {},
+    extensions = { "nvim-tree" },
+})
+-- bufferline-nvim
+require("bufferline").setup({
+    options = {
+        close_command = function(bufnum)
+            require("bufdelete").bufdelete(bufnum, false)
+        end,
+        right_mouse_command = "vertical sbuffer %d",
+        indicator_icon = "▎",
+        buffer_close_icon = "",
+        modified_icon = "●",
+        close_icon = "",
+        left_trunc_marker = "",
+        right_trunc_marker = "",
+        separator_style = "thin",
+        max_name_length = 18,
+        max_prefix_length = 15,
+        tab_size = 18,
+        show_buffer_icons = true,
+        show_buffer_close_icons = true,
+        show_close_icon = true,
+        show_tab_indicators = true,
+        persist_buffer_sort = true,
+        enforce_regular_tabs = true,
+        always_show_bufferline = true,
+        offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "left"}},
+        sort_by = 'extension',
+        diagnostics = "nvim_lsp",
+        diagnostics_update_in_insert = true,
+        diagnostics_indicator = function(count, level, diagnostics_dict, context)
+            local s = ""
+            for e, n in pairs(diagnostics_dict) do
+                local sym = e == "error" and "" or (e == "warning" and "" or "" )
+                if(sym ~= "") then
+                    s = s .. " " .. n .. sym
+                end
+            end
+            return s
+        end,
+        numbers = function(opts)
+            return string.format('%s·%s', opts.raise(opts.id), opts.lower(opts.ordinal))
+        end,
+    }
+})
+nnoremap("<leader>bn", "<cmd>BufferLineCycleNext<CR>")
+nnoremap("<leader>bm", "<cmd>BufferLineCyclePrev<CR>")
+nnoremap("<leader>bv", "<cmd>BufferLinePick<CR>")
+nnoremap("<leader>bbn", "<cmd>BufferLineMoveNext<CR>")
+nnoremap("<leader>bbm", "<cmd>BufferLineMovePrev<CR>")
+nnoremap("<leader>1", "<cmd>BufferLineGoToBuffer 1<CR>")
+nnoremap("<leader>2", "<cmd>BufferLineGoToBuffer 2<CR>")
+nnoremap("<leader>3", "<cmd>BufferLineGoToBuffer 3<CR>")
+nnoremap("<leader>4", "<cmd>BufferLineGoToBuffer 4<CR>")
+nnoremap("<leader>5", "<cmd>BufferLineGoToBuffer 5<CR>")
+nnoremap("<leader>6", "<cmd>BufferLineGoToBuffer 6<CR>")
+nnoremap("<leader>7", "<cmd>BufferLineGoToBuffer 7<CR>")
+nnoremap("<leader>8", "<cmd>BufferLineGoToBuffer 8<CR>")
+nnoremap("<leader>9", "<cmd>BufferLineGoToBuffer 9<CR>")
 
 ---- Language Overrides ----
 -- nix
@@ -82,8 +201,8 @@ lspkind.init()
 -- trouble
 require("trouble").setup({})
 nnoremap("<leader>xx", "<cmd>TroubleToggle<CR>")
-nnoremap("<leader>xw", "<cmd>TroubleToggle lsp_worskpace_diagnostics<CR>")
-nnoremap("<leader>xd", "<cmd>TroubleToggle lsp_document_diagnostics<CR>")
+nnoremap("<leader>xw", "<cmd>TroubleToggle worskpace_diagnostics<CR>")
+nnoremap("<leader>xd", "<cmd>TroubleToggle document_diagnostics<CR>")
 nnoremap("<leader>xq", "<cmd>TroubleToggle quickfix<CR>")
 nnoremap("<leader>xl", "<cmd>TroubleToggle loclist<CR>")
 nnoremap("<leader>xr", "<cmd>TroubleToggle lsp_references<CR>")
@@ -101,7 +220,7 @@ nnoremap("<C-f>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<
 nnoremap("<leader>lr", "<cmd>lua require('lspsaga.rename').rename()<CR>")
 nnoremap("<leader>ld", "<cmd>lua require('lspsaga.provider').preview_definition()<CR>")
 nnoremap("<leader>ll", "<cmd>lua require('lspsaga.diagnostic').show_line_diagnostics()<CR>")
-nnoremap("<leader>lc", "<cmd>lua require('lspsaga.diagnostic').show_cursor_diagnostics()<CR>")
+nnoremap("<leader>lk", "<cmd>lua require('lspsaga.diagnostic').show_cursor_diagnostics()<CR>")
 nnoremap("<leader>ca", "<cmd>lua require('lspsaga.codeaction').code_action()<CR>")
 
 --- setup language servers ---
@@ -164,6 +283,16 @@ lspconfig.java_language_server.setup({
     capabilities = capabilities,
     on_attach = default_on_attach,
     cmd = { "java-language-server" },
+})
+-- json
+lspconfig.jsonls.setup({
+    capabilities = capabilities,
+    on_attach = default_on_attach,
+})
+-- bash
+lspconfig.bashls.setup({
+    capabilities = capabilities,
+    on_attach = default_on_attach,
 })
 
 ---- Treesitter Config ----
@@ -261,7 +390,7 @@ require("nvim-autopairs").setup({})
 ---- nvim-cmp Config ----
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nvim_buf_get_lines
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 local feedkey = function(key, mode)
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
@@ -308,7 +437,7 @@ cmp.setup({
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif vim.fn['vsnip#available'](-1) == 1 then
-                feedkeys("<Plug>(vsnip-jump-prev)", "")
+                feedkey("<Plug>(vsnip-jump-prev)", "")
             end
         end, { 'i', 's' }),
     },
@@ -327,7 +456,7 @@ cmp.setup({
                 crates = "[Crates]",
                 buffer = "[Buffer]",
             })[entry.source.name]
-            
+
             return vim_item
         end,
     },
@@ -348,3 +477,32 @@ vim.opt.list = true
 
 ---- nvim-cursorline Config ----
 vim.g.cursorline_timeout = 500
+
+---- comment-nvim Config ----
+require("Comment").setup({})
+
+---- nvim-tree-lua Config ----
+vim.g.nvim_tree_indent_markers = true
+vim.g.nvim_tree_add_trailing = true
+vim.g.nvim_tree_group_empty = true
+require("nvim-tree").setup({
+    disable_netrw = true,
+    hijack_netrw = true,
+    open_on_tab = false,
+    open_on_setup = false,
+    auto_close = true,
+    diagnostics = { enable = true },
+    view = { width = 40, side = "left" },
+    git = { enable = true, nvim_tree_gitignore = false },
+    filters = {
+        dotfiles = false,
+        custom = {
+            ".git",
+            "node_modules",
+            ".cache",
+            "zig-cache",
+        },
+    },
+})
+nnoremap("<C-n>", "<cmd>NvimTreeToggle<CR>")
+nnoremap("<leader>tr", "<cmd>NvimTreeRefresh<CR>")
