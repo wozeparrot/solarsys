@@ -506,3 +506,6 @@ require("nvim-tree").setup({
 })
 nnoremap("<C-n>", "<cmd>NvimTreeToggle<CR>")
 nnoremap("<leader>tr", "<cmd>NvimTreeRefresh<CR>")
+
+---- glow-nvim Config ----
+vim.cmd("autocmd FileType markdown noremap <leader>p <cmd>Glow<CR>")

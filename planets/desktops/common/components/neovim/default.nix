@@ -40,6 +40,8 @@ in
       # telescope
       ripgrep
       fd
+      # glow
+      glow
 
       # lsp language additionals
       zls
@@ -102,6 +104,8 @@ in
       comment-nvim
       # nvim-tree-lua
       nvim-tree-lua
+      # glow
+      glow-nvim
 
       # language support
       zig-vim
