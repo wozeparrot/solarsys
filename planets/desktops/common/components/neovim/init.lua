@@ -135,9 +135,29 @@ lspconfig.pyright.setup({
     on_attach = default_on_attach,
 })
 -- lua
+local runtime_path = vim.split(package.path, ";")
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
 lspconfig.sumneko_lua.setup({
     capabilities = capabilities,
     on_attach = default_on_attach,
+    settings = {
+        Lua = {
+            runtime = {
+                version = "LuaJIT",
+                path = runtime_path,
+            },
+            diagnostics = {
+                globals = { "vim" },
+            },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file("", true),
+            },
+            telemetry = {
+                enable = false,
+            },
+        },
+    },
 })
 -- java
 lspconfig.java_language_server.setup({
