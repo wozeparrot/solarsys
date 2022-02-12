@@ -14,7 +14,7 @@ in
     enable = true;
     withNodeJs = true;
 
-    extraConfig = builtins.concatStringsSep "\n" [
+    extraConfig = builtins.concatStringsSep "\n" [    
       ''
         if exists('g:vscode')
           colorscheme default
@@ -25,34 +25,87 @@ in
 
       ''
         lua << EOF
+        ${lib.strings.fileContents ./util.lua}
         ${lib.strings.fileContents ./init.lua}
         EOF
       ''
     ];
 
     extraPackages = with pkgs; [
-      tree-sitter
+      # nodePackages.pyright
+      # nodePackages.dockerfile-language-server-nodejs
+      # rust-analyzer
+      # dart
+      # mpkgs.zls
+      # rnix-lsp
+
+      # libraries
+      sqlite
+      # treesitter
       gcc
-      nodePackages.pyright
-      nodePackages.dockerfile-language-server-nodejs
-      rust-analyzer
-      dart
-      mpkgs.zls
+      # telescope
+      ripgrep
+      fd
+
+      # lsp language additionals
+      zls
       rnix-lsp
+      rust-analyzer
+      nodePackages.pyright
+      black
+      sumneko-lua-language-server
+      java-language-server
     ];
 
     plugins = with pkgs.vimPlugins; [
-      (pluginGit "neovim/nvim-lspconfig" "251aa38a3ad87389e4e9dfb4ee745c312c25d740")
-      (pluginGit "hrsh7th/nvim-compe" "5001cd7632b50b65f04d59af85a9dd199ea73b3a")
-      (pluginGit "nvim-treesitter/nvim-treesitter" "a1b0e9ebb56f1042bc51e94252902ef14f688aaf")
-      (pluginGit "nekonako/xresources-nvim" "e989bc88b5572b4be29efee42eb5c9c4e3e7edd1")
+      # themes
+      (pluginGit "nekonako/xresources-nvim" "745b4df924a6c4a7d8026a3fb3a7fa5f78e6f582")
 
-      which-key-nvim
+      # libraries
+      plenary-nvim
+      sqlite-lua
+      # lsp
+      nvim-lspconfig
+      null-ls-nvim
+      lspkind-nvim
+      trouble-nvim
+      nvim-lightbulb
+      lspsaga-nvim
+      nvim-code-action-menu
+      # treesitter
+      nvim-treesitter
+      nvim-treesitter-context
+      nvim-ts-autotag
+      # telescope
+      telescope-nvim
+      telescope-fzf-native-nvim
+      telescope-frecency-nvim
+      (pluginGit "nvim-telescope/telescope-ui-select.nvim" "d02a3d3a6b3f6b933c43a28668ae18f78846d3aa")
+      # nvim-autopairs
+      nvim-autopairs
+      # vim-vsnip
+      vim-vsnip
+      friendly-snippets
+      # nvim-cmp
+      nvim-cmp
+      cmp-nvim-lsp
+      cmp-vsnip
+      cmp-treesitter
+      cmp-path
+      cmp-buffer
+      # indent-blankline
+      indent-blankline-nvim
+      # nvim-cursorline
+      nvim-cursorline
+      # nvim-web-devicons
+      nvim-web-devicons
 
+      # language support
       zig-vim
-      vim-nix
-      vim-flutter
-      dart-vim-plugin
+
+      # lsp language additionals
+      crates-nvim
+      rust-tools-nvim
     ];
   };
 }
