@@ -3,6 +3,8 @@
 vim.opt.encoding = "utf-8"
 -- enable mouse
 vim.opt.mouse = "a"
+-- enable lists
+vim.opt.list = true
 -- set indent width
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
@@ -473,7 +475,6 @@ require("indent_blankline").setup({
 })
 -- TODO: https://github.com/lukas-reineke/indent-blankline.nvim/issues/59
 vim.wo.colorcolumn = "99999"
-vim.opt.list = true
 
 ---- nvim-cursorline Config ----
 vim.g.cursorline_timeout = 500
