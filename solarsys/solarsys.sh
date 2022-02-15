@@ -125,7 +125,14 @@ function build_moon_output {
     local output=$3
 
     # build
-    if nix build --no-link ".#planets.$planet.moons.$moon.core.$output"; then
+
+    if [[ -z "${NIX_TRACE+z}" ]]; then
+        local build_cmd="nix build --no-link \".#planets.$planet.moons.$moon.core.$output\""
+    else
+        local build_cmd="nix build --show-trace --no-link \".#planets.$planet.moons.$moon.core.$output\""
+    fi
+
+    if eval "$build_cmd"; then
         nix path-info ".#planets.$planet.moons.$moon.core.$output"
         return 0
     else
