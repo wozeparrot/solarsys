@@ -38,7 +38,6 @@
     krita
     kicad-unstable
     horizon-eda
-    zettlr
     audacity
     antimicroX
     yt-dlp
@@ -71,7 +70,6 @@
     iotop
 
     keepassxc
-    etcher
 
     unzip
     p7zip
