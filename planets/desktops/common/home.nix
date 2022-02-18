@@ -55,7 +55,7 @@
     nix-gaming.osu-lazer-bin
 
     ranger
-    feh
+    imv
 
     grim
     slurp
