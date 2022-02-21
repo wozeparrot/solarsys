@@ -23,8 +23,6 @@
   ];
   networking.firewall.allowedTCPPorts = [
     5072 # aninarr web dir
-
-    443 # dsvpn
   ];
   networking.firewall.interfaces.wg0 = {
     allowedUDPPorts = [
@@ -169,27 +167,12 @@
         publicKey = "EYBKX22REQWG5VmC9VeXhiwvH6Gr2FTQ35m4TDQ9Fh0=";
         allowedIPs = [ "10.11.235.12/32" "fdbe:ef11:2358:1321::12/128" ];
       }
+      {
+        # aaaa
+        publicKey = "seZ+gvU58blS9n8dMMws/7yNMXjGVjk2Sj18zDEKBW4=";
+        allowedIPs = [ "10.11.235.89/32" "fdbe:ef11:2358:1321::89/128" ];
+      }
     ];
-  };
-
-  # dsvpn
-  systemd.services."dsvpn" = {
-    description = "Dead Simple VPN - Server";
-
-    path = with pkgs; [
-      gawk
-      iproute2
-    ];
-    serviceConfig = {
-      ExecStart = "${pkgs.screen}/bin/screen ${pkgs.dsvpn}/bin/dsvpn server /keys/dsvpn";
-      Restart = "always";
-      RestartSec = "5s";
-      User = "root";
-      Group = "root";
-    };
-
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
   };
 
   # --- weechat ---
