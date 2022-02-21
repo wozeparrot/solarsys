@@ -5,6 +5,8 @@
 
   boot.kernelPackages = pkgs.linuxPackages;
 
+  boot.loader.raspberryPi.version = 4;
+
   sdImage.populateFirmwareCommands =
     let
       configTxt = pkgs.writeText "config.txt" ''

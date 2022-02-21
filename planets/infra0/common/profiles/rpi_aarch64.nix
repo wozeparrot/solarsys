@@ -6,8 +6,9 @@
 
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
+  boot.loader.raspberryPi.enable = true;
   boot.loader.grub.enable = false;
-  boot.loader.generic-extlinux-compatible.enable = true;
+  # boot.loader.generic-extlinux-compatible.enable = true;
 
   sdImage.compressImage = false;
   sdImage.firmwareSize = 128;
