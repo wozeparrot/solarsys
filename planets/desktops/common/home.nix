@@ -22,6 +22,7 @@
     nixpkgs-fmt
     python3
     ruby
+    zig
 
     blender
     godot
