@@ -134,8 +134,25 @@
         "nixpkgs": [
           "unstable"
         ],
+        "staging-next": "staging-next",
         "unstable": "unstable",
         "wozey": "wozey"
+      }
+    },
+    "staging-next": {
+      "locked": {
+        "lastModified": 1645895537,
+        "narHash": "sha256-ugWRBUF7CCEmEjTipnVg+xa4L9tRiUcfutUuK8umyk0=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "f68dbdc7c39faa5f685e34b10da0b373ad6a7c22",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "staging-next",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "unstable": {

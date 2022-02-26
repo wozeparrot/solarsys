@@ -6,6 +6,7 @@
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs.follows = "unstable";
     master.url = "github:NixOS/nixpkgs/master";
+    staging-next.url = "github:NixOS/nixpkgs/staging-next";
 
     # home-manager
     home-manager.url = "github:nix-community/home-manager";
@@ -27,7 +28,7 @@
     # nix-gaming.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nixpkgs, master, home-manager, flake-utils, ... }:
+  outputs = inputs@{ self, nixpkgs, master, staging-next, home-manager, flake-utils, ... }:
     let
       overlays =
         let
@@ -66,7 +67,11 @@
             overlays = [
               (
                 final: prev: {
-                  mpkgs = import master {
+                  master = import master {
+                    inherit system;
+                    config.allowUnfree = true;
+                  };
+                  staging-next = import staging-next {
                     inherit system;
                     config.allowUnfree = true;
                   };

@@ -37,7 +37,7 @@
     openscad
     freecad
     krita
-    kicad-unstable
+    staging-next.kicad-unstable
     horizon-eda
     audacity
     antimicroX
@@ -47,11 +47,9 @@
 
     gitAndTools.hub
 
-    mpkgs.polymc
-    mpkgs.steam
-    mpkgs.steam.run
-    mpkgs.protontricks
-    mpkgs.lutris
+    master.polymc
+    master.protontricks
+    master.lutris
     the-powder-toy
     nix-gaming.osu-lazer-bin
 

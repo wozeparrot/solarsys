@@ -69,6 +69,7 @@
   programs.droidcam.enable = true;
   programs.wireshark.enable = true;
   programs.gamemode.enable = true;
+  programs.steam.enable = true;
 
   # services.flatpak.enable = true;
 

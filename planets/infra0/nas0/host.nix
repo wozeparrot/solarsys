@@ -177,7 +177,7 @@
 
   # --- weechat ---
   services.weechat.enable = true;
-  services.weechat.binary = "${pkgs.mpkgs.weechat}/bin/weechat";
+  services.weechat.binary = "${pkgs.master.weechat}/bin/weechat";
 
   # --- transmission ---
   services.transmission = {
