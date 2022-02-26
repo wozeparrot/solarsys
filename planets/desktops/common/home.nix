@@ -35,10 +35,10 @@
     solvespace
     antimony
     openscad
-    freecad
+    master.freecad
     krita
-    staging-next.kicad-unstable
-    horizon-eda
+    # staging-next.kicad-unstable
+    master.horizon-eda
     audacity
     antimicroX
     yt-dlp
@@ -50,6 +50,10 @@
     master.polymc
     master.protontricks
     master.lutris
+    master.steam # not using the normal way as I need steam from master
+    master.steam.run # ^ required settings from programs.steam.enable should be set in each hosts config
+    master.steamcmd # ^
+    master.steam-tui # ^
     the-powder-toy
     nix-gaming.osu-lazer-bin
 
