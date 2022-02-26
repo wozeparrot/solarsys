@@ -24,7 +24,7 @@
     wozey.inputs.flake-utils.follows = "flake-utils";
 
     nix-gaming.url = "github:fufexan/nix-gaming";
-    nix-gaming.inputs.nixpkgs.follows = "nixpkgs";
+    # nix-gaming.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ self, nixpkgs, master, home-manager, flake-utils, ... }:
@@ -45,10 +45,19 @@
         (builtins.attrValues (pathsToImportedAttrs overlayPaths)) ++ [
           inputs.aninarr.overlay
         ];
-      pkgSetsFor = system: {
-        nix-gaming = inputs.nix-gaming.packages."${system}";
-        wozey = inputs.wozey.packages."${system}";
+      external = {
+        wozey = {
+          packages = inputs.wozey.packages;
+        };
+        nix-gaming = {
+          packages = inputs.nix-gaming.packages;
+          cache = {
+            substituters = [ "https://nix-gaming.cachix.org" ];
+            trusted-public-keys = [ "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4=" ];
+          };
+        };
       };
+
       configNixpkgs = system: (
         import nixpkgs
           {
@@ -64,7 +73,7 @@
                 }
               )
             ] ++ overlays;
-          } // pkgSetsFor system
+          } // nixpkgs.lib.mapAttrs (n: v: v.packages."${system}") (nixpkgs.lib.filterAttrs (n: v: nixpkgs.lib.hasAttr "packages" v) external)
       );
     in
     flake-utils.lib.eachSystem [
@@ -101,6 +110,9 @@
 
                 nixpkgs.config = pkgs.config;
                 nixpkgs.pkgs = pkgs;
+
+                # build nix caches from external
+                nix.settings = nixpkgs.lib.zipAttrs (nixpkgs.lib.attrValues (nixpkgs.lib.mapAttrs (n: v: v.cache) (nixpkgs.lib.filterAttrs (n: v: nixpkgs.lib.hasAttr "cache" v) external)));
 
                 _module.args = {
                   inherit inputs pkgs;
