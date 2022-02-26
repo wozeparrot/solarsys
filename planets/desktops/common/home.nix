@@ -49,7 +49,7 @@
 
     master.polymc
     master.protontricks
-    master.lutris
+    lutris
     master.steam # not using the normal way as I need steam from master
     master.steam.run # ^ required settings from programs.steam.enable should be set in each hosts config
     master.steamcmd # ^

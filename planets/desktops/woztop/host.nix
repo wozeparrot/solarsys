@@ -21,7 +21,7 @@
   # nix cross build support
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   nix.extraOptions = ''
-    extra-platforms = aarch64-linux arm-linux
+    extra-platforms = aarch64-linux arm-linux i686-linux
   '';
 
   boot.loader.systemd-boot.enable = true;
@@ -69,7 +69,6 @@
   programs.droidcam.enable = true;
   programs.wireshark.enable = true;
   programs.gamemode.enable = true;
-  programs.steam.enable = true;
 
   # services.flatpak.enable = true;
 

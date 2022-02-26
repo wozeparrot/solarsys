@@ -25,7 +25,6 @@
     wozey.inputs.flake-utils.follows = "flake-utils";
 
     nix-gaming.url = "github:fufexan/nix-gaming";
-    # nix-gaming.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ self, nixpkgs, master, staging-next, home-manager, flake-utils, ... }:
