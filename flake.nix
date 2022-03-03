@@ -112,14 +112,14 @@
               { lib, ... }: {
                 system.configurationRevision = lib.mkIf (self ? rev) self.rev;
 
-                nixpkgs.config = pkgs.config;
                 nixpkgs.pkgs = pkgs;
 
                 # build nix caches from external
                 nix.settings = nixpkgs.lib.mapAttrs (n: v: nixpkgs.lib.flatten v) (nixpkgs.lib.zipAttrs (nixpkgs.lib.attrValues (nixpkgs.lib.mapAttrs (n: v: v.cache) (nixpkgs.lib.filterAttrs (n: v: nixpkgs.lib.hasAttr "cache" v) external))));
 
                 _module.args = {
-                  inherit inputs pkgs;
+                  inherit inputs;
+                  pkgs = pkgs.lib.mkForce pkgs;
                 };
               }
             )
