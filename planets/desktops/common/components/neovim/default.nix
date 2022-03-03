@@ -53,6 +53,7 @@ in
       java-language-server
       nodePackages.vscode-json-languageserver
       nodePackages.bash-language-server
+      clang-tools
     ];
 
     plugins = with pkgs.vimPlugins; [
@@ -109,6 +110,7 @@ in
 
       # language support
       zig-vim
+      (pluginGit "lluchs/vim-wren" "713705a23bdb94ff6c29866ff4a9db089cbc2dab")
 
       # lsp language additionals
       crates-nvim

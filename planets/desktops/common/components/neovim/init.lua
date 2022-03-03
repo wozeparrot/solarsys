@@ -296,6 +296,10 @@ lspconfig.bashls.setup({
     capabilities = capabilities,
     on_attach = default_on_attach,
 })
+-- clangd
+lspconfig.clangd.setup({
+    capabilities = capabilities,
+})
 
 ---- Treesitter Config ----
 local treesitter = require("nvim-treesitter.configs")
