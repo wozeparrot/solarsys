@@ -21,9 +21,6 @@
   networking.firewall.allowedTCPPorts = [
     25565 # minecraft
     8083 # calibre-web
-    8448 # matrix
-    443 # caddy | matrix
-    80 # caddy
   ];
   networking.firewall.interfaces.wg0 = {
     allowedUDPPorts = [
@@ -32,9 +29,6 @@
     allowedTCPPorts = [
       25565 # minecraft
       8083 # calibre-web
-      8448 # matrix
-      443 # caddy | matrix
-      80 # caddy
     ];
   };
 
@@ -107,57 +101,6 @@
 
   virtualisation.docker = {
     enable = true;
-  };
-
-  # --- matrix stuff ---
-  services.matrix-conduit = {
-    enable = true;
-    package = pkgs.ss.matrix-conduit;
-    settings = {
-      global = {
-        server_name = "wozenest.duckdns.org";
-
-        database_backend = "sqlite";
-        allow_registration = false;
-      };
-    };
-  };
-  services.matrix-appservice-discord = {
-    enable = true;
-    serviceDependencies = [ "conduit.service" ];
-    environmentFile = "/keys/matrix_as_discord_env";
-    settings = {
-      bridge = {
-        domain = "wozenest.duckdns.org";
-        homeserverUrl = "https://wozenest.duckdns.org";
-        adminMxid = "@wozeparrot:wozenest.duckdns.org";
-      };
-      auth = {
-        usePrivilegedIntents = true;
-      };
-      room = {
-        defaultVisibility = "private";
-      };
-    };
-  };
-
-  # --- caddy ---
-  services.caddy = {
-    enable = true;
-    logFormat = "level ERROR";
-    virtualHosts = {
-      "wozenest.duckdns.org" = {
-        extraConfig = ''
-          reverse_proxy /_matrix/* http://localhost:6167
-        '';
-      };
-
-      "wozenest.duckdns.org:8448" = {
-        extraConfig = ''
-          reverse_proxy http://localhost:6167
-        '';
-      };
-    };
   };
 
   system.stateVersion = "21.11";
