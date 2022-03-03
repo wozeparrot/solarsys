@@ -19,7 +19,7 @@
     settings.extra-sandbox-paths = [ "/bin/sh=${pkgs.bash}/bin/sh" ];
 
     gc = {
-      automatic = true;
+      automatic = lib.mkDefault true;
       dates = "weekly";
       options = "--delete-older-than 14d";
     };

@@ -5,6 +5,8 @@
     ./user.nix
   ];
 
+  nix.gc.automatic = false;
+
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
 
