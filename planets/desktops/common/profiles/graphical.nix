@@ -20,7 +20,7 @@
 
   xdg.portal = {
     enable = true;
-    gtkUsePortal = true;
+    gtkUsePortal = false; # something changed??? not really sure so TODO
     wlr = {
       enable = true;
       settings = {
@@ -44,7 +44,7 @@
 
     lowLatency = {
       enable = true;
-      quantum = 96;
+      quantum = 48;
       rate = 48000;
     };
   };
