@@ -11,6 +11,7 @@
     ./components/kitty
     ./components/mpv
     ./components/shfm
+    ./components/musicprod
   ];
 
   # packages
@@ -27,7 +28,6 @@
     blender
     godot
     gimp
-    lmms
     libsForQt5.kdenlive
     transmission-gtk
     libreoffice
@@ -237,4 +237,6 @@
   home.homeDirectory = "/home/woze";
 
   programs.home-manager.enable = true;
+
+  home.stateVersion = lib.mkDefault "22.05";
 }
