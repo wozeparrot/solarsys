@@ -13,7 +13,7 @@
         type "fifo"
         name "Visualizer feed"
         path "/tmp/mpd.fifo"
-        format "44100:16:1"
+        format "44100:16:2"
       }
 
       audio_output {
@@ -42,14 +42,15 @@
     settings = {
       visualizer_data_source = "/tmp/mpd.fifo";
       visualizer_output_name = "Visualizer feed";
-      visualizer_in_stereo = "no";
-      visualizer_type = "spectrum";
+      visualizer_in_stereo = "yes";
+      visualizer_type = "wave";
       visualizer_fps = "60";
       visualizer_spectrum_smooth_look = "yes";
-      visualizer_color = "magenta";
-      visualizer_look = "+|";
+      visualizer_color = "red";
+      visualizer_look = "██";
 
-      user_interface = "alternative";
+      user_interface = "classic";
+      startup_screen = "playlist";
       cyclic_scrolling = "yes";
       progressbar_look = "━━━";
 
@@ -62,7 +63,8 @@
 
       header_text_scrolling = "yes";
       jump_to_now_playing_song_at_start = "yes";
-      browser_display_mode = "columns";
+      browser_display_mode = "classic";
+      playlist_display_mode = "classic";
       selected_item_prefix = "* ";
     };
   };
