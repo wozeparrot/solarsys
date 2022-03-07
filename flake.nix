@@ -14,8 +14,12 @@
 
     # flake stuff
     flake-utils.url = "github:numtide/flake-utils";
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
 
-    # overlays + extra package sets
+    # overlays + extra package sets + extra modules
     aninarr.url = "git+ssh://git@github.com/wozeparrot/aninarr.git?ref=main";
     aninarr.inputs.nixpkgs.follows = "nixpkgs";
     aninarr.inputs.flake-utils.follows = "flake-utils";
@@ -25,6 +29,9 @@
     wozey.inputs.flake-utils.follows = "flake-utils";
 
     nix-gaming.url = "github:fufexan/nix-gaming";
+
+    nix-ld.url = "github:Mic92/nix-ld";
+    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ self, nixpkgs, master, staging-next, home-manager, flake-utils, ... }:
@@ -46,6 +53,9 @@
           inputs.aninarr.overlay
         ];
       external = {
+        aninarr = {
+          overlay = inputs.aninarr.overlay;
+        };
         wozey = {
           packages = inputs.wozey.packages;
         };
@@ -55,6 +65,9 @@
             substituters = [ "https://nix-gaming.cachix.org" ];
             trusted-public-keys = [ "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4=" ];
           };
+        };
+        nix-ld = {
+          modules = inputs.nix-ld.nixosModules;
         };
       };
 
@@ -134,6 +147,7 @@
             let
               makeDesktopModules = pkgs: hostFile: [
                 home-manager.nixosModules.home-manager
+                external.nix-ld.modules.nix-ld
               ] ++ makeModules pkgs hostFile;
             in
             {
