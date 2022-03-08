@@ -36,22 +36,7 @@
 
   outputs = inputs@{ self, nixpkgs, master, staging-next, home-manager, flake-utils, ... }:
     let
-      overlays =
-        let
-          overlayDir = ./common/overlays;
-          fullPath = name: overlayDir + "/${name}";
-          overlayPaths = map fullPath (builtins.attrNames (builtins.readDir overlayDir));
-          pathsToImportedAttrs = paths:
-            (values: f: builtins.listToAttrs (map f values)) paths (
-              path: {
-                name = nixpkgs.lib.removeSuffix ".nix" (baseNameOf path);
-                value = import path;
-              }
-            );
-        in
-        (builtins.attrValues (pathsToImportedAttrs overlayPaths)) ++ [
-          inputs.aninarr.overlay
-        ];
+      # external/third-party stuff
       external = {
         aninarr = {
           overlay = inputs.aninarr.overlay;
@@ -71,6 +56,21 @@
         };
       };
 
+      overlay =
+        let
+          overlayDir = ./common/overlays;
+          fullPath = name: overlayDir + "/${name}";
+          overlayPaths = map fullPath (builtins.attrNames (builtins.readDir overlayDir));
+          pathsToImportedAttrs = paths:
+            (values: f: builtins.listToAttrs (map f values)) paths (
+              path: {
+                name = nixpkgs.lib.removeSuffix ".nix" (baseNameOf path);
+                value = import path;
+              }
+            );
+        in
+        (builtins.attrValues (pathsToImportedAttrs overlayPaths));
+
       configNixpkgs = system: (
         import nixpkgs
           {
@@ -89,7 +89,7 @@
                   };
                 }
               )
-            ] ++ overlays;
+            ] ++ overlay ++ (nixpkgs.lib.mapAttrsToList (n: v: v.overlay) (nixpkgs.lib.filterAttrs (n: v: nixpkgs.lib.hasAttr "overlay" v) external));
           } // nixpkgs.lib.mapAttrs (n: v: v.packages."${system}") (nixpkgs.lib.filterAttrs (n: v: nixpkgs.lib.hasAttr "packages" v) external)
       );
     in
