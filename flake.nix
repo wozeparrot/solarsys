@@ -110,7 +110,7 @@
 
             installPhase = ''
               mkdir -p $out/bin/
-              install -D ./solarsys $out/bin/
+              install -D ./ss $out/bin/
             '';
           };
         in
