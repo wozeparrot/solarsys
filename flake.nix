@@ -101,6 +101,18 @@
         system:
         let
           pkgs = configNixpkgs system;
+
+          solarsys = pkgs.stdenv.mkDerivation {
+            pname = "solarsys";
+            version = "0.1.0";
+
+            src = ./solarsys;
+
+            installPhase = ''
+              mkdir -p $out/bin/
+              install -D ./solarsys $out/bin/
+            '';
+          };
         in
         {
           legacyPackages = pkgs;
@@ -111,6 +123,8 @@
               jq
               rsync
               rnix-lsp
+
+              solarsys
             ];
           };
         }
