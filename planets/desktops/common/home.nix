@@ -37,7 +37,7 @@
     openscad
     master.freecad
     krita
-    # staging-next.kicad-unstable
+    # kicad-unstable
     master.horizon-eda
     audacity
     antimicroX
