@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -eo pipefail
 
 # --- utility functions ---
 # echo to stderr
@@ -541,6 +541,18 @@ function list {
     done
 }
 
+# returns json of planets and moons
+function json {
+    local planets
+    readarray -t planets <<< "$(get_planets | jq -c -r '.[]')"
+
+    local planets_json
+    planets_json="$(for planet in "${planets[@]}"; do
+        jq -c -r -n --argjson ms "$(get_moons "$planet")" "{"$planet": \$ms}"
+    done)"
+    jq -c -r -s add <<< "$planets_json"
+}
+
 # prints usage of solarsys
 function print_usage {
     ercho "Usage: $0 <subcommand>"
@@ -557,6 +569,7 @@ function print_usage {
     ercho "  ssh <planet> <moon>            |  SSH to <moon> in <planet>"
     ercho "  satellites <planet> <moon>     |  Send satellites to <moon> in <planet>"
     ercho "  list                           |  Lists planets and moons"
+    ercho "  json                           |  Returns json of planets and moons"
     exit 1
 }
 
@@ -663,6 +676,9 @@ function main {
             ;;
         list)
             list
+            ;;
+        json)
+            json
             ;;
         *)
             ercho "error~ Unknown subcommand: $subcommand"

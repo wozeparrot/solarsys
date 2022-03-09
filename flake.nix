@@ -124,6 +124,8 @@
               rsync
               rnix-lsp
 
+              fish
+
               solarsys
             ];
           };
