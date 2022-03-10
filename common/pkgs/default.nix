@@ -6,6 +6,7 @@ self: super:
     river = self.callPackage ./river { };
     shotcut = self.libsForQt5.callPackage ./shotcut { };
     lmms = self.libsForQt5.callPackage ./lmms { };
+    zrythm = self.callPackage ./zrythm { };
 
     matrix-conduit = self.callPackage ./matrix-conduit { };
   };
