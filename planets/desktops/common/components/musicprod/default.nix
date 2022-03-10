@@ -3,6 +3,7 @@
   home.packages = with pkgs; [
     # DAW
     ss.lmms
+    ss.zrythm
 
     # extras
     carla
@@ -36,11 +37,11 @@
   ];
 
   home.sessionVariables = {
-    DSSI_PATH = "$HOME/.dssi:/nix/var/nix/profiles/per-user/woze/home-manager/home-path/lib/dssi:/run/current-system/sw/lib/dssi";
-    LADSPA_PATH = "$HOME/.ladspa:/nix/var/nix/profiles/per-user/woze/home-manager/home-path/lib/ladspa:/run/current-system/sw/lib/ladspa";
-    LV2_PATH = "$HOME/.lv2:/nix/var/nix/profiles/per-user/woze/home-manager/home-path/lib/lv2:/run/current-system/sw/lib/lv2";
-    LXVST_PATH = "$HOME/.lxvst:/nix/var/nix/profiles/per-user/woze/home-manager/home-path/lib/lxvst:/run/current-system/sw/lib/lxvst";
-    VST_PATH = "$HOME/.vst:/nix/var/nix/profiles/per-user/woze/home-manager/home-path/lib/vst:/run/current-system/sw/lib/vst";
-    VST3_PATH = "$HOME/.vst3:/nix/var/nix/profiles/per-user/woze/home-manager/home-path/lib/vst3:/run/current-system/sw/lib/vst3";
+    DSSI_PATH = "$HOME/.dssi:/etc/profiles/per-user/woze/lib/dssi:/run/current-system/sw/lib/dssi";
+    LADSPA_PATH = "$HOME/.ladspa:/etc/profiles/per-user/woze/lib/ladspa:/run/current-system/sw/lib/ladspa";
+    LV2_PATH = "$HOME/.lv2:/etc/profiles/per-user/woze/lib/lv2:/run/current-system/sw/lib/lv2";
+    LXVST_PATH = "$HOME/.lxvst:/etc/profiles/per-user/woze/lib/lxvst:/run/current-system/sw/lib/lxvst";
+    VST_PATH = "$HOME/.vst:/etc/profiles/per-user/woze/lib/vst:/run/current-system/sw/lib/vst";
+    VST3_PATH = "$HOME/.vst3:/etc/profiles/per-user/woze/lib/vst3:/run/current-system/sw/lib/vst3";
   };
 }
