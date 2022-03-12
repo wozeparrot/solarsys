@@ -34,6 +34,21 @@
     drumgizmo
     vocproc
     talentedhack
+    gxplugins-lv2
+    swh_lv2
+    mda_lv2
+    gxmatcheq-lv2
+    rkrlv2
+    boops
+    artyFX
+    zam-plugins
+    faustPhysicalModeling
+    CHOWTapeModel
+    lsp-plugins
+    calf
+    dragonfly-reverb
+    quadrafuzz
+    magnetophonDSP.VoiceOfFaust
   ];
 
   home.sessionVariables = {
