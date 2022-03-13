@@ -167,7 +167,6 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     homepage = "https://www.zrythm.org";
     description = "Highly automated and intuitive digital audio workstation";
-    maintainers = with maintainers; [ tshaynik magnetophon ];
     platforms = platforms.linux;
     license = licenses.agpl3Plus;
   };

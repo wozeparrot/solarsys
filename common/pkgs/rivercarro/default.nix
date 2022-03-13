@@ -44,7 +44,6 @@ stdenv.mkDerivation rec {
     description = "A layout generator for river Wayland compositor, fork of rivertile";
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
-    maintainers = with maintainers; [ kraem ];
   };
 }
 

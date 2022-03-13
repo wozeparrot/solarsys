@@ -46,7 +46,6 @@
 , systemd
 , libappindicator-gtk3
 , libdbusmenu
-, useWayland ? false
 }:
 
 let
@@ -126,20 +125,22 @@ stdenv.mkDerivation rec {
 
     wrapProgram $out/opt/${binaryName}/${binaryName} \
         "''${gappsWrapperArgs[@]}" \
-        --add-flags "${lib.optionalString useWayland "--enable-features=UseOzonePlatform --ozone-platform=wayland"}" \
+        --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--enable-features=UseOzonePlatform --ozone-platform=wayland}}" \
         --prefix XDG_DATA_DIRS : "${gtk3}/share/gsettings-schemas/${gtk3.name}/" \
         --prefix LD_LIBRARY_PATH : ${libPath}:$out/opt/${binaryName}
 
     ln -s $out/opt/${binaryName}/${binaryName} $out/bin/
     # Without || true the install would fail on case-insensitive filesystems
-    ln -s $out/opt/${binaryName}/${binaryName} $out/bin/${lib.strings.toLower binaryName} || true
+    ln -s $out/opt/${binaryName}/${binaryName} $out/bin/${
+      lib.strings.toLower binaryName
+    } || true
     ln -s $out/opt/${binaryName}/discord.png $out/share/pixmaps/${pname}.png
 
     ln -s "${desktopItem}/share/applications" $out/share/
   '';
 
   desktopItem = makeDesktopItem {
-    name = "${pname}${lib.optionalString useWayland " (Wayland)"}";
+    name = pname;
     exec = binaryName;
     icon = pname;
     inherit desktopName;
@@ -148,14 +149,11 @@ stdenv.mkDerivation rec {
     mimeTypes = [ "x-scheme-handler/discord" ];
   };
 
-  passthru.updateScript = ./update-discord.sh;
-
   meta = with lib; {
     description = "All-in-one cross-platform voice and text chat for gamers";
     homepage = "https://discordapp.com/";
     downloadPage = "https://discordapp.com/download";
     license = licenses.unfree;
-    maintainers = with maintainers; [ ldesgoui MP2E ];
     platforms = [ "x86_64-linux" ];
   };
 }

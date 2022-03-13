@@ -67,7 +67,6 @@ stdenv.mkDerivation rec {
     description = "A dynamic tiling wayland compositor";
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
-    maintainers = with maintainers; [ fortuneteller2k ];
   };
 }
 

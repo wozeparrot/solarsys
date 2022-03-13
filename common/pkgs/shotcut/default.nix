@@ -95,7 +95,6 @@ mkDerivation rec {
     '';
     homepage = "https://shotcut.org";
     license = licenses.gpl3Plus;
-    maintainers = with maintainers; [ goibhniu woffs peti ];
     platforms = platforms.linux;
   };
 }
