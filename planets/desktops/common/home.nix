@@ -77,7 +77,7 @@
     unzip
     p7zip
 
-    ss.discord-canary
+    ss.goosemod.discord-canary
     nheko
 
     qt5.qtwayland
