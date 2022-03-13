@@ -1,6 +1,6 @@
 self: super:
 {
-  ss = {
+  ss = rec {
     discord-canary = self.callPackage ./discord { branch = "canary"; };
     rivercarro = self.callPackage ./rivercarro { };
     river = self.callPackage ./river { };
@@ -12,6 +12,7 @@ self: super:
 
     goosemod = {
       openasar = self.callPackage ./goosemod-openasar { };
+      discord-canary = self.callPackage ./goosemod-discord { branch = "canary"; goosemod = goosemod; };
     };
   };
 
