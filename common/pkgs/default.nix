@@ -9,6 +9,10 @@ self: super:
     zrythm = self.callPackage ./zrythm { };
 
     matrix-conduit = self.callPackage ./matrix-conduit { };
+
+    goosemod = {
+      openasar = self.callPackage ./goosemod-openasar { };
+    };
   };
 
   yt-dlp = self.python3Packages.callPackage ./yt-dlp { };
