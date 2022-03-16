@@ -111,6 +111,7 @@
             installPhase = ''
               mkdir -p $out/bin/
               install -D ./ss $out/bin/
+              install -D ./solarsys-remote.sh $out/bin/
             '';
           };
         in
