@@ -20,6 +20,8 @@
 
     gdb
     rustup
+    rustc
+    cargo
     nixpkgs-fmt
     python3
     ruby
