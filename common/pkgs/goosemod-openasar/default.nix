@@ -2,6 +2,7 @@
 , stdenv
 , fetchFromGitHub
 , nodePackages
+, unzip
 }:
 
 stdenv.mkDerivation rec {
@@ -19,10 +20,15 @@ stdenv.mkDerivation rec {
     nodePackages.asar
   ];
 
+  buildInputs = [
+    unzip
+  ];
+
   patchPhase = ''
     rm -rf src/node_modules
     mkdir src/node_modules
     cp -rf poly/* src/node_modules
+    cp ${./yauzl.js} src/node_modules/yauzl.js
     sed -i -e "s/nightly/nightly-${builtins.substring 0 7 version}/" src/index.js
   '';
 
