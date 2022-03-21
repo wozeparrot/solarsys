@@ -215,6 +215,22 @@
                     modules = makeModules pkgs ./planets/infra0/nas0/host.nix;
                   };
                 };
+              nas1 =
+                let
+                  system = "aarch64-linux";
+                  pkgs = configNixpkgs system;
+                in
+                {
+                  trajectory = {
+                    host = "192.168.0.214";
+                    port = 22;
+                  };
+                  orbits = [ "aarch64-build" "nas" ];
+                  core = nixpkgs.lib.nixosSystem {
+                    inherit system specialArgs;
+                    modules = makeModules pkgs ./planets/infra0/nas1/host.nix;
+                  };
+                };
               x86runner0 =
                 let
                   system = "x86_64-linux";

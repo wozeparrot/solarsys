@@ -28,6 +28,7 @@
 
   nixpkgs.overlays = [
     (final: prev: {
+      bind = prev.master.bind;
       ripgrep = prev.master.ripgrep;
       neovim = prev.master.neovim;
       pango = prev.pango.overrideAttrs (oldAttrs: {
