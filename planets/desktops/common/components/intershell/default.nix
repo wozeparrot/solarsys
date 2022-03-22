@@ -57,11 +57,6 @@ in
           cat "$argv" | xclip -selection clipboard
         '';
       };
-      insp = {
-        body = ''
-          nix shell ${builtins.toString ../../../../../.}#$argv
-        '';
-      };
       mpvclf = {
         body = ''
           mpv --vf=format=colorlevels=full $argv

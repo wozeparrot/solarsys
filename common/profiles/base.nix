@@ -75,7 +75,14 @@
   };
 
   # extra programs
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      function bonk
+        nix shell ${builtins.toString ../../.}#$argv
+      end
+    '';
+  };
   users.defaultUserShell = pkgs.fish;
   programs.command-not-found.enable = false;
 
