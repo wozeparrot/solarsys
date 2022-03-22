@@ -15,7 +15,7 @@
       in
       nixRegistry;
 
-    nixPath = [ "nixpkgs=${builtins.toString ../../.}" ];
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     settings.extra-sandbox-paths = [ "/bin/sh=${pkgs.bash}/bin/sh" ];
 
     gc = {

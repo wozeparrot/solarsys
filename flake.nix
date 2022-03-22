@@ -14,10 +14,6 @@
 
     # flake stuff
     flake-utils.url = "github:numtide/flake-utils";
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
 
     # overlays + extra package sets + extra modules
     aninarr.url = "git+ssh://git@github.com/wozeparrot/aninarr.git?ref=main";
@@ -116,7 +112,7 @@
           };
         in
         {
-          legacyPackages = pkgs;
+          packages = pkgs;
 
           devShell = pkgs.mkShell {
             nativeBuildInputs = with pkgs; [
