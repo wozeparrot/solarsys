@@ -34,13 +34,13 @@
 
 mkDerivation rec {
   pname = "lmms";
-  version = "3c67510bbf5b900d77112a800900c7bd6fd18721";
+  version = "4378fe232c240975b2c5b5115440b4a8afdfd501";
 
   src = fetchFromGitHub {
     owner = "wozeparrot";
     repo = pname;
     rev = version;
-    sha256 = "sha256-6Blddb3Pwrwm/opbom+7wVnURZJJCwbYoDKWNJ4HE0M=";
+    sha256 = "sha256-jAOzhL0fs7sI5vtyqRGum4hsCXit4jPqJxnW1fopEPU=";
     fetchSubmodules = true;
   };
 
