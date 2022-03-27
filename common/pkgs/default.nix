@@ -7,6 +7,7 @@ self: super:
     shotcut = self.libsForQt5.callPackage ./shotcut { };
     lmms = self.libsForQt5.callPackage ./lmms { };
     zrythm = self.callPackage ./zrythm { };
+    horizon = self.callPackage ./horizon { };
 
     matrix-conduit = self.callPackage ./matrix-conduit { };
 
