@@ -20,6 +20,7 @@
     teams
 
     wine
+    bottles
     appimage-run
 
     (
