@@ -39,7 +39,7 @@
     # freecad
     krita
     # kicad-unstable
-    ss.horizon-eda
+    ss.horizon
     audacity
     antimicroX
     yt-dlp
