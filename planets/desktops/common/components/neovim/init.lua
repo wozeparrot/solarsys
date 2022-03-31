@@ -50,6 +50,7 @@ nnoremap("<leader>tt", "<cmd>tabnew<CR>")
 nnoremap("<leader>tm", "<cmd>tabp<CR>")
 nnoremap("<leader>tn", "<cmd>tabn<CR>")
 nnoremap("<leader>bd", "<cmd>lua require('bufdelete').bufdelete(0, false)<CR>")
+nnoremap("//", "<cmd>noh<CR>")
 
 ---- Ricing ----
 -- lualine
