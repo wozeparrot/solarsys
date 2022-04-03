@@ -496,7 +496,6 @@ require("nvim-tree").setup({
     hijack_netrw = true,
     open_on_tab = false,
     open_on_setup = false,
-    auto_close = true,
     diagnostics = { enable = true },
     view = { width = 40, side = "left" },
     git = { enable = true, nvim_tree_gitignore = false },
