@@ -16,7 +16,7 @@
       last = "log -1 HEAD";
       cane = "commit --amend --no-edit";
       d = "diff";
-      lola = "log --graph --decorate --pretty=oneline --abbrev-commit --all";
+      lola = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)' --all";
       a = "add";
       pl = "pull";
       ps = "push";
