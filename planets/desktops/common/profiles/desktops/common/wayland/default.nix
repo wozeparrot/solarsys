@@ -5,7 +5,7 @@
     home.packages = with pkgs; [
       wofi
       oguri
-      master.fuzzel
+      fuzzel
       fnott
 
       wlr-randr
