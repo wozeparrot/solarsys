@@ -45,8 +45,7 @@
     yt-dlp
     r128gain
     ffmpeg
-
-    gitAndTools.hub
+    zathura
 
     master.polymc
     master.protontricks
@@ -57,6 +56,8 @@
     master.steam-tui # ^
     the-powder-toy
     nix-gaming.osu-lazer-bin
+    bottles
+    appimage-run
 
     ranger
     imv
@@ -83,7 +84,6 @@
 
     qt5.qtwayland
     adwaita-qt
-
     xorg.xrdb
 
     pkgs.aninarr.aninarc

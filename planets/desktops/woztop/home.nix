@@ -7,11 +7,8 @@
 
   # Packages
   home.packages = with pkgs; [
-    python3
-
     docker-compose
 
-    zathura
     gnome3.file-roller
 
     radeontop
@@ -20,8 +17,6 @@
     teams
 
     wine
-    bottles
-    appimage-run
 
     (
       pkgs.writeShellScriptBin "run_gpu" ''
