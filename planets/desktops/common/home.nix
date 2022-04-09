@@ -45,7 +45,7 @@
     yt-dlp
     r128gain
     ffmpeg
-    zathura
+    master.zathura # TODO: switch off of master zathura once #167592 arrives in unstable
 
     master.polymc
     master.protontricks
