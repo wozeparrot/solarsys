@@ -38,7 +38,7 @@
     openscad
     # freecad
     krita
-    # kicad-unstable
+    kicad
     ss.horizon
     audacity
     antimicroX
