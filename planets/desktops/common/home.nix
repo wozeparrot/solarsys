@@ -38,7 +38,7 @@
     openscad
     # freecad
     krita
-    kicad
+    # kicad
     ss.horizon
     audacity
     antimicroX
