@@ -301,6 +301,13 @@ lspconfig.bashls.setup({
 lspconfig.clangd.setup({
     capabilities = capabilities,
 })
+-- deno
+lspconfig.denols.setup({
+    capabilities = capabilities,
+    init_options = {
+        lint = true,
+    },
+})
 
 ---- Treesitter Config ----
 local treesitter = require("nvim-treesitter.configs")
@@ -488,7 +495,6 @@ vim.g.cursorline_timeout = 500
 require("Comment").setup({})
 
 ---- nvim-tree-lua Config ----
-vim.g.nvim_tree_indent_markers = true
 vim.g.nvim_tree_add_trailing = true
 vim.g.nvim_tree_group_empty = true
 require("nvim-tree").setup({
@@ -506,6 +512,11 @@ require("nvim-tree").setup({
             "node_modules",
             ".cache",
             "zig-cache",
+        },
+    },
+    renderer = {
+        indent_markers = {
+            enable = true,
         },
     },
 })

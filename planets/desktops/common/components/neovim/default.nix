@@ -54,6 +54,7 @@ in
       nodePackages.vscode-json-languageserver
       nodePackages.bash-language-server
       clang-tools
+      deno
     ];
 
     plugins = with pkgs.vimPlugins; [
