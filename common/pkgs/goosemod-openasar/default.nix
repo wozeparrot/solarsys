@@ -7,13 +7,13 @@
 
 stdenv.mkDerivation rec {
   pname = "goosemod-openasar";
-  version = "2a82ee5a1c7e986c371de89c429b29f0673529a2";
+  version = "e256e8fea1c14570a4aa665ca3295fffb8d71cd9";
 
   src = fetchFromGitHub {
     owner = "GooseMod";
     repo = "OpenAsar";
     rev = version;
-    sha256 = "sha256-hBPvlPN7BkpQWCSdbG3ZS64QbQAodEcThbe30T8YFZo=";
+    sha256 = "sha256-KL8UoT50GWyvmxTQlN8UzViuBplfKGeQ6pTDAFdss90=";
   };
 
   nativeBuildInputs = [
