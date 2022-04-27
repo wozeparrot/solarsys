@@ -1,10 +1,11 @@
 { config, pkgs, lib, ... }:
 let
-  pluginGit = repo: rev: pkgs.vimUtils.buildVimPluginFrom2Nix {
+  pluginGit = repo: rev: ref: pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "${lib.strings.sanitizeDerivationName repo}-${rev}";
     version = rev;
     src = builtins.fetchGit {
       url = "https://github.com/${repo}.git";
+      ref = ref;
       rev = rev;
     };
   };
@@ -59,7 +60,7 @@ in
 
     plugins = with pkgs.vimPlugins; [
       # ricing
-      (pluginGit "nekonako/xresources-nvim" "745b4df924a6c4a7d8026a3fb3a7fa5f78e6f582")
+      (pluginGit "nekonako/xresources-nvim" "745b4df924a6c4a7d8026a3fb3a7fa5f78e6f582" "master")
       lualine-nvim
       bufferline-nvim
       bufdelete-nvim
@@ -83,7 +84,7 @@ in
       telescope-nvim
       telescope-fzf-native-nvim
       telescope-frecency-nvim
-      (pluginGit "nvim-telescope/telescope-ui-select.nvim" "d02a3d3a6b3f6b933c43a28668ae18f78846d3aa")
+      (pluginGit "nvim-telescope/telescope-ui-select.nvim" "d02a3d3a6b3f6b933c43a28668ae18f78846d3aa" "master")
       # nvim-autopairs
       nvim-autopairs
       # vim-vsnip
@@ -111,7 +112,8 @@ in
 
       # language support
       zig-vim
-      (pluginGit "lluchs/vim-wren" "713705a23bdb94ff6c29866ff4a9db089cbc2dab")
+      (pluginGit "lluchs/vim-wren" "713705a23bdb94ff6c29866ff4a9db089cbc2dab" "master")
+      (pluginGit "stefanos82/nelua.vim" "60e67296bce29db0c060a21c9ad5423005a8f6eb" "main")
 
       # lsp language additionals
       crates-nvim
