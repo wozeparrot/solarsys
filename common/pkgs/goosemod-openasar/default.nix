@@ -20,7 +20,7 @@ stdenv.mkDerivation rec {
     nodePackages.asar
   ];
 
-  buildInputs = [
+  propagatedBuildInputs = [
     unzip
   ];
 
@@ -34,6 +34,7 @@ stdenv.mkDerivation rec {
       cp -rf poly/* src/node_modules
       sed -i -e "s/nightly/nightly-${builtins.substring 0 7 version}/" src/index.js
       sed -i -e "s/unzip/${lib.strings.escape ["/"] unzipBin}/" src/updater/moduleUpdater.js
+      sed -i -e 's/proc\.stderr\.on.*//' src/updater/moduleUpdater.js
     '';
 
   installPhase = ''
