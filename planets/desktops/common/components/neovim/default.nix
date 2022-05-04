@@ -114,6 +114,7 @@ in
       zig-vim
       (pluginGit "lluchs/vim-wren" "713705a23bdb94ff6c29866ff4a9db089cbc2dab" "master")
       (pluginGit "stefanos82/nelua.vim" "60e67296bce29db0c060a21c9ad5423005a8f6eb" "main")
+      (pluginGit "DingDean/wgsl.vim" "fbe8f0dd179aec8525d6c93bb992e409b0e4e0ee" "main")
 
       # lsp language additionals
       crates-nvim
