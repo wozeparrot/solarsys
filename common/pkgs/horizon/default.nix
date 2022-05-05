@@ -12,6 +12,7 @@
 , libarchive
 , libgit2
 , librsvg
+, libspnav
 , libuuid
 , opencascade
 , pkg-config
@@ -24,13 +25,13 @@
 
 stdenv.mkDerivation rec {
   pname = "horizon-eda";
-  version = "3d834e6ea63cbaa15799f06b683f96f32967d31f";
+  version = "unstable-2022-05-04";
 
   src = fetchFromGitHub {
     owner = "horizon-eda";
     repo = "horizon";
-    rev = version;
-    sha256 = "sha256-wMz5+tQy7i/Cc3iHDS0HwvK6hIqyOup+zkNPcr3AJbY=";
+    rev = "f788f05d67d81a11b76c0e4914ae3d3930e3b0dc";
+    sha256 = "sha256-6dVmiO7ScWhMYUGpSTjdRy+l4GVQEdqfU42Lhn+QhVM=";
   };
 
   buildInputs = [
@@ -43,6 +44,7 @@ stdenv.mkDerivation rec {
     libarchive
     libgit2
     librsvg
+    libspnav
     libuuid
     opencascade
     podofo
