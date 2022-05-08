@@ -11,7 +11,7 @@
     ./components/kitty
     ./components/mpv
     ./components/shfm
-    ./components/musicprod
+    #./components/musicprod
   ];
 
   # packages
