@@ -39,8 +39,8 @@ mkDerivation rec {
   src = fetchFromGitHub {
     owner = "wozeparrot";
     repo = pname;
-    rev = "a0d00fb3839a2699a47092f767e5f7e494f213d3";
-    sha256 = "sha256-0ZNMekHK8hV7Byq5UeshL01nI/cGcvIdiihrUoDM4AQ=";
+    rev = "0dcf909129d14a12c2bd55453834229ae2ca9039";
+    sha256 = "sha256-f0rxq4B/SNIiLqmvJctgbZq10BId+q4gyfi3UV1QiIg=";
     fetchSubmodules = true;
   };
 
