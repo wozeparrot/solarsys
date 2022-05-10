@@ -14,7 +14,7 @@
     radeontop
     simplescreenrecorder
 
-    teams
+    master.teams # TODO: currently borked on unstable
 
     wine
 
