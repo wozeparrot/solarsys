@@ -13,7 +13,7 @@ self: super:
 
     goosemod = {
       openasar = self.callPackage ./goosemod-openasar { };
-      discord-canary = self.callPackage ./goosemod-discord { branch = "canary"; goosemod = goosemod; };
+      discord-canary = self.callPackage ./goosemod-discord { branch = "canary"; inherit goosemod; };
     };
   };
 

@@ -5,8 +5,8 @@ let
     version = rev;
     src = builtins.fetchGit {
       url = "https://github.com/${repo}.git";
-      ref = ref;
-      rev = rev;
+      inherit ref;
+      inherit rev;
     };
   };
 in

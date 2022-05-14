@@ -35,13 +35,13 @@
       # external/third-party stuff
       external = {
         aninarr = {
-          overlay = inputs.aninarr.overlay;
+          inherit (inputs.aninarr) overlay;
         };
         wozey = {
-          packages = inputs.wozey.packages;
+          inherit (inputs.wozey) packages;
         };
         nix-gaming = {
-          packages = inputs.nix-gaming.packages;
+          inherit (inputs.nix-gaming) packages;
           cache = {
             substituters = [ "https://nix-gaming.cachix.org" ];
             trusted-public-keys = [ "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4=" ];
@@ -65,7 +65,7 @@
               }
             );
         in
-        (builtins.attrValues (pathsToImportedAttrs overlayPaths));
+        builtins.attrValues (pathsToImportedAttrs overlayPaths);
 
       configNixpkgs = system: (
         import nixpkgs
@@ -85,8 +85,8 @@
                   };
                 }
               )
-            ] ++ overlay ++ (nixpkgs.lib.mapAttrsToList (n: v: v.overlay) (nixpkgs.lib.filterAttrs (n: v: nixpkgs.lib.hasAttr "overlay" v) external));
-          } // nixpkgs.lib.mapAttrs (n: v: v.packages."${system}") (nixpkgs.lib.filterAttrs (n: v: nixpkgs.lib.hasAttr "packages" v) external)
+            ] ++ overlay ++ (nixpkgs.lib.mapAttrsToList (n: v: v.overlay) (nixpkgs.lib.filterAttrs (n: nixpkgs.lib.hasAttr "overlay") external));
+          } // nixpkgs.lib.mapAttrs (n: v: v.packages."${system}") (nixpkgs.lib.filterAttrs (n: nixpkgs.lib.hasAttr "packages") external)
       );
     in
     flake-utils.lib.eachSystem [
@@ -141,7 +141,7 @@
                 nixpkgs.pkgs = pkgs;
 
                 # build nix caches from external
-                nix.settings = nixpkgs.lib.mapAttrs (n: v: nixpkgs.lib.flatten v) (nixpkgs.lib.zipAttrs (nixpkgs.lib.attrValues (nixpkgs.lib.mapAttrs (n: v: v.cache) (nixpkgs.lib.filterAttrs (n: v: nixpkgs.lib.hasAttr "cache" v) external))));
+                nix.settings = nixpkgs.lib.mapAttrs (n: nixpkgs.lib.flatten) (nixpkgs.lib.zipAttrs (nixpkgs.lib.attrValues (nixpkgs.lib.mapAttrs (n: v: v.cache) (nixpkgs.lib.filterAttrs (n: nixpkgs.lib.hasAttr "cache") external))));
 
                 _module.args = {
                   inherit inputs;

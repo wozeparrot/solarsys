@@ -28,9 +28,9 @@
 
   nixpkgs.overlays = [
     (final: prev: {
-      bind = prev.master.bind;
-      ripgrep = prev.master.ripgrep;
-      neovim = prev.master.neovim;
+      inherit (prev.master) bind;
+      inherit (prev.master) ripgrep;
+      inherit (prev.master) neovim;
       pango = prev.pango.overrideAttrs (oldAttrs: {
         outputs = [ "bin" "out" "dev" ];
         mesonFlags = [ "-Dintrospection=disabled" "-Dgtk_doc=false" ];
