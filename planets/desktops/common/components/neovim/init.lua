@@ -131,15 +131,15 @@ require("bufferline").setup({
         persist_buffer_sort = true,
         enforce_regular_tabs = true,
         always_show_bufferline = true,
-        offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "left"}},
+        offsets = { { filetype = "NvimTree", text = "File Explorer", text_align = "left" } },
         sort_by = 'extension',
         diagnostics = "nvim_lsp",
         diagnostics_update_in_insert = true,
         diagnostics_indicator = function(count, level, diagnostics_dict, context)
             local s = ""
             for e, n in pairs(diagnostics_dict) do
-                local sym = e == "error" and "" or (e == "warning" and "" or "" )
-                if(sym ~= "") then
+                local sym = e == "error" and "" or (e == "warning" and "" or "")
+                if (sym ~= "") then
                     s = s .. " " .. n .. sym
                 end
             end
@@ -424,7 +424,7 @@ cmp.setup({
         { name = "crates" },
         { name = "buffer" },
     },
-    mapping = {
+    mapping = cmp.mapping.preset.insert({
         ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
         ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
         ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -447,20 +447,20 @@ cmp.setup({
                 fallback()
             end
         end, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(function (fallback)
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif vim.fn['vsnip#available'](-1) == 1 then
                 feedkey("<Plug>(vsnip-jump-prev)", "")
             end
         end, { 'i', 's' }),
-    },
+    }),
     completion = {
         completeopt = 'menu,menuone,noinsert',
     },
     formatting = {
         format = function(entry, vim_item)
-            vim_item.kind = lspkind.presets.default[vim_item.kind].." "..vim_item.kind
+            vim_item.kind = lspkind.presets.default[vim_item.kind] .. " " .. vim_item.kind
 
             vim_item.menu = ({
                 nvim_lsp = "[LSP]",
