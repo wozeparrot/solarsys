@@ -8,6 +8,8 @@ self: super:
     lmms = self.libsForQt5.callPackage ./lmms { };
     zrythm = self.callPackage ./zrythm { };
     horizon = self.callPackage ./horizon { };
+    pop-launcher = self.callPackage ./pop-launcher { };
+    onagre = self.callPackage ./onagre { inherit pop-launcher; };
 
     matrix-conduit = self.callPackage ./matrix-conduit { };
 
