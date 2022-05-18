@@ -7,9 +7,17 @@
       oguri
       fuzzel
       fnott
+      grim
+      slurp
+      swappy
+      pngquant
 
       wlr-randr
       wdisplays
+
+      (pkgs.writeShellScriptBin "wl-screenshot" ''
+        grim -g "$(slurp)" - | swappy -f - -o - | pngquant -o - - | wl-copy -t 'image/png'
+      '')
     ];
 
     xdg.configFile."oguri/config".text = ''
