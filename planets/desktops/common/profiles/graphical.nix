@@ -78,6 +78,8 @@
     };
   };
 
+  services.udev.packages = [ pkgs.gnome3.gnome-settings-daemon ];
+
   # environment
   environment = {
     systemPackages = with pkgs; [
@@ -86,8 +88,10 @@
       helvum
       pamixer
 
+      gtk-engine-murrine
       hicolor-icon-theme
-      tela-icon-theme
+      gnome3.adwaita-icon-theme
+      papirus-icon-theme
 
       libnotify
       xdg-utils

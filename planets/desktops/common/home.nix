@@ -82,9 +82,10 @@
     ss.goosemod.discord-canary
     nheko
 
+    gtk-engine-murrine
     qt5.qtwayland
-    adwaita-qt
     xorg.xrdb
+
 
     pkgs.aninarr.aninarc
   ];
@@ -181,15 +182,17 @@
   # theming
   gtk = {
     theme = {
-      package = pkgs.gnome.gnome-themes-extra;
-      name = "Adwaita-dark";
+      package = pkgs.orchis-theme.override {
+        tweaks = [ "compact" "black" "primary" ];
+      };
+      name = "Orchis-Purple-Dark-Compact";
     };
     iconTheme = {
-      package = pkgs.gnome.adwaita-icon-theme;
-      name = "Adwaita";
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus";
     };
     font = {
-      name = "Agave Nerd Font";
+      name = "Vegur";
       size = 11;
     };
     enable = true;
@@ -197,6 +200,7 @@
 
   qt = {
     enable = true;
+    platformTheme = "gnome";
     style = {
       package = pkgs.adwaita-qt;
       name = "adwaita-dark";
