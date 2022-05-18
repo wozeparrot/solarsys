@@ -15,6 +15,11 @@
 , libinput
 , libX11
 , libGL
+, makeWrapper
+, wrapGAppsHook
+, gdk-pixbuf
+, glib
+, gtk3
 }:
 
 stdenv.mkDerivation rec {
@@ -29,7 +34,9 @@ stdenv.mkDerivation rec {
     fetchSubmodules = true;
   };
 
-  nativeBuildInputs = [ zig wayland xwayland scdoc pkg-config ];
+  nativeBuildInputs = [ zig wayland xwayland scdoc pkg-config makeWrapper wrapGAppsHook ];
+
+  dontWrapGApps = true;
 
   buildInputs = [
     wayland-protocols
@@ -41,6 +48,9 @@ stdenv.mkDerivation rec {
     libinput
     libX11
     libGL
+    gdk-pixbuf
+    glib
+    gtk3
   ];
 
   dontConfigure = true;
@@ -53,6 +63,12 @@ stdenv.mkDerivation rec {
     runHook preInstall
     zig build -Drelease-safe -Dcpu=baseline -Dxwayland -Dman-pages --prefix $out install
     runHook postInstall
+  '';
+
+  postInstall = ''
+    gappsWrapperArgsHook
+
+    wrapProgram $out/bin/river "''${gappsWrappeArgs[@]}"
   '';
 
   /*
