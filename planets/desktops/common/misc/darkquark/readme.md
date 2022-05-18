@@ -29,6 +29,9 @@ light_purple:           #c29dd5
 cyan:                   #33b3f4
 light_cyan:             #88c4f4
 
+orange:                 #d8272a
+light_orange:           #ff7458
+
 gray:                   #bbb3c1
 white:                  #f8f0f8
 
