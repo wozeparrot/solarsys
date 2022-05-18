@@ -115,6 +115,11 @@ riverctl attach-mode bottom
 # Set input stuff
 riverctl set-repeat 50 300
 riverctl set-cursor-warp on-output-change
+for pad in $(riverctl list-inputs | grep -i touchpad)
+do
+  riverctl input $pad events enabled
+  riverctl input $pad tap enabled
+done
 
 # Set app-ids of views which should float
 riverctl float-filter-add app-id "float"
