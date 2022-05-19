@@ -95,6 +95,8 @@
 
       libnotify
       xdg-utils
+
+      gsettings-desktop-schemas
     ];
   };
 }
