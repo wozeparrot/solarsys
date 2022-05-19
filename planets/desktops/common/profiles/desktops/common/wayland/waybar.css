@@ -16,9 +16,9 @@
   min-height: 10px;
 }
 
-/* Make the background black */
+/* Set background color */
 window#waybar {
-  background: #000000;
+  background: @background;
 }
 
 /* Style center modules */
