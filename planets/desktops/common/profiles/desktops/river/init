@@ -5,9 +5,13 @@ mod="Mod4"
 
 # Normal mode applications
 riverctl map normal $mod Return          spawn kitty
+riverctl map normal $mod B               spawn "kitty btop"
+riverctl map normal $mod V               spawn "kitty ncmpcpp"
 riverctl map normal $mod D               spawn "fuzzel -r 0 -b 151510ff -t d2cad3ff -s 6691d2ff -C aa3c9fff -m a52e4dff -w 40 -l 12 -B 2"
-riverctl map normal $mod Space           spawn "fnottctl dismiss"
+riverctl map normal $mod+Control Space   spawn "fnottctl dismiss"
 riverctl map normal None Print           spawn wl-screenshot
+
+riverctl map normal $mod Space           spawn "pkill -USR1 waybar"
 
 # Mod+Q to close the focused view
 riverctl map normal $mod Q close

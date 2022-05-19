@@ -36,23 +36,33 @@
         {
           layer = "top";
           position = "top";
-          height = 20;
+          mode = "invisible";
           output = [
             "eDP-1"
+            "HDMI-A-1"
           ];
-          modules-left = [ "battery" "network" "cpu" "memory" ];
-          modules-center = [ "mpd" ];
-          modules-right = [ "backlight" "pulseaudio" "clock" "tray" ];
+
+          modules-left = [ "cpu" "memory" "mpd" "tray" ];
+          modules-center = [ "river/tags" ];
+          modules-right = [ "backlight" "pulseaudio" "clock" "battery" ];
+
           modules = {
             "mpd" = {
-              format = "{stateIcon} : {title} : ({elapsedTime:%H:%M:%S}/{totalTime:%H:%M:%S})";
-              format-disconnected = "disconnected";
-              format-stopped = "stopped";
+              format = "{stateIcon}";
+              format-disconnected = "";
+              format-stopped = "";
               state-icons = {
-                paused = "#";
-                playing = "^";
+                paused = "";
+                playing = "";
               };
               tooltip = false;
+            };
+            "tray" = {
+              icon-size = 12;
+              spacing = 10;
+            };
+            "river/tags" = {
+              num-tags = 9;
             };
             "network" = {
               format-wifi = "W {signalStrength}%";
@@ -64,8 +74,7 @@
             "backlight" = {
               on-scroll-up = "light -A 1";
               on-scroll-down = "light -U 1";
-              format = "{icon} {percent}%";
-              format-icons = [ "B" ];
+              format = " {percent}%";
               tooltip = false;
             };
             "clock" = {
@@ -76,40 +85,30 @@
             };
             "pulseaudio" = {
               format = "{icon} {volume}%";
-              format-muted = "M";
+              format-muted = "";
               format-icons = {
-                default = [ "S" ];
+                default = [ "" "" "" ];
               };
               on-click = "pavucontrol";
               tooltip = false;
             };
             "battery" = {
-              format-icons = [ "." "," "-" "'" "*" ];
+              format-icons = [ "" "" "" "" "" ];
               format = "{icon} {capacity}%";
-              format-charging = "{icon} {capacity}%";
-              format-discharging = "{icon} {capacity}";
-              format-full = "{icon} {capacity}%";
+              format-charging = " {capacity}%";
               interval = 30;
               states = {
+                good = 95;
                 warning = 30;
                 critical = 15;
               };
-              tooltip = false;
             };
             "memory" = {
-              format = "R {}%";
-              states = {
-                warning = 70;
-                critical = 90;
-              };
+              format = " {}%";
               interval = 2;
             };
             "cpu" = {
-              format = "C {usage}%";
-              states = {
-                warning = 70;
-                critical = 90;
-              };
+              format = " {usage}%";
               interval = 2;
             };
           };

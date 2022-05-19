@@ -1,46 +1,121 @@
-@define-color background rgba(0, 0, 0, 0.8);
+@define-color background #151510;
 @define-color foreground #d2cad3;
 @define-color yellow     #996f06;
 @define-color red        #a52e4d;
 @define-color green      #228039;
+@define-color blue       #006fc1;
+@define-color purple     #aa3c9f;
+@define-color gray       #bbb3c1;
 
+/* Generic style for everything */
 * {
   border: none;
-  border-radius: 0;
-  font-family: "Agave Nerd Font";
-  font-size: 13px;
-  min-height: 0;
+  border-radius: 0px;
+  font-family: "Vegur";
+  font-size: 12px;
+  min-height: 10px;
 }
 
+/* Make the background black */
 window#waybar {
-  background: @background;
-  color: @foreground;
+  background: #000000;
 }
 
-#battery.warning,
-#memory.warning,
-#cpu.warning {
-  border-top: 3px solid @yellow;
+/* Style center modules */
+.modules-center {
+    background: @background;
 }
 
-#battery.critical,
-#memory.critical,
-#cpu.critical {
-  border-top: 3px solid @red;
+#tags button {
+	color: @foreground;
+	background: transparent;
+    border-left: 2px solid transparent;
+    border-right: 2px solid transparent;
 }
 
-#battery.charging {
-  border-top: 3px solid @green;
+#tags button.occupied {
+	color: @red;
 }
 
-#network,
-#cpu,
-#memory,
-#backlight,
-#battery,
-#pulseaudio,
-#clock,
+#tags button.focused {
+	color: @blue;
+    border-color: @blue;
+}
+
+#tags button:hover {
+	color: @purple;
+    border-color: @purple;
+}
+
+/* Style left modules */
+.modules-left {
+    background: @background;
+}
+
+#memory {
+    margin: 0px 8px;
+    padding: 0px 10px;
+	color: @foreground;
+}
+
+#cpu {
+    margin: 0px 8px;
+    padding: 0px 10px;
+	color: @foreground;
+}
+
 #tray {
-  padding: 0 6px;
-  margin: 0 6px;
+    margin: 0px 8px;
+    padding: 0px 10px;
+	color: @foreground;
 }
+
+/* Style right modules */
+.modules-right {
+    background: @background;
+}
+
+#pulseaudio {
+    margin: 0px 8px;
+    padding: 0px 10px;
+	color: @foreground;
+}
+
+#battery {
+    margin: 0px 8px;
+    padding: 0px 10px;
+	color: @foreground;
+}
+
+#battery.charging, #battery.plugged {
+	color: @green;
+}
+
+#battery.critical:not(.charging) {
+    background-color: @background;
+    color: @red;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+@keyframes blink {
+    to {
+        background-color: @red;
+        color: @background;
+    }
+}
+
+#backlight {
+    margin: 0px 8px;
+    padding: 0px 10px;
+	color: @foreground;
+}
+
+#clock {
+    margin: 0px 8px;
+    padding: 0px 10px;
+	color: @foreground;
+}
+
