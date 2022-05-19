@@ -36,7 +36,6 @@
         {
           layer = "top";
           position = "top";
-          mode = "invisible";
           output = [
             "eDP-1"
             "HDMI-A-1"
