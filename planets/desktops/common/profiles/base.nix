@@ -17,7 +17,10 @@
 
   # services
   ## oom killer
-  services.earlyoom.enable = true;
+  services.earlyoom = {
+    enable = true;
+    enableNotifications = true;
+  };
 
   # rtkit
   security.rtkit.enable = true;
