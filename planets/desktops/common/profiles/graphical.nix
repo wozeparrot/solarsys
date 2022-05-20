@@ -97,6 +97,7 @@
       xdg-utils
 
       gsettings-desktop-schemas
+      glib
     ];
   };
 }
