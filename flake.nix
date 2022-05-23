@@ -17,17 +17,24 @@
 
     # overlays + extra package sets + extra modules
     aninarr.url = "git+ssh://git@github.com/wozeparrot/aninarr.git?ref=main";
-    aninarr.inputs.nixpkgs.follows = "nixpkgs";
-    aninarr.inputs.flake-utils.follows = "flake-utils";
+    aninarr.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-utils.follows = "flake-utils";
+    };
 
     wozey.url = "git+ssh://git@github.com/wozeparrot/wozey.service.git?ref=main";
-    wozey.inputs.nixpkgs.follows = "nixpkgs";
-    wozey.inputs.flake-utils.follows = "flake-utils";
+    wozey.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-utils.follows = "flake-utils";
+    };
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
     nix-ld.url = "github:Mic92/nix-ld";
-    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
+    nix-ld.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      utils.follows = "flake-utils";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, master, staging-next, home-manager, flake-utils, ... }:
