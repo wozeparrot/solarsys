@@ -77,21 +77,24 @@
         monospace = [
           "Agave Nerd Font"
           "Source Han Mono"
-          "Noto Sans Japanese"
+          "Noto Sans Mono CJK JP"
+          "Noto Emoji"
           "Noto Sans"
           "Last Resort"
         ];
         sansSerif = [
           "Vegur"
           "Source Han Sans"
-          "Noto Sans Japanese"
+          "Noto Sans CJK JP"
+          "Noto Emoji"
           "Noto Sans"
           "Last Resort"
         ];
         serif = [
           "Tenderness"
           "Source Han Serif"
-          "Noto Serif Japanese"
+          "Noto Serif CJK JP"
+          "Noto Emoji"
           "Noto Serif"
           "Last Resort"
         ];
