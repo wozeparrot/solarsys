@@ -57,22 +57,43 @@
       agave
       vegur
       tenderness
-      noto-fonts-cjk
+      source-han-mono
+      source-han-sans
+      source-han-serif
+
+      # fallback
+      noto-fonts
+      noto-fonts-extra
+      noto-fonts-emoji
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+
+      # super fallback
+      last-resort
     ];
 
     fontconfig = {
       defaultFonts = {
         monospace = [
           "Agave Nerd Font"
+          "Source Han Mono"
           "Noto Sans Japanese"
+          "Noto Sans"
+          "Last Resort"
         ];
         sansSerif = [
           "Vegur"
+          "Source Han Sans"
           "Noto Sans Japanese"
+          "Noto Sans"
+          "Last Resort"
         ];
         serif = [
           "Tenderness"
+          "Source Han Serif"
           "Noto Serif Japanese"
+          "Noto Serif"
+          "Last Resort"
         ];
       };
     };
