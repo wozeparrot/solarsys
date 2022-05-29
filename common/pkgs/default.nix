@@ -19,6 +19,6 @@ self: super:
     };
   };
 
-  yt-dlp = self.python3Packages.callPackage ./yt-dlp { };
+  # yt-dlp = self.python3Packages.callPackage ./yt-dlp { };
   matrix-appservice-discord = self.callPackage ./matrix-appservice-discord { };
 }
