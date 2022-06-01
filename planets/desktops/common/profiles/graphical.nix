@@ -25,9 +25,8 @@
       enable = true;
       settings = {
         screencast = {
-          max_fps = 30;
           choose_type = "simple";
-          chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or -s '#12345655' -b '#65432155'";
+          chooser_cmd = "${pkgs.wofi}/bin/wofi -d -n --prompt='Select Monitor To Share: '";
         };
       };
     };
