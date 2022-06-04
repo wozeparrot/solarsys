@@ -45,7 +45,7 @@
     yt-dlp
     r128gain
     ffmpeg
-    master.zathura # TODO: switch off of master zathura once #167592 arrives in unstable
+    zathura
 
     master.polymc
     master.protontricks
@@ -54,7 +54,7 @@
         openssl
       ];
     })
-    master.steam # not using the normal way as I need steam from master
+    master.steam # not using the normal way as we need steam from master
     master.steam.run # ^ required settings from programs.steam.enable should be set in each hosts config
     master.steamcmd # ^
     master.steam-tui # ^
@@ -84,7 +84,7 @@
     p7zip
 
     ss.goosemod.discord-canary
-    nheko
+    # nheko # TODO: uncomment when #176246 lands
 
     gtk-engine-murrine
     qt5.qtwayland

@@ -485,8 +485,6 @@ require("indent_blankline").setup({
     show_current_context = true,
     show_trailing_blankline_indent = false,
 })
--- TODO: https://github.com/lukas-reineke/indent-blankline.nvim/issues/59
-vim.wo.colorcolumn = "99999"
 
 ---- nvim-cursorline Config ----
 vim.g.cursorline_timeout = 500
@@ -504,7 +502,7 @@ require("nvim-tree").setup({
     open_on_setup = false,
     diagnostics = { enable = true },
     view = { width = 40, side = "left" },
-    git = { enable = true, nvim_tree_gitignore = false },
+    git = { enable = true, ignore = false },
     filters = {
         dotfiles = false,
         custom = {
