@@ -99,7 +99,7 @@
       enable = true;
       qemu.ovmf = {
         enable = true;
-        package = pkgs.OVMFFull;
+        packages = [ pkgs.OVMFFull ];
       };
       onBoot = "ignore";
       onShutdown = "shutdown";
