@@ -122,5 +122,25 @@
       gsettings-desktop-schemas
       glib
     ];
+    sessionVariables.XDG_DATA_DIRS =
+      let
+        missing-gsettings-schemas-fix = builtins.readFile "${pkgs.stdenv.mkDerivation {
+          name = "missing-gsettings-schemas-fix";
+          dontUnpack = true;
+          buildInputs = [ pkgs.gtk3 ];
+          installPhase = ''
+            printf %s "$GSETTINGS_SCHEMAS_PATH" > "$out"
+          '';
+        }}";
+      in
+      lib.mkAfter [ "${missing-gsettings-schemas-fix}" ];
+  };
+
+  # input methods
+  i18n.inputMethod = {
+    enabled = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [
+      typing-booster
+    ];
   };
 }
