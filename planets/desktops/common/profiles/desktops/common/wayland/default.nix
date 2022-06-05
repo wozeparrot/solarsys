@@ -11,6 +11,7 @@
       slurp
       swappy
       pngquant
+      albert
 
       wlr-randr
       wdisplays
@@ -121,6 +122,18 @@
         Description = "Home Manager System Tray";
         Requires = [ "graphical-session-pre.target" ];
       };
+    };
+
+    systemd.user.services.albert = {
+      Unit = {
+        Description = "albert launcher";
+        After = [ "graphical-session-pre.target" "tray.target" ];
+        PartOf = [ "graphical-session.target" ];
+      };
+
+      Install = { WantedBy = [ "graphical-session.target" ]; };
+
+      Service = { ExecStart = "${pkgs.albert}/bin/albert"; };
     };
   };
 
