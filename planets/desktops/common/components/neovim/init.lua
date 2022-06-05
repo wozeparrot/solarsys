@@ -493,8 +493,6 @@ vim.g.cursorline_timeout = 500
 require("Comment").setup({})
 
 ---- nvim-tree-lua Config ----
-vim.g.nvim_tree_add_trailing = true
-vim.g.nvim_tree_group_empty = true
 require("nvim-tree").setup({
     disable_netrw = true,
     hijack_netrw = true,
@@ -516,6 +514,8 @@ require("nvim-tree").setup({
         indent_markers = {
             enable = true,
         },
+        group_empty = true,
+        add_trailing = true,
     },
 })
 nnoremap("<C-n>", "<cmd>NvimTreeToggle<CR>")
