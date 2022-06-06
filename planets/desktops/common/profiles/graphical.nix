@@ -135,12 +135,4 @@
       in
       lib.mkAfter [ "${missing-gsettings-schemas-fix}" ];
   };
-
-  # input methods
-  i18n.inputMethod = {
-    enabled = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [
-      typing-booster
-    ];
-  };
 }
