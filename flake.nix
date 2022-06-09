@@ -10,7 +10,10 @@
 
     # home-manager
     home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      utils.follows = "flake-utils";
+    };
 
     # flake stuff
     flake-utils.url = "github:numtide/flake-utils";
