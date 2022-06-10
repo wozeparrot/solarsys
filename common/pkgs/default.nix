@@ -10,6 +10,7 @@ self: super:
     horizon = self.callPackage ./horizon { };
     pop-launcher = self.callPackage ./pop-launcher { };
     onagre = self.callPackage ./onagre { inherit pop-launcher; };
+    sonobus = self.callPackage ./sonobus { };
 
     matrix-conduit = self.callPackage ./matrix-conduit { };
 
