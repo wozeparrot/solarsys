@@ -7,6 +7,7 @@
     nixpkgs.follows = "unstable";
     master.url = "github:NixOS/nixpkgs/master";
     staging-next.url = "github:NixOS/nixpkgs/staging-next";
+    wozepkgs.url = "github:wozeparrot/nixpkgs/hyprland";
 
     # home-manager
     home-manager.url = "github:nix-community/home-manager";
@@ -40,7 +41,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, master, staging-next, home-manager, flake-utils, ... }:
+  outputs = inputs@{ self, nixpkgs, master, staging-next, wozepkgs, home-manager, flake-utils, ... }:
     let
       # external/third-party stuff
       external = {
@@ -90,6 +91,10 @@
                     config.allowUnfree = true;
                   };
                   staging-next = import staging-next {
+                    inherit system;
+                    config.allowUnfree = true;
+                  };
+                  wozepkgs = import wozepkgs {
                     inherit system;
                     config.allowUnfree = true;
                   };

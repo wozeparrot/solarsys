@@ -198,6 +198,7 @@
         ],
         "staging-next": "staging-next",
         "unstable": "unstable",
+        "wozepkgs": "wozepkgs",
         "wozey": "wozey"
       }
     },
@@ -229,6 +230,22 @@
       "original": {
         "owner": "NixOS",
         "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "wozepkgs": {
+      "locked": {
+        "lastModified": 1654958002,
+        "narHash": "sha256-MMOFi7pbVSjrgK6sZvyDsmv61G6nJT2cnC2i+fRsFkE=",
+        "owner": "wozeparrot",
+        "repo": "nixpkgs",
+        "rev": "d852663ae6736296f504c8ea730a7a4986959436",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wozeparrot",
+        "ref": "hyprland",
         "repo": "nixpkgs",
         "type": "github"
       }
