@@ -16,7 +16,7 @@
 
     teams
 
-    wine
+    wine64
 
     (
       pkgs.writeShellScriptBin "run_gpu" ''
