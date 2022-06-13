@@ -35,7 +35,7 @@
               export SDL_VIDEODRIVER=wayland
               export _JAVA_AWT_WM_NONREPARENTING=1
 
-              systemd-cat --identifier=hyprland dbus-run-session hyprland
+              systemd-cat --identifier=hyprland dbus-run-session Hyprland
             '';
           in
           "${pkgs.greetd.greetd}/bin/agreety --cmd ${hyprland-run}/bin/hyprland-run";
