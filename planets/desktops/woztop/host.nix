@@ -8,8 +8,8 @@
     ./hardware.nix
 
     # ../common/profiles/desktops/hikari
-    # ../common/profiles/desktops/river
-    ../common/profiles/desktops/hyprland
+    ../common/profiles/desktops/river
+    # ../common/profiles/desktops/hyprland
 
     ../common/profiles/wireguard.nix
   ];
