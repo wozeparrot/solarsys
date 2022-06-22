@@ -120,6 +120,9 @@ in
       # lsp language additionals
       crates-nvim
       rust-tools-nvim
+
+      # others
+      (pluginGit "github/copilot.vim" "c2e75a3a7519c126c6fdb35984976df9ae13f564" "release")
     ];
   };
 }
