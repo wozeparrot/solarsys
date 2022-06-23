@@ -282,15 +282,13 @@ lspconfig.sumneko_lua.setup({
     },
 })
 -- java
-lspconfig.java_language_server.setup({
+lspconfig.jdtls.setup({
     capabilities = capabilities,
     on_attach = default_on_attach,
-    cmd = { "java-language-server" },
-})
--- json
-lspconfig.jsonls.setup({
-    capabilities = capabilities,
-    on_attach = default_on_attach,
+    cmd = { "jdt-language-server", "-data", "/home/woze/.cache/jdtls/workspace" },
+    init_options = {
+        workspace = "/home/woze/.cache/jdtls/workspace"
+    },
 })
 -- bash
 lspconfig.bashls.setup({
@@ -423,6 +421,7 @@ cmp.setup({
         { name = "path" },
         { name = "crates" },
         { name = "buffer" },
+        { name = "copilot" },
     },
     mapping = cmp.mapping.preset.insert({
         ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
@@ -469,6 +468,7 @@ cmp.setup({
                 path = "[Path]",
                 crates = "[Crates]",
                 buffer = "[Buffer]",
+                copilot = "[Copilot]"
             })[entry.source.name]
 
             return vim_item

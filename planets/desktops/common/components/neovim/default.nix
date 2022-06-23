@@ -51,8 +51,7 @@ in
       nodePackages.pyright
       black
       sumneko-lua-language-server
-      java-language-server
-      nodePackages.vscode-json-languageserver
+      jdt-language-server
       nodePackages.bash-language-server
       clang-tools
       deno
@@ -121,8 +120,9 @@ in
       crates-nvim
       rust-tools-nvim
 
-      # others
+      # copilot
       (pluginGit "github/copilot.vim" "c2e75a3a7519c126c6fdb35984976df9ae13f564" "release")
+      cmp-copilot
     ];
   };
 }
