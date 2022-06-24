@@ -20,18 +20,16 @@
   networking.interfaces.enp3s6.wakeOnLan.enable = true;
 
   # --- open ports ---
-  networking.firewall.allowedUDPPorts = [ ];
-  networking.firewall.allowedTCPPorts = [ ];
+  networking.firewall.allowedUDPPorts = [
+    25565
+  ];
+  networking.firewall.allowedTCPPorts = [
+    25565
+  ];
 
   # --- packages ---
   environment.systemPackages = with pkgs; [
     docker-compose
-
-    mpv
-    aninarr.aninarc
-
-    pamix
-    pamixer
   ];
 
   # --- wireguard vpn setup ---
@@ -49,42 +47,6 @@
           endpoint = "192.168.2.31:5553";
         }
       ];
-    };
-  };
-
-  # --- htpc ---
-  hardware.opengl.enable = true;
-  services.dbus.enable = true;
-
-  sound.enable = true;
-  hardware.pulseaudio = {
-    enable = true;
-    systemWide = true;
-    support32Bit = true;
-  };
-
-  environment.noXlibs = false;
-  users.groups.pulse-access = { };
-  users.users.user = {
-    initialPassword = "toor";
-    isNormalUser = true;
-    extraGroups = [ "audio" "video" "pulse" "pulse-access" ];
-  };
-  system.activationScripts.fix-pulse-permissions = ''
-    chmod 755 /run/pulse
-  '';
-
-  services.cage = {
-    enable = true;
-    user = "user";
-    program = "${pkgs.aninarr.aninarc}/bin/aninarc";
-  };
-
-  systemd.services."cage-tty1" = {
-    serviceConfig.Restart = "always";
-    environment = {
-      WLR_LIBINPUT_NO_DEVICES = "1";
-      NO_AT_BRIDGE = "1";
     };
   };
 
