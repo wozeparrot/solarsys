@@ -186,18 +186,14 @@
     },
     "wozepkgs": {
       "locked": {
-        "lastModified": 1657056719,
-        "narHash": "sha256-LrrmrneXIysAr3o6S9AcLesbDD0pYruBSsYe27Bf0/w=",
-        "owner": "wozeparrot",
-        "repo": "nixpkgs",
-        "rev": "1612c9742385aaa8b4b1e003e6533966cde57672",
-        "type": "github"
+        "lastModified": 0,
+        "narHash": "sha256-DueGqAM+prnkc3ZVhfO9EyZ0ad58pwm2Gcy4SpAoMMs=",
+        "path": "/nix/store/j93z10wc0aaq9hv5m36y1cqqwnlj25pm-source",
+        "type": "path"
       },
       "original": {
-        "owner": "wozeparrot",
-        "ref": "hyprland",
-        "repo": "nixpkgs",
-        "type": "github"
+        "id": "wozepkgs",
+        "type": "indirect"
       }
     },
     "wozey": {

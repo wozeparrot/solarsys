@@ -13,7 +13,7 @@
 
   # system config
   environment.systemPackages = with pkgs; [
-    wozepkgs.hyprland
+    hyprland
     swaylock-effects
   ];
 
