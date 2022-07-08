@@ -20,7 +20,6 @@
 
   xdg.portal = {
     enable = true;
-    gtkUsePortal = false; # something changed??? not really sure so TODO
     wlr = {
       enable = true;
       settings = {
