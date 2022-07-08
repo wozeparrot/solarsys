@@ -125,6 +125,6 @@
   };
 
   programs.xwayland.enable = true;
-  programs.qt5ct.enable = true;
   services.greetd.enable = true;
+  qt5.platformTheme = "qt5ct";
 }
