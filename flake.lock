@@ -149,7 +149,8 @@
         "staging-next": "staging-next",
         "unstable": "unstable",
         "wozepkgs": "wozepkgs",
-        "wozey": "wozey"
+        "wozey": "wozey",
+        "zigf": "zigf"
       }
     },
     "staging-next": {
@@ -218,6 +219,29 @@
         "ref": "main",
         "type": "git",
         "url": "ssh://git@github.com/wozeparrot/wozey.service.git"
+      }
+    },
+    "zigf": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1657241481,
+        "narHash": "sha256-0r9InewRhjAfLk9wp6i8mJ0Xujis4HgBWVBb2BN40tg=",
+        "owner": "arqv",
+        "repo": "zig-overlay",
+        "rev": "cc1ae27a303baba75ee8886b22f602da1b99fb28",
+        "type": "github"
+      },
+      "original": {
+        "owner": "arqv",
+        "repo": "zig-overlay",
+        "type": "github"
       }
     }
   },

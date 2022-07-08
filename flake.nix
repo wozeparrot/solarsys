@@ -38,6 +38,12 @@
       nixpkgs.follows = "nixpkgs";
       utils.follows = "flake-utils";
     };
+
+    zigf.url = "github:arqv/zig-overlay";
+    zigf.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-utils.follows = "flake-utils";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, master, staging-next, wozepkgs, home-manager, flake-utils, ... }:
@@ -59,6 +65,9 @@
         };
         nix-ld = {
           modules = inputs.nix-ld.nixosModules;
+        };
+        zigf = {
+          inherit (inputs.zigf) packages;
         };
       };
 

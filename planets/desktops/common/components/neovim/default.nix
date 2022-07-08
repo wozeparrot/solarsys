@@ -45,7 +45,18 @@ in
       glow
 
       # lsp language additionals
-      zls
+      ((zls.overrideAttrs (_: {
+        src = pkgs.fetchFromGitHub {
+          owner = "zigtools";
+          repo = "zls";
+          rev = "0f3eb1df367fbf3db679aab36726784498e48ab4";
+          sha256 = "sha256-PGvOAuSp842e0wMejHYlIRjWQISiSd8R0VAmrXXYVXc=";
+          fetchSubmodules = true;
+        };
+      })).override
+        {
+          zig = pkgs.zigf.master.latest;
+        })
       rnix-lsp
       rust-analyzer
       nodePackages.pyright
