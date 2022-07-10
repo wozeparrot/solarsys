@@ -79,6 +79,9 @@
       "Alt+Shift+b" = "no-osd change-list glsl-shaders toggle \"~~/shaders/adaptive-sharpen.glsl\"; show-text \"Toggled Adaptive Sharpen\"";
 
       "Alt+n" = "no-osd change-list glsl-shaders clr \"\"; show-text \"GLSL shaders cleared\"";
+
+      "Alt+-" = "add video-zoom -0.25";
+      "Alt+=" = "add video-zoom 0.25";
     };
   };
 
