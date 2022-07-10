@@ -64,6 +64,7 @@
     openFirewall = true;
     options.calibreLibrary = "/opt/stuff/books";
     options.enableBookConversion = true;
+    options.enableBookUploading = true;
 
     user = "root";
     group = "root";
