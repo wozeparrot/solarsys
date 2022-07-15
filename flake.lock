@@ -187,14 +187,18 @@
     },
     "wozepkgs": {
       "locked": {
-        "lastModified": 0,
-        "narHash": "sha256-DueGqAM+prnkc3ZVhfO9EyZ0ad58pwm2Gcy4SpAoMMs=",
-        "path": "/nix/store/j93z10wc0aaq9hv5m36y1cqqwnlj25pm-source",
-        "type": "path"
+        "lastModified": 1657817469,
+        "narHash": "sha256-rrYtSn0qVLtD7/tApc52iMB9cM+4aJyPcKItpzFNkFg=",
+        "owner": "wozeparrot",
+        "repo": "nixpkgs",
+        "rev": "4b71aa319b21644ddec71a9bbe0a60b89b4c4d16",
+        "type": "github"
       },
       "original": {
-        "id": "wozepkgs",
-        "type": "indirect"
+        "owner": "wozeparrot",
+        "ref": "seaweedfs",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "wozey": {

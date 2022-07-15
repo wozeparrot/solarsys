@@ -7,6 +7,7 @@
     nixpkgs.follows = "unstable";
     master.url = "github:NixOS/nixpkgs/master";
     staging-next.url = "github:NixOS/nixpkgs/staging-next";
+    wozepkgs.url = "github:wozeparrot/nixpkgs/seaweedfs";
 
     # home-manager
     home-manager.url = "github:nix-community/home-manager";
@@ -245,6 +246,7 @@
                     port = 22;
                   };
                   orbits = [ "aarch64-build" "nas" ];
+
                   core = nixpkgs.lib.nixosSystem {
                     inherit system specialArgs;
                     modules = makeModules pkgs ./planets/infra0/nas1/host.nix;
