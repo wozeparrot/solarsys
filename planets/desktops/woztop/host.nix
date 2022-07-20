@@ -70,6 +70,7 @@
   programs.droidcam.enable = true;
   programs.wireshark.enable = true;
   programs.gamemode.enable = true;
+  programs.fuse.userAllowOther = true;
 
   # services.flatpak.enable = true;
 
