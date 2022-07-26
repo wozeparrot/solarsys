@@ -14,7 +14,7 @@
     ../common/profiles/wireguard.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_xanmod;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   boot.kernelParams = [ "intel_iommu=on" ];
 
   hardware.cpu.intel.updateMicrocode = true;
