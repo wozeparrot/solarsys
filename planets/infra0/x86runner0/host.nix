@@ -71,6 +71,7 @@
 
   # --- containers ---
   containers.seaweedfs-brain = {
+    autoStart = true;
     config = { config, ... }: {
       # oneshot systemd service to create /var/lib/seaweedfs
       systemd.services."seaweedfs-preinit" = {
@@ -150,6 +151,7 @@
     };
   };
   containers.seaweedfs-node = {
+    autoStart = true;
     bindMounts."/var/lib/seaweedfs/data" = {
       hostPath = "/opt/deepspace";
       isReadOnly = false;
@@ -160,7 +162,7 @@
         description = "seaweedfs volume server";
 
         serviceConfig = {
-          ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed volume -ip 10.11.235.11 -port 9311 -mserver '127.0.0.1:9301' -index leveldb -max 4 -dir /var/lib/seaweedfs/data/";
+          ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed volume -ip 10.11.235.11 -port 9311 -mserver '127.0.0.1:9301' -index leveldb -max 12 -dir /var/lib/seaweedfs/data/";
           Restart = "always";
           RestartSec = "10s";
         };
