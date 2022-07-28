@@ -72,7 +72,7 @@
   services.cron = {
     enable = true;
     systemCronJobs = [
-      "*/5 * * * * ~/duckdns/duck.sh >/dev/null 2>&1"
+      "*/5 * * * * /root/duckdns/duck.sh >/dev/null 2>&1"
     ];
   };
 
