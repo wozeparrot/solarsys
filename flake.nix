@@ -22,7 +22,7 @@
     # overlays + extra package sets + extra modules
     aninarr.url = "git+ssh://git@github.com/wozeparrot/aninarr.git?ref=main";
     aninarr.inputs = {
-      nixpkgs.follows = "nixpkgs";
+      # nixpkgs.follows = "nixpkgs";
       flake-utils.follows = "flake-utils";
     };
 
@@ -52,7 +52,7 @@
       # external/third-party stuff
       external = {
         aninarr = {
-          inherit (inputs.aninarr) overlay;
+          inherit (inputs.aninarr) packages;
         };
         wozey = {
           inherit (inputs.wozey) packages;

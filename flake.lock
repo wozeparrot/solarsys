@@ -5,16 +5,14 @@
         "flake-utils": [
           "flake-utils"
         ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1657502942,
-        "narHash": "sha256-ymyMEU/D2AlSQs3AmeOQd30R7qE0BUucztJcBZUeCxo=",
+        "lastModified": 1660429066,
+        "narHash": "sha256-boEeVLlIyssKjqtwGDIwplwXXH6zRa6wvdf168xcFQk=",
         "ref": "main",
-        "rev": "203e7f0b724dba862c219acdd1295a58b5b51e8e",
-        "revCount": 273,
+        "rev": "b563ab8fafbd13e558bb249ced7a992067f50679",
+        "revCount": 274,
         "type": "git",
         "url": "ssh://git@github.com/wozeparrot/aninarr.git"
       },
@@ -80,7 +78,7 @@
     },
     "nix-gaming": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1660233265,
@@ -120,6 +118,22 @@
       }
     },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1657356697,
+        "narHash": "sha256-sT38tcx7m0Quz+Uj6jzx+yRa2+EVW2C3cE0FkROXUzQ=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "87e7965bbcdbac3d103e3ed14ff04f719a4f7a58",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1656401090,
         "narHash": "sha256-bUS2nfQsvTQW2z8SK7oEFSElbmoBahOPtbXPm0AL3I4=",
