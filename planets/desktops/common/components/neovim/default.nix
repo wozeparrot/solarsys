@@ -49,8 +49,8 @@ in
         src = pkgs.fetchFromGitHub {
           owner = "zigtools";
           repo = "zls";
-          rev = "0f3eb1df367fbf3db679aab36726784498e48ab4";
-          sha256 = "sha256-PGvOAuSp842e0wMejHYlIRjWQISiSd8R0VAmrXXYVXc=";
+          rev = "c632a7f29d67607c3c846a01d211a09c1f64d47c";
+          sha256 = "sha256-nE2zE2/WI8LQNB4030vu5YPEIgtJS198aD6dfreqnPs=";
           fetchSubmodules = true;
         };
       })).override
