@@ -201,11 +201,11 @@
     },
     "wozepkgs": {
       "locked": {
-        "lastModified": 1658853321,
-        "narHash": "sha256-wo/T4ZMH6mM3s+t3iRej5y35Nmx1bpXIzXlS2WYE9cM=",
+        "lastModified": 1660500535,
+        "narHash": "sha256-gS86e5oi0tsZH0Gf02tDmPRl81kRCPk/0xtGOhaK8GI=",
         "owner": "wozeparrot",
         "repo": "nixpkgs",
-        "rev": "e739d0edbbc7308b3400611119de6a539ccc8126",
+        "rev": "41064acb7a2efa10d687b3d4d54cdd0ce0538ed6",
         "type": "github"
       },
       "original": {
