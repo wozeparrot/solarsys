@@ -32,6 +32,12 @@
       flake-utils.follows = "flake-utils";
     };
 
+    n2n.url = "git+ssh://git@github.com/wozeparrot/n2n-nix.git?ref=main";
+    n2n.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-utils.follows = "flake-utils";
+    };
+
     nix-gaming.url = "github:fufexan/nix-gaming";
 
     nix-ld.url = "github:Mic92/nix-ld";
@@ -69,6 +75,9 @@
         };
         zigf = {
           inherit (inputs.zigf) packages;
+        };
+        n2n = {
+          inherit (inputs.n2n) packages;
         };
       };
 

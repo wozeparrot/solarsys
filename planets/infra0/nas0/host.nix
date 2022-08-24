@@ -20,9 +20,11 @@
   # --- open ports ---
   networking.firewall.allowedUDPPorts = [
     5553 # wireguard
+    5314 # n2n
   ];
   networking.firewall.allowedTCPPorts = [
     5072 # aninarr web dir
+    5314 # n2n
   ];
   networking.firewall.interfaces.wg0 = {
     allowedUDPPorts = [
@@ -62,7 +64,7 @@
   };
 
   # --- packages ---
-  environment.systemPackages = with pkgs; [ ];
+  environment.systemPackages = with pkgs; [ n2n.n2n ];
 
   # udev rules
   services.udev.extraRules = ''
