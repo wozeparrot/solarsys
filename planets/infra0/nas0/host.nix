@@ -71,6 +71,14 @@
     SUBSYSTEM=="usb", TEST=="power/autosuspend" ATTR{power/autosuspend}="-1"
   '';
 
+  # cron
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "*/5 * * * * /root/duckdns/duck.sh >/dev/null 2>&1"
+    ];
+  };
+
   # --- wireguard vpn setup ---
   # enable nat
   networking.nat = {
