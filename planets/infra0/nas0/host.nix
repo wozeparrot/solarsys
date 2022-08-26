@@ -76,7 +76,7 @@
   networking.nat = {
     enable = true;
     externalInterface = "eth0";
-    internalInterfaces = [ "wg0" ];
+    internalInterfaces = [ "wg0" "n2n0" ];
   };
 
   # dns
@@ -91,6 +91,7 @@
           "::/0 refuse"
           "10.11.235.0/24 allow"
           "fdbe:ef11:2358:1321::/64 allow"
+          "10.13.141.0/24 allow"
           "127.0.0.0/8 allow"
           "::1 allow"
         ];
@@ -145,7 +146,7 @@
 
     preDown = ''
       ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.11.235.1/24 -o eth0 -j MASQUERADE
-      ${pkgs.iptables}/bin/ip6tables -t nat -D POSTROUTING -s fdbe:ef11:2358:1321::1/64 -o eth0 -j MASQUERADE 
+      ${pkgs.iptables}/bin/ip6tables -t nat -D POSTROUTING -s fdbe:ef11:2358:1321::1/64 -o eth0 -j MASQUERADE
     '';
 
     peers = [
@@ -175,6 +176,41 @@
         allowedIPs = [ "10.11.235.89/32" "fdbe:ef11:2358:1321::89/128" ];
       }
     ];
+  };
+
+  # --- n2n setup ---
+  systemd.services.n2n-supernode = {
+    enable = true;
+
+    serviceConfig = {
+      ExecStart = "${pkgs.n2n.n2n}/bin/supernode /keys/n2n-supernode.conf";
+      User = "root";
+      Group = "root";
+    };
+
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+  };
+
+  systemd.services.n2n-edge = {
+    enable = true;
+
+    postStart = ''
+      ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.13.141.1/24 -o eth0 -j MASQUERADE
+    '';
+
+    postStop = ''
+      ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.13.141.1/24 -o eth0 -j MASQUERADE
+    '';
+
+    serviceConfig = {
+      ExecStart = "${pkgs.n2n.n2n}/bin/edge /keys/n2n-edge.conf";
+      User = "root";
+      Group = "root";
+    };
+
+    after = [ "network.target" "n2n-supernode.service" ];
+    wantedBy = [ "multi-user.target" ];
   };
 
   # --- weechat ---

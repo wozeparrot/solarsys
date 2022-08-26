@@ -237,6 +237,18 @@
                       path = "./satellites/common/dsvpn";
                       destination = "/keys/dsvpn";
                     };
+                    n2n-supernode = {
+                      path = "./satellites/infra0/nas0/n2n-supernode.conf";
+                      destination = "/keys/n2n-supernode.conf";
+                    };
+                    n2n-community = {
+                      path = "./satellites/infra0/nas0/n2n-community.list";
+                      destination = "/keys/n2n-community.list";
+                    };
+                    n2n-edge = {
+                      path = "./satellites/infra0/nas0/n2n-edge.conf";
+                      destination = "/keys/n2n-edge.conf";
+                    };
                   };
 
                   core = nixpkgs.lib.nixosSystem {
