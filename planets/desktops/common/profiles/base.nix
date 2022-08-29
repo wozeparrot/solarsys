@@ -21,6 +21,7 @@
     enable = true;
     enableNotifications = true;
   };
+  services.udisks2.enable = true;
 
   # rtkit
   security.rtkit.enable = true;
