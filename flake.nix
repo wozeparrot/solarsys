@@ -46,7 +46,7 @@
       utils.follows = "flake-utils";
     };
 
-    zigf.url = "github:arqv/zig-overlay";
+    zigf.url = "github:mitchellh/zig-overlay";
     zigf.inputs = {
       nixpkgs.follows = "nixpkgs";
       flake-utils.follows = "flake-utils";
