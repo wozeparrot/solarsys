@@ -11,7 +11,7 @@
     ../common/profiles/desktops/river
     # ../common/profiles/desktops/hyprland
 
-    ../common/profiles/wireguard.nix
+    ../common/profiles/vpn.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
