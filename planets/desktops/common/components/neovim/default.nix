@@ -55,7 +55,7 @@ in
         };
       })).override
         {
-          zig = pkgs.zigf.master.latest;
+          zig = pkgs.zigf.master;
         })
       rnix-lsp
       rust-analyzer
