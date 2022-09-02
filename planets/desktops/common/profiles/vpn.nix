@@ -6,5 +6,5 @@
 
   networking.firewall.checkReversePath = "loose";
 
-  services.mullvad-vpn.enabled = true;
+  services.mullvad-vpn.enable = true;
 }
