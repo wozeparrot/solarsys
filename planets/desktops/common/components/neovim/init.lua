@@ -250,7 +250,7 @@ require("rust-tools").setup({
         on_attach = default_on_attach,
     },
 })
-require("rust-tools.inlay_hints").set_inlay_hints()
+require("rust-tools").inlay_hints.enable()
 -- python
 lspconfig.pyright.setup({
     capabilities = capabilities,
