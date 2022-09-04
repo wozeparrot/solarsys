@@ -13,7 +13,7 @@ in
 {
   programs.neovim = {
     enable = true;
-    withNodeJs = true;
+    withNodeJs = false;
 
     extraConfig = builtins.concatStringsSep "\n" [
       ''
@@ -66,6 +66,9 @@ in
       nodePackages.bash-language-server
       clang-tools
       deno
+
+      # need node 16 for copilot
+      nodejs-16_x
     ];
 
     plugins = with pkgs.vimPlugins; [
@@ -132,7 +135,9 @@ in
       rust-tools-nvim
 
       # copilot
-      (pluginGit "github/copilot.vim" "c2e75a3a7519c126c6fdb35984976df9ae13f564" "release")
+      # (pluginGit "zbirenbaum/copilot.lua" "5fbe531eb53f6a782d0fed7166f8cec23d606e84" "master")
+      # (pluginGit "zbirenbaum/copilot-cmp" "4a8909fd63dff71001b22a287daa3830e447de70" "master")
+      (pluginGit "github/copilot.vim" "1bfbaf5b027ee4d3d3dbc828c8bfaef2c45d132d" "release")
       cmp-copilot
     ];
   };
