@@ -42,7 +42,7 @@
     settings = {
       visualizer_data_source = "/tmp/mpd.fifo";
       visualizer_output_name = "Visualizer feed";
-      visualizer_in_stereo = "yes";
+      visualizer_in_stereo = "no";
       visualizer_type = "wave";
       visualizer_fps = "60";
       visualizer_spectrum_smooth_look = "yes";
