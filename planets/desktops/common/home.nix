@@ -184,23 +184,23 @@
   xdg.enable = true;
 
   # theming
-  gtk = {
-    theme = {
-      package = pkgs.orchis-theme.override {
-        tweaks = [ "compact" "black" "primary" ];
-      };
-      name = "Orchis-Purple-Dark-Compact";
-    };
-    iconTheme = {
-      package = pkgs.papirus-icon-theme;
-      name = "Papirus";
-    };
-    font = {
-      name = "Vegur";
-      size = 11;
-    };
-    enable = true;
-  };
+  # gtk = {
+  #   theme = {
+  #     package = pkgs.orchis-theme.override {
+  #       tweaks = [ "compact" "black" "primary" ];
+  #     };
+  #     name = "Orchis-Purple-Dark-Compact";
+  #   };
+  #   iconTheme = {
+  #     package = pkgs.papirus-icon-theme;
+  #     name = "Papirus";
+  #   };
+  #   font = {
+  #     name = "Vegur";
+  #     size = 11;
+  #   };
+  #   enable = true;
+  # };
 
   qt = {
     enable = true;

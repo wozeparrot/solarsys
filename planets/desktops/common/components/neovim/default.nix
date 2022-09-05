@@ -17,14 +17,6 @@ in
 
     extraConfig = builtins.concatStringsSep "\n" [
       ''
-        if exists('g:vscode')
-          colorscheme default
-        else
-          colorscheme xresources
-        endif
-      ''
-
-      ''
         lua << EOF
         ${lib.strings.fileContents ./util.lua}
         ${lib.strings.fileContents ./init.lua}
@@ -77,6 +69,7 @@ in
       lualine-nvim
       bufferline-nvim
       bufdelete-nvim
+      nvim-base16
 
       # libraries
       plenary-nvim

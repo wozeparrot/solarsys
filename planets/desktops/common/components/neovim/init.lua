@@ -54,7 +54,6 @@ nnoremap("//", "<cmd>noh<CR>")
 
 ---- Ricing ----
 -- lualine
--- require("lualine").setup({})
 require("lualine").setup({
     options = {
         icons_enabled = true,
@@ -484,7 +483,11 @@ local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { text = "" } }))
 
 ---- indent-blankline Config ----
-vim.cmd("highlight IndentBlankline guifg=#151510 gui=nocombine")
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = function()
+    vim.defer_fn(function()
+        vim.cmd("highlight IndentBlankline guifg=#151510 gui=nocombine")
+    end, 100)
+end })
 require("indent_blankline").setup({
     char_highlight_list = { "IndentBlankline" },
     show_current_context = true,

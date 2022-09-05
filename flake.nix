@@ -51,6 +51,11 @@
       nixpkgs.follows = "nixpkgs";
       flake-utils.follows = "flake-utils";
     };
+
+    stylix.url = "github:danth/stylix";
+    stylix.inputs = {
+      nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, master, staging-next, wozepkgs, home-manager, flake-utils, ... }:
@@ -78,6 +83,13 @@
         };
         n2n = {
           inherit (inputs.n2n) packages;
+        };
+        stylix = {
+          modules = inputs.stylix.nixosModules;
+          cache = {
+            substituters = [ "https://danth.cachix.org" ];
+            trusted-public-keys = [ "danth.cachix.org-1:wpodfSL7suXRc/rJDZZUptMa1t4MJ795hemRN0q84vI=" ];
+          };
         };
       };
 
@@ -194,6 +206,7 @@
               makeDesktopModules = pkgs: hostFile: [
                 home-manager.nixosModules.home-manager
                 external.nix-ld.modules.nix-ld
+                external.stylix.modules.stylix
               ] ++ makeModules pkgs hostFile;
             in
             {

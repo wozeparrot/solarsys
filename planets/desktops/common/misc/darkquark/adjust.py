@@ -14,6 +14,14 @@ def rev_redshift(color):
     return (color + 0x0D0D0D) - 0x130606
 
 
+def lighten(color):
+    return color + 0x131212
+
+
+def darken(color):
+    return color - 0x131212
+
+
 c = int(input(": "), 16)
 
 while True:
@@ -29,4 +37,10 @@ while True:
         print(hex(c))
     elif o == "t":
         c = tint(c)
+        print(hex(c))
+    elif o == "l":
+        c = lighten(c)
+        print(hex(c))
+    elif o == "d":
+        c = darken(c)
         print(hex(c))
