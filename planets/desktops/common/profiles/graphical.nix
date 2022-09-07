@@ -145,12 +145,14 @@
   # environment
   environment = {
     systemPackages = with pkgs; [
+      pulseaudio
       pavucontrol
       paprefs
       helvum
       pamixer
 
       gtk-engine-murrine
+      hicolor-icon-theme
       gnome3.adwaita-icon-theme
 
       libnotify
