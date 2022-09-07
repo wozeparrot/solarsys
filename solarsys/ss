@@ -47,7 +47,7 @@ function retry {
     local output=
 
     while [[ "$attempts" -le "$max" ]]; do
-        if eval "$@"; then
+        if "$@"; then
             break
         fi
 
@@ -543,7 +543,7 @@ function json {
 
     local planets_json
     planets_json="$(for planet in "${planets[@]}"; do
-        jq -c -r -n --argjson ms "$(get_moons "$planet")" "{"$planet": \$ms}"
+        jq -c -r -n --argjson ms "$(get_moons "$planet")" "{""$planet"": \$ms}"
     done)"
     jq -c -r -s add <<< "$planets_json"
 }
