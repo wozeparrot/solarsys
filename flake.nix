@@ -165,6 +165,7 @@
               jq
               rsync
               rnix-lsp
+              nvd
 
               fish
 
