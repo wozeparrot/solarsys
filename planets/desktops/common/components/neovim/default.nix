@@ -132,6 +132,9 @@ in
       # (pluginGit "zbirenbaum/copilot-cmp" "4a8909fd63dff71001b22a287daa3830e447de70" "master")
       (pluginGit "github/copilot.vim" "1bfbaf5b027ee4d3d3dbc828c8bfaef2c45d132d" "release")
       cmp-copilot
+
+      # firenvim
+      (pluginGit "glacambre/firenvim" "56a49d79904921a8b4405786e12b4e12fbbf171b" "master")
     ];
   };
 }
