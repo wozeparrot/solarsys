@@ -16,56 +16,61 @@
 
   # packages
   home.packages = with pkgs; [
-    #vscode
-
-    gdb
-    rustc
-    cargo
-    nixpkgs-fmt
-    python3
-    ruby
-    zig
-
-    blender
-    godot
-    gimp
-    libsForQt5.kdenlive
-    transmission-gtk
-    libreoffice
-    ghidra-bin
-    solvespace
-    antimony
-    openscad
-    # freecad
-    krita
-    kicad
-    ss.horizon
-    audacity
-    antimicroX
-    yt-dlp
-    r128gain
+    # cli untilities
+    appimage-run
+    bottom
     ffmpeg
+    imv
+    iotop
+    mpc_cli
+    neofetch
+    p7zip
+    python3
+    r128gain
+    ranger
+    unzip
+    yt-dlp
+
+    # applications
+    antimicroX
+    antimony
+    audacity
+    blender
+    ghidra-bin
+    gimp
+    godot
+    keepassxc
+    kicad
+    krita
+    libreoffice
+    libsForQt5.kdenlive
+    nheko
+    openscad
+    pkgs.aninarr.aninarc
+    sioyek
+    solvespace
+    ss.goosemod.discord-canary
+    ss.horizon
+    transmission-gtk
     zathura
 
-    master.polymc
-    master.protontricks
+    # gaming stuff
+    bottles
     (lutris.override {
       extraLibraries = pkgs: with pkgs; [
         openssl
       ];
     })
-    master.steam # not using the normal way as we need steam from master
-    master.steam.run # ^ required settings from programs.steam.enable should be set in each hosts config
-    master.steamcmd # ^
-    master.steam-tui # ^
-    the-powder-toy
     nix-gaming.osu-lazer-bin
-    bottles
-    appimage-run
+    master.polymc
+    master.protontricks
+    master.steam # not using the normal way as we need steam from master
+    master.steam-tui # ^ required settings from programs.steam.enable should be set in each hosts config
+    master.steam.run # ^
+    master.steamcmd # ^
+    the-powder-toy
 
-    ranger
-    imv
-
+    # wayland/desktop stuff
     grim
     slurp
     wf-recorder
@@ -73,25 +78,10 @@
     xclip
     xsel
 
-    mpc_cli
-    neofetch
-    bottom
-    iotop
-
-    keepassxc
-
-    unzip
-    p7zip
-
-    ss.goosemod.discord-canary
-    # nheko # TODO: uncomment when #176246 lands
-
+    # theme stuff
     gtk-engine-murrine
     qt5.qtwayland
     xorg.xrdb
-
-
-    pkgs.aninarr.aninarc
   ];
 
   # extra programs
@@ -131,10 +121,10 @@
   programs.obs-studio = {
     enable = true;
     plugins = with pkgs.obs-studio-plugins; [
-      wlrobs
-      obs-websocket
-      obs-move-transition
       obs-gstreamer
+      obs-move-transition
+      obs-websocket
+      wlrobs
     ];
   };
 
@@ -142,23 +132,23 @@
     enable = false;
     package = pkgs.vscodium;
     extensions = with pkgs.vscode-extensions; [
-      yzhang.markdown-all-in-one
-      redhat.java
-      tiehuis.zig
-      bbenoist.nix
-      jnoortheen.nix-ide
-      eamodio.gitlens
       antyos.openscad
-      mikestead.dotenv
-      vadimcn.vscode-lldb
-      timonwong.shellcheck
-      matklad.rust-analyzer
-      tamasfe.even-better-toml
-      asvetliakov.vscode-neovim
       arrterian.nix-env-selector
-      streetsidesoftware.code-spell-checker
-      mads-hartmann.bash-ide-vscode
       asciidoctor.asciidoctor-vscode
+      asvetliakov.vscode-neovim
+      bbenoist.nix
+      eamodio.gitlens
+      jnoortheen.nix-ide
+      mads-hartmann.bash-ide-vscode
+      matklad.rust-analyzer
+      mikestead.dotenv
+      redhat.java
+      streetsidesoftware.code-spell-checker
+      tamasfe.even-better-toml
+      tiehuis.zig
+      timonwong.shellcheck
+      vadimcn.vscode-lldb
+      yzhang.markdown-all-in-one
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "xresources-theme";
@@ -184,24 +174,6 @@
   xdg.enable = true;
 
   # theming
-  # gtk = {
-  #   theme = {
-  #     package = pkgs.orchis-theme.override {
-  #       tweaks = [ "compact" "black" "primary" ];
-  #     };
-  #     name = "Orchis-Purple-Dark-Compact";
-  #   };
-  #   iconTheme = {
-  #     package = pkgs.papirus-icon-theme;
-  #     name = "Papirus";
-  #   };
-  #   font = {
-  #     name = "Vegur";
-  #     size = 11;
-  #   };
-  #   enable = true;
-  # };
-
   qt = {
     enable = true;
     platformTheme = "gnome";
@@ -232,7 +204,7 @@
     color15 = "#f8f0f8";
   };
 
-  # home manager stuff
+  # home stuff
   home.sessionVariables = {
     LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
