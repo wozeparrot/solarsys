@@ -16,10 +16,11 @@
 
   # packages
   home.packages = with pkgs; [
-    # cli untilities
+    # cli/tui untilities
     appimage-run
     bottom
     ffmpeg
+    gurk-rs
     imv
     iotop
     mpc_cli
@@ -47,6 +48,7 @@
     nheko
     openscad
     pkgs.aninarr.aninarc
+    signal-desktop
     sioyek
     solvespace
     ss.goosemod.discord-canary
