@@ -38,11 +38,10 @@
           position = "top";
           output = [
             "eDP-1"
-            "HDMI-A-1"
           ];
 
           modules-left = [ "cpu" "memory" "mpd" "tray" ];
-          modules-center = [ "river/tags" ];
+          modules-center = [ ];
           modules-right = [ "backlight" "pulseaudio" "clock" "battery" ];
 
           modules = {
@@ -59,9 +58,6 @@
             "tray" = {
               icon-size = 12;
               spacing = 10;
-            };
-            "river/tags" = {
-              num-tags = 9;
             };
             "network" = {
               format-wifi = "W {signalStrength}%";
@@ -126,5 +122,4 @@
 
   programs.xwayland.enable = true;
   services.greetd.enable = true;
-  qt5.platformTheme = "qt5ct";
 }
