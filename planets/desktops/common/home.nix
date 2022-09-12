@@ -45,11 +45,11 @@
     krita
     libreoffice
     libsForQt5.kdenlive
+    master.sioyek
     nheko
     openscad
     pkgs.aninarr.aninarc
     signal-desktop
-    sioyek
     solvespace
     ss.goosemod.discord-canary
     ss.horizon
