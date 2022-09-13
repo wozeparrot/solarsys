@@ -64,6 +64,30 @@ function retry {
     done
 }
 
+# run a command and show a progress bar using ⣾⣽⣻⢿⡿⣟⣯⣷ while a command is running
+function run_with_progress {
+    local cmd="$1"
+    local args="${*:2}"
+
+    # run in background and get pid
+    eval "$cmd" "$args" &
+    local pid=$!
+
+    # show the progress bar
+    local bar="⣾⣽⣻⢿⡿⣟⣯⣷"
+    local i=0
+    while ps "$pid" >/dev/null; do
+        printf "\r[%s] %s" "${bar:i:1}" "$cmd"
+        i=$((i + 1))
+        if [[ "$i" -ge "${#bar}" ]]; then
+            i=0
+        fi
+        sleep 0.1
+    done
+
+    wait "$pid"
+    printf "\r[✓] %s\n" "$cmd"
+}
 
 # --- script helper functions ---
 # shortcut for nix eval --json --impure --expr
@@ -204,7 +228,7 @@ EOF
     else # deploying remotely
         local trajectory
         trajectory="$(get_trajectory "$planet" "$moon")"
-        
+
         if [[ -z "$(jq -c -r '.' <<< "$trajectory")" ]]; then
             ercho "warning~ Moon: |$moon| is set for a local trajectory, skipping."
             return
@@ -215,7 +239,7 @@ EOF
         trajectory_port="$(jq -c -r '.port' <<< "$trajectory")"
 
         echo "[solarsys] Moon: |$moon| is at |$trajectory_host| on port |$trajectory_port|"
-        
+
         # build config
         local buildpath
         if buildpath="$(build_moon_output "$planet" "$moon" "config.system.build.toplevel")"; then
@@ -243,7 +267,7 @@ EOF
 # deploys all moons
 function deploy_all {
     echo "[solarsys] Deploying all moons"
-    
+
     local planets
     readarray -t planets <<< "$(get_planets | jq -c -r '.[]')"
 
@@ -255,7 +279,7 @@ function deploy_all {
             if [[ -z "$moon" ]]; then
                 break
             fi
-            
+
             deploy "$planet" "$moon"
         done
     done
@@ -280,7 +304,7 @@ function deploy_planet {
         if [[ -z "$moon" ]]; then
             break
         fi
-            
+
         deploy "$planet" "$moon"
     done
 }
@@ -309,7 +333,7 @@ function deploy_orbit {
             if [[ ! "$(printf "_[%s]_" "${orbits[@]}")" =~ .*_\[$orbit\]_.* ]]; then
                 continue
             fi
-            
+
             deploy "$planet" "$moon"
         done
     done
@@ -368,7 +392,7 @@ EOF
     else # rolling back remotely
         local trajectory
         trajectory="$(get_trajectory "$planet" "$moon")"
-        
+
         if [[ -z "$(jq -c -r '.' <<< "$trajectory")" ]]; then
             ercho "warning~ Moon: |$moon| is set for a local trajectory, skipping."
             return
@@ -416,7 +440,7 @@ function test_moon {
     else # testing remotely
         local trajectory
         trajectory="$(get_trajectory "$planet" "$moon")"
-        
+
         if [[ -z "$(jq -c -r '.' <<< "$trajectory")" ]]; then
             ercho "warning~ Moon: |$moon| is set for a local trajectory, skipping."
             return
@@ -451,7 +475,7 @@ function ssh_moon {
     else
         local trajectory
         trajectory="$(get_trajectory "$planet" "$moon")"
-        
+
         if [[ -z "$(jq -c -r '.' <<< "$trajectory")" ]]; then
             ercho "error~ Moon: |$moon| does not have a set trajectory!"
             return 1
@@ -487,7 +511,7 @@ function satellites {
     else
         local trajectory
         trajectory="$(get_trajectory "$planet" "$moon")"
-        
+
         if [[ -z "$(jq -c -r '.' <<< "$trajectory")" ]]; then
             ercho "error~ Moon: |$moon| does not have a set trajectory!"
             return 1
@@ -520,7 +544,7 @@ function list {
 
             local trajectory
             trajectory="$(get_trajectory "$planet" "${moons[i]}")"
-            
+
             if [[ -z "$(jq -c -r '.' <<< "$trajectory")" ]]; then
                 trajectory="{\"host\":\"localhost\",\"port\":0}"
             fi
