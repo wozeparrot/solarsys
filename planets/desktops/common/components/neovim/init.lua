@@ -328,6 +328,7 @@ treesitter.setup({
     autotag = {
         enable = true,
     },
+    ensure_installed = {},
 })
 -- set nvim to use treesitter folding
 vim.opt.foldmethod = "expr"

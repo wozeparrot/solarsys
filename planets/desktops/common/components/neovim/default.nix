@@ -83,7 +83,7 @@ in
       lspsaga-nvim
       nvim-code-action-menu
       # treesitter
-      nvim-treesitter
+      (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
       nvim-treesitter-context
       nvim-ts-autotag
       # telescope
