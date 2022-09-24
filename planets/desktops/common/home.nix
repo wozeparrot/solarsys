@@ -39,9 +39,9 @@
     blender
     ghidra-bin
     gimp
+    gnome3.gnome-disk-utility
     godot
     keepassxc
-    # kicad
     krita
     libreoffice
     libsForQt5.kdenlive
