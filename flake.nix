@@ -226,6 +226,20 @@
                       modules = makeDesktopModules pkgs ./planets/desktops/woztop/host.nix;
                     };
                   };
+                woztop-horizon =
+                  let
+                    system = "x86_64-linux";
+                    pkgs = configNixpkgs system;
+                  in
+                  {
+                    trajectory = "";
+                    orbits = [ ];
+
+                    core = nixpkgs.lib.nixosSystem {
+                      inherit system specialArgs;
+                      modules = makeDesktopModules pkgs ./planets/desktops/woztop-horizon/host.nix;
+                    };
+                  };
               };
             };
 
