@@ -50,6 +50,8 @@ in
           zig = pkgs.zigf.master;
         })
       rnix-lsp
+      cargo
+      rustc
       rust-analyzer
       nodePackages.pyright
       black
