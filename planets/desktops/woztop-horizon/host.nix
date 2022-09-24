@@ -117,5 +117,5 @@
   users.users.woze.extraGroups = [ "docker" "libvirtd" "video" "render" "vboxusers" "libvirt" ];
   home-manager.users.woze = ./home.nix;
 
-  system.stateVersion = "21.11";
+  system.stateVersion = "22.11";
 }
