@@ -50,8 +50,6 @@
     virt-manager
     virt-viewer
 
-    corectrl
-
     piper
 
     cifs-utils
@@ -64,6 +62,7 @@
   programs.wireshark.enable = true;
   programs.gamemode.enable = true;
   programs.fuse.userAllowOther = true;
+  programs.corectrl.enable = true;
 
   # services.flatpak.enable = true;
 
@@ -114,7 +113,7 @@
     options = [ "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" ];
   };
 
-  users.users.woze.extraGroups = [ "docker" "libvirtd" "video" "render" "vboxusers" "libvirt" ];
+  users.users.woze.extraGroups = [ "docker" "libvirtd" "video" "render" "vboxusers" "libvirt" "corectrl" ];
   home-manager.users.woze = ./home.nix;
 
   system.stateVersion = "22.11";
