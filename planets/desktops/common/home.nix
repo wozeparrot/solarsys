@@ -41,7 +41,7 @@
     gimp
     godot
     keepassxc
-    kicad
+    # kicad
     krita
     libreoffice
     libsForQt5.kdenlive

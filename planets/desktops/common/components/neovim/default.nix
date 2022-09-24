@@ -47,7 +47,7 @@ in
         };
       })).override
         {
-          zig = pkgs.zigf.master;
+          zig = pkgs.zigf.master-2022-09-01;
         })
       rnix-lsp
       cargo

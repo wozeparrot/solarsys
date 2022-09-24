@@ -38,6 +38,7 @@
           position = "top";
           output = [
             "eDP-1"
+            "eDP-2"
           ];
 
           modules-left = [ "cpu" "memory" "mpd" "tray" ];
