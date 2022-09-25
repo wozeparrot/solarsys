@@ -56,6 +56,11 @@
     stylix.inputs = {
       nixpkgs.follows = "nixpkgs";
     };
+
+    hyprland.url = "github:hyprwm/hyprland";
+    hyprland.inputs = {
+      nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, master, staging-next, wozepkgs, home-manager, flake-utils, ... }:
@@ -89,6 +94,13 @@
           cache = {
             substituters = [ "https://danth.cachix.org" ];
             trusted-public-keys = [ "danth.cachix.org-1:wpodfSL7suXRc/rJDZZUptMa1t4MJ795hemRN0q84vI=" ];
+          };
+        };
+        hyprland = {
+          inherit (inputs.hyprland) packages;
+          cache = {
+            substituters = [ "https://hyprland.cachix.org" ];
+            trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
           };
         };
       };

@@ -8,13 +8,13 @@
   home-manager.users.woze = {
     xdg.configFile."hypr/hyprland.conf" = {
       source = ./hyprland.conf;
+      onChange = "HYPRLAND_INSTANCE_SIGNATURE=$(ls -w 1 /tmp/hypr | tail -1) ${pkgs.hyprland.hyprland}/bin/hyprctl reload config-only}";
     };
   };
 
   # system config
   environment.systemPackages = with pkgs; [
-    hyprland
-    swaylock-effects
+    hyprland.hyprland
   ];
 
   services.greetd = {
@@ -29,19 +29,20 @@
               export XDG_SESSION_DESKTOP=hyprland
               export XDG_CURRENT_DESKTOP=hyprland
 
+              export GDK_BACKEND=wayland
               export MOZ_ENABLE_WAYLAND=1
               export QT_QPA_PLATFORM=wayland-egl
-              export QT_QPA_PLATFORMTHEME=qt5ct
               export SDL_VIDEODRIVER=wayland
               export _JAVA_AWT_WM_NONREPARENTING=1
+              export XCURSOR_SIZE=24
+              export NIXOS_OZONE_WL=1
 
-              systemd-cat --identifier=hyprland dbus-run-session Hyprland
+              exec systemd-cat --identifier=hyprland dbus-run-session Hyprland
             '';
           in
-          "${pkgs.greetd.greetd}/bin/agreety --cmd ${hyprland-run}/bin/hyprland-run";
+          "${pkgs.greetd.tuigreet}/bin/tuigreet --time --greeting 'Access is restricted to authorized personnel only.' --cmd ${hyprland-run}/bin/hyprland-run";
       };
     };
   };
 
-  security.pam.services.swaylock = { };
 }

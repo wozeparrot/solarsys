@@ -63,13 +63,14 @@
         openssl
       ];
     })
-    nix-gaming.osu-lazer-bin
+    gamescope
     master.polymc
     master.protontricks
     master.steam # not using the normal way as we need steam from master
     master.steam-tui # ^ required settings from programs.steam.enable should be set in each hosts config
     master.steam.run # ^
     master.steamcmd # ^
+    nix-gaming.osu-lazer-bin
     the-powder-toy
 
     # wayland/desktop stuff
@@ -178,11 +179,7 @@
   # theming
   qt = {
     enable = true;
-    platformTheme = "gnome";
-    style = {
-      package = pkgs.adwaita-qt;
-      name = "adwaita-dark";
-    };
+    platformTheme = "gtk";
   };
 
   xresources.properties = {

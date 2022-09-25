@@ -11,6 +11,7 @@
       slurp
       swappy
       pngquant
+      swaylock-effects
 
       wlr-randr
       wdisplays
@@ -32,6 +33,7 @@
 
     programs.waybar = {
       enable = true;
+      package = pkgs.hyprland.waybar-hyprland;
       settings = [
         {
           layer = "top";
@@ -123,4 +125,6 @@
 
   programs.xwayland.enable = true;
   services.greetd.enable = true;
+
+  security.pam.services.swaylock = { };
 }
