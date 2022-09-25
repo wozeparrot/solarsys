@@ -33,25 +33,26 @@
   environment = {
     systemPackages = with pkgs; [
       # core system utils
-      coreutils
       binutils
+      coreutils
 
       # extra utils
-      ripgrep
-      htop
+      bottom
       btop
       curl
-      file
-      tree
-      less
-      git
-      neovim
-      pciutils
-      usbutils
       du-dust
-      nix-index
       fd
+      file
+      git
+      htop
       jq
+      less
+      neovim
+      nix-index
+      pciutils
+      ripgrep
+      tree
+      usbutils
 
       # network utils
       dnsutils
