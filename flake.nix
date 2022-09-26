@@ -71,6 +71,11 @@
     nixpkgs-wayland.inputs = {
       nixpkgs.follows = "nixpkgs";
     };
+
+    webcord.url = "github:fufexan/webcord-flake";
+    webcord.inputs = {
+      nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, master, staging-next, wozepkgs, home-manager, flake-utils, ... }:
@@ -101,33 +106,18 @@
         };
         stylix = {
           modules = inputs.stylix.nixosModules;
-          cache = {
-            substituters = [ "https://danth.cachix.org" ];
-            trusted-public-keys = [ "danth.cachix.org-1:wpodfSL7suXRc/rJDZZUptMa1t4MJ795hemRN0q84vI=" ];
-          };
         };
         hyprland = {
           inherit (inputs.hyprland) packages;
-          cache = {
-            substituters = [ "https://hyprland.cachix.org" ];
-            trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
-          };
         };
         hyprpicker = {
           inherit (inputs.hyprpicker) packages;
         };
         nixpkgs-wayland = {
           inherit (inputs.nixpkgs-wayland) packages;
-          cache = {
-            substituters = [
-              "https://cache.nixos.org"
-              "https://nixpkgs-wayland.cachix.org"
-            ];
-            trusted-public-keys = [
-              "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-              "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
-            ];
-          };
+        };
+        webcord = {
+          inherit (inputs.webcord) packages;
         };
       };
 

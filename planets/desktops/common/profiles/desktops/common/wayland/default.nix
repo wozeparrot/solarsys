@@ -92,11 +92,6 @@
         drun-url-launcher = "xdg-open";
         drun-use-desktop-cache = false;
         drun-reload-desktop-cache = false;
-        drun = {
-          parse-user = true;
-          parse-system = true;
-          fallback-icon = "application-x-addon";
-        };
       };
     };
 

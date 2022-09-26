@@ -51,9 +51,9 @@
     pkgs.aninarr.aninarc
     signal-desktop
     solvespace
-    ss.goosemod.discord-canary
     ss.horizon
     transmission-gtk
+    webcord.webcord
     zathura
 
     # gaming stuff
