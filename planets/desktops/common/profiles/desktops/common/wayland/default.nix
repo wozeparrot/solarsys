@@ -6,13 +6,15 @@
       fnott
       fuzzel
       grim
+      hyprpicker.hyprpicker
       oguri
       pngquant
       slurp
+      ss.zscroll
       swappy
       swaylock-effects
+      wob
       wofi
-      ss.zscroll
 
       wdisplays
       wlr-randr
@@ -27,6 +29,10 @@
 
       (pkgs.writeShellScriptBin "wl-lockscreen" ''
         swaylock -i ${../../../../misc/lockscreen.jpg} -F --effect-pixelate 128 --effect-vignette 0.2:0.2
+      '')
+
+      (pkgs.writeShellScriptBin "wl-colorpicker" ''
+        hyprpicker --no-fancy | wl-copy -n
       '')
     ];
 
@@ -47,6 +53,51 @@
         rofi-calc
         rofi-emoji
       ];
+      cycle = true;
+      extraConfig = {
+        # general settings
+        modi = "drun,calc,emoji";
+        case-sensitive = false;
+        filter = "";
+        scroll-method = 0;
+        normalize-match = true;
+        show-icons = true;
+        icon-theme = "Papirus";
+        window-format = "{w} · {c} · {t}";
+
+        # matching settings
+        matching = "normal";
+        tokenize = true;
+
+        # history settings
+        disable-history = false;
+        sorting-method = "normal";
+        max-history-size = 50;
+
+        # misc settings
+        sort = false;
+        threads = 0;
+        click-to-exit = true;
+
+        # display settings
+        display-drun = "Apps";
+        display-calc = "Calc";
+        display-emoji = "Emoji";
+
+        # drun settings
+        drun-categories = "";
+        drun-match-fields = "name,generic,exec,categories,keywords";
+        drun-display-format = "{name}";
+        drun-show-actions = false;
+        drun-url-launcher = "xdg-open";
+        drun-use-desktop-cache = false;
+        drun-reload-desktop-cache = false;
+        drun = {
+          parse-user = true;
+          parse-system = true;
+          fallback-icon = "application-x-addon";
+        };
+      };
     };
 
     programs.waybar = {
