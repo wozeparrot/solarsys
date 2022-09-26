@@ -1,121 +1,144 @@
-@define-color background #151510;
-@define-color foreground #d2cad3;
-@define-color yellow     #996f06;
-@define-color red        #a52e4d;
-@define-color green      #228039;
-@define-color blue       #006fc1;
-@define-color purple     #aa3c9f;
-@define-color gray       #bbb3c1;
+@define-color background  #151510;
+@define-color foreground  #d2cad3;
+@define-color black       #08040b;
+@define-color yellow      #996f06;
+@define-color red         #a52e4d;
+@define-color green       #228039;
+@define-color blue        #006fc1;
+@define-color purple      #aa3c9f;
+@define-color gray        #bbb3c1;
+@define-color lightblue   #88c4f4;
+@define-color lightpurple #c29dd5;
 
-/* Generic style for everything */
 * {
-  border: none;
-  border-radius: 0px;
-  font-family: "Vegur";
-  font-size: 12px;
-  min-height: 10px;
+    border: none;
+    border-radius: 0px;
+    font-family: "Agave Nerd Font";
+    font-size: 14px;
+    min-height: 0;
 }
 
-/* Set background color */
 window#waybar {
-  background: @background;
+    background-color: transparent;
+    color: @foreground;
 }
 
-/* Style center modules */
-.modules-center {
-    background: @background;
+#custom-launcher,
+#window,
+#tray,
+#battery,
+#pulseaudio,
+#backlight,
+#cpu,
+#memory,
+#temperature,
+#custom-gpu-usage,
+#custom-gpu-usage-2,
+#clock,
+#custom-media,
+#custom-lock {
+    color: @foreground;
+    padding: 0 12px;
 }
 
-#tags button {
-	color: @foreground;
-	background: transparent;
-    border-left: 2px solid transparent;
-    border-right: 2px solid transparent;
+/* left modules */
+#custom-launcher {
+    background-color: @background;
+    background-image: linear-gradient(to right, @purple 0%, @lightpurple 100%);
+    color: @black;
+    border-radius: 20px;
+    padding-right: 16px;
+    padding-left: 8px;
+    font-size: 20px;
 }
 
-#tags button.occupied {
-	color: @red;
-}
-
-#tags button.focused {
-	color: @blue;
-    border-color: @blue;
-}
-
-#tags button:hover {
-	color: @purple;
-    border-color: @purple;
-}
-
-/* Style left modules */
-.modules-left {
-    background: @background;
-}
-
-#memory {
-    margin: 0px 8px;
-    padding: 0px 10px;
-	color: @foreground;
-}
-
-#cpu {
-    margin: 0px 8px;
-    padding: 0px 10px;
-	color: @foreground;
+#window {
+    background-color: @background;
+    background-image: linear-gradient(to right, @lightpurple 0%, @lightblue 100%);
+    color: @black;
+    border-radius: 20px 0px 0px 20px;
+    margin-left: 5px;
 }
 
 #tray {
-    margin: 0px 8px;
-    padding: 0px 10px;
-	color: @foreground;
+    background-color: @lightblue;
+    color: @black;
+    border-radius: 0px 20px 20px 0px;
 }
 
-/* Style right modules */
-.modules-right {
-    background: @background;
-}
-
-#pulseaudio {
-    margin: 0px 8px;
-    padding: 0px 10px;
-	color: @foreground;
-}
-
+/* center modules */
 #battery {
-    margin: 0px 8px;
-    padding: 0px 10px;
-	color: @foreground;
+    background-color: @background;
+    border-radius: 20px 0px 0px 20px;
 }
-
 #battery.charging, #battery.plugged {
-	color: @green;
+    background-color: @background;
+    background-image: linear-gradient(to right, @green 0%, @background 100%);
 }
-
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
 #battery.critical:not(.charging) {
     background-color: @background;
-    color: @red;
+    background-image: linear-gradient(to right, @red 0%, @background 100%);
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
-@keyframes blink {
-    to {
-        background-color: @red;
-        color: @background;
-    }
+
+#pulseaudio {
+    background-color: @background;
 }
 
 #backlight {
-    margin: 0px 8px;
-    padding: 0px 10px;
-	color: @foreground;
+    background-color: @background;
+}
+
+#cpu {
+    background-color: @background;
+}
+
+#memory {
+    background-color: @background;
+}
+
+#temperature {
+    background-color: @background;
+}
+
+#custom-gpu-usage {
+    background-color: @background;
+}
+
+#custom-gpu-usage-2 {
+    background-color: @background;
 }
 
 #clock {
-    margin: 0px 8px;
-    padding: 0px 10px;
-	color: @foreground;
+    background-color: @background;
+    border-radius: 0px 20px 20px 0px;
 }
 
+/* right modules */
+#custom-media {
+    background-color: @foreground;
+    background-image: linear-gradient(62deg, @lightblue 0%, @lightpurple 100%);
+    color: @black;
+    border-radius: 20px;
+    margin-right: 5px;
+}
+
+#custom-lock {
+    background-color: @background;
+    background-image: linear-gradient(to right, @lightpurple 0%, @purple 100%);
+    color: @black;
+    border-radius: 20px;
+    padding-left: 11px;
+    padding-right: 13px;
+    font-size: 20px;
+}

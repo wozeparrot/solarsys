@@ -3,21 +3,30 @@
   # home-manager config
   home-manager.users.woze = {
     home.packages = with pkgs; [
-      wofi
-      oguri
-      fuzzel
       fnott
+      fuzzel
       grim
+      oguri
+      pngquant
       slurp
       swappy
-      pngquant
       swaylock-effects
+      wofi
+      ss.zscroll
 
-      wlr-randr
       wdisplays
+      wlr-randr
 
       (pkgs.writeShellScriptBin "wl-screenshot" ''
         grim -g "$(slurp)" - | swappy -f - -o - | pngquant -o - - | wl-copy -t 'image/png'
+      '')
+
+      (pkgs.writeShellScriptBin "wl-launcher" ''
+        fuzzel -r 0 -b 151510ff -t d2cad3ff -s 6691d2ff -C aa3c9fff -m a52e4dff -w 40 -l 12 -B 2
+      '')
+
+      (pkgs.writeShellScriptBin "wl-lockscreen" ''
+        swaylock -i ${../../../../misc/lockscreen.jpg} -F --effect-pixelate 128 --effect-vignette 0.2:0.2
       '')
     ];
 
@@ -31,9 +40,18 @@
 
     xdg.configFile."fnott/fnott.ini".source = ./fnott.ini;
 
+    programs.rofi = {
+      enable = true;
+      package = pkgs.rofi-wayland;
+      plugins = with pkgs; [
+        rofi-calc
+        rofi-emoji
+      ];
+    };
+
     programs.waybar = {
       enable = true;
-      package = pkgs.hyprland.waybar-hyprland;
+      package = pkgs.nixpkgs-wayland.waybar;
       settings = [
         {
           layer = "top";
@@ -43,71 +61,122 @@
             "eDP-2"
           ];
 
-          modules-left = [ "cpu" "memory" "mpd" "tray" ];
-          modules-center = [ ];
-          modules-right = [ "backlight" "pulseaudio" "clock" "battery" ];
+          height = 30;
+          spacing = 0;
+          margin-top = 0;
+          margin-bottom = 0;
+
+          modules-left = [ "custom/launcher" "hyprland/window" "tray" ];
+          modules-center = [ "battery" "pulseaudio" "backlight" "cpu" "memory" "temperature" "custom/gpu-usage" "custom/gpu-usage-2" "clock" ];
+          modules-right = [ "custom/media" "custom/lock" ];
 
           modules = {
-            "mpd" = {
-              format = "{stateIcon}";
-              format-disconnected = "";
-              format-stopped = "";
-              state-icons = {
-                paused = "";
-                playing = "";
-              };
+            "custom/launcher" = {
+              format = "";
+              on-click = "wl-launcher";
+              on-click-right = "pkill fuzzel";
               tooltip = false;
             };
+
+            "hyprland/window" = {
+              format = "  {}";
+              max-length = 40;
+            };
+
             "tray" = {
-              icon-size = 12;
-              spacing = 10;
+              icon-size = 15;
+              spacing = 7;
             };
-            "network" = {
-              format-wifi = "W {signalStrength}%";
-              format-ethernet = "E";
-              format-disconnected = "";
+
+            "battery" = {
+              interval = 4;
+              states = {
+                warning = 30;
+                critical = 15;
+              };
+              format = "{capacity}% {icon}";
+              format-charging = "{capacity}% ";
+              format-plugged = "{capacity}% ";
+              format-alt = "{time} {icon}";
+              format-icons = [ "" "" "" "" "" ];
               tooltip = false;
-              interval = 10;
             };
+
+            "pulseaudio" = {
+              format = "{volume}% ";
+              format-muted = "";
+              on-click = "pavucontrol";
+              on-click-right = "pamixer -t";
+              tooltip = false;
+            };
+
             "backlight" = {
+              format = "{percent}% ";
               on-scroll-up = "light -A 1";
               on-scroll-down = "light -U 1";
-              format = " {percent}%";
+            };
+
+            "cpu" = {
+              interval = 2;
+              format = "{usage}% ";
+              on-click = "kitty btm";
               tooltip = false;
             };
+
+            "memory" = {
+              interval = 2;
+              format = "{}% ";
+              on-click = "kitty btm";
+              tooltip = false;
+            };
+
+            "temperature" = {
+              interval = 2;
+              hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
+              format = "{temperatureC}°C ";
+              on-click = "kitty btm";
+              tooltip = false;
+            };
+
+            "custom/gpu-usage" = {
+              interval = 2;
+              format = "{}% ";
+              on-click = "kitty btm";
+              exec = "cat /sys/class/drm/card0/device/gpu_busy_percent";
+              tooltip = false;
+            };
+
+            "custom/gpu-usage-2" = {
+              interval = 2;
+              format = "{}% ";
+              on-click = "kitty btm";
+              exec = "cat /sys/class/drm/card1/device/gpu_busy_percent";
+              tooltip = false;
+            };
+
             "clock" = {
               interval = 1;
               format = "{:%H:%M:%S}";
               today-format = "<b><big><u>{}</u></big></b>";
               tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
             };
-            "pulseaudio" = {
-              format = "{icon} {volume}%";
-              format-muted = "";
-              format-icons = {
-                default = [ "" "" "" ];
-              };
-              on-click = "pavucontrol";
+
+            "custom/media" = {
+              format = "{}";
+              exec = "${./bar-mpd-zscroll.sh}";
+              escape = true;
+              on-click = "mpc toggle";
+              on-click-right = "kitty ncmpcpp";
+              smooth-scroll-threshold = 10;
+              on-scroll-up = "mpc next";
+              on-scroll-down = "mpc prev";
               tooltip = false;
             };
-            "battery" = {
-              format-icons = [ "" "" "" "" "" ];
-              format = "{icon} {capacity}%";
-              format-charging = " {capacity}%";
-              interval = 30;
-              states = {
-                good = 95;
-                warning = 30;
-                critical = 15;
-              };
-            };
-            "memory" = {
-              format = " {}%";
-              interval = 2;
-            };
-            "cpu" = {
-              format = " {usage}%";
-              interval = 2;
+
+            "custom/lock" = {
+              format = "";
+              on-click = "wl-lockscreen";
+              tooltip = false;
             };
           };
         }

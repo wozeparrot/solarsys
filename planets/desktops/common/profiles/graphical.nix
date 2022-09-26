@@ -88,6 +88,7 @@
       };
     };
   };
+  fonts.enableDefaultFonts = true;
   # fonts = {
   #   enableDefaultFonts = true;
   #   fonts = with pkgs; [
@@ -154,6 +155,7 @@
       gtk-engine-murrine
       hicolor-icon-theme
       gnome3.adwaita-icon-theme
+      papirus-icon-theme
 
       libnotify
       xdg-utils

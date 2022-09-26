@@ -11,6 +11,7 @@ self: super:
     pop-launcher = self.callPackage ./pop-launcher { };
     onagre = self.callPackage ./onagre { inherit pop-launcher; };
     sonobus = self.callPackage ./sonobus { };
+    zscroll = self.callPackage ./zscroll { };
 
     matrix-conduit = self.callPackage ./matrix-conduit { };
 
