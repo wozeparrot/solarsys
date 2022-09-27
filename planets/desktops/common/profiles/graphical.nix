@@ -49,7 +49,7 @@
 
   # fonts
   stylix = {
-    image = ../misc/starrysky.png;
+    image = ../misc/wallpaper.png;
     polarity = "dark";
     palette = {
       base00 = "000000";

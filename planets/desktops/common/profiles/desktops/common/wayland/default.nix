@@ -48,7 +48,7 @@
 
     xdg.configFile."oguri/config".text = ''
       [output *]
-      image=${../../../../misc/starrysky.png}
+      image=${../../../../misc/wallpaper.png}
       filter=best
       scaling-mode=fill
       anchor=center
