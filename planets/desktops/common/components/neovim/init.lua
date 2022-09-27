@@ -239,7 +239,7 @@ lspconfig.zls.setup({
     on_attach = default_on_attach,
 })
 -- nix
-lspconfig.rnix.setup({
+lspconfig.nil_ls.setup({
     capabilities = capabilities,
     on_attach = default_on_attach,
 })

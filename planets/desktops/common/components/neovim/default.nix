@@ -28,11 +28,11 @@ in
       # libraries
       sqlite
       # treesitter
-      tree-sitter
       gcc
+      tree-sitter
       # telescope
-      ripgrep
       fd
+      ripgrep
       # glow
       glow
 
@@ -49,17 +49,17 @@ in
         {
           zig = pkgs.zigf.master-2022-09-01;
         })
-      rnix-lsp
-      cargo
-      rustc
-      rust-analyzer
-      nodePackages.pyright
       black
-      sumneko-lua-language-server
-      jdt-language-server
-      nodePackages.bash-language-server
+      cargo
       clang-tools
       deno
+      jdt-language-server
+      nil
+      nodePackages.bash-language-server
+      nodePackages.pyright
+      rust-analyzer
+      rustc
+      sumneko-lua-language-server
 
       # need node 16 for copilot
       nodejs-16_x
@@ -68,43 +68,43 @@ in
     plugins = with pkgs.vimPlugins; [
       # ricing
       (pluginGit "nekonako/xresources-nvim" "745b4df924a6c4a7d8026a3fb3a7fa5f78e6f582" "master")
-      lualine-nvim
-      bufferline-nvim
       bufdelete-nvim
+      bufferline-nvim
+      lualine-nvim
       nvim-base16
 
       # libraries
       plenary-nvim
       sqlite-lua
       # lsp
-      nvim-lspconfig
-      null-ls-nvim
       lspkind-nvim
-      trouble-nvim
-      nvim-lightbulb
       lspsaga-nvim
+      null-ls-nvim
       nvim-code-action-menu
+      nvim-lightbulb
+      nvim-lspconfig
+      trouble-nvim
       # treesitter
       (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
       nvim-treesitter-context
       nvim-ts-autotag
       # telescope
-      telescope-nvim
-      telescope-fzf-native-nvim
-      telescope-frecency-nvim
       (pluginGit "nvim-telescope/telescope-ui-select.nvim" "d02a3d3a6b3f6b933c43a28668ae18f78846d3aa" "master")
+      telescope-frecency-nvim
+      telescope-fzf-native-nvim
+      telescope-nvim
       # nvim-autopairs
       nvim-autopairs
       # vim-vsnip
-      vim-vsnip
       friendly-snippets
+      vim-vsnip
       # nvim-cmp
-      nvim-cmp
-      cmp-nvim-lsp
-      cmp-vsnip
-      cmp-treesitter
-      cmp-path
       cmp-buffer
+      cmp-nvim-lsp
+      cmp-path
+      cmp-treesitter
+      cmp-vsnip
+      nvim-cmp
       # indent-blankline
       indent-blankline-nvim
       # nvim-cursorline
@@ -119,11 +119,11 @@ in
       glow-nvim
 
       # language support
-      zig-vim
-      (pluginGit "lluchs/vim-wren" "713705a23bdb94ff6c29866ff4a9db089cbc2dab" "master")
-      (pluginGit "stefanos82/nelua.vim" "60e67296bce29db0c060a21c9ad5423005a8f6eb" "main")
       (pluginGit "DingDean/wgsl.vim" "fbe8f0dd179aec8525d6c93bb992e409b0e4e0ee" "main")
       (pluginGit "elkowar/yuck.vim" "6dc3da77c53820c32648cf67cbdbdfb6994f4e08" "master")
+      (pluginGit "lluchs/vim-wren" "713705a23bdb94ff6c29866ff4a9db089cbc2dab" "master")
+      (pluginGit "stefanos82/nelua.vim" "60e67296bce29db0c060a21c9ad5423005a8f6eb" "main")
+      zig-vim
 
       # lsp language additionals
       crates-nvim
