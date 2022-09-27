@@ -15,6 +15,7 @@
       swaylock-effects
       wob
       wofi
+      wtype
 
       wdisplays
       wlr-randr
@@ -24,7 +25,16 @@
       '')
 
       (pkgs.writeShellScriptBin "wl-launcher" ''
-        fuzzel -r 0 -b 151510ff -t d2cad3ff -s 6691d2ff -C aa3c9fff -m a52e4dff -w 40 -l 12 -B 2
+        # fuzzel -r 0 -b 151510ff -t d2cad3ff -s 6691d2ff -C aa3c9fff -m a52e4dff -w 40 -l 12 -B 2
+        rofi -show drun
+      '')
+
+      (pkgs.writeShellScriptBin "wl-calc" ''
+        rofi -show calc
+      '')
+
+      (pkgs.writeShellScriptBin "wl-emoji" ''
+        rofi -show emoji
       '')
 
       (pkgs.writeShellScriptBin "wl-lockscreen" ''
@@ -93,6 +103,7 @@
         drun-use-desktop-cache = false;
         drun-reload-desktop-cache = false;
       };
+      theme = ./rofi-theme.rasi;
     };
 
     programs.waybar = {

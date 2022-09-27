@@ -43,12 +43,11 @@ window#waybar {
 
 /* left modules */
 #custom-launcher {
-    background-color: @background;
-    background-image: linear-gradient(to right, @purple 0%, @lightpurple 100%);
+    background-color: @lightpurple;
     color: @black;
-    border-radius: 20px;
-    padding-right: 16px;
-    padding-left: 8px;
+    border-radius: 0px;
+    padding-right: 17px;
+    padding-left: 7px;
     font-size: 20px;
 }
 
@@ -56,8 +55,9 @@ window#waybar {
     background-color: @background;
     background-image: linear-gradient(to right, @lightpurple 0%, @lightblue 100%);
     color: @black;
-    border-radius: 20px 0px 0px 20px;
-    margin-left: 5px;
+    border-radius: 0px;
+    margin-left: 0px;
+    padding-left: 24px;
 }
 
 #tray {
@@ -129,15 +129,15 @@ window#waybar {
     background-color: @foreground;
     background-image: linear-gradient(62deg, @lightblue 0%, @lightpurple 100%);
     color: @black;
-    border-radius: 20px;
-    margin-right: 5px;
+    border-radius: 20px 0px 0px 20px;
+    margin-right: 0px;
+    padding-right: 24px;
 }
 
 #custom-lock {
-    background-color: @background;
-    background-image: linear-gradient(to right, @lightpurple 0%, @purple 100%);
+    background-color: @lightpurple;
     color: @black;
-    border-radius: 20px;
+    border-radius: 0px;
     padding-left: 11px;
     padding-right: 13px;
     font-size: 20px;
