@@ -26,14 +26,17 @@
 
       (pkgs.writeShellScriptBin "wl-launcher" ''
         # fuzzel -r 0 -b 151510ff -t d2cad3ff -s 6691d2ff -C aa3c9fff -m a52e4dff -w 40 -l 12 -B 2
+        pkill -9 rofi
         rofi -show drun
       '')
 
       (pkgs.writeShellScriptBin "wl-calc" ''
+        pkill -9 rofi
         rofi -show calc
       '')
 
       (pkgs.writeShellScriptBin "wl-emoji" ''
+        pkill -9 rofi
         rofi -show emoji
       '')
 
@@ -42,6 +45,7 @@
       '')
 
       (pkgs.writeShellScriptBin "wl-colorpicker" ''
+        pkill -9 hyprpicker
         hyprpicker --no-fancy | wl-copy -n
       '')
     ];
@@ -88,7 +92,6 @@
         sort = false;
         threads = 0;
         click-to-exit = true;
-        replace = true;
 
         # display settings
         display-drun = "Apps";
