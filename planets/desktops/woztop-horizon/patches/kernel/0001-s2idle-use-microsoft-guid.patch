@@ -1,0 +1,44 @@
+diff --git a/drivers/acpi/x86/s2idle.c b/drivers/acpi/x86/s2idle.c
+index e10394b847af..c9ee30627b6c 100644
+--- a/drivers/acpi/x86/s2idle.c
++++ b/drivers/acpi/x86/s2idle.c
+@@ -369,6 +369,39 @@ static int validate_dsm(acpi_handle handle, const char *uuid, int rev, guid_t *d
+ 	return ret;
+ }
+ 
++struct amd_lps0_hid_device_data {
++	const unsigned int rev_id;
++	const bool check_off_by_one;
++	const bool prefer_amd_guid;
++};
++
++static const struct amd_lps0_hid_device_data amd_picasso = {
++	.rev_id = 0,
++	.check_off_by_one = true,
++	.prefer_amd_guid = false,
++};
++
++static const struct amd_lps0_hid_device_data amd_cezanne = {
++	.rev_id = 0,
++	.check_off_by_one = false,
++	.prefer_amd_guid = false,
++};
++
++static const struct amd_lps0_hid_device_data amd_rembrandt = {
++	.rev_id = 2,
++	.check_off_by_one = false,
++	.prefer_amd_guid = true,
++};
++
++static const struct acpi_device_id amd_hid_ids[] = {
++	{"AMD0004",	(kernel_ulong_t)&amd_picasso,	},
++	{"AMD0005",	(kernel_ulong_t)&amd_picasso,	},
++	{"AMDI0005",	(kernel_ulong_t)&amd_picasso,	},
++	{"AMDI0006",	(kernel_ulong_t)&amd_cezanne,	},
++	{"AMDI0007",	(kernel_ulong_t)&amd_rembrandt,	},
++	{}
++};
++
+ static int lps0_device_attach(struct acpi_device *adev,
+ 			      const struct acpi_device_id *not_used)
+ {

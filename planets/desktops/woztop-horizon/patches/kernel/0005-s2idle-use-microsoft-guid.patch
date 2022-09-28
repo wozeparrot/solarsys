@@ -1,0 +1,32 @@
+---
+v3-v4:
+ * Absorb tags
+v2->v3:
+ * Absorb tags
+v1->v2:
+ * New patch
+---
+ drivers/acpi/x86/s2idle.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/drivers/acpi/x86/s2idle.c b/drivers/acpi/x86/s2idle.c
+index 99eae362de6d..2cd381f6c002 100644
+--- a/drivers/acpi/x86/s2idle.c
++++ b/drivers/acpi/x86/s2idle.c
+@@ -420,6 +420,14 @@ static const struct dmi_system_id s2idle_dmi_table[] __initconst = {
+ 			DMI_MATCH(DMI_PRODUCT_NAME, "ASUS TUF Gaming A17"),
+ 		},
+ 	},
++	{
++		/* ASUS ROG Zephyrus G14 (2022) */
++		.callback = lps0_prefer_microsoft,
++		.matches = {
++			DMI_MATCH(DMI_SYS_VENDOR, "ASUSTeK COMPUTER INC."),
++			DMI_MATCH(DMI_PRODUCT_NAME, "ROG Zephyrus G14 GA402"),
++		},
++	},
+ 	{}
+ };
+ 
+-- 
+2.34.1

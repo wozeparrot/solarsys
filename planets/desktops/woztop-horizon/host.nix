@@ -14,7 +14,14 @@
     ../common/profiles/vpn.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPatches = [
+    { name = "0001-s2idle-use-microsoft-guid"; patch = ./patches/kernel/0001-s2idle-use-microsoft-guid.patch; }
+    { name = "0002-s2idle-use-microsoft-guid"; patch = ./patches/kernel/0002-s2idle-use-microsoft-guid.patch; }
+    { name = "0003-s2idle-use-microsoft-guid"; patch = ./patches/kernel/0003-s2idle-use-microsoft-guid.patch; }
+    { name = "0004-s2idle-use-microsoft-guid"; patch = ./patches/kernel/0004-s2idle-use-microsoft-guid.patch; }
+    { name = "0005-s2idle-use-microsoft-guid"; patch = ./patches/kernel/0005-s2idle-use-microsoft-guid.patch; }
+  ];
 
   hardware.cpu.amd.updateMicrocode = true;
 
