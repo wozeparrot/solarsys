@@ -132,7 +132,7 @@
             "custom/launcher" = {
               format = "";
               on-click = "wl-launcher";
-              on-click-right = "pkill fuzzel";
+              on-click-right = "pkill -9 rofi";
               tooltip = false;
             };
 
