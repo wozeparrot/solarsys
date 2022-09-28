@@ -88,6 +88,7 @@
         sort = false;
         threads = 0;
         click-to-exit = true;
+        replace = true;
 
         # display settings
         display-drun = "Apps";
