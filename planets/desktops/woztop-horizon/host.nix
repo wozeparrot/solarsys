@@ -21,6 +21,8 @@
     { name = "0003-s2idle-use-microsoft-guid"; patch = ./patches/kernel/0003-s2idle-use-microsoft-guid.patch; }
     { name = "0004-s2idle-use-microsoft-guid"; patch = ./patches/kernel/0004-s2idle-use-microsoft-guid.patch; }
     { name = "0005-s2idle-use-microsoft-guid"; patch = ./patches/kernel/0005-s2idle-use-microsoft-guid.patch; }
+    { name = "0001-cpufreq-epp-patches"; patch = ./patches/kernel/0001-cpufreq-epp-patches.patch; }
+    { name = "0001-amd-idle-dummy-wait-fix"; patch = ./patches/kernel/0001-amd-idle-dummy-wait-fix.patch; }
   ];
 
   hardware.cpu.amd.updateMicrocode = true;

@@ -27,6 +27,7 @@ window#waybar {
 #window,
 #tray,
 #battery,
+#custom-powerdraw,
 #pulseaudio,
 #backlight,
 #cpu,
@@ -89,6 +90,10 @@ window#waybar {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+}
+
+#custom-powerdraw {
+    background-color: @background;
 }
 
 #pulseaudio {

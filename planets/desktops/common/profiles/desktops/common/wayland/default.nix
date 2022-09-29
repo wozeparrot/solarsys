@@ -128,7 +128,7 @@
           margin-bottom = 0;
 
           modules-left = [ "custom/launcher" "hyprland/window" "tray" ];
-          modules-center = [ "battery" "pulseaudio" "backlight" "cpu" "memory" "temperature" "custom/gpu-usage" "custom/gpu-usage-2" "clock" ];
+          modules-center = [ "battery" "custom/powerdraw" "pulseaudio" "backlight" "cpu" "memory" "temperature" "custom/gpu-usage" "custom/gpu-usage-2" "clock" ];
           modules-right = [ "custom/media" "custom/lock" ];
 
           # modules
@@ -160,6 +160,14 @@
             format-plugged = "{capacity}% ";
             format-alt = "{time} {icon}";
             format-icons = [ " " " " " " " " " " ];
+            tooltip = false;
+          };
+
+          "custom/powerdraw" = {
+            interval = 2;
+            exec = "cat /sys/class/power_supply/BAT0/power_now | head -c 2";
+            format = "{}W ";
+            on-click = "kitty btm";
             tooltip = false;
           };
 
