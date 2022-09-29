@@ -14,7 +14,7 @@
     ../common/profiles/vpn.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   boot.kernelPatches = [
     { name = "0001-s2idle-use-microsoft-guid"; patch = ./patches/kernel/0001-s2idle-use-microsoft-guid.patch; }
     { name = "0002-s2idle-use-microsoft-guid"; patch = ./patches/kernel/0002-s2idle-use-microsoft-guid.patch; }
