@@ -131,114 +131,113 @@
           modules-center = [ "battery" "pulseaudio" "backlight" "cpu" "memory" "temperature" "custom/gpu-usage" "custom/gpu-usage-2" "clock" ];
           modules-right = [ "custom/media" "custom/lock" ];
 
-          modules = {
-            "custom/launcher" = {
-              format = "";
-              on-click = "wl-launcher";
-              on-click-right = "pkill -9 rofi";
-              tooltip = false;
-            };
+          # modules
+          "custom/launcher" = {
+            format = "";
+            on-click = "wl-launcher";
+            on-click-right = "pkill -9 rofi";
+            tooltip = false;
+          };
 
-            "hyprland/window" = {
-              format = "  {}";
-              max-length = 40;
-            };
+          "hyprland/window" = {
+            format = "  {}";
+            max-length = 40;
+          };
 
-            "tray" = {
-              icon-size = 15;
-              spacing = 7;
-            };
+          "tray" = {
+            icon-size = 15;
+            spacing = 7;
+          };
 
-            "battery" = {
-              interval = 4;
-              states = {
-                warning = 30;
-                critical = 15;
-              };
-              format = "{capacity}% {icon}";
-              format-charging = "{capacity}% ";
-              format-plugged = "{capacity}% ";
-              format-alt = "{time} {icon}";
-              format-icons = [ " " " " " " " " " " ];
-              tooltip = false;
+          "battery" = {
+            interval = 4;
+            states = {
+              warning = 30;
+              critical = 15;
             };
+            format = "{capacity}% {icon}";
+            format-charging = "{capacity}% ";
+            format-plugged = "{capacity}% ";
+            format-alt = "{time} {icon}";
+            format-icons = [ " " " " " " " " " " ];
+            tooltip = false;
+          };
 
-            "pulseaudio" = {
-              format = "{volume}% ";
-              format-muted = "";
-              on-click = "pavucontrol";
-              on-click-right = "pamixer -t";
-              tooltip = false;
-            };
+          "pulseaudio" = {
+            format = "{volume}% ";
+            format-muted = "";
+            on-click = "pavucontrol";
+            on-click-right = "pamixer -t";
+            tooltip = false;
+          };
 
-            "backlight" = {
-              format = "{percent}% ";
-              on-scroll-up = "light -A 1";
-              on-scroll-down = "light -U 1";
-            };
+          "backlight" = {
+            format = "{percent}% ";
+            on-scroll-up = "light -A 1";
+            on-scroll-down = "light -U 1";
+          };
 
-            "cpu" = {
-              interval = 2;
-              format = "{usage}% ";
-              on-click = "kitty btm";
-              tooltip = false;
-            };
+          "cpu" = {
+            interval = 2;
+            format = "{usage}% ";
+            on-click = "kitty btm";
+            tooltip = false;
+          };
 
-            "memory" = {
-              interval = 2;
-              format = "{}% ";
-              on-click = "kitty btm";
-              tooltip = false;
-            };
+          "memory" = {
+            interval = 2;
+            format = "{}% ";
+            on-click = "kitty btm";
+            tooltip = false;
+          };
 
-            "temperature" = {
-              interval = 2;
-              hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
-              format = "{temperatureC}°C ";
-              on-click = "kitty btm";
-              tooltip = false;
-            };
+          "temperature" = {
+            interval = 2;
+            hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
+            format = "{temperatureC}°C ";
+            on-click = "kitty btm";
+            tooltip = false;
+          };
 
-            "custom/gpu-usage" = {
-              interval = 2;
-              format = "{}% ";
-              on-click = "kitty btm";
-              exec = "cat /sys/class/drm/card0/device/gpu_busy_percent";
-              tooltip = false;
-            };
+          "custom/gpu-usage" = {
+            interval = 2;
+            format = "{}% ";
+            on-click = "kitty btm";
+            exec = "cat /sys/class/drm/card0/device/gpu_busy_percent";
+            tooltip = false;
+          };
 
-            "custom/gpu-usage-2" = {
-              interval = 2;
-              format = "{}% ";
-              on-click = "kitty btm";
-              exec = "cat /sys/class/drm/card1/device/gpu_busy_percent";
-              tooltip = false;
-            };
+          "custom/gpu-usage-2" = {
+            interval = 2;
+            format = "{}% ";
+            on-click = "kitty btm";
+            exec = "cat /sys/class/drm/card1/device/gpu_busy_percent";
+            tooltip = false;
+          };
 
-            "clock" = {
-              interval = 1;
-              format = "{:%H:%M:%S}";
-              today-format = "<b><big><u>{}</u></big></b>";
-              tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-            };
+          "clock" = {
+            interval = 1;
+            format = "{:%H:%M:%S}";
+            today-format = "<b><big><u>{}</u></big></b>";
+            tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+          };
 
-            "custom/media" = {
-              format = "{}";
-              exec = "${./bar-mpd-zscroll.sh}";
-              escape = true;
-              on-click = "mpc toggle";
-              on-click-right = "kitty ncmpcpp";
-              smooth-scroll-threshold = 10;
-              on-scroll-up = "mpc next";
-              on-scroll-down = "mpc prev";
-              tooltip = false;
-            };
+          "custom/media" = {
+            format = "{}";
+            exec = "${./bar-mpd-zscroll.sh}";
+            escape = true;
+            on-click = "mpc toggle";
+            on-click-right = "kitty ncmpcpp";
+            smooth-scroll-threshold = 10;
+            on-scroll-up = "mpc next";
+            on-scroll-down = "mpc prev";
+            tooltip = false;
+          };
 
-            "custom/lock" = {
-              format = "";
-              on-click = "wl-lockscreen";
-              tooltip = false;
-            };
+          "custom/lock" = {
+            format = "";
+            on-click = "wl-lockscreen";
+            tooltip = false;
           };
         }
       ];

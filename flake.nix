@@ -63,9 +63,6 @@
     };
 
     hyprpicker.url = "github:hyprwm/hyprpicker";
-    hyprpicker.inputs = {
-      nixpkgs.follows = "nixpkgs";
-    };
 
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixpkgs-wayland.inputs = {

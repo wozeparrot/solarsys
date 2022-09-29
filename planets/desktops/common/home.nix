@@ -39,7 +39,8 @@
     blender
     ghidra-bin
     gimp
-    gnome3.gnome-disk-utility
+    gnome.file-roller
+    gnome.gnome-disk-utility
     godot
     keepassxc
     krita
@@ -72,6 +73,7 @@
     master.steamcmd # ^
     nix-gaming.osu-lazer-bin
     the-powder-toy
+    wine64
 
     # wayland/desktop stuff
     grim
@@ -170,6 +172,7 @@
 
   # extra services
   services.kdeconnect.enable = true;
+  services.kdeconnect.indicator = true;
   services.easyeffects.enable = false; # causes some problems
   services.syncthing.enable = true;
 

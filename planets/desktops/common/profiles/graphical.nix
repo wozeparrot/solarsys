@@ -141,7 +141,7 @@
   #   };
   # };
 
-  services.udev.packages = [ pkgs.gnome3.gnome-settings-daemon ];
+  services.udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
 
   # environment
   environment = {
@@ -154,7 +154,7 @@
 
       gtk-engine-murrine
       hicolor-icon-theme
-      gnome3.adwaita-icon-theme
+      gnome.adwaita-icon-theme
       papirus-icon-theme
 
       libnotify

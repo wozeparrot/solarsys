@@ -9,7 +9,7 @@
   home.packages = with pkgs; [
     docker-compose
 
-    gnome3.file-roller
+    gnome.file-roller
 
     radeontop
     simplescreenrecorder

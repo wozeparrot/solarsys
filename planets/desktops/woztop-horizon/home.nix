@@ -9,14 +9,7 @@
   home.packages = with pkgs; [
     docker-compose
 
-    gnome3.file-roller
-
     radeontop
-    simplescreenrecorder
-
-    teams
-
-    wine64
 
     (
       pkgs.writeShellScriptBin "run_gpu" ''
@@ -27,8 +20,5 @@
     )
   ];
 
-  # Services
-  services.kdeconnect.indicator = true;
-
-  home.stateVersion = "20.09";
+  home.stateVersion = "22.11";
 }
