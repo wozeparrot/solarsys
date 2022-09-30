@@ -165,7 +165,7 @@
 
           "custom/powerdraw" = {
             interval = 2;
-            exec = "cat /sys/class/power_supply/BAT0/power_now | head -c 2";
+            exec = "cat /sys/class/power_supply/BAT0/power_now | awk '{ printf \"%.1f\", ($1/1000000) }'";
             format = "{}W ";
             on-click = "kitty btm";
             tooltip = false;
