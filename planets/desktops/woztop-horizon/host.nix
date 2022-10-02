@@ -23,6 +23,8 @@
     { name = "0005-s2idle-use-microsoft-guid"; patch = ./patches/kernel/0005-s2idle-use-microsoft-guid.patch; }
     { name = "0001-cpufreq-epp-patches"; patch = ./patches/kernel/0001-cpufreq-epp-patches.patch; }
     { name = "0001-amd-idle-dummy-wait-fix"; patch = ./patches/kernel/0001-amd-idle-dummy-wait-fix.patch; }
+    { name = "0001-asus-wmi-gpu-fan"; patch = ./patches/kernel/0001-asus-wmi-gpu-fan.patch; }
+    { name = "0002-asus-wmi-gpu-fan"; patch = ./patches/kernel/0002-asus-wmi-gpu-fan.patch; }
   ];
 
   hardware.cpu.amd.updateMicrocode = true;
