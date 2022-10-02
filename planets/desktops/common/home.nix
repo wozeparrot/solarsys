@@ -173,7 +173,7 @@
   # extra services
   services.kdeconnect.enable = true;
   services.kdeconnect.indicator = true;
-  services.easyeffects.enable = false; # causes some problems
+  services.easyeffects.enable = true;
   services.syncthing.enable = true;
 
   # xdg config
