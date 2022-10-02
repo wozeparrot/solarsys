@@ -53,7 +53,7 @@
     START_CHARGE_THRESH_BAT0 = "0";
     STOP_CHARGE_THRESH_BAT0 = "80";
 
-    PLATFORM_PROFILE_ON_AC = "performance";
+    PLATFORM_PROFILE_ON_AC = "balanced";
     PLATFORM_PROFILE_ON_BAT = "quiet";
   };
   services.logind.lidSwitch = "suspend";
