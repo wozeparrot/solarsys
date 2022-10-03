@@ -19,6 +19,9 @@ self: super:
       openasar = self.callPackage ./goosemod-openasar { };
       discord-canary = self.callPackage ./goosemod-discord { branch = "canary"; inherit goosemod; };
     };
+
+    pam-python = self.callPackage ./pam-python { };
+    howdy = self.callPackage ./howdy { };
   };
 
   # yt-dlp = self.python3Packages.callPackage ./yt-dlp { };

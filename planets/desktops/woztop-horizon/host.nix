@@ -12,6 +12,7 @@
     ../common/profiles/desktops/hyprland
 
     ../common/profiles/vpn.nix
+    ../../../common/modules/howdy
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
@@ -91,7 +92,7 @@
 
   services.ratbagd.enable = true;
 
-  services.tlp.settings.WIFI_PWR_ON_BAT = "off";
+  services.howdy.enable = true;
 
   security.pam.loginLimits = [
     { domain = "@audio"; item = "memlock"; type = "-"; value = "unlimited"; }
