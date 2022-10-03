@@ -74,6 +74,7 @@
   programs.gamemode.enable = true;
   programs.fuse.userAllowOther = true;
   programs.corectrl.enable = true;
+  programs.adb.enable = true;
 
   # services.flatpak.enable = true;
 
@@ -124,7 +125,7 @@
     options = [ "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" ];
   };
 
-  users.users.woze.extraGroups = [ "docker" "libvirtd" "video" "render" "vboxusers" "libvirt" "corectrl" ];
+  users.users.woze.extraGroups = [ "docker" "libvirtd" "video" "render" "vboxusers" "libvirt" "corectrl" "adbusers" ];
   home-manager.users.woze = ./home.nix;
 
   system.stateVersion = "22.11";
