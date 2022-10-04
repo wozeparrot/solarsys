@@ -64,7 +64,7 @@ in {
 
       dark-threshold = mkOption {
         type = types.int;
-        default = 50;
+        default = 75;
         description = ''
           Because of flashing IR emitters, some frames can be completely unlit. Skip the frame if the lowest 1/8 of the histogram is above this percentage of the total. The lower this setting is, the more dark frames are ignored.
         '';
