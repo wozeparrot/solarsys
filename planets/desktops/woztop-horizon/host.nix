@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   networking.hostName = "woztop-horizon";
 
   imports = [
@@ -17,21 +20,48 @@
 
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   boot.kernelPatches = [
-    { name = "0001-s2idle-use-microsoft-guid"; patch = ./patches/kernel/0001-s2idle-use-microsoft-guid.patch; }
-    { name = "0002-s2idle-use-microsoft-guid"; patch = ./patches/kernel/0002-s2idle-use-microsoft-guid.patch; }
-    { name = "0003-s2idle-use-microsoft-guid"; patch = ./patches/kernel/0003-s2idle-use-microsoft-guid.patch; }
-    { name = "0004-s2idle-use-microsoft-guid"; patch = ./patches/kernel/0004-s2idle-use-microsoft-guid.patch; }
-    { name = "0005-s2idle-use-microsoft-guid"; patch = ./patches/kernel/0005-s2idle-use-microsoft-guid.patch; }
-    { name = "0001-cpufreq-epp-patches"; patch = ./patches/kernel/0001-cpufreq-epp-patches.patch; }
-    { name = "0001-amd-idle-dummy-wait-fix"; patch = ./patches/kernel/0001-amd-idle-dummy-wait-fix.patch; }
-    { name = "0001-asus-wmi-gpu-fan"; patch = ./patches/kernel/0001-asus-wmi-gpu-fan.patch; }
-    { name = "0002-asus-wmi-gpu-fan"; patch = ./patches/kernel/0002-asus-wmi-gpu-fan.patch; }
+    {
+      name = "0001-s2idle-use-microsoft-guid";
+      patch = ./patches/kernel/0001-s2idle-use-microsoft-guid.patch;
+    }
+    {
+      name = "0002-s2idle-use-microsoft-guid";
+      patch = ./patches/kernel/0002-s2idle-use-microsoft-guid.patch;
+    }
+    {
+      name = "0003-s2idle-use-microsoft-guid";
+      patch = ./patches/kernel/0003-s2idle-use-microsoft-guid.patch;
+    }
+    {
+      name = "0004-s2idle-use-microsoft-guid";
+      patch = ./patches/kernel/0004-s2idle-use-microsoft-guid.patch;
+    }
+    {
+      name = "0005-s2idle-use-microsoft-guid";
+      patch = ./patches/kernel/0005-s2idle-use-microsoft-guid.patch;
+    }
+    {
+      name = "0001-cpufreq-epp-patches";
+      patch = ./patches/kernel/0001-cpufreq-epp-patches.patch;
+    }
+    {
+      name = "0001-amd-idle-dummy-wait-fix";
+      patch = ./patches/kernel/0001-amd-idle-dummy-wait-fix.patch;
+    }
+    {
+      name = "0001-asus-wmi-gpu-fan";
+      patch = ./patches/kernel/0001-asus-wmi-gpu-fan.patch;
+    }
+    {
+      name = "0002-asus-wmi-gpu-fan";
+      patch = ./patches/kernel/0002-asus-wmi-gpu-fan.patch;
+    }
   ];
 
   hardware.cpu.amd.updateMicrocode = true;
 
   # nix cross build support
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
   nix.extraOptions = ''
     extra-platforms = aarch64-linux arm-linux i686-linux
   '';
@@ -50,12 +80,12 @@
   hardware.uinput.enable = true;
   hardware.opentabletdriver.enable = true;
 
-  networking.firewall.allowedTCPPorts = [ 29999 ];
-  networking.firewall.allowedUDPPorts = [ 29999 ];
+  networking.firewall.allowedTCPPorts = [29999];
+  networking.firewall.allowedUDPPorts = [29999];
 
   networking.firewall.interfaces.wg-ss = {
-    allowedUDPPorts = [ 6504 ];
-    allowedTCPPorts = [ 6504 ];
+    allowedUDPPorts = [6504];
+    allowedTCPPorts = [6504];
   };
 
   environment.systemPackages = with pkgs; [
@@ -79,14 +109,14 @@
 
   # services.flatpak.enable = true;
 
-  services.xserver.videoDrivers = [ "amdgpu" "modesetting" ];
+  services.xserver.videoDrivers = ["amdgpu" "modesetting"];
 
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="amdgpu_bl1", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
   '';
 
   services.printing.enable = true;
-  services.printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin pkgs.hplip ];
+  services.printing.drivers = [pkgs.gutenprint pkgs.gutenprintBin pkgs.hplip];
 
   services.gvfs.enable = true;
 
@@ -95,10 +125,30 @@
   services.howdy.enable = true;
 
   security.pam.loginLimits = [
-    { domain = "@audio"; item = "memlock"; type = "-"; value = "unlimited"; }
-    { domain = "@audio"; item = "rtprio"; type = "-"; value = "99"; }
-    { domain = "@audio"; item = "nofile"; type = "soft"; value = "99999"; }
-    { domain = "@audio"; item = "nofile"; type = "hard"; value = "99999"; }
+    {
+      domain = "@audio";
+      item = "memlock";
+      type = "-";
+      value = "unlimited";
+    }
+    {
+      domain = "@audio";
+      item = "rtprio";
+      type = "-";
+      value = "99";
+    }
+    {
+      domain = "@audio";
+      item = "nofile";
+      type = "soft";
+      value = "99999";
+    }
+    {
+      domain = "@audio";
+      item = "nofile";
+      type = "hard";
+      value = "99999";
+    }
   ];
 
   virtualisation = {
@@ -107,7 +157,7 @@
       qemu = {
         ovmf = {
           enable = true;
-          packages = [ pkgs.OVMFFull.fd ];
+          packages = [pkgs.OVMFFull.fd];
         };
         swtpm.enable = true;
       };
@@ -123,10 +173,10 @@
   fileSystems."/mnt/ss/infra0/nas0" = {
     device = "10.11.235.1:/";
     fsType = "nfs";
-    options = [ "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" ];
+    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
   };
 
-  users.users.woze.extraGroups = [ "docker" "libvirtd" "video" "render" "vboxusers" "libvirt" "corectrl" "adbusers" ];
+  users.users.woze.extraGroups = ["docker" "libvirtd" "video" "render" "vboxusers" "libvirt" "corectrl" "adbusers"];
   home-manager.users.woze = ./home.nix;
 
   system.stateVersion = "22.11";

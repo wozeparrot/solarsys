@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ... }: {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: {
   imports = [
     ../../../../common/profiles/base.nix
   ];
@@ -16,7 +21,7 @@
   documentation.nixos.enable = false;
 
   # Remove unneeded locales
-  i18n.supportedLocales = [ (config.i18n.defaultLocale + "/UTF-8") ];
+  i18n.supportedLocales = [(config.i18n.defaultLocale + "/UTF-8")];
 
   # enable ssh
   services.openssh.enable = lib.mkForce true;
@@ -25,7 +30,7 @@
   ];
 
   # Reboot on kernel panic
-  boot.kernelParams = [ "panic=1" "boot.panic_on_fail" ];
+  boot.kernelParams = ["panic=1" "boot.panic_on_fail"];
 
   # no systemd emergency mode
   systemd.enableEmergencyMode = false;
@@ -33,7 +38,7 @@
   # Firewall
   networking.firewall.enable = true;
   networking.firewall.allowPing = true;
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [22];
 
   # cleanup
   nix.settings.auto-optimise-store = true;

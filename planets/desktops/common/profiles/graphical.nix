@@ -1,6 +1,11 @@
-{ config, pkgs, lib, inputs, ... }:
 {
-  imports = [ ./base.nix ./network.nix "${inputs.nix-gaming}/modules/pipewireLowLatency.nix" ];
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
+  imports = [./base.nix ./network.nix "${inputs.nix-gaming}/modules/pipewireLowLatency.nix"];
 
   # hardware
   hardware = {
@@ -16,7 +21,7 @@
   };
 
   programs.dconf.enable = true;
-  services.dbus.packages = with pkgs; [ dconf ];
+  services.dbus.packages = with pkgs; [dconf];
 
   xdg.portal = {
     enable = true;
@@ -141,7 +146,7 @@
   #   };
   # };
 
-  services.udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
+  services.udev.packages = [pkgs.gnome.gnome-settings-daemon];
 
   # environment
   environment = {
@@ -163,17 +168,16 @@
       gsettings-desktop-schemas
       glib
     ];
-    sessionVariables.XDG_DATA_DIRS =
-      let
-        missing-gsettings-schemas-fix = builtins.readFile "${pkgs.stdenv.mkDerivation {
-          name = "missing-gsettings-schemas-fix";
-          dontUnpack = true;
-          buildInputs = [ pkgs.gtk3 ];
-          installPhase = ''
-            printf %s "$GSETTINGS_SCHEMAS_PATH" > "$out"
-          '';
-        }}";
-      in
-      lib.mkAfter [ "${missing-gsettings-schemas-fix}" ];
+    sessionVariables.XDG_DATA_DIRS = let
+      missing-gsettings-schemas-fix = builtins.readFile "${pkgs.stdenv.mkDerivation {
+        name = "missing-gsettings-schemas-fix";
+        dontUnpack = true;
+        buildInputs = [pkgs.gtk3];
+        installPhase = ''
+          printf %s "$GSETTINGS_SCHEMAS_PATH" > "$out"
+        '';
+      }}";
+    in
+      lib.mkAfter ["${missing-gsettings-schemas-fix}"];
   };
 }

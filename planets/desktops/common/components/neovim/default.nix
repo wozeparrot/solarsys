@@ -1,16 +1,20 @@
-{ config, pkgs, lib, ... }:
-let
-  pluginGit = repo: rev: ref: pkgs.vimUtils.buildVimPluginFrom2Nix {
-    pname = "${lib.strings.sanitizeDerivationName repo}-${rev}";
-    version = rev;
-    src = builtins.fetchGit {
-      url = "https://github.com/${repo}.git";
-      inherit ref;
-      inherit rev;
-    };
-  };
-in
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  pluginGit = repo: rev: ref:
+    pkgs.vimUtils.buildVimPluginFrom2Nix {
+      pname = "${lib.strings.sanitizeDerivationName repo}-${rev}";
+      version = rev;
+      src = builtins.fetchGit {
+        url = "https://github.com/${repo}.git";
+        inherit ref;
+        inherit rev;
+      };
+    };
+in {
   programs.neovim = {
     enable = true;
     withNodeJs = false;
@@ -38,14 +42,15 @@ in
 
       # lsp language additionals
       ((zls.overrideAttrs (_: {
-        src = pkgs.fetchFromGitHub {
-          owner = "zigtools";
-          repo = "zls";
-          rev = "d72cac04ab0d048e0014294fd125a0a1db3b4845";
-          sha256 = "sha256-QsnrGY/K8Qcoikqv+8aln1+V9xel6qfD/c/Nt1cTzHQ=";
-          fetchSubmodules = true;
-        };
-      })).override
+          src = pkgs.fetchFromGitHub {
+            owner = "zigtools";
+            repo = "zls";
+            rev = "d72cac04ab0d048e0014294fd125a0a1db3b4845";
+            sha256 = "sha256-QsnrGY/K8Qcoikqv+8aln1+V9xel6qfD/c/Nt1cTzHQ=";
+            fetchSubmodules = true;
+          };
+        }))
+        .override
         {
           zig = pkgs.zigf.master-2022-09-01;
         })

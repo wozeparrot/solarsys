@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ../common/wayland
   ];
@@ -29,30 +32,28 @@
   services.greetd = {
     settings = {
       default_session = {
-        command =
-          let
-            hikari-run = pkgs.writeShellScriptBin "hikari-run" ''
-              #!/bin/sh
+        command = let
+          hikari-run = pkgs.writeShellScriptBin "hikari-run" ''
+            #!/bin/sh
 
-              export XDG_SESSION_TYPE=wayland
-              export XDG_SESSION_DESKTOP=hikari
-              export XDG_CURRENT_DESKTOP=hikari
+            export XDG_SESSION_TYPE=wayland
+            export XDG_SESSION_DESKTOP=hikari
+            export XDG_CURRENT_DESKTOP=hikari
 
-              export GDK_BACKEND=wayland
-              export MOZ_ENABLE_WAYLAND=1
-              export QT_QPA_PLATFORM=wayland-egl
-              export SDL_VIDEODRIVER=wayland
-              export _JAVA_AWT_WM_NONREPARENTING=1
-              export XCURSOR_SIZE=24
-              export NIXOS_OZONE_WL=1
+            export GDK_BACKEND=wayland
+            export MOZ_ENABLE_WAYLAND=1
+            export QT_QPA_PLATFORM=wayland-egl
+            export SDL_VIDEODRIVER=wayland
+            export _JAVA_AWT_WM_NONREPARENTING=1
+            export XCURSOR_SIZE=24
+            export NIXOS_OZONE_WL=1
 
-              systemd-cat --identifier=hikari dbus-run-session hikari
-            '';
-          in
-          "${pkgs.greetd.greetd}/bin/agreety --cmd ${hikari-run}/bin/hikari-run";
+            systemd-cat --identifier=hikari dbus-run-session hikari
+          '';
+        in "${pkgs.greetd.greetd}/bin/agreety --cmd ${hikari-run}/bin/hikari-run";
       };
     };
   };
 
-  security.pam.services.hikari-unlocker = { };
+  security.pam.services.hikari-unlocker = {};
 }

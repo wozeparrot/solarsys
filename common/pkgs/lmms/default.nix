@@ -1,37 +1,37 @@
-{ lib
-, fetchFromGitHub
-, cmake
-, qttools
-, pkg-config
-, perl
-, perlPackages
-, alsa-lib
-, fftwFloat
-, fltk13
-, fluidsynth
-, lame
-, libgig
-, libjack2
-, libpulseaudio
-, libsamplerate
-, libsndfile
-, libsoundio
-, libvorbis
-, portaudio
-, sndio
-, qtbase
-, qtx11extras
-, lv2
-, lilv
-, suil
-, flac
-, carla
-, SDL2
-, xorg
-, wine64
-, mkDerivation
+{
+  lib,
+  fetchFromGitHub,
+  cmake,
+  qttools,
+  pkg-config,
+  perl,
+  perlPackages,
+  alsa-lib,
+  fftwFloat,
+  fltk13,
+  fluidsynth,
+  lame,
+  libgig,
+  libjack2,
+  libpulseaudio,
+  libsamplerate,
+  libsndfile,
+  libsoundio,
+  libvorbis,
+  portaudio,
+  sndio,
+  qtbase,
+  qtx11extras,
+  lv2,
+  lilv,
+  suil,
+  flac,
+  carla,
+  SDL2,
+  xorg,
+  wine64,
+  mkDerivation,
 }:
-
 mkDerivation rec {
   pname = "lmms";
   version = "unstable-2022-05-04";
@@ -84,5 +84,5 @@ mkDerivation rec {
     patchShebangs ./
   '';
 
-  cmakeFlags = [ "-DWANT_SOUNDIO=OFF" ];
+  cmakeFlags = ["-DWANT_SOUNDIO=OFF"];
 }

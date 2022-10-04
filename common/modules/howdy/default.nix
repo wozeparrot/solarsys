@@ -20,12 +20,11 @@ with lib; let
     substituteInPlace $out --replace 'capture_failed = true' 'capture_failed = false'
     substituteInPlace $out --replace 'capture_successful = true' 'capture_successful = false'
   '';
-  pam-rule =
-    pkgs.lib.mkDefault (pkgs.lib.mkBefore
-      ''
+  pam-rule = pkgs.lib.mkDefault (pkgs.lib.mkBefore
+    ''
       auth sufficient pam_unix.so try_first_pass likeauth nullok
       auth sufficient ${pkgs.ss.pam-python}/lib/security/pam_python.so ${config.services.howdy.package}/lib/security/howdy/pam.py
-      '');
+    '');
 in {
   options = {
     services.howdy = {

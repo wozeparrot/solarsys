@@ -1,18 +1,18 @@
-{ lib
-, stdenv
-, fetchFromGitHub
-, cmake
-, pkg-config
-, libjack2
-, libopus
-, opusTools
-, xorg
-, alsa-lib
-, libGL
-, freetype
-, curl
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  cmake,
+  pkg-config,
+  libjack2,
+  libopus,
+  opusTools,
+  xorg,
+  alsa-lib,
+  libGL,
+  freetype,
+  curl,
 }:
-
 stdenv.mkDerivation rec {
   pname = "sonobus";
   version = "1.5.1";

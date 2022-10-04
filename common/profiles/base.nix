@@ -1,22 +1,27 @@
-{ config, pkgs, inputs, lib, ... }:
 {
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}: {
   nix = {
     package = pkgs.nixUnstable;
-    settings.system-features = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+    settings.system-features = ["nixos-test" "benchmark" "big-parallel" "kvm"];
 
-    registry =
-      let
-        nixRegistry = builtins.mapAttrs (name: v: { flake = v; })
-          (
-            lib.filterAttrs
-              (name: value: value ? outputs)
-              inputs
-          );
-      in
+    registry = let
+      nixRegistry =
+        builtins.mapAttrs (name: v: {flake = v;})
+        (
+          lib.filterAttrs
+          (name: value: value ? outputs)
+          inputs
+        );
+    in
       nixRegistry;
 
-    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-    settings.extra-sandbox-paths = [ "/bin/sh=${pkgs.bash}/bin/sh" ];
+    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+    settings.extra-sandbox-paths = ["/bin/sh=${pkgs.bash}/bin/sh"];
 
     gc = {
       automatic = lib.mkDefault true;

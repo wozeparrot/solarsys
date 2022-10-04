@@ -1,5 +1,9 @@
-{ stdenv, lib, fetchFromGitHub, rustPlatform, }:
-
+{
+  stdenv,
+  lib,
+  fetchFromGitHub,
+  rustPlatform,
+}:
 rustPlatform.buildRustPackage rec {
   pname = "pop-launcher";
   version = "47852e53cb6f637003ed6bdb178fe76cb90dff24";
@@ -12,7 +16,7 @@ rustPlatform.buildRustPackage rec {
   };
 
   cargoHash = "sha256-iHzM3sUv+D5p7+24WPAFfrOiYJEBiStj6uru+YAldxk=";
-  cargoBuildFlags = [ "-p pop-launcher-bin" ];
+  cargoBuildFlags = ["-p pop-launcher-bin"];
 
   # this doesn't actually test anything
   doCheck = false;

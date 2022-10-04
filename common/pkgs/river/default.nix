@@ -1,27 +1,27 @@
-{ lib
-, stdenv
-, fetchFromGitHub
-, zig
-, wayland
-, pkg-config
-, scdoc
-, xwayland
-, wayland-protocols
-, wlroots
-, libxkbcommon
-, pixman
-, udev
-, libevdev
-, libinput
-, libX11
-, libGL
-, makeWrapper
-, wrapGAppsHook
-, gdk-pixbuf
-, glib
-, gtk3
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  zig,
+  wayland,
+  pkg-config,
+  scdoc,
+  xwayland,
+  wayland-protocols,
+  wlroots,
+  libxkbcommon,
+  pixman,
+  udev,
+  libevdev,
+  libinput,
+  libX11,
+  libGL,
+  makeWrapper,
+  wrapGAppsHook,
+  gdk-pixbuf,
+  glib,
+  gtk3,
 }:
-
 stdenv.mkDerivation rec {
   pname = "river";
   version = "unstable-2022-05-04";
@@ -34,7 +34,7 @@ stdenv.mkDerivation rec {
     fetchSubmodules = true;
   };
 
-  nativeBuildInputs = [ zig wayland xwayland scdoc pkg-config makeWrapper wrapGAppsHook ];
+  nativeBuildInputs = [zig wayland xwayland scdoc pkg-config makeWrapper wrapGAppsHook];
 
   dontWrapGApps = true;
 
@@ -72,11 +72,11 @@ stdenv.mkDerivation rec {
   '';
 
   /*
-    Builder patch install dir into river to get default config
-    When installFlags is removed, river becomes half broken.
-    See https://github.com/ifreund/river/blob/7ffa2f4b9e7abf7d152134f555373c2b63ccfc1d/river/main.zig#L56
+  Builder patch install dir into river to get default config
+  When installFlags is removed, river becomes half broken.
+  See https://github.com/ifreund/river/blob/7ffa2f4b9e7abf7d152134f555373c2b63ccfc1d/river/main.zig#L56
   */
-  installFlags = [ "DESTDIR=$(out)" ];
+  installFlags = ["DESTDIR=$(out)"];
 
   meta = with lib; {
     homepage = "https://github.com/ifreund/river";
@@ -85,4 +85,3 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
   };
 }
-

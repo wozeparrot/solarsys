@@ -1,6 +1,9 @@
 # interactive shell config
-{ config, pkgs, ... }:
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   fishConfig = ''
     # color scheme
     # set -U fish_color_normal normal
@@ -35,8 +38,7 @@ let
 
     source ("${pkgs.starship}/bin/starship" init fish --print-full-init | psub)
   '';
-in
-{
+in {
   programs.fish = {
     enable = true;
 

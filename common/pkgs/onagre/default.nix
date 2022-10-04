@@ -1,5 +1,17 @@
-{ stdenv, lib, fetchFromGitHub, rustPlatform, cmake, expat, freetype, libxkbcommon, makeWrapper, pkg-config, pop-launcher, wayland }:
-
+{
+  stdenv,
+  lib,
+  fetchFromGitHub,
+  rustPlatform,
+  cmake,
+  expat,
+  freetype,
+  libxkbcommon,
+  makeWrapper,
+  pkg-config,
+  pop-launcher,
+  wayland,
+}:
 rustPlatform.buildRustPackage rec {
   pname = "onagre";
   version = "9764271963825045cff30fcee3fb1953290fcefb";

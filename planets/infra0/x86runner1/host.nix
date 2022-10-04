@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   networking.hostName = "x86runner1";
 
   imports = [
@@ -40,15 +40,15 @@
   # --- wireguard vpn setup ---
   networking.wg-quick.interfaces = {
     wg0 = {
-      address = [ "10.11.235.12/24" "fdbe:ef11:2358:1321::12/64" ];
-      dns = [ "10.11.235.1" "fdbe:ef11:2358:1321::1" ];
+      address = ["10.11.235.12/24" "fdbe:ef11:2358:1321::12/64"];
+      dns = ["10.11.235.1" "fdbe:ef11:2358:1321::1"];
 
       privateKeyFile = "/keys/wg_private";
 
       peers = [
         {
           publicKey = "W0yvMPgWIS/qKWKPg2x+7xkHNlmvJ1Ze4iFhTS1BkXk=";
-          allowedIPs = [ "10.11.235.0/24" "fdbe:ef11:2358:1321::/64" ];
+          allowedIPs = ["10.11.235.0/24" "fdbe:ef11:2358:1321::/64"];
           endpoint = "192.168.2.31:5553";
           persistentKeepalive = 25;
         }
@@ -81,8 +81,8 @@
       RestartSec = "5s";
     };
 
-    after = [ "network.target" "wozey-compute.service" ];
-    wantedBy = [ "multi-user.target" ];
+    after = ["network.target" "wozey-compute.service"];
+    wantedBy = ["multi-user.target"];
   };
   systemd.services."wozey-compute" = {
     enable = false;
@@ -97,8 +97,8 @@
       Group = "root";
     };
 
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" "wozey.service" ];
+    after = ["network.target"];
+    wantedBy = ["multi-user.target" "wozey.service"];
   };
 
   virtualisation.docker = {

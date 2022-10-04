@@ -1,13 +1,13 @@
-{ lib
-, stdenv
-, fetchgit
-, zig
-, river
-, wayland
-, pkg-config
-, scdoc
+{
+  lib,
+  stdenv,
+  fetchgit,
+  zig,
+  river,
+  wayland,
+  pkg-config,
+  scdoc,
 }:
-
 stdenv.mkDerivation rec {
   pname = "rivercarro";
   version = "unstable-2022-05-04";
@@ -46,4 +46,3 @@ stdenv.mkDerivation rec {
     platforms = platforms.linux;
   };
 }
-

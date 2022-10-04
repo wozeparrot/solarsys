@@ -12,8 +12,8 @@ self: super: {
 
     dontBuild = true;
     dontConfigure = true;
-    propagatedBuildInputs = [ super.wl-clipboard ];
-    makeFlags = [ "PREFIX=$(out)" ];
+    propagatedBuildInputs = [super.wl-clipboard];
+    makeFlags = ["PREFIX=$(out)"];
   };
 
   xsel = self.wl-clipboard-x11;

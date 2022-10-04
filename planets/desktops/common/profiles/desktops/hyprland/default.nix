@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ../common/wayland
   ];
@@ -24,29 +27,26 @@
   services.greetd = {
     settings = {
       default_session = {
-        command =
-          let
-            hyprland-run = pkgs.writeShellScriptBin "hyprland-run" ''
-              #!/bin/sh
+        command = let
+          hyprland-run = pkgs.writeShellScriptBin "hyprland-run" ''
+            #!/bin/sh
 
-              export XDG_SESSION_TYPE=wayland
-              export XDG_SESSION_DESKTOP=hyprland
-              export XDG_CURRENT_DESKTOP=hyprland
+            export XDG_SESSION_TYPE=wayland
+            export XDG_SESSION_DESKTOP=hyprland
+            export XDG_CURRENT_DESKTOP=hyprland
 
-              export GDK_BACKEND=wayland
-              export MOZ_ENABLE_WAYLAND=1
-              export QT_QPA_PLATFORM=wayland-egl
-              export SDL_VIDEODRIVER=wayland
-              export _JAVA_AWT_WM_NONREPARENTING=1
-              export XCURSOR_SIZE=24
-              export NIXOS_OZONE_WL=1
+            export GDK_BACKEND=wayland
+            export MOZ_ENABLE_WAYLAND=1
+            export QT_QPA_PLATFORM=wayland-egl
+            export SDL_VIDEODRIVER=wayland
+            export _JAVA_AWT_WM_NONREPARENTING=1
+            export XCURSOR_SIZE=24
+            export NIXOS_OZONE_WL=1
 
-              exec systemd-cat --identifier=hyprland dbus-run-session Hyprland
-            '';
-          in
-          "${pkgs.greetd.tuigreet}/bin/tuigreet --time --greeting 'Access is restricted to authorized personnel only.' --cmd ${hyprland-run}/bin/hyprland-run";
+            exec systemd-cat --identifier=hyprland dbus-run-session Hyprland
+          '';
+        in "${pkgs.greetd.tuigreet}/bin/tuigreet --time --greeting 'Access is restricted to authorized personnel only.' --cmd ${hyprland-run}/bin/hyprland-run";
       };
     };
   };
-
 }

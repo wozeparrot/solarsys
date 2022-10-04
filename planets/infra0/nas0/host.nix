@@ -1,11 +1,11 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   networking.hostName = "nas0";
 
   imports = [
     ../common/profiles/rpi4.nix
   ];
 
-  # --- mount disks --- 
+  # --- mount disks ---
   fileSystems = {
     "/mnt/pstore0" = {
       device = "/dev/disk/by-uuid/7591e656-ea01-4841-a6e8-fcf585be0190";
@@ -64,7 +64,7 @@
   };
 
   # --- packages ---
-  environment.systemPackages = with pkgs; [ n2n.n2n ];
+  environment.systemPackages = with pkgs; [n2n.n2n];
 
   # udev rules
   services.udev.extraRules = ''
@@ -84,7 +84,7 @@
   networking.nat = {
     enable = true;
     externalInterface = "eth0";
-    internalInterfaces = [ "wg0" "n2n0" ];
+    internalInterfaces = ["wg0" "n2n0"];
   };
 
   # dns
@@ -93,7 +93,7 @@
     enableRootTrustAnchor = true;
     settings = {
       server = {
-        interface = [ "0.0.0.0" "::0" ];
+        interface = ["0.0.0.0" "::0"];
         access-control = [
           "0.0.0.0/0 refuse"
           "::/0 refuse"
@@ -142,7 +142,7 @@
 
   # define wireguard interface
   networking.wg-quick.interfaces.wg0 = {
-    address = [ "10.11.235.1/24" "fdbe:ef11:2358:1321::1/64" ];
+    address = ["10.11.235.1/24" "fdbe:ef11:2358:1321::1/64"];
     listenPort = 5553;
 
     privateKeyFile = "/keys/wg_private";
@@ -161,27 +161,27 @@
       {
         # woztop
         publicKey = "3U2Nu7UvYIzOHPLjwKCB5iQzSNO+6hL4fTvZ+AhGHT4=";
-        allowedIPs = [ "10.11.235.99/32" "fdbe:ef11:2358:1321::99/128" ];
+        allowedIPs = ["10.11.235.99/32" "fdbe:ef11:2358:1321::99/128"];
       }
       {
         # wone
         publicKey = "DNY6opgAbjMJh8o4O7h9dXiO4BCzg+0RM4zVNvQg3xs=";
-        allowedIPs = [ "10.11.235.88/32" "fdbe:ef11:2358:1321::88/128" ];
+        allowedIPs = ["10.11.235.88/32" "fdbe:ef11:2358:1321::88/128"];
       }
       {
         # x86runner0
         publicKey = "XM6CRHIBPyAvCs8VYUmPkgT8bwX32tXnwRZJp9ztMFg=";
-        allowedIPs = [ "10.11.235.11/32" "fdbe:ef11:2358:1321::11/128" ];
+        allowedIPs = ["10.11.235.11/32" "fdbe:ef11:2358:1321::11/128"];
       }
       {
         # x86runner1
         publicKey = "EYBKX22REQWG5VmC9VeXhiwvH6Gr2FTQ35m4TDQ9Fh0=";
-        allowedIPs = [ "10.11.235.12/32" "fdbe:ef11:2358:1321::12/128" ];
+        allowedIPs = ["10.11.235.12/32" "fdbe:ef11:2358:1321::12/128"];
       }
       {
         # aaaa
         publicKey = "seZ+gvU58blS9n8dMMws/7yNMXjGVjk2Sj18zDEKBW4=";
-        allowedIPs = [ "10.11.235.89/32" "fdbe:ef11:2358:1321::89/128" ];
+        allowedIPs = ["10.11.235.89/32" "fdbe:ef11:2358:1321::89/128"];
       }
     ];
   };
@@ -196,8 +196,8 @@
       Group = "root";
     };
 
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
+    after = ["network.target"];
+    wantedBy = ["multi-user.target"];
   };
 
   systemd.services.n2n-edge = {
@@ -217,8 +217,8 @@
       Group = "root";
     };
 
-    after = [ "network.target" "n2n-supernode.service" ];
-    wantedBy = [ "multi-user.target" ];
+    after = ["network.target" "n2n-supernode.service"];
+    wantedBy = ["multi-user.target"];
   };
 
   # --- weechat ---
@@ -265,23 +265,23 @@
   # --- nfs ---
   fileSystems."/export/music" = {
     device = "/mnt/pstore0/datas/sync/music";
-    options = [ "bind" ];
+    options = ["bind"];
   };
   fileSystems."/export/anime" = {
     device = "/mnt/pstore1/datas/aninarr/anime";
-    options = [ "bind" ];
+    options = ["bind"];
   };
   fileSystems."/export/store" = {
     device = "/mnt/pstore1/datas/aninarr/store";
-    options = [ "bind" ];
+    options = ["bind"];
   };
   fileSystems."/export/books" = {
     device = "/mnt/pstore0/datas/books";
-    options = [ "bind" ];
+    options = ["bind"];
   };
   fileSystems."/export/random" = {
     device = "/mnt/pstore0/datas/export";
-    options = [ "bind" ];
+    options = ["bind"];
   };
   services.nfs.server = {
     enable = true;
@@ -320,7 +320,7 @@
   systemd.services."aninarr" = {
     description = "aninarr daemon";
 
-    path = with pkgs; [ bash ];
+    path = with pkgs; [bash];
     serviceConfig = {
       ExecStart = "${pkgs.aninarr.aninarr}/bin/aninarr";
       WorkingDirectory = "/mnt/pstore1/datas/aninarr";
@@ -330,8 +330,8 @@
       Group = "root";
     };
 
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
+    after = ["network.target"];
+    wantedBy = ["multi-user.target"];
   };
   # aninarrh
   systemd.services."aninarrh" = {
@@ -346,14 +346,14 @@
       RestartSec = "5s";
     };
 
-    after = [ "aninarr.service" ];
-    wantedBy = [ "multi-user.target" ];
+    after = ["aninarr.service"];
+    wantedBy = ["multi-user.target"];
   };
   # aninarrx
   systemd.services."aninarrx" = {
     description = "aninarrx daemon";
 
-    path = with pkgs; [ bash jq ];
+    path = with pkgs; [bash jq];
     serviceConfig = {
       ExecStart = "${pkgs.bash}/bin/bash helper.bash localhost yes";
       WorkingDirectory = "${pkgs.aninarr.aninarrx}";
@@ -361,8 +361,8 @@
       RestartSec = "5s";
     };
 
-    after = [ "aninarr.service" ];
-    wantedBy = [ "multi-user.target" ];
+    after = ["aninarr.service"];
+    wantedBy = ["multi-user.target"];
   };
 
   system.stateVersion = "21.11";

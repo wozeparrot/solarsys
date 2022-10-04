@@ -1,6 +1,8 @@
-{ pkgs, lib, ... }:
-
 {
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./components/neovim
     # ./components/helix
@@ -61,9 +63,10 @@
     # gaming stuff
     bottles
     (lutris.override {
-      extraLibraries = pkgs: with pkgs; [
-        openssl
-      ];
+      extraLibraries = pkgs:
+        with pkgs; [
+          openssl
+        ];
     })
     gamescope
     master.polymc
@@ -109,7 +112,7 @@
   programs.keychain = {
     enable = true;
     enableXsessionIntegration = false;
-    keys = [ "id_ed25519" ];
+    keys = ["id_ed25519"];
   };
 
   programs.mangohud = {
@@ -137,38 +140,40 @@
   programs.vscode = {
     enable = false;
     package = pkgs.vscodium;
-    extensions = with pkgs.vscode-extensions; [
-      antyos.openscad
-      arrterian.nix-env-selector
-      asciidoctor.asciidoctor-vscode
-      asvetliakov.vscode-neovim
-      bbenoist.nix
-      eamodio.gitlens
-      jnoortheen.nix-ide
-      mads-hartmann.bash-ide-vscode
-      matklad.rust-analyzer
-      mikestead.dotenv
-      redhat.java
-      streetsidesoftware.code-spell-checker
-      tamasfe.even-better-toml
-      tiehuis.zig
-      timonwong.shellcheck
-      vadimcn.vscode-lldb
-      yzhang.markdown-all-in-one
-    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      {
-        name = "xresources-theme";
-        publisher = "JackVandergriff";
-        version = "1.1.0";
-        sha256 = "sha256-pzs9Y6bYxG8cEjBxU2VPW9rq/VPWo/gl7JilheNJ6v8=";
-      }
-      {
-        name = "vscode-direnv";
-        publisher = "cab404";
-        version = "1.0.0";
-        sha256 = "sha256-+nLH+T9v6TQCqKZw6HPN/ZevQ65FVm2SAo2V9RecM3Y=";
-      }
-    ];
+    extensions = with pkgs.vscode-extensions;
+      [
+        antyos.openscad
+        arrterian.nix-env-selector
+        asciidoctor.asciidoctor-vscode
+        asvetliakov.vscode-neovim
+        bbenoist.nix
+        eamodio.gitlens
+        jnoortheen.nix-ide
+        mads-hartmann.bash-ide-vscode
+        matklad.rust-analyzer
+        mikestead.dotenv
+        redhat.java
+        streetsidesoftware.code-spell-checker
+        tamasfe.even-better-toml
+        tiehuis.zig
+        timonwong.shellcheck
+        vadimcn.vscode-lldb
+        yzhang.markdown-all-in-one
+      ]
+      ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          name = "xresources-theme";
+          publisher = "JackVandergriff";
+          version = "1.1.0";
+          sha256 = "sha256-pzs9Y6bYxG8cEjBxU2VPW9rq/VPWo/gl7JilheNJ6v8=";
+        }
+        {
+          name = "vscode-direnv";
+          publisher = "cab404";
+          version = "1.0.0";
+          sha256 = "sha256-+nLH+T9v6TQCqKZw6HPN/ZevQ65FVm2SAo2V9RecM3Y=";
+        }
+      ];
   };
 
   # extra services

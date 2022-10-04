@@ -1,18 +1,22 @@
-{ pkgs, config, ... }: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   networking.hostName = "nas1";
 
   imports = [
     ../common/profiles/rpi4.nix
   ];
 
-  # --- mount disks --- 
+  # --- mount disks ---
   fileSystems = {
     "/mnt/storage" = {
       device = "/dev/disk/by-uuid/b26f275b-b03d-4895-89e2-c986cab78a00";
       fsType = "xfs";
     };
   };
-  boot.supportedFilesystems = [ "ntfs" "btrfs" ];
+  boot.supportedFilesystems = ["ntfs" "btrfs"];
 
   # --- open ports ---
   networking.firewall.allowedUDPPorts = [
@@ -37,7 +41,7 @@
   ];
 
   # --- packages ---
-  environment.systemPackages = with pkgs; [ ];
+  environment.systemPackages = with pkgs; [];
 
   # --- services ---
   # docker
@@ -46,13 +50,13 @@
     containers = {
       samba = {
         image = "dperson/samba";
-        ports = [ "139:139" "445:445" ];
-        volumes = [ "/mnt/storage/public:/share" ];
-        cmd = [ "-p" "-spublic;/share;yes;no" ];
+        ports = ["139:139" "445:445"];
+        volumes = ["/mnt/storage/public:/share"];
+        cmd = ["-p" "-spublic;/share;yes;no"];
       };
       motioneye = {
         image = "ccrisan/motioneye:master-armhf";
-        ports = [ "8765:8765" "8081:8081" "8082:8082" ];
+        ports = ["8765:8765" "8081:8081" "8082:8082"];
         volumes = [
           "/etc/localtime:/etc/localtime:ro"
           "/mnt/storage/docker/motioneye/config:/etc/motioneye"
@@ -61,7 +65,7 @@
       };
       homea = {
         image = "homeassistant/raspberrypi4-homeassistant:stable";
-        extraOptions = [ "--net=host" ];
+        extraOptions = ["--net=host"];
         environment.TZ = config.time.timeZone;
         volumes = [
           "/mnt/storage/docker/homea/config:/config"
@@ -75,7 +79,7 @@
           "/mnt/storage/docker/mosquitto/data:/mosquitto/data"
           "/mnt/storage/docker/mosquitto/log:/mosquitto/log"
         ];
-        ports = [ "1883:1883" "9001:9001" ];
+        ports = ["1883:1883" "9001:9001"];
       };
       nc-db = {
         image = "mariadb:latest";
@@ -85,7 +89,7 @@
           MYSQL_USER = "user";
           MYSQL_PASSWORD = "nc1382968";
         };
-        volumes = [ "/mnt/storage/docker/nc-db:/var/lib/mysql" ];
+        volumes = ["/mnt/storage/docker/nc-db:/var/lib/mysql"];
         cmd = [
           "--character-set-server=utf8mb4"
           "--collation-server=utf8mb4_unicode_ci"
@@ -93,13 +97,13 @@
       };
       nextcloud = {
         image = "nextcloud:latest";
-        ports = [ "8080:80" ];
-        extraOptions = [ "--link=nc-db:db" ];
+        ports = ["8080:80"];
+        extraOptions = ["--link=nc-db:db"];
         volumes = [
           "/mnt/storage/public/Pictures:/photos"
           "/mnt/storage/docker/nextcloud:/var/www/html"
         ];
-        dependsOn = [ "nc-db" ];
+        dependsOn = ["nc-db"];
       };
     };
   };

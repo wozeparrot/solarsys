@@ -1,10 +1,10 @@
-{ pkgs, ... }:
-{
-  home.packages = with pkgs; [ yt-dlp ];
+{pkgs, ...}: {
+  home.packages = with pkgs; [yt-dlp];
 
   programs.mpv = {
     enable = true;
-    package = pkgs.wrapMpv
+    package =
+      pkgs.wrapMpv
       (
         pkgs.mpv-unwrapped.override {
           vapoursynthSupport = true;
@@ -12,9 +12,9 @@
       )
       {
         youtubeSupport = true;
-        scripts = with pkgs.mpvScripts; [ mpris ];
+        scripts = with pkgs.mpvScripts; [mpris];
       };
-    defaultProfiles = [ "gpu-hq" ];
+    defaultProfiles = ["gpu-hq"];
     config = {
       force-window = true;
       pause = false;

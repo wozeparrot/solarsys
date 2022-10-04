@@ -1,4 +1,10 @@
-{ pkgs, config, inputs, lib, ... }: {
+{
+  pkgs,
+  config,
+  inputs,
+  lib,
+  ...
+}: {
   imports = [
     ./base.nix
     "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image.nix"
@@ -22,7 +28,7 @@
     "/" = {
       device = "/dev/disk/by-label/NIXOS_SD";
       fsType = "ext4";
-      options = [ "relatime" ];
+      options = ["relatime"];
     };
   };
 
@@ -32,8 +38,8 @@
       inherit (prev.master) ripgrep;
       inherit (prev.master) neovim;
       pango = prev.pango.overrideAttrs (oldAttrs: {
-        outputs = [ "bin" "out" "dev" ];
-        mesonFlags = [ "-Dintrospection=disabled" "-Dgtk_doc=false" ];
+        outputs = ["bin" "out" "dev"];
+        mesonFlags = ["-Dintrospection=disabled" "-Dgtk_doc=false"];
         postInstall = "";
       });
     })

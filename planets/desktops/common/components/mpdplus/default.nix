@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   # mpd service with fft output
   services.mpd = {
     enable = true;
@@ -39,7 +38,7 @@
   # custom ncmpcpp
   programs.ncmpcpp = {
     enable = true;
-    package = pkgs.ncmpcpp.override { visualizerSupport = true; };
+    package = pkgs.ncmpcpp.override {visualizerSupport = true;};
     settings = {
       visualizer_data_source = "/tmp/mpd.fifo";
       visualizer_output_name = "Visualizer feed";
@@ -71,5 +70,5 @@
   };
 
   # glava
-  home.packages = with pkgs; [ glava ];
+  home.packages = with pkgs; [glava];
 }

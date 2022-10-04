@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   # home-manager config
   home-manager.users.woze = {
     home.packages = with pkgs; [
@@ -130,9 +133,9 @@
           margin-top = 0;
           margin-bottom = 0;
 
-          modules-left = [ "custom/launcher" "hyprland/window" "tray" ];
-          modules-center = [ "battery" "custom/powerdraw" "pulseaudio" "backlight" "cpu" "memory" "temperature" "custom/gpu-usage" "custom/gpu-usage-2" "clock" ];
-          modules-right = [ "custom/media" "custom/lock" ];
+          modules-left = ["custom/launcher" "hyprland/window" "tray"];
+          modules-center = ["battery" "custom/powerdraw" "pulseaudio" "backlight" "cpu" "memory" "temperature" "custom/gpu-usage" "custom/gpu-usage-2" "clock"];
+          modules-right = ["custom/media" "custom/lock"];
 
           # modules
           "custom/launcher" = {
@@ -162,7 +165,7 @@
             format-charging = "{capacity}% ";
             format-plugged = "{capacity}% ";
             format-alt = "{time} {icon}";
-            format-icons = [ " " " " " " " " " " ];
+            format-icons = [" " " " " " " " " "];
             tooltip = false;
           };
 
@@ -258,7 +261,7 @@
     systemd.user.targets.tray = {
       Unit = {
         Description = "Home Manager System Tray";
-        Requires = [ "graphical-session-pre.target" ];
+        Requires = ["graphical-session-pre.target"];
       };
     };
   };
@@ -266,5 +269,5 @@
   programs.xwayland.enable = true;
   services.greetd.enable = true;
 
-  security.pam.services.swaylock = { };
+  security.pam.services.swaylock = {};
 }

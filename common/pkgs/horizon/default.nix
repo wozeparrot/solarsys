@@ -1,28 +1,28 @@
-{ stdenv
-, boost
-, coreutils
-, cppzmq
-, curl
-, libepoxy
-, fetchFromGitHub
-, glib
-, glm
-, gtkmm3
-, lib
-, libarchive
-, libgit2
-, librsvg
-, libspnav
-, libuuid
-, opencascade
-, pkg-config
-, podofo
-, python3
-, sqlite
-, wrapGAppsHook
-, zeromq
+{
+  stdenv,
+  boost,
+  coreutils,
+  cppzmq,
+  curl,
+  libepoxy,
+  fetchFromGitHub,
+  glib,
+  glm,
+  gtkmm3,
+  lib,
+  libarchive,
+  libgit2,
+  librsvg,
+  libspnav,
+  libuuid,
+  opencascade,
+  pkg-config,
+  podofo,
+  python3,
+  sqlite,
+  wrapGAppsHook,
+  zeromq,
 }:
-
 stdenv.mkDerivation rec {
   pname = "horizon-eda";
   version = "2.3.90";
@@ -72,7 +72,7 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "A free EDA software to develop printed circuit boards";
     homepage = "https://horizon-eda.org";
-    maintainers = with maintainers; [ guserav ];
+    maintainers = with maintainers; [guserav];
     license = licenses.gpl3;
     platforms = platforms.linux;
   };

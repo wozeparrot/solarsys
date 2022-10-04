@@ -1,5 +1,10 @@
-{ config, pkgs, inputs, lib, ... }:
 {
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}: {
   imports = [
     ../../../../common/profiles/base.nix
     ./user.nix
