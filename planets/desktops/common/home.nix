@@ -29,6 +29,7 @@
     python3
     r128gain
     ranger
+    topydo
     unzip
     yt-dlp
 
