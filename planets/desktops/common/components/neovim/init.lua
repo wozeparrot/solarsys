@@ -179,7 +179,7 @@ local null_helpers = require("null-ls.helpers")
 local null_methods = require("null-ls.methods")
 
 local save_format = function(client)
-    if client.resolved_capabilities.document_formatting then
+    if client.server_capabilities.document_formatting then
         vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
     end
 end
