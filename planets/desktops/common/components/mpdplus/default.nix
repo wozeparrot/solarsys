@@ -32,6 +32,15 @@
   # mpdris2 for kdeconnect
   services.mpdris2 = {
     enable = true;
+    package = pkgs.mpdris2.overrideAttrs (oldAttrs: {
+      src = pkgs.fetchFromGitHub {
+        owner = "wozeparrot";
+        repo = "mpdris2";
+        rev = "89234c37416dd330bb54f199cbf6d2cf53deef47";
+        sha256 = "sha256-6nVmipRFdW+YKYMrvAjtNJtA2AMZxPTiTFbP5Zi7G2M=";
+      };
+    });
+
     notifications = false;
   };
 
