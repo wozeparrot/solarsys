@@ -43,6 +43,7 @@
 
       core.editor = "nvim";
 
+      commit.gpgsign = true;
       gpg.format = "ssh";
       user.signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKPL+OWmcGo4IlL+LUz9uEgOH8hk0JIN3DXEV8sdgxPB wozeparrot";
       gpg.ssh.allowedSignersFile = "~/.local/share/git_allowed_signers";
