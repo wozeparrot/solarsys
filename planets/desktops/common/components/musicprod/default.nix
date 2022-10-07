@@ -2,7 +2,6 @@
   home.packages = with pkgs; [
     # DAW
     ss.lmms
-    ss.zrythm
 
     # extras
     carla
