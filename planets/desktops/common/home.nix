@@ -20,7 +20,8 @@
   home.packages = with pkgs; [
     # cli/tui untilities
     appimage-run
-    bottom
+    beets-unstable
+    chromaprint
     ffmpeg
     gurk-rs
     imv
@@ -31,6 +32,7 @@
     python3
     r128gain
     ranger
+    spotdl
     topydo
     unzip
     yt-dlp
@@ -45,6 +47,7 @@
     gnome.file-roller
     gnome.gnome-disk-utility
     godot
+    jamesdsp
     keepassxc
     krita
     libreoffice
