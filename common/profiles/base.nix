@@ -95,6 +95,8 @@
   # disable manually creating users
   users.mutableUsers = false;
 
+  boot.cleanTmpDir = true;
+
   # time
   time.timeZone = "America/Toronto";
   services.timesyncd.enable = true;
