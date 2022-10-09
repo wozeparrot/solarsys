@@ -2,7 +2,7 @@
   # mpd service with fft output
   services.mpd = {
     enable = true;
-    musicDirectory = "/home/woze/mmusic";
+    musicDirectory = "/home/woze/music";
     extraConfig = ''
       audio_output {
         type "pulse"

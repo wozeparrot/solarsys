@@ -74,7 +74,21 @@
     gamescope
     master.polymc
     master.protontricks
-    master.steam # not using the normal way as we need steam from master
+    (master.steam.override {
+      extraPkgs = pkgs: with pkgs;
+        [
+          xorg.libXcursor
+          xorg.libXi
+          xorg.libXinerama
+          xorg.libXScrnSaver
+          libpng
+          libpulseaudio
+          libvorbis
+          stdenv.cc.cc.lib
+          libkrb5
+          keyutils
+        ];
+    }) # not using the normal way as we need steam from master
     master.steam-tui # ^ required settings from programs.steam.enable should be set in each hosts config
     master.steam.run # ^
     master.steamcmd # ^
