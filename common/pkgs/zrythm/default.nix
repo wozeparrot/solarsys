@@ -4,7 +4,6 @@
   fetchFromGitHub,
   SDL2,
   alsa-lib,
-  libaudec,
   bash,
   bash-completion,
   breeze-icons,
@@ -13,22 +12,25 @@
   cmake,
   curl,
   dconf,
-  libepoxy,
   fftw,
   fftwFloat,
   flex,
   glib,
+  graphviz,
   gtk4,
   gtksourceview5,
   guile,
-  graphviz,
   help2man,
-  json-glib,
   jq,
+  json-glib,
+  libadwaita,
+  libaudec,
   libbacktrace,
   libcyaml,
+  libepoxy,
   libgtop,
   libjack2,
+  libpanel,
   libpulseaudio,
   libsamplerate,
   libsndfile,
@@ -48,30 +50,30 @@
   rtaudio,
   rtmidi,
   rubberband,
+  sassc,
   serd,
   sord,
   sratom,
   texi2html,
+  vamp-plugin-sdk,
   wrapGAppsHook,
   xdg-utils,
   xxHash,
-  vamp-plugin-sdk,
   zstd,
-  libadwaita,
-  sassc,
 }:
 stdenv.mkDerivation rec {
   pname = "zrythm";
-  version = "1.0.0-alpha.30.2.1";
+  version = "1.0.0-beta.3.6.1";
 
   src = fetchFromGitHub {
     owner = pname;
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-Ozn1hn3mZXl4ZOk2un94bt2G91r4frEl1GV6cBTZJRE=";
+    sha256 = "sha256-+YPaWe/Tu29DPtsFLCi5c18nlL12DxR4md/TDWZ6ekE=";
   };
 
   nativeBuildInputs = [
+    cmake
     help2man
     jq
     libaudec
@@ -84,32 +86,33 @@ stdenv.mkDerivation rec {
     python3.pkgs.sphinx
     texi2html
     wrapGAppsHook
-    cmake
   ];
 
   buildInputs = [
     SDL2
     alsa-lib
     bash-completion
+    breeze-icons
     carla
     chromaprint
     curl
     dconf
-    libepoxy
     fftw
     fftwFloat
     flex
-    breeze-icons
     glib
+    graphviz
     gtk4
     gtksourceview5
-    graphviz
     guile
     json-glib
+    libadwaita
     libbacktrace
     libcyaml
+    libepoxy
     libgtop
     libjack2
+    libpanel
     libpulseaudio
     libsamplerate
     libsndfile
@@ -123,6 +126,7 @@ stdenv.mkDerivation rec {
     rtaudio
     rtmidi
     rubberband
+    sassc
     serd
     sord
     sratom
@@ -130,8 +134,6 @@ stdenv.mkDerivation rec {
     xdg-utils
     xxHash
     zstd
-    libadwaita
-    sassc
   ];
 
   mesonFlags = [
@@ -144,6 +146,7 @@ stdenv.mkDerivation rec {
     "-Dlsp_dsp=disabled"
     "-Db_lto=false"
     "-Ddebug=true"
+    "-Dopus=true"
   ];
 
   NIX_LDFLAGS = ''
