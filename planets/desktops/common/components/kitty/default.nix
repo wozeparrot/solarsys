@@ -33,7 +33,9 @@
       background_opacity = "0.925";
 
       hide_window_decorations = "no";
-      window_padding_width = 2;
+      window_padding_width = 8;
+
+      allow_remote_control = true;
     };
   };
 }
