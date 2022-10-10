@@ -56,17 +56,20 @@
       visualizer_fps = "60";
       visualizer_spectrum_smooth_look = "yes";
       visualizer_color = "red";
-      visualizer_look = "██";
+      visualizer_look = "▋";
 
-      user_interface = "classic";
+      user_interface = "alternative";
       startup_screen = "playlist";
       cyclic_scrolling = "yes";
       progressbar_look = "━━━";
 
-      now_playing_prefix = "> ";
+      now_playing_prefix = "$b$8>$9$/b";
+      now_playing_suffix = "$/b ";
+      current_item_prefix = "$8$u";
+      current_item_suffix = "$/u$9";
+
       song_status_format = "$b$7♫ $2%a $4⟫$3⟫ $8%t $4⟫$3⟫ $5%b ";
-      song_columns_list_format = "(6)[]{} (90)[yellow]{t|f} (4)[blue]{l}";
-      song_list_format = " $7%l  $2%t $R$5%a ";
+      song_list_format = " $2%t$9 $R$4%a$9 ";
       autocenter_mode = "yes";
       centered_cursor = "yes";
 
@@ -74,10 +77,11 @@
       jump_to_now_playing_song_at_start = "yes";
       browser_display_mode = "classic";
       playlist_display_mode = "classic";
+      search_engine_display_mode = "columns";
       selected_item_prefix = "* ";
     };
   };
 
-  # glava
-  home.packages = with pkgs; [glava];
+  # cava
+  home.packages = with pkgs; [cava];
 }
