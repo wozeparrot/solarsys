@@ -54,9 +54,10 @@
       visualizer_in_stereo = "no";
       visualizer_type = "wave";
       visualizer_fps = "60";
+      visualizer_autoscale = "yes";
       visualizer_spectrum_smooth_look = "yes";
       visualizer_color = "red";
-      visualizer_look = "▋";
+      visualizer_look = "██";
 
       user_interface = "alternative";
       startup_screen = "playlist";
@@ -79,6 +80,7 @@
       playlist_display_mode = "classic";
       search_engine_display_mode = "columns";
       selected_item_prefix = "* ";
+      media_library_primary_tag = "album_artist";
     };
   };
 
