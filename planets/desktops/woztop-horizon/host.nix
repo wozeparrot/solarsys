@@ -106,6 +106,7 @@
   programs.fuse.userAllowOther = true;
   programs.corectrl.enable = true;
   programs.adb.enable = true;
+  programs.steam.enable = true;
 
   # services.flatpak.enable = true;
 

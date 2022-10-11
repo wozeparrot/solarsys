@@ -38,7 +38,7 @@
       flake-utils.follows = "flake-utils";
     };
 
-    nix-gaming.url = "github:fufexan/nix-gaming";
+    nix-gaming.url = "github:wozeparrot/nix-gaming";
 
     nix-ld.url = "github:Mic92/nix-ld";
     nix-ld.inputs = {

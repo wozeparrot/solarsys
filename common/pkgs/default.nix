@@ -28,4 +28,20 @@ self: super: {
 
   # yt-dlp = self.python3Packages.callPackage ./yt-dlp { };
   matrix-appservice-discord = self.callPackage ./matrix-appservice-discord {};
+
+  steam = self.master.steam.override {
+    extraPkgs = pkgs: with pkgs;
+      [
+        keyutils
+        libkrb5
+        libpng
+        libpulseaudio
+        libvorbis
+        stdenv.cc.cc.lib
+        xorg.libXScrnSaver
+        xorg.libXcursor
+        xorg.libXi
+        xorg.libXinerama
+      ];
+  };
 }
