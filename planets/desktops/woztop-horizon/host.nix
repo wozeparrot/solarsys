@@ -18,7 +18,7 @@
     ../../../common/modules/howdy
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_stable;
   boot.kernelPatches = [
     {
       name = "0001-s2idle-use-microsoft-guid";
