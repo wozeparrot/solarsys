@@ -207,7 +207,8 @@
 
           "temperature" = {
             interval = 2;
-            hwmon-path = "/sys/class/hwmon/hwmon1/temp1_input";
+            hwmon-path-abs = "/sys/devices/pci0000:00/0000:00:18.3/hwmon";
+            input-filename = "temp1_input";
             format = "{temperatureC}°C ";
             on-click = "kitty btm";
             tooltip = false;
