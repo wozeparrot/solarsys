@@ -1,15 +1,16 @@
 self: super: {
   ss = rec {
+    ardour = self.callPackage ./ardour { };
     discord-canary = self.callPackage ./discord {branch = "canary";};
-    rivercarro = self.callPackage ./rivercarro {};
-    river = self.callPackage ./river {};
-    shotcut = self.libsForQt5.callPackage ./shotcut {};
-    lmms = self.libsForQt5.callPackage ./lmms {};
-    zrythm = self.callPackage ./zrythm {};
     horizon = self.callPackage ./horizon {};
-    pop-launcher = self.callPackage ./pop-launcher {};
+    lmms = self.libsForQt5.callPackage ./lmms {};
     onagre = self.callPackage ./onagre {inherit pop-launcher;};
+    pop-launcher = self.callPackage ./pop-launcher {};
+    river = self.callPackage ./river {};
+    rivercarro = self.callPackage ./rivercarro {};
+    shotcut = self.libsForQt5.callPackage ./shotcut {};
     sonobus = self.callPackage ./sonobus {};
+    zrythm = self.callPackage ./zrythm {};
     zscroll = self.callPackage ./zscroll {};
 
     matrix-conduit = self.callPackage ./matrix-conduit {};

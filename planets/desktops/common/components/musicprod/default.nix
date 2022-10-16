@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     # DAW
-    ardour
+    ss.ardour
 
     # extras
     carla
