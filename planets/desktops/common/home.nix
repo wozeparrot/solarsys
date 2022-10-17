@@ -59,6 +59,7 @@
     signal-desktop
     solvespace
     ss.horizon
+    thunderbird
     transmission-gtk
     webcord.webcord
     zathura
