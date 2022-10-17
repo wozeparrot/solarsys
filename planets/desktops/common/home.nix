@@ -73,7 +73,6 @@
         ];
     })
     gamescope
-    master.polymc
     master.protontricks
     master.steam-tui
     master.steamcmd
