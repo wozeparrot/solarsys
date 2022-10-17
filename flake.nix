@@ -73,6 +73,12 @@
     webcord.inputs = {
       nixpkgs.follows = "nixpkgs";
     };
+
+    nom.url = "github:maralorn/nix-output-monitor";
+    nom.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-utils.follows = "flake-utils";
+    };
   };
 
   outputs = inputs @ {
@@ -123,6 +129,9 @@
       };
       webcord = {
         inherit (inputs.webcord) packages;
+      };
+      nom = {
+        inherit (inputs.nom) packages;
       };
     };
 
@@ -200,6 +209,7 @@
             rsync
             rnix-lsp
             nvd
+            nom.default
 
             fish
 

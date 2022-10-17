@@ -149,7 +149,7 @@ function build_moon_output {
     local output=$3
 
     # build
-    local build_cmd="nix $NIX_EXTRA_OPTS build --no-link \".#planets.$planet.moons.$moon.core.$output\""
+    local build_cmd="nom $NIX_EXTRA_OPTS build --no-link \".#planets.$planet.moons.$moon.core.$output\""
 
     if eval "$build_cmd"; then
         nix path-info ".#planets.$planet.moons.$moon.core.$output"
