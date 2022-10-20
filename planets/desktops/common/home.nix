@@ -28,6 +28,7 @@
     iotop
     mpc_cli
     neofetch
+    nom.default
     p7zip
     python3
     r128gain
