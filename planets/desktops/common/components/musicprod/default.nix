@@ -9,44 +9,56 @@
     yabridgectl
 
     # Plugins
-    bespokesynth
-    tunefish
-    geonkick
-    padthv1
-    aeolus
-    helm
-    zyn-fusion
-    yoshimi
-    drumkv1
-    bristol
+    CHOWTapeModel
     ChowKick
-    sorcer
-    surge-XT
-    samplv1
+    delayarchitect
+    LibreArp-lv2
+    aeolus
+    aether-lv2
+    airwindows-lv2
+    artyFX
+    bespokesynth
+    boops
+    bristol
+    calf
+    cardinal
+    distrho
+    dragonfly-reverb
+    drumgizmo
+    drumkv1
+    faustPhysicalModeling
+    geonkick
+    gxmatcheq-lv2
+    gxplugins-lv2
+    helm
     industrializer
     infamousPlugins
-    distrho
-    x42-plugins
-    aether-lv2
-    mooSpace
-    drumgizmo
-    vocproc
-    talentedhack
-    gxplugins-lv2
-    swh_lv2
-    mda_lv2
-    gxmatcheq-lv2
-    rkrlv2
-    boops
-    artyFX
-    zam-plugins
-    faustPhysicalModeling
-    CHOWTapeModel
     lsp-plugins
-    calf
-    dragonfly-reverb
-    quadrafuzz
+    magnetophonDSP.CharacterCompressor
+    magnetophonDSP.CompBus
+    magnetophonDSP.LazyLimiter
+    magnetophonDSP.MBdistortion
+    magnetophonDSP.RhythmDelay
     magnetophonDSP.VoiceOfFaust
+    magnetophonDSP.faustCompressors
+    magnetophonDSP.shelfMultiBand
+    mda_lv2
+    mooSpace
+    noise-repellent
+    padthv1
+    quadrafuzz
+    rkrlv2
+    samplv1
+    sorcer
+    surge-XT
+    swh_lv2
+    talentedhack
+    tunefish
+    vocproc
+    x42-plugins
+    yoshimi
+    zam-plugins
+    zyn-fusion
   ];
 
   home.sessionVariables = {
