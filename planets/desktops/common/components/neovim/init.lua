@@ -308,6 +308,15 @@ lspconfig.denols.setup({
         lint = true,
     },
 })
+-- verilog
+lspconfig.svls.setup({
+    capabilities = capabilities,
+    on_attach = default_on_attach,
+})
+lspconfig.verible.setup({
+    capabilities = capabilities,
+    on_attach = default_on_attach,
+})
 
 ---- Treesitter Config ----
 local treesitter = require("nvim-treesitter.configs")

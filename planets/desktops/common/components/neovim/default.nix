@@ -65,6 +65,8 @@ in {
       rust-analyzer
       rustc
       sumneko-lua-language-server
+      verible
+      svls
 
       # need node 16 for copilot
       nodejs-16_x
