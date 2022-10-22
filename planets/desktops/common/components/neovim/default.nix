@@ -64,9 +64,10 @@ in {
       nodePackages.pyright
       rust-analyzer
       rustc
+      rustfmt
       sumneko-lua-language-server
-      verible
       svls
+      verible
 
       # need node 16 for copilot
       nodejs-16_x
