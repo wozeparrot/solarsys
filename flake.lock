@@ -480,11 +480,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1665439969,
-        "narHash": "sha256-CGT2sHnsPhS3qypb/8gmTCe0TEmoed1JIbbibI2vhsI=",
+        "lastModified": 1666462515,
+        "narHash": "sha256-oQTGt+cetzJk5UlMelMlrlTpzItiYB8WtmYrv/GhTaA=",
         "owner": "wozeparrot",
         "repo": "nix-gaming",
-        "rev": "304b1d70872c27c6e9a946229845ee731b498ed4",
+        "rev": "fcc5bf2e7648219eb0747255633868e3107521f5",
         "type": "github"
       },
       "original": {
