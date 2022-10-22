@@ -23,18 +23,20 @@ function visible_sleep {
 
 # prompt user for y or n
 function yes_or_no {
+    local RETURN=0
+
     if [[ -n "$ALWAYS_YES" ]]; then
-        return 0
+        return "$RETURN"
     fi
 
     local yn
-    while true; do
-        read -r -p "$* [y/n]: " yn
-        case $yn in
-            [Yy]*) return 0 ;;  
-            [Nn]*) return 1 ;;
-        esac
-    done
+    read -r -p "$* [Y/n]: " yn
+    case $yn in
+        [Yy]*) RETURN=0 ;;
+        [Nn]*) RETURN=1 ;;
+    esac
+
+    return "$RETURN"
 }
 
 # retry with exponential backoff
