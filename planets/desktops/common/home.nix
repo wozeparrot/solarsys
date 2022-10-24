@@ -33,6 +33,7 @@
     python3
     r128gain
     ranger
+    ruby
     spotdl
     topydo
     unzip
