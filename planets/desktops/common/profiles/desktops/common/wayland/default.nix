@@ -16,6 +16,7 @@
       ss.zscroll
       swappy
       swaylock-effects
+      wayvnc
       wob
       wofi
       wtype
