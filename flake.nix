@@ -65,9 +65,6 @@
     hyprpicker.url = "github:hyprwm/hyprpicker";
 
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
-    nixpkgs-wayland.inputs = {
-      nixpkgs.follows = "nixpkgs";
-    };
 
     webcord.url = "github:fufexan/webcord-flake";
     webcord.inputs = {
