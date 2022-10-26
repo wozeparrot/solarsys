@@ -45,4 +45,5 @@ self: super: {
         xorg.libXinerama
       ];
   };
+  android-tools = self.master.android-tools;
 }
