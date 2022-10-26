@@ -58,18 +58,12 @@
     };
 
     hyprland.url = "github:hyprwm/hyprland";
-    hyprland.inputs = {
-      nixpkgs.follows = "nixpkgs";
-    };
 
     hyprpicker.url = "github:hyprwm/hyprpicker";
 
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
     webcord.url = "github:fufexan/webcord-flake";
-    webcord.inputs = {
-      nixpkgs.follows = "nixpkgs";
-    };
 
     nom.url = "github:maralorn/nix-output-monitor";
     nom.inputs = {
@@ -117,15 +111,27 @@
       };
       hyprland = {
         inherit (inputs.hyprland) packages;
+        cache = {
+          substituters = ["https://hyprland.cachix.org"];
+          trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+        };
       };
       hyprpicker = {
         inherit (inputs.hyprpicker) packages;
       };
       nixpkgs-wayland = {
         inherit (inputs.nixpkgs-wayland) packages;
+        cache = {
+          substituters = ["https://nixpkgs-wayland.cachix.org"];
+          trusted-public-keys = ["nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="];
+        };
       };
       webcord = {
         inherit (inputs.webcord) packages;
+        cache = {
+          substituters = ["https://webcord.cachix.org"];
+          trusted-public-keys = ["webcord.cachix.org-1:l555jqOZGHd2C9+vS8ccdh8FhqnGe8L78QrHNn+EFEs="];
+        };
       };
       nom = {
         inherit (inputs.nom) packages;
