@@ -58,6 +58,7 @@
     nheko
     openscad
     pkgs.aninarr.aninarc
+    prismlauncher
     signal-desktop
     solvespace
     ss.horizon
