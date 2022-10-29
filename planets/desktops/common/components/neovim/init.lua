@@ -39,7 +39,6 @@ vim.cmd("set clipboard+=unnamedplus")
 vim.opt.syntax = "on"
 vim.opt.filetype = "on"
 vim.opt.termguicolors = true
-vim.cmd("set t_Co=256")
 -- map space to leader key
 vim.cmd("let mapleader=\" \"")
 vim.cmd("let maplocalleader=\" \"")
@@ -178,23 +177,30 @@ local null_ls = require("null-ls")
 local null_helpers = require("null-ls.helpers")
 local null_methods = require("null-ls.methods")
 
-local save_format = function(client)
-    if client.server_capabilities.document_formatting then
-        vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local save_format = function(client, bufnr)
+    if client.supports_method("textDocument/formatting") then
+        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            group = augroup,
+            buffer = bufnr,
+            callback = function()
+                vim.lsp.buf.format({ bufnr = bufnr })
+            end,
+        })
     end
 end
 local default_on_attach = function(client)
     save_format(client)
 end
+nnoremap("<leader>u", "<cmd>lua vim.lsp.buf.format()<CR>")
 
 null_ls.setup({
     diagnostics_format = "[#{m}] #{s} (#{c})",
     debounce = 250,
     default_timeout = 5000,
     sources = {
-        null_ls.builtins.formatting.black.with({
-            command = "black",
-        }),
+        null_ls.builtins.formatting.black,
     },
     on_attach = default_on_attach,
 })

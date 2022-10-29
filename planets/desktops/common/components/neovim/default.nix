@@ -130,7 +130,7 @@ in {
       (pluginGit "DingDean/wgsl.vim" "fbe8f0dd179aec8525d6c93bb992e409b0e4e0ee" "main")
       (pluginGit "elkowar/yuck.vim" "6dc3da77c53820c32648cf67cbdbdfb6994f4e08" "master")
       (pluginGit "lluchs/vim-wren" "713705a23bdb94ff6c29866ff4a9db089cbc2dab" "master")
-      (pluginGit "stefanos82/nelua.vim" "60e67296bce29db0c060a21c9ad5423005a8f6eb" "main")
+      (pluginGit "stefanos82/nelua.vim" "ff0a733a586ef0b48cda4999170ed4ca1653a144" "main")
       zig-vim
 
       # lsp language additionals
@@ -140,11 +140,11 @@ in {
       # copilot
       # (pluginGit "zbirenbaum/copilot.lua" "5fbe531eb53f6a782d0fed7166f8cec23d606e84" "master")
       # (pluginGit "zbirenbaum/copilot-cmp" "4a8909fd63dff71001b22a287daa3830e447de70" "master")
-      (pluginGit "github/copilot.vim" "1bfbaf5b027ee4d3d3dbc828c8bfaef2c45d132d" "release")
+      (pluginGit "github/copilot.vim" "8ba151a20bc1d7a5c72e592e51bfc925d5bbb837" "release")
       cmp-copilot
 
       # firenvim
-      (pluginGit "glacambre/firenvim" "56a49d79904921a8b4405786e12b4e12fbbf171b" "master")
+      (pluginGit "glacambre/firenvim" "2f0ee858c3eb5c9d306523cc054047eda2e6a3a2" "master")
     ];
   };
 }
