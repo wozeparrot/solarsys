@@ -116,10 +116,7 @@
 
     programs.waybar = {
       enable = true;
-      package = pkgs.nixpkgs-wayland.waybar.override {
-        swaySupport = false;
-        withMediaPlayer = true;
-      };
+      package = pkgs.nixpkgs-wayland.waybar;
       settings = [
         {
           layer = "top";
