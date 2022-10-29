@@ -42,6 +42,7 @@
       coreutils
 
       # extra utils
+      bat
       bottom
       btop
       curl
