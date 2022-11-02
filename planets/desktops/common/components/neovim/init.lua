@@ -324,6 +324,8 @@ lspconfig.verible.setup({
 })
 
 ---- Treesitter Config ----
+local parser_install_dir = vim.fn.stdpath("cache") .. "/treesitters"
+vim.fn.mkdir(parser_install_dir, "p")
 local treesitter = require("nvim-treesitter.configs")
 treesitter.setup({
     highlight = {
@@ -343,6 +345,7 @@ treesitter.setup({
         enable = true,
     },
     ensure_installed = {},
+    parser_install_dir = parser_install_dir,
 })
 -- set nvim to use treesitter folding
 vim.opt.foldmethod = "expr"
