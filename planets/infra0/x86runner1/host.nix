@@ -85,7 +85,7 @@
     wantedBy = ["multi-user.target"];
   };
   systemd.services."wozey-compute" = {
-    enable = false;
+    enable = true;
     description = "wozey.service compute daemon";
 
     serviceConfig = {
