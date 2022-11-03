@@ -589,6 +589,7 @@ function print_usage {
     ercho "  test <planet> <moon>           |  Tests <moon> in <planet>"
     ercho "  ssh <planet> <moon>            |  SSH to <moon> in <planet>"
     ercho "  satellites <planet> <moon>     |  Send satellites to <moon> in <planet>"
+    ercho "  update                         |  Updates and commits flake.lock"
     ercho "  list                           |  Lists planets and moons"
     ercho "  json                           |  Returns json of planets and moons"
     exit 1
@@ -694,6 +695,9 @@ function main {
             fi
 
             satellites "$planet" "$moon"
+            ;;
+        update)
+            nix flake update --commit-lock-file
             ;;
         list)
             list
