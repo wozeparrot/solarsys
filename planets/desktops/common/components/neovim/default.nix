@@ -71,6 +71,7 @@ in {
 
       # need node 16 for copilot
       nodejs-16_x
+      nodePackages.vscode-langservers-extracted
     ];
 
     plugins = with pkgs.vimPlugins; [

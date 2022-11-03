@@ -313,6 +313,11 @@ lspconfig.denols.setup({
         lint = true,
     },
 })
+-- html
+lspconfig.html.setup({
+    capabilities = capabilities,
+    on_attach = default_on_attach,
+})
 -- verilog
 lspconfig.svls.setup({
     capabilities = capabilities,
