@@ -54,7 +54,7 @@
     krita
     libreoffice
     libsForQt5.kdenlive
-    master.sioyek
+    sioyek
     nheko
     openscad
     pkgs.aninarr.aninarc
