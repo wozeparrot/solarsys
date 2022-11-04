@@ -52,6 +52,13 @@
       flake-utils.follows = "flake-utils";
     };
 
+    zls.url = "github:zigtools/zls";
+    zls.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-utils.follows = "flake-utils";
+      zig-overlay.follows = "zigf";
+    };
+
     stylix.url = "github:danth/stylix";
     stylix.inputs = {
       nixpkgs.follows = "nixpkgs";
@@ -102,6 +109,9 @@
       };
       zigf = {
         inherit (inputs.zigf) packages;
+      };
+      zls = {
+        inherit (inputs.zls) packages;
       };
       n2n = {
         inherit (inputs.n2n) packages;

@@ -41,19 +41,6 @@ in {
       glow
 
       # lsp language additionals
-      ((zls.overrideAttrs (_: {
-          src = pkgs.fetchFromGitHub {
-            owner = "zigtools";
-            repo = "zls";
-            rev = "d72cac04ab0d048e0014294fd125a0a1db3b4845";
-            sha256 = "sha256-QsnrGY/K8Qcoikqv+8aln1+V9xel6qfD/c/Nt1cTzHQ=";
-            fetchSubmodules = true;
-          };
-        }))
-        .override
-        {
-          zig = pkgs.zigf.master-2022-09-01;
-        })
       black
       cargo
       clang-tools
@@ -68,6 +55,7 @@ in {
       sumneko-lua-language-server
       svls
       verible
+      zls.zls
 
       # need node 16 for copilot
       nodejs-16_x
