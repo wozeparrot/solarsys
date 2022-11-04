@@ -1,0 +1,31 @@
+cpufreq_cpu_release" and "cpufreq_cpu_acquire" are only used internally by
+drivers/cpufreq/cpufreq.c currently.
+Export them so that other drivers such as the AMD P-state driver can use them as well.
+
+Signed-off-by: Perry Yuan <Perry.Yuan@amd.com>
+---
+ drivers/cpufreq/cpufreq.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/cpufreq/cpufreq.c b/drivers/cpufreq/cpufreq.c
+index 69b3d61852ac..a491fea4985e 100644
+--- a/drivers/cpufreq/cpufreq.c
++++ b/drivers/cpufreq/cpufreq.c
+@@ -262,6 +262,7 @@ void cpufreq_cpu_release(struct cpufreq_policy *policy)
+ 
+ 	cpufreq_cpu_put(policy);
+ }
++EXPORT_SYMBOL_GPL(cpufreq_cpu_release);
+ 
+ /**
+  * cpufreq_cpu_acquire - Find policy for a CPU, mark it as busy and lock it.
+@@ -291,6 +292,7 @@ struct cpufreq_policy *cpufreq_cpu_acquire(unsigned int cpu)
+ 
+ 	return policy;
+ }
++EXPORT_SYMBOL_GPL(cpufreq_cpu_acquire);
+ 
+ /*********************************************************************
+  *            EXTERNALLY AFFECTING FREQUENCY CHANGES                 *
+-- 
+2.34.1

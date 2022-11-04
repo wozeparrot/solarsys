@@ -1,4 +1,5 @@
 {
+  lib,
   config,
   pkgs,
   ...
@@ -18,7 +19,11 @@
     ../../../common/modules/howdy
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_stable;
+  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_xanmod_latest.override {
+    structuredExtraConfig = with lib.kernel; {
+      X86_AMD_PSTATE = lib.mkForce yes;
+    };
+  });
   boot.kernelPatches = [
     {
       name = "0001-s2idle-use-microsoft-guid";
@@ -41,8 +46,56 @@
       patch = ./patches/kernel/0005-s2idle-use-microsoft-guid.patch;
     }
     {
-      name = "0001-cpufreq-epp-patches";
-      patch = ./patches/kernel/0001-cpufreq-epp-patches.patch;
+      name = "0006-s2idle-use-microsoft-guid";
+      patch = ./patches/kernel/0006-s2idle-use-microsoft-guid.patch;
+    }
+    {
+      name = "0007-s2idle-use-microsoft-guid";
+      patch = ./patches/kernel/0007-s2idle-use-microsoft-guid.patch;
+    }
+    {
+      name = "0008-s2idle-use-microsoft-guid";
+      patch = ./patches/kernel/0008-s2idle-use-microsoft-guid.patch;
+    }
+    {
+      name = "0009-s2idle-use-microsoft-guid";
+      patch = ./patches/kernel/0009-s2idle-use-microsoft-guid.patch;
+    }
+    {
+      name = "0001-amd-pstate-epp";
+      patch = ./patches/kernel/0001-amd-pstate-epp.patch;
+    }
+    {
+      name = "0002-amd-pstate-epp";
+      patch = ./patches/kernel/0002-amd-pstate-epp.patch;
+    }
+    {
+      name = "0003-amd-pstate-epp";
+      patch = ./patches/kernel/0003-amd-pstate-epp.patch;
+    }
+    {
+      name = "0004-amd-pstate-epp";
+      patch = ./patches/kernel/0004-amd-pstate-epp.patch;
+    }
+    {
+      name = "0005-amd-pstate-epp";
+      patch = ./patches/kernel/0005-amd-pstate-epp.patch;
+    }
+    {
+      name = "0006-amd-pstate-epp";
+      patch = ./patches/kernel/0006-amd-pstate-epp.patch;
+    }
+    {
+      name = "0007-amd-pstate-epp";
+      patch = ./patches/kernel/0007-amd-pstate-epp.patch;
+    }
+    {
+      name = "0008-amd-pstate-epp";
+      patch = ./patches/kernel/0008-amd-pstate-epp.patch;
+    }
+    {
+      name = "0009-amd-pstate-epp";
+      patch = ./patches/kernel/0009-amd-pstate-epp.patch;
     }
     {
       name = "0001-amd-idle-dummy-wait-fix";
@@ -55,6 +108,10 @@
     {
       name = "0002-asus-wmi-gpu-fan";
       patch = ./patches/kernel/0002-asus-wmi-gpu-fan.patch;
+    }
+    {
+      name = "0001-bore-sched";
+      patch = ./patches/kernel/0001-bore-sched.patch;
     }
   ];
 

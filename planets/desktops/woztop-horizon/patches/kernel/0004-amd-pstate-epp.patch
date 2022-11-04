@@ -1,0 +1,37 @@
+This MSR can be used to check whether the CPU frequency boost state
+is enabled in the hardware control. User can change the boost state in
+the BIOS setting,amd_pstate driver will update the boost state according
+to this msr value.
+
+AMD Processor Programming Reference (PPR)
+Link: https://www.amd.com/system/files/TechDocs/40332.pdf [p1095]
+Link: https://www.amd.com/system/files/TechDocs/56569-A1-PUB.zip [p162]
+
+Signed-off-by: Perry Yuan <Perry.Yuan@amd.com>
+---
+ arch/x86/include/asm/msr-index.h | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/arch/x86/include/asm/msr-index.h b/arch/x86/include/asm/msr-index.h
+index 6674bdb096f3..e5ea1c9f747b 100644
+--- a/arch/x86/include/asm/msr-index.h
++++ b/arch/x86/include/asm/msr-index.h
+@@ -569,6 +569,7 @@
+ #define MSR_AMD_CPPC_CAP2		0xc00102b2
+ #define MSR_AMD_CPPC_REQ		0xc00102b3
+ #define MSR_AMD_CPPC_STATUS		0xc00102b4
++#define MSR_AMD_CPPC_HW_CTL		0xc0010015
+ 
+ #define AMD_CPPC_LOWEST_PERF(x)		(((x) >> 0) & 0xff)
+ #define AMD_CPPC_LOWNONLIN_PERF(x)	(((x) >> 8) & 0xff)
+@@ -579,6 +580,8 @@
+ #define AMD_CPPC_MIN_PERF(x)		(((x) & 0xff) << 8)
+ #define AMD_CPPC_DES_PERF(x)		(((x) & 0xff) << 16)
+ #define AMD_CPPC_ENERGY_PERF_PREF(x)	(((x) & 0xff) << 24)
++#define AMD_CPPC_PRECISION_BOOST_BIT   25
++#define AMD_CPPC_PRECISION_BOOST_ENABLED       BIT_ULL(AMD_CPPC_PRECISION_BOOST_BIT)
+ 
+ /* AMD Performance Counter Global Status and Control MSRs */
+ #define MSR_AMD64_PERF_CNTR_GLOBAL_STATUS	0xc0000300
+-- 
+2.34.1
