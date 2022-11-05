@@ -114,6 +114,7 @@
       patch = ./patches/kernel/0001-bore-sched.patch;
     }
   ];
+  boot.kernelParams = ["amd_pstate.epp=1"];
 
   hardware.cpu.amd.updateMicrocode = true;
 
