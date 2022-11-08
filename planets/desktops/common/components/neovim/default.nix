@@ -82,7 +82,7 @@ in {
       nvim-lspconfig
       trouble-nvim
       # treesitter
-      (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
+      nvim-treesitter.withAllGrammars
       nvim-treesitter-context
       nvim-ts-autotag
       # telescope
