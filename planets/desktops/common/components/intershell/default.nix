@@ -37,6 +37,8 @@
     set -x HISTFILESIZE 20000
 
     source ("${pkgs.starship}/bin/starship" init fish --print-full-init | psub)
+
+    complete -c nom --wraps nix
   '';
 in {
   programs.fish = {
