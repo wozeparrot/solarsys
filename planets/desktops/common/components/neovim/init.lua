@@ -56,7 +56,7 @@ nnoremap("//", "<cmd>noh<CR>")
 require("lualine").setup({
     options = {
         icons_enabled = true,
-        theme = "auto",
+        theme = "ayu_dark",
         component_separators = "⏽",
         section_separators = { left = '', right = '' },
     },
