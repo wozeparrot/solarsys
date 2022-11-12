@@ -536,11 +536,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1666462515,
-        "narHash": "sha256-oQTGt+cetzJk5UlMelMlrlTpzItiYB8WtmYrv/GhTaA=",
+        "lastModified": 1668289371,
+        "narHash": "sha256-mt7FI9Iyf1ItdXuDoVi0ny65Egbg74ywDXS9gF3FTTo=",
         "owner": "wozeparrot",
         "repo": "nix-gaming",
-        "rev": "fcc5bf2e7648219eb0747255633868e3107521f5",
+        "rev": "1917a823ea9e6083ad016e07d73011d3b4ccfcc5",
         "type": "github"
       },
       "original": {
