@@ -31,6 +31,14 @@ _: {
         to = 29999;
       }
     ];
+
+    hosts = {
+      "0.0.0.0" = [
+        "sg-public-data-api.hoyoverse.com"
+        "log-upload-os.hoyoverse.com"
+        "overseauspider.yuanshen.com"
+      ];
+    };
   };
 
   services.resolved.enable = true;
