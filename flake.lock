@@ -478,11 +478,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1661301827,
-        "narHash": "sha256-wMzr0vrSLiVzti5OONQtH9pNP36ZywESV+PULWF2T2k=",
+        "lastModified": 1668529862,
+        "narHash": "sha256-czUC2Tpa5SkNjCQcfIjqERDyoe+cO2f4IFc40sGpY7k=",
         "ref": "main",
-        "rev": "c2d972d1ba38ec9b7b8562881a373df119831f12",
-        "revCount": 2,
+        "rev": "c2613a069cd9ca1a86d42f885dd4329ba623811a",
+        "revCount": 4,
         "type": "git",
         "url": "ssh://git@github.com/wozeparrot/n2n-nix.git"
       },
@@ -495,11 +495,11 @@
     "n2n_2": {
       "flake": false,
       "locked": {
-        "lastModified": 1657371499,
-        "narHash": "sha256-W1N7lUKWAu4gymB8dgaHVR9ygyswoLUx9V6cTnCVovE=",
+        "lastModified": 1668468894,
+        "narHash": "sha256-jLTmUsE/lpx8nR+e9P9Pfj0tJdo0hBrt6fFqj285dXQ=",
         "owner": "ntop",
         "repo": "n2n",
-        "rev": "06c489fd8ad42d6c025beaea0fd62d7d4d948c31",
+        "rev": "ec15ebb80c3a656d368adf4b1b25701b8758b4f1",
         "type": "github"
       },
       "original": {
