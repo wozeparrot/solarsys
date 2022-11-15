@@ -136,7 +136,6 @@
     plugins = with pkgs.obs-studio-plugins; [
       obs-gstreamer
       obs-move-transition
-      obs-websocket
       wlrobs
     ];
   };
