@@ -57,6 +57,10 @@ in {
       verible
       zls.zls
 
+      # formatters
+      alejandra
+      stylua
+
       # need node 16 for copilot
       nodejs-16_x
       nodePackages.vscode-langservers-extracted

@@ -40,8 +40,8 @@ vim.opt.syntax = "on"
 vim.opt.filetype = "on"
 vim.opt.termguicolors = true
 -- map space to leader key
-vim.cmd("let mapleader=\" \"")
-vim.cmd("let maplocalleader=\" \"")
+vim.cmd('let mapleader=" "')
+vim.cmd('let maplocalleader=" "')
 nnoremap("<space>", "<nop>")
 
 ---- Keybindings ----
@@ -58,7 +58,7 @@ require("lualine").setup({
         icons_enabled = true,
         theme = "ayu_dark",
         component_separators = "⏽",
-        section_separators = { left = '', right = '' },
+        section_separators = { left = "", right = "" },
     },
     sections = {
         lualine_a = { "mode" },
@@ -71,7 +71,7 @@ require("lualine").setup({
             {
                 "diagnostics",
                 sources = { "nvim_lsp" },
-                symbols = { error = "", warn = "", info = "", hint = "" }
+                symbols = { error = "", warn = "", info = "", hint = "" },
             },
         },
         lualine_x = {
@@ -88,7 +88,7 @@ require("lualine").setup({
             "encoding",
         },
         lualine_y = {
-            "progress"
+            "progress",
         },
         lualine_z = {
             "location",
@@ -133,23 +133,23 @@ require("bufferline").setup({
         enforce_regular_tabs = true,
         always_show_bufferline = true,
         offsets = { { filetype = "NvimTree", text = "File Explorer", text_align = "left" } },
-        sort_by = 'extension',
+        sort_by = "extension",
         diagnostics = "nvim_lsp",
         diagnostics_update_in_insert = true,
         diagnostics_indicator = function(count, level, diagnostics_dict, context)
             local s = ""
             for e, n in pairs(diagnostics_dict) do
                 local sym = e == "error" and "" or (e == "warning" and "" or "")
-                if (sym ~= "") then
+                if sym ~= "" then
                     s = s .. " " .. n .. sym
                 end
             end
             return s
         end,
         numbers = function(opts)
-            return string.format('%s·%s', opts.raise(opts.id), opts.lower(opts.ordinal))
+            return string.format("%s·%s", opts.raise(opts.id), opts.lower(opts.ordinal))
         end,
-    }
+    },
 })
 nnoremap("<leader>bn", "<cmd>BufferLineCycleNext<CR>")
 nnoremap("<leader>bm", "<cmd>BufferLineCyclePrev<CR>")
@@ -174,8 +174,6 @@ vim.g.c_syntax_for_h = 1
 
 ---- LSP Config ----
 local null_ls = require("null-ls")
-local null_helpers = require("null-ls.helpers")
-local null_methods = require("null-ls.methods")
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local save_format = function(client, bufnr)
@@ -200,7 +198,9 @@ null_ls.setup({
     debounce = 250,
     default_timeout = 5000,
     sources = {
+        null_ls.builtins.formatting.alejandra,
         null_ls.builtins.formatting.black,
+        null_ls.builtins.formatting.stylua,
     },
     on_attach = default_on_attach,
 })
@@ -235,8 +235,8 @@ nnoremap("<leader>lk", "<cmd>lua require('lspsaga.diagnostic').show_cursor_diagn
 nnoremap("<leader>ca", "<cmd>lua require('lspsaga.codeaction').code_action()<CR>")
 
 --- setup language servers ---
-local lspconfig = require('lspconfig')
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local lspconfig = require("lspconfig")
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- zig
 lspconfig.zls.setup({
@@ -294,7 +294,7 @@ lspconfig.jdtls.setup({
     on_attach = default_on_attach,
     cmd = { "jdt-language-server", "-data", "/home/woze/.cache/jdtls/workspace" },
     init_options = {
-        workspace = "/home/woze/.cache/jdtls/workspace"
+        workspace = "/home/woze/.cache/jdtls/workspace",
     },
 })
 -- bash
@@ -343,7 +343,7 @@ treesitter.setup({
             init_selection = "gnn",
             node_incremental = "grn",
             node_decremental = "grm",
-            scope_incremental = "grb"
+            scope_incremental = "grb",
         },
     },
     autotag = {
@@ -431,7 +431,9 @@ require("nvim-autopairs").setup({})
 
 ---- nvim-cmp Config ----
 local has_words_before = function()
-    if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+    if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+        return false
+    end
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 end
@@ -463,28 +465,28 @@ cmp.setup({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         }),
-        ['<CR>'] = cmp.mapping.confirm({
+        ["<CR>"] = cmp.mapping.confirm({
             select = true,
         }),
-        ['<Tab>'] = cmp.mapping(function(fallback)
+        ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() and has_words_before() then
                 cmp.select_next_item()
-            elseif vim.fn['vsnip#available'](1) == 1 then
+            elseif vim.fn["vsnip#available"](1) == 1 then
                 feedkey("<Plug>(vsnip-expand-or-jump)", "")
             else
                 fallback()
             end
-        end, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif vim.fn['vsnip#available'](-1) == 1 then
+            elseif vim.fn["vsnip#available"](-1) == 1 then
                 feedkey("<Plug>(vsnip-jump-prev)", "")
             end
-        end, { 'i', 's' }),
+        end, { "i", "s" }),
     }),
     completion = {
-        completeopt = 'menu,menuone,noinsert',
+        completeopt = "menu,menuone,noinsert",
     },
     formatting = {
         format = function(entry, vim_item)
@@ -497,7 +499,7 @@ cmp.setup({
                 path = "[Path]",
                 crates = "[Crates]",
                 buffer = "[Buffer]",
-                copilot = "[Copilot]"
+                copilot = "[Copilot]",
             })[entry.source.name]
 
             return vim_item
@@ -508,11 +510,13 @@ local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { text = "" } }))
 
 ---- indent-blankline Config ----
-vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = function()
-    vim.defer_fn(function()
-        vim.cmd("highlight IndentBlankline guifg=#151510 gui=nocombine")
-    end, 100)
-end })
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+    callback = function()
+        vim.defer_fn(function()
+            vim.cmd("highlight IndentBlankline guifg=#151510 gui=nocombine")
+        end, 100)
+    end,
+})
 require("indent_blankline").setup({
     char_highlight_list = { "IndentBlankline" },
     show_current_context = true,
