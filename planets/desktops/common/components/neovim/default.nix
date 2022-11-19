@@ -133,7 +133,7 @@ in {
       # copilot
       # (pluginGit "zbirenbaum/copilot.lua" "5fbe531eb53f6a782d0fed7166f8cec23d606e84" "master")
       # (pluginGit "zbirenbaum/copilot-cmp" "4a8909fd63dff71001b22a287daa3830e447de70" "master")
-      (pluginGit "github/copilot.vim" "8ba151a20bc1d7a5c72e592e51bfc925d5bbb837" "release")
+      (pluginGit "github/copilot.vim" "5a411d19ce7334ab10ba12516743fc25dad363fa" "release")
       cmp-copilot
 
       # firenvim
