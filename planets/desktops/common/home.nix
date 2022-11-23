@@ -68,7 +68,7 @@
     zathura
 
     # gaming stuff
-    bottles
+    master.bottles
     (lutris.override {
       extraLibraries = pkgs:
         with pkgs; [
