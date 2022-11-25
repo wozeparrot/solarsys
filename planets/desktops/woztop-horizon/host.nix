@@ -225,8 +225,10 @@
       onShutdown = "shutdown";
     };
 
-    docker.enable = true;
-    anbox.enable = false;
+    docker = {
+      enable = true;
+      enableOnBoot = false;
+    };
   };
 
   fileSystems."/mnt/ss/infra0/nas0" = {
