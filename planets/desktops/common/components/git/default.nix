@@ -1,6 +1,4 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [gh];
-
   programs.git = {
     enable = true;
 
@@ -23,9 +21,9 @@
 
     lfs.enable = true;
 
-    delta = {
+    difftastic = {
       enable = true;
-      options.features = "decorations side-by-side line-numbers";
+      background = "dark";
     };
 
     extraConfig = {
@@ -50,5 +48,16 @@
 
       init.defaultBranch = "main";
     };
+  };
+
+  programs.gh = {
+    enable = true;
+    settings = {
+      git_protocol = "ssh";
+    };
+  };
+
+  programs.gitui = {
+    enable = true;
   };
 }
