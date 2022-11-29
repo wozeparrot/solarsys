@@ -60,6 +60,16 @@
       5070 # aninarr
       5071 # aninarrh
       5072 # aninarr web dir
+
+      # seaweedfs
+      9301
+      19301
+      9302
+      19302
+      9311
+      19311
+      9312
+      19312
     ];
   };
 
@@ -315,55 +325,185 @@
     guiAddress = "0.0.0.0:8384";
   };
 
+  # --- seaweedfs ---
+  containers.seaweedfs-brain = {
+    autoStart = true;
+    ephemeral = true;
+    bindMounts = {
+      "/var/lib/seaweedfs" = {
+        hostPath = "/mnt/pstore0/seaweedfs";
+        isReadOnly = false;
+      };
+    };
+    config = {config, ...}: {
+      # oneshot systemd service to create required directories
+      systemd.services."seaweedfs-preinit" = {
+        description = "Preinit stuff for seaweedfs";
+
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "${pkgs.coreutils}/bin/mkdir -p /var/lib/seaweedfs/master/";
+        };
+
+        after = ["network.target"];
+        wantedBy = ["multi-user.target"];
+      };
+      # -- seaweedfs master --
+      environment.etc."seaweedfs/master.toml".text = ''
+        [master.maintenance]
+        scripts = """
+          lock
+          ec.encode -fullPercent=95 -quietFor=1h
+          ec.rebuild -force
+          ec.balance -force
+          volume.deleteEmpty -quietFor=24h -force
+          volume.balance -force
+          volume.fix.replication
+          s3.clean.uploads -timeAgo=24h
+          unlock
+        """
+        sleep_minutes = 17
+
+        [master.sequencer]
+        type = "raft"
+
+        [master.volume_growth]
+        copy_1 = 7
+        copy_2 = 6
+        copy_3 = 3
+        copy_other = 1
+      '';
+      systemd.services."seaweedfs-master" = {
+        description = "seaweedfs master server";
+
+        serviceConfig = {
+          ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed master -ip 10.11.235.1 -port 9301 -mdir '/var/lib/seaweedfs/master/' -volumeSizeLimitMB=4096";
+          Restart = "on-failure";
+          RestartSec = "10s";
+        };
+
+        after = ["network.target" "seaweedfs-preinit.service"];
+        wantedBy = ["multi-user.target"];
+      };
+
+      # -- seaweedfs filer --
+      environment.etc."seaweedfs/filer.toml".text = ''
+        [filer.options]
+        recursive_delete = false
+
+        [sqlite]
+        enabled = true
+        dbFile = "/var/lib/seaweedfs/filer.db"
+      '';
+      systemd.services."seaweedfs-filer" = {
+        description = "seaweedfs filer server";
+
+        serviceConfig = {
+          ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed filer -ip 10.11.235.1 -port 9302 -master '127.0.0.1:9301' -encryptVolumeData";
+          Restart = "on-failure";
+          RestartSec = "10s";
+        };
+
+        after = ["network.target" "seaweedfs-master.service" "seaweedfs-preinit.service"];
+        wantedBy = ["multi-user.target"];
+      };
+
+      system.stateVersion = "22.11";
+    };
+  };
+  containers.seaweedfs-node = {
+    autoStart = true;
+    ephemeral = true;
+    bindMounts = {
+      "/var/lib/seaweedfs/data/pstore0" = {
+        hostPath = "/mnt/pstore0/seaweedfs/volume";
+        isReadOnly = false;
+      };
+      "/var/lib/seaweedfs/data/pstore1" = {
+        hostPath = "/mnt/pstore1/seaweedfs/volume";
+        isReadOnly = false;
+      };
+    };
+    config = {config, ...}: {
+      # -- seaweedfs volume servers --
+      systemd.services."seaweedfs-volume-pstore0" = {
+        description = "seaweedfs volume server";
+
+        serviceConfig = {
+          ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed volume -ip 10.11.235.1 -port 9311 -mserver '127.0.0.1:9301' -index leveldb -max 70 -dir /var/lib/seaweedfs/data/pstore0/";
+          Restart = "on-failure";
+          RestartSec = "10s";
+        };
+
+        after = ["network.target"];
+        wantedBy = ["multi-user.target"];
+      };
+      systemd.services."seaweedfs-volume-pstore1" = {
+        description = "seaweedfs volume server";
+
+        serviceConfig = {
+          ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed volume -ip 10.11.235.1 -port 9312 -mserver '127.0.0.1:9301' -index leveldb -max 0 -dir /var/lib/seaweedfs/data/pstore1/";
+          Restart = "on-failure";
+          RestartSec = "10s";
+        };
+
+        after = ["network.target"];
+        wantedBy = ["multi-user.target"];
+      };
+
+      system.stateVersion = "22.11";
+    };
+  };
+
   # --- aninarr ---
   # aninarr
-  systemd.services."aninarr" = {
-    description = "aninarr daemon";
-
-    path = with pkgs; [bash];
-    serviceConfig = {
-      ExecStart = "${pkgs.aninarr.aninarr}/bin/aninarr";
-      WorkingDirectory = "/mnt/pstore1/datas/aninarr";
-      Restart = "always";
-      RestartSec = "5s";
-      User = "root";
-      Group = "root";
-    };
-
-    after = ["network.target"];
-    wantedBy = ["multi-user.target"];
-  };
-  # aninarrh
-  systemd.services."aninarrh" = {
-    description = "aninarrh daemon";
-
-    serviceConfig = {
-      ExecStart = "${pkgs.aninarr.aninarrh}/bin/aninarrh localhost 5071";
-      WorkingDirectory = "${pkgs.aninarr.aninarrh}";
-      StandardOutput = "inherit";
-      StandardError = "inherit";
-      Restart = "always";
-      RestartSec = "5s";
-    };
-
-    after = ["aninarr.service"];
-    wantedBy = ["multi-user.target"];
-  };
-  # aninarrx
-  systemd.services."aninarrx" = {
-    description = "aninarrx daemon";
-
-    path = with pkgs; [bash jq];
-    serviceConfig = {
-      ExecStart = "${pkgs.bash}/bin/bash helper.bash localhost yes";
-      WorkingDirectory = "${pkgs.aninarr.aninarrx}";
-      Restart = "always";
-      RestartSec = "5s";
-    };
-
-    after = ["aninarr.service"];
-    wantedBy = ["multi-user.target"];
-  };
+  # systemd.services."aninarr" = {
+  #   description = "aninarr daemon";
+  #
+  #   path = with pkgs; [bash];
+  #   serviceConfig = {
+  #     ExecStart = "${pkgs.aninarr.aninarr}/bin/aninarr";
+  #     WorkingDirectory = "/mnt/pstore1/datas/aninarr";
+  #     Restart = "always";
+  #     RestartSec = "5s";
+  #     User = "root";
+  #     Group = "root";
+  #   };
+  #
+  #   after = ["network.target"];
+  #   wantedBy = ["multi-user.target"];
+  # };
+  # # aninarrh
+  # systemd.services."aninarrh" = {
+  #   description = "aninarrh daemon";
+  #
+  #   serviceConfig = {
+  #     ExecStart = "${pkgs.aninarr.aninarrh}/bin/aninarrh localhost 5071";
+  #     WorkingDirectory = "${pkgs.aninarr.aninarrh}";
+  #     StandardOutput = "inherit";
+  #     StandardError = "inherit";
+  #     Restart = "always";
+  #     RestartSec = "5s";
+  #   };
+  #
+  #   after = ["aninarr.service"];
+  #   wantedBy = ["multi-user.target"];
+  # };
+  # # aninarrx
+  # systemd.services."aninarrx" = {
+  #   description = "aninarrx daemon";
+  #
+  #   path = with pkgs; [bash jq];
+  #   serviceConfig = {
+  #     ExecStart = "${pkgs.bash}/bin/bash helper.bash localhost yes";
+  #     WorkingDirectory = "${pkgs.aninarr.aninarrx}";
+  #     Restart = "always";
+  #     RestartSec = "5s";
+  #   };
+  #
+  #   after = ["aninarr.service"];
+  #   wantedBy = ["multi-user.target"];
+  # };
 
   system.stateVersion = "21.11";
 }
