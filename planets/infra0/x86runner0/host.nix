@@ -70,86 +70,6 @@
   };
 
   # --- containers ---
-  containers.seaweedfs-brain = {
-    autoStart = true;
-    config = {config, ...}: {
-      # oneshot systemd service to create /var/lib/seaweedfs
-      systemd.services."seaweedfs-preinit" = {
-        description = "Preinit stuff for seaweedfs";
-
-        serviceConfig = {
-          Type = "oneshot";
-          ExecStart = "${pkgs.coreutils}/bin/mkdir -p /var/lib/seaweedfs/master/";
-        };
-
-        wantedBy = ["multi-user.target"];
-      };
-
-      # -- seaweedfs master --
-      environment.etc."seaweedfs/master.toml".text = ''
-        [master.maintenance]
-        scripts = """
-          lock
-          ec.encode -fullPercent=95 -quietFor=1h
-          ec.rebuild -force
-          ec.balance -force
-          volume.deleteEmpty -quietFor=24h -force
-          volume.balance -force
-          volume.fix.replication
-          unlock
-        """
-        sleep_minutes = 17
-
-        [master.sequencer]
-        type = "raft"
-
-        [master.volume_growth]
-        copy_1 = 7
-        copy_2 = 6
-        copy_3 = 3
-        copy_other = 1
-      '';
-      systemd.services."seaweedfs-master" = {
-        description = "seaweedfs master server";
-
-        serviceConfig = {
-          ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed master -ip 10.11.235.11 -port 9301 -mdir '/var/lib/seaweedfs/master/'";
-          Restart = "always";
-          RestartSec = "10s";
-        };
-
-        after = ["network.target" "seaweedfs-preinit.service"];
-        wantedBy = ["multi-user.target"];
-      };
-
-      # -- seaweedfs filer --
-      environment.etc."seaweedfs/filer.toml".text = ''
-        [filer.options]
-        recursive_delete = false
-
-        [leveldb2]
-        enabled = false
-
-        [leveldb3]
-        enabled = true
-        dir = "/var/lib/seaweedfs/filerldb3/"
-      '';
-      systemd.services."seaweedfs-filer" = {
-        description = "seaweedfs filer server";
-
-        serviceConfig = {
-          ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed filer -ip 10.11.235.11 -port 9302 -master '127.0.0.1:9301'";
-          Restart = "always";
-          RestartSec = "10s";
-        };
-
-        after = ["network.target" "seaweedfs-master.service" "seaweedfs-preinit.service"];
-        wantedBy = ["multi-user.target"];
-      };
-
-      system.stateVersion = "22.11";
-    };
-  };
   containers.seaweedfs-node = {
     autoStart = true;
     bindMounts."/var/lib/seaweedfs/data" = {
@@ -162,7 +82,7 @@
         description = "seaweedfs volume server";
 
         serviceConfig = {
-          ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed volume -ip 10.11.235.11 -port 9311 -mserver '127.0.0.1:9301' -index leveldb -max 12 -dir /var/lib/seaweedfs/data/";
+          ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed volume -ip 10.11.235.11 -port 9311 -mserver '10.11.235.1:9301' -index leveldb -max 12 -dir /var/lib/seaweedfs/data/";
           Restart = "always";
           RestartSec = "10s";
         };
