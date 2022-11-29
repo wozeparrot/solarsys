@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  home.packages = with pkgs; [
+    git-branchless
+  ];
+
   programs.git = {
     enable = true;
 
