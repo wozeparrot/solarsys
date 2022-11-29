@@ -23,7 +23,7 @@
         format "22050:16:2"
       }
 
-      replaygain "track"
+      replaygain "auto"
 
       auto_update "yes"
     '';
