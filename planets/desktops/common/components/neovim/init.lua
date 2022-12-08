@@ -171,6 +171,12 @@ nnoremap("<leader>9", "<cmd>BufferLineGoToBuffer 9<CR>")
 vim.cmd("autocmd filetype nix setlocal tabstop=2 shiftwidth=2 softtabstop=2")
 -- c
 vim.g.c_syntax_for_h = 1
+-- endron
+vim.filetype.add({
+    extension = {
+        ["edr"] = "endron",
+    },
+})
 
 ---- LSP Config ----
 local null_ls = require("null-ls")
@@ -352,6 +358,13 @@ treesitter.setup({
     ensure_installed = {},
     parser_install_dir = parser_install_dir,
 })
+local treesitter_parsers = require("nvim-treesitter.parsers").get_parser_configs()
+treesitter_parsers.endron = {
+    install_info = {
+        url = "~/projects/enqy/tree-sitter-endron",
+        files = { "src/parser.c" },
+    },
+}
 -- set nvim to use treesitter folding
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
