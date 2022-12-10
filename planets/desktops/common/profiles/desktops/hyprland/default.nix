@@ -24,6 +24,16 @@
     '')
   ];
 
+  xdg.portal = {
+    extraPortals = [
+      (pkgs.xdph.xdg-desktop-portal-hyprland.override {
+        hyprland-share-picker = pkgs.xdph.hyprland-share-picker.override {
+          hyprland = pkgs.hyprland.hyprland;
+        };
+      })
+    ];
+  };
+
   services.greetd = {
     settings = {
       default_session = {

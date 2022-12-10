@@ -26,7 +26,6 @@
   xdg.portal = {
     enable = true;
     wlr = {
-      enable = true;
       settings = {
         screencast = {
           choose_type = "simple";

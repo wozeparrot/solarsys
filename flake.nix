@@ -68,6 +68,8 @@
 
     hyprpicker.url = "github:hyprwm/hyprpicker";
 
+    xdph.url = "github:hyprwm/xdg-desktop-portal-hyprland";
+
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
     webcord.url = "github:fufexan/webcord-flake";
@@ -128,6 +130,9 @@
       };
       hyprpicker = {
         inherit (inputs.hyprpicker) packages;
+      };
+      xdph = {
+        inherit (inputs.xdph) packages;
       };
       nixpkgs-wayland = {
         inherit (inputs.nixpkgs-wayland) packages;
