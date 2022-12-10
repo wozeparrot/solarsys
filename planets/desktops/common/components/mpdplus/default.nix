@@ -4,6 +4,9 @@
     enable = true;
     musicDirectory = "/home/woze/music";
     extraConfig = ''
+      bind_to_address "/tmp/mpd.socket"
+      bind_to_address "10.11.235.99"
+
       audio_output {
         type "pulse"
         name "pulse audio"
@@ -49,6 +52,8 @@
     enable = true;
     package = pkgs.ncmpcpp.override {visualizerSupport = true;};
     settings = {
+      mpd_host = "/tmp/mpd.socket";
+
       visualizer_data_source = "/tmp/mpd.fifo";
       visualizer_output_name = "Visualizer feed";
       visualizer_in_stereo = "no";

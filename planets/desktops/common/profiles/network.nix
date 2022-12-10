@@ -11,26 +11,33 @@ _: {
     resolvconf.enable = false;
 
     firewall.enable = true;
-    firewall.allowedUDPPortRanges = [
-      {
-        from = 1714;
-        to = 1764;
-      }
-      {
-        from = 29999;
-        to = 29999;
-      }
-    ];
-    firewall.allowedTCPPortRanges = [
-      {
-        from = 1714;
-        to = 1764;
-      }
-      {
-        from = 29999;
-        to = 29999;
-      }
-    ];
+
+    firewall.interfaces = let
+      fw_config = {
+        allowedUDPPortRanges = [
+          {
+            from = 1714;
+            to = 1764;
+          } # kdeconnect
+        ];
+        allowedTCPPortRanges = [
+          {
+            from = 1714;
+            to = 1764;
+          } # kdeconnect
+        ];
+        allowedTCPPorts = [
+          6600 # mpd
+          29999 # extra
+        ];
+        allowedUDPPorts = [
+          29999 # extra
+        ];
+      };
+    in {
+      solarsys-away = fw_config;
+      solarsys-home = fw_config;
+    };
 
     hosts = {
       "0.0.0.0" = [
