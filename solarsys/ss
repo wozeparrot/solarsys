@@ -66,31 +66,6 @@ function retry {
     done
 }
 
-# run a command and show a progress bar using ⣾⣽⣻⢿⡿⣟⣯⣷ while a command is running
-function run_with_progress {
-    local cmd="$1"
-    local args="${*:2}"
-
-    # run in background and get pid
-    eval "$cmd" "$args" &
-    local pid=$!
-
-    # show the progress bar
-    local bar="⣾⣽⣻⢿⡿⣟⣯⣷"
-    local i=0
-    while ps "$pid" >/dev/null; do
-        printf "\r[%s] %s" "${bar:i:1}" "$cmd"
-        i=$((i + 1))
-        if [[ "$i" -ge "${#bar}" ]]; then
-            i=0
-        fi
-        sleep 0.1
-    done
-
-    wait "$pid"
-    printf "\r[✓] %s\n" "$cmd"
-}
-
 # --- script helper functions ---
 # shortcut for nix eval --json --impure --expr
 function nee { nix eval --json --impure --expr "$1"; }
