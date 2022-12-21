@@ -40,12 +40,6 @@
 
     nix-gaming.url = "github:wozeparrot/nix-gaming";
 
-    nix-ld.url = "github:Mic92/nix-ld";
-    nix-ld.inputs = {
-      nixpkgs.follows = "nixpkgs";
-      utils.follows = "flake-utils";
-    };
-
     zigf.url = "github:mitchellh/zig-overlay";
     zigf.inputs = {
       nixpkgs.follows = "nixpkgs";
@@ -105,9 +99,6 @@
           substituters = ["https://nix-gaming.cachix.org"];
           trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
         };
-      };
-      nix-ld = {
-        modules = inputs.nix-ld.nixosModules;
       };
       zigf = {
         inherit (inputs.zigf) packages;
@@ -266,7 +257,6 @@
           makeDesktopModules = pkgs: hostFile:
             [
               home-manager.nixosModules.home-manager
-              external.nix-ld.modules.nix-ld
               external.stylix.modules.stylix
             ]
             ++ makeModules pkgs hostFile;

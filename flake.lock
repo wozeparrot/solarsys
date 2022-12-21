@@ -692,29 +692,6 @@
         "type": "github"
       }
     },
-    "nix-ld": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "utils": [
-          "flake-utils"
-        ]
-      },
-      "locked": {
-        "lastModified": 1671467851,
-        "narHash": "sha256-0aXxARYr6EDMW+fOOPUxB0IIItP1bxVljSc100RRAeo=",
-        "owner": "Mic92",
-        "repo": "nix-ld",
-        "rev": "3210f71f0171b491b88bbb099effc5d3c7ef99e9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Mic92",
-        "repo": "nix-ld",
-        "type": "github"
-      }
-    },
     "nix-pypi-fetcher": {
       "flake": false,
       "locked": {
@@ -1020,7 +997,6 @@
         "master": "master",
         "n2n": "n2n",
         "nix-gaming": "nix-gaming",
-        "nix-ld": "nix-ld",
         "nixpkgs": [
           "unstable"
         ],

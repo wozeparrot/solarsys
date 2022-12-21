@@ -19,6 +19,7 @@
 
   # extra programs
   programs.firejail.enable = true;
+  programs.nix-ld.enable = true;
 
   # services
   ## oom killer
