@@ -391,9 +391,9 @@
         [filer.options]
         recursive_delete = false
 
-        [sqlite]
+        [leveldb3]
         enabled = true
-        dbFile = "/var/lib/seaweedfs/filer.db"
+        dir = "/var/lib/seaweedfs/filer"
       '';
       systemd.services."seaweedfs-filer" = {
         description = "seaweedfs filer server";
