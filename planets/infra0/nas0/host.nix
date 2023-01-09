@@ -399,7 +399,7 @@
         description = "seaweedfs filer server";
 
         serviceConfig = {
-          ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed filer -ip 10.11.235.1 -port 9302 -master '127.0.0.1:9301' -encryptVolumeData";
+          ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed filer -ip 10.11.235.1 -port 9302 -master '127.0.0.1:9301'";
           Restart = "on-failure";
           RestartSec = "10s";
         };
