@@ -30,6 +30,9 @@ vim.opt.splitright = true
 vim.opt.signcolumn = "yes"
 vim.opt.number = true
 vim.opt.relativenumber = true
+-- disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 -- disable bells
 vim.opt.errorbells = false
 vim.opt.visualbell = false
@@ -545,27 +548,14 @@ require("Comment").setup({})
 
 ---- nvim-tree-lua Config ----
 require("nvim-tree").setup({
-    disable_netrw = true,
-    hijack_netrw = true,
-    open_on_tab = false,
-    open_on_setup = false,
     diagnostics = { enable = true },
-    view = { width = 40, side = "left" },
-    git = { enable = true, ignore = false },
-    filters = {
-        dotfiles = false,
-        custom = {
-            ".git",
-            "node_modules",
-            ".cache",
-            "zig-cache",
-        },
+    view = {
+        adaptive_size = true,
+        side = "left",
     },
+    git = { ignore = false },
     renderer = {
-        indent_markers = {
-            enable = true,
-        },
-        group_empty = true,
+        indent_markers = { enable = true },
         add_trailing = true,
     },
 })
