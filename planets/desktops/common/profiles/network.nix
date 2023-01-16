@@ -28,6 +28,7 @@ _: {
         ];
         allowedTCPPorts = [
           6600 # mpd
+          8384 # syncthing
           29999 # extra
         ];
         allowedUDPPorts = [
