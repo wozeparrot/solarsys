@@ -16,7 +16,6 @@
     ../common/profiles/desktops/hyprland
 
     ../common/profiles/vpn.nix
-    ../../../common/modules/howdy
   ];
 
   boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_xanmod_latest.override {
@@ -100,8 +99,6 @@
   services.gvfs.enable = true;
 
   services.ratbagd.enable = true;
-
-  services.howdy.enable = true;
 
   security.pam.loginLimits = [
     {
