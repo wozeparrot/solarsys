@@ -136,6 +136,13 @@
           packages = [pkgs.OVMFFull.fd];
         };
         swtpm.enable = true;
+        package = pkgs.qemu.overrideAttrs (old: {
+          patches =
+            old.patches
+            ++ [
+              ./patches/qemu/enable_rebar.patch
+            ];
+        });
       };
 
       onBoot = "ignore";
