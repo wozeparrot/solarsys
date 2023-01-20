@@ -153,7 +153,7 @@
       pulseaudio
       pavucontrol
       paprefs
-      helvum
+      # helvum # TODO: broken on unstable https://github.com/NixOS/nixpkgs/issues/211610
       pamixer
 
       gtk-engine-murrine
