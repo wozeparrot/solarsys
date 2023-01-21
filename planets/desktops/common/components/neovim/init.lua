@@ -550,7 +550,9 @@ require("Comment").setup({})
 require("nvim-tree").setup({
     diagnostics = { enable = true },
     view = {
-        adaptive_size = true,
+        adaptive_size = false,
+        width = 35,
+        preserve_window_proportions = true,
         side = "left",
     },
     git = { ignore = false },

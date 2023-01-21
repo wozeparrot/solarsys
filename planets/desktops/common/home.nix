@@ -35,7 +35,7 @@
     ranger
     ruby
     spotdl
-    topydo
+    # topydo # TODO: broken
     unzip
     yt-dlp
 

@@ -1,10 +1,11 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     wireguard-tools
-    mullvad
+    master.mullvad
   ];
 
   networking.firewall.checkReversePath = "loose";
 
   services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.package = pkgs.master.mullvad;
 }
