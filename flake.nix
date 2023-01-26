@@ -8,6 +8,7 @@
     master.url = "github:NixOS/nixpkgs/master";
     staging-next.url = "github:NixOS/nixpkgs/staging-next";
     wozepkgs.url = "github:wozeparrot/nixpkgs/seaweedfs";
+    patched-akkoma.url = "github:wozeparrot/nixpkgs/patched-akkoma";
 
     # home-manager
     home-manager.url = "github:nix-community/home-manager";

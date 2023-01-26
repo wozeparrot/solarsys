@@ -932,6 +932,22 @@
         "type": "github"
       }
     },
+    "patched-akkoma": {
+      "locked": {
+        "lastModified": 1674755329,
+        "narHash": "sha256-ZybVOCSSfq1XrkxUP5A2T+wuWCANIgvWNbFUCKOT7to=",
+        "owner": "wozeparrot",
+        "repo": "nixpkgs",
+        "rev": "a1b86ba13621af4f711d03d59dcc99e4e3b5a24b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wozeparrot",
+        "ref": "patched-akkoma",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "poetry2nix": {
       "flake": false,
       "locked": {
@@ -1019,6 +1035,7 @@
         ],
         "nixpkgs-wayland": "nixpkgs-wayland",
         "nom": "nom",
+        "patched-akkoma": "patched-akkoma",
         "staging-next": "staging-next",
         "stylix": "stylix",
         "unstable": "unstable",
@@ -1104,11 +1121,11 @@
     },
     "unstable": {
       "locked": {
-        "lastModified": 1674211260,
-        "narHash": "sha256-xU6Rv9sgnwaWK7tgCPadV6HhI2Y/fl4lKxJoG2+m9qs=",
+        "lastModified": 1674459583,
+        "narHash": "sha256-L0UZl/u2H3HGsrhN+by42c5kNYeKtdmJiPzIRvEVeiM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5ed481943351e9fd354aeb557679624224de38d5",
+        "rev": "1b1f50645af2a70dc93eae18bfd88d330bfbcf7f",
         "type": "github"
       },
       "original": {
