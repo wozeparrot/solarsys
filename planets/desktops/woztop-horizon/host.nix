@@ -40,7 +40,7 @@
   # nix cross build support
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
   nix.extraOptions = ''
-    extra-platforms = aarch64-linux arm-linux i686-linux
+    extra-platforms = aarch64-linux i686-linux
   '';
 
   boot.loader.systemd-boot.enable = true;
@@ -136,13 +136,13 @@
           packages = [pkgs.OVMFFull.fd];
         };
         swtpm.enable = true;
-        package = pkgs.qemu.overrideAttrs (old: {
-          patches =
-            old.patches
-            ++ [
-              ./patches/qemu/enable_rebar.patch
-            ];
-        });
+        # package = pkgs.qemu.overrideAttrs (old: {
+        #   patches =
+        #     old.patches
+        #     ++ [
+        #       ./patches/qemu/enable_rebar.patch
+        #     ];
+        # });
       };
 
       onBoot = "ignore";
