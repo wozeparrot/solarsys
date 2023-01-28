@@ -52,7 +52,7 @@
     jamesdsp
     keepassxc
     krita
-    libreoffice-fresh # switch back to normal once #199314 lands
+    master.libreoffice-fresh
     libsForQt5.kdenlive
     sioyek
     nheko
