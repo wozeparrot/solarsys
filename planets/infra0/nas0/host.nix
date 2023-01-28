@@ -11,10 +11,10 @@
 
   # --- mount disks ---
   fileSystems = {
-    "/mnt/pstore0" = {
-      device = "/dev/disk/by-uuid/7591e656-ea01-4841-a6e8-fcf585be0190";
-      fsType = "ext4";
-    };
+    # "/mnt/pstore0" = {
+    #   device = "/dev/disk/by-uuid/7591e656-ea01-4841-a6e8-fcf585be0190";
+    #   fsType = "ext4";
+    # };
     "/mnt/pstore1" = {
       device = "/dev/disk/by-uuid/823e9830-4af1-42cc-929c-05fcf078326c";
       fsType = "xfs";
@@ -284,24 +284,12 @@
   };
 
   # --- nfs ---
-  fileSystems."/export/music" = {
-    device = "/mnt/pstore0/datas/sync/music";
-    options = ["bind"];
-  };
   fileSystems."/export/anime" = {
     device = "/mnt/pstore1/datas/aninarr/anime";
     options = ["bind"];
   };
   fileSystems."/export/store" = {
     device = "/mnt/pstore1/datas/aninarr/store";
-    options = ["bind"];
-  };
-  fileSystems."/export/books" = {
-    device = "/mnt/pstore0/datas/books";
-    options = ["bind"];
-  };
-  fileSystems."/export/random" = {
-    device = "/mnt/pstore0/datas/export";
     options = ["bind"];
   };
   services.nfs.server = {
@@ -311,11 +299,8 @@
     statdPort = 4000;
     exports = ''
       /export               *(insecure,ro,no_root_squash,async,no_subtree_check,crossmnt,fsid=0)
-      /export/music         *(insecure,ro,no_root_squash,async,no_subtree_check)
       /export/anime         *(insecure,ro,no_root_squash,async,no_subtree_check)
       /export/store         *(insecure,ro,no_root_squash,async,no_subtree_check)
-      /export/books         *(insecure,ro,no_root_squash,async,no_subtree_check)
-      /export/random        *(insecure,ro,no_root_squash,async,no_subtree_check)
     '';
   };
 
@@ -331,14 +316,14 @@
 
   # --- syncthing ---
   services.syncthing = {
-    enable = true;
+    enable = false;
     openDefaultPorts = false;
     guiAddress = "0.0.0.0:8384";
   };
 
   # --- seaweedfs ---
   containers.seaweedfs-brain = {
-    autoStart = true;
+    autoStart = false;
     ephemeral = true;
     bindMounts = {
       "/var/lib/seaweedfs" = {
@@ -364,9 +349,6 @@
         [master.maintenance]
         scripts = """
           lock
-          ec.encode -fullPercent=95 -quietFor=1h
-          ec.rebuild -force
-          ec.balance -force
           volume.deleteEmpty -quietFor=24h -force
           volume.balance -force
           volume.fix.replication
@@ -423,7 +405,7 @@
     };
   };
   containers.seaweedfs-node = {
-    autoStart = true;
+    autoStart = false;
     ephemeral = true;
     bindMounts = {
       "/var/lib/seaweedfs/data/pstore0" = {
@@ -468,7 +450,7 @@
 
   # --- akkoma ---
   containers.akkoma = {
-    autoStart = true;
+    autoStart = false;
     # ephemeral = true;
 
     allowedDevices = [
@@ -679,7 +661,7 @@
 
   # --- caddy ---
   containers.caddy = {
-    autoStart = true;
+    autoStart = false;
     ephemeral = true;
 
     allowedDevices = [
@@ -740,38 +722,38 @@
 
   # --- aninarr ---
   # aninarr
-  systemd.services."aninarr" = {
-    description = "aninarr daemon";
-
-    path = with pkgs; [bash];
-    serviceConfig = {
-      ExecStart = "${pkgs.aninarr.aninarr}/bin/aninarr";
-      WorkingDirectory = "/mnt/pstore1/datas/aninarr";
-      Restart = "always";
-      RestartSec = "5s";
-      User = "root";
-      Group = "root";
-    };
-
-    after = ["network.target"];
-    wantedBy = ["multi-user.target"];
-  };
-  # aninarrh
-  systemd.services."aninarrh" = {
-    description = "aninarrh daemon";
-
-    serviceConfig = {
-      ExecStart = "${pkgs.aninarr.aninarrh}/bin/aninarrh localhost 5071";
-      WorkingDirectory = "${pkgs.aninarr.aninarrh}";
-      StandardOutput = "inherit";
-      StandardError = "inherit";
-      Restart = "always";
-      RestartSec = "5s";
-    };
-
-    after = ["aninarr.service"];
-    wantedBy = ["multi-user.target"];
-  };
+  # systemd.services."aninarr" = {
+  #   description = "aninarr daemon";
+  #
+  #   path = with pkgs; [bash];
+  #   serviceConfig = {
+  #     ExecStart = "${pkgs.aninarr.aninarr}/bin/aninarr";
+  #     WorkingDirectory = "/mnt/pstore1/datas/aninarr";
+  #     Restart = "always";
+  #     RestartSec = "5s";
+  #     User = "root";
+  #     Group = "root";
+  #   };
+  #
+  #   after = ["network.target"];
+  #   wantedBy = ["multi-user.target"];
+  # };
+  # # aninarrh
+  # systemd.services."aninarrh" = {
+  #   description = "aninarrh daemon";
+  #
+  #   serviceConfig = {
+  #     ExecStart = "${pkgs.aninarr.aninarrh}/bin/aninarrh localhost 5071";
+  #     WorkingDirectory = "${pkgs.aninarr.aninarrh}";
+  #     StandardOutput = "inherit";
+  #     StandardError = "inherit";
+  #     Restart = "always";
+  #     RestartSec = "5s";
+  #   };
+  #
+  #   after = ["aninarr.service"];
+  #   wantedBy = ["multi-user.target"];
+  # };
   # aninarrx
   # systemd.services."aninarrx" = {
   #   description = "aninarrx daemon";
