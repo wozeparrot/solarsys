@@ -54,6 +54,9 @@
     driSupport = true;
     driSupport32Bit = true;
   };
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}"
+  ];
   hardware.uinput.enable = true;
   hardware.opentabletdriver.enable = true;
 
