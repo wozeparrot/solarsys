@@ -103,6 +103,13 @@
 
   services.ratbagd.enable = true;
 
+  services.asusd = {
+    enable = true;
+    asusdConfig = {
+      bat_charge_limit = 60;
+    };
+  };
+
   security.pam.loginLimits = [
     {
       domain = "@audio";
