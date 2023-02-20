@@ -276,7 +276,7 @@ lspconfig.pyright.setup({
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-lspconfig.sumneko_lua.setup({
+lspconfig.lua_ls.setup({
     capabilities = capabilities,
     on_attach = default_on_attach,
     settings = {
@@ -473,7 +473,7 @@ cmp.setup({
         { name = "buffer" },
     },
     mapping = cmp.mapping.preset.insert({
-        ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+        ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs( -4), { "i", "c" }),
         ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
         ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
         ["<C-y>"] = cmp.config.disable,
@@ -496,7 +496,7 @@ cmp.setup({
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif vim.fn["vsnip#available"](-1) == 1 then
+            elseif vim.fn["vsnip#available"]( -1) == 1 then
                 feedkey("<Plug>(vsnip-jump-prev)", "")
             end
         end, { "i", "s" }),
@@ -509,14 +509,14 @@ cmp.setup({
             vim_item.kind = lspkind.presets.default[vim_item.kind] .. " " .. vim_item.kind
 
             vim_item.menu = ({
-                nvim_lsp = "[LSP]",
-                vsnip = "[VSnip]",
-                treesitter = "[TS]",
-                path = "[Path]",
-                crates = "[Crates]",
-                buffer = "[Buffer]",
-                copilot = "[Copilot]",
-            })[entry.source.name]
+                    nvim_lsp = "[LSP]",
+                    vsnip = "[VSnip]",
+                    treesitter = "[TS]",
+                    path = "[Path]",
+                    crates = "[Crates]",
+                    buffer = "[Buffer]",
+                    copilot = "[Copilot]",
+                })[entry.source.name]
 
             return vim_item
         end,

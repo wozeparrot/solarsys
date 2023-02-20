@@ -43,7 +43,7 @@
     antimicroX
     antimony
     audacity
-    blender
+    master.blender # TODO: switch off master when https://github.com/NixOS/nixpkgs/pull/216844 lands
     ghidra-bin
     gimp
     gnome.file-roller

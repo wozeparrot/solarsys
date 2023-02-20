@@ -32,7 +32,7 @@
     gxplugins-lv2
     helm
     industrializer
-    infamousPlugins
+    # infamousPlugins # TODO: broken
     lsp-plugins
     magnetophonDSP.CharacterCompressor
     magnetophonDSP.CompBus

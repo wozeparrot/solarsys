@@ -52,7 +52,7 @@ in {
       rust-analyzer
       rustc
       rustfmt
-      sumneko-lua-language-server
+      lua-language-server
       svls
       verible
       zls.zls

@@ -55,7 +55,7 @@
   stylix = {
     image = ../misc/wallpaper.png;
     polarity = "dark";
-    palette = {
+    base16Scheme = {
       base00 = "000000";
       base01 = "08040b";
       base02 = "554856";
@@ -153,7 +153,7 @@
       pulseaudio
       pavucontrol
       paprefs
-      # helvum # TODO: broken on unstable https://github.com/NixOS/nixpkgs/issues/211610
+      helvum
       pamixer
 
       gtk-engine-murrine
