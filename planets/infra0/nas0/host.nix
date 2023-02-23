@@ -322,7 +322,7 @@
 
   # --- syncthing ---
   services.syncthing = {
-    enable = false;
+    enable = true;
     openDefaultPorts = false;
     guiAddress = "0.0.0.0:8384";
   };
