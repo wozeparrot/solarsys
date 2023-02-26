@@ -7,7 +7,7 @@
     nixpkgs.follows = "unstable";
     master.url = "github:NixOS/nixpkgs/master";
     staging-next.url = "github:NixOS/nixpkgs/staging-next";
-    wozepkgs.url = "github:wozeparrot/nixpkgs/seaweedfs";
+    wozepkgs.url = "github:wozeparrot/nixpkgs/update-seaweedfs";
     patched-akkoma.url = "github:wozeparrot/nixpkgs/patched-akkoma";
 
     # home-manager

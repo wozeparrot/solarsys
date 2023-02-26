@@ -1233,16 +1233,16 @@
     },
     "wozepkgs": {
       "locked": {
-        "lastModified": 1673843245,
-        "narHash": "sha256-vFdHEiSCKB7GRPFE89ajvQEa8Hy27xNfAazolSQkGL4=",
+        "lastModified": 1677385922,
+        "narHash": "sha256-tLy4CVrsxVvkbTYDRMgs8Y6ZBi6sjMsVkegMgJMJjcw=",
         "owner": "wozeparrot",
         "repo": "nixpkgs",
-        "rev": "cd18384f4920c11630ad6cb21665826eb35f620c",
+        "rev": "763d09674be24e3794769e7ad19daa6426f168e4",
         "type": "github"
       },
       "original": {
         "owner": "wozeparrot",
-        "ref": "seaweedfs",
+        "ref": "update-seaweedfs",
         "repo": "nixpkgs",
         "type": "github"
       }
