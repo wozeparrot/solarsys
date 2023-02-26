@@ -1,7 +1,8 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     # DAW
-    ss.ardour
+    # ss.ardour
+    reaper
 
     # extras
     carla
