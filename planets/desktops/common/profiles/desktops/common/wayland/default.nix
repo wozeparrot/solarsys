@@ -111,7 +111,7 @@
         drun-use-desktop-cache = false;
         drun-reload-desktop-cache = false;
       };
-      theme = ./rofi-theme.rasi;
+      # theme = ./rofi-theme.rasi;
     };
 
     programs.waybar = {
