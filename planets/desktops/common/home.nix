@@ -182,7 +182,7 @@
   # extra services
   services.kdeconnect.enable = true;
   services.kdeconnect.indicator = true;
-  # services.easyeffects.enable = true; # not working atm
+  services.easyeffects.enable = true;
   services.syncthing.enable = true;
 
   # xdg config
