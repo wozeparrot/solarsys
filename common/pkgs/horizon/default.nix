@@ -25,13 +25,13 @@
 }:
 stdenv.mkDerivation rec {
   pname = "horizon-eda";
-  version = "4c05bf13999e62f0666d1a97027bcedb6a046004";
+  version = "8e4761cb9e2e728c013c785d563f2a43895fca0c";
 
   src = fetchFromGitHub {
     owner = "horizon-eda";
     repo = "horizon";
     rev = "${version}";
-    sha256 = "sha256-/Wvbi771dQ1WI6IA0tTmYtytJepDtxKG15zzYLMtLVE=";
+    sha256 = "sha256-t+wEGvI2or34P9w9sqL7nas6c+vbNvH13WcqL4ZcGgE=";
   };
 
   buildInputs = [
