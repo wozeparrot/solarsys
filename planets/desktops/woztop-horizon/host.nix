@@ -24,10 +24,10 @@
     };
   });
   boot.kernelPatches = [
-    {
-      name = "0001-bore-sched";
-      patch = ./patches/kernel/0001-bore-sched.patch;
-    }
+    # {
+    #   name = "0001-bore-sched";
+    #   patch = ./patches/kernel/0001-bore-sched.patch;
+    # }
     {
       name = "0001-amd-pstate-epp";
       patch = ./patches/kernel/0001-amd-pstate-epp.patch;
