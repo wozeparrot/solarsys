@@ -77,12 +77,12 @@ in {
       # libraries
       plenary-nvim
       sqlite-lua
+      (pluginGit "lewis6991/impatient.nvim" "c90e273f7b8c50a02f956c24ce4804a47f18162e" "main")
       # lsp
       lspkind-nvim
       lspsaga-nvim
       null-ls-nvim
       nvim-code-action-menu
-      nvim-lightbulb
       nvim-lspconfig
       trouble-nvim
       # treesitter
@@ -90,7 +90,7 @@ in {
       nvim-treesitter-context
       nvim-ts-autotag
       # telescope
-      (pluginGit "nvim-telescope/telescope-ui-select.nvim" "d02a3d3a6b3f6b933c43a28668ae18f78846d3aa" "master")
+      (pluginGit "nvim-telescope/telescope-ui-select.nvim" "62ea5e58c7bbe191297b983a9e7e89420f581369" "master")
       telescope-frecency-nvim
       telescope-fzf-native-nvim
       telescope-nvim
@@ -121,8 +121,8 @@ in {
 
       # language support
       (pluginGit "DingDean/wgsl.vim" "fbe8f0dd179aec8525d6c93bb992e409b0e4e0ee" "main")
-      (pluginGit "elkowar/yuck.vim" "6dc3da77c53820c32648cf67cbdbdfb6994f4e08" "master")
-      (pluginGit "lluchs/vim-wren" "713705a23bdb94ff6c29866ff4a9db089cbc2dab" "master")
+      (pluginGit "elkowar/yuck.vim" "9b5e0370f70cc30383e1dabd6c215475915fe5c3" "master")
+      (pluginGit "avivbeeri/vim-wren" "2514d32c8e476384f3df81bd2cd369908d85bcfe" "fixedStatic")
       (pluginGit "stefanos82/nelua.vim" "ff0a733a586ef0b48cda4999170ed4ca1653a144" "main")
       zig-vim
 
@@ -131,13 +131,13 @@ in {
       rust-tools-nvim
 
       # copilot
-      # (pluginGit "zbirenbaum/copilot.lua" "5fbe531eb53f6a782d0fed7166f8cec23d606e84" "master")
-      # (pluginGit "zbirenbaum/copilot-cmp" "4a8909fd63dff71001b22a287daa3830e447de70" "master")
-      (pluginGit "github/copilot.vim" "5a411d19ce7334ab10ba12516743fc25dad363fa" "release")
+      copilot-vim
       cmp-copilot
+      # (pluginGit "zbirenbaum/copilot.lua" "b41d4c9c7d4f5e0272bcf94061b88e244904c56f" "master")
+      # (pluginGit "zbirenbaum/copilot-cmp" "92535dfd9c430b49ca7d9a7da336c5db65826b65" "master")
 
       # firenvim
-      (pluginGit "glacambre/firenvim" "2f0ee858c3eb5c9d306523cc054047eda2e6a3a2" "master")
+      (pluginGit "glacambre/firenvim" "8a5bde3dc52c58c40ddc9784149ba21489371021" "master")
     ];
   };
 }

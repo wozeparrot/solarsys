@@ -1,3 +1,5 @@
+require("impatient")
+
 ---- General Config ----
 -- utf-8 encoding
 vim.opt.encoding = "utf-8"
@@ -30,9 +32,8 @@ vim.opt.splitright = true
 vim.opt.signcolumn = "yes"
 vim.opt.number = true
 vim.opt.relativenumber = true
--- disable netrw
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- lazy redraw
+vim.opt.lazyredraw = true
 -- disable bells
 vim.opt.errorbells = false
 vim.opt.visualbell = false
@@ -46,6 +47,32 @@ vim.opt.termguicolors = true
 vim.cmd('let mapleader=" "')
 vim.cmd('let maplocalleader=" "')
 nnoremap("<space>", "<nop>")
+
+-- diable some built-in plugins
+local disabled_built_ins = {
+    "netrw",
+    "netrwPlugin",
+    "netrwSettings",
+    "netrwFileHandlers",
+    "gzip",
+    "zip",
+    "zipPlugin",
+    "tar",
+    "tarPlugin",
+    "getscript",
+    "getscriptPlugin",
+    "vimball",
+    "vimballPlugin",
+    "2html_plugin",
+    "logipat",
+    "rrhelper",
+    "spellfile_plugin",
+    "matchit",
+}
+
+for _, plugin in pairs(disabled_built_ins) do
+    vim.g["loaded_" .. plugin] = 1
+end
 
 ---- Keybindings ----
 nnoremap("<leader>tt", "<cmd>tabnew<CR>")
@@ -177,13 +204,11 @@ vim.g.c_syntax_for_h = 1
 -- endron
 vim.filetype.add({
     extension = {
-        ["edr"] = "endron",
+            ["edr"] = "endron",
     },
 })
 
 ---- LSP Config ----
-local null_ls = require("null-ls")
-
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local save_format = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
@@ -202,33 +227,32 @@ local default_on_attach = function(client)
 end
 nnoremap("<leader>u", "<cmd>lua vim.lsp.buf.format()<CR>")
 
-null_ls.setup({
-    diagnostics_format = "[#{m}] #{s} (#{c})",
-    debounce = 250,
-    default_timeout = 5000,
-    sources = {
-        null_ls.builtins.formatting.alejandra,
-        null_ls.builtins.formatting.black,
-        null_ls.builtins.formatting.stylua,
-    },
-    on_attach = default_on_attach,
-})
+lazy_require("null-ls", function(null_ls)
+    return {
+        diagnostics_format = "[#{m}] #{s} (#{c})",
+        debounce = 250,
+        default_timeout = 5000,
+        sources = {
+            null_ls.builtins.formatting.alejandra,
+            null_ls.builtins.formatting.black,
+            null_ls.builtins.formatting.stylua,
+        },
+        on_attach = default_on_attach,
+    }
+end)
 
 -- lspkind
 local lspkind = require("lspkind")
 lspkind.init()
 
 -- trouble
-require("trouble").setup({})
+lazy_require("trouble", {})
 nnoremap("<leader>xx", "<cmd>TroubleToggle<CR>")
 nnoremap("<leader>xw", "<cmd>TroubleToggle worskpace_diagnostics<CR>")
 nnoremap("<leader>xd", "<cmd>TroubleToggle document_diagnostics<CR>")
 nnoremap("<leader>xq", "<cmd>TroubleToggle quickfix<CR>")
 nnoremap("<leader>xl", "<cmd>TroubleToggle loclist<CR>")
 nnoremap("<leader>xr", "<cmd>TroubleToggle lsp_references<CR>")
-
--- lightbulb
-vim.cmd("autocmd CursorHold,CursorHoldI * lua require('nvim-lightbulb').update_lightbulb()")
 
 -- lspsaga
 local saga = require("lspsaga")
@@ -259,7 +283,7 @@ lspconfig.nil_ls.setup({
 })
 -- rust
 lspconfig.rust_analyzer.setup({})
-require("crates").setup({})
+lazy_require("crates", {})
 require("rust-tools").setup({
     server = {
         capabilities = capabilities,
@@ -281,18 +305,15 @@ lspconfig.lua_ls.setup({
     on_attach = default_on_attach,
     settings = {
         Lua = {
+            telemetry = {
+                enable = false,
+            },
             runtime = {
                 version = "LuaJIT",
                 path = runtime_path,
             },
             diagnostics = {
                 globals = { "vim" },
-            },
-            workspace = {
-                library = vim.api.nvim_get_runtime_file("", true),
-            },
-            telemetry = {
-                enable = false,
             },
         },
     },
@@ -440,10 +461,14 @@ nnoremap("<leader>fs", "<cmd>Telescope treesitter<CR>")
 require("nvim-autopairs").setup({})
 
 ---- Copilot Config ----
--- require("copilot").setup({
---     cmp = { enabled = true },
---     panel = { enabled = true },
+-- lazy_require("copilot", {
+--     panel = { enabled = false },
+--     suggestion = { enabled = false },
+--     filetypes = {
+--         markdown = true,
+--     },
 -- })
+-- lazy_require("copilot_cmp", {})
 
 ---- nvim-cmp Config ----
 local has_words_before = function()
@@ -464,27 +489,28 @@ cmp.setup({
         end,
     },
     sources = {
-        { name = "nvim_lsp" },
-        { name = "copilot" },
-        { name = "vsnip" },
-        { name = "treesitter" },
-        { name = "path" },
-        { name = "crates" },
-        { name = "buffer" },
+        { name = "nvim_lsp",   group_index = 2 },
+        { name = "path",       group_index = 2 },
+        { name = "copilot",    group_index = 2 },
+        { name = "treesitter", group_index = 2 },
+        { name = "vsnip",      group_index = 2 },
+        { name = "crates",     group_index = 2 },
+        { name = "buffer",     group_index = 2 },
     },
     mapping = cmp.mapping.preset.insert({
-        ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs( -4), { "i", "c" }),
-        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-        ["<C-y>"] = cmp.config.disable,
-        ["<C-e>"] = cmp.mapping({
+            ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4)),
+            ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4)),
+            ["<C-Space>"] = cmp.mapping(cmp.mapping.complete()),
+            ["<C-y>"] = cmp.config.disable,
+            ["<C-e>"] = cmp.mapping({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         }),
-        ["<CR>"] = cmp.mapping.confirm({
+            ["<CR>"] = cmp.mapping.confirm({
+            -- behavior = cmp.ConfirmBehavior.Replace,
             select = true,
         }),
-        ["<Tab>"] = cmp.mapping(function(fallback)
+            ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() and has_words_before() then
                 cmp.select_next_item()
             elseif vim.fn["vsnip#available"](1) == 1 then
@@ -492,14 +518,14 @@ cmp.setup({
             else
                 fallback()
             end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
+        end),
+            ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif vim.fn["vsnip#available"]( -1) == 1 then
+            elseif vim.fn["vsnip#available"](-1) == 1 then
                 feedkey("<Plug>(vsnip-jump-prev)", "")
             end
-        end, { "i", "s" }),
+        end),
     }),
     completion = {
         completeopt = "menu,menuone,noinsert",
@@ -547,7 +573,7 @@ vim.g.cursorline_timeout = 500
 require("Comment").setup({})
 
 ---- nvim-tree-lua Config ----
-require("nvim-tree").setup({
+lazy_require("nvim-tree", {
     diagnostics = { enable = true },
     view = {
         adaptive_size = false,
