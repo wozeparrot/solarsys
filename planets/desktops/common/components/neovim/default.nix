@@ -46,6 +46,7 @@ in {
       clang-tools
       deno
       jdt-language-server
+      ltex-ls
       nil
       nodePackages.bash-language-server
       nodePackages.pyright
