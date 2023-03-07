@@ -701,11 +701,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1677300428,
-        "narHash": "sha256-QvPqEPwAzgJj3z1BetqIHz/d7kHxuWT+uIaCosrTUHA=",
+        "lastModified": 1678207317,
+        "narHash": "sha256-Fxc6YvRRXlOrFpwY0davUZ0399HDnoCr5OGEdMyoLWk=",
         "owner": "wozeparrot",
         "repo": "nix-gaming",
-        "rev": "59a2333e600c3cb8216e43bc0e89baba3e8902a2",
+        "rev": "0b36eb4e484bdecb65fc5e2421c00f88c592e60f",
         "type": "github"
       },
       "original": {
