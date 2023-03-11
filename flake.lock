@@ -621,11 +621,11 @@
     },
     "master": {
       "locked": {
-        "lastModified": 1678500036,
-        "narHash": "sha256-TPjXDGqDU0TtlMSjPVCnVWx2VyYa8GJrmlDTZuupPUA=",
+        "lastModified": 1678500128,
+        "narHash": "sha256-lxjaQXvLZHN9WIfMAj7aVyyaBCkwhL+AnkkRDRDeYII=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d5d5def45871b109cd83bf1a72b6c15c4e0f624d",
+        "rev": "0a8530182b686e2a76505212ed5b629dfd78130f",
         "type": "github"
       },
       "original": {
@@ -952,22 +952,6 @@
         "type": "github"
       }
     },
-    "patched-akkoma": {
-      "locked": {
-        "lastModified": 1674755329,
-        "narHash": "sha256-ZybVOCSSfq1XrkxUP5A2T+wuWCANIgvWNbFUCKOT7to=",
-        "owner": "wozeparrot",
-        "repo": "nixpkgs",
-        "rev": "a1b86ba13621af4f711d03d59dcc99e4e3b5a24b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "wozeparrot",
-        "ref": "patched-akkoma",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "poetry2nix": {
       "flake": false,
       "locked": {
@@ -1055,12 +1039,10 @@
         ],
         "nixpkgs-wayland": "nixpkgs-wayland",
         "nom": "nom",
-        "patched-akkoma": "patched-akkoma",
         "staging-next": "staging-next",
         "stylix": "stylix",
         "unstable": "unstable",
         "webcord": "webcord",
-        "wozepkgs": "wozepkgs",
         "wozey": "wozey",
         "xdph": "xdph_2",
         "zigf": "zigf",
@@ -1086,18 +1068,15 @@
     },
     "staging-next": {
       "locked": {
-        "lastModified": 1678492957,
-        "narHash": "sha256-4OnimhVl0Fk1pH9qicA6qnFfhmENSYgRsz0imt24cuc=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "9ffe17a0bea317f5ead9c434514ed9e3349a93ec",
-        "type": "github"
+        "lastModified": 1678045471,
+        "narHash": "sha256-iXvLNwtdOMUoT4y1LcNMrVfotOLuayyXfVihX5nQPjg=",
+        "path": "/nix/store/v0n5hz2vjp0016s4aa109gvb1rwx7qrs-source",
+        "rev": "b126db35fc8f9284dc38ab66f4de795280f37841",
+        "type": "path"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "staging-next",
-        "repo": "nixpkgs",
-        "type": "github"
+        "id": "staging-next",
+        "type": "indirect"
       }
     },
     "stylix": {
@@ -1234,22 +1213,6 @@
         "owner": "wlroots",
         "repo": "wlroots",
         "type": "gitlab"
-      }
-    },
-    "wozepkgs": {
-      "locked": {
-        "lastModified": 1677385922,
-        "narHash": "sha256-tLy4CVrsxVvkbTYDRMgs8Y6ZBi6sjMsVkegMgJMJjcw=",
-        "owner": "wozeparrot",
-        "repo": "nixpkgs",
-        "rev": "763d09674be24e3794769e7ad19daa6426f168e4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "wozeparrot",
-        "ref": "update-seaweedfs",
-        "repo": "nixpkgs",
-        "type": "github"
       }
     },
     "wozey": {
