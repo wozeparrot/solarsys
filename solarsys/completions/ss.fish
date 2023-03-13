@@ -14,7 +14,7 @@ end
 # remove file completions
 complete -c ss -f
 
-set -l ss_commands deploy deploy-all deploy-planet deploy-orbit build rollback test ssh satellites list
+set -l ss_commands deploy deploy-all deploy-planet deploy-orbit build rollback test ssh satellites list json
 set -l ss_planet_commands deploy deploy-planet build rollback test ssh satellites
 set -l ss_moon_commands deploy build rollback test ssh satellites
 

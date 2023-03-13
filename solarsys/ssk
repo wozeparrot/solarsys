@@ -1,0 +1,297 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+# --- utility functions ---
+# echo to stderr
+function ercho { printf "%s\n" "$*" >&2; }
+
+# shortcut to return values
+function r { printf "%s" "$*"; }
+
+# sleep that counts
+function visible_sleep {
+    local DELAY=$1
+
+    for i in $(seq "$DELAY" -1 1); do
+        for s in / - \\ \|; do
+            printf "\r%s = $i        " "$s"
+            sleep 0.25
+        done
+    done
+    printf "\r                \r"
+}
+
+# prompt user for y or n
+function yes_or_no {
+    local RETURN=0
+
+    if [[ -n "$ALWAYS_YES" ]]; then
+        return "$RETURN"
+    fi
+
+    local yn
+    read -r -p "$* [Y/n]: " yn
+    case $yn in
+        [Yy]*) RETURN=0 ;;
+        [Nn]*) RETURN=1 ;;
+    esac
+
+    return "$RETURN"
+}
+
+# retry with exponential backoff
+function retry {
+    local max="$1"
+    shift 1
+
+    local delay=1
+    local attempts=1
+
+    while [[ "$attempts" -le "$max" ]]; do
+        if "$@"; then
+            break
+        fi
+
+        if [[ "$attempts" -lt "$max" ]]; then
+            echo "Retrying in $delay seconds..."
+            visible_sleep "$delay"
+        elif [[ "$attempts" -eq "$max" ]]; then
+            echo "Failed after $attempts attempts"
+            return 1
+        fi
+
+        attempts=$((attempts + 1))
+        delay=$((delay * 2))
+    done
+}
+
+# --- script helper functions ---
+FLK="$(nix eval --impure .#planets --json --apply 'with import <nixpkgs> {}; lib.attrsets.filterAttrsRecursive (n: v: n != "core")')"
+
+# gets planets from flake
+function get_planets {
+    jq -c -r 'keys' <<< "$FLK"
+}
+
+# gets moons for a planet
+function get_moons {
+    local planet=$1
+    jq -c -r ".\"$planet\".moons | keys" <<< "$FLK"
+}
+
+# gets trajectory for a moon
+function get_trajectory {
+    local planet=$1
+    local moon=$2
+    jq -c -r ".\"$planet\".moons.\"$moon\".trajectory" <<< "$FLK"
+}
+
+# gets orbits for a moon
+function get_orbits {
+    local planet=$1
+    local moon=$2
+    jq -c -r ".\"$planet\".moons.\"$moon\".orbits" <<< "$FLK"
+}
+
+# checks if planet exists
+function has_planet {
+    local planet=$1
+    if [[ "$(jq -e "has(\"$planet\")" <<< "$FLK" )" == "false" ]]; then
+        return 1
+    else
+        return 0
+    fi
+}
+
+# checks if a moon exists for a planet
+function has_moon {
+    local planet=$1
+    local moon=$2
+    if [[ "$(jq -e ".\"$planet\".moons | has(\"$moon\")" <<< "$FLK" )" == "false" ]]; then
+        return 1
+    else
+        return 0
+    fi
+}
+
+function get_satellites {
+    local planet=$1
+    local moon=$2
+    jq -c -r ".\"$planet\".moons.\"$moon\".satellites" <<< "$FLK"
+}
+
+# --- script main ---
+# -- script main functions --
+# deploys all moons
+function deploy_all {
+    echo "[solarsys] Deploying all moons"
+
+    local planets
+    readarray -t planets <<< "$(get_planets | jq -c -r '.[]')"
+
+    for planet in "${planets[@]}"; do
+        local moons
+        readarray -t moons <<< "$(get_moons "$planet" | jq -c -r '.[]')"
+
+        for moon in "${moons[@]}"; do
+            if [[ -z "$moon" ]]; then
+                break
+            fi
+
+            ss deploy "$planet" "$moon"
+        done
+    done
+}
+
+# deploys all moons in a planet
+function deploy_planet {
+    local planet=$1
+
+    # sanity check
+    if ! has_planet "$planet"; then
+        ercho "error~ Planet: |$planet| does not exist!"
+        return 1
+    fi
+
+    echo "[solarsys] Deploying all moons in planet: |$planet|"
+
+    local moons
+    readarray -t moons <<< "$(get_moons "$planet" | jq -c -r '.[]')"
+
+    for moon in "${moons[@]}"; do
+        if [[ -z "$moon" ]]; then
+            break
+        fi
+
+        ss deploy "$planet" "$moon"
+    done
+}
+
+# deploys all moons with an orbit
+function deploy_orbit {
+    local orbit=$1
+
+    echo "[solarsys] Deploying all moons with orbit: |$orbit|"
+
+    local planets
+    readarray -t planets <<< "$(get_planets | jq -c -r '.[]')"
+
+    for planet in "${planets[@]}"; do
+        local moons
+        readarray -t moons <<< "$(get_moons "$planet" | jq -c -r '.[]')"
+
+        for moon in "${moons[@]}"; do
+            if [[ -z "$moon" ]]; then
+                break
+            fi
+
+            local orbits
+            readarray -t orbits <<< "$(get_orbits "$planet" "$moon" | jq -c -r '.[]')"
+
+            if [[ ! "$(printf "_[%s]_" "${orbits[@]}")" =~ .*_\[$orbit\]_.* ]]; then
+                continue
+            fi
+
+            ss deploy "$planet" "$moon"
+        done
+    done
+}
+
+function build_all {
+    local output=$1
+
+    echo "[solarsys] Building output: |$output| for all moons"
+
+    kitty @ goto-layout grid
+
+    local planets
+    readarray -t planets <<< "$(get_planets | jq -c -r '.[]')"
+
+    for planet in "${planets[@]}"; do
+        local moons
+        readarray -t moons <<< "$(get_moons "$planet" | jq -c -r '.[]')"
+
+        for moon in "${moons[@]}"; do
+            if [[ -z "$moon" ]]; then
+                break
+            fi
+
+            # check if last planet and last moon
+            if [[ "$planet" == "${planets[-1]}" ]] && [[ "$moon" == "${moons[-1]}" ]]; then
+                ss build "$planet" "$moon" "$output"
+            else
+                kitty @ launch --title "$planet/$moon" --cwd current
+                kitty @ send-text --match "title:$planet/$moon" "ss build $planet $moon $output\\n"
+                kitty @ send-text --match "title:$planet/$moon" "exit\\n"
+            fi
+        done
+    done
+}
+
+# prints usage of solarsys
+function print_usage {
+    ercho "Usage: $0 <subcommand>"
+    ercho
+    ercho "  Subcommand                     |  Description"
+    ercho "--------------------------------------------------------------------------"
+    ercho "  deploy-all                     |  Deploys all moons"
+    ercho "  deploy-planet <planet>         |  Deploys all moons in <planet>"
+    ercho "  deploy-orbit <orbit>           |  Deploys all moons with <orbit>"
+    ercho "  build-all <output>             |  Builds <output> for all moons"
+    exit 1
+}
+
+# main function
+function main {
+    # check if subcommand is set
+    local subcommand=$1
+    if [[ -z "$subcommand" ]]; then
+        print_usage
+    fi
+
+    # switch on subcommand
+    case "$subcommand" in
+        deploy-all)
+            deploy_all
+            ;;
+        deploy-planet)
+            local planet=$2
+            if [[ -z "$planet" ]]; then
+                ercho "error~ No planet specified"
+                ercho
+                print_usage
+            fi
+
+            deploy_planet "$planet"
+            ;;
+        deploy-orbit)
+            local orbit=$2
+            if [[ -z "$orbit" ]]; then
+                ercho "error~ No orbit specified"
+                ercho
+                print_usage
+            fi
+
+            deploy_orbit "$orbit"
+            ;;
+        build-all)
+            local output=$2
+            if [[ -z "$output" ]]; then
+                ercho "error~ No output specified"
+                ercho
+                print_usage
+            fi
+
+            build_all "$output"
+            ;;
+        *)
+            ercho "error~ Unknown subcommand: $subcommand"
+            ercho
+            print_usage
+            ;;
+    esac
+}
+
+# run main
+main "$@"

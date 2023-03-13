@@ -6,9 +6,6 @@
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs.follows = "unstable";
     master.url = "github:NixOS/nixpkgs/master";
-    staging-next.url = "github:NixOS/nixpkgs/staging-next";
-    wozepkgs.url = "github:wozeparrot/nixpkgs/update-seaweedfs";
-    patched-akkoma.url = "github:wozeparrot/nixpkgs/patched-akkoma";
 
     # home-manager
     home-manager.url = "github:nix-community/home-manager";
@@ -80,8 +77,6 @@
     self,
     nixpkgs,
     master,
-    staging-next,
-    wozepkgs,
     home-manager,
     flake-utils,
     ...
@@ -163,16 +158,8 @@
         overlays =
           [
             (
-              final: prev: {
+              _: _: {
                 master = import master {
-                  inherit system;
-                  config.allowUnfree = true;
-                };
-                staging-next = import staging-next {
-                  inherit system;
-                  config.allowUnfree = true;
-                };
-                wozepkgs = import wozepkgs {
                   inherit system;
                   config.allowUnfree = true;
                 };
@@ -180,9 +167,9 @@
             )
           ]
           ++ overlay
-          ++ (nixpkgs.lib.mapAttrsToList (n: v: v.overlay) (nixpkgs.lib.filterAttrs (n: nixpkgs.lib.hasAttr "overlay") external));
+          ++ (nixpkgs.lib.mapAttrsToList (_: v: v.overlay) (nixpkgs.lib.filterAttrs (_: nixpkgs.lib.hasAttr "overlay") external));
       }
-      // nixpkgs.lib.mapAttrs (n: v: v.packages."${system}") (nixpkgs.lib.filterAttrs (n: nixpkgs.lib.hasAttr "packages") external)
+      // nixpkgs.lib.mapAttrs (_: v: v.packages."${system}") (nixpkgs.lib.filterAttrs (_: nixpkgs.lib.hasAttr "packages") external)
     );
   in
     flake-utils.lib.eachSystem [
@@ -202,7 +189,13 @@
           installPhase = ''
             mkdir -p $out/bin/
             install -D ./ss $out/bin/
+            install -D ./ssk $out/bin/
             install -D ./solarsys-remote.sh $out/bin/
+
+            # install completions
+            mkdir -p $out/share/fish/vendor_completions.d/
+            install -D ./completions/ss.fish $out/share/fish/vendor_completions.d/
+            install -D ./completions/ssk.fish $out/share/fish/vendor_completions.d/
           '';
         };
       in {
@@ -216,6 +209,7 @@
             rnix-lsp
             nvd
             nom.default
+            shellcheck
 
             fish
 
@@ -236,7 +230,7 @@
               nixpkgs.pkgs = pkgs;
 
               # build nix caches from external
-              nix.settings = nixpkgs.lib.mapAttrs (n: nixpkgs.lib.flatten) (nixpkgs.lib.zipAttrs (nixpkgs.lib.attrValues (nixpkgs.lib.mapAttrs (n: v: v.cache) (nixpkgs.lib.filterAttrs (n: nixpkgs.lib.hasAttr "cache") external))));
+              nix.settings = nixpkgs.lib.mapAttrs (_: nixpkgs.lib.flatten) (nixpkgs.lib.zipAttrs (nixpkgs.lib.attrValues (nixpkgs.lib.mapAttrs (_: v: v.cache) (nixpkgs.lib.filterAttrs (_: nixpkgs.lib.hasAttr "cache") external))));
 
               _module.args = {
                 inherit inputs;
@@ -259,18 +253,18 @@
             ++ makeModules pkgs hostFile;
         in {
           moons = {
-            woztop = let
-              system = "x86_64-linux";
-              pkgs = configNixpkgs system;
-            in {
-              trajectory = "";
-              orbits = [];
-
-              core = nixpkgs.lib.nixosSystem {
-                inherit system specialArgs;
-                modules = makeDesktopModules pkgs ./planets/desktops/woztop/host.nix;
-              };
-            };
+            # woztop = let
+            #   system = "x86_64-linux";
+            #   pkgs = configNixpkgs system;
+            # in {
+            #   trajectory = "";
+            #   orbits = [];
+            #
+            #   core = nixpkgs.lib.nixosSystem {
+            #     inherit system specialArgs;
+            #     modules = makeDesktopModules pkgs ./planets/desktops/woztop/host.nix;
+            #   };
+            # };
             woztop-horizon = let
               system = "x86_64-linux";
               pkgs = configNixpkgs system;

@@ -46,7 +46,6 @@ function retry {
 
     local delay=1
     local attempts=1
-    local output=
 
     while [[ "$attempts" -le "$max" ]]; do
         if "$@"; then
@@ -67,41 +66,37 @@ function retry {
 }
 
 # --- script helper functions ---
-# shortcut for nix eval --json --impure --expr
-function nee { nix eval --json --impure --expr "$1"; }
-
-# shortcut to flake in pwd
-FLK='(builtins.getFlake (builtins.toString ./.))'
+FLK="$(nix eval --impure .#planets --json --apply 'with import <nixpkgs> {}; lib.attrsets.filterAttrsRecursive (n: v: n != "core")')"
 
 # gets planets from flake
 function get_planets {
-    nee "builtins.attrNames $FLK.planets"
+    jq -c -r 'keys' <<< "$FLK"
 }
 
 # gets moons for a planet
 function get_moons {
     local planet=$1
-    nee "builtins.attrNames $FLK.planets.$planet.moons"
+    jq -c -r ".\"$planet\".moons | keys" <<< "$FLK"
 }
 
 # gets trajectory for a moon
 function get_trajectory {
     local planet=$1
     local moon=$2
-    nee "$FLK.planets.$planet.moons.$moon.trajectory"
+    jq -c -r ".\"$planet\".moons.\"$moon\".trajectory" <<< "$FLK"
 }
 
 # gets orbits for a moon
 function get_orbits {
     local planet=$1
     local moon=$2
-    nee "$FLK.planets.$planet.moons.$moon.orbits"
+    jq -c -r ".\"$planet\".moons.\"$moon\".orbits" <<< "$FLK"
 }
 
 # checks if planet exists
 function has_planet {
     local planet=$1
-    if [[ "$(nee "builtins.hasAttr \"$planet\" $FLK.planets")" == "false" ]]; then
+    if [[ "$(jq -e "has(\"$planet\")" <<< "$FLK" )" == "false" ]]; then
         return 1
     else
         return 0
@@ -112,11 +107,17 @@ function has_planet {
 function has_moon {
     local planet=$1
     local moon=$2
-    if [[ "$(nee "builtins.hasAttr \"$moon\" $FLK.planets.$planet.moons")" == "false" ]]; then
+    if [[ "$(jq -e ".\"$planet\".moons | has(\"$moon\")" <<< "$FLK" )" == "false" ]]; then
         return 1
     else
         return 0
     fi
+}
+
+function get_satellites {
+    local planet=$1
+    local moon=$2
+    jq -c -r ".\"$planet\".moons.\"$moon\".satellites" <<< "$FLK"
 }
 
 # builds an output for a moon in a planet
@@ -137,6 +138,16 @@ function build_moon_output {
 }
 
 # sends satellites to a moon in a planet
+function send_satellites_ {
+    local trajectory_host=$1
+    local trajectory_port=$2
+    local dest_path=$3
+    local path=$4
+
+    ssh -t "root@$trajectory_host" -p "$trajectory_port" "mkdir -p $(dirname "$dest_path")" 2> /dev/null
+    rsync -q -e "ssh -p $trajectory_port" -r "$path" "root@[$trajectory_host]:$dest_path"
+}
+
 function send_satellites {
     local planet=$1
     local moon=$2
@@ -145,26 +156,29 @@ function send_satellites {
 
     # parse satellites
     local satellites
-    readarray -t satellites <<< "$(nee "builtins.attrNames $FLK.planets.$planet.moons.$moon.satellites" | jq -c -r '.[]')"
+    readarray -t satellites <<< "$(get_satellites "$planet" "$moon" | jq -c -r 'to_entries | .[]')"
 
     for satellite in "${satellites[@]}"; do
+        local name
+        name="$(jq -c -r '.key' <<< "$satellite")"
+
         local dest_path
-        dest_path="$(nee "$FLK.planets.$planet.moons.$moon.satellites.$satellite" | jq -c -r '.destination')"
+        dest_path="$(jq -c -r '.value.destination' <<< "$satellite")"
         if [[ "$dest_path" == "null" ]]; then
             dest_path="/run/keys/$satellite"
         fi
 
-        echo "[solarsys] Deploying satellite: |$satellite| to destination: |$dest_path|"
+        echo "[solarsys] Deploying satellite: |$name| to destination: |$dest_path|"
 
         local path
-        path=$(jq -c -r '.path' <<< "$(nee "$FLK.planets.$planet.moons.$moon.satellites.$satellite")")
+        path="$(jq -c -r '.value.path' <<< "$satellite")"
         if [[ -n "$path" ]]; then
-            ssh -t "root@$trajectory_host" -p "$trajectory_port" "mkdir -p $(dirname "$dest_path")" 2> /dev/null
-            rsync -q -e "ssh -p $trajectory_port" -r "$path" "root@[$trajectory_host]:$dest_path"
+            send_satellites_ "$trajectory_host" "$trajectory_port" "$dest_path" "$path" &
         fi
     done
-}
 
+    wait
+}
 
 # --- script main ---
 # -- script main functions --
@@ -239,81 +253,6 @@ EOF
             echo "[solarsys] Deployed moon: |$moon|"
         fi
     fi
-}
-
-# deploys all moons
-function deploy_all {
-    echo "[solarsys] Deploying all moons"
-
-    local planets
-    readarray -t planets <<< "$(get_planets | jq -c -r '.[]')"
-
-    for planet in "${planets[@]}"; do
-        local moons
-        readarray -t moons <<< "$(get_moons "$planet" | jq -c -r '.[]')"
-
-        for moon in "${moons[@]}"; do
-            if [[ -z "$moon" ]]; then
-                break
-            fi
-
-            deploy "$planet" "$moon"
-        done
-    done
-}
-
-# deploys all moons in a planet
-function deploy_planet {
-    local planet=$1
-
-    # sanity check
-    if ! has_planet "$planet"; then
-        ercho "error~ Planet: |$planet| does not exist!"
-        return 1
-    fi
-
-    echo "[solarsys] Deploying all moons in planet: |$planet|"
-
-    local moons
-    readarray -t moons <<< "$(get_moons "$planet" | jq -c -r '.[]')"
-
-    for moon in "${moons[@]}"; do
-        if [[ -z "$moon" ]]; then
-            break
-        fi
-
-        deploy "$planet" "$moon"
-    done
-}
-
-# deploys all moons with an orbit
-function deploy_orbit {
-    local orbit=$1
-
-    echo "[solarsys] Deploying all moons with orbit: |$orbit|"
-
-    local planets
-    readarray -t planets <<< "$(get_planets | jq -c -r '.[]')"
-
-    for planet in "${planets[@]}"; do
-        local moons
-        readarray -t moons <<< "$(get_moons "$planet" | jq -c -r '.[]')"
-
-        for moon in "${moons[@]}"; do
-            if [[ -z "$moon" ]]; then
-                break
-            fi
-
-            local orbits
-            readarray -t orbits <<< "$(get_orbits "$planet" "$moon" | jq -c -r '.[]')"
-
-            if [[ ! "$(printf "_[%s]_" "${orbits[@]}")" =~ .*_\[$orbit\]_.* ]]; then
-                continue
-            fi
-
-            deploy "$planet" "$moon"
-        done
-    done
 }
 
 # builds an output for a moon in a planet
@@ -556,9 +495,6 @@ function print_usage {
     ercho "  Subcommand                     |  Description"
     ercho "--------------------------------------------------------------------------"
     ercho "  deploy <planet> <moon>         |  Deploys <moon> in <planet>"
-    ercho "  deploy-all                     |  Deploys all moons"
-    ercho "  deploy-planet <planet>         |  Deploys all moons in <planet>"
-    ercho "  deploy-orbit <orbit>           |  Deploys all moons with <orbit>"
     ercho "  build <planet> <moon> <output> |  Builds <output> for <moon> in <planet>"
     ercho "  rollback <planet> <moon>       |  Rolls back <moon> in <planet>"
     ercho "  test <planet> <moon>           |  Tests <moon> in <planet>"
@@ -590,29 +526,6 @@ function main {
             fi
 
             deploy "$planet" "$moon"
-            ;;
-        deploy-all)
-            deploy_all
-            ;;
-        deploy-planet)
-            local planet=$2
-            if [[ -z "$planet" ]]; then
-                ercho "error~ No planet specified"
-                ercho
-                print_usage
-            fi
-
-            deploy_planet "$planet"
-            ;;
-        deploy-orbit)
-            local orbit=$2
-            if [[ -z "$orbit" ]]; then
-                ercho "error~ No orbit specified"
-                ercho
-                print_usage
-            fi
-
-            deploy_orbit "$orbit"
             ;;
         build)
             local planet=$2
