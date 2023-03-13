@@ -31,18 +31,19 @@ self: super: {
   matrix-appservice-discord = self.callPackage ./matrix-appservice-discord {};
 
   steam = self.master.steam.override {
-    extraPkgs = pkgs: with pkgs; [
-      keyutils
-      libkrb5
-      libpng
-      libpulseaudio
-      libvorbis
-      stdenv.cc.cc.lib
-      xorg.libXScrnSaver
-      xorg.libXcursor
-      xorg.libXi
-      xorg.libXinerama
-    ];
+    extraPkgs = pkgs:
+      with pkgs; [
+        keyutils
+        libkrb5
+        libpng
+        libpulseaudio
+        libvorbis
+        stdenv.cc.cc.lib
+        xorg.libXScrnSaver
+        xorg.libXcursor
+        xorg.libXi
+        xorg.libXinerama
+      ];
   };
-  android-tools = self.master.android-tools;
+  inherit (self.master) android-tools;
 }

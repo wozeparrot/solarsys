@@ -33,7 +33,7 @@
 
       nixpkgs.overlays = [
         (self: super: {
-          formats = inputs.patched-akkoma.legacyPackages."${pkgs.system}".formats;
+          inherit (inputs.patched-akkoma.legacyPackages."${pkgs.system}") formats;
         })
       ];
 

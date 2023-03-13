@@ -16,6 +16,8 @@
       };
     defaultProfiles = ["gpu-hq"];
     config = {
+      vo = "gpu-next";
+
       force-window = true;
       pause = false;
       save-position-on-quit = true;
@@ -42,7 +44,7 @@
 
       blend-subtitles = true;
 
-      scale = "ewa_lanczossharp";
+      scale = "ewa_lanczos";
       dscale = "mitchell";
       cscale = "spline36";
       linear-downscaling = false;

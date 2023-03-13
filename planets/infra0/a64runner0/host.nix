@@ -6,15 +6,17 @@
   ];
 
   # --- open ports ---
-  networking.firewall.allowedUDPPorts = [
-  ];
-  networking.firewall.allowedTCPPorts = [
-  ];
-  networking.firewall.interfaces.wg0 = {
+  networking.firewall = {
     allowedUDPPorts = [
     ];
     allowedTCPPorts = [
     ];
+    interfaces.wg0 = {
+      allowedUDPPorts = [
+      ];
+      allowedTCPPorts = [
+      ];
+    };
   };
 
   # --- packages ---

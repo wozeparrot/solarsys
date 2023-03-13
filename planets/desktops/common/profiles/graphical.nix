@@ -51,7 +51,7 @@
     };
   };
 
-  # fonts
+  # main theming
   stylix = {
     image = ../misc/wallpaper.png;
     polarity = "dark";

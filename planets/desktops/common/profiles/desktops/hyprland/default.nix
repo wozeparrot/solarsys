@@ -28,7 +28,7 @@
     extraPortals = [
       (pkgs.xdph.xdg-desktop-portal-hyprland.override {
         hyprland-share-picker = pkgs.xdph.hyprland-share-picker.override {
-          hyprland = pkgs.hyprland.hyprland;
+          inherit (pkgs.hyprland) hyprland;
         };
       })
     ];

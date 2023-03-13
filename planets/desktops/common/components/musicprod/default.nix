@@ -10,9 +10,9 @@
     yabridgectl
 
     # Plugins
+    # infamousPlugins # TODO: broken
     CHOWTapeModel
     ChowKick
-    delayarchitect
     LibreArp-lv2
     aeolus
     aether-lv2
@@ -23,17 +23,18 @@
     bristol
     calf
     cardinal
+    delayarchitect
     distrho
     dragonfly-reverb
     drumgizmo
     drumkv1
     faustPhysicalModeling
+    fluidsynth
     geonkick
     gxmatcheq-lv2
     gxplugins-lv2
     helm
     industrializer
-    # infamousPlugins # TODO: broken
     lsp-plugins
     magnetophonDSP.CharacterCompressor
     magnetophonDSP.CompBus
@@ -56,6 +57,7 @@
     talentedhack
     tunefish
     vocproc
+    x42-gmsynth
     x42-plugins
     yoshimi
     zam-plugins

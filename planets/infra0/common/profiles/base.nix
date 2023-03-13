@@ -10,15 +10,19 @@
 
   # disabled unneeded stuff
   environment.noXlibs = lib.mkDefault true;
-  security.polkit.enable = lib.mkDefault false;
-  security.audit.enable = false;
+  security = {
+    polkit.enable = lib.mkDefault false;
+    audit.enable = false;
+  };
   services.udisks2.enable = false;
 
   # remove docs
-  documentation.enable = false;
-  documentation.info.enable = false;
-  documentation.man.enable = false;
-  documentation.nixos.enable = false;
+  documentation = {
+    enable = false;
+    info.enable = false;
+    man.enable = false;
+    nixos.enable = false;
+  };
 
   # Remove unneeded locales
   i18n.supportedLocales = [(config.i18n.defaultLocale + "/UTF-8")];
@@ -36,9 +40,13 @@
   systemd.enableEmergencyMode = false;
 
   # Firewall
-  networking.firewall.enable = true;
-  networking.firewall.allowPing = true;
-  networking.firewall.allowedTCPPorts = [22];
+  networking = {
+    firewall = {
+      enable = true;
+      allowPing = true;
+      allowedTCPPorts = [22];
+    };
+  };
 
   # cleanup
   nix.settings.auto-optimise-store = true;

@@ -11,10 +11,10 @@
 
     registry = let
       nixRegistry =
-        builtins.mapAttrs (name: v: {flake = v;})
+        builtins.mapAttrs (_: v: {flake = v;})
         (
           lib.filterAttrs
-          (name: value: value ? outputs)
+          (_: value: value ? outputs)
           inputs
         );
     in
@@ -54,7 +54,6 @@
       jq
       less
       neovim
-      nix-index
       pciutils
       ripgrep
       tree

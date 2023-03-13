@@ -28,10 +28,6 @@
     #   name = "0001-bore-sched";
     #   patch = ./patches/kernel/0001-bore-sched.patch;
     # }
-    {
-      name = "0001-amd-pstate-epp";
-      patch = ./patches/kernel/0001-amd-pstate-epp.patch;
-    }
   ];
   boot.kernelParams = ["amd_pstate=active"];
 
@@ -163,6 +159,9 @@
       enable = true;
       enableOnBoot = false;
     };
+
+    waydroid.enable = true;
+    lxd.enable = true;
   };
 
   fileSystems."/mnt/ss/infra0/nas0" = {

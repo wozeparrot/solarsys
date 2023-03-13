@@ -43,7 +43,7 @@
     antimicroX
     antimony
     audacity
-    master.blender # TODO: switch off master when https://github.com/NixOS/nixpkgs/pull/216844 lands
+    blender
     ghidra-bin
     gimp
     gnome.file-roller
@@ -52,7 +52,7 @@
     jamesdsp
     keepassxc
     krita
-    master.libreoffice-fresh
+    libreoffice-fresh
     libsForQt5.kdenlive
     sioyek
     nheko
@@ -98,92 +98,57 @@
   ];
 
   # extra programs
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
-
-  programs.firefox = {
-    enable = true;
-    package = pkgs.firefox-devedition-bin;
-  };
-
-  programs.chromium = {
-    enable = true;
-    package = pkgs.ungoogled-chromium;
-  };
-
-  programs.keychain = {
-    enable = true;
-    enableXsessionIntegration = false;
-    keys = ["id_ed25519"];
-  };
-
-  programs.mangohud = {
-    enable = true;
-    settings = {
-      full = true;
+  programs = {
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
     };
-    settingsPerApplication = {
-      mpv = {
-        no_display = true;
+
+    firefox = {
+      enable = true;
+      package = pkgs.firefox-devedition-bin;
+    };
+
+    chromium = {
+      enable = true;
+      package = pkgs.ungoogled-chromium;
+    };
+
+    keychain = {
+      enable = true;
+      enableXsessionIntegration = false;
+      keys = ["id_ed25519"];
+    };
+
+    mangohud = {
+      enable = true;
+      settings = {
+        full = true;
+      };
+      settingsPerApplication = {
+        mpv = {
+          no_display = true;
+        };
       };
     };
-  };
 
-  programs.obs-studio = {
-    enable = true;
-    plugins = with pkgs.obs-studio-plugins; [
-      obs-gstreamer
-      obs-move-transition
-      wlrobs
-    ];
-  };
-
-  programs.vscode = {
-    enable = false;
-    package = pkgs.vscodium;
-    extensions = with pkgs.vscode-extensions;
-      [
-        antyos.openscad
-        arrterian.nix-env-selector
-        asciidoctor.asciidoctor-vscode
-        asvetliakov.vscode-neovim
-        bbenoist.nix
-        eamodio.gitlens
-        jnoortheen.nix-ide
-        mads-hartmann.bash-ide-vscode
-        matklad.rust-analyzer
-        mikestead.dotenv
-        redhat.java
-        streetsidesoftware.code-spell-checker
-        tamasfe.even-better-toml
-        tiehuis.zig
-        timonwong.shellcheck
-        vadimcn.vscode-lldb
-        yzhang.markdown-all-in-one
-      ]
-      ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        {
-          name = "xresources-theme";
-          publisher = "JackVandergriff";
-          version = "1.1.0";
-          sha256 = "sha256-pzs9Y6bYxG8cEjBxU2VPW9rq/VPWo/gl7JilheNJ6v8=";
-        }
-        {
-          name = "vscode-direnv";
-          publisher = "cab404";
-          version = "1.0.0";
-          sha256 = "sha256-+nLH+T9v6TQCqKZw6HPN/ZevQ65FVm2SAo2V9RecM3Y=";
-        }
+    obs-studio = {
+      enable = true;
+      plugins = with pkgs.obs-studio-plugins; [
+        obs-gstreamer
+        obs-move-transition
+        wlrobs
       ];
+    };
   };
 
   # extra services
-  services.kdeconnect.enable = true;
-  services.kdeconnect.indicator = true;
-  services.easyeffects.enable = true;
-  services.syncthing.enable = true;
+  services = {
+    kdeconnect.enable = true;
+    kdeconnect.indicator = true;
+    easyeffects.enable = true;
+    syncthing.enable = true;
+  };
 
   # xdg config
   xdg.enable = true;
@@ -216,17 +181,19 @@
   };
 
   # home stuff
-  home.sessionVariables = {
-    LANG = "en_US.UTF-8";
-    LC_ALL = "en_US.UTF-8";
-    LC_CTYPE = "en_US.UTF-8";
-    VISUAL = "nvim";
-    EDITOR = "nvim";
-    SHELL = "${pkgs.fish}/bin/fish";
-  };
+  home = {
+    sessionVariables = {
+      LANG = "en_US.UTF-8";
+      LC_ALL = "en_US.UTF-8";
+      LC_CTYPE = "en_US.UTF-8";
+      VISUAL = "nvim";
+      EDITOR = "nvim";
+      SHELL = "${pkgs.fish}/bin/fish";
+    };
 
-  home.username = "woze";
-  home.homeDirectory = "/home/woze";
+    username = "woze";
+    homeDirectory = "/home/woze";
+  };
 
   programs.home-manager.enable = true;
 

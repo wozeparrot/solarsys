@@ -6,6 +6,7 @@
   # home-manager config
   home-manager.users.woze = {
     home.packages = with pkgs; [
+      cliphist
       fnott
       fuzzel
       grim
@@ -29,7 +30,6 @@
       '')
 
       (pkgs.writeShellScriptBin "wl-launcher" ''
-        # fuzzel -r 0 -b 151510ff -t d2cad3ff -s 6691d2ff -C aa3c9fff -m a52e4dff -w 40 -l 12 -B 2
         pkill -9 rofi
         rofi -show drun
       '')
@@ -51,6 +51,11 @@
       (pkgs.writeShellScriptBin "wl-colorpicker" ''
         pkill -9 hyprpicker
         hyprpicker --no-fancy | wl-copy -n
+      '')
+
+      (pkgs.writeShellScriptBin "wl-clipmanager" ''
+        pkill -9 rofi
+        cliphist list | rofi -dmenu | cliphist decode | wl-copy
       '')
     ];
 

@@ -41,50 +41,52 @@
     complete -c nom --wraps nix
   '';
 in {
-  programs.fish = {
-    enable = true;
+  programs = {
+    fish = {
+      enable = true;
 
-    interactiveShellInit = fishConfig;
+      interactiveShellInit = fishConfig;
 
-    functions = {
-      fish_greeting = {
-        body = "";
-      };
-      ccd = {
-        body = ''
-          mkdir -p "$argv"
-          and cd "$argv"
-        '';
-      };
-      clipb = {
-        body = ''
-          cat "$argv" | xclip -selection clipboard
-        '';
-      };
-      mpvclf = {
-        body = ''
-          mpv --vf=format=colorlevels=full $argv
-        '';
-      };
-      ytdlmu = {
-        body = ''
-          yt-dlp -x --audio-quality 0 --audio-format flac --yes-playlist -o "%(title)s.%(ext)s" $argv
-        '';
-      };
-      x11waymir = {
-        body = ''
-          SDL_VIDEODRIVER=x11 wf-recorder -c rawvideo -m sdl -f pipe:xwayland-mirror
-        '';
+      functions = {
+        fish_greeting = {
+          body = "";
+        };
+        ccd = {
+          body = ''
+            mkdir -p "$argv"
+            and cd "$argv"
+          '';
+        };
+        clipb = {
+          body = ''
+            cat "$argv" | xclip -selection clipboard
+          '';
+        };
+        mpvclf = {
+          body = ''
+            mpv --vf=format=colorlevels=full $argv
+          '';
+        };
+        ytdlmu = {
+          body = ''
+            yt-dlp -x --audio-quality 0 --audio-format flac --yes-playlist -o "%(title)s.%(ext)s" $argv
+          '';
+        };
+        x11waymir = {
+          body = ''
+            SDL_VIDEODRIVER=x11 wf-recorder -c rawvideo -m sdl -f pipe:xwayland-mirror
+          '';
+        };
       };
     };
-  };
 
-  programs.starship.enable = true;
-  programs.starship.settings = {
-    character.success_symbol = "[➜](bold green)";
-    character.error_symbol = "[➜](bold red)";
+    starship.enable = true;
+    starship.settings = {
+      character.success_symbol = "[➜](bold green)";
+      character.error_symbol = "[➜](bold red)";
 
-    cmd_duration.min_time = 500;
-    cmd_duration.format = "took [$duration](bold yellow)";
+      cmd_duration.min_time = 500;
+      cmd_duration.format = "took [$duration](bold yellow)";
+    };
   };
 }

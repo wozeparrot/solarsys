@@ -16,6 +16,6 @@ self: super: {
     makeFlags = ["PREFIX=$(out)"];
   };
 
-  xsel = self.wl-clipboard-x11;
-  xclip = self.wl-clipboard-x11;
+  # xsel = self.wl-clipboard-x11;
+  # xclip = self.wl-clipboard-x11;
 }

@@ -13,22 +13,22 @@
     device = "/dev/sda";
   };
 
-  networking.useDHCP = false;
-  networking.interfaces.enp2s0.useDHCP = true;
-  networking.interfaces.enp2s0.wakeOnLan.enable = true;
-  networking.interfaces.enp3s6.useDHCP = true;
-  networking.interfaces.enp3s6.wakeOnLan.enable = true;
+  networking = {
+    useDHCP = false;
+    interfaces = {
+      enp2s0 = {
+        useDHCP = true;
+        wakeOnLan.enable = true;
+      };
+      enp3s6 = {
+        useDHCP = true;
+        wakeOnLan.enable = true;
+      };
+    };
+  };
 
   # --- open ports ---
-  networking.firewall.allowedUDPPorts = [
-    # minecraft server
-    25565
-  ];
-  networking.firewall.allowedTCPPorts = [
-    # minecraft server
-    25565
-  ];
-  networking.firewall.interfaces.wg0 = {
+  networking.firewall = {
     allowedUDPPorts = [
       # minecraft server
       25565
@@ -36,15 +36,25 @@
     allowedTCPPorts = [
       # minecraft server
       25565
-
-      # seaweedfs
-      9301
-      19301
-      9302
-      19302
-      9311
-      19311
     ];
+    interfaces.wg0 = {
+      allowedUDPPorts = [
+        # minecraft server
+        25565
+      ];
+      allowedTCPPorts = [
+        # minecraft server
+        25565
+
+        # seaweedfs
+        9301
+        19301
+        9302
+        19302
+        9311
+        19311
+      ];
+    };
   };
 
   # --- packages ---
@@ -82,7 +92,7 @@
         description = "seaweedfs volume server";
 
         serviceConfig = {
-          ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed volume -ip 10.11.235.11 -port 9311 -mserver '10.11.235.1:9301' -index leveldb -max 12 -dir /var/lib/seaweedfs/data/";
+          ExecStart = "${pkgs.seaweedfs}/bin/weed volume -ip 10.11.235.11 -port 9311 -mserver '10.11.235.1:9301' -index leveldb -max 12 -dir /var/lib/seaweedfs/data/";
           Restart = "always";
           RestartSec = "10s";
         };

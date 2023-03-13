@@ -1039,7 +1039,6 @@
         ],
         "nixpkgs-wayland": "nixpkgs-wayland",
         "nom": "nom",
-        "staging-next": "staging-next",
         "stylix": "stylix",
         "unstable": "unstable",
         "webcord": "webcord",
@@ -1064,19 +1063,6 @@
         "ref": "nightly",
         "repo": "rust-analyzer",
         "type": "github"
-      }
-    },
-    "staging-next": {
-      "locked": {
-        "lastModified": 1678045471,
-        "narHash": "sha256-iXvLNwtdOMUoT4y1LcNMrVfotOLuayyXfVihX5nQPjg=",
-        "path": "/nix/store/v0n5hz2vjp0016s4aa109gvb1rwx7qrs-source",
-        "rev": "b126db35fc8f9284dc38ab66f4de795280f37841",
-        "type": "path"
-      },
-      "original": {
-        "id": "staging-next",
-        "type": "indirect"
       }
     },
     "stylix": {

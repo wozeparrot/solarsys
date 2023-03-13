@@ -10,19 +10,16 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
 
-  networking.useDHCP = false;
-  networking.interfaces.eno1.useDHCP = true;
-  networking.interfaces.eno1.wakeOnLan.enable = true;
+  networking = {
+    useDHCP = false;
+    interfaces.eno1 = {
+      useDHCP = true;
+      wakeOnLan.enable = true;
+    };
+  };
 
   # --- open ports ---
-  networking.firewall.allowedUDPPorts = [
-    25565 # minecraft
-  ];
-  networking.firewall.allowedTCPPorts = [
-    25565 # minecraft
-    8083 # calibre-web
-  ];
-  networking.firewall.interfaces.wg0 = {
+  networking.firewall = {
     allowedUDPPorts = [
       25565 # minecraft
     ];
@@ -30,6 +27,15 @@
       25565 # minecraft
       8083 # calibre-web
     ];
+    interfaces.wg0 = {
+      allowedUDPPorts = [
+        25565 # minecraft
+      ];
+      allowedTCPPorts = [
+        25565 # minecraft
+        8083 # calibre-web
+      ];
+    };
   };
 
   # --- packages ---
@@ -62,9 +68,11 @@
     enable = true;
     listen.ip = "0.0.0.0";
     openFirewall = true;
-    options.calibreLibrary = "/opt/stuff/books";
-    options.enableBookConversion = true;
-    options.enableBookUploading = true;
+    options = {
+      calibreLibrary = "/opt/stuff/books";
+      enableBookConversion = true;
+      enableBookUploading = true;
+    };
 
     user = "root";
     group = "root";

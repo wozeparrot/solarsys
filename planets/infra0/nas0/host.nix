@@ -22,64 +22,66 @@
   };
 
   # --- open ports ---
-  networking.firewall.allowedUDPPorts = [
-    5553 # wireguard
-    5314 # n2n
-  ];
-  networking.firewall.allowedTCPPorts = [
-    5072 # aninarr web dir
-    5314 # n2n
-
-    443 # caddy
-    80 # acme
-  ];
-  networking.firewall.interfaces.wg0 = {
+  networking.firewall = {
     allowedUDPPorts = [
-      53 # dns
-
-      8384 # syncthing
-      22000
-
-      9091 # transmission
-
-      111 # nfs
-      2049
-      4000
-      4001
-      4002
-      20048
+      5553 # wireguard
+      5314 # n2n
     ];
     allowedTCPPorts = [
-      53 # dns
-
-      8384 # syncthing
-      22000
-
-      9091 # transmission
-
-      111 # nfs
-      2049
-      4000
-      4001
-      4002
-      20048
-
-      5070 # aninarr
-      5071 # aninarrh
       5072 # aninarr web dir
-
-      # seaweedfs
-      9301
-      19301
-      9302
-      19302
-      9311
-      19311
-      9312
-      19312
+      5314 # n2n
 
       443 # caddy
+      80 # acme
     ];
+    interfaces.wg0 = {
+      allowedUDPPorts = [
+        53 # dns
+
+        8384 # syncthing
+        22000
+
+        9091 # transmission
+
+        111 # nfs
+        2049
+        4000
+        4001
+        4002
+        20048
+      ];
+      allowedTCPPorts = [
+        53 # dns
+
+        8384 # syncthing
+        22000
+
+        9091 # transmission
+
+        111 # nfs
+        2049
+        4000
+        4001
+        4002
+        20048
+
+        5070 # aninarr
+        5071 # aninarrh
+        5072 # aninarr web dir
+
+        # seaweedfs
+        9301
+        19301
+        9302
+        19302
+        9311
+        19311
+        9312
+        19312
+
+        443 # caddy
+      ];
+    };
   };
 
   # --- packages ---
@@ -244,8 +246,10 @@
   };
 
   # --- weechat ---
-  services.weechat.enable = true;
-  services.weechat.binary = "${pkgs.master.weechat}/bin/weechat";
+  services.weechat = {
+    enable = true;
+    binary = "${pkgs.master.weechat}/bin/weechat";
+  };
 
   # --- transmission ---
   services.transmission = {
@@ -285,17 +289,19 @@
   };
 
   # --- remote filesystem access ---
-  fileSystems."/export/anime" = {
-    device = "/mnt/pstore1/datas/aninarr/anime";
-    options = ["bind"];
-  };
-  fileSystems."/export/store" = {
-    device = "/mnt/pstore1/datas/aninarr/store";
-    options = ["bind"];
-  };
-  fileSystems."/export/export" = {
-    device = "/mnt/pstore1/datas/export";
-    options = ["bind"];
+  fileSystems = {
+    "/export/anime" = {
+      device = "/mnt/pstore1/datas/aninarr/anime";
+      options = ["bind"];
+    };
+    "/export/store" = {
+      device = "/mnt/pstore1/datas/aninarr/store";
+      options = ["bind"];
+    };
+    "/export/export" = {
+      device = "/mnt/pstore1/datas/export";
+      options = ["bind"];
+    };
   };
   services.nfs.server = {
     enable = true;
@@ -328,129 +334,131 @@
   };
 
   # --- seaweedfs ---
-  containers.seaweedfs-brain = {
-    autoStart = false;
-    ephemeral = true;
-    bindMounts = {
-      "/var/lib/seaweedfs" = {
-        hostPath = "/mnt/pstore1/seaweedfs";
-        isReadOnly = false;
+  containers = {
+    seaweedfs-brain = {
+      autoStart = false;
+      ephemeral = true;
+      bindMounts = {
+        "/var/lib/seaweedfs" = {
+          hostPath = "/mnt/pstore1/seaweedfs";
+          isReadOnly = false;
+        };
+      };
+      config = {config, ...}: {
+        # oneshot systemd service to create required directories
+        systemd.services."seaweedfs-preinit" = {
+          description = "Preinit stuff for seaweedfs";
+
+          serviceConfig = {
+            Type = "oneshot";
+            ExecStart = "${pkgs.coreutils}/bin/mkdir -p /var/lib/seaweedfs/master/";
+          };
+
+          after = ["network.target"];
+          wantedBy = ["multi-user.target"];
+        };
+        # -- seaweedfs master --
+        environment.etc."seaweedfs/master.toml".text = ''
+          [master.maintenance]
+          scripts = """
+            lock
+            volume.deleteEmpty -quietFor=24h -force
+            volume.balance -force
+            volume.fix.replication
+            s3.clean.uploads -timeAgo=24h
+            unlock
+          """
+          sleep_minutes = 17
+
+          [master.sequencer]
+          type = "raft"
+
+          [master.volume_growth]
+          copy_1 = 7
+          copy_2 = 6
+          copy_3 = 3
+          copy_other = 1
+        '';
+        systemd.services."seaweedfs-master" = {
+          description = "seaweedfs master server";
+
+          serviceConfig = {
+            ExecStart = "${pkgs.seaweedfs}/bin/weed master -ip 10.11.235.1 -port 9301 -mdir '/var/lib/seaweedfs/master/' -volumeSizeLimitMB=16384";
+            Restart = "on-failure";
+            RestartSec = "10s";
+          };
+
+          after = ["network.target" "seaweedfs-preinit.service"];
+          wantedBy = ["multi-user.target"];
+        };
+
+        # -- seaweedfs filer --
+        environment.etc."seaweedfs/filer.toml".text = ''
+          [filer.options]
+          recursive_delete = false
+
+          [leveldb3]
+          enabled = true
+          dir = "/var/lib/seaweedfs/filer"
+        '';
+        systemd.services."seaweedfs-filer" = {
+          description = "seaweedfs filer server";
+
+          serviceConfig = {
+            ExecStart = "${pkgs.seaweedfs}/bin/weed filer -ip 10.11.235.1 -port 9302 -master '127.0.0.1:9301'";
+            Restart = "on-failure";
+            RestartSec = "10s";
+          };
+
+          after = ["network.target" "seaweedfs-master.service" "seaweedfs-preinit.service"];
+          wantedBy = ["multi-user.target"];
+        };
+
+        system.stateVersion = "22.11";
       };
     };
-    config = {config, ...}: {
-      # oneshot systemd service to create required directories
-      systemd.services."seaweedfs-preinit" = {
-        description = "Preinit stuff for seaweedfs";
+    seaweedfs-node = {
+      autoStart = false;
+      ephemeral = true;
+      bindMounts = {
+        "/var/lib/seaweedfs/data/pstore0" = {
+          hostPath = "/mnt/pstore0/seaweedfs/volume";
+          isReadOnly = false;
+        };
+        "/var/lib/seaweedfs/data/pstore1" = {
+          hostPath = "/mnt/pstore1/seaweedfs/volume";
+          isReadOnly = false;
+        };
+      };
+      config = {config, ...}: {
+        # -- seaweedfs volume servers --
+        systemd.services."seaweedfs-volume-pstore0" = {
+          description = "seaweedfs volume server";
 
-        serviceConfig = {
-          Type = "oneshot";
-          ExecStart = "${pkgs.coreutils}/bin/mkdir -p /var/lib/seaweedfs/master/";
+          serviceConfig = {
+            ExecStart = "${pkgs.seaweedfs}/bin/weed volume -ip 10.11.235.1 -port 9311 -mserver '127.0.0.1:9301' -index leveldb -max 0 -dir /var/lib/seaweedfs/data/pstore0/";
+            Restart = "on-failure";
+            RestartSec = "10s";
+          };
+
+          after = ["network.target"];
+          wantedBy = ["multi-user.target"];
+        };
+        systemd.services."seaweedfs-volume-pstore1" = {
+          description = "seaweedfs volume server";
+
+          serviceConfig = {
+            ExecStart = "${pkgs.seaweedfs}/bin/weed volume -ip 10.11.235.1 -port 9312 -mserver '127.0.0.1:9301' -index leveldb -max 0 -dir /var/lib/seaweedfs/data/pstore1/";
+            Restart = "on-failure";
+            RestartSec = "10s";
+          };
+
+          after = ["network.target"];
+          wantedBy = ["multi-user.target"];
         };
 
-        after = ["network.target"];
-        wantedBy = ["multi-user.target"];
+        system.stateVersion = "22.11";
       };
-      # -- seaweedfs master --
-      environment.etc."seaweedfs/master.toml".text = ''
-        [master.maintenance]
-        scripts = """
-          lock
-          volume.deleteEmpty -quietFor=24h -force
-          volume.balance -force
-          volume.fix.replication
-          s3.clean.uploads -timeAgo=24h
-          unlock
-        """
-        sleep_minutes = 17
-
-        [master.sequencer]
-        type = "raft"
-
-        [master.volume_growth]
-        copy_1 = 7
-        copy_2 = 6
-        copy_3 = 3
-        copy_other = 1
-      '';
-      systemd.services."seaweedfs-master" = {
-        description = "seaweedfs master server";
-
-        serviceConfig = {
-          ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed master -ip 10.11.235.1 -port 9301 -mdir '/var/lib/seaweedfs/master/' -volumeSizeLimitMB=4096";
-          Restart = "on-failure";
-          RestartSec = "10s";
-        };
-
-        after = ["network.target" "seaweedfs-preinit.service"];
-        wantedBy = ["multi-user.target"];
-      };
-
-      # -- seaweedfs filer --
-      environment.etc."seaweedfs/filer.toml".text = ''
-        [filer.options]
-        recursive_delete = false
-
-        [leveldb3]
-        enabled = true
-        dir = "/var/lib/seaweedfs/filer"
-      '';
-      systemd.services."seaweedfs-filer" = {
-        description = "seaweedfs filer server";
-
-        serviceConfig = {
-          ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed filer -ip 10.11.235.1 -port 9302 -master '127.0.0.1:9301'";
-          Restart = "on-failure";
-          RestartSec = "10s";
-        };
-
-        after = ["network.target" "seaweedfs-master.service" "seaweedfs-preinit.service"];
-        wantedBy = ["multi-user.target"];
-      };
-
-      system.stateVersion = "22.11";
-    };
-  };
-  containers.seaweedfs-node = {
-    autoStart = false;
-    ephemeral = true;
-    bindMounts = {
-      # "/var/lib/seaweedfs/data/pstore0" = {
-      #   hostPath = "/mnt/pstore0/seaweedfs/volume";
-      #   isReadOnly = false;
-      # };
-      "/var/lib/seaweedfs/data/pstore1" = {
-        hostPath = "/mnt/pstore1/seaweedfs/volume";
-        isReadOnly = false;
-      };
-    };
-    config = {config, ...}: {
-      # -- seaweedfs volume servers --
-      # systemd.services."seaweedfs-volume-pstore0" = {
-      #   description = "seaweedfs volume server";
-      #
-      #   serviceConfig = {
-      #     ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed volume -ip 10.11.235.1 -port 9311 -mserver '127.0.0.1:9301' -index leveldb -max 70 -dir /var/lib/seaweedfs/data/pstore0/";
-      #     Restart = "on-failure";
-      #     RestartSec = "10s";
-      #   };
-      #
-      #   after = ["network.target"];
-      #   wantedBy = ["multi-user.target"];
-      # };
-      systemd.services."seaweedfs-volume-pstore1" = {
-        description = "seaweedfs volume server";
-
-        serviceConfig = {
-          ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed volume -ip 10.11.235.1 -port 9312 -mserver '127.0.0.1:9301' -index leveldb -max 0 -dir /var/lib/seaweedfs/data/pstore1/";
-          Restart = "on-failure";
-          RestartSec = "10s";
-        };
-
-        after = ["network.target"];
-        wantedBy = ["multi-user.target"];
-      };
-
-      system.stateVersion = "22.11";
     };
   };
 
@@ -483,7 +491,7 @@
 
         serviceConfig = {
           ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/caddy";
-          ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed mount -dir /var/lib/caddy -filer.path /services/caddy -filer=10.11.235.1:9302";
+          ExecStart = "${pkgs.seaweedfs}/bin/weed mount -dir /var/lib/caddy -filer.path /services/caddy -filer=10.11.235.1:9302";
           ExecStartPost = "${pkgs.coreutils}/bin/sleep 10";
           Restart = "on-failure";
           RestartSec = "10s";

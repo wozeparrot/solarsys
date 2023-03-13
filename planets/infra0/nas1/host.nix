@@ -19,26 +19,28 @@
   boot.supportedFilesystems = ["ntfs" "btrfs"];
 
   # --- open ports ---
-  networking.firewall.allowedUDPPorts = [
-  ];
-  networking.firewall.allowedTCPPorts = [
-    # samba
-    139
-    445
+  networking.firewall = {
+    allowedUDPPorts = [
+    ];
+    allowedTCPPorts = [
+      # samba
+      139
+      445
 
-    # motioneye
-    8765
-    8081
-    8082
+      # motioneye
+      8765
+      8081
+      8082
 
-    # home-assistant
-    8123
-    1883
-    9001
+      # home-assistant
+      8123
+      1883
+      9001
 
-    # nextcloud
-    8080
-  ];
+      # nextcloud
+      8080
+    ];
+  };
 
   # --- packages ---
   environment.systemPackages = with pkgs; [];
