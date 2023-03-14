@@ -146,7 +146,6 @@
   services = {
     kdeconnect.enable = true;
     kdeconnect.indicator = true;
-    easyeffects.enable = true;
     syncthing.enable = true;
   };
 

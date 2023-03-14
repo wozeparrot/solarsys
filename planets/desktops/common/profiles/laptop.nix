@@ -53,7 +53,7 @@
         RADEON_DPM_STATE_ON_AC = "performance";
         RADEON_DPM_STATE_ON_BAT = "battery";
 
-        WOL_DISABLE = "N";
+        WOL_DISABLE = "Y";
 
         START_CHARGE_THRESH_BAT0 = "0";
         STOP_CHARGE_THRESH_BAT0 = "60";
