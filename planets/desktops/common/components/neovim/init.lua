@@ -269,16 +269,17 @@ nnoremap("<leader>ca", "<cmd>lua require('lspsaga.codeaction').code_action()<CR>
 
 --- setup language servers ---
 local lspconfig = require("lspconfig")
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, {
+	capabilities = cmp_capabilities,
+})
 
 -- zig
 lspconfig.zls.setup({
-	capabilities = capabilities,
 	on_attach = default_on_attach,
 })
 -- nix
 lspconfig.nil_ls.setup({
-	capabilities = capabilities,
 	on_attach = default_on_attach,
 })
 -- rust
@@ -286,14 +287,12 @@ lspconfig.rust_analyzer.setup({})
 lazy_require("crates", {})
 require("rust-tools").setup({
 	server = {
-		capabilities = capabilities,
 		on_attach = default_on_attach,
 	},
 })
 require("rust-tools").inlay_hints.enable()
 -- python
 lspconfig.pyright.setup({
-	capabilities = capabilities,
 	on_attach = default_on_attach,
 })
 -- lua
@@ -301,7 +300,6 @@ local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 lspconfig.lua_ls.setup({
-	capabilities = capabilities,
 	on_attach = default_on_attach,
 	settings = {
 		Lua = {
@@ -320,7 +318,6 @@ lspconfig.lua_ls.setup({
 })
 -- java
 lspconfig.jdtls.setup({
-	capabilities = capabilities,
 	on_attach = default_on_attach,
 	cmd = { "jdt-language-server", "-data", "/home/woze/.cache/jdtls/workspace" },
 	init_options = {
@@ -329,17 +326,14 @@ lspconfig.jdtls.setup({
 })
 -- bash
 lspconfig.bashls.setup({
-	capabilities = capabilities,
 	on_attach = default_on_attach,
 })
 -- clangd
 lspconfig.clangd.setup({
-	capabilities = capabilities,
 	on_attach = default_on_attach,
 })
 -- deno
 lspconfig.denols.setup({
-	capabilities = capabilities,
 	on_attach = default_on_attach,
 	init_options = {
 		lint = true,
@@ -347,21 +341,17 @@ lspconfig.denols.setup({
 })
 -- html
 lspconfig.html.setup({
-	capabilities = capabilities,
 	on_attach = default_on_attach,
 })
 -- verilog
 lspconfig.svls.setup({
-	capabilities = capabilities,
 	on_attach = default_on_attach,
 })
 lspconfig.verible.setup({
-	capabilities = capabilities,
 	on_attach = default_on_attach,
 })
 -- ltex
 lspconfig.ltex.setup({
-	capabilities = capabilities,
 	on_attach = default_on_attach,
 	settings = {
 		ltex = {
