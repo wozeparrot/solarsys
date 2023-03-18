@@ -99,5 +99,5 @@
 
   # time
   time.timeZone = "America/Toronto";
-  services.timesyncd.enable = true;
+  services.timesyncd.enable = lib.mkDefault true;
 }
