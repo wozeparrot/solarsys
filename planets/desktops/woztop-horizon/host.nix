@@ -29,7 +29,7 @@
       patch = ./patches/kernel/0001-amd-pstate-epp.patch;
     }
   ];
-  boot.kernelParams = ["amd_pstate=active"];
+  boot.kernelParams = ["amd_pstate=active" "psi=1"];
 
   hardware.cpu.amd.updateMicrocode = true;
 
