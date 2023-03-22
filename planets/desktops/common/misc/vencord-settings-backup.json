@@ -1,0 +1,369 @@
+{
+    "settings": {
+        "notifyAboutUpdates": true,
+        "autoUpdate": false,
+        "autoUpdateNotification": true,
+        "useQuickCss": true,
+        "themeLinks": [],
+        "enableReactDevtools": false,
+        "frameless": false,
+        "transparent": false,
+        "winCtrlQ": false,
+        "winNativeTitleBar": false,
+        "plugins": {
+            "MessageEventsAPI": {
+                "enabled": true
+            },
+            "CommandsAPI": {
+                "enabled": true
+            },
+            "MenuItemDeobfuscatorAPI": {
+                "enabled": true
+            },
+            "ContextMenuAPI": {
+                "enabled": true
+            },
+            "MessagePopoverAPI": {
+                "enabled": true
+            },
+            "MessageAccessoriesAPI": {
+                "enabled": true
+            },
+            "MessageDecorationsAPI": {
+                "enabled": true
+            },
+            "MemberListDecoratorsAPI": {
+                "enabled": true
+            },
+            "ServerListAPI": {
+                "enabled": true
+            },
+            "AlwaysTrust": {
+                "enabled": false
+            },
+            "AnonymiseFileNames": {
+                "enabled": true,
+                "method": 2,
+                "randomisedLength": 7,
+                "consistent": "image"
+            },
+            "BANger": {
+                "enabled": false
+            },
+            "BetterGifAltText": {
+                "enabled": true
+            },
+            "BetterNotesBox": {
+                "enabled": false
+            },
+            "BetterRoleDot": {
+                "enabled": false,
+                "bothStyles": false
+            },
+            "BetterUploadButton": {
+                "enabled": false
+            },
+            "BlurNSFW": {
+                "enabled": false
+            },
+            "CallTimer": {
+                "enabled": true,
+                "format": "stopwatch"
+            },
+            "ColorSighted": {
+                "enabled": false
+            },
+            "CrashHandler": {
+                "enabled": true
+            },
+            "DisableDMCallIdle": {
+                "enabled": false
+            },
+            "EmoteCloner": {
+                "enabled": true
+            },
+            "Experiments": {
+                "enabled": false,
+                "enableIsStaff": false,
+                "forceStagingBanner": false
+            },
+            "FakeNitro": {
+                "enabled": false,
+                "enableEmojiBypass": true,
+                "emojiSize": 48,
+                "enableStickerBypass": true,
+                "stickerSize": 160,
+                "enableStreamQualityBypass": true
+            },
+            "FixInbox": {
+                "enabled": false
+            },
+            "ForceOwnerCrown": {
+                "enabled": false
+            },
+            "iLoveSpam": {
+                "enabled": false
+            },
+            "IgnoreActivities": {
+                "enabled": false
+            },
+            "InvisibleChat": {
+                "enabled": false,
+                "savedPasswords": "password, Password"
+            },
+            "LoadingQuotes": {
+                "enabled": false
+            },
+            "MemberCount": {
+                "enabled": true
+            },
+            "MessageLinkEmbeds": {
+                "enabled": false,
+                "automodEmbeds": "never"
+            },
+            "MessageLogger": {
+                "enabled": true,
+                "deleteStyle": "text",
+                "ignoreBots": false,
+                "ignoreSelf": false
+            },
+            "MuteNewGuild": {
+                "enabled": false
+            },
+            "NoBlockedMessages": {
+                "enabled": false
+            },
+            "NoDevtoolsWarning": {
+                "enabled": false
+            },
+            "NoF1": {
+                "enabled": false
+            },
+            "NoReplyMention": {
+                "enabled": false
+            },
+            "NoScreensharePreview": {
+                "enabled": false
+            },
+            "NoUnblockToJump": {
+                "enabled": false
+            },
+            "NSFWGateBypass": {
+                "enabled": false
+            },
+            "PlainFolderIcon": {
+                "enabled": false
+            },
+            "PlatformIndicators": {
+                "enabled": true,
+                "list": true,
+                "badges": true,
+                "messages": true,
+                "colorMobileIndicator": true
+            },
+            "PronounDB": {
+                "enabled": false
+            },
+            "RevealAllSpoilers": {
+                "enabled": false
+            },
+            "ReverseImageSearch": {
+                "enabled": true
+            },
+            "RoleColorEverywhere": {
+                "enabled": false
+            },
+            "ShikiCodeblocks": {
+                "enabled": true,
+                "theme": "https://raw.githubusercontent.com/shikijs/shiki/0b28ad8ccfbf2615f2d9d38ea8255416b8ac3043/packages/shiki/themes/github-dark.json",
+                "tryHljs": "SECONDARY",
+                "useDevIcon": "GREYSCALE",
+                "bgOpacity": 100
+            },
+            "ShowHiddenChannels": {
+                "enabled": false
+            },
+            "SilentMessageToggle": {
+                "enabled": false
+            },
+            "SilentTyping": {
+                "enabled": true,
+                "showIcon": true,
+                "isEnabled": true
+            },
+            "SortFriendRequests": {
+                "enabled": false
+            },
+            "SpotifyControls": {
+                "enabled": false
+            },
+            "SpotifyCrack": {
+                "enabled": false,
+                "noSpotifyAutoPause": true,
+                "keepSpotifyActivityOnIdle": false
+            },
+            "StartupTimings": {
+                "enabled": false
+            },
+            "TimeBarAllActivities": {
+                "enabled": false
+            },
+            "TypingIndicator": {
+                "enabled": true,
+                "includeMutedChannels": false
+            },
+            "TypingTweaks": {
+                "enabled": true,
+                "alternativeFormatting": true,
+                "showRoleColors": true,
+                "showAvatars": true
+            },
+            "Unindent": {
+                "enabled": true
+            },
+            "ReactErrorDecoder": {
+                "enabled": false
+            },
+            "VoiceChatDoubleClick": {
+                "enabled": true
+            },
+            "ViewIcons": {
+                "enabled": true
+            },
+            "WebContextMenus": {
+                "enabled": true
+            },
+            "Webhook Tags": {
+                "enabled": false
+            },
+            "WhoReacted": {
+                "enabled": false
+            },
+            "Settings": {
+                "enabled": true,
+                "settingsLocation": "aboveActivity"
+            },
+            "WebRichPresence (arRPC)": {
+                "enabled": false
+            },
+            "ClearURLs": {
+                "enabled": true
+            },
+            "ConsoleShortcuts": {
+                "enabled": false
+            },
+            "CorruptMp4s": {
+                "enabled": true
+            },
+            "CustomRPC": {
+                "enabled": false
+            },
+            "UrbanDictionary": {
+                "enabled": false
+            },
+            "F8Break": {
+                "enabled": false
+            },
+            "Fart2": {
+                "enabled": false
+            },
+            "FriendInvites": {
+                "enabled": false
+            },
+            "FxTwitter": {
+                "enabled": true
+            },
+            "HideAttachments": {
+                "enabled": false
+            },
+            "KeepCurrentChannel": {
+                "enabled": false
+            },
+            "LastFMRichPresence": {
+                "enabled": false
+            },
+            "MessageClickActions": {
+                "enabled": true,
+                "enableDoubleClickToEdit": true
+            },
+            "MessageTags": {
+                "enabled": false,
+                "clyde": true
+            },
+            "MoreCommands": {
+                "enabled": false
+            },
+            "MoreKaomoji": {
+                "enabled": true
+            },
+            "Moyai": {
+                "enabled": false,
+                "volume": 0.5,
+                "triggerWhenUnfocused": true,
+                "ignoreBots": true
+            },
+            "NoCanaryMessageLinks": {
+                "enabled": false,
+                "linkPrefix": "",
+                "alwaysUseDiscordHost": false
+            },
+            "oneko": {
+                "enabled": false
+            },
+            "petpet": {
+                "enabled": false
+            },
+            "QuickMention": {
+                "enabled": true
+            },
+            "QuickReply": {
+                "enabled": true
+            },
+            "ReadAllNotificationsButton": {
+                "enabled": false
+            },
+            "ServerListIndicators": {
+                "enabled": false
+            },
+            "SpotifyShareCommands": {
+                "enabled": false
+            },
+            "UwUifier": {
+                "enabled": false
+            },
+            "VcNarrator": {
+                "enabled": false,
+                "volume": 1,
+                "rate": 1,
+                "joinMessage": "{{USER}} joined",
+                "leaveMessage": "{{USER}} left",
+                "moveMessage": "{{USER}} moved to {{CHANNEL}}",
+                "muteMessage": "{{USER}} Muted",
+                "unmuteMessage": "{{USER}} unmuted",
+                "deafenMessage": "{{USER}} deafened",
+                "undeafenMessage": "{{USER}} undeafened"
+            },
+            "ViewRaw": {
+                "enabled": false
+            },
+            "BadgeAPI": {
+                "enabled": true
+            },
+            "NoticesAPI": {
+                "enabled": true
+            },
+            "NoTrack": {
+                "enabled": true
+            },
+            "SupportHelper": {
+                "enabled": true
+            }
+        },
+        "notifications": {
+            "timeout": 5000,
+            "position": "bottom-right",
+            "useNative": "not-focused"
+        }
+    },
+    "quickCss": "/**\n * @name Lavender\n * @version 3.0.0\n * @author Obscure.#4719\n * @authorLink https://github.com/Obscure-Git\n * @description A very customizeable and good looking discord theme.\n * @website https://github.com/lavender-discord/Lavender\n * @source https://lavender-discord.github.io/Lavender\n * @invite B9TK7nqRE4\n*/\n\n/* \n!===============================================================================================================================\n!                                                ⚠️ IMPORTANT\n!                               Important theme files, don't remove anything here\n!===============================================================================================================================\n*/\n\n@import url(\"https://lavender-discord.github.io/Lavender/src/source.css\");\n/* ⚠️ Main theme file — Do not remove */\n\n@import url(\"https://lavender-discord.github.io/Lavender/skins/skin-loader/skin-loader.css\");\n/* ⚠️ The file responsible for all the colors and skin loading */\n\n/* \n!===============================================================================================================================\n!                                                    🎨 SKINS\n!                  The color scheme of the whole UI, make sure you only have one skin enabled to avoid bugs\n!===============================================================================================================================\n*/\n\n/* Imports your desired color scheme of Lavender */\n\n@import url(\"https://lavender-discord.github.io/Lavender/skins/layout/lavender.css\");\n/* Default color scheme */\n\n/**? Put your skin import links here and comment out the import for default color scheme above ?**/\n\n/*\n!===============================================================================================================================\n!                                                💻 Code Blocks Skins\n!                                           The color scheme for codeblocks\n!===============================================================================================================================\n*/\n\n/* Import your desired color scheme for codeblocks - Works best with better codeblocks plugin */\n\n@import url(\"https://lavender-discord.github.io/Lavender/skins/codeblock/tokyo-night.css\");\n/* Default color scheme */\n\n/**? Put your codeblock skin import links here and comment out the import for default color scheme above ?**/\n\n/* \n!===============================================================================================================================\n!                                                    🔌 Extensions\n!              Extensions are the third party mini themes used by lavender (eg: Friends grid, iconsax iconpax)\n!===============================================================================================================================\n*/\n\n@import url(\"https://lavender-discord.github.io/Lavender/extensions/context-iconsax.css\");\n/* Context icons for menus */\n\n@import url(\"https://lavender-discord.github.io/Lavender/extensions/emoji-replace.css\");\n/* Replaces all discord emojis with the microsoft ones */\n\n@import url(\"https://lavender-discord.github.io/Lavender/extensions/friends-grid.css\");\n/* Makes the friends tab layout a 3 row grid */\n\n@import url(\"https://lavender-discord.github.io/Lavender/extensions/iconsax.css\");\n/* Replaces all discord icons with modern ones */\n\n@import url(\"https://lavender-discord.github.io/Lavender/extensions/settings-iconsax.css\");\n/* Adds iconsax icons next to sidebar items in settings */\n\n/* \n!===============================================================================================================================\n!                                                    🖌️ Design\n!                                   Change the design of certain elements of lavender,\n!                           more will be added in the future, join the support server to stay updated\n!===============================================================================================================================\n*/\n\n\n/*? ====== Removed Stuff ======*/\n@import url(\"https://lavender-discord.github.io/Lavender/design/removed/removed.css\");\n/* Removes few of the elements from discord, remove this import to get them back */\n\n\n/*? ====== User Action Buttons (Mute, Deafen, Settings) ======*/\n/* @import url(\"https://lavender-discord.github.io/Lavender/design/user-actions/vertical.css\"); */\n/* Vertical allignment on the left side in server list */\n\n@import url(\"https://lavender-discord.github.io/Lavender/design/user-actions/vertical-connected.css\"); /*\n/* Vertical allignment on the left side in server list, buttons are connected in this one */\n\n\n/*? ====== Status Indicators ======*/\n/* @import url(\"https://lavender-discord.github.io/Lavender/design/status-indicators/top-right.css\"); */\n/* Moves the status indicators to the upper right side of the user avatar */\n\n/* @import url(\"https://lavender-discord.github.io/Lavender/design/status-indicators/radial.css\"); /* */\n/* Radial statuses for lavender, made by gibbu, must disable the top-right status import to make this work */\n\n\n/*? ====== Server List allignment ======*/\n/* @import url(\"https://lavender-discord.github.io/Lavender/design/server-list/bottom.css\"); /* */\n/* Puts the server list on the bottom */\n\n/* @import url(\"https://lavender-discord.github.io/Lavender/design/server-list/top.css\"); /* */ */\n/* Puts the server list on the top */\n\n/* \n!===============================================================================================================================\n!                                           🧪 Experiments / Snippets\n!                Well if you dont like the quick css / custom css feature then put ur snippets below here\n!               Also remember this: line of code starting with '@import' should always be above other code\n!                  Code block starting with ':root' should be below @imports but above all other code\n!===============================================================================================================================\n*/"
+}
