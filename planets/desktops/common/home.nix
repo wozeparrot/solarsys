@@ -42,6 +42,7 @@
     # applications
     antimicroX
     antimony
+    armcord
     audacity
     blender
     ghidra-bin
@@ -54,12 +55,12 @@
     krita
     libreoffice-fresh
     libsForQt5.kdenlive
-    sioyek
     nheko
     openscad
     pkgs.aninarr.aninarc
     prismlauncher
     signal-desktop
+    sioyek
     solvespace
     ss.horizon
     thunderbird
