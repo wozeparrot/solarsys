@@ -186,16 +186,16 @@
 
           src = ./solarsys;
 
+          nativeBuildInputs = with pkgs; [installShellFiles];
+
           installPhase = ''
             mkdir -p $out/bin/
-            install -D ./ss $out/bin/
-            install -D ./ssk $out/bin/
-            install -D ./solarsys-remote.sh $out/bin/
+            install -D ss $out/bin/
+            install -D ssk $out/bin/
+            install -D solarsys-remote.sh $out/bin/
 
             # install completions
-            mkdir -p $out/share/fish/vendor_completions.d/
-            install -D ./completions/ss.fish $out/share/fish/vendor_completions.d/
-            install -D ./completions/ssk.fish $out/share/fish/vendor_completions.d/
+            installShellCompletion completions/ss.fish
           '';
         };
       in {
