@@ -68,7 +68,6 @@
 
     nom.url = "github:maralorn/nix-output-monitor";
     nom.inputs = {
-      nixpkgs.follows = "nixpkgs";
       flake-utils.follows = "flake-utils";
     };
   };
