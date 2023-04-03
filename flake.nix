@@ -36,7 +36,7 @@
       flake-utils.follows = "flake-utils";
     };
 
-    nix-gaming.url = "github:wozeparrot/nix-gaming";
+    nix-gaming.url = "github:fufexan/nix-gaming";
 
     zigf.url = "github:mitchellh/zig-overlay";
     zigf.inputs = {

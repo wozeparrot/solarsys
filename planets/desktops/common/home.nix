@@ -180,6 +180,8 @@
     color15 = "#f8f0f8";
   };
 
+  stylix.targets.waybar.enable = false;
+
   # home stuff
   home = {
     sessionVariables = {
