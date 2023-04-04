@@ -77,8 +77,8 @@
       serif = config.stylix.fonts.sansSerif;
 
       sansSerif = {
-        package = pkgs.mona-sans;
-        name = "Mona Sans";
+        package = pkgs.noto-fonts;
+        name = "Noto Sans";
       };
 
       monospace = {
@@ -99,54 +99,54 @@
   };
   fonts = {
     enableDefaultFonts = true;
-    # fonts = with pkgs; [
-    #   nerdfonts
-    #   agave
-    #   vegur
-    #   tenderness
-    #   source-han-mono
-    #   source-han-sans
-    #   source-han-serif
-    #
-    #   # fallback
-    #   noto-fonts
-    #   noto-fonts-extra
-    #   noto-fonts-emoji
-    #   noto-fonts-cjk-sans
-    #   noto-fonts-cjk-serif
-    #
-    #   # super fallback
-    #   last-resort
-    # ];
-    #
-    # fontconfig = {
-    #   defaultFonts = {
-    #     monospace = [
-    #       "Agave Nerd Font"
-    #       "Source Han Mono"
-    #       "Noto Sans Mono CJK JP"
-    #       "Noto Emoji"
-    #       "Noto Sans"
-    #       "Last Resort"
-    #     ];
-    #     sansSerif = [
-    #       "Vegur"
-    #       "Source Han Sans"
-    #       "Noto Sans CJK JP"
-    #       "Noto Emoji"
-    #       "Noto Sans"
-    #       "Last Resort"
-    #     ];
-    #     serif = [
-    #       "Tenderness"
-    #       "Source Han Serif"
-    #       "Noto Serif CJK JP"
-    #       "Noto Emoji"
-    #       "Noto Serif"
-    #       "Last Resort"
-    #     ];
-    #   };
-    # };
+    fonts = with pkgs; [
+      nerdfonts
+      agave
+      vegur
+      tenderness
+      source-han-mono
+      source-han-sans
+      source-han-serif
+
+      # fallback
+      noto-fonts
+      noto-fonts-extra
+      noto-fonts-emoji
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+
+      # super fallback
+      last-resort
+    ];
+
+    fontconfig = {
+      defaultFonts = {
+        monospace = [
+          "Agave Nerd Font"
+          "Source Han Mono"
+          "Noto Sans Mono CJK JP"
+          "Noto Emoji"
+          "Noto Sans"
+          "Last Resort"
+        ];
+        sansSerif = [
+          "Vegur"
+          "Source Han Sans"
+          "Noto Sans CJK JP"
+          "Noto Emoji"
+          "Noto Sans"
+          "Last Resort"
+        ];
+        serif = [
+          "Tenderness"
+          "Source Han Serif"
+          "Noto Serif CJK JP"
+          "Noto Emoji"
+          "Noto Serif"
+          "Last Resort"
+        ];
+      };
+    };
   };
 
   services.udev.packages = [pkgs.gnome.gnome-settings-daemon];
