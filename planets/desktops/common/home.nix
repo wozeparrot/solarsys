@@ -45,6 +45,7 @@
     armcord
     audacity
     blender
+    freecad
     ghidra-bin
     gimp
     gnome.file-roller
@@ -78,8 +79,6 @@
     })
     gamescope
     master.protontricks
-    master.steam-tui
-    master.steamcmd
     nix-gaming.osu-lazer-bin
     the-powder-toy
     wine64
