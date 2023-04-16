@@ -16,7 +16,7 @@
       slurp
       ss.zscroll
       swappy
-      swaylock-effects
+      swaylock
       wayvnc
       wob
       wofi
@@ -45,7 +45,7 @@
       '')
 
       (pkgs.writeShellScriptBin "wl-lockscreen" ''
-        swaylock -i ${../../../../misc/lockscreen.jpg} -F --effect-pixelate 128 --effect-vignette 0.2:0.2
+        swaylock -i ${../../../../misc/lockscreen.jpg} -F
       '')
 
       (pkgs.writeShellScriptBin "wl-colorpicker" ''
@@ -121,7 +121,7 @@
 
     programs.waybar = {
       enable = true;
-      package = pkgs.nixpkgs-wayland.waybar;
+      package = pkgs.waybar;
       settings = [
         {
           layer = "top";
