@@ -30,9 +30,15 @@ _: {
           6600 # mpd
           8384 # syncthing
           29999 # extra
+
+          10001 # roc
+          10002 # roc
         ];
         allowedUDPPorts = [
           29999 # extra
+
+          10001 # roc
+          10002 # roc
         ];
       };
     in {
