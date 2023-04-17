@@ -121,7 +121,7 @@
 
     programs.waybar = {
       enable = true;
-      package = pkgs.waybar;
+      package = pkgs.nixpkgs-wayland.waybar;
       settings = [
         {
           layer = "top";
