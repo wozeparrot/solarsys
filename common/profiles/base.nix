@@ -95,7 +95,7 @@
   # disable manually creating users
   users.mutableUsers = false;
 
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
 
   # time
   time.timeZone = "America/Toronto";
