@@ -495,6 +495,26 @@
         "type": "github"
       }
     },
+    "hyprland-contrib": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1683107384,
+        "narHash": "sha256-maCeGSr7UaxMzHgqHBtahwhf8nhenTytJnCWOA+DoXI=",
+        "owner": "hyprwm",
+        "repo": "contrib",
+        "rev": "a5792efdb113e9e971dc6fe5114fee814afbfb81",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hyprwm",
+        "repo": "contrib",
+        "type": "github"
+      }
+    },
     "hyprland-protocols": {
       "inputs": {
         "nixpkgs": [
@@ -1009,6 +1029,7 @@
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
+        "hyprland-contrib": "hyprland-contrib",
         "hyprpicker": "hyprpicker",
         "master": "master",
         "n2n": "n2n",

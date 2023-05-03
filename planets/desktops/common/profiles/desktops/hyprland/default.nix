@@ -19,8 +19,7 @@
   environment.systemPackages = with pkgs; [
     hyprland.hyprland
     (pkgs.writeShellScriptBin "hl-switchworkspacetoactivemonitor" ''
-      hyprctl dispatch moveworkspacetomonitor "$1" "$(hyprctl -j monitors | jq '.[] | select(.focused) | .id')"
-      hyprctl dispatch workspace $1
+      ${pkgs.hyprland-contrib.try_swap_workspace}/bin/try_swap_workspace "$1"
     '')
   ];
 

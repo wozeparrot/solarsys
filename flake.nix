@@ -60,6 +60,11 @@
       nixpkgs.follows = "nixpkgs";
     };
 
+    hyprland-contrib.url = "github:hyprwm/contrib";
+    hyprland-contrib.inputs = {
+      nixpkgs.follows = "nixpkgs";
+    };
+
     hyprpicker.url = "github:hyprwm/hyprpicker";
 
     xdph.url = "github:hyprwm/xdg-desktop-portal-hyprland";
@@ -111,6 +116,9 @@
       };
       hyprland = {
         inherit (inputs.hyprland) packages;
+      };
+      hyprland-contrib = {
+        inherit (inputs.hyprland-contrib) packages;
       };
       hyprpicker = {
         inherit (inputs.hyprpicker) packages;
