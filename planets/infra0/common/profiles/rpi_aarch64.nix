@@ -37,17 +37,4 @@
       options = ["relatime"];
     };
   };
-
-  nixpkgs.overlays = [
-    (final: prev: {
-      inherit (prev.master) bind;
-      inherit (prev.master) ripgrep;
-      inherit (prev.master) neovim;
-      pango = prev.pango.overrideAttrs (oldAttrs: {
-        outputs = ["bin" "out" "dev"];
-        mesonFlags = ["-Dintrospection=disabled" "-Dgtk_doc=false"];
-        postInstall = "";
-      });
-    })
-  ];
 }

@@ -1,20 +1,18 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   networking.hostName = "nas0";
 
   imports = [
     ../common/profiles/rpi4.nix
+    ../common/containered-services/seaweedfs-master.nix
+    ../common/containered-services/seaweedfs-node.nix
   ];
 
   # --- mount disks ---
   fileSystems = {
-    # "/mnt/pstore0" = {
-    #   device = "/dev/disk/by-uuid/7591e656-ea01-4841-a6e8-fcf585be0190";
-    #   fsType = "ext4";
-    # };
+    "/mnt/pstore0" = {
+      device = "/dev/disk/by-uuid/bbdea403-5106-47d1-8742-f3f4449257b7";
+      fsType = "btrfs";
+    };
     "/mnt/pstore1" = {
       device = "/dev/disk/by-uuid/823e9830-4af1-42cc-929c-05fcf078326c";
       fsType = "xfs";
@@ -92,14 +90,6 @@
     SUBSYSTEM=="usb", TEST=="power/autosuspend" ATTR{power/autosuspend}="-1"
   '';
 
-  # cron
-  services.cron = {
-    enable = true;
-    systemCronJobs = [
-      "*/5 * * * * /root/duckdns/duck.sh >/dev/null 2>&1"
-    ];
-  };
-
   # --- wireguard vpn setup ---
   # enable nat
   networking.nat = {
@@ -154,8 +144,7 @@
         ];
 
         local-data = [
-          "\"enqy.one A 10.11.235.1\""
-          "\"ak.enqy.one A 10.11.235.1\""
+          "\"wonest.duckdns.org A 10.11.235.1\""
         ];
       };
     };
@@ -334,132 +323,16 @@
   };
 
   # --- seaweedfs ---
-  containers = {
-    seaweedfs-brain = {
-      autoStart = false;
-      ephemeral = true;
-      bindMounts = {
-        "/var/lib/seaweedfs" = {
-          hostPath = "/mnt/pstore1/seaweedfs";
-          isReadOnly = false;
-        };
-      };
-      config = {config, ...}: {
-        # oneshot systemd service to create required directories
-        systemd.services."seaweedfs-preinit" = {
-          description = "Preinit stuff for seaweedfs";
-
-          serviceConfig = {
-            Type = "oneshot";
-            ExecStart = "${pkgs.coreutils}/bin/mkdir -p /var/lib/seaweedfs/master/";
-          };
-
-          after = ["network.target"];
-          wantedBy = ["multi-user.target"];
-        };
-        # -- seaweedfs master --
-        environment.etc."seaweedfs/master.toml".text = ''
-          [master.maintenance]
-          scripts = """
-            lock
-            volume.deleteEmpty -quietFor=24h -force
-            volume.balance -force
-            volume.fix.replication
-            s3.clean.uploads -timeAgo=24h
-            unlock
-          """
-          sleep_minutes = 17
-
-          [master.sequencer]
-          type = "raft"
-
-          [master.volume_growth]
-          copy_1 = 7
-          copy_2 = 6
-          copy_3 = 3
-          copy_other = 1
-        '';
-        systemd.services."seaweedfs-master" = {
-          description = "seaweedfs master server";
-
-          serviceConfig = {
-            ExecStart = "${pkgs.seaweedfs}/bin/weed master -ip 10.11.235.1 -port 9301 -mdir '/var/lib/seaweedfs/master/' -volumeSizeLimitMB=16384";
-            Restart = "on-failure";
-            RestartSec = "10s";
-          };
-
-          after = ["network.target" "seaweedfs-preinit.service"];
-          wantedBy = ["multi-user.target"];
-        };
-
-        # -- seaweedfs filer --
-        environment.etc."seaweedfs/filer.toml".text = ''
-          [filer.options]
-          recursive_delete = false
-
-          [leveldb3]
-          enabled = true
-          dir = "/var/lib/seaweedfs/filer"
-        '';
-        systemd.services."seaweedfs-filer" = {
-          description = "seaweedfs filer server";
-
-          serviceConfig = {
-            ExecStart = "${pkgs.seaweedfs}/bin/weed filer -ip 10.11.235.1 -port 9302 -master '127.0.0.1:9301'";
-            Restart = "on-failure";
-            RestartSec = "10s";
-          };
-
-          after = ["network.target" "seaweedfs-master.service" "seaweedfs-preinit.service"];
-          wantedBy = ["multi-user.target"];
-        };
-
-        system.stateVersion = "22.11";
-      };
-    };
-    seaweedfs-node = {
-      autoStart = false;
-      ephemeral = true;
-      bindMounts = {
-        "/var/lib/seaweedfs/data/pstore0" = {
-          hostPath = "/mnt/pstore0/seaweedfs/volume";
-          isReadOnly = false;
-        };
-        "/var/lib/seaweedfs/data/pstore1" = {
-          hostPath = "/mnt/pstore1/seaweedfs/volume";
-          isReadOnly = false;
-        };
-      };
-      config = {config, ...}: {
-        # -- seaweedfs volume servers --
-        systemd.services."seaweedfs-volume-pstore0" = {
-          description = "seaweedfs volume server";
-
-          serviceConfig = {
-            ExecStart = "${pkgs.seaweedfs}/bin/weed volume -ip 10.11.235.1 -port 9311 -mserver '127.0.0.1:9301' -index leveldb -max 0 -dir /var/lib/seaweedfs/data/pstore0/";
-            Restart = "on-failure";
-            RestartSec = "10s";
-          };
-
-          after = ["network.target"];
-          wantedBy = ["multi-user.target"];
-        };
-        systemd.services."seaweedfs-volume-pstore1" = {
-          description = "seaweedfs volume server";
-
-          serviceConfig = {
-            ExecStart = "${pkgs.seaweedfs}/bin/weed volume -ip 10.11.235.1 -port 9312 -mserver '127.0.0.1:9301' -index leveldb -max 0 -dir /var/lib/seaweedfs/data/pstore1/";
-            Restart = "on-failure";
-            RestartSec = "10s";
-          };
-
-          after = ["network.target"];
-          wantedBy = ["multi-user.target"];
-        };
-
-        system.stateVersion = "22.11";
-      };
-    };
+  containered-services.seaweedfs-master = {
+    enable = true;
+    dataDir = "/mnt/pstore1/seaweedfs";
+  };
+  containered-services.seaweedfs-node = {
+    enable = true;
+    volumes = [
+      "/mnt/pstore0/seaweedfs/volume"
+      "/mnt/pstore1/seaweedfs/volume"
+    ];
   };
 
   # --- caddy ---

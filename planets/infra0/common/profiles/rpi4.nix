@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./rpi_aarch64.nix
   ];
@@ -6,18 +10,22 @@
   boot.kernelPackages = pkgs.linuxPackages;
 
   boot.loader.raspberryPi.version = 4;
+  boot.loader.raspberryPi.firmwareConfig = ''
+    arm_boost=1
+  '';
 
   sdImage.populateFirmwareCommands = let
     configTxt = pkgs.writeText "config.txt" ''
       kernel=u-boot.bin
 
       # set stuff
-      enable_gic=1
-      armstub=armstub8-gic.bin
+      arm_boost=1
       disable_overscan=1
 
       # boot in 64bit mode
       arm_64bit=1
+      enable_gic=1
+      armstub=armstub8-gic.bin
 
       # prevent framebuffer smashing
       avoid_warnings=1
