@@ -121,11 +121,12 @@ in {
       glow-nvim
 
       # language support
-      (pluginGit "DingDean/wgsl.vim" "fbe8f0dd179aec8525d6c93bb992e409b0e4e0ee" "main")
+      (pluginGit "DingDean/wgsl.vim" "fdf91e11243266dfe923fc08c2fc9749429bc5aa" "main")
       (pluginGit "elkowar/yuck.vim" "9b5e0370f70cc30383e1dabd6c215475915fe5c3" "master")
       (pluginGit "avivbeeri/vim-wren" "2514d32c8e476384f3df81bd2cd369908d85bcfe" "fixedStatic")
       (pluginGit "stefanos82/nelua.vim" "ff0a733a586ef0b48cda4999170ed4ca1653a144" "main")
       zig-vim
+      vim-opencl
 
       # lsp language additionals
       crates-nvim
@@ -138,7 +139,7 @@ in {
       # (pluginGit "zbirenbaum/copilot-cmp" "92535dfd9c430b49ca7d9a7da336c5db65826b65" "master")
 
       # firenvim
-      (pluginGit "glacambre/firenvim" "8a5bde3dc52c58c40ddc9784149ba21489371021" "master")
+      (pluginGit "glacambre/firenvim" "ee4ef314bd990b2b05b7fbd95b857159e444a2fe" "master")
     ];
   };
 }
