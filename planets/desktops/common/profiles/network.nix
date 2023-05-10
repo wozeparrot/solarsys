@@ -11,7 +11,6 @@ _: {
     resolvconf.enable = false;
 
     firewall.enable = true;
-
     firewall.interfaces = let
       fw_config = {
         allowedUDPPortRanges = [
@@ -42,10 +41,11 @@ _: {
         ];
       };
     in {
-      solarsys-away = fw_config;
-      solarsys-home = fw_config;
+      orion-away = fw_config;
+      orion-home = fw_config;
     };
 
+    # block certain hosts
     hosts = {
       "0.0.0.0" = [
         "sg-public-data-api.hoyoverse.com"

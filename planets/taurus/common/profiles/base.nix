@@ -50,5 +50,4 @@
 
   # cleanup
   nix.settings.auto-optimise-store = true;
-  boot.cleanTmpDir = true;
 }

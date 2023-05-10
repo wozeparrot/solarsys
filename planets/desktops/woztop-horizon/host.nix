@@ -101,9 +101,7 @@
 
   services.asusd = {
     enable = true;
-    asusdConfig = {
-      bat_charge_limit = 60;
-    };
+    asusdConfig = '''';
   };
 
   security.pam.loginLimits = [
@@ -164,11 +162,11 @@
     lxd.enable = true;
   };
 
-  fileSystems."/mnt/ss/infra0/nas0" = {
-    device = "10.11.235.1:/";
-    fsType = "nfs";
-    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
-  };
+  # fileSystems."/mnt/ss/infra0/nas0" = {
+  #   device = "10.11.235.1:/";
+  #   fsType = "nfs";
+  #   options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
+  # };
 
   users.users.woze.extraGroups = ["docker" "libvirtd" "video" "render" "vboxusers" "libvirt" "corectrl" "adbusers"];
   home-manager.users.woze = ./home.nix;

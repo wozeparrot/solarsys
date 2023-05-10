@@ -37,6 +37,15 @@ in {
   };
 
   config = mkIf cfg.enable {
+    networking.firewall.interfaces.orion.allowedTCPPorts = [
+      cfg.masterPort
+      (cfg.masterPort + 10000)
+      (cfg.masterPort + 20000)
+      cfg.filerPort
+      (cfg.filerPort + 10000)
+      (cfg.filerPort + 20000)
+    ];
+
     containers.seaweedfs-master = {
       autoStart = true;
       ephemeral = true;
@@ -78,16 +87,16 @@ in {
           type = "raft"
 
           [master.volume_growth]
-          copy_1 = 9
-          copy_2 = 5
-          copy_3 = 3
-          copy_other = 1
+          copy_1 = 7
+          copy_2 = 7
+          copy_3 = 7
+          copy_other = 7
         '';
         systemd.services."seaweedfs-master" = {
           description = "seaweedfs master server";
 
           serviceConfig = {
-            ExecStart = "${pkgs.master.seaweedfs}/bin/weed master -ip ${cfg.bindAddress} -port ${toString cfg.masterPort} -mdir '/var/lib/seaweedfs/master/' -volumeSizeLimitMB=${toString cfg.volumeSizeLimitMB}";
+            ExecStart = "${pkgs.master.seaweedfs}/bin/weed master -ip ${cfg.bindAddress} -port ${toString cfg.masterPort} -mdir '/var/lib/seaweedfs/master/' -volumeSizeLimitMB=${toString cfg.volumeSizeLimitMB} -defaultReplication=001 -metricsPort ${toString (cfg.masterPort + 20000)}";
             Restart = "on-failure";
             RestartSec = "10s";
           };
@@ -108,7 +117,7 @@ in {
           description = "seaweedfs filer server";
 
           serviceConfig = {
-            ExecStart = "${pkgs.master.seaweedfs}/bin/weed filer -ip ${cfg.bindAddress} -port ${toString cfg.filerPort} -master '${cfg.bindAddress}:${toString cfg.masterPort}'";
+            ExecStart = "${pkgs.master.seaweedfs}/bin/weed filer -ip ${cfg.bindAddress} -port ${toString cfg.filerPort} -master '${cfg.bindAddress}:${toString cfg.masterPort}' -metricsPort ${toString (cfg.filerPort + 20000)}";
             Restart = "on-failure";
             RestartSec = "10s";
           };

@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  networking.hostName = "x86runner0";
+  networking.hostName = "wangshu";
 
   imports = [
     ./hardware.nix

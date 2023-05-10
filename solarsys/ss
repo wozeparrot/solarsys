@@ -172,8 +172,15 @@ function send_satellites {
 
         local path
         path="$(jq -c -r '.value.path' <<< "$satellite")"
-        if [[ -n "$path" ]]; then
+        if [[ -n "$path" && ! "$path" == "null" ]]; then
             send_satellites_ "$trajectory_host" "$trajectory_port" "$dest_path" "$path" &
+
+            local chown_target
+            chown_target="$(jq -c -r '.value.chown' <<< "$satellite")"
+            if [[ -n "$chown_target" && ! "$chown_target" == "null" ]]; then
+                echo "[solarsys] Chowning satellite: |$dest_path| to: |$chown_target|"
+                ssh -t "root@$trajectory_host" -p "$trajectory_port" "chown $chown_target $dest_path" 2> /dev/null
+            fi
         fi
     done
 

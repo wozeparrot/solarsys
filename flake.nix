@@ -159,7 +159,7 @@
     in
       builtins.attrValues (pathsToImportedAttrs overlayPaths);
 
-    configNixpkgs = system: (
+    configNixpkgs' = extraOverlays: system: (
       import nixpkgs
       {
         inherit system;
@@ -176,10 +176,12 @@
             )
           ]
           ++ overlay
-          ++ (nixpkgs.lib.mapAttrsToList (_: v: v.overlay) (nixpkgs.lib.filterAttrs (_: nixpkgs.lib.hasAttr "overlay") external));
+          ++ (nixpkgs.lib.mapAttrsToList (_: v: v.overlay) (nixpkgs.lib.filterAttrs (_: nixpkgs.lib.hasAttr "overlay") external))
+          ++ extraOverlays;
       }
       // nixpkgs.lib.mapAttrs (_: v: v.packages."${system}") (nixpkgs.lib.filterAttrs (_: nixpkgs.lib.hasAttr "packages") external)
     );
+    configNixpkgs = configNixpkgs' [];
   in
     flake-utils.lib.eachSystem [
       "x86_64-linux"
@@ -231,9 +233,14 @@
       solar-system = {};
 
       planets = let
-        makeModules = pkgs: hostFile: [
+        makeModules' = planet: pkgs: hostFile: [
           (
             {lib, ...}: {
+              imports = [
+                ./common/modules/solarsys
+              ];
+
+              solarsys.planet = planet;
               system.configurationRevision = lib.mkIf (self ? rev) self.rev;
 
               nixpkgs.pkgs = pkgs;
@@ -252,14 +259,14 @@
         specialArgs = {
           inherit inputs;
         };
-      in {
+      in rec {
         desktops = let
-          makeDesktopModules = pkgs: hostFile:
+          makeModules = pkgs: hostFile:
             [
               home-manager.nixosModules.home-manager
               external.stylix.modules.stylix
             ]
-            ++ makeModules pkgs hostFile;
+            ++ makeModules' "desktops" pkgs hostFile;
         in {
           moons = {
             # woztop = let
@@ -271,7 +278,7 @@
             #
             #   core = nixpkgs.lib.nixosSystem {
             #     inherit system specialArgs;
-            #     modules = makeDesktopModules pkgs ./planets/desktops/woztop/host.nix;
+            #     modules = makeModules pkgs ./planets/desktops/woztop/host.nix;
             #   };
             # };
             woztop-horizon = let
@@ -283,82 +290,96 @@
 
               core = nixpkgs.lib.nixosSystem {
                 inherit system specialArgs;
-                modules = makeDesktopModules pkgs ./planets/desktops/woztop-horizon/host.nix;
+                modules = makeModules pkgs ./planets/desktops/woztop-horizon/host.nix;
               };
             };
           };
         };
 
-        infra0 = {
+        taurus = let
+          makeModules = pkgs: hostFile:
+            [
+              (_: {
+                solarsys.moons = taurus.moons;
+              })
+            ]
+            ++ makeModules' "taurus" pkgs hostFile;
+        in {
           moons = {
-            nas0 = let
+            amateru = let
               system = "aarch64-linux";
-              pkgs = configNixpkgs system;
+              pkgs =
+                configNixpkgs' [
+                  (final: prev: {
+                    makeModulesClosure = x:
+                      prev.makeModulesClosure (x // {allowMissing = true;});
+                  })
+                ]
+                system;
             in {
               trajectory = {
                 host = "192.168.0.11";
                 port = 22;
               };
-              orbits = ["aarch64-build" "nas"];
+              orbits = ["nas"];
               satellites = {
                 wg_private = {
-                  path = "./satellites/infra0/nas0/wg_private";
+                  path = "./satellites/taurus/amateru/wg_private";
                   destination = "/keys/wg_private";
                 };
-                dsvpn = {
-                  path = "./satellites/common/dsvpn";
-                  destination = "/keys/dsvpn";
+                wgam_gossip_secret = {
+                  path = "./satellites/common/wgam_gossip_secret";
+                  destination = "/keys/wgam_gossip_secret";
                 };
-                n2n-supernode = {
-                  path = "./satellites/infra0/nas0/n2n-supernode.conf";
-                  destination = "/keys/n2n-supernode.conf";
-                };
-                n2n-community = {
-                  path = "./satellites/infra0/nas0/n2n-community.list";
-                  destination = "/keys/n2n-community.list";
-                };
-                n2n-edge = {
-                  path = "./satellites/infra0/nas0/n2n-edge.conf";
-                  destination = "/keys/n2n-edge.conf";
+                grafana_secret_key = {
+                  path = "./satellites/taurus/amateru/grafana_secret_key";
+                  destination = "/keys/grafana_secret_key";
                 };
               };
 
               core = nixpkgs.lib.nixosSystem {
                 inherit system specialArgs;
-                modules = makeModules pkgs ./planets/infra0/nas0/host.nix;
+                modules = makeModules pkgs ./planets/taurus/amateru/host.nix;
               };
             };
-            nas1 = let
+            arion = let
               system = "aarch64-linux";
-              pkgs = configNixpkgs system;
+              pkgs =
+                configNixpkgs' [
+                  (final: prev: {
+                    makeModulesClosure = x:
+                      prev.makeModulesClosure (x // {allowMissing = true;});
+                  })
+                ]
+                system;
             in {
               trajectory = {
-                host = "192.168.0.214";
+                host = "192.168.0.194";
                 port = 22;
               };
-              orbits = ["aarch64-build" "nas"];
+              orbits = ["runner"];
+              satellites = {
+                wg_private = {
+                  path = "./satellites/taurus/arion/wg_private";
+                  destination = "/keys/wg_private";
+                };
+                wgam_gossip_secret = {
+                  path = "./satellites/common/wgam_gossip_secret";
+                  destination = "/keys/wgam_gossip_secret";
+                };
+                nextcloud_adminpass = {
+                  path = "./satellites/taurus/arion/nextcloud_adminpass";
+                  destination = "/keys/nextcloud_adminpass";
+                  chown = "999:999";
+                };
+              };
 
               core = nixpkgs.lib.nixosSystem {
                 inherit system specialArgs;
-                modules = makeModules pkgs ./planets/infra0/nas1/host.nix;
+                modules = makeModules pkgs ./planets/taurus/arion/host.nix;
               };
             };
-            a64runner0 = let
-              system = "aarch64-linux";
-              pkgs = configNixpkgs system;
-            in {
-              trajectory = {
-                host = "10.11.235.21";
-                port = 22;
-              };
-              orbits = ["aarch64-build" "runners"];
-
-              core = nixpkgs.lib.nixosSystem {
-                inherit system specialArgs;
-                modules = makeModules pkgs ./planets/infra0/a64runner0/host.nix;
-              };
-            };
-            x86runner0 = let
+            wangshu = let
               system = "x86_64-linux";
               pkgs = configNixpkgs system;
             in {
@@ -366,20 +387,20 @@
                 host = "192.168.0.221";
                 port = 22;
               };
-              orbits = ["x86-build" "runners"];
+              orbits = ["runner"];
               satellites = {
                 wg_private = {
-                  path = "./satellites/infra0/x86runner0/wg_private";
+                  path = "./satellites/taurus/wangshu/wg_private";
                   destination = "/keys/wg_private";
                 };
               };
 
               core = nixpkgs.lib.nixosSystem {
                 inherit system specialArgs;
-                modules = makeModules pkgs ./planets/infra0/x86runner0/host.nix;
+                modules = makeModules pkgs ./planets/taurus/wangshu/host.nix;
               };
             };
-            x86runner1 = let
+            veles = let
               system = "x86_64-linux";
               pkgs = configNixpkgs system;
             in {
@@ -387,25 +408,21 @@
                 host = "192.168.0.243";
                 port = 22;
               };
-              orbits = ["x86-build" "runners"];
+              orbits = ["runner"];
               satellites = {
                 wg_private = {
-                  path = "./satellites/infra0/x86runner1/wg_private";
+                  path = "./satellites/taurus/veles/wg_private";
                   destination = "/keys/wg_private";
                 };
                 wozey_token = {
-                  path = "./satellites/infra0/x86runner1/wozey_token";
+                  path = "./satellites/taurus/veles/wozey_token";
                   destination = "/var/lib/wozey/.token";
-                };
-                matrix_as_discord_env = {
-                  path = "./satellites/infra0/x86runner1/matrix_as_discord_env";
-                  destination = "/keys/matrix_as_discord_env";
                 };
               };
 
               core = nixpkgs.lib.nixosSystem {
                 inherit system specialArgs;
-                modules = makeModules pkgs ./planets/infra0/x86runner1/host.nix;
+                modules = makeModules pkgs ./planets/taurus/veles/host.nix;
               };
             };
           };

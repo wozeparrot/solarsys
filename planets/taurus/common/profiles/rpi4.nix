@@ -7,7 +7,7 @@
     ./rpi_aarch64.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_rpi4;
 
   boot.loader.raspberryPi.version = 4;
   boot.loader.raspberryPi.firmwareConfig = ''

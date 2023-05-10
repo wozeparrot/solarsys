@@ -39,6 +39,15 @@ in {
   };
 
   config = mkIf cfg.enable {
+    networking.firewall.interfaces.orion.allowedTCPPorts = lib.foldl' (cur: acc:
+      cur
+      ++ [
+        (cfg.startPort + acc)
+        (cfg.startPort + acc + 10000)
+        (cfg.startPort + acc + 20000)
+      ])
+    [] (lib.range 0 ((length cfg.volumes) - 1));
+
     # oneshot service to ensure that the volume directories exist
     systemd.services.seaweedfs-volume-setup = {
       description = "seaweedfs volume setup";
@@ -58,24 +67,24 @@ in {
       autoStart = true;
       ephemeral = true;
 
-      bindMounts = lib.foldl' (cur: acc:
-        cur
+      bindMounts = lib.lists.foldl' (acc: cur:
+        acc
         // {
-          "/mnt/seaweedfs-${toString acc}" = {
-            hostPath = elemAt cfg.volumes acc;
+          "/mnt/seaweedfs-${toString cur}" = {
+            hostPath = elemAt cfg.volumes cur;
             isReadOnly = false;
           };
         }) {} (lib.range 0 ((length cfg.volumes) - 1));
 
       config = {cconfig, ...}: {
-        systemd.services = lib.foldl' (cur: acc:
-          cur
+        systemd.services = lib.foldl' (acc: cur:
+          acc
           // {
-            "seaweedfs-volume-${toString acc}" = {
-              description = "seaweedfs volume server for ${elemAt cfg.volumes acc}";
+            "seaweedfs-volume-${toString cur}" = {
+              description = "seaweedfs volume server for ${elemAt cfg.volumes cur}";
 
               serviceConfig = {
-                ExecStart = "${pkgs.master.seaweedfs}/bin/weed volume -ip ${cfg.bindAddress} -port ${toString (cfg.startPort + acc)} -mserver '${cfg.masterAddress}:${toString cfg.masterPort}' -max 0 -dir /mnt/seaweedfs-${toString acc}/";
+                ExecStart = "${pkgs.master.seaweedfs}/bin/weed volume -ip ${cfg.bindAddress} -port ${toString (cfg.startPort + cur)} -mserver '${cfg.masterAddress}:${toString cfg.masterPort}' -max 0 -dir /mnt/seaweedfs-${toString cur}/ -dataCenter='${config.solarsys.planet}' -rack='${config.networking.hostName}' -index=leveldb -metricsPort ${toString (cfg.startPort + cur + 20000)}";
               };
 
               after = ["network.target"];

@@ -14,8 +14,9 @@
     kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
     loader = {
-      # generic-extlinux-compatible.enable = true;
-      raspberryPi.enable = true;
+      # uncomment the following line when building an sd image
+      generic-extlinux-compatible.enable = true;
+      # raspberryPi.enable = true;
       grub.enable = false;
     };
   };
@@ -24,9 +25,11 @@
     compressImage = false;
     firmwareSize = 128;
     firmwarePartitionName = "NIXOS_BOOT";
-    populateRootCommands = ''
+    populateRootCommands = let
+      populateCmd = config.boot.loader.generic-extlinux-compatible.populateCmd;
+    in ''
       mkdir -p ./files/boot
-      ${config.boot.loader.generic-extlinux-compatible.populateCmd} -c ${config.system.build.toplevel} -d ./files/boot
+      ${populateCmd} -c ${config.system.build.toplevel} -d ./files/boot
     '';
   };
 
