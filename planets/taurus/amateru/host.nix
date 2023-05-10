@@ -1,16 +1,13 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   networking.hostName = "amateru";
 
   imports = [
     ../common/profiles/rpi4.nix
+    ../common/profiles/vpn.nix
     ../common/containered-services/seaweedfs-master.nix
     ../common/containered-services/seaweedfs-node.nix
     ../common/containered-services/metrics.nix
+    ../common/containered-services/transmission.nix
   ];
 
   # --- mount disks ---
@@ -28,8 +25,6 @@
   # --- open ports ---
   networking.firewall = {
     allowedUDPPorts = [
-      5553 # wireguard
-      5554 # wgautomesh
     ];
     allowedTCPPorts = [
     ];
@@ -37,8 +32,6 @@
       allowedUDPPorts = [
         8384 # syncthing
         22000
-
-        9091 # transmission
 
         111 # nfs
         2049
@@ -50,8 +43,6 @@
       allowedTCPPorts = [
         8384 # syncthing
         22000
-
-        9091 # transmission
 
         111 # nfs
         2049
@@ -73,90 +64,11 @@
     SUBSYSTEM=="usb", TEST=="power/autosuspend" ATTR{power/autosuspend}="-1"
   '';
 
-  # --- wireguard setup ---
-  networking.firewall.checkReversePath = "loose";
-  boot.kernel.sysctl."net.ipv4.conf.all.forwarding" = (lib.lists.findFirst (x: lib.strings.hasPrefix "hub" x.type) {hostname = null;} (import ../../../networks/orion.nix)).hostname == config.networking.hostName;
-  networking.wireguard.interfaces.orion = {
-    ips = ["${(lib.lists.findFirst (x: x.hostname == config.networking.hostName) (builtins.abort "failed to find node in network") (import ../../../networks/orion.nix)).address}/24"];
-    listenPort = 5553;
-
-    privateKeyFile = "/keys/wg_private";
-
-    peers =
-      lib.lists.optionals ((lib.lists.findFirst (x: lib.strings.hasPrefix "hub" x.type) {hostname = null;} (import ../../../networks/orion.nix)).hostname == config.networking.hostName)
-      (map (x: {
-          publicKey = x.pubkey;
-          endpoint = x.endpoint;
-          allowedIPs = ["${x.address}/32"];
-        }) (lib.lists.foldl (acc: cur:
-          if cur.hostname != config.networking.hostName && (lib.strings.hasInfix "client" cur.type)
-          then acc ++ [cur]
-          else acc) [] (import ../../../networks/orion.nix)));
-
-    postSetup = ''
-      ${pkgs.iptables}/bin/iptables -A FORWARD -i orion -o orion -j ACCEPT
-      ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.11.235.0/24 -o orion -j MASQUERADE
-    '';
-    postShutdown = ''
-      ${pkgs.iptables}/bin/iptables -D FORWARD -i orion -o orion -j ACCEPT
-      ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.11.235.0/24 -o orion -j MASQUERADE
-    '';
-  };
-  services.wgautomesh = {
-    enable = true;
-    settings = {
-      interface = "orion";
-      gossip_port = 5554;
-      peers =
-        map (x: {
-          inherit (x) address pubkey endpoint;
-        }) (lib.lists.foldl (acc: cur:
-          if cur.hostname != config.networking.hostName && !(lib.strings.hasInfix "client" cur.type)
-          then acc ++ [cur]
-          else acc) [] (import ../../../networks/orion.nix));
-    };
-    gossipSecretFile = "/keys/wgam_gossip_secret";
-  };
-
   # --- metrics ---
   containered-services.metrics.enable = true;
 
   # --- transmission ---
-  services.transmission = {
-    enable = true;
-    settings = {
-      bind-address-ipv4 = "10.11.235.1";
-
-      rpc-bind-address = "10.11.235.1";
-      rpc-port = 9091;
-      rpc-whitelist = "10.11.235.*";
-      rpc-whitelist-enabled = true;
-
-      download-dir = "/mnt/pstore1/tmps";
-      incomplete-dir-enabled = false;
-
-      max-peers-global = 200;
-      peer-limit-global = 200;
-      peer-limit-per-torrent = 50;
-
-      download-queue-size = 4;
-      download-queue-enabled = true;
-
-      idle-seeding-limit = 1;
-      idle-seeding-limit-enabled = true;
-
-      ratio-limit = 0;
-      ratio-limit-enabled = true;
-
-      speed-limit-up = 0;
-      speed-limit-up-enabled = true;
-
-      blocklist-url = "https://github.com/Naunter/BT_BlockLists/raw/master/bt_blocklists.gz";
-      blocklist-enabled = true;
-
-      encryption = 2;
-    };
-  };
+  containered-services.transmission.enable = true;
 
   # --- remote filesystem access ---
   fileSystems = {

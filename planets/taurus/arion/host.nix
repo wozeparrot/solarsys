@@ -1,20 +1,18 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }: {
   networking.hostName = "arion";
 
   imports = [
     ../common/profiles/rpi4.nix
+    ../common/profiles/vpn.nix
   ];
 
   # --- open ports ---
   networking.firewall = {
     allowedUDPPorts = [
-      5553 # wireguard
-      5554 # wgautomesh
     ];
     allowedTCPPorts = [
       80
@@ -34,42 +32,6 @@
   services.udev.extraRules = ''
     SUBSYSTEM=="usb", TEST=="power/autosuspend" ATTR{power/autosuspend}="-1"
   '';
-
-  # --- wireguard setup ---
-  networking.firewall.checkReversePath = "loose";
-  boot.kernel.sysctl."net.ipv4.conf.all.forwarding" = (lib.lists.findFirst (x: lib.strings.hasPrefix "hub" x.type) {hostname = null;} (import ../../../networks/orion.nix)).hostname == config.networking.hostName;
-  networking.wireguard.interfaces.orion = {
-    ips = ["${(lib.lists.findFirst (x: x.hostname == config.networking.hostName) (builtins.abort "failed to find node in network") (import ../../../networks/orion.nix)).address}/24"];
-    listenPort = 5553;
-
-    privateKeyFile = "/keys/wg_private";
-
-    peers =
-      lib.lists.optionals ((lib.lists.findFirst (x: lib.strings.hasPrefix "hub" x.type) {hostname = null;} (import ../../../networks/orion.nix)).hostname == config.networking.hostName)
-      (map (x: {
-          publicKey = x.pubkey;
-          endpoint = x.endpoint;
-          allowedIPs = ["${x.address}/32"];
-        }) (lib.lists.foldl (acc: cur:
-          if cur.hostname != config.networking.hostName && (lib.strings.hasInfix "client" cur.type)
-          then acc ++ [cur]
-          else acc) [] (import ../../../networks/orion.nix)));
-  };
-  services.wgautomesh = {
-    enable = true;
-    settings = {
-      interface = "orion";
-      gossip_port = 5554;
-      peers =
-        map (x: {
-          inherit (x) address pubkey endpoint;
-        }) (lib.lists.foldl (acc: cur:
-          if cur.hostname != config.networking.hostName && !(lib.strings.hasInfix "client" cur.type)
-          then acc ++ [cur]
-          else acc) [] (import ../../../networks/orion.nix));
-    };
-    gossipSecretFile = "/keys/wgam_gossip_secret";
-  };
 
   # --- nextcloud ---
   containers.nextcloud = {
