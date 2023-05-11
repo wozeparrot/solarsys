@@ -23,8 +23,7 @@ self: super: {
       };
     };
 
-    pam-python = self.callPackage ./pam-python {};
-    howdy = self.callPackage ./howdy {};
+    motioneye = self.callPackage ./motioneye {};
   };
 
   # yt-dlp = self.python3Packages.callPackage ./yt-dlp { };
