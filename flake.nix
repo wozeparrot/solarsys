@@ -77,6 +77,13 @@
     nom.inputs = {
       flake-utils.follows = "flake-utils";
     };
+
+    ensky.url = "github:wozeparrot/ensky";
+    ensky.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-utils.follows = "flake-utils";
+      zig.follows = "zigf";
+    };
   };
 
   outputs = inputs @ {
@@ -111,9 +118,6 @@
       n2n = {
         inherit (inputs.n2n) packages;
       };
-      stylix = {
-        modules = inputs.stylix.nixosModules;
-      };
       hyprland = {
         inherit (inputs.hyprland) packages;
       };
@@ -142,6 +146,10 @@
       };
       nom = {
         inherit (inputs.nom) packages;
+      };
+      ensky = {
+        inherit (inputs.ensky) packages;
+        modules = inputs.ensky.nixosModules;
       };
     };
 
@@ -236,9 +244,12 @@
         makeModules' = planet: pkgs: hostFile: [
           (
             {lib, ...}: {
-              imports = [
-                ./common/modules/solarsys
-              ];
+              # import external modules
+              imports =
+                [
+                  ./common/modules/solarsys
+                ]
+                ++ (nixpkgs.lib.mapAttrsToList (n: v: v.modules."${n}") (nixpkgs.lib.filterAttrs (_: nixpkgs.lib.hasAttr "modules") external));
 
               solarsys.planet = planet;
               system.configurationRevision = lib.mkIf (self ? rev) self.rev;
@@ -264,7 +275,7 @@
           makeModules = pkgs: hostFile:
             [
               home-manager.nixosModules.home-manager
-              external.stylix.modules.stylix
+              inputs.stylix.nixosModules.stylix
             ]
             ++ makeModules' "desktops" pkgs hostFile;
         in {
@@ -327,9 +338,9 @@
                   path = "./satellites/taurus/amateru/wg_private";
                   destination = "/keys/wg_private";
                 };
-                wgam_gossip_secret = {
-                  path = "./satellites/common/wgam_gossip_secret";
-                  destination = "/keys/wgam_gossip_secret";
+                ensky_gossip_secret = {
+                  path = "./satellites/common/ensky_gossip_secret";
+                  destination = "/keys/ensky_gossip_secret";
                 };
                 grafana_secret_key = {
                   path = "./satellites/taurus/amateru/grafana_secret_key";
@@ -363,9 +374,9 @@
                   path = "./satellites/taurus/arion/wg_private";
                   destination = "/keys/wg_private";
                 };
-                wgam_gossip_secret = {
-                  path = "./satellites/common/wgam_gossip_secret";
-                  destination = "/keys/wgam_gossip_secret";
+                ensky_gossip_secret = {
+                  path = "./satellites/common/ensky_gossip_secret";
+                  destination = "/keys/ensky_gossip_secret";
                 };
                 nextcloud_adminpass = {
                   path = "./satellites/taurus/arion/nextcloud_adminpass";

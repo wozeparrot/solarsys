@@ -21,9 +21,8 @@ in {
       lib.lists.optionals isHub
       (map (x: {
           publicKey = x.pubkey;
-          endpoint = x.endpoint;
           allowedIPs = ["${x.address}/32"];
-        }) (lib.lists.foldl (acc: cur:
+        }) (lib.lists.foldl' (acc: cur:
           if cur.hostname != config.networking.hostName && (lib.strings.hasInfix "client" cur.type)
           then acc ++ [cur]
           else acc) []
@@ -31,27 +30,33 @@ in {
 
     postSetup = lib.optional isHub ''
       ${pkgs.iptables}/bin/iptables -A FORWARD -i orion -o orion -j ACCEPT
-      ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.11.235.0/24 -o orion -j MASQUERADE
     '';
     postShutdown = lib.optional isHub ''
       ${pkgs.iptables}/bin/iptables -D FORWARD -i orion -o orion -j ACCEPT
-      ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.11.235.0/24 -o orion -j MASQUERADE
     '';
   };
-  services.wgautomesh = {
+  services.ensky = {
     enable = true;
     settings = {
       interface = "orion";
+      gossip_address = "0.0.0.0";
       gossip_port = 5554;
+      gossip_secret_path = "/keys/ensky_gossip_secret";
       peers =
         map (x: {
-          inherit (x) address pubkey endpoint;
-        }) (lib.lists.foldl (acc: cur:
+          inherit (x) pubkey endpoints;
+          allowed_ips =
+            ["${x.address}/32"]
+            ++ lib.lists.optionals ((lib.strings.hasInfix "hub" x.type) && !isHub) (lib.lists.foldl' (acc: cur:
+              if lib.strings.hasInfix "client" cur.type
+              then acc ++ ["${cur.address}/32"]
+              else acc) []
+            orion);
+        }) (lib.lists.foldl' (acc: cur:
           if cur.hostname != config.networking.hostName && !(lib.strings.hasInfix "client" cur.type)
           then acc ++ [cur]
           else acc) []
         orion);
     };
-    gossipSecretFile = "/keys/wgam_gossip_secret";
   };
 }

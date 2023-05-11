@@ -161,6 +161,32 @@
         "type": "github"
       }
     },
+    "ensky": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "zig": [
+          "zigf"
+        ]
+      },
+      "locked": {
+        "lastModified": 1683778176,
+        "narHash": "sha256-5+l679P0BYgPTemzAqjnLAlGKoGQxpq/yPwf/UWBwzs=",
+        "owner": "wozeparrot",
+        "repo": "ensky",
+        "rev": "5b41d95ca19fd61976ebb3d41711b5bff684ebbe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wozeparrot",
+        "repo": "ensky",
+        "type": "github"
+      }
+    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
@@ -1026,6 +1052,7 @@
     "root": {
       "inputs": {
         "aninarr": "aninarr",
+        "ensky": "ensky",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
