@@ -10,7 +10,20 @@
     ./user.nix
   ];
 
-  nix.gc.automatic = false;
+  nix = {
+    registry = let
+      nixRegistry =
+        builtins.mapAttrs (_: v: {flake = v;})
+        (
+          lib.filterAttrs
+          (_: value: value ? outputs)
+          inputs
+        );
+    in
+      nixRegistry;
+
+    gc.automatic = false;
+  };
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;

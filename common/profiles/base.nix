@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   inputs,
   lib,
@@ -10,15 +9,11 @@
     settings.system-features = ["nixos-test" "benchmark" "big-parallel" "kvm"];
 
     registry = let
-      nixRegistry =
-        builtins.mapAttrs (_: v: {flake = v;})
-        (
-          lib.filterAttrs
-          (_: value: value ? outputs)
-          inputs
-        );
+      nixRegistry = {
+        nixpkgs = {flake = inputs.nixpkgs;};
+      };
     in
-      nixRegistry;
+      lib.mkDefault nixRegistry;
 
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];
     settings.extra-sandbox-paths = ["/bin/sh=${pkgs.bash}/bin/sh"];
