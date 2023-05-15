@@ -143,9 +143,16 @@ function send_satellites_ {
     local trajectory_port=$2
     local dest_path=$3
     local path=$4
+    local chown_target=$5
 
+    echo "[solarsys] Deploying satellite: |$name| to destination: |$dest_path|"
     ssh -t "root@$trajectory_host" -p "$trajectory_port" "mkdir -p $(dirname "$dest_path")" 2> /dev/null
     rsync -q -e "ssh -p $trajectory_port" -r "$path" "root@[$trajectory_host]:$dest_path"
+
+    if [[ -n "$chown_target" && ! "$chown_target" == "null" ]]; then
+        echo "[solarsys] Chowning satellite: |$dest_path| to: |$chown_target|"
+        ssh -t "root@$trajectory_host" -p "$trajectory_port" "chown $chown_target $dest_path" 2> /dev/null
+    fi
 }
 
 function send_satellites {
@@ -168,19 +175,13 @@ function send_satellites {
             dest_path="/run/keys/$satellite"
         fi
 
-        echo "[solarsys] Deploying satellite: |$name| to destination: |$dest_path|"
-
         local path
         path="$(jq -c -r '.value.path' <<< "$satellite")"
         if [[ -n "$path" && ! "$path" == "null" ]]; then
-            send_satellites_ "$trajectory_host" "$trajectory_port" "$dest_path" "$path" &
-
             local chown_target
             chown_target="$(jq -c -r '.value.chown' <<< "$satellite")"
-            if [[ -n "$chown_target" && ! "$chown_target" == "null" ]]; then
-                echo "[solarsys] Chowning satellite: |$dest_path| to: |$chown_target|"
-                ssh -t "root@$trajectory_host" -p "$trajectory_port" "chown $chown_target $dest_path" 2> /dev/null
-            fi
+
+            send_satellites_ "$trajectory_host" "$trajectory_port" "$dest_path" "$path" "$chown_target" &
         fi
     done
 
