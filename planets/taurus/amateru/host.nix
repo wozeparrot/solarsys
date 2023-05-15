@@ -67,9 +67,6 @@
   # --- metrics ---
   containered-services.metrics.enable = true;
 
-  # --- transmission ---
-  containered-services.transmission.enable = true;
-
   # --- remote filesystem access ---
   fileSystems = {
     "/export/anime" = {
