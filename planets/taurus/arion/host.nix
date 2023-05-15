@@ -70,7 +70,7 @@
 
         serviceConfig = {
           ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/nextcloud";
-          ExecStart = "${pkgs.seaweedfs}/bin/weed mount -dir /var/lib/nextcloud -filer.path /services/nextcloud -filer=10.11.235.1:9302 -concurrentWriters 128";
+          ExecStart = "${pkgs.seaweedfs}/bin/weed mount -dir /var/lib/nextcloud -filer.path /services/nextcloud -filer=10.11.235.1:9302";
           ExecStartPost = "${pkgs.coreutils}/bin/sleep 10";
           Restart = "on-failure";
           RestartSec = "10s";
@@ -162,7 +162,7 @@
 
         serviceConfig = {
           ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/motioneye";
-          ExecStart = "${pkgs.seaweedfs}/bin/weed mount -dir /var/lib/motioneye -filer.path /services/motioneye -filer=10.11.235.1:9302 -concurrentWriters 128";
+          ExecStart = "${pkgs.seaweedfs}/bin/weed mount -dir /var/lib/motioneye -filer.path /services/motioneye -filer=10.11.235.1:9302";
           ExecStartPost = "${pkgs.coreutils}/bin/sleep 10";
           Restart = "on-failure";
           RestartSec = "10s";

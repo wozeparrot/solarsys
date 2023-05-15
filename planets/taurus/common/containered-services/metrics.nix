@@ -54,7 +54,7 @@ in {
 
           serviceConfig = {
             ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/metrics";
-            ExecStart = "${pkgs.seaweedfs}/bin/weed -v=2 mount -dir /var/lib/metrics -filer.path /services/metrics -filer=10.11.235.1:9302 -concurrentWriters 128";
+            ExecStart = "${pkgs.seaweedfs}/bin/weed -v=2 mount -dir /var/lib/metrics -filer.path /services/metrics -filer=10.11.235.1:9302";
             ExecStartPost = "${pkgs.coreutils}/bin/sleep 10";
             Restart = "on-failure";
             RestartSec = "10s";
