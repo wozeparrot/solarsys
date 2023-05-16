@@ -37,6 +37,7 @@ in {
   };
   services.ensky = {
     enable = true;
+    package = pkgs.ensky.ensky;
     settings = {
       interface = "orion";
       gossip_address = "0.0.0.0";
