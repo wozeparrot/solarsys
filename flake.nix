@@ -17,12 +17,6 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     # overlays + extra package sets + extra modules
-    aninarr.url = "git+ssh://git@github.com/wozeparrot/aninarr.git?ref=main";
-    aninarr.inputs = {
-      # nixpkgs.follows = "nixpkgs";
-      flake-utils.follows = "flake-utils";
-    };
-
     wozey.url = "git+ssh://git@github.com/wozeparrot/wozey.service.git?ref=main";
     wozey.inputs = {
       nixpkgs.follows = "nixpkgs";
@@ -71,8 +65,6 @@
 
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
-    webcord.url = "github:fufexan/webcord-flake";
-
     nom.url = "github:maralorn/nix-output-monitor";
     nom.inputs = {
       flake-utils.follows = "flake-utils";
@@ -96,9 +88,6 @@
   }: let
     # external/third-party stuff
     external = {
-      aninarr = {
-        inherit (inputs.aninarr) packages;
-      };
       wozey = {
         inherit (inputs.wozey) packages;
       };
@@ -135,13 +124,6 @@
         cache = {
           substituters = ["https://nixpkgs-wayland.cachix.org"];
           trusted-public-keys = ["nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="];
-        };
-      };
-      webcord = {
-        inherit (inputs.webcord) packages;
-        cache = {
-          substituters = ["https://webcord.cachix.org"];
-          trusted-public-keys = ["webcord.cachix.org-1:l555jqOZGHd2C9+vS8ccdh8FhqnGe8L78QrHNn+EFEs="];
         };
       };
       nom = {
@@ -209,6 +191,8 @@
 
           installPhase = ''
             mkdir -p $out/bin/
+            cp *.bash $out/bin/
+
             install -D ss $out/bin/
             install -D ssk $out/bin/
             install -D solarsys-remote.sh $out/bin/

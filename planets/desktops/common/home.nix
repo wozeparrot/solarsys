@@ -58,7 +58,6 @@
     libsForQt5.kdenlive
     nheko
     openscad
-    pkgs.aninarr.aninarc
     prismlauncher
     signal-desktop
     sioyek
@@ -66,7 +65,6 @@
     ss.horizon
     thunderbird
     transmission-gtk
-    webcord.webcord
     zathura
 
     # gaming stuff

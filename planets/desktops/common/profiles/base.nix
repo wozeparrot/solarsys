@@ -34,6 +34,12 @@
   programs.firejail.enable = true;
   programs.nix-ld.enable = true;
 
+  programs.fish.interactiveShellInit = ''
+    function bonk
+      nix shell ${builtins.toString ../../../../.}#$argv
+    end
+  '';
+
   # services
   ## oom killer
   services.earlyoom = {

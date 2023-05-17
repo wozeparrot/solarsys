@@ -21,7 +21,6 @@
       force-window = true;
       pause = false;
       save-position-on-quit = true;
-      osc = false;
       border = false;
       gpu-api = "auto";
       gpu-context = "wayland";
@@ -44,17 +43,69 @@
 
       blend-subtitles = true;
 
-      scale = "ewa_lanczos";
-      dscale = "mitchell";
-      cscale = "spline36";
+      scale = "ewa_robidouxsharp";
+      dscale = "ewa_robidouxsharp";
+      cscale = "ewa_robidouxsharp";
       linear-downscaling = false;
-      sigmoid-upscaling = false;
+      correct-downscaling = true;
+      sigmoid-upscaling = true;
+
+      tone-mapping = "clip";
 
       demuxer-mkv-subtitle-preroll = true;
 
       script-opts-append = "ytdl_hook-ytdl_path=yt-dlp";
 
       native-keyrepeat = true;
+    };
+    profiles = {
+      "bt.2100-pq" = {
+        profile-cond = ''get("video-params/primaries") == "bt.2020" and get("video-params/gamma") == "pq"'';
+        profile-restore = "copy";
+
+        target-trc = "pq";
+        target-prim = "bt.2020";
+
+        glsl-shaders = [
+          "~~/shaders/hdr-toys/utils/clip_both.glsl"
+          "~~/shaders/hdr-toys/transfer-function/pq_to_l.glsl"
+          "~~/shaders/hdr-toys/transfer-function/l_to_linear.glsl"
+          "~~/shaders/hdr-toys/utils/chroma_correction.glsl"
+          "~~/shaders/hdr-toys/tone-mapping/dynamic.glsl"
+          "~~/shaders/hdr-toys/gamut-mapping/compress.glsl"
+          "~~/shaders/hdr-toys/transfer-function/linear_to_bt1886.glsl"
+        ];
+      };
+      "bt.2100-hlg" = {
+        profile-cond = ''get("video-params/primaries") == "bt.2020" and get("video-params/gamma") == "hlg"'';
+        profile-restore = "copy";
+
+        target-trc = "hlg";
+        target-prim = "bt.2020";
+
+        glsl-shaders = [
+          "~~/shaders/hdr-toys/utils/clip_both.glsl"
+          "~~/shaders/hdr-toys/transfer-function/hlg_to_l.glsl"
+          "~~/shaders/hdr-toys/transfer-function/l_to_linear.glsl"
+          "~~/shaders/hdr-toys/utils/chroma_correction.glsl"
+          "~~/shaders/hdr-toys/tone-mapping/dynamic.glsl"
+          "~~/shaders/hdr-toys/gamut-mapping/compress.glsl"
+          "~~/shaders/hdr-toys/transfer-function/linear_to_bt1886.glsl"
+        ];
+      };
+      "bt.2020" = {
+        profile-cond = ''get("video-params/primaries") == "bt.2020" and get("video-params/gamma") == "bt.1886"'';
+        profile-restore = "copy";
+
+        target-trc = "bt.1886";
+        target-prim = "bt.2020";
+
+        glsl-shaders = [
+          "~~/shaders/hdr-toys/transfer-function/bt1886_to_linear.glsl"
+          "~~/shaders/hdr-toys/gamut-mapping/compress.glsl"
+          "~~/shaders/hdr-toys/transfer-function/linear_to_bt1886.glsl"
+        ];
+      };
     };
     bindings = {
       b = "vf toggle format=colorlevels=full";

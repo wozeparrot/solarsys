@@ -24,10 +24,6 @@
     };
   });
   boot.kernelPatches = [
-    {
-      name = "0001-amd-pstate-epp";
-      patch = ./patches/kernel/0001-amd-pstate-epp.patch;
-    }
   ];
   boot.kernelParams = ["amd_pstate=active" "psi=1"];
 
@@ -101,7 +97,12 @@
 
   services.asusd = {
     enable = true;
-    asusdConfig = '''';
+    asusdConfig = ''
+      (
+        bat_charge_limit: 60,
+        panel_od: false,
+      )
+    '';
   };
 
   security.pam.loginLimits = [
