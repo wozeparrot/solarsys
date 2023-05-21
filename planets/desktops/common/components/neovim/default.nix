@@ -17,7 +17,7 @@
 in {
   programs.neovim = {
     enable = true;
-    withNodeJs = false;
+    withNodeJs = true;
 
     extraConfig = builtins.concatStringsSep "\n" [
       ''
@@ -62,8 +62,6 @@ in {
       alejandra
       stylua
 
-      # need node 16 for copilot
-      nodejs-16_x
       nodePackages.vscode-langservers-extracted
     ];
 
