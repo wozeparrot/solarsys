@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   programs.kitty = {
     enable = true;
     font = {
@@ -30,7 +30,7 @@
       # color7 = "#bbb3c1";
       # color15 = "#f8f0f8";
 
-      background_opacity = "0.925";
+      background_opacity = lib.mkForce "0.915";
 
       hide_window_decorations = "no";
       window_padding_width = 8;
