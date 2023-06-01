@@ -259,15 +259,13 @@ nnoremap("<leader>xr", "<cmd>TroubleToggle lsp_references<CR>")
 lazy_require("lspsaga", {
     lightbulb = { enable = false },
 })
-nnoremap("<leader>lf", "<cmd>lua require('lspsaga.provider').lsp_finder()<CR>")
-nnoremap("<leader>lh", "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>")
-nnoremap("<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>")
-nnoremap("<C-f>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>")
-nnoremap("<leader>lr", "<cmd>lua require('lspsaga.rename').rename()<CR>")
-nnoremap("<leader>ld", "<cmd>lua require('lspsaga.provider').preview_definition()<CR>")
-nnoremap("<leader>ll", "<cmd>lua require('lspsaga.diagnostic').show_line_diagnostics()<CR>")
-nnoremap("<leader>lk", "<cmd>lua require('lspsaga.diagnostic').show_cursor_diagnostics()<CR>")
-nnoremap("<leader>ca", "<cmd>lua require('lspsaga.codeaction').code_action()<CR>")
+nnoremap("<leader>lf", "<cmd>Lspsaga lsp_finder<CR>")
+nnoremap("<leader>ll", "<cmd>Lspsaga hover_doc<CR>")
+nnoremap("<leader>lr", "<cmd>Lspsaga rename<CR>")
+nnoremap("<leader>ld", "<cmd>Lspsaga peek_definition<CR>")
+nnoremap("<leader>lg", "<cmd>Lspsaga goto_definition<CR>")
+nnoremap("<leader>lh", "<cmd>Lspsaga outline<CR>")
+nnoremap("<leader>ca", "<cmd>Lspsaga code_action<CR>")
 
 --- setup language servers ---
 local lspconfig = require("lspconfig")
