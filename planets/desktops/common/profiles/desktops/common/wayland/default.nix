@@ -189,7 +189,7 @@
           };
 
           "backlight" = {
-            format = "{percent}% ";
+            format = "{percent}% ";
             on-scroll-up = "light -A 1";
             on-scroll-down = "light -U 1";
           };

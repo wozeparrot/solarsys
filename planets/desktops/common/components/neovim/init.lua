@@ -146,7 +146,7 @@ require("bufferline").setup({
 			icon = "▎",
 			style = "icon",
 		},
-		buffer_close_icon = "",
+		buffer_close_icon = "",
 		modified_icon = "●",
 		close_icon = "",
 		left_trunc_marker = "",
@@ -256,8 +256,9 @@ nnoremap("<leader>xl", "<cmd>TroubleToggle loclist<CR>")
 nnoremap("<leader>xr", "<cmd>TroubleToggle lsp_references<CR>")
 
 -- lspsaga
-local saga = require("lspsaga")
-saga.init_lsp_saga()
+lazy_require("lspsaga", {
+    lightbulb = { enable = false },
+})
 nnoremap("<leader>lf", "<cmd>lua require('lspsaga.provider').lsp_finder()<CR>")
 nnoremap("<leader>lh", "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>")
 nnoremap("<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>")

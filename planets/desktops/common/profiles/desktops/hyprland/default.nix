@@ -18,9 +18,15 @@
   # system config
   environment.systemPackages = with pkgs; [
     hyprland.hyprland
-    (pkgs.writeShellScriptBin "hl-switchworkspacetoactivemonitor" ''
-      ${pkgs.hyprland-contrib.try_swap_workspace}/bin/try_swap_workspace "$1"
-    '')
+    (pkgs.writeShellScriptBin "hl-switchworkspacetoactivemonitor" (let
+      try_swap_workspace = pkgs.hyprland-contrib.try_swap_workspace.overrideAttrs (_: {
+        postPatch = ''
+          substituteInPlace try_swap_workspace --replace "-x Hyprland" "Hyprland"
+        '';
+      });
+    in ''
+      ${try_swap_workspace}/bin/try_swap_workspace "$1"
+    ''))
   ];
 
   xdg.portal = {
