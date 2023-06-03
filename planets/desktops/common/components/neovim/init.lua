@@ -260,11 +260,11 @@ lazy_require("lspsaga", {
     lightbulb = { enable = false },
 })
 nnoremap("<leader>lf", "<cmd>Lspsaga lsp_finder<CR>")
-nnoremap("<leader>ll", "<cmd>Lspsaga hover_doc<CR>")
+nnoremap("<leader>lh", "<cmd>Lspsaga hover_doc<CR>")
 nnoremap("<leader>lr", "<cmd>Lspsaga rename<CR>")
 nnoremap("<leader>ld", "<cmd>Lspsaga peek_definition<CR>")
 nnoremap("<leader>lg", "<cmd>Lspsaga goto_definition<CR>")
-nnoremap("<leader>lh", "<cmd>Lspsaga outline<CR>")
+nnoremap("<leader>ll", "<cmd>Lspsaga outline<CR>")
 nnoremap("<leader>ca", "<cmd>Lspsaga code_action<CR>")
 
 --- setup language servers ---
