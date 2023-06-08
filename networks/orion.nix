@@ -31,6 +31,13 @@
     endpoints = [];
   }
   {
+    hostname = "auriga";
+    type = "server";
+    address = "10.11.235.22";
+    pubkey = "V3h0F4ERTu+BVeEN7tsLVnH/mPIzqTLcgM/ZtJECnDY=";
+    endpoints = [];
+  }
+  {
     hostname = "wangshu";
     type = "server";
     address = "10.11.235.11";

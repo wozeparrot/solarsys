@@ -14,9 +14,7 @@
     kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
     loader = {
-      # uncomment the following line when building an sd image
       generic-extlinux-compatible.enable = true;
-      # raspberryPi.enable = true;
       grub.enable = false;
     };
   };

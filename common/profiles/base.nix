@@ -38,7 +38,6 @@
 
       # extra utils
       bat
-      bottom
       btop
       curl
       du-dust
