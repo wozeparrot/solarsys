@@ -96,7 +96,7 @@ in {
           description = "seaweedfs master server";
 
           serviceConfig = {
-            ExecStart = "${pkgs.master.seaweedfs}/bin/weed master -ip ${cfg.bindAddress} -port ${toString cfg.masterPort} -mdir '/var/lib/seaweedfs/master/' -volumeSizeLimitMB=${toString cfg.volumeSizeLimitMB} -defaultReplication=001 -metricsPort ${toString (cfg.masterPort + 20000)}";
+            ExecStart = "${pkgs.master.seaweedfs}/bin/weed master -ip ${cfg.bindAddress} -port ${toString cfg.masterPort} -mdir '/var/lib/seaweedfs/master/' -volumeSizeLimitMB=${toString cfg.volumeSizeLimitMB} -defaultReplication=010 -metricsPort ${toString (cfg.masterPort + 20000)}";
             Restart = "on-failure";
             RestartSec = "10s";
           };
