@@ -6,6 +6,7 @@
       size = 12;
     };
     settings = {
+      editor = "nvim";
       disable_ligatures = "cursor";
       scrollback_lines = 10000;
       enable_audio_bell = false;
