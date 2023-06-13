@@ -7,7 +7,6 @@
     ../common/containered-services/seaweedfs-master.nix
     ../common/containered-services/seaweedfs-node.nix
     ../common/containered-services/metrics.nix
-    ../common/containered-services/transmission.nix
   ];
 
   # --- mount disks ---
