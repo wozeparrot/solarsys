@@ -107,7 +107,7 @@
         home = "/var/lib/nextcloud/nextcloud";
         appstoreEnable = false;
         config = {
-          extraTrustedDomains = ["192.168.0.194"];
+          extraTrustedDomains = ["192.168.0.194" "192.168.2.31"];
 
           adminuser = "root";
           adminpassFile = "/keys/nextcloud_adminpass";
