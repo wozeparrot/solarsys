@@ -1,6 +1,5 @@
 {
   stdenv,
-  boost,
   coreutils,
   cppzmq,
   curl,
@@ -25,13 +24,13 @@
 }:
 stdenv.mkDerivation rec {
   pname = "horizon-eda";
-  version = "c3bf67ec43b80c9b5f797aca694eb8e485c8509f";
+  version = "2.5.0";
 
   src = fetchFromGitHub {
     owner = "horizon-eda";
     repo = "horizon";
-    rev = "${version}";
-    sha256 = "sha256-+425GVlG+E6RaS7q4Ry51FpE8+/NQNURGgnKJPq/o1g=";
+    rev = "v${version}";
+    sha256 = "sha256-UcjbDJR6shyETpanNkRoH8LF8r6gFjsyNHVSCMHKqS8=";
   };
 
   buildInputs = [
@@ -54,7 +53,6 @@ stdenv.mkDerivation rec {
   ];
 
   nativeBuildInputs = [
-    boost.dev
     pkg-config
     wrapGAppsHook
   ];
