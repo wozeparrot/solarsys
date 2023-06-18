@@ -24,10 +24,18 @@
       options = "--delete-older-than 14d";
     };
 
-    extraOptions = ''
-      experimental-features = nix-command flakes
-      min-free = 536870912
-    '';
+    settings = {
+      connect-timeout = 5;
+      experimental-features = ["nix-command" "flakes"];
+      log-lines = 25;
+      max-free = 1024 * 1024 * 1024;
+      min-free = 128 * 1024 * 1024;
+      builders-use-substitutes = true;
+    };
+
+    daemonCPUSchedPolicy = "batch";
+    daemonIOSchedClass = "idle";
+    daemonIOSchedPriority = 7;
   };
 
   environment = {
@@ -84,7 +92,13 @@
   # disable manually creating users
   users.mutableUsers = false;
 
+  # clean tmp on boot
   boot.tmp.cleanOnBoot = true;
+
+  # networking
+  systemd.services.NetworkManager-wait-online.enable = false;
+  systemd.network.wait-online.enable = false;
+  systemd.services.systemd-resolved.stopIfChanged = false;
 
   # time
   time.timeZone = "America/Toronto";

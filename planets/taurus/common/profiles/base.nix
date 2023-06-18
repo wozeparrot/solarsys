@@ -24,8 +24,14 @@
     nixos.enable = false;
   };
 
-  # Remove unneeded locales
+  # remove unneeded locales
   i18n.supportedLocales = [(config.i18n.defaultLocale + "/UTF-8")];
+
+  # remove fonts
+  fonts.fontconfig.enable = lib.mkDefault false;
+
+  # remove sound
+  sound.enable = lib.mkDefault false;
 
   # enable ssh
   services.openssh.enable = lib.mkForce true;
@@ -33,19 +39,29 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKPL+OWmcGo4IlL+LUz9uEgOH8hk0JIN3DXEV8sdgxPB wozeparrot"
   ];
 
-  # Reboot on kernel panic
+  # reboot on kernel panic
   boot.kernelParams = ["panic=1" "boot.panic_on_fail"];
 
-  # no systemd emergency mode
+  # systemd tweaks
   systemd.enableEmergencyMode = false;
+  systemd.sleep.extraConfig = ''
+    AllowSuspend=no
+    AllowHibernation=no
+  '';
 
-  # Firewall
+  # firewall
   networking = {
     firewall = {
       enable = true;
       allowPing = true;
       allowedTCPPorts = [22];
     };
+  };
+
+  # use tcp bbr
+  boot.kernel.sysctl = {
+    "net.core.default_qdisc" = "fq";
+    "net.ipv4.tcp_congestion_control" = "bbr";
   };
 
   # cleanup
