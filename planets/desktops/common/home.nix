@@ -34,7 +34,7 @@
     r128gain
     ranger
     ruby
-    spotdl
+    # spotdl # TODO: broken
     # topydo # TODO: broken
     unzip
     yt-dlp
