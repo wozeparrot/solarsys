@@ -61,7 +61,7 @@
       };
     };
 
-    config = {cconfig, ...}: {
+    config = {cconfig, ...}: rec {
       # mount seaweedfs
       systemd.services."seaweedfs-mount" = {
         description = "mount seaweedfs for/in container";
@@ -106,6 +106,14 @@
 
         home = "/var/lib/nextcloud/nextcloud";
         appstoreEnable = false;
+        extraApps = with services.nextcloud.package.packages.apps; {
+          inherit notes;
+        };
+        extraAppsEnable = true;
+
+        configureRedis = true;
+        caching.apcu = true;
+
         config = {
           extraTrustedDomains = ["192.168.0.194" "192.168.2.31"];
 
@@ -121,6 +129,9 @@
           preview_max_y = 1024;
         };
       };
+
+      # don't persist redis
+      services.redis.servers.nextcloud.save = [];
 
       system.stateVersion = config.system.stateVersion;
     };
