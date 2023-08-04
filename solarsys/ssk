@@ -107,6 +107,33 @@ function build_all {
     done
 }
 
+function build_planet {
+    local planet=$1
+    local output=$2
+
+    echo "[solarsys] Building output: |$output| for planet: |$planet|"
+
+    kitty @ goto-layout grid
+
+    local moons
+    readarray -t moons <<< "$(get_moons "$planet" | jq -c -r '.[]')"
+
+    for moon in "${moons[@]}"; do
+        if [[ -z "$moon" ]]; then
+            break
+        fi
+
+        # check if last moon
+        if [[ "$moon" == "${moons[-1]}" ]]; then
+            ss build "$planet" "$moon" "$output"
+        else
+            kitty @ launch --title "$planet/$moon" --cwd current
+            kitty @ send-text --match "title:$planet/$moon" "ss build $planet $moon $output\\n"
+            kitty @ send-text --match "title:$planet/$moon" "exit\\n"
+        fi
+    done
+}
+
 # prints usage of solarsys
 function print_usage {
     ercho "Usage: $0 <subcommand>"
@@ -117,6 +144,7 @@ function print_usage {
     ercho "  deploy-planet <planet>         |  Deploys all moons in <planet>"
     ercho "  deploy-orbit <orbit>           |  Deploys all moons with <orbit>"
     ercho "  build-all <output>             |  Builds <output> for all moons"
+    ercho "  build-planet <planet> <output> |  Builds <output> for <planet>"
     exit 1
 }
 
@@ -162,6 +190,22 @@ function main {
             fi
 
             build_all "$output"
+            ;;
+        build-planet)
+            local planet=$2
+            local output=$3
+            if [[ -z "$planet" ]]; then
+                ercho "error~ No planet specified"
+                ercho
+                print_usage
+            fi
+            if [[ -z "$output" ]]; then
+                ercho "error~ No output specified"
+                ercho
+                print_usage
+            fi
+
+            build_planet "$planet" "$output"
             ;;
         *)
             ercho "error~ Unknown subcommand: $subcommand"
