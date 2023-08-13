@@ -53,6 +53,7 @@
     godot
     jamesdsp
     keepassxc
+    kicad
     krita
     libreoffice-fresh
     libsForQt5.kdenlive
