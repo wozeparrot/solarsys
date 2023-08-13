@@ -73,7 +73,10 @@
 
   programs.nm-applet.enable = true;
   programs.droidcam.enable = true;
-  programs.wireshark.enable = true;
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark;
+  };
   programs.gamemode.enable = true;
   programs.fuse.userAllowOther = true;
   programs.corectrl.enable = true;
@@ -159,8 +162,8 @@
       enableOnBoot = false;
     };
 
-    waydroid.enable = true;
-    lxd.enable = true;
+    # waydroid.enable = true;
+    # lxd.enable = true;
   };
 
   # fileSystems."/mnt/ss/infra0/nas0" = {
@@ -169,7 +172,7 @@
   #   options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
   # };
 
-  users.users.woze.extraGroups = ["docker" "libvirtd" "video" "render" "vboxusers" "libvirt" "corectrl" "adbusers"];
+  users.users.woze.extraGroups = ["docker" "libvirtd" "video" "render" "vboxusers" "libvirt" "corectrl" "adbusers" "wireshark"];
   home-manager.users.woze = ./home.nix;
 
   system.stateVersion = "22.11";
