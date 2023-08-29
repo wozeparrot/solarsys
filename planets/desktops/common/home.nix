@@ -50,7 +50,6 @@
     gimp
     gnome.file-roller
     gnome.gnome-disk-utility
-    godot
     jamesdsp
     keepassxc
     kicad

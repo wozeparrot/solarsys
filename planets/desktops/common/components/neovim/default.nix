@@ -79,7 +79,7 @@ in {
       (pluginGit "lewis6991/impatient.nvim" "c90e273f7b8c50a02f956c24ce4804a47f18162e" "main")
       # lsp
       lspkind-nvim
-      lspsaga-nvim-original
+      lspsaga-nvim
       null-ls-nvim
       nvim-code-action-menu
       nvim-lspconfig

@@ -156,6 +156,7 @@
           "tray" = {
             icon-size = 15;
             spacing = 7;
+            show-passive-items = true;
           };
 
           "battery" = {
