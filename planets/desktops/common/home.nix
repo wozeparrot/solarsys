@@ -42,7 +42,14 @@
     # applications
     antimicroX
     antimony
-    armcord
+    (
+      armcord.overrideAttrs (oldAttrs: {
+        src = fetchurl {
+          url = "https://github.com/ArmCord/ArmCord/releases/download/v3.2.4-e27/ArmCord_3.2.4_amd64.deb";
+          hash = "sha256-MOzd82yMVgG5tOIoFom7dCzeaMZXCfmSmQg3TUjuh6k=";
+        };
+      })
+    )
     audacity
     blender
     freecad
