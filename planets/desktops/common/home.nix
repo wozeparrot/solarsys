@@ -91,6 +91,7 @@
     # wayland/desktop stuff
     grim
     slurp
+    sunshine
     wf-recorder
     wl-clipboard
     xclip

@@ -32,12 +32,21 @@ _: {
 
           10001 # roc
           10002 # roc
+
+          47984 # sunshine
+          47989 # sunshine
+          48010 # sunshine
         ];
         allowedUDPPorts = [
           29999 # extra
 
           10001 # roc
           10002 # roc
+
+          47998 # sunshine
+          47999 # sunshine
+          48000 # sunshine
+          48002 # sunshine
         ];
       };
     in {
