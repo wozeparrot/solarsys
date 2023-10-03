@@ -8,8 +8,8 @@
       bind_to_address "10.11.235.99"
 
       audio_output {
-        type "pulse"
-        name "pulse audio"
+        type "pipewire"
+        name "Pipewire"
       }
 
       audio_output {
@@ -20,10 +20,14 @@
       }
 
       audio_output {
-        type "fifo"
-        name "glava feed"
-        path "/tmp/mpd_glava.fifo"
-        format "22050:16:2"
+        type "httpd"
+        name "HTTP stream"
+        encoder "opus"
+        port "8000"
+        bitrate "160000"
+        format "44100:16:2"
+        always_on "yes"
+        tags "yes"
       }
 
       replaygain "auto"
