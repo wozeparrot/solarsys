@@ -22,6 +22,8 @@
     appimage-run
     beets-unstable
     chromaprint
+    # spotdl # TODO: broken
+    # topydo # TODO: broken
     ffmpeg
     gurk-rs
     imv
@@ -33,9 +35,8 @@
     python3
     r128gain
     ranger
+    restic
     ruby
-    # spotdl # TODO: broken
-    # topydo # TODO: broken
     unzip
     yt-dlp
 
