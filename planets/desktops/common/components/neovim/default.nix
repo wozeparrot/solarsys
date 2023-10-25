@@ -45,15 +45,16 @@ in {
       cargo
       clang-tools
       deno
+      gopls
       jdt-language-server
       ltex-ls
+      lua-language-server
       nil
       nodePackages.bash-language-server
       nodePackages.pyright
       rust-analyzer
       rustc
       rustfmt
-      lua-language-server
       svls
       verible
       zls.zls

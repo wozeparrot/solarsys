@@ -371,6 +371,10 @@ lspconfig.ltex.setup({
 		},
 	},
 })
+-- go
+lspconfig.go.setup({
+    on_attach = default_on_attach,
+})
 
 ---- Treesitter Config ----
 local parser_install_dir = vim.fn.stdpath("cache") .. "/treesitters"
