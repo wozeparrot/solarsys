@@ -15,7 +15,14 @@
         + ''
           plugin = ${pkgs.hyprland-split-monitor-workspaces.split-monitor-workspaces}/lib/libsplit-monitor-workspaces.so
         '';
-      onChange = "HYPRLAND_INSTANCE_SIGNATURE=$(ls -w 1 /tmp/hypr | tail -1) ${pkgs.hyprland.hyprland}/bin/hyprctl reload config-only}";
+      onChange = ''
+        (
+          shopt -s nullglob
+          for instance in /tmp/hypr/*; do
+            HYPRLAND_INSTANCE_SIGNATURE=''${instance##*/} ${pkgs.hyprland.hyprland}/bin/hyprctl reload config-only || true
+          done
+        )
+      '';
     };
   };
 
