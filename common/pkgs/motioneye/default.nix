@@ -38,7 +38,7 @@ in
       "--prefix PATH : ${lib.makeBinPath bins}"
     ];
 
-    propagatedBuildInputs = with python3Packages; [jinja2 pillow pycurl boto3 tornado];
+    propagatedBuildInputs = with python3Packages; [jinja2 pillow pycurl boto3 tornado setuptools];
 
     doCheck = false;
   }
