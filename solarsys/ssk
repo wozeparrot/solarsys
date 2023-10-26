@@ -100,8 +100,7 @@ function build_all {
                 ss build "$planet" "$moon" "$output"
             else
                 kitty @ launch --title "$planet/$moon" --cwd current
-                kitty @ send-text --match "title:$planet/$moon" "ss build $planet $moon $output\\n"
-                kitty @ send-text --match "title:$planet/$moon" "exit\\n"
+                kitty @ send-text --match "title:$planet/$moon" "ss build $planet $moon $output && exit\\n"
             fi
         done
     done
