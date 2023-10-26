@@ -19,13 +19,9 @@ in {
     enable = true;
     withNodeJs = true;
 
-    extraConfig = builtins.concatStringsSep "\n" [
-      ''
-        lua << EOF
-        ${lib.strings.fileContents ./util.lua}
-        ${lib.strings.fileContents ./init.lua}
-        EOF
-      ''
+    extraLuaConfig = builtins.concatStringsSep "\n" [
+      (lib.strings.fileContents ./util.lua)
+      (lib.strings.fileContents ./init.lua)
     ];
 
     extraPackages = with pkgs; [
@@ -108,6 +104,7 @@ in {
       nvim-cmp
       # indent-blankline
       indent-blankline-nvim
+      rainbow-delimiters-nvim
       # nvim-cursorline
       nvim-cursorline
       # nvim-web-devicons

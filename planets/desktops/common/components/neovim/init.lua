@@ -568,19 +568,40 @@ local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { text = "" } }))
 
 ---- indent-blankline Config ----
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
-	callback = function()
-		vim.defer_fn(function()
-			vim.cmd("highlight IndentBlankline guifg=#151510 gui=nocombine")
-		end, 100)
-	end,
-})
+local ibl_hooks = require("ibl.hooks")
+local ibl_highlight = {
+	"RainbowRed",
+	"RainbowYellow",
+	"RainbowBlue",
+	"RainbowOrange",
+	"RainbowGreen",
+	"RainbowViolet",
+	"RainbowCyan",
+}
+vim.g.rainbow_delimiters = { highlight = ibl_highlight }
+ibl_hooks.register(ibl_hooks.type.HIGHLIGHT_SETUP, function()
+	vim.api.nvim_set_hl(0, "IndentBlankline", { fg = "#151510" })
+	vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#a52e4d" })
+	vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#996f06" })
+	vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#006fc1" })
+	vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#d8272a" })
+	vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#228039" })
+	vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#aa3c9f" })
+	vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#33b3f4" })
+end)
 require("ibl").setup({
-    -- char_highlight_list = { "IndentBlankline" },
-	-- show_current_context = true,
-	-- show_current_context_start = true,
-	-- show_trailing_blankline_indent = false,
+	indent = {
+		highlight = {
+			"IndentBlankline",
+		},
+		char = "▎",
+		tab_char = "▎",
+	},
+	scope = {
+		highlight = ibl_highlight,
+	},
 })
+ibl_hooks.register(ibl_hooks.type.SCOPE_HIGHLIGHT, ibl_hooks.builtin.scope_highlight_from_extmark)
 
 ---- nvim-cursorline Config ----
 vim.g.cursorline_timeout = 500

@@ -13,7 +13,6 @@
       hyprpicker.hyprpicker
       pngquant
       slurp
-      ss.zscroll
       swappy
       swww
       wayvnc
@@ -221,7 +220,9 @@
 
           "custom/media" = {
             format = "{}";
-            exec = "${./bar-mpd-zscroll.sh}";
+            exec = ''
+              ${pkgs.ss.zscroll}/bin/zscroll -p " === " -l 50 -b "  Stopped" -d 0.2 -u t "${pkgs.mpc-cli}/bin/mpc current" -M "${pkgs.mpc-cli}/bin/mpc status" -m "playing" "-s1 -b '  '" -m "paused" "-s0 -b '  '"
+            '';
             escape = true;
             on-click = "${pkgs.mpc-cli}/bin/mpc toggle";
             smooth-scroll-threshold = 10;
