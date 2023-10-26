@@ -31,7 +31,7 @@
       # color7 = "#bbb3c1";
       # color15 = "#f8f0f8";
 
-      background_opacity = lib.mkForce "0.915";
+      background_opacity = lib.mkForce "0.88";
 
       hide_window_decorations = "no";
       window_padding_width = 8;
