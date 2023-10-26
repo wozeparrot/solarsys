@@ -63,6 +63,11 @@
 
     xdph.url = "github:hyprwm/xdg-desktop-portal-hyprland";
 
+    hyprland-split-monitor-workspaces = {
+      url = "github:Duckonaut/split-monitor-workspaces";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
     nom.url = "github:maralorn/nix-output-monitor";
@@ -118,6 +123,9 @@
       };
       xdph = {
         inherit (inputs.xdph) packages;
+      };
+      hyprland-split-monitor-workspaces = {
+        inherit (inputs.hyprland-split-monitor-workspaces) packages;
       };
       nixpkgs-wayland = {
         inherit (inputs.nixpkgs-wayland) packages;

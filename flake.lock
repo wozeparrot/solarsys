@@ -143,11 +143,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1689112722,
-        "narHash": "sha256-TaSwpzW+CqjcxwsPpSKznGiPAFnQU1nOuIMbeAQ5vUs=",
+        "lastModified": 1698299311,
+        "narHash": "sha256-xY7itEhPjm0eEL9WzmyQQQ1rtPhU/9HQgeCmgGGEtVc=",
         "owner": "wozeparrot",
         "repo": "ensky",
-        "rev": "73edd5e5f1db9bb4b7d40db45b979530b5d6438a",
+        "rev": "4e4099f3b9866eecb56b7c3418731217baa549ff",
         "type": "github"
       },
       "original": {
@@ -489,6 +489,27 @@
         "type": "github"
       }
     },
+    "hyprland-split-monitor-workspaces": {
+      "inputs": {
+        "hyprland": [
+          "hyprland"
+        ],
+        "nix-filter": "nix-filter"
+      },
+      "locked": {
+        "lastModified": 1698179193,
+        "narHash": "sha256-zDW+72enuRGuLLRbO1+pYk8FgRjQrBGksIAOk88OwOI=",
+        "owner": "Duckonaut",
+        "repo": "split-monitor-workspaces",
+        "rev": "2b1abdbf9e9de9ee660540167c8f51903fa3d959",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Duckonaut",
+        "repo": "split-monitor-workspaces",
+        "type": "github"
+      }
+    },
     "hyprpicker": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -613,6 +634,21 @@
       "original": {
         "owner": "nix-community",
         "repo": "nix-eval-jobs",
+        "type": "github"
+      }
+    },
+    "nix-filter": {
+      "locked": {
+        "lastModified": 1693833173,
+        "narHash": "sha256-hlMABKrGbEiJD5dwUSfnw1CQ3bG7KKwDV+Nx3bEZd7U=",
+        "owner": "numtide",
+        "repo": "nix-filter",
+        "rev": "ac030bd9ba98e318e1f4c4328d60766ade8ebe8b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "nix-filter",
         "type": "github"
       }
     },
@@ -857,6 +893,7 @@
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "hyprland-contrib": "hyprland-contrib",
+        "hyprland-split-monitor-workspaces": "hyprland-split-monitor-workspaces",
         "hyprpicker": "hyprpicker",
         "master": "master",
         "n2n": "n2n",
