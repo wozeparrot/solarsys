@@ -101,7 +101,6 @@
     # theme stuff
     gtk-engine-murrine
     qt5.qtwayland
-    xorg.xrdb
   ];
 
   # extra programs
@@ -113,7 +112,7 @@
 
     firefox = {
       enable = true;
-      package = pkgs.firefox-devedition-bin;
+      package = pkgs.firefox-devedition;
     };
 
     chromium = {
@@ -187,6 +186,7 @@
   };
 
   stylix.targets.waybar.enable = false;
+  stylix.targets.xfce.enable = false;
 
   # home stuff
   home = {

@@ -44,7 +44,7 @@
   ## oom killer
   services.earlyoom = {
     enable = true;
-    enableNotifications = true;
+    enableNotifications = false;
   };
   services.udisks2.enable = true;
 

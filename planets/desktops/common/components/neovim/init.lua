@@ -257,7 +257,7 @@ nnoremap("<leader>xr", "<cmd>TroubleToggle lsp_references<CR>")
 
 -- lspsaga
 lazy_require("lspsaga", {
-    lightbulb = { enable = false },
+	lightbulb = { enable = false },
 })
 nnoremap("<leader>lf", "<cmd>Lspsaga lsp_finder<CR>")
 nnoremap("<leader>lh", "<cmd>Lspsaga hover_doc<CR>")
@@ -372,8 +372,8 @@ lspconfig.ltex.setup({
 	},
 })
 -- go
-lspconfig.go.setup({
-    on_attach = default_on_attach,
+lspconfig.gopls.setup({
+	on_attach = default_on_attach,
 })
 
 ---- Treesitter Config ----
@@ -575,11 +575,11 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 		end, 100)
 	end,
 })
-require("indent_blankline").setup({
-	char_highlight_list = { "IndentBlankline" },
-	show_current_context = true,
-	show_current_context_start = true,
-	show_trailing_blankline_indent = false,
+require("ibl").setup({
+    -- char_highlight_list = { "IndentBlankline" },
+	-- show_current_context = true,
+	-- show_current_context_start = true,
+	-- show_trailing_blankline_indent = false,
 })
 
 ---- nvim-cursorline Config ----

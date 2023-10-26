@@ -101,12 +101,6 @@
     enableDefaultPackages = true;
     packages = with pkgs; [
       nerdfonts
-      agave
-      vegur
-      tenderness
-      source-han-mono
-      source-han-sans
-      source-han-serif
 
       # fallback
       noto-fonts
@@ -123,26 +117,21 @@
       defaultFonts = {
         monospace = [
           "Agave Nerd Font"
-          "Source Han Mono"
+          "Noto Sans Mono"
           "Noto Sans Mono CJK JP"
           "Noto Emoji"
-          "Noto Sans"
           "Last Resort"
         ];
         sansSerif = [
-          "Vegur"
-          "Source Han Sans"
+          "Noto Sans"
           "Noto Sans CJK JP"
           "Noto Emoji"
-          "Noto Sans"
           "Last Resort"
         ];
         serif = [
-          "Tenderness"
-          "Source Han Serif"
+          "Noto Serif"
           "Noto Serif CJK JP"
           "Noto Emoji"
-          "Noto Serif"
           "Last Resort"
         ];
       };

@@ -11,16 +11,16 @@
       fuzzel
       grim
       hyprpicker.hyprpicker
-      oguri
       pngquant
       slurp
       ss.zscroll
       swappy
-      swaylock
+      swww
       wayvnc
       wob
       wofi
       wtype
+      xorg.xrdb
 
       wdisplays
       wlr-randr
@@ -44,10 +44,6 @@
         rofi -show emoji
       '')
 
-      (pkgs.writeShellScriptBin "wl-lockscreen" ''
-        swaylock -i ${../../../../misc/lockscreen.jpg} -F
-      '')
-
       (pkgs.writeShellScriptBin "wl-colorpicker" ''
         pkill -9 hyprpicker
         hyprpicker --no-fancy | wl-copy -n
@@ -58,14 +54,6 @@
         cliphist list | rofi -dmenu | cliphist decode | wl-copy
       '')
     ];
-
-    xdg.configFile."oguri/config".text = ''
-      [output *]
-      image=${../../../../misc/wallpaper.png}
-      filter=best
-      scaling-mode=fill
-      anchor=center
-    '';
 
     xdg.configFile."fnott/fnott.ini".source = ./fnott.ini;
 
@@ -122,6 +110,10 @@
     programs.waybar = {
       enable = true;
       package = pkgs.nixpkgs-wayland.waybar;
+      systemd = {
+        enable = true;
+        target = "wayland-desktop-session.target";
+      };
       settings = [
         {
           layer = "top";
@@ -136,17 +128,9 @@
           margin-top = 0;
           margin-bottom = 0;
 
-          modules-left = ["custom/launcher" "hyprland/window" "tray"];
+          modules-left = ["hyprland/window" "tray"];
           modules-center = ["battery" "custom/powerdraw" "pulseaudio" "backlight" "cpu" "memory" "temperature" "custom/gpu-usage" "custom/gpu-usage-2" "clock"];
-          modules-right = ["custom/media" "custom/lock"];
-
-          # modules
-          "custom/launcher" = {
-            format = "";
-            on-click = "wl-launcher";
-            on-click-right = "pkill -9 rofi";
-            tooltip = false;
-          };
+          modules-right = ["custom/media"];
 
           "hyprland/window" = {
             format = "  {}";
@@ -175,37 +159,34 @@
 
           "custom/powerdraw" = {
             interval = 2;
-            exec = "cat /sys/class/power_supply/BAT0/power_now | awk '{ printf \"%.1f\", ($1/1000000) }'";
+            exec = "${pkgs.coreutils}/bin/cat /sys/class/power_supply/BAT0/power_now | ${pkgs.gawk}/bin/awk '{ printf \"%.1f\", ($1/1000000) }'";
             format = "{}W ";
-            on-click = "kitty btm";
             tooltip = false;
           };
 
           "pulseaudio" = {
             format = "{volume}% ";
             format-muted = "";
-            on-click = "pavucontrol";
-            on-click-right = "pamixer -t";
+            on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
+            on-click-right = "${pkgs.pamixer}/bin/pamixer -t";
             tooltip = false;
           };
 
           "backlight" = {
             format = "{percent}% ";
-            on-scroll-up = "light -A 1";
-            on-scroll-down = "light -U 1";
+            on-scroll-up = "${pkgs.light}/bin/light -A 1";
+            on-scroll-down = "${pkgs.light}/bin/light -U 1";
           };
 
           "cpu" = {
             interval = 2;
             format = "{usage}% ";
-            on-click = "kitty btm";
             tooltip = false;
           };
 
           "memory" = {
             interval = 2;
             format = "{}% ";
-            on-click = "kitty btm";
             tooltip = false;
           };
 
@@ -214,23 +195,20 @@
             hwmon-path-abs = "/sys/devices/pci0000:00/0000:00:18.3/hwmon";
             input-filename = "temp1_input";
             format = "{temperatureC}°C ";
-            on-click = "kitty btm";
             tooltip = false;
           };
 
           "custom/gpu-usage" = {
             interval = 2;
             format = "{}% ";
-            on-click = "kitty btm";
-            exec = "cat /sys/class/drm/card0/device/gpu_busy_percent";
+            exec = "${pkgs.coreutils}/bin/cat /sys/class/drm/card0/device/gpu_busy_percent";
             tooltip = false;
           };
 
           "custom/gpu-usage-2" = {
             interval = 2;
             format = "{}% ";
-            on-click = "kitty btm";
-            exec = "cat /sys/class/drm/card1/device/gpu_busy_percent";
+            exec = "${pkgs.coreutils}/bin/cat /sys/class/drm/card1/device/gpu_busy_percent";
             tooltip = false;
           };
 
@@ -245,17 +223,10 @@
             format = "{}";
             exec = "${./bar-mpd-zscroll.sh}";
             escape = true;
-            on-click = "mpc toggle";
-            on-click-right = "kitty ncmpcpp";
+            on-click = "${pkgs.mpc-cli}/bin/mpc toggle";
             smooth-scroll-threshold = 10;
-            on-scroll-up = "mpc next";
-            on-scroll-down = "mpc prev";
-            tooltip = false;
-          };
-
-          "custom/lock" = {
-            format = "";
-            on-click = "wl-lockscreen";
+            on-scroll-up = "${pkgs.mpc-cli}/bin/mpc next";
+            on-scroll-down = "${pkgs.mpc-cli}/bin/mpc prev";
             tooltip = false;
           };
         }
@@ -269,10 +240,17 @@
         Requires = ["graphical-session-pre.target"];
       };
     };
+
+    systemd.user.targets.wayland-desktop-session = {
+      Unit = {
+        Description = "wayland desktop session";
+        Documentation = ["man:systemd.special(7)"];
+        BindsTo = ["graphical-session.target"];
+        Wants = ["graphical-session-pre.target"];
+        After = ["graphical-session-pre.target"];
+      };
+    };
   };
 
   programs.xwayland.enable = true;
-  services.greetd.enable = true;
-
-  security.pam.services.swaylock = {};
 }
