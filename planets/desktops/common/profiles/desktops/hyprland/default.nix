@@ -46,7 +46,7 @@
       export XCURSOR_SIZE=24
       export NIXOS_OZONE_WL=1
 
-      exec systemd-cat --identifier=hyprland dbus-run-session Hyprland
+      exec Hyprland
     '')
     (pkgs.writeShellScriptBin "hyprland-gamemode" ''
       #!/usr/bin/env sh
