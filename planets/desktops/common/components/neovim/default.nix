@@ -41,6 +41,7 @@ in {
       cargo
       clang-tools
       deno
+      go
       gopls
       jdt-language-server
       ltex-ls
