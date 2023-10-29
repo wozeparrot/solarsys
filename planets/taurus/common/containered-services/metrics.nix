@@ -55,7 +55,7 @@ in {
           serviceConfig = {
             ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/metrics";
             ExecStart = "${pkgs.seaweedfs}/bin/weed -v=2 mount -dir /var/lib/metrics -filer.path /services/metrics -filer=10.11.235.1:9302";
-            ExecStartPost = "${pkgs.coreutils}/bin/sleep 10";
+            ExecStartPost = "${pkgs.coreutils}/bin/sleep 30";
             Restart = "on-failure";
             RestartSec = "10s";
           };
@@ -143,7 +143,7 @@ in {
                   targets = lib.lists.foldl' (acc: cur: let
                     cc = cur.core.config;
                   in
-                    if lib.attrsets.hasAttrByPath ["containered-services" "seaweedfs-master"] cc && cc.containered-services.seaweedfs-node.enable
+                    if lib.attrsets.hasAttrByPath ["containered-services" "seaweedfs-node"] cc && cc.containered-services.seaweedfs-node.enable
                     then
                       acc
                       ++ (lib.lists.foldl' (
