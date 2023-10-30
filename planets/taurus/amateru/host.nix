@@ -65,7 +65,7 @@
 
   # --- metrics ---
   containered-services.metrics.enable = true;
-  systemd.services."container@metrics".after = ["container@seaweedfs-master"];
+  systemd.services."container@metrics".after = ["container@seaweedfs-master.service"];
 
   # --- remote filesystem access ---
   fileSystems = {
