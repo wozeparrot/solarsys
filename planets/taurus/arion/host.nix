@@ -84,7 +84,7 @@
 
       services.nextcloud = {
         enable = true;
-        package = pkgs.nextcloud26;
+        package = pkgs.nextcloud27;
         hostName = "10.11.235.21";
 
         phpOptions = {
