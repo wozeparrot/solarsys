@@ -357,7 +357,7 @@
                 system;
             in {
               trajectory = {
-                host = "192.168.0.194";
+                host = "10.11.235.21";
                 port = 22;
               };
               orbits = ["runner"];
