@@ -53,7 +53,7 @@
     )
     audacity
     blender
-    freecad
+    # freecad # TODO: https://github.com/NixOS/nixpkgs/pull/263599
     ghidra-bin
     gimp
     gnome.file-roller
