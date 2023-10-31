@@ -9,6 +9,8 @@
     ../common/profiles/rpi4.nix
     ../common/profiles/vpn.nix
     ../common/containered-services/seaweedfs-node.nix
+    ../common/containered-services/blocky.nix
+    ../common/components/common-metrics.nix
   ];
 
   # --- mount disks ---
@@ -41,6 +43,9 @@
     SUBSYSTEM=="usb", TEST=="power/autosuspend" ATTR{power/autosuspend}="-1"
   '';
 
+  # --- metrics ---
+  components.common-metrics.enable = true;
+
   # --- seaweedfs ---
   containered-services.seaweedfs-node = {
     enable = true;
@@ -49,6 +54,9 @@
       "/mnt/pstore0/seaweedfs/volume"
     ];
   };
+
+  # --- blocky ---
+  containered-services.blocky.enable = true;
 
   system.stateVersion = "23.05";
 }

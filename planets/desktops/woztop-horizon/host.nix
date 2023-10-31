@@ -18,11 +18,7 @@
     ../common/profiles/vpn.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_xanmod_latest.override {
-    structuredExtraConfig = with lib.kernel; {
-      X86_AMD_PSTATE = lib.mkForce yes;
-    };
-  });
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
   boot.kernelPatches = [
   ];
   boot.kernelParams = ["amd_pstate=active" "psi=1"];

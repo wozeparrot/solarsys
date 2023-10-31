@@ -7,6 +7,7 @@
     ../common/containered-services/seaweedfs-master.nix
     ../common/containered-services/seaweedfs-node.nix
     ../common/containered-services/metrics.nix
+    ../common/components/common-metrics.nix
   ];
 
   # --- mount disks ---
@@ -51,6 +52,8 @@
         20048
 
         5072 # export directory to a lighttpd server
+
+        9001
       ];
     };
   };
@@ -66,6 +69,8 @@
   # --- metrics ---
   containered-services.metrics.enable = true;
   systemd.services."container@metrics".after = ["container@seaweedfs-master.service"];
+
+  components.common-metrics.enable = true;
 
   # --- remote filesystem access ---
   fileSystems = {

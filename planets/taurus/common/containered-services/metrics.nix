@@ -55,7 +55,7 @@ in {
           serviceConfig = {
             ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/metrics";
             ExecStart = "${pkgs.seaweedfs}/bin/weed -v=2 mount -dir /var/lib/metrics -filer.path /services/metrics -filer=10.11.235.1:9302";
-            ExecStartPost = "${pkgs.coreutils}/bin/sleep 30";
+            ExecStartPost = "${pkgs.bash}/bin/bash -c 'while ! ${pkgs.util-linux}/bin/mountpoint -q /var/lib/metrics; do sleep 1; done'";
             Restart = "on-failure";
             RestartSec = "10s";
           };
@@ -82,6 +82,9 @@ in {
             security = {
               secret_key = "$__file{/keys/grafana_secret_key}";
             };
+            panels = {
+              disable_sanitize_html = true;
+            };
             analytics.reporting_enabled = false;
           };
         };
@@ -94,9 +97,9 @@ in {
           port = 9090;
 
           globalConfig = {
-            scrape_interval = "12s";
-            scrape_timeout = "10s";
-            evaluation_interval = "12s";
+            scrape_interval = "10s";
+            scrape_timeout = "8s";
+            evaluation_interval = "30s";
           };
 
           scrapeConfigs = [
@@ -151,6 +154,60 @@ in {
                           acc2
                           ++ ["${cc.containered-services.seaweedfs-node.bindAddress}:${toString (cc.containered-services.seaweedfs-node.startPort + cur2 + 20000)}"]
                       ) [] (lib.range 0 ((length cc.containered-services.seaweedfs-node.volumes) - 1)))
+                    else acc) []
+                  (lib.attrsets.mapAttrsToList (_: v: v) config.solarsys.moons);
+                }
+              ];
+            }
+            {
+              job_name = "node";
+              static_configs = [
+                {
+                  targets = lib.lists.foldl' (acc: cur: let
+                    cc = cur.core.config;
+                  in
+                    if lib.attrsets.hasAttrByPath ["services" "prometheus" "exporters" "node"] cc && cc.services.prometheus.exporters.node.enable
+                    then
+                      acc
+                      ++ [
+                        "${cc.services.prometheus.exporters.node.listenAddress}:${toString cc.services.prometheus.exporters.node.port}"
+                      ]
+                    else acc) []
+                  (lib.attrsets.mapAttrsToList (_: v: v) config.solarsys.moons);
+                }
+              ];
+            }
+            {
+              job_name = "wireguard";
+              static_configs = [
+                {
+                  targets = lib.lists.foldl' (acc: cur: let
+                    cc = cur.core.config;
+                  in
+                    if lib.attrsets.hasAttrByPath ["services" "prometheus" "exporters" "wireguard"] cc && cc.services.prometheus.exporters.wireguard.enable
+                    then
+                      acc
+                      ++ [
+                        "${cc.services.prometheus.exporters.wireguard.listenAddress}:${toString cc.services.prometheus.exporters.wireguard.port}"
+                      ]
+                    else acc) []
+                  (lib.attrsets.mapAttrsToList (_: v: v) config.solarsys.moons);
+                }
+              ];
+            }
+            {
+              job_name = "blocky";
+              static_configs = [
+                {
+                  targets = lib.lists.foldl' (acc: cur: let
+                    cc = cur.core.config;
+                  in
+                    if lib.attrsets.hasAttrByPath ["containered-services" "blocky"] cc && cc.containered-services.blocky.enable
+                    then
+                      acc
+                      ++ [
+                        "${cc.containered-services.blocky.bindAddress}:4000"
+                      ]
                     else acc) []
                   (lib.attrsets.mapAttrsToList (_: v: v) config.solarsys.moons);
                 }

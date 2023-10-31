@@ -8,6 +8,8 @@
   imports = [
     ../common/profiles/rpi4.nix
     ../common/profiles/vpn.nix
+    ../common/containered-services/nextcloud.nix
+    ../common/components/common-metrics.nix
   ];
 
   # --- open ports ---
@@ -15,7 +17,6 @@
     allowedUDPPorts = [
     ];
     allowedTCPPorts = [
-      80
       8765
     ];
     interfaces.orion = {
@@ -34,109 +35,11 @@
     SUBSYSTEM=="usb", TEST=="power/autosuspend" ATTR{power/autosuspend}="-1"
   '';
 
+  # --- metrics ---
+  components.common-metrics.enable = true;
+
   # --- nextcloud ---
-  containers.nextcloud = {
-    autoStart = true;
-    ephemeral = true;
-    timeoutStartSec = "12hr";
-
-    # make fuse work
-    allowedDevices = [
-      {
-        modifier = "rwm";
-        node = "/dev/fuse";
-      }
-    ];
-    additionalCapabilities = [
-      "CAP_MKNOD"
-    ];
-    extraFlags = [
-      "--bind=/dev/fuse"
-    ];
-
-    # bind mounts
-    bindMounts = {
-      "/keys" = {
-        hostPath = "/keys";
-        isReadOnly = true;
-      };
-    };
-
-    config = {cconfig, ...}: rec {
-      # mount seaweedfs
-      systemd.services."seaweedfs-mount" = {
-        description = "mount seaweedfs for/in container";
-
-        path = with pkgs; [fuse3];
-
-        serviceConfig = {
-          ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/nextcloud";
-          ExecStart = "${pkgs.seaweedfs}/bin/weed mount -dir /var/lib/nextcloud -filer.path /services/nextcloud -filer=10.11.235.1:9302";
-          ExecStartPost = "${pkgs.coreutils}/bin/sleep 30";
-          Restart = "on-failure";
-          RestartSec = "10s";
-        };
-
-        after = ["network.target"];
-        before = ["nextcloud-setup.service"];
-        wantedBy = ["multi-user.target"];
-      };
-
-      services.nextcloud = {
-        enable = true;
-        package = pkgs.nextcloud27;
-        hostName = "10.11.235.21";
-
-        phpOptions = {
-          catch_workers_output = "yes";
-          display_errors = "stderr";
-          error_reporting = "E_ALL & ~E_DEPRECATED & ~E_STRICT";
-          expose_php = "Off";
-          "opcache.enable_cli" = "1";
-          "opcache.fast_shutdown" = "1";
-          "opcache.interned_strings_buffer" = "8";
-          "opcache.max_accelerated_files" = "10000";
-          "opcache.memory_consumption" = "128";
-          "opcache.revalidate_freq" = "60";
-          "opcache.save_comments" = "1";
-          "opcache.jit" = "1255";
-          "opcache.jit_buffer_size" = "128M";
-          "openssl.cafile" = "/etc/ssl/certs/ca-certificates.crt";
-          short_open_tag = "Off";
-        };
-
-        home = "/var/lib/nextcloud/nextcloud";
-        appstoreEnable = false;
-        extraApps = with services.nextcloud.package.packages.apps; {
-          inherit notes;
-        };
-        extraAppsEnable = true;
-
-        configureRedis = true;
-        caching.apcu = true;
-
-        config = {
-          extraTrustedDomains = ["192.168.0.194" "192.168.2.31"];
-
-          adminuser = "root";
-          adminpassFile = "/keys/nextcloud_adminpass";
-
-          dbtype = "sqlite";
-
-          defaultPhoneRegion = "CA";
-        };
-        extraOptions = {
-          preview_max_x = 1024;
-          preview_max_y = 1024;
-        };
-      };
-
-      # don't persist redis
-      services.redis.servers.nextcloud.save = [];
-
-      system.stateVersion = config.system.stateVersion;
-    };
-  };
+  containered-services.nextcloud.enable = true;
 
   # --- motioneye ---
   containers.motioneye = {
@@ -175,7 +78,7 @@
         serviceConfig = {
           ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/motioneye";
           ExecStart = "${pkgs.seaweedfs}/bin/weed mount -dir /var/lib/motioneye -filer.path /services/motioneye -filer=10.11.235.1:9302";
-          ExecStartPost = "${pkgs.coreutils}/bin/sleep 30";
+          ExecStartPost = "${pkgs.bash}/bin/bash -c 'while ! ${pkgs.util-linux}/bin/mountpoint -q /var/lib/motioneye; do sleep 1; done'";
           Restart = "on-failure";
           RestartSec = "10s";
         };

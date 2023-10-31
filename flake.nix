@@ -321,7 +321,7 @@
                 system;
             in {
               trajectory = {
-                host = "192.168.0.11";
+                host = "10.11.235.1";
                 port = 22;
               };
               orbits = ["nas"];
@@ -394,7 +394,7 @@
                 system;
             in {
               trajectory = {
-                host = "192.168.0.214";
+                host = "10.11.235.22";
                 port = 22;
               };
               orbits = ["runner"];
