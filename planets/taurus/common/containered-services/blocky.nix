@@ -56,6 +56,9 @@ in {
               blackLists = {
                 ads = [
                   "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
+                  "https://adaway.org/hosts.txt"
+                  "https://raw.githubusercontent.com/logroid/adaway-hosts/master/hosts.txt"
+                  "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext"
                 ];
               };
               clientGroupsBlock = {
