@@ -11,6 +11,7 @@
     ../common/containered-services/seaweedfs-node.nix
     ../common/containered-services/blocky.nix
     ../common/components/common-metrics.nix
+    ../common/components/speedtest-metric.nix
   ];
 
   # --- mount disks ---
@@ -45,6 +46,7 @@
 
   # --- metrics ---
   components.common-metrics.enable = true;
+  components.speedtest-metric.enable = true;
 
   # --- seaweedfs ---
   containered-services.seaweedfs-node = {

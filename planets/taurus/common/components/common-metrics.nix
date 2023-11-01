@@ -15,6 +15,7 @@ in {
     networking.firewall.interfaces.orion.allowedTCPPorts = [
       config.services.prometheus.exporters.node.port
       config.services.prometheus.exporters.wireguard.port
+      config.services.prometheus.exporters.smartctl.port
     ];
 
     services.prometheus.exporters = let
@@ -30,6 +31,11 @@ in {
         inherit listenAddress;
         enable = true;
         port = 9002;
+      };
+      smartctl = {
+        inherit listenAddress;
+        enable = true;
+        port = 9003;
       };
     };
   };

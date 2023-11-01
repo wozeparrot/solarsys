@@ -29,48 +29,7 @@ in {
       autoStart = true;
       ephemeral = true;
 
-      # make fuse work
-      allowedDevices = [
-        {
-          modifier = "rwm";
-          node = "/dev/fuse";
-        }
-      ];
-      additionalCapabilities = [
-        "CAP_MKNOD"
-      ];
-      extraFlags = [
-        "--bind=/dev/fuse"
-      ];
-
-      # bind mounts
-      bindMounts = {
-        "/keys" = {
-          hostPath = "/keys";
-          isReadOnly = true;
-        };
-      };
-
       config = {cconfig, ...}: {
-        # mount seaweedfs
-        systemd.services."seaweedfs-mount" = {
-          description = "mount seaweedfs for/in container";
-
-          path = with pkgs; [fuse3];
-
-          serviceConfig = {
-            ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/blocky";
-            ExecStart = "${pkgs.seaweedfs}/bin/weed -v=2 mount -dir /var/lib/blocky -filer.path /services/blocky -filer=10.11.235.1:9302";
-            ExecStartPost = "${pkgs.bash}/bin/bash -c 'while ! ${pkgs.util-linux}/bin/mountpoint -q /var/lib/blocky; do sleep 1; done'";
-            Restart = "on-failure";
-            RestartSec = "10s";
-          };
-
-          after = ["network.target"];
-          before = ["blocky.service"];
-          wantedBy = ["multi-user.target"];
-        };
-
         services.blocky = {
           enable = true;
           settings = {
@@ -111,8 +70,7 @@ in {
               enable = true;
             };
             queryLog = {
-              type = "csv";
-              target = "/var/lib/blocky";
+              type = "console";
             };
           };
         };

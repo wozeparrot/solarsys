@@ -24,6 +24,8 @@ self: super: {
     };
 
     motioneye = self.callPackage ./motioneye {};
+
+    speedtest-exporter = self.callPackage ./speedtest-exporter {};
   };
 
   # yt-dlp = self.python3Packages.callPackage ./yt-dlp { };

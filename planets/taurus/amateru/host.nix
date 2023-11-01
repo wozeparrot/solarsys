@@ -67,7 +67,10 @@
   '';
 
   # --- metrics ---
-  containered-services.metrics.enable = true;
+  containered-services.metrics = {
+    enable = true;
+    promLocalPath = "/mnt/pstore1/prom";
+  };
   systemd.services."container@metrics".after = ["container@seaweedfs-master.service"];
 
   components.common-metrics.enable = true;

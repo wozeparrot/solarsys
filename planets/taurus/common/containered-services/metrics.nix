@@ -14,6 +14,10 @@ in {
       default = "10.11.235.1";
       description = "IP address to bind to";
     };
+    promLocalPath = mkOption {
+      type = types.str;
+      description = "path to local prometheus storage";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -42,6 +46,10 @@ in {
         "/keys" = {
           hostPath = "/keys";
           isReadOnly = true;
+        };
+        "/var/lib/prometheus2" = {
+          hostPath = cfg.promLocalPath;
+          isReadOnly = false;
         };
       };
 
@@ -92,7 +100,7 @@ in {
         # prometheus
         services.prometheus = {
           enable = true;
-          # stateDir = "metrics/prometheus";
+          stateDir = "prometheus2";
           listenAddress = cfg.addr;
           port = 9090;
 
@@ -103,6 +111,60 @@ in {
           };
 
           scrapeConfigs = [
+            {
+              job_name = "node";
+              static_configs = [
+                {
+                  targets = lib.lists.foldl' (acc: cur: let
+                    cc = cur.core.config;
+                  in
+                    if lib.attrsets.hasAttrByPath ["services" "prometheus" "exporters" "node"] cc && cc.services.prometheus.exporters.node.enable
+                    then
+                      acc
+                      ++ [
+                        "${cc.services.prometheus.exporters.node.listenAddress}:${toString cc.services.prometheus.exporters.node.port}"
+                      ]
+                    else acc) []
+                  (lib.attrsets.mapAttrsToList (_: v: v) config.solarsys.moons);
+                }
+              ];
+            }
+            {
+              job_name = "wireguard";
+              static_configs = [
+                {
+                  targets = lib.lists.foldl' (acc: cur: let
+                    cc = cur.core.config;
+                  in
+                    if lib.attrsets.hasAttrByPath ["services" "prometheus" "exporters" "wireguard"] cc && cc.services.prometheus.exporters.wireguard.enable
+                    then
+                      acc
+                      ++ [
+                        "${cc.services.prometheus.exporters.wireguard.listenAddress}:${toString cc.services.prometheus.exporters.wireguard.port}"
+                      ]
+                    else acc) []
+                  (lib.attrsets.mapAttrsToList (_: v: v) config.solarsys.moons);
+                }
+              ];
+            }
+            {
+              job_name = "smartctl";
+              static_configs = [
+                {
+                  targets = lib.lists.foldl' (acc: cur: let
+                    cc = cur.core.config;
+                  in
+                    if lib.attrsets.hasAttrByPath ["services" "prometheus" "exporters" "smartctl"] cc && cc.services.prometheus.exporters.smartctl.enable
+                    then
+                      acc
+                      ++ [
+                        "${cc.services.prometheus.exporters.smartctl.listenAddress}:${toString cc.services.prometheus.exporters.smartctl.port}"
+                      ]
+                    else acc) []
+                  (lib.attrsets.mapAttrsToList (_: v: v) config.solarsys.moons);
+                }
+              ];
+            }
             {
               job_name = "seaweedfs-master";
               static_configs = [
@@ -160,42 +222,6 @@ in {
               ];
             }
             {
-              job_name = "node";
-              static_configs = [
-                {
-                  targets = lib.lists.foldl' (acc: cur: let
-                    cc = cur.core.config;
-                  in
-                    if lib.attrsets.hasAttrByPath ["services" "prometheus" "exporters" "node"] cc && cc.services.prometheus.exporters.node.enable
-                    then
-                      acc
-                      ++ [
-                        "${cc.services.prometheus.exporters.node.listenAddress}:${toString cc.services.prometheus.exporters.node.port}"
-                      ]
-                    else acc) []
-                  (lib.attrsets.mapAttrsToList (_: v: v) config.solarsys.moons);
-                }
-              ];
-            }
-            {
-              job_name = "wireguard";
-              static_configs = [
-                {
-                  targets = lib.lists.foldl' (acc: cur: let
-                    cc = cur.core.config;
-                  in
-                    if lib.attrsets.hasAttrByPath ["services" "prometheus" "exporters" "wireguard"] cc && cc.services.prometheus.exporters.wireguard.enable
-                    then
-                      acc
-                      ++ [
-                        "${cc.services.prometheus.exporters.wireguard.listenAddress}:${toString cc.services.prometheus.exporters.wireguard.port}"
-                      ]
-                    else acc) []
-                  (lib.attrsets.mapAttrsToList (_: v: v) config.solarsys.moons);
-                }
-              ];
-            }
-            {
               job_name = "blocky";
               static_configs = [
                 {
@@ -207,6 +233,24 @@ in {
                       acc
                       ++ [
                         "${cc.containered-services.blocky.bindAddress}:4000"
+                      ]
+                    else acc) []
+                  (lib.attrsets.mapAttrsToList (_: v: v) config.solarsys.moons);
+                }
+              ];
+            }
+            {
+              job_name = "speedtest";
+              static_configs = [
+                {
+                  targets = lib.lists.foldl' (acc: cur: let
+                    cc = cur.core.config;
+                  in
+                    if lib.attrsets.hasAttrByPath ["components" "speedtest-metric"] cc && cc.components.speedtest-metric.enable
+                    then
+                      acc
+                      ++ [
+                        "${cc.components.speedtest-metric.bindAddress}:9020"
                       ]
                     else acc) []
                   (lib.attrsets.mapAttrsToList (_: v: v) config.solarsys.moons);
