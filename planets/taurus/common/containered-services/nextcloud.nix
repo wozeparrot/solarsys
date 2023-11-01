@@ -5,13 +5,14 @@
   ...
 }:
 with lib; let
+  orion = import ../../../../networks/orion.nix;
   cfg = config.containered-services.nextcloud;
 in {
   options.containered-services.nextcloud = {
     enable = mkEnableOption "nextcloud";
     bindAddress = mkOption {
       type = types.str;
-      default = "10.11.235.21";
+      default = (lib.lists.findFirst (x: x.hostname == config.networking.hostName) (builtins.abort "failed to find node in network") orion).address;
       description = "IP address to bind to";
     };
     extraTrustedDomains = mkOption {

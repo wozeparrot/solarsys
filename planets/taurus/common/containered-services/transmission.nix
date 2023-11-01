@@ -5,13 +5,14 @@
   ...
 }:
 with lib; let
+  orion = import ../../../../networks/orion.nix;
   cfg = config.containered-services.transmission;
 in {
   options.containered-services.transmission = {
     enable = mkEnableOption "transmission torrent client";
     addr = mkOption {
       type = types.str;
-      default = "10.11.235.1";
+      default = (lib.lists.findFirst (x: x.hostname == config.networking.hostName) (builtins.abort "failed to find node in network") orion).address;
       description = "IP address to bind to";
     };
   };
@@ -47,7 +48,7 @@ in {
           serviceConfig = {
             ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/transmission";
             ExecStart = "${pkgs.seaweedfs}/bin/weed -v=2 mount -dir /var/lib/transmission -filer.path /services/transmission -filer=10.11.235.1:9302";
-            ExecStartPost = "${pkgs.coreutils}/bin/sleep 10";
+            ExecStartPost = "${pkgs.bash}/bin/bash -c 'while ! ${pkgs.util-linux}/bin/mountpoint -q /var/lib/transmission; do sleep 1; done'";
             Restart = "on-failure";
             RestartSec = "10s";
           };

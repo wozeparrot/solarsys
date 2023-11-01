@@ -5,13 +5,14 @@
   ...
 }:
 with lib; let
+  orion = import ../../../../networks/orion.nix;
   cfg = config.containered-services.blocky;
 in {
   options.containered-services.blocky = {
     enable = mkEnableOption "blocky dns proxy/adblocker";
     bindAddress = mkOption {
       type = types.str;
-      default = "10.11.235.22";
+      default = (lib.lists.findFirst (x: x.hostname == config.networking.hostName) (builtins.abort "failed to find node in network") orion).address;
       description = "IP address to bind to";
     };
   };
@@ -47,7 +48,7 @@ in {
                   "https://dns10.quad9.net/dns-query"
                   "tcp-tls:dns10.quad9.net:853"
                   "https://anycast.uncensoreddns.org/dns-query"
-                  "1.1.1.1"
+                  "https://dns.google/dns-query"
                 ];
               };
             };
