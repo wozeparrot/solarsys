@@ -22,7 +22,15 @@ in {
   };
 
   config = mkIf cfg.enable {
-    networking.firewall.interfaces.orion.allowedTCPPorts = [3000 9090];
+    networking.firewall.interfaces.orion.allowedTCPPorts = [
+      # grafana
+      3000
+      # prometheus
+      9090
+      # loki
+      3100
+      13100
+    ];
 
     containers.metrics = {
       autoStart = true;
@@ -70,7 +78,7 @@ in {
           };
 
           after = ["network.target"];
-          before = ["grafana.service" "prometheus.service"];
+          before = ["grafana.service" "prometheus.service" "loki.service"];
           wantedBy = ["multi-user.target"];
         };
 
@@ -98,6 +106,62 @@ in {
           };
         };
 
+        # loki
+        services.loki = {
+          enable = true;
+          dataDir = "/var/lib/metrics/loki";
+          configuration = {
+            auth_enabled = false;
+            common = {
+              instance_addr = cfg.addr;
+              path_prefix = "/var/lib/metrics/loki";
+              storage = {
+                filesystem = {
+                  chunks_directory = "/var/lib/metrics/loki/chunks";
+                  rules_directory = "/var/lib/metrics/loki/rules";
+                };
+              };
+              replication_factor = 1;
+              ring = {
+                kvstore = {
+                  store = "inmemory";
+                };
+              };
+            };
+            server = {
+              http_listen_address = cfg.addr;
+              http_listen_port = 3100;
+              grpc_listen_address = cfg.addr;
+              grpc_listen_port = 13100;
+            };
+            query_range = {
+              results_cache = {
+                cache = {
+                  embedded_cache = {
+                    enabled = true;
+                    max_size_mb = 100;
+                  };
+                };
+              };
+            };
+            schema_config = {
+              configs = [
+                {
+                  from = "2023-01-01";
+                  store = "tsdb";
+                  object_store = "filesystem";
+                  schema = "v12";
+                  index = {
+                    prefix = "index_";
+                    period = "24h";
+                  };
+                }
+              ];
+            };
+            analytics.reporting_enabled = false;
+          };
+        };
+
         # prometheus
         services.prometheus = {
           enable = true;
@@ -108,7 +172,7 @@ in {
           globalConfig = {
             scrape_interval = "10s";
             scrape_timeout = "8s";
-            evaluation_interval = "30s";
+            evaluation_interval = "10s";
           };
 
           scrapeConfigs = [
@@ -160,6 +224,24 @@ in {
                       acc
                       ++ [
                         "${cc.services.prometheus.exporters.smartctl.listenAddress}:${toString cc.services.prometheus.exporters.smartctl.port}"
+                      ]
+                    else acc) []
+                  (lib.attrsets.mapAttrsToList (_: v: v) config.solarsys.moons);
+                }
+              ];
+            }
+            {
+              job_name = "promtail";
+              static_configs = [
+                {
+                  targets = lib.lists.foldl' (acc: cur: let
+                    cc = cur.core.config;
+                  in
+                    if lib.attrsets.hasAttrByPath ["services" "promtail"] cc && cc.services.promtail.enable
+                    then
+                      acc
+                      ++ [
+                        "${cc.services.promtail.configuration.server.http_listen_address}:${toString cc.services.promtail.configuration.server.http_listen_port}"
                       ]
                     else acc) []
                   (lib.attrsets.mapAttrsToList (_: v: v) config.solarsys.moons);
