@@ -5,6 +5,7 @@
     ./hardware.nix
     ../common/profiles/base.nix
     ../common/profiles/vpn.nix
+    ../common/components/common-metrics.nix
   ];
 
   # important config
@@ -44,5 +45,8 @@
   # --- packages ---
   environment.systemPackages = with pkgs; [];
 
-  system.stateVersion = "21.11";
+  # --- metrics ---
+  components.common-metrics.enable = true;
+
+  system.stateVersion = "23.05";
 }
