@@ -25,8 +25,10 @@
   # --- open ports ---
   networking.firewall = {
     allowedUDPPorts = [
+      53
     ];
     allowedTCPPorts = [
+      53
     ];
     interfaces.orion = {
       allowedUDPPorts = [

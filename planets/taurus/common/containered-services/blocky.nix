@@ -35,7 +35,7 @@ in {
           enable = true;
           settings = {
             ports = {
-              dns = "${cfg.bindAddress}:53";
+              dns = "0.0.0.0:53";
               http = "${cfg.bindAddress}:4000";
               # tls = "${cfg.bindAddress}:853";
               # https = "${cfg.bindAddress}:443";
