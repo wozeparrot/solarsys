@@ -58,6 +58,11 @@
     };
   };
 
+  # make disks not spin down
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", TEST=="power/autosuspend" ATTR{power/autosuspend}="-1"
+  '';
+
   # use tcp bbr
   boot.kernel.sysctl = {
     "net.core.default_qdisc" = "fq";

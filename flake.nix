@@ -414,6 +414,38 @@
                 modules = makeModules pkgs ./planets/taurus/auriga/host.nix;
               };
             };
+            arkas = let
+              system = "aarch64-linux";
+              pkgs =
+                configNixpkgs' [
+                  (final: prev: {
+                    makeModulesClosure = x:
+                      prev.makeModulesClosure (x // {allowMissing = true;});
+                  })
+                ]
+                system;
+            in {
+              trajectory = {
+                host = "10.11.235.71";
+                port = 22;
+              };
+              orbits = ["runner"];
+              satellites = {
+                wg_private = {
+                  path = "./satellites/taurus/auriga/wg_private";
+                  destination = "/keys/wg_private";
+                };
+                ensky_gossip_secret = {
+                  path = "./satellites/common/ensky_gossip_secret";
+                  destination = "/keys/ensky_gossip_secret";
+                };
+              };
+
+              core = nixpkgs.lib.nixosSystem {
+                inherit system specialArgs;
+                modules = makeModules pkgs ./planets/taurus/arkas/host.nix;
+              };
+            };
             wangshu = let
               system = "x86_64-linux";
               pkgs = configNixpkgs system;

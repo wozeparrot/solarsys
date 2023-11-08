@@ -38,6 +38,13 @@
     endpoints = [];
   }
   {
+    hostname = "arkas";
+    type = "server";
+    address = "10.11.235.31";
+    pubkey = "uYWnP7s5V4irO6wk/HkRmJasvaIo8q+69D5Tm+HtiGo=";
+    endpoints = [];
+  }
+  {
     hostname = "wangshu";
     type = "server";
     address = "10.11.235.11";
