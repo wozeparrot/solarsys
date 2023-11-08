@@ -52,6 +52,11 @@ in {
                 ];
               };
             };
+            bootstrapDns = [
+              {
+                upstream = "1.1.1.1";
+              }
+            ];
             blocking = {
               blackLists = {
                 ads = [
