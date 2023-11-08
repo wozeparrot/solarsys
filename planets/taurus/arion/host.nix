@@ -30,11 +30,6 @@
   # --- packages ---
   environment.systemPackages = with pkgs; [];
 
-  # udev rules
-  services.udev.extraRules = ''
-    SUBSYSTEM=="usb", TEST=="power/autosuspend" ATTR{power/autosuspend}="-1"
-  '';
-
   # --- metrics ---
   components.common-metrics.enable = true;
 

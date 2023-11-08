@@ -61,11 +61,6 @@
   # --- packages ---
   environment.systemPackages = with pkgs; [];
 
-  # udev rules
-  services.udev.extraRules = ''
-    SUBSYSTEM=="usb", TEST=="power/autosuspend" ATTR{power/autosuspend}="-1"
-  '';
-
   # --- metrics ---
   containered-services.metrics = {
     enable = true;
