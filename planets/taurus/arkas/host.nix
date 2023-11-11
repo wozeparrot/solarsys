@@ -9,6 +9,7 @@
     ../common/profiles/rpi3.nix
     ../common/profiles/vpn.nix
     ../common/components/common-metrics.nix
+    ../common/containered-services/transmission.nix
   ];
 
   # --- mount disks ---
@@ -33,6 +34,9 @@
 
   # --- metrics ---
   components.common-metrics.enable = true;
+
+  # --- transmission ---
+  containered-services.transmission.enable = true;
 
   system.stateVersion = "23.05";
 }

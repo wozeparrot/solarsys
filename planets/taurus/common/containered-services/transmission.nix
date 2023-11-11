@@ -47,7 +47,7 @@ in {
 
           serviceConfig = {
             ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/transmission";
-            ExecStart = "${pkgs.seaweedfs}/bin/weed -v=2 mount -dir /var/lib/transmission -filer.path /services/transmission -filer=10.11.235.1:9302";
+            ExecStart = "${pkgs.seaweedfs}/bin/weed -v=2 mount -dir /var/lib/transmission -filer.path /services/transmission -filer=10.11.235.1:9302 -concurrentWriters 8";
             ExecStartPost = "${pkgs.bash}/bin/bash -c 'while ! ${pkgs.util-linux}/bin/mountpoint -q /var/lib/transmission; do sleep 1; done'";
             Restart = "on-failure";
             RestartSec = "10s";
@@ -61,8 +61,6 @@ in {
         services.transmission = {
           enable = true;
           settings = {
-            bind-address-ipv4 = cfg.addr;
-
             rpc-bind-address = cfg.addr;
             rpc-port = 9091;
             rpc-whitelist = "10.11.235.*";
@@ -88,8 +86,13 @@ in {
             blocklist-enabled = true;
 
             encryption = 2;
+
+            preallocation = 2;
+            umask = 0;
           };
         };
+        # TODO: https://github.com/NixOS/nixpkgs/issues/258793
+        systemd.services.transmission.serviceConfig.BindReadOnlyPaths = lib.mkForce [ builtins.storeDir "/etc" ];
 
         system.stateVersion = config.system.stateVersion;
       };
