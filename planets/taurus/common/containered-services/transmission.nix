@@ -47,7 +47,7 @@ in {
 
           serviceConfig = {
             ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/transmission";
-            ExecStart = "${pkgs.seaweedfs}/bin/weed -v=2 mount -dir /var/lib/transmission -filer.path /services/transmission -filer=10.11.235.1:9302 -concurrentWriters 8";
+            ExecStart = "${pkgs.seaweedfs}/bin/weed -v=2 mount -dir /var/lib/transmission -filer.path /services/transmission -filer=10.11.235.1:9302 -concurrentWriters 4";
             ExecStartPost = "${pkgs.bash}/bin/bash -c 'while ! ${pkgs.util-linux}/bin/mountpoint -q /var/lib/transmission; do sleep 1; done'";
             Restart = "on-failure";
             RestartSec = "10s";
