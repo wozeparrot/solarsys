@@ -143,11 +143,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1698299311,
-        "narHash": "sha256-xY7itEhPjm0eEL9WzmyQQQ1rtPhU/9HQgeCmgGGEtVc=",
+        "lastModified": 1699733145,
+        "narHash": "sha256-0G3iaGBPO13GV/EcopTCEhX6IJPHS0m5zAnS/LoZets=",
         "owner": "wozeparrot",
         "repo": "ensky",
-        "rev": "4e4099f3b9866eecb56b7c3418731217baa549ff",
+        "rev": "d232fb858581fa7470ff8ec73ba78cf9ea7c22c7",
         "type": "github"
       },
       "original": {

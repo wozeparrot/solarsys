@@ -177,7 +177,7 @@
           ++ (nixpkgs.lib.mapAttrsToList (_: v: v.overlay) (nixpkgs.lib.filterAttrs (_: nixpkgs.lib.hasAttr "overlay") external))
           ++ extraOverlays;
       }
-      // nixpkgs.lib.mapAttrs (_: v: v.packages."${system}") (nixpkgs.lib.filterAttrs (_: nixpkgs.lib.hasAttr "packages") external)
+      // nixpkgs.lib.mapAttrs (_: v: v.packages."${system}") (nixpkgs.lib.filterAttrs (_: p: (builtins.hasAttr "${system}" p.packages)) (nixpkgs.lib.filterAttrs (_: builtins.hasAttr "packages") external))
     );
     configNixpkgs = configNixpkgs' [];
   in
@@ -431,7 +431,7 @@
               orbits = ["runner"];
               satellites = {
                 wg_private = {
-                  path = "./satellites/taurus/auriga/wg_private";
+                  path = "./satellites/taurus/arkas/wg_private";
                   destination = "/keys/wg_private";
                 };
                 ensky_gossip_secret = {
