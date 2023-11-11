@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    ./rpi_aarch64.nix
+    ./rpi_base.nix
   ];
 
   sdImage.populateFirmwareCommands = let

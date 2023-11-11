@@ -1,18 +1,12 @@
 {
   pkgs,
-  config,
   ...
 }: {
   imports = [
-    ./rpi_aarch64.nix
+    ./rpi_base.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_rpi4;
-
-  boot.loader.raspberryPi.version = 4;
-  boot.loader.raspberryPi.firmwareConfig = ''
-    arm_boost=1
-  '';
 
   sdImage.populateFirmwareCommands = let
     configTxt = pkgs.writeText "config.txt" ''
