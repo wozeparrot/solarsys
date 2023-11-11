@@ -41,11 +41,35 @@
     complete -c nom --wraps nix
   '';
 in {
+  home.packages = with pkgs; [
+    github-copilot-cli
+  ];
+
   programs = {
     fish = {
       enable = true;
 
       interactiveShellInit = fishConfig;
+      plugins = [
+        {
+          name = "github-copilot-cli-fish";
+          src = pkgs.fetchFromGitHub {
+            owner = "z11i";
+            repo = "github-copilot-cli.fish";
+            rev = "ccb6367bbb3055ea19b9ff0eac1ccf1c5e86419a";
+            hash = "sha256-cnmxvnG3WN2uqtt1aUEf0OFJulQSpFd3RJeeVKpDI9Y=";
+          };
+        }
+        {
+          name = "z";
+          src = pkgs.fetchFromGitHub {
+            owner = "jethrokuan";
+            repo = "z";
+            rev = "85f863f20f24faf675827fb00f3a4e15c7838d76";
+            hash = "sha256-+FUBM7CodtZrYKqU542fQD+ZDGrd2438trKM0tIESs0=";
+          };
+        }
+      ];
 
       functions = {
         fish_greeting = {
