@@ -214,15 +214,14 @@
 
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
+            fzf
             git
             jq
-            rsync
-            rnix-lsp
-            nvd
             nom.default
+            nvd
+            rnix-lsp
+            rsync
             shellcheck
-
-            fish
 
             solarsys
           ];

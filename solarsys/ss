@@ -95,6 +95,57 @@ function build {
     build_moon_output "$planet" "$moon" "$output"
 }
 
+# flashes the sdImage output for a moon in a planet
+function flash_sd {
+    local planet=$1
+    local moon=$2
+
+    # sanity check
+    if ! has_planet "$planet"; then
+        ercho "error~ Planet: |$planet| does not exist!"
+        return 1
+    fi
+    if ! has_moon "$planet" "$moon"; then
+        ercho "error~ Moon: |$moon| does not exist for planet: |$planet|!"
+        return 1
+    fi
+
+    echo "[solarsys] Flashing sdImage for moon: |$moon| in planet: |$planet|"
+
+    # build and get the output path
+    local outputpath
+    outputpath="$(build_moon_output "$planet" "$moon" "config.system.build.sdImage")"
+
+    # get the sdimage path
+    local sdimagepath
+    sdimagepath="$(find "$outputpath" -name '*.img' -type f -printf '%T@ %p\n' | sort -n | tail -1 | cut -d' ' -f2-)"
+
+    # fzf to select sdcard device
+    local sdcard
+    sdcard="$(lsblk -d -p -n -l -o NAME,SIZE,TYPE | fzf --prompt "Select SD Card: " | awk '{print $1}')"
+
+    echo "[solarsys] Flashing sdImage: |$sdimagepath| to sdcard: |$sdcard|"
+    echo "[solarsys] Press enter to continue..."
+    read -r
+
+    # flash sdimage
+    sudo dd if="$sdimagepath" of="$sdcard" bs=4M status=progress conv=fsync
+
+    # make a random temporary mountpoint
+    local mountpoint
+    mountpoint="$(mktemp -d)"
+
+    # mount sdcard
+    sudo mount "${sdcard}p2" "$mountpoint"
+
+    echo "[solarsys] Mounted sdcard: |$sdcard| at |$mountpoint|"
+    echo "[solarsys] Press enter to continue..."
+    read -r
+
+    # unmount sdcard
+    sudo umount "$mountpoint"
+}
+
 # rolls back a moon in a planet
 function rollback {
     local planet=$1
@@ -315,6 +366,7 @@ function print_usage {
     ercho "--------------------------------------------------------------------------"
     ercho "  deploy <planet> <moon>         |  Deploys <moon> in <planet>"
     ercho "  build <planet> <moon> <output> |  Builds <output> for <moon> in <planet>"
+    ercho "  flash-sd <planet> <moon>       |  Flashes the sdImage output for <moon> in <planet>"
     ercho "  rollback <planet> <moon>       |  Rolls back <moon> in <planet>"
     ercho "  test <planet> <moon>           |  Tests <moon> in <planet>"
     ercho "  ssh <planet> <moon>            |  SSH to <moon> in <planet>"
@@ -358,7 +410,17 @@ function main {
 
             build "$planet" "$moon" "$output"
             ;;
+        flash-sd)
+            local planet=$2
+            local moon=$3
+            if [[ -z "$planet" ]] || [[ -z "$moon" ]]; then
+                ercho "error~ No planet and/or moon specified"
+                ercho
+                print_usage
+            fi
 
+            flash_sd "$planet" "$moon"
+            ;;
         rollback)
             local planet=$2
             local moon=$3
