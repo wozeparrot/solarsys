@@ -44,7 +44,7 @@
         path = with pkgs; [fuse3];
 
         serviceConfig = {
-          ExecStart = "${pkgs.wozepkgs.seaweedfs}/bin/weed mount -dir /var/lib/akkoma -filer.path /services/akkoma -filer=10.11.235.1:9302";
+          ExecStart = "${pkgs.master.seaweedfs}/bin/weed mount -dir /var/lib/akkoma -filer.path /services/akkoma -filer=10.11.235.1:9302";
           ExecStartPost = "${pkgs.coreutils}/bin/sleep 10";
           Restart = "on-failure";
           RestartSec = "10s";

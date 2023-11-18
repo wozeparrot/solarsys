@@ -27,7 +27,7 @@
 
         serviceConfig = {
           ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/caddy";
-          ExecStart = "${pkgs.seaweedfs}/bin/weed mount -dir /var/lib/caddy -filer.path /services/caddy -filer=10.11.235.1:9302";
+          ExecStart = "${pkgs.master.seaweedfs}/bin/weed mount -dir /var/lib/caddy -filer.path /services/caddy -filer=10.11.235.1:9302";
           ExecStartPost = "${pkgs.coreutils}/bin/sleep 10";
           Restart = "on-failure";
           RestartSec = "10s";

@@ -72,7 +72,7 @@
 
         serviceConfig = {
           ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/motioneye";
-          ExecStart = "${pkgs.seaweedfs}/bin/weed mount -dir /var/lib/motioneye -filer.path /services/motioneye -filer=10.11.235.1:9302";
+          ExecStart = "${pkgs.master.seaweedfs}/bin/weed mount -dir /var/lib/motioneye -filer.path /services/motioneye -filer=10.11.235.1:9302";
           ExecStartPost = "${pkgs.bash}/bin/bash -c 'while ! ${pkgs.util-linux}/bin/mountpoint -q /var/lib/motioneye; do sleep 1; done'";
           Restart = "on-failure";
           RestartSec = "10s";
