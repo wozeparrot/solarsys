@@ -20,6 +20,10 @@ in {
   config = mkIf cfg.enable {
     networking.firewall.interfaces.orion.allowedTCPPorts = [9091];
 
+    systemd.tmpfiles.rules = [
+      "d /tmp/transmission 0755 root root -"
+    ];
+
     containers.transmission = {
       autoStart = true;
       ephemeral = true;
@@ -38,6 +42,13 @@ in {
         "--bind=/dev/fuse"
       ];
 
+      bindMounts = {
+        "/tmp" = {
+          hostPath = "/tmp/transmission";
+          isReadOnly = false;
+        };
+      };
+
       config = {cconfig, ...}: {
         # mount seaweedfs
         systemd.services."seaweedfs-mount" = {
@@ -46,9 +57,9 @@ in {
           path = with pkgs; [fuse3];
 
           serviceConfig = {
-            ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/transmission";
-            ExecStart = "${pkgs.seaweedfs}/bin/weed -v=2 mount -dir /var/lib/transmission -filer.path /services/transmission -filer=10.11.235.1:9302 -concurrentWriters 4";
-            ExecStartPost = "${pkgs.bash}/bin/bash -c 'while ! ${pkgs.util-linux}/bin/mountpoint -q /var/lib/transmission; do sleep 1; done'";
+            ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /mnt/services";
+            ExecStart = "${pkgs.seaweedfs}/bin/weed -v=2 mount -dir /mnt/services -filer.path /services -filer=10.11.235.1:9302";
+            ExecStartPost = "${pkgs.bash}/bin/bash -c 'while ! ${pkgs.util-linux}/bin/mountpoint -q /mnt/services; do sleep 1; done'";
             Restart = "on-failure";
             RestartSec = "10s";
           };
@@ -60,6 +71,7 @@ in {
 
         services.transmission = {
           enable = true;
+          home = "/mnt/services/transmission";
           settings = {
             rpc-bind-address = cfg.addr;
             rpc-port = 9091;
@@ -70,7 +82,7 @@ in {
             peer-limit-global = 300;
             peer-limit-per-torrent = 60;
 
-            download-queue-size = 5;
+            download-queue-size = 1;
             download-queue-enabled = true;
 
             idle-seeding-limit = 1;
@@ -86,13 +98,17 @@ in {
             blocklist-enabled = true;
 
             encryption = 2;
+            dht-enabled = false;
 
-            preallocation = 2;
+            incomplete-dir-enabled = false;
             umask = 0;
           };
         };
         # TODO: https://github.com/NixOS/nixpkgs/issues/258793
         systemd.services.transmission.serviceConfig.BindReadOnlyPaths = lib.mkForce [ builtins.storeDir "/etc" ];
+        systemd.services.transmission.serviceConfig.BindPaths = [
+          "/mnt/services"
+        ];
 
         system.stateVersion = config.system.stateVersion;
       };
