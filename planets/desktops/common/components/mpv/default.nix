@@ -25,7 +25,7 @@
       gpu-api = "auto";
       gpu-context = "wayland";
 
-      hwdec = "auto";
+      hwdec = false;
       hwdec-codecs = "all";
       hr-seek-framedrop = false;
 
