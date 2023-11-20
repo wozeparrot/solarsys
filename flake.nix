@@ -81,6 +81,12 @@
       flake-utils.follows = "flake-utils";
       zig.follows = "zigf";
     };
+
+    seaweedfs.url = "github:wozeparrot/seaweedfs-nix";
+    seaweedfs.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-utils.follows = "flake-utils";
+    };
   };
 
   outputs = inputs @ {
@@ -140,6 +146,9 @@
       ensky = {
         inherit (inputs.ensky) packages;
         modules = inputs.ensky.nixosModules;
+      };
+      seaweedfs = {
+        inherit (inputs.seaweedfs) packages;
       };
     };
 

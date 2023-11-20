@@ -926,12 +926,53 @@
         ],
         "nixpkgs-wayland": "nixpkgs-wayland",
         "nom": "nom",
+        "seaweedfs": "seaweedfs",
         "stylix": "stylix",
         "unstable": "unstable",
         "wozey": "wozey",
         "xdph": "xdph_2",
         "zigf": "zigf",
         "zls": "zls"
+      }
+    },
+    "seaweedfs": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "seaweedfs": "seaweedfs_2"
+      },
+      "locked": {
+        "lastModified": 1700371669,
+        "narHash": "sha256-+wQaEcYtTdlA9h4B4F5Vj/QpyxT+ZHbj58UTDnFofQE=",
+        "owner": "wozeparrot",
+        "repo": "seaweedfs-nix",
+        "rev": "7f87bed894ce32a15d49ed2c3a3916e8b54415ef",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wozeparrot",
+        "repo": "seaweedfs-nix",
+        "type": "github"
+      }
+    },
+    "seaweedfs_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1700313626,
+        "narHash": "sha256-NS33OIE1eaU5+ArPIWKUopPO4NoxCfxHAKKEdM5izgA=",
+        "owner": "seaweedfs",
+        "repo": "seaweedfs",
+        "rev": "06434f5227d6ee89d5f7bc3367132cec9b9fdb61",
+        "type": "github"
+      },
+      "original": {
+        "owner": "seaweedfs",
+        "repo": "seaweedfs",
+        "type": "github"
       }
     },
     "stylix": {

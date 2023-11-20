@@ -85,7 +85,7 @@ in {
               description = "seaweedfs volume server for ${elemAt cfg.volumes cur}";
 
               serviceConfig = {
-                ExecStart = "${pkgs.master.seaweedfs}/bin/weed volume -ip ${cfg.bindAddress} -port ${toString (cfg.startPort + cur)} -mserver '${cfg.masterAddress}:${toString cfg.masterPort}' -max 0 -dir /mnt/seaweedfs-${toString cur}/ -dataCenter='${config.solarsys.planet}' -rack='${config.networking.hostName}' -index=memory -metricsPort ${toString (cfg.startPort + cur + 20000)}";
+                ExecStart = "${pkgs.seaweedfs.seaweedfs}/bin/weed volume -ip ${cfg.bindAddress} -port ${toString (cfg.startPort + cur)} -mserver '${cfg.masterAddress}:${toString cfg.masterPort}' -max 0 -dir /mnt/seaweedfs-${toString cur}/ -dataCenter='${config.solarsys.planet}' -rack='${config.networking.hostName}' -index=memory -metricsPort ${toString (cfg.startPort + cur + 20000)}";
               };
 
               after = ["network.target"];

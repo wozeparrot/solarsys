@@ -61,7 +61,7 @@ in {
 
           serviceConfig = {
             ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/nextcloud";
-            ExecStart = "${pkgs.master.seaweedfs}/bin/weed mount -dir /var/lib/nextcloud -filer.path /services/nextcloud -filer=10.11.235.1:9302";
+            ExecStart = "${pkgs.seaweedfs.seaweedfs}/bin/weed mount -dir /var/lib/nextcloud -filer.path /services/nextcloud -filer=10.11.235.1:9302";
             ExecStartPost = "${pkgs.bash}/bin/bash -c 'while ! ${pkgs.util-linux}/bin/mountpoint -q /var/lib/nextcloud; do sleep 1; done'";
             Restart = "on-failure";
             RestartSec = "10s";
