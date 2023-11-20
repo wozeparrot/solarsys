@@ -96,6 +96,9 @@
         terminal = 12;
       };
     };
+    cursor = {
+      size = 24;
+    };
   };
   fonts = {
     enableDefaultPackages = true;
