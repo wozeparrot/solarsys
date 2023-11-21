@@ -97,7 +97,7 @@ in {
           description = "seaweedfs master server";
 
           serviceConfig = {
-            ExecStart = "${pkgs.seaweedfs.seaweedfs}/bin/weed master -ip ${cfg.bindAddress} -port ${toString cfg.masterPort} -mdir '/var/lib/seaweedfs/master/' -volumeSizeLimitMB=${toString cfg.volumeSizeLimitMB} -defaultReplication=010 -metricsPort ${toString (cfg.masterPort + 20000)}";
+            ExecStart = "${pkgs.seaweedfs.seaweedfs}/bin/weed -v=2 master -ip ${cfg.bindAddress} -port ${toString cfg.masterPort} -mdir '/var/lib/seaweedfs/master/' -volumeSizeLimitMB=${toString cfg.volumeSizeLimitMB} -defaultReplication=010 -metricsPort ${toString (cfg.masterPort + 20000)}";
             Restart = "on-failure";
             RestartSec = "10s";
           };
@@ -118,7 +118,7 @@ in {
           description = "seaweedfs filer server";
 
           serviceConfig = {
-            ExecStart = "${pkgs.seaweedfs.seaweedfs}/bin/weed filer -ip ${cfg.bindAddress} -port ${toString cfg.filerPort} -master '${cfg.bindAddress}:${toString cfg.masterPort}' -metricsPort ${toString (cfg.filerPort + 20000)}";
+            ExecStart = "${pkgs.seaweedfs.seaweedfs}/bin/weed -v=2 filer -ip ${cfg.bindAddress} -port ${toString cfg.filerPort} -master '${cfg.bindAddress}:${toString cfg.masterPort}' -metricsPort ${toString (cfg.filerPort + 20000)}";
             Restart = "on-failure";
             RestartSec = "10s";
           };
