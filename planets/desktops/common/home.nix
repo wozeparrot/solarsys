@@ -32,7 +32,12 @@
     neofetch
     nom.default
     p7zip
-    python3
+    (python3.withPackages (
+      ps:
+        with ps; [
+          requests
+        ]
+    ))
     r128gain
     ranger
     restic
