@@ -60,4 +60,5 @@ in {
         orion);
     };
   };
+  systemd.services.ensky.after = ["wireguard-orion.service"];
 }
