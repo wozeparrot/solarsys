@@ -45,7 +45,7 @@
     pulse.enable = true;
 
     lowLatency = {
-      enable = false;
+      enable = true;
       quantum = 64;
       rate = 48000;
     };
