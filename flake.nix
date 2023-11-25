@@ -31,6 +31,8 @@
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
     zigf.url = "github:mitchellh/zig-overlay";
     zigf.inputs = {
       nixpkgs.follows = "nixpkgs";
@@ -75,6 +77,8 @@
       flake-utils.follows = "flake-utils";
     };
 
+    nixd.url = "github:nix-community/nixd";
+
     ensky.url = "github:wozeparrot/ensky";
     ensky.inputs = {
       nixpkgs.follows = "nixpkgs";
@@ -107,6 +111,16 @@
         cache = {
           substituters = ["https://nix-gaming.cachix.org"];
           trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
+        };
+      };
+      chaotic = {
+        inherit (inputs.chaotic) packages;
+        cache = {
+          substituters = ["https://nyx.chaotic.cx"];
+          trusted-public-keys = [
+            "nyx.chaotic.cx-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+            "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+          ];
         };
       };
       zigf = {
@@ -142,6 +156,9 @@
       };
       nom = {
         inherit (inputs.nom) packages;
+      };
+      nixd = {
+        inherit (inputs.nixd) packages;
       };
       ensky = {
         inherit (inputs.ensky) packages;
