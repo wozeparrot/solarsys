@@ -18,7 +18,8 @@
     ../common/profiles/vpn.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
+  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
+  boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos;
   boot.kernelPatches = [
   ];
   boot.kernelParams = ["amd_pstate=active" "psi=1"];
