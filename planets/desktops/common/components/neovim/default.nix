@@ -5,7 +5,7 @@
   ...
 }: let
   pluginGit = repo: rev: ref:
-    pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pkgs.vimUtils.buildVimPlugin {
       pname = "${lib.strings.sanitizeDerivationName repo}-${rev}";
       version = rev;
       src = builtins.fetchGit {
@@ -46,7 +46,8 @@ in {
       jdt-language-server
       ltex-ls
       lua-language-server
-      nil
+      # nil
+      nixd.nixd
       nodePackages.bash-language-server
       nodePackages.pyright
       rust-analyzer

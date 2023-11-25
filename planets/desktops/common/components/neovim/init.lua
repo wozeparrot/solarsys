@@ -262,8 +262,8 @@ lazy_require("lspsaga", {
 nnoremap("<leader>lf", "<cmd>Lspsaga lsp_finder<CR>")
 nnoremap("<leader>lh", "<cmd>Lspsaga hover_doc<CR>")
 nnoremap("<leader>lr", "<cmd>Lspsaga rename<CR>")
-nnoremap("<leader>ld", "<cmd>Lspsaga peek_definition<CR>")
-nnoremap("<leader>lg", "<cmd>Lspsaga goto_definition<CR>")
+nnoremap("<leader>lk", "<cmd>Lspsaga peek_definition<CR>")
+nnoremap("<leader>lj", "<cmd>Lspsaga goto_definition<CR>")
 nnoremap("<leader>ll", "<cmd>Lspsaga outline<CR>")
 nnoremap("<leader>ca", "<cmd>Lspsaga code_action<CR>")
 
@@ -279,7 +279,10 @@ lspconfig.zls.setup({
 	on_attach = default_on_attach,
 })
 -- nix
-lspconfig.nil_ls.setup({
+-- lspconfig.nil_ls.setup({
+-- 	on_attach = default_on_attach,
+-- })
+lspconfig.nixd.setup({
 	on_attach = default_on_attach,
 })
 -- rust
@@ -467,7 +470,7 @@ nnoremap("<leader>fvcw", "<cmd>Telescope git_commits<CR>")
 nnoremap("<leader>fvcb", "<cmd>Telescope git_bcommits<CR>")
 nnoremap("<leader>fvb", "<cmd>Telescope git_branches<CR>")
 nnoremap("<leader>fvs", "<cmd>Telescope git_status<CR>")
-nnoremap("<leader>ft", "<cmd>Telescope<CR>")
+nnoremap("<leader>fa", "<cmd>Telescope<CR>")
 nnoremap("<leader>flsw", "<cmd>Telescope lsp_workspace_symbols<CR>")
 nnoremap("<leader>flsd", "<cmd>Telescope lsp_document_symbols<CR>")
 nnoremap("<leader>flr", "<cmd>Telescope lsp_references<CR>")
