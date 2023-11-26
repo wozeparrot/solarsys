@@ -12,6 +12,9 @@
     docker-compose
 
     radeontop
+    amdgpu_top
+
+    kanshi
 
     (
       pkgs.writeShellScriptBin "run_gpu" ''
@@ -29,6 +32,49 @@
       ''
     )
   ];
+
+  # kanshi
+  services.kanshi = {
+    enable = true;
+    package = pkgs.nixpkgs-wayland.kanshi;
+    systemdTarget = "graphical-session.target";
+    profiles = {
+      undocked = {
+        outputs = [
+          {
+            criteria = "eDP-2";
+            position = "0,0";
+          }
+        ];
+        exec = [
+          "$HOME/scripts/clamp_workspaces.sh"
+          "swww img ${../common/misc/wallpaper.png}"
+        ];
+      };
+      docked-1 = {
+        outputs = [
+          {
+            criteria = "eDP-2";
+            position = "0,1080";
+          }
+          {
+            criteria = "Samsung Electric Company S24B240 HTNCB00984";
+            # mode = "1920x1080@75"; # TODO: when kanshi supports custom modes
+            position = "0,0";
+          }
+        ];
+        exec = [
+          "swww img ${../common/misc/wallpaper.png}"
+        ];
+      };
+    };
+  };
+  # add packages to the path
+  systemd.user.services.kanshi.Service = {
+    Environment = let
+      path = with pkgs; "${bash}/bin:${jq}/bin:${hyprland.hyprland}/bin:${swww}/bin";
+    in "PATH=${path}";
+  };
 
   home.stateVersion = "22.11";
 }
