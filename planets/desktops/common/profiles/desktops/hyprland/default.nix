@@ -14,6 +14,7 @@
         (builtins.readFile ./hyprland.conf)
         + ''
           plugin = ${pkgs.hyprland-split-monitor-workspaces.split-monitor-workspaces}/lib/libsplit-monitor-workspaces.so
+          plugin = ${pkgs.hyprland-plugins.hyprwinwrap}/lib/libhyprwinwrap.so
         '';
       onChange = ''
         (
