@@ -46,7 +46,7 @@ in {
       jdt-language-server
       ltex-ls
       lua-language-server
-      # nil
+      nil
       nixd.nixd
       nodePackages.bash-language-server
       nodePackages.pyright
@@ -120,9 +120,10 @@ in {
 
       # language support
       (pluginGit "DingDean/wgsl.vim" "fdf91e11243266dfe923fc08c2fc9749429bc5aa" "main")
-      (pluginGit "elkowar/yuck.vim" "9b5e0370f70cc30383e1dabd6c215475915fe5c3" "master")
       (pluginGit "avivbeeri/vim-wren" "2514d32c8e476384f3df81bd2cd369908d85bcfe" "fixedStatic")
+      (pluginGit "elkowar/yuck.vim" "9b5e0370f70cc30383e1dabd6c215475915fe5c3" "master")
       (pluginGit "stefanos82/nelua.vim" "ff0a733a586ef0b48cda4999170ed4ca1653a144" "main")
+      (pluginGit "luckasRanarison/tree-sitter-hypr" "90b3ddf8a85b5ea3d9dc4920fddb16182a192e14" "master")
       zig-vim
       vim-opencl
 
