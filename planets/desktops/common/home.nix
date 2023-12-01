@@ -166,7 +166,7 @@
   # theming
   qt = {
     enable = true;
-    platformTheme = "gtk";
+    platformTheme = "gtk3";
   };
 
   xresources.properties = {
@@ -192,6 +192,7 @@
 
   stylix.targets.waybar.enable = false;
   stylix.targets.xfce.enable = false;
+  stylix.targets.kde.enable = false;
 
   # home stuff
   home = {
