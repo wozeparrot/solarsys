@@ -51,7 +51,7 @@
           "swww img ${../common/misc/wallpaper.png}"
         ];
       };
-      docked-1 = {
+      docked-home = {
         outputs = [
           {
             criteria = "eDP-2";
@@ -61,6 +61,39 @@
             criteria = "Samsung Electric Company S24B240 HTNCB00984";
             # mode = "1920x1080@75"; # TODO: when kanshi supports custom modes
             position = "0,0";
+            transform = "normal";
+          }
+        ];
+        exec = [
+          "swww img ${../common/misc/wallpaper.png}"
+        ];
+      };
+      docked-away = {
+        outputs = [
+          {
+            criteria = "eDP-2";
+            position = "0,0";
+          }
+          {
+            criteria = "Samsung Electric Company SAMSUNG 0x01000E00";
+            position = "1920,0";
+            transform = "normal";
+          }
+        ];
+        exec = [
+          "swww img ${../common/misc/wallpaper.png}"
+        ];
+      };
+      docked-away-vertical = {
+        outputs = [
+          {
+            criteria = "eDP-2";
+            position = "0,720";
+          }
+          {
+            criteria = "Samsung Electric Company SAMSUNG 0x01000E00";
+            position = "1920,0";
+            transform = "90";
           }
         ];
         exec = [
