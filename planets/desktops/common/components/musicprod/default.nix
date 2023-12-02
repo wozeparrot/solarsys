@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     # DAW
-    # ss.ardour
     reaper
 
     # extras
@@ -10,7 +9,7 @@
     yabridgectl
 
     # Plugins
-    # infamousPlugins # TODO: broken
+    infamousPlugins # TODO: broken
     CHOWTapeModel
     ChowKick
     LibreArp-lv2
@@ -41,7 +40,7 @@
     magnetophonDSP.LazyLimiter
     magnetophonDSP.MBdistortion
     magnetophonDSP.RhythmDelay
-    magnetophonDSP.VoiceOfFaust
+    # magnetophonDSP.VoiceOfFaust # TODO: broken
     magnetophonDSP.faustCompressors
     magnetophonDSP.shelfMultiBand
     mda_lv2
