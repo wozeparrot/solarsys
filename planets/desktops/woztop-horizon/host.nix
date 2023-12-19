@@ -22,6 +22,7 @@
   boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos;
   boot.kernelPatches = [
   ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [kvmfr];
   boot.kernelParams = ["amd_pstate=active" "psi=1"];
 
   hardware.cpu.amd.updateMicrocode = true;
@@ -76,6 +77,10 @@
   programs.corectrl.enable = true;
   programs.adb.enable = true;
   programs.steam.enable = true;
+
+  systemd.tmpfiles.rules = [
+    "f /dev/shm/looking-glass 0660 woze kvm -"
+  ];
 
   # services.flatpak.enable = true;
 
@@ -136,7 +141,7 @@
       qemu = {
         ovmf = {
           enable = true;
-          packages = [pkgs.OVMFFull.fd];
+          packages = [pkgs.OVMF.fd];
         };
         swtpm.enable = true;
         # package = pkgs.qemu.overrideAttrs (old: {
@@ -167,7 +172,7 @@
   #   options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
   # };
 
-  users.users.woze.extraGroups = ["docker" "libvirtd" "video" "render" "vboxusers" "libvirt" "corectrl" "adbusers" "wireshark"];
+  users.users.woze.extraGroups = ["docker" "libvirtd" "video" "render" "vboxusers" "libvirt" "corectrl" "adbusers" "wireshark" "kvm"];
   home-manager.users.woze = ./home.nix;
 
   system.stateVersion = "22.11";
