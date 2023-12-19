@@ -146,8 +146,16 @@
     obs-studio = {
       enable = true;
       plugins = with pkgs.obs-studio-plugins; [
+        droidcam-obs
+        input-overlay
+        looking-glass-obs
         obs-gstreamer
         obs-move-transition
+        obs-shaderfilter
+        obs-tuna
+        obs-vertical-canvas
+        obs-vkcapture
+        waveform
         wlrobs
       ];
     };
