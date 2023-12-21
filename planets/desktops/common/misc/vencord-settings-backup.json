@@ -194,7 +194,7 @@
             "SilentTyping": {
                 "enabled": true,
                 "showIcon": true,
-                "isEnabled": false
+                "isEnabled": true
             },
             "SortFriendRequests": {
                 "enabled": false
@@ -543,6 +543,12 @@
             },
             "SuperReactionTweaks": {
                 "enabled": false
+            },
+            "ClientTheme": {
+                "enabled": false
+            },
+            "FixImagesQuality": {
+                "enabled": false
             }
         },
         "notifications": {
@@ -557,7 +563,7 @@
             "authenticated": false,
             "url": "https://api.vencord.dev/",
             "settingsSync": false,
-            "settingsSyncVersion": 1699547964845
+            "settingsSyncVersion": 1701892746544
         },
         "enabledThemes": []
     },
