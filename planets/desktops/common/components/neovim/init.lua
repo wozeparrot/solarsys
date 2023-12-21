@@ -80,6 +80,10 @@ nnoremap("<leader>tm", "<cmd>tabp<CR>")
 nnoremap("<leader>tn", "<cmd>tabn<CR>")
 nnoremap("<leader>bd", "<cmd>lua require('bufdelete').bufdelete(0, false)<CR>")
 nnoremap("//", "<cmd>noh<CR>")
+nnoremap("<C-k>", "<cmd>wincmd k<CR>")
+nnoremap("<C-j>", "<cmd>wincmd j<CR>")
+nnoremap("<C-h>", "<cmd>wincmd h<CR>")
+nnoremap("<C-l>", "<cmd>wincmd l<CR>")
 
 ---- Ricing ----
 -- lualine
