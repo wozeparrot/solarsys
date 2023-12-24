@@ -22,7 +22,6 @@
   boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos;
   boot.kernelPatches = [
   ];
-  boot.extraModulePackages = with config.boot.kernelPackages; [kvmfr];
   boot.kernelParams = ["amd_pstate=active" "psi=1"];
 
   hardware.cpu.amd.updateMicrocode = true;
@@ -141,7 +140,7 @@
       qemu = {
         ovmf = {
           enable = true;
-          packages = [pkgs.OVMF.fd];
+          packages = [pkgs.OVMFFull.fd];
         };
         swtpm.enable = true;
         # package = pkgs.qemu.overrideAttrs (old: {
