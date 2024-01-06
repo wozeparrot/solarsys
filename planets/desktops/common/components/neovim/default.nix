@@ -76,6 +76,7 @@ in {
       plenary-nvim
       sqlite-lua
       (pluginGit "lewis6991/impatient.nvim" "c90e273f7b8c50a02f956c24ce4804a47f18162e" "main")
+
       # lsp
       lspkind-nvim
       lspsaga-nvim
@@ -83,20 +84,25 @@ in {
       nvim-code-action-menu
       nvim-lspconfig
       trouble-nvim
+
       # treesitter
       nvim-treesitter.withAllGrammars
       nvim-treesitter-context
       nvim-ts-autotag
+
       # telescope
       (pluginGit "nvim-telescope/telescope-ui-select.nvim" "62ea5e58c7bbe191297b983a9e7e89420f581369" "master")
       telescope-frecency-nvim
       telescope-fzf-native-nvim
       telescope-nvim
+
       # nvim-autopairs
       nvim-autopairs
+
       # vim-vsnip
       friendly-snippets
       vim-vsnip
+
       # nvim-cmp
       cmp-buffer
       cmp-nvim-lsp
@@ -104,17 +110,23 @@ in {
       cmp-treesitter
       cmp-vsnip
       nvim-cmp
+
       # indent-blankline
-      indent-blankline-nvim
+      (pluginGit "lukas-reineke/indent-blankline.nvim" "3c8a185da4b8ab7aef487219f5e001b11d4b6aaf" "master")
       rainbow-delimiters-nvim
+
       # nvim-cursorline
       nvim-cursorline
+
       # nvim-web-devicons
       nvim-web-devicons
+
       # comment-nvim
       comment-nvim
+
       # nvim-tree-lua
       nvim-tree-lua
+
       # glow
       glow-nvim
 
