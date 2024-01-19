@@ -90,7 +90,12 @@
   '';
 
   services.printing.enable = true;
-  services.printing.drivers = [pkgs.gutenprint pkgs.gutenprintBin pkgs.hplip];
+  services.printing.drivers = with pkgs; [
+    gutenprint
+    gutenprintBin
+    hplip
+    foo2zjs
+  ];
 
   services.gvfs.enable = true;
 

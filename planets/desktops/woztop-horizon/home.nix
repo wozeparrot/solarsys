@@ -72,11 +72,11 @@
         outputs = [
           {
             criteria = "eDP-2";
-            position = "0,0";
+            position = "0,1080";
           }
           {
             criteria = "Samsung Electric Company SAMSUNG 0x01000E00";
-            position = "1920,0";
+            position = "0,0";
             transform = "normal";
           }
         ];
