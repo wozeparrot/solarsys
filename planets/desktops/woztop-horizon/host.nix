@@ -18,8 +18,8 @@
     ../common/profiles/vpn.nix
   ];
 
-  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
-  boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
+  # boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos;
   boot.kernelPatches = [
   ];
   boot.kernelParams = ["amd_pstate=active" "psi=1"];
@@ -150,13 +150,6 @@
           packages = [pkgs.OVMFFull.fd];
         };
         swtpm.enable = true;
-        # package = pkgs.qemu.overrideAttrs (old: {
-        #   patches =
-        #     old.patches
-        #     ++ [
-        #       ./patches/qemu/enable_rebar.patch
-        #     ];
-        # });
       };
 
       onBoot = "ignore";
