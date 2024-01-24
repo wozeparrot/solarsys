@@ -16,7 +16,7 @@
         type "fifo"
         name "Visualizer feed"
         path "/tmp/mpd.fifo"
-        format "44100:16:2"
+        format "48000:16:2"
       }
 
       audio_output {
