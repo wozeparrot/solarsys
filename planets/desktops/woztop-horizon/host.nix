@@ -88,6 +88,9 @@
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="amdgpu_bl1", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
     SUBSYSTEM=="usb", ATTRS{idVendor}=="03e7", MODE="0666"
   '';
+  services.udev.packages = with pkgs; [
+    openocd
+  ];
 
   services.printing.enable = true;
   services.printing.drivers = with pkgs; [
