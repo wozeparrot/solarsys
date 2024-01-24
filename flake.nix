@@ -120,13 +120,13 @@
       };
       chaotic = {
         inherit (inputs.chaotic) packages;
-        cache = {
-          substituters = ["https://nyx.chaotic.cx"];
-          trusted-public-keys = [
-            "nyx.chaotic.cx-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
-            "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
-          ];
-        };
+        # cache = {
+        #   substituters = ["https://nyx.chaotic.cx"];
+        #   trusted-public-keys = [
+        #     "nyx.chaotic.cx-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+        #     "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+        #   ];
+        # };
       };
       zigf = {
         inherit (inputs.zigf) packages;
