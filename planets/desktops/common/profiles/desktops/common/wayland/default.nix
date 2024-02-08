@@ -108,7 +108,7 @@
 
     programs.waybar = {
       enable = true;
-      package = pkgs.nixpkgs-wayland.waybar;
+      package = pkgs.waybar;
       systemd = {
         enable = true;
         target = "wayland-desktop-session.target";
