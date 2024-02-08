@@ -57,15 +57,15 @@
       })
     )
     audacity
-    blender
-    # freecad # TODO: https://github.com/NixOS/nixpkgs/pull/263599
+    blender-hip
+    freecad
     ghidra-bin
     gimp
     gnome.file-roller
     gnome.gnome-disk-utility
     jamesdsp
     keepassxc
-    kicad
+    # kicad
     krita
     libreoffice-fresh
     libsForQt5.kdenlive
@@ -91,7 +91,7 @@
     gamescope
     master.protontricks
     nix-gaming.osu-lazer-bin
-    the-powder-toy
+    # the-powder-toy
     wine64
 
     # wayland/desktop stuff
