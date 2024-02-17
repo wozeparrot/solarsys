@@ -34,7 +34,7 @@
       extraConfig = {
         github.user = "wozeparrot@gmail.com";
 
-        pull.rebase = true;
+        merge.conflictstyle = "zdiff3";
 
         diff.colorMoved = "default";
 
@@ -52,6 +52,14 @@
         gpg.ssh.allowedSignersFile = "~/.local/share/git_allowed_signers";
 
         init.defaultBranch = "main";
+
+        rerere.enabled = true;
+
+        diff.algorithm = "histogram";
+
+        status.submoduleSummary = true;
+        diff.submodule = "log";
+        submodule.recurse = true;
       };
     };
 
