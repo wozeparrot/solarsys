@@ -72,6 +72,7 @@
     nheko
     openscad
     prismlauncher
+    rnote
     signal-desktop
     sioyek
     solvespace
