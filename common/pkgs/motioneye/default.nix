@@ -12,16 +12,17 @@
 in
   python3Packages.buildPythonApplication rec {
     pname = "motioneye";
-    version = "unstable-2023-04-07";
+    version = "unstable-2024-02-15";
     format = "pyproject";
 
     src = fetchFromGitHub {
-      owner = "ccrisan";
+      owner = "motioneye-project";
       repo = pname;
-      rev = "ef1c42b57895324a2fb7129e63d37412061a82e2";
-      sha256 = "sha256-SkkSOPb3lLJ5e9fr6ac+9HMbCpJXC9TZdDrreeBdi4c=";
+      rev = "2675cd20ab1df365d0efce204051296f23033c1c";
+      sha256 = "sha256-0YWFDDDzkdxTBpiM0vVv80gW+nUqkb2Pt7Ew/XT5T5I=";
     };
 
+    nativeBuildInputs = [python3Packages.babel];
     buildInputs = bins;
 
     postPatch = ''
