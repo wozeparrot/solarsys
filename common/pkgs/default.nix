@@ -10,6 +10,7 @@ self: super: {
     rivercarro = self.callPackage ./rivercarro {};
     shotcut = self.libsForQt5.callPackage ./shotcut {};
     sonobus = self.callPackage ./sonobus {};
+    veikk-driver = self.callPackage ./veikk-driver {};
     zrythm = self.callPackage ./zrythm {};
     zscroll = self.callPackage ./zscroll {};
 
