@@ -307,11 +307,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1700620223,
-        "narHash": "sha256-Br+L/k82A7zy5uECdKZsrqdA2lbYLfHhqrROuv9DXNw=",
+        "lastModified": 1708196137,
+        "narHash": "sha256-bpZnrULNJuv7+EpLelbfF8Q3IICllJQLV7YTeZPb79s=",
         "owner": "wozeparrot",
         "repo": "ensky",
-        "rev": "b9164616b44403449c374979f397a27568fb2ce7",
+        "rev": "ee5464e8cd7e49a0d9e50ee070c1aa3a41d61d50",
         "type": "github"
       },
       "original": {
@@ -1551,11 +1551,11 @@
         "seaweedfs": "seaweedfs_2"
       },
       "locked": {
-        "lastModified": 1708129630,
-        "narHash": "sha256-PI/tkvi+Ri2kdrXUxpaBmMhPWz2h+J4IMMGOE843Wb4=",
+        "lastModified": 1708148007,
+        "narHash": "sha256-4nT+jFdpbPArPHU2LxHYZ7hShvDpuJgpcgNAAS3IhLc=",
         "owner": "wozeparrot",
         "repo": "seaweedfs-nix",
-        "rev": "4957806f4d2d1525de2d7b8daa3c4b428b630aba",
+        "rev": "7f49f6dc389b8cdd2e3130aec42b29112e3626ef",
         "type": "github"
       },
       "original": {
