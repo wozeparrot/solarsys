@@ -326,7 +326,7 @@ lspconfig.lua_ls.setup({
 -- java
 lspconfig.jdtls.setup({
     on_attach = default_on_attach,
-    cmd = { "jdt-language-server", "-data", "/home/woze/.cache/jdtls/workspace" },
+    cmd = { "jdtls", "-data", "/home/woze/.cache/jdtls/workspace" },
     init_options = {
         workspace = "/home/woze/.cache/jdtls/workspace",
     },
