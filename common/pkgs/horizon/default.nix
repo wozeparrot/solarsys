@@ -18,19 +18,23 @@
   pkg-config,
   podofo,
   python3,
+  python3Packages,
   sqlite,
   wrapGAppsHook,
   zeromq,
+  cmake,
+  meson,
+  ninja,
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "horizon-eda";
-  version = "2.5.0";
+  version = "unstable-2024-02-11";
 
   src = fetchFromGitHub {
     owner = "horizon-eda";
     repo = "horizon";
-    rev = "v${version}";
-    sha256 = "sha256-UcjbDJR6shyETpanNkRoH8LF8r6gFjsyNHVSCMHKqS8=";
+    rev = "ddd15df6297900ce22d1480a68604a24fe6e60c2";
+    sha256 = "sha256-hKLQ3MWslQLViCpgK9JJskRhIF4CzVxLcrgrDWrbW+Q=";
   };
 
   buildInputs = [
@@ -48,13 +52,17 @@ stdenv.mkDerivation rec {
     opencascade-occt
     podofo
     python3
+    python3Packages.pycairo
     sqlite
     zeromq
+    cmake
   ];
 
   nativeBuildInputs = [
     pkg-config
     wrapGAppsHook
+    meson
+    ninja
   ];
 
   CASROOT = opencascade-occt;
