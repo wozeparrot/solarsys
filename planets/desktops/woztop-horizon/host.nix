@@ -61,7 +61,7 @@
 
     cifs-utils
 
-    lxqt.lxqt-policykit
+    gpu-screen-recorder
   ];
 
   programs.nm-applet.enable = true;
@@ -140,6 +140,12 @@
       value = "99999";
     }
   ];
+  security.wrappers."gsr-kms-server" = {
+    owner = "root";
+    group = "root";
+    capabilities = "cap_sys_admin+ep";
+    source = "${pkgs.gpu-screen-recorder}/bin/gsr-kms-server";
+  };
 
   virtualisation = {
     libvirtd = {
