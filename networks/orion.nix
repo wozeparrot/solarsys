@@ -45,6 +45,13 @@
     endpoints = [];
   }
   {
+    hostname = "ahra";
+    type = "server";
+    address = "10.11.235.2";
+    pubkey = "kCg6oGuc3b7kAysYtmhr/tsECVZbFrp5feeWkIbRtgU=";
+    endpoints = [];
+  }
+  {
     hostname = "wangshu";
     type = "server";
     address = "10.11.235.11";
