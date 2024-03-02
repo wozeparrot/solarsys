@@ -239,6 +239,9 @@
             install -D ssk $out/bin/
             install -D solarsys-remote.sh $out/bin/
 
+            # patch the completion script to use the full path to solarsys
+            sed -i "s|ss json|$out/bin/ss json|g" completions/ss.fish
+
             # install completions
             installShellCompletion completions/ss.fish
           '';
