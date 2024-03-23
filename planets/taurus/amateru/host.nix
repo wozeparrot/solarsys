@@ -86,7 +86,7 @@
     };
   };
   services.nfs.server = {
-    enable = true;
+    enable = false;
     lockdPort = 4001;
     mountdPort = 4002;
     statdPort = 4000;
