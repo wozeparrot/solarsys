@@ -133,7 +133,7 @@
     };
 
     mangohud = {
-      enable = true;
+      enable = false;
       settings = {
         full = true;
       };

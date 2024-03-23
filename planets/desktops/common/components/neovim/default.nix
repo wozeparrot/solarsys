@@ -70,7 +70,7 @@ in {
       bufdelete-nvim
       bufferline-nvim
       lualine-nvim
-      nvim-base16
+      base16-nvim
 
       # libraries
       plenary-nvim

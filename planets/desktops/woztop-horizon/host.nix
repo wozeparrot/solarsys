@@ -90,6 +90,7 @@
   '';
   services.udev.packages = with pkgs; [
     openocd
+    platformio-core
   ];
 
   services.printing.enable = true;
