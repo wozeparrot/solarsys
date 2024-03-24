@@ -256,7 +256,6 @@
             jq
             nom.default
             nvd
-            rnix-lsp
             rsync
             shellcheck
 
