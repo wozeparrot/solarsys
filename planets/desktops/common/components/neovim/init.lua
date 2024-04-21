@@ -466,6 +466,9 @@ telescope.setup({
             override_file_sorter = true,
             case_mode = "smart_case",
         },
+        frecency = {
+            db_safe_mode = false,
+        },
     },
 })
 -- load extensions
@@ -502,6 +505,7 @@ require("nvim-autopairs").setup({})
 --     },
 -- })
 -- lazy_require("copilot_cmp", {})
+vim.g.copilot_no_tab_map = true
 
 ---- nvim-cmp Config ----
 local has_words_before = function()

@@ -71,7 +71,7 @@
     xdph.url = "github:hyprwm/xdg-desktop-portal-hyprland";
 
     hyprland-split-monitor-workspaces = {
-      url = "github:Duckonaut/split-monitor-workspaces";
+      url = "github:zjeffer/split-monitor-workspaces";
       inputs.hyprland.follows = "hyprland";
     };
 

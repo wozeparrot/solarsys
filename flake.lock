@@ -306,11 +306,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1708196137,
-        "narHash": "sha256-bpZnrULNJuv7+EpLelbfF8Q3IICllJQLV7YTeZPb79s=",
+        "lastModified": 1712128013,
+        "narHash": "sha256-eis67xkcXjm7kJnBZc9JU46r5UhJV6S5Lgr3QpK8+w4=",
         "owner": "wozeparrot",
         "repo": "ensky",
-        "rev": "ee5464e8cd7e49a0d9e50ee070c1aa3a41d61d50",
+        "rev": "487d948f28898f4c138864b11dd89534ae45ded8",
         "type": "github"
       },
       "original": {
@@ -838,15 +838,15 @@
         "nix-filter": "nix-filter_2"
       },
       "locked": {
-        "lastModified": 1709119202,
-        "narHash": "sha256-3qcLLe+LqC1YAdqpKtU1COlxzb5uqpTMYgwmleS2oRg=",
-        "owner": "Duckonaut",
+        "lastModified": 1710276818,
+        "narHash": "sha256-eLYPvUXoJSadBzEzwYO1mxPQ4GogN8VK7DprvzdNhKY=",
+        "owner": "zjeffer",
         "repo": "split-monitor-workspaces",
-        "rev": "d0012b8b0f764e32dd7b82f7a94b8c30197d7dc8",
+        "rev": "759e4b605d873dd6f47967c54d5d78d12939986c",
         "type": "github"
       },
       "original": {
-        "owner": "Duckonaut",
+        "owner": "zjeffer",
         "repo": "split-monitor-workspaces",
         "type": "github"
       }

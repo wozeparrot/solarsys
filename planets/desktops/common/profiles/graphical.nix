@@ -25,14 +25,7 @@
 
   xdg.portal = {
     enable = true;
-    wlr = {
-      settings = {
-        screencast = {
-          choose_type = "simple";
-          chooser_cmd = "${pkgs.wofi}/bin/wofi -d -n --prompt='Select Monitor To Share: '";
-        };
-      };
-    };
+    config.common.default = "*";
   };
 
   # audio
