@@ -136,7 +136,7 @@
           modules-right = ["custom/media"];
 
           "hyprland/window" = {
-            format = "  {}";
+            format = "{}";
             max-length = 40;
           };
 
@@ -153,7 +153,7 @@
               critical = 15;
             };
             format = "{capacity}% {icon}";
-            format-charging = "{capacity}% ";
+            format-charging = "{capacity}% 󰂄";
             format-plugged = "{capacity}% ";
             format-alt = "{time} {icon}";
             format-icons = [" " " " " " " " " "];
