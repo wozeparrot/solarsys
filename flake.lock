@@ -843,15 +843,15 @@
         "nix-filter": "nix-filter_2"
       },
       "locked": {
-        "lastModified": 1712524232,
-        "narHash": "sha256-W3wcI3Hw4vgRRzNMi0dlRTEYELz9TDtIcT29MZ3QYgM=",
-        "owner": "zjeffer",
+        "lastModified": 1713693088,
+        "narHash": "sha256-42x8C984A46FHybQh6+RTbfUDuOz0iTa+HaAUNLA06U=",
+        "owner": "Duckonaut",
         "repo": "split-monitor-workspaces",
-        "rev": "fa3916102340b7ad90554260e709d57cc4108278",
+        "rev": "65d4cb11a27f8c0e6aa976e5d1c17d9086469938",
         "type": "github"
       },
       "original": {
-        "owner": "zjeffer",
+        "owner": "Duckonaut",
         "repo": "split-monitor-workspaces",
         "type": "github"
       }
