@@ -18,8 +18,8 @@
     ../common/profiles/vpn.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
-  # boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos;
+  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
+  boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos-lto;
   boot.kernelPatches = [
   ];
   boot.kernelParams = ["amd_pstate=active" "psi=1"];
@@ -62,6 +62,8 @@
     cifs-utils
 
     gpu-screen-recorder
+
+    chaotic.scx
   ];
 
   programs.nm-applet.enable = true;
