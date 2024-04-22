@@ -74,7 +74,7 @@ in {
 
         services.nextcloud = {
           enable = true;
-          package = pkgs.nextcloud27;
+          package = pkgs.nextcloud28;
           hostName = cfg.bindAddress;
 
           phpOptions = {
@@ -106,16 +106,15 @@ in {
           caching.apcu = true;
 
           config = {
-            inherit (cfg) extraTrustedDomains;
-
             adminuser = "root";
             adminpassFile = "/keys/nextcloud_adminpass";
 
             dbtype = "sqlite";
-
-            defaultPhoneRegion = "CA";
           };
-          extraOptions = {
+          settings = {
+            trusted_domains = cfg.extraTrustedDomains;
+            default_phone_region = "CA";
+
             preview_max_x = 1024;
             preview_max_y = 1024;
           };
