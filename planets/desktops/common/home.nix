@@ -89,7 +89,8 @@
           openssl
         ];
     })
-    gamescope
+    chaotic.gamescope_git
+    chaotic.gamescope-wsi_git
     master.protontricks
     nix-gaming.osu-lazer-bin
     # the-powder-toy
