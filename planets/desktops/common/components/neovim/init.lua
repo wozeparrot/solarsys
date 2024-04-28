@@ -199,14 +199,19 @@ nnoremap("<leader>8", "<cmd>BufferLineGoToBuffer 8<CR>")
 nnoremap("<leader>9", "<cmd>BufferLineGoToBuffer 9<CR>")
 
 ---- Language Overrides ----
+-- nix
+vim.cmd("autocmd filetype nix setlocal tabstop=2 shiftwidth=2 softtabstop=2")
 -- c & cpp
 vim.g.c_syntax_for_h = 1
+vim.cmd("autocmd filetype c,cpp setlocal tabstop=2 shiftwidth=2 softtabstop=2")
 -- endron
 vim.filetype.add({
 	extension = {
 		["edr"] = "endron",
 	},
 })
+-- python
+vim.cmd("autocmd filetype python setlocal tabstop=2 shiftwidth=2 softtabstop=2")
 
 ---- LSP Config ----
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
