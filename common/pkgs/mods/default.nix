@@ -14,10 +14,10 @@ buildGoModule rec {
     owner = "charmbracelet";
     repo = "mods";
     rev = "v${version}";
-    hash = "";
+    hash = "sha256-9sr6R7Keg9NQQapZKnjfrMOJilQEYCs8AS04TuNWQ68=";
   };
 
-  vendorHash = "";
+  vendorHash = "sha256-BL5bxyeVkcm7GO1Kzk9d/hj2wY50UhauEFq9YQ/JbCE=";
 
   ldflags = [ "-s" "-w" "-X=main.Version=${version}" ];
 

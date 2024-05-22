@@ -5,7 +5,7 @@
   ...
 }: {
   nix = {
-    package = pkgs.nixUnstable;
+    package = pkgs.nixVersions.latest;
     settings.system-features = ["nixos-test" "benchmark" "big-parallel" "kvm"];
 
     registry = let
@@ -101,6 +101,5 @@
   systemd.services.systemd-resolved.stopIfChanged = false;
 
   # time
-  time.timeZone = "America/Toronto";
   services.timesyncd.enable = lib.mkDefault true;
 }

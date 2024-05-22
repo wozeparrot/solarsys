@@ -38,21 +38,23 @@
     enable = true;
     package = pkgs.nixpkgs-wayland.kanshi;
     systemdTarget = "graphical-session.target";
-    profiles = {
-      undocked = {
-        outputs = [
+    settings = [
+      {
+        profile.name = "undocked";
+        profile.outputs = [
           {
             criteria = "eDP-2";
             position = "0,0";
           }
         ];
-        exec = [
+        profile.exec = [
           "$HOME/scripts/clamp_workspaces.sh"
           "swww img ${../common/misc/wallpaper.png}"
         ];
-      };
-      docked-home = {
-        outputs = [
+      }
+      {
+        profile.name = "docked-home";
+        profile.outputs = [
           {
             criteria = "eDP-2";
             position = "0,1080";
@@ -64,12 +66,13 @@
             transform = "normal";
           }
         ];
-        exec = [
+        profile.exec = [
           "swww img ${../common/misc/wallpaper.png}"
         ];
-      };
-      docked-away = {
-        outputs = [
+      }
+      {
+        profile.name = "docked-away";
+        profile.outputs = [
           {
             criteria = "eDP-2";
             position = "0,1080";
@@ -80,12 +83,13 @@
             transform = "normal";
           }
         ];
-        exec = [
+        profile.exec = [
           "swww img ${../common/misc/wallpaper.png}"
         ];
-      };
-      docked-away-vertical = {
-        outputs = [
+      }
+      {
+        profile.name = "docked-away-vertical";
+        profile.outputs = [
           {
             criteria = "eDP-2";
             position = "0,720";
@@ -96,11 +100,26 @@
             transform = "90";
           }
         ];
-        exec = [
+        profile.exec = [
           "swww img ${../common/misc/wallpaper.png}"
         ];
-      };
-    };
+      }
+      {
+        profile.name = "comma";
+        profile.outputs = [
+          {
+            criteria = "eDP-2";
+            position = "0,0";
+          }
+          {
+            criteria = "Dell Inc. DELL U3219Q 1D093Q2";
+            position = "1920,0";
+            scale = 1.5;
+            transform = "normal";
+          }
+        ];
+      }
+    ];
   };
   # add packages to the path
   systemd.user.services.kanshi.Service = {

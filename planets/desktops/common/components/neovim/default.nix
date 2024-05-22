@@ -66,11 +66,13 @@ in {
 
     plugins = with pkgs.vimPlugins; [
       # ricing
-      (pluginGit "nekonako/xresources-nvim" "745b4df924a6c4a7d8026a3fb3a7fa5f78e6f582" "master")
       bufdelete-nvim
       bufferline-nvim
       lualine-nvim
       base16-nvim
+
+      # util
+      nvim-lastplace
 
       # libraries
       plenary-nvim
@@ -144,10 +146,10 @@ in {
       rust-tools-nvim
 
       # copilot
-      copilot-vim
-      cmp-copilot
-      # (pluginGit "zbirenbaum/copilot.lua" "b41d4c9c7d4f5e0272bcf94061b88e244904c56f" "master")
-      # (pluginGit "zbirenbaum/copilot-cmp" "92535dfd9c430b49ca7d9a7da336c5db65826b65" "master")
+      # copilot-vim
+      # cmp-copilot
+      (pluginGit "zbirenbaum/copilot.lua" "f7612f5af4a7d7615babf43ab1e67a2d790c13a6" "master")
+      (pluginGit "zbirenbaum/copilot-cmp" "72fbaa03695779f8349be3ac54fa8bd77eed3ee3" "master")
 
       # firenvim
       (pluginGit "glacambre/firenvim" "ee4ef314bd990b2b05b7fbd95b857159e444a2fe" "master")

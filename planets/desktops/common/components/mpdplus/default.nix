@@ -94,5 +94,12 @@
   };
 
   # cava
-  home.packages = with pkgs; [cava];
+  programs.cava = {
+    enable = true;
+    settings = {
+      general.framerate = 60;
+      input.method = "pipewire";
+      smoothing.noise_reduction = 77;
+    };
+  };
 }

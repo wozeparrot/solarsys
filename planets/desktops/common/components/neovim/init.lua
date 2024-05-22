@@ -46,6 +46,12 @@ vim.cmd('let mapleader=" "')
 vim.cmd('let maplocalleader=" "')
 nnoremap("<space>", "<nop>")
 
+-- jump to last location
+require("nvim-lastplace").setup({
+  lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
+  lastplace_ignore_filetype = { "gitcommit", "gitrebase", "svn", "hgcommit" },
+})
+
 -- diable some built-in plugins
 local disabled_built_ins = {
 	"netrw",
@@ -497,15 +503,14 @@ nnoremap("<leader>fs", "<cmd>Telescope treesitter<CR>")
 require("nvim-autopairs").setup({})
 
 ---- Copilot Config ----
--- lazy_require("copilot", {
---     panel = { enabled = false },
---     suggestion = { enabled = false },
---     filetypes = {
---         markdown = true,
---     },
--- })
--- lazy_require("copilot_cmp", {})
-vim.g.copilot_no_tab_map = true
+lazy_require("copilot", {
+    panel = { enabled = false },
+    suggestion = { enabled = false },
+    filetypes = {
+        markdown = true,
+    },
+})
+lazy_require("copilot_cmp", {})
 
 ---- nvim-cmp Config ----
 local has_words_before = function()
@@ -535,9 +540,9 @@ cmp.setup({
 		{ name = "buffer", group_index = 2 },
 	},
 	mapping = cmp.mapping.preset.insert({
-		["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4)),
-		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4)),
-		["<C-Space>"] = cmp.mapping(cmp.mapping.complete()),
+		["<C-d>"] = cmp.mapping.scroll_docs(-4),
+		["<C-f>"] = cmp.mapping.scroll_docs(4),
+		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-y>"] = cmp.config.disable,
 		["<C-e>"] = cmp.mapping({
 			i = cmp.mapping.abort(),
