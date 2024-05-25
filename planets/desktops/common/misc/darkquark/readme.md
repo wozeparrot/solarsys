@@ -3,12 +3,12 @@
 ## Palette
 
 background:             #000000
-lighter_background:     #151510
+lighter_background:     #111111
 
-foreground:             #d2cad3
-lighter_foreground:     #f8f0f8
+foreground:             #bbb3c1
+lighter_foreground:     #d2cad3
 
-black:                  #08040b
+black:                  #222024
 dark_gray:              #554d5b
 
 red:                    #a52e4d
@@ -34,13 +34,3 @@ light_orange:           #ff7458
 
 gray:                   #bbb3c1
 white:                  #f8f0f8
-
-## Helper Scripts
-
-```py
-def tint(color):
-    return hex((color + 0x08040b) - 0x080808)
-
-def redshift(color):
-    return hex((color + 0x130606) - 0x0d0d0d)
-```

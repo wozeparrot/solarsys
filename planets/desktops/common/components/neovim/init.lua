@@ -420,14 +420,6 @@ treesitter_parsers.endron = {
 		files = { "src/parser.c" },
 	},
 }
-treesitter_parsers.hypr = {
-	install_info = {
-		url = "https://github.com/luckasRanarison/tree-sitter-hypr",
-		files = { "src/parser.c" },
-		branch = "master",
-	},
-	filetype = "hypr",
-}
 -- set nvim to use treesitter folding
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"

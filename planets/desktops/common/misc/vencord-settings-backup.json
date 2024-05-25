@@ -78,9 +78,6 @@
             "CrashHandler": {
                 "enabled": true
             },
-            "DisableDMCallIdle": {
-                "enabled": false
-            },
             "EmoteCloner": {
                 "enabled": true
             },
@@ -117,7 +114,9 @@
                 "enabled": false
             },
             "MemberCount": {
-                "enabled": true
+                "enabled": true,
+                "memberList": true,
+                "toolTip": true
             },
             "MessageLinkEmbeds": {
                 "enabled": false,
@@ -130,10 +129,9 @@
                 "ignoreSelf": true,
                 "ignoreUsers": "",
                 "ignoreChannels": "",
-                "ignoreGuilds": ""
-            },
-            "MuteNewGuild": {
-                "enabled": false
+                "ignoreGuilds": "",
+                "logEdits": true,
+                "logDeletes": true
             },
             "NoBlockedMessages": {
                 "enabled": false
@@ -194,7 +192,7 @@
             "SilentTyping": {
                 "enabled": true,
                 "showIcon": true,
-                "isEnabled": true
+                "isEnabled": false
             },
             "SortFriendRequests": {
                 "enabled": false
@@ -215,7 +213,9 @@
             },
             "TypingIndicator": {
                 "enabled": true,
-                "includeMutedChannels": false
+                "includeMutedChannels": false,
+                "includeCurrentChannel": true,
+                "indicatorMode": 3
             },
             "TypingTweaks": {
                 "enabled": true,
@@ -320,7 +320,7 @@
                 "enabled": false
             },
             "petpet": {
-                "enabled": false
+                "enabled": true
             },
             "QuickMention": {
                 "enabled": true
@@ -363,7 +363,8 @@
                 "enabled": true
             },
             "NoTrack": {
-                "enabled": true
+                "enabled": true,
+                "disableAnalytics": true
             },
             "SupportHelper": {
                 "enabled": true
@@ -391,7 +392,7 @@
                 "enabled": false,
                 "saveZoomValues": true,
                 "preventCarouselFromClosingOnClick": true,
-                "invertScroll": true,
+                "invertScroll": false,
                 "nearestNeighbour": false,
                 "square": false,
                 "zoom": 2,
@@ -426,7 +427,8 @@
                 "enabled": false
             },
             "SendTimestamps": {
-                "enabled": true
+                "enabled": true,
+                "replaceMessageContents": true
             },
             "ShowConnections": {
                 "enabled": true,
@@ -466,10 +468,6 @@
             "VencordToolbox": {
                 "enabled": true
             },
-            "Party mode 🎉": {
-                "enabled": false,
-                "superIntensePartyMode": 0
-            },
             "NoPendingCount": {
                 "enabled": false
             },
@@ -492,7 +490,9 @@
                 "enabled": true
             },
             "VoiceMessages": {
-                "enabled": false
+                "enabled": false,
+                "noiseSuppression": true,
+                "echoCancellation": true
             },
             "NormalizeMessageLinks": {
                 "enabled": false
@@ -520,9 +520,6 @@
             "ServerProfile": {
                 "enabled": false
             },
-            "ShowTimeouts": {
-                "enabled": false
-            },
             "ThemeAttributes": {
                 "enabled": true
             },
@@ -530,7 +527,9 @@
                 "enabled": false
             },
             "PermissionFreeWill": {
-                "enabled": false
+                "enabled": false,
+                "lockout": true,
+                "onboarding": true
             },
             "NoMosaic": {
                 "enabled": false
@@ -549,6 +548,85 @@
             },
             "FixImagesQuality": {
                 "enabled": false
+            },
+            "Decor": {
+                "enabled": false
+            },
+            "NotificationVolume": {
+                "enabled": false
+            },
+            "BetterGifPicker": {
+                "enabled": false
+            },
+            "FixCodeblockGap": {
+                "enabled": false
+            },
+            "ChatInputButtonAPI": {
+                "enabled": true
+            },
+            "DisableCallIdle": {
+                "enabled": false
+            },
+            "NewGuildSettings": {
+                "enabled": false
+            },
+            "BetterRoleContext": {
+                "enabled": false
+            },
+            "BetterSettings": {
+                "enabled": true,
+                "disableFade": true,
+                "organizeMenu": true,
+                "eagerLoad": true
+            },
+            "FriendsSince": {
+                "enabled": false
+            },
+            "OverrideForumDefaults": {
+                "enabled": false
+            },
+            "ResurrectHome": {
+                "enabled": false
+            },
+            "UnlockedAvatarZoom": {
+                "enabled": false
+            },
+            "ShowHiddenThings": {
+                "enabled": false
+            },
+            "BetterSessions": {
+                "enabled": false,
+                "backgroundCheck": false,
+                "checkInterval": 20
+            },
+            "ImageLink": {
+                "enabled": false
+            },
+            "ImplicitRelationships": {
+                "enabled": true,
+                "sortByAffinity": true
+            },
+            "MessageLatency": {
+                "enabled": false
+            },
+            "PauseInvitesForever": {
+                "enabled": false
+            },
+            "ReplyTimestamp": {
+                "enabled": false
+            },
+            "StreamerModeOnStream": {
+                "enabled": false
+            },
+            "VoiceDownload": {
+                "enabled": false
+            },
+            "WebScreenShareFixes": {
+                "enabled": true
+            },
+            "PartyMode": {
+                "enabled": false,
+                "superIntensePartyMode": 0
             }
         },
         "notifications": {
@@ -563,7 +641,7 @@
             "authenticated": false,
             "url": "https://api.vencord.dev/",
             "settingsSync": false,
-            "settingsSyncVersion": 1701892746544
+            "settingsSyncVersion": 1716242492246
         },
         "enabledThemes": []
     },
