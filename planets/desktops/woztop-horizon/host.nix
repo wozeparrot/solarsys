@@ -22,7 +22,7 @@
   boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos-lto;
   boot.kernelPatches = [
   ];
-  boot.kernelParams = ["amd_pstate=guided" "psi=1"];
+  boot.kernelParams = ["amd_pstate=active" "psi=1"];
 
   hardware.cpu.amd.updateMicrocode = true;
 
