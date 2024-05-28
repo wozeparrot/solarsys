@@ -184,7 +184,6 @@
     platformTheme.name = "gtk3";
   };
 
-  stylix.targets.vim.enable = false;
   stylix.targets.xresources.enable = true;
   stylix.targets.waybar.enable = false;
   stylix.targets.xfce.enable = false;

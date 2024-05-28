@@ -15,6 +15,8 @@
       };
     };
 in {
+  home.packages = with pkgs; [neovide];
+
   programs.neovim = {
     enable = true;
     withNodeJs = true;
@@ -42,6 +44,7 @@ in {
           base0E = "${colors.base0E}",
           base0F = "${colors.base0F}",
         });
+        vim.g.neovide_transparency = 0.9;
       '')
       (lib.strings.fileContents ./util.lua)
       (lib.strings.fileContents ./init.lua)
@@ -112,7 +115,6 @@ in {
 
       # treesitter
       nvim-treesitter.withAllGrammars
-      nvim-treesitter-context
       nvim-ts-autotag
 
       # telescope

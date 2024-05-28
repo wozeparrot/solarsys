@@ -424,19 +424,6 @@ treesitter_parsers.endron = {
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldenable = false
--- treesitter-context
-require("treesitter-context").setup({
-	enable = true,
-	throttle = true,
-	max_lines = 0,
-	patterns = {
-		default = {
-			"class",
-			"function",
-			"method",
-		},
-	},
-})
 
 ---- Telescope Config ----
 local telescope = require("telescope")
