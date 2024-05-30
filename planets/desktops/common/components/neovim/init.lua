@@ -48,8 +48,8 @@ nnoremap("<space>", "<nop>")
 
 -- jump to last location
 require("nvim-lastplace").setup({
-  lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
-  lastplace_ignore_filetype = { "gitcommit", "gitrebase", "svn", "hgcommit" },
+	lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
+	lastplace_ignore_filetype = { "gitcommit", "gitrebase", "svn", "hgcommit" },
 })
 
 -- diable some built-in plugins
@@ -84,10 +84,13 @@ nnoremap("<leader>tm", "<cmd>tabp<CR>")
 nnoremap("<leader>tn", "<cmd>tabn<CR>")
 nnoremap("<leader>bd", "<cmd>lua require('bufdelete').bufdelete(0, false)<CR>")
 nnoremap("//", "<cmd>noh<CR>")
+
 nnoremap("<C-k>", "<cmd>wincmd k<CR>")
 nnoremap("<C-j>", "<cmd>wincmd j<CR>")
 nnoremap("<C-h>", "<cmd>wincmd h<CR>")
 nnoremap("<C-l>", "<cmd>wincmd l<CR>")
+
+tnoremap("<Esc>", "<C-\\><C-n>")
 
 ---- Ricing ----
 -- lualine
@@ -144,15 +147,20 @@ require("lualine").setup({
 	extensions = { "nvim-tree" },
 })
 -- bufferline-nvim
+local bufdelete = require("bufdelete")
 require("bufferline").setup({
 	options = {
 		close_command = function(bufnum)
-			require("bufdelete").bufdelete(bufnum, false)
+			bufdelete.bufdelete(bufnum, false)
 		end,
 		right_mouse_command = "vertical sbuffer %d",
 		indicator = {
-			icon = "▎",
-			style = "icon",
+			style = "underline",
+		},
+		hover = {
+			enable = true,
+			delay = 500,
+			reveal = { "close" },
 		},
 		buffer_close_icon = "",
 		modified_icon = "●",
@@ -189,8 +197,9 @@ require("bufferline").setup({
 		end,
 	},
 })
-nnoremap("<leader>bn", "<cmd>BufferLineCycleNext<CR>")
-nnoremap("<leader>bm", "<cmd>BufferLineCyclePrev<CR>")
+-- bind shift hl to move between buffers
+nnoremap("<S-h>", "<cmd>BufferLineCyclePrev<CR>")
+nnoremap("<S-l>", "<cmd>BufferLineCycleNext<CR>")
 nnoremap("<leader>bv", "<cmd>BufferLinePick<CR>")
 nnoremap("<leader>bbn", "<cmd>BufferLineMoveNext<CR>")
 nnoremap("<leader>bbm", "<cmd>BufferLineMovePrev<CR>")
@@ -483,11 +492,11 @@ require("nvim-autopairs").setup({})
 
 ---- Copilot Config ----
 lazy_require("copilot", {
-    panel = { enabled = false },
-    suggestion = { enabled = false },
-    filetypes = {
-        markdown = true,
-    },
+	panel = { enabled = false },
+	suggestion = { enabled = false },
+	filetypes = {
+		markdown = true,
+	},
 })
 lazy_require("copilot_cmp", {})
 

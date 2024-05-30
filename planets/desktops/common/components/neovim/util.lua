@@ -6,6 +6,10 @@ function inoremap(shortcut, command)
     vim.api.nvim_set_keymap("i", shortcut, command, { noremap = true, silent = true })
 end
 
+function tnoremap(shortcut, command)
+    vim.api.nvim_set_keymap("t", shortcut, command, { noremap = true, silent = true })
+end
+
 local lazy_loaded = {}
 
 function lazy_require(plugin, config)
