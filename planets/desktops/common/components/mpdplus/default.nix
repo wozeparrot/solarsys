@@ -99,7 +99,12 @@
     settings = {
       general.framerate = 60;
       input.method = "pipewire";
-      smoothing.noise_reduction = 77;
+      smoothing.noise_reduction = 33;
     };
   };
+
+  # cavalier
+  home.packages = with pkgs; [
+    cavalier
+  ];
 }
