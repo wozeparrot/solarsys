@@ -52,6 +52,7 @@
     antimony
     audacity
     blender-hip
+    darktable
     freecad
     ghidra-bin
     gimp
