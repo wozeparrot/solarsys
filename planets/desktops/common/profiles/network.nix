@@ -11,6 +11,9 @@ _: {
     resolvconf.enable = false;
 
     firewall.enable = true;
+    firewall.allowedUDPPorts = [
+      5353 # avahi
+    ];
     firewall.interfaces = let
       fw_config = {
         allowedUDPPortRanges = [
