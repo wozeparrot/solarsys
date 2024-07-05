@@ -10,6 +10,7 @@
       fnott
       fuzzel
       grim
+      hyprlock # TODO: hyprlock.hyprlock
       hyprpicker.hyprpicker
       pngquant
       slurp
@@ -258,4 +259,6 @@
   };
 
   programs.xwayland.enable = true;
+
+  security.pam.services.hyprlock = {};
 }
