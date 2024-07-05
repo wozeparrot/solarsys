@@ -36,6 +36,7 @@
       ps:
         with ps; [
           requests
+          tqdm
         ]
     ))
     r128gain
@@ -49,14 +50,6 @@
     # applications
     antimicroX
     antimony
-    (
-      armcord.overrideAttrs (oldAttrs: {
-        src = fetchurl {
-          url = "https://github.com/ArmCord/ArmCord/releases/download/v3.2.5/ArmCord_3.2.5_amd64.deb";
-          hash = "sha256-6zlYm4xuYpG+Bgsq5S+B/Zt9TRB2GZnueKAg2ywYLE4=";
-        };
-      })
-    )
     audacity
     blender-hip
     freecad
@@ -80,6 +73,7 @@
     ss.horizon
     thunderbird
     transmission-gtk
+    vesktop
     zathura
 
     # gaming stuff
