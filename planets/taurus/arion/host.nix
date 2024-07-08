@@ -10,6 +10,7 @@
     ../common/profiles/vpn.nix
     ../common/containered-services/nextcloud.nix
     ../common/containered-services/motioneye.nix
+    ../common/containered-services/samba.nix
     ../common/components/common-metrics.nix
   ];
 
@@ -38,6 +39,9 @@
 
   # --- motioneye ---
   containered-services.motioneye.enable = true;
+
+  # --- samba ---
+  containered-services.samba.enable = true;
 
   system.stateVersion = "23.05";
 }
