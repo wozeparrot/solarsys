@@ -43,6 +43,10 @@ in {
       ];
 
       config = {cconfig, ...}: {
+        users.users.family.isNormalUser = true;
+        users.users.family.group = "family";
+        users.groups.family = {};
+
         # mount seaweedfs
         systemd.services."seaweedfs-mount" = {
           description = "mount seaweedfs for/in container";
@@ -50,7 +54,7 @@ in {
           path = with pkgs; [fuse3];
 
           serviceConfig = {
-            ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/samba-mount";
+            ExecStartPre = "${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/mkdir -p /var/lib/samba-mount; ${pkgs.coreutils}/bin/chown family:family /var/lib/samba-mount'";
             ExecStart = "${pkgs.seaweedfs.seaweedfs}/bin/weed mount -dir /var/lib/samba-mount -filer.path /personal/family -filer=10.11.235.1:9302";
             ExecStartPost = "${pkgs.bash}/bin/bash -c 'while ! ${pkgs.util-linux}/bin/mountpoint -q /var/lib/samba-mount; do sleep 1; done'";
             Restart = "on-failure";
@@ -64,15 +68,16 @@ in {
 
         services.samba = {
           enable = true;
+          enableNmbd = true;
           package = pkgs.sambaFull;
           securityType = "user";
           extraConfig = ''
             workgroup = SOLARSYS
             server string = ssmb
             netbios name = ssmb
-            hosts allow = 10.11.235. 192.168.0. 127.0.0.1 localhost
+            security = user
+            hosts allow = 10.11.235.0/24 192.168.0.0/24 127.0.0.1 localhost
             hosts deny = 0.0.0.0/0
-            guest account = nobody
             map to guest = bad user
           '';
           shares = {
@@ -80,11 +85,10 @@ in {
               path = "/var/lib/samba-mount";
               browseable = "yes";
               "read only" = "no";
+              writeable = "yes";
               "guest ok" = "no";
-              "create mask" = "0644";
-              "directory mask" = "0755";
-              "force user" = "username";
-              "force group" = "groupname";
+              "force user" = "family";
+              "force group" = "family";
             };
           };
         };
@@ -93,6 +97,8 @@ in {
           enable = true;
           workgroup = "SOLARSYS";
           hostname = "ssmb";
+          interface = "eth0";
+          extraOptions = ["--verbose"];
         };
 
         system.stateVersion = config.system.stateVersion;

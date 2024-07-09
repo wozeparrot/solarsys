@@ -88,7 +88,6 @@
     ensky.inputs = {
       nixpkgs.follows = "nixpkgs";
       flake-utils.follows = "flake-utils";
-      zig.follows = "zigf";
     };
 
     seaweedfs.url = "github:wozeparrot/seaweedfs-nix";
