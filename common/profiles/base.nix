@@ -16,7 +16,7 @@
       lib.mkDefault nixRegistry;
 
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];
-    settings.extra-sandbox-paths = ["/bin/sh=${pkgs.bash}/bin/sh"];
+    # settings.extra-sandbox-paths = ["/bin/sh=${pkgs.bash}/bin/sh"];
 
     gc = {
       automatic = lib.mkDefault true;
