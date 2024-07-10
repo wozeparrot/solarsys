@@ -84,7 +84,7 @@ in {
       zls.zls
 
       # formatters
-      alejandra
+      nixfmt-rfc-style
       stylua
 
       nodePackages.vscode-langservers-extracted
@@ -103,12 +103,11 @@ in {
       # libraries
       plenary-nvim
       sqlite-lua
-      (pluginGit "lewis6991/impatient.nvim" "c90e273f7b8c50a02f956c24ce4804a47f18162e" "main")
 
       # lsp
       lspkind-nvim
       lspsaga-nvim
-      null-ls-nvim
+      none-ls-nvim
       nvim-code-action-menu
       nvim-lspconfig
       trouble-nvim
@@ -118,7 +117,7 @@ in {
       nvim-ts-autotag
 
       # telescope
-      (pluginGit "nvim-telescope/telescope-ui-select.nvim" "62ea5e58c7bbe191297b983a9e7e89420f581369" "master")
+      (pluginGit "nvim-telescope/telescope-ui-select.nvim" "6e51d7da30bd139a6950adf2a47fda6df9fa06d2" "master")
       telescope-frecency-nvim
       telescope-fzf-native-nvim
       telescope-nvim
@@ -139,7 +138,7 @@ in {
       nvim-cmp
 
       # indent-blankline
-      (pluginGit "lukas-reineke/indent-blankline.nvim" "3c8a185da4b8ab7aef487219f5e001b11d4b6aaf" "master")
+      (pluginGit "lukas-reineke/indent-blankline.nvim" "65e20ab94a26d0e14acac5049b8641336819dfc7" "master")
       rainbow-delimiters-nvim
 
       # nvim-cursorline
@@ -162,7 +161,6 @@ in {
       (pluginGit "avivbeeri/vim-wren" "2514d32c8e476384f3df81bd2cd369908d85bcfe" "fixedStatic")
       (pluginGit "elkowar/yuck.vim" "9b5e0370f70cc30383e1dabd6c215475915fe5c3" "master")
       (pluginGit "stefanos82/nelua.vim" "ff0a733a586ef0b48cda4999170ed4ca1653a144" "main")
-      (pluginGit "luckasRanarison/tree-sitter-hypr" "90b3ddf8a85b5ea3d9dc4920fddb16182a192e14" "master")
       zig-vim
       vim-opencl
 
@@ -171,13 +169,11 @@ in {
       rust-tools-nvim
 
       # copilot
-      # copilot-vim
-      # cmp-copilot
-      (pluginGit "zbirenbaum/copilot.lua" "f7612f5af4a7d7615babf43ab1e67a2d790c13a6" "master")
-      (pluginGit "zbirenbaum/copilot-cmp" "72fbaa03695779f8349be3ac54fa8bd77eed3ee3" "master")
+      (pluginGit "zbirenbaum/copilot.lua" "86537b286f18783f8b67bccd78a4ef4345679625" "master")
+      (pluginGit "zbirenbaum/copilot-cmp" "b6e5286b3d74b04256d0a7e3bd2908eabec34b44" "master")
 
       # firenvim
-      (pluginGit "glacambre/firenvim" "ee4ef314bd990b2b05b7fbd95b857159e444a2fe" "master")
+      (pluginGit "glacambre/firenvim" "c6e37476ab3b58cf01ababfe80ec9335798e70e5" "master")
     ];
   };
 }

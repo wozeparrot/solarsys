@@ -1,4 +1,4 @@
-require("impatient")
+vim.loader.enable()
 
 ---- General Config ----
 -- utf-8 encoding
@@ -253,7 +253,7 @@ lazy_require("null-ls", function(null_ls)
 		debounce = 250,
 		default_timeout = 5000,
 		sources = {
-			null_ls.builtins.formatting.alejandra,
+			null_ls.builtins.formatting.nixfmt,
 			null_ls.builtins.formatting.black,
 			null_ls.builtins.formatting.stylua,
 		},
@@ -301,9 +301,9 @@ lspconfig.zls.setup({
 lspconfig.nil_ls.setup({
 	on_attach = default_on_attach,
 })
--- lspconfig.nixd.setup({
---     on_attach = default_on_attach,
--- })
+lspconfig.nixd.setup({
+    on_attach = default_on_attach,
+})
 -- rust
 lspconfig.rust_analyzer.setup({})
 lazy_require("crates", {})
@@ -372,27 +372,27 @@ lspconfig.svls.setup({
 lspconfig.verible.setup({
 	on_attach = default_on_attach,
 })
--- ltex
-lspconfig.ltex.setup({
-	on_attach = default_on_attach,
-	settings = {
-		ltex = {
-			language = "en-US",
-			filetypes = {
-				"bib",
-				"gitcommit",
-				"markdown",
-				"org",
-				"plaintex",
-				"rst",
-				"rnoweb",
-				"tex",
-				"pandoc",
-				"asciidoc",
-			},
-		},
-	},
-})
+-- -- ltex
+-- lspconfig.ltex.setup({
+-- 	on_attach = default_on_attach,
+-- 	settings = {
+-- 		ltex = {
+-- 			language = "en-US",
+-- 			filetypes = {
+-- 				"bib",
+-- 				"gitcommit",
+-- 				"markdown",
+-- 				"org",
+-- 				"plaintex",
+-- 				"rst",
+-- 				"rnoweb",
+-- 				"tex",
+-- 				"pandoc",
+-- 				"asciidoc",
+-- 			},
+-- 		},
+-- 	},
+-- })
 -- go
 lspconfig.gopls.setup({
 	on_attach = default_on_attach,
@@ -496,6 +496,8 @@ lazy_require("copilot", {
 	suggestion = { enabled = false },
 	filetypes = {
 		markdown = true,
+    gitcommit = true,
+    yaml = true,
 	},
 })
 lazy_require("copilot_cmp", {})
