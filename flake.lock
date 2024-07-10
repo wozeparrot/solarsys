@@ -917,11 +917,11 @@
     },
     "master": {
       "locked": {
-        "lastModified": 1720647150,
-        "narHash": "sha256-SzZjMS1ISYtwdSGOe/SRXeSbcX+3c6Vgz5pUGWw9INY=",
+        "lastModified": 1720652183,
+        "narHash": "sha256-W5zcLIdhGtidpTRx62t9Pgnl4RUeCcG8XeFHmkKrUUk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "6cac901ebbfac75fa0abef7a14667661718cd118",
+        "rev": "c01d606435c739c3329e79c267a17235b0ab1760",
         "type": "github"
       },
       "original": {
