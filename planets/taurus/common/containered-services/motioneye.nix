@@ -4,17 +4,16 @@
   pkgs,
   ...
 }:
-with lib;
 let
   orion = import ../../../../networks/orion.nix;
   cfg = config.containered-services.motioneye;
 in
 {
   options.containered-services.motioneye = {
-    enable = mkEnableOption "motioneye";
+    enable = lib.mkEnableOption "motioneye";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     networking.firewall.interfaces.orion.allowedTCPPorts = [ 8765 ];
 
     containers.motioneye = {

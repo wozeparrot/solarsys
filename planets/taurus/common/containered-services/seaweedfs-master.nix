@@ -4,45 +4,44 @@
   pkgs,
   ...
 }:
-with lib;
 let
   orion = import ../../../../networks/orion.nix;
   cfg = config.containered-services.seaweedfs-master;
 in
 {
   options.containered-services.seaweedfs-master = {
-    enable = mkEnableOption "seaweedfs master & filer";
-    dataDir = mkOption {
-      type = types.str;
+    enable = lib.mkEnableOption "seaweedfs master & filer";
+    dataDir = lib.mkOption {
+      type = lib.types.str;
       default = "/var/lib/seaweedfs";
       description = "Directory to store data in";
     };
-    bindAddress = mkOption {
-      type = types.str;
+    bindAddress = lib.mkOption {
+      type = lib.types.str;
       default =
         (lib.lists.findFirst (
           x: x.hostname == config.networking.hostName
         ) (builtins.abort "failed to find node in network") orion).address;
       description = "IP address to bind to";
     };
-    masterPort = mkOption {
-      type = types.int;
+    masterPort = lib.mkOption {
+      type = lib.types.int;
       default = 9301;
       description = "Port to bind master to";
     };
-    filerPort = mkOption {
-      type = types.int;
+    filerPort = lib.mkOption {
+      type = lib.types.int;
       default = 9302;
       description = "Port to bind filer to";
     };
-    volumeSizeLimitMB = mkOption {
-      type = types.int;
+    volumeSizeLimitMB = lib.mkOption {
+      type = lib.types.int;
       default = 16384;
       description = "Maximum size of a volume in MB";
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     networking.firewall.interfaces.orion.allowedTCPPorts = [
       cfg.masterPort
       (cfg.masterPort + 10000)

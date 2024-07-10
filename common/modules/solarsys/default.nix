@@ -1,17 +1,16 @@
 { config, lib, ... }:
-with lib;
 let
   cfg = config.solarsys;
 in
 {
   options.solarsys = {
-    planet = mkOption {
-      type = types.str;
+    planet = lib.mkOption {
+      type = lib.types.str;
       description = "planet that this moon is in";
     };
 
-    moons = mkOption {
-      type = types.attrs;
+    moons = lib.mkOption {
+      type = lib.types.attrs;
       description = "list of moons";
     };
   };

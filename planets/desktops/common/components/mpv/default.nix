@@ -4,9 +4,16 @@
 
   programs.mpv = {
     enable = true;
-    package = pkgs.wrapMpv (pkgs.mpv-unwrapped.override { vapoursynthSupport = true; }) {
+    package = pkgs.mpv-unwrapped.wrapper {
+      mpv = pkgs.mpv-unwrapped.override { vapoursynthSupport = true; };
       youtubeSupport = true;
-      scripts = with pkgs.mpvScripts; [ mpris ];
+      scripts = with pkgs.mpvScripts; [
+        evafast
+        mpris
+        thumbfast
+        uosc
+        videoclip
+      ];
     };
     defaultProfiles = [ "gpu-hq" ];
     config = {

@@ -4,16 +4,15 @@
   pkgs,
   ...
 }:
-with lib;
 let
   orion = import ../../../../networks/orion.nix;
   cfg = config.components.speedtest-metric;
 in
 {
   options.components.speedtest-metric = {
-    enable = mkEnableOption "speedtest metric exporter";
-    bindAddress = mkOption {
-      type = types.str;
+    enable = lib.mkEnableOption "speedtest metric exporter";
+    bindAddress = lib.mkOption {
+      type = lib.types.str;
       default =
         (lib.lists.findFirst (
           x: x.hostname == config.networking.hostName
@@ -22,7 +21,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     networking.firewall.interfaces.orion.allowedTCPPorts = [ 9020 ];
 
     users.users.speedtest-metric = {

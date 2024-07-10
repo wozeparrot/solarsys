@@ -4,16 +4,15 @@
   pkgs,
   ...
 }:
-with lib;
 let
   orion = import ../../../../networks/orion.nix;
   cfg = config.containered-services.blocky;
 in
 {
   options.containered-services.blocky = {
-    enable = mkEnableOption "blocky dns proxy/adblocker";
-    bindAddress = mkOption {
-      type = types.str;
+    enable = lib.mkEnableOption "blocky dns proxy/adblocker";
+    bindAddress = lib.mkOption {
+      type = lib.types.str;
       default =
         (lib.lists.findFirst (
           x: x.hostname == config.networking.hostName
@@ -22,7 +21,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     networking.firewall.interfaces.orion.allowedTCPPorts = [
       53
       4000

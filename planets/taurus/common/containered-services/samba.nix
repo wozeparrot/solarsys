@@ -4,17 +4,16 @@
   pkgs,
   ...
 }:
-with lib;
 let
   orion = import ../../../../networks/orion.nix;
   cfg = config.containered-services.samba;
 in
 {
   options.containered-services.samba = {
-    enable = mkEnableOption "samba server";
+    enable = lib.mkEnableOption "samba server";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [
       139
       445

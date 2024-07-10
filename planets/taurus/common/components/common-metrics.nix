@@ -4,14 +4,13 @@
   pkgs,
   ...
 }:
-with lib;
 let
   orion = import ../../../../networks/orion.nix;
   cfg = config.components.common-metrics;
 in
 {
   options.components.common-metrics = {
-    enable = mkEnableOption "common metrics exporters";
+    enable = lib.mkEnableOption "common metrics exporters";
   };
 
   config =
@@ -21,7 +20,7 @@ in
           x: x.hostname == config.networking.hostName
         ) (builtins.abort "failed to find node in network") orion).address;
     in
-    mkIf cfg.enable {
+    lib.mkIf cfg.enable {
       networking.firewall.interfaces.orion.allowedTCPPorts = [
         config.services.prometheus.exporters.node.port
         config.services.prometheus.exporters.wireguard.port

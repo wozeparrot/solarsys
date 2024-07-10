@@ -52,8 +52,8 @@
     freecad
     ghidra-bin
     gimp
-    gnome.file-roller
-    gnome.gnome-disk-utility
+    file-roller
+    gnome-disk-utility
     jamesdsp
     keepassxc
     # kicad
@@ -69,7 +69,7 @@
     solvespace
     ss.horizon
     thunderbird
-    transmission-gtk
+    transmission_4-gtk
     vesktop
     zathura
 

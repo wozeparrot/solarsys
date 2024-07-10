@@ -258,17 +258,17 @@
           packages = pkgs;
 
           devShell = pkgs.mkShell {
-            nativeBuildInputs = with pkgs; [
-              fzf
-              git
-              jq
-              nom.default
-              nvd
-              rsync
-              shellcheck
-
-              solarsys
-            ];
+            nativeBuildInputs =
+              (with pkgs; [
+                fzf
+                git
+                jq
+                nom.default
+                nvd
+                rsync
+                shellcheck
+              ])
+              ++ [ solarsys ];
           };
         }
       )

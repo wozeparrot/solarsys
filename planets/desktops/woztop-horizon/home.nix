@@ -11,13 +11,13 @@
 
     kanshi
 
-    (pkgs.writeShellScriptBin "run_gpu" ''
+    (writeShellScriptBin "run_gpu" ''
       #!/usr/bin/env bash
 
       DRI_PRIME=1 exec -a "$0" "$@"
     '')
 
-    (pkgs.writeShellScriptBin "run_gamescope" ''
+    (writeShellScriptBin "run_gamescope" ''
       #!/usr/bin/env bash
 
       exec gamescope --prefer-vk-device 1002:1681 -f -U -- "$@"
@@ -52,7 +52,7 @@
           }
           {
             criteria = "Samsung Electric Company S24B240 HTNCB00984";
-            # mode = "1920x1080@75"; # TODO: when kanshi supports custom modes
+            mode = "1920x1080@75";
             position = "0,0";
             transform = "normal";
           }

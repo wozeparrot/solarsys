@@ -4,29 +4,28 @@
   pkgs,
   ...
 }:
-with lib;
 let
   orion = import ../../../../networks/orion.nix;
   cfg = config.containered-services.metrics;
 in
 {
   options.containered-services.metrics = {
-    enable = mkEnableOption "metrics collection and visualization";
-    addr = mkOption {
-      type = types.str;
+    enable = lib.mkEnableOption "metrics collection and visualization";
+    addr = lib.mkOption {
+      type = lib.types.str;
       default =
         (lib.lists.findFirst (
           x: x.hostname == config.networking.hostName
         ) (builtins.abort "failed to find node in network") orion).address;
       description = "IP address to bind to";
     };
-    promLocalPath = mkOption {
-      type = types.str;
+    promLocalPath = lib.mkOption {
+      type = lib.types.str;
       description = "path to local prometheus storage";
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     networking.firewall.interfaces.orion.allowedTCPPorts = [
       # grafana
       3000
@@ -374,7 +373,7 @@ in
                               toString (cc.containered-services.seaweedfs-node.startPort + cur2 + 20000)
                             }"
                           ]
-                        ) [ ] (lib.range 0 ((length cc.containered-services.seaweedfs-node.volumes) - 1)))
+                        ) [ ] (lib.range 0 ((lib.length cc.containered-services.seaweedfs-node.volumes) - 1)))
                       else
                         acc
                     ) [ ] (lib.attrsets.mapAttrsToList (_: v: v) config.solarsys.moons);

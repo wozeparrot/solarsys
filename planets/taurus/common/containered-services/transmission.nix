@@ -4,16 +4,15 @@
   pkgs,
   ...
 }:
-with lib;
 let
   orion = import ../../../../networks/orion.nix;
   cfg = config.containered-services.transmission;
 in
 {
   options.containered-services.transmission = {
-    enable = mkEnableOption "transmission torrent client";
-    addr = mkOption {
-      type = types.str;
+    enable = lib.mkEnableOption "transmission torrent client";
+    addr = lib.mkOption {
+      type = lib.types.str;
       default =
         (lib.lists.findFirst (
           x: x.hostname == config.networking.hostName
@@ -22,7 +21,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     networking.firewall.interfaces.orion.allowedTCPPorts = [ 9091 ];
 
     systemd.tmpfiles.rules = [ "d /tmp/transmission 0755 root root -" ];

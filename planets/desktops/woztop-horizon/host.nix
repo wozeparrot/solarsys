@@ -38,10 +38,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  hardware.opengl = {
+  hardware.graphics = {
     extraPackages = with pkgs; [ rocmPackages.clr.icd ];
-    driSupport = true;
-    driSupport32Bit = true;
   };
   hardware.uinput.enable = true;
   hardware.opentabletdriver.enable = true;
@@ -101,7 +99,7 @@
   services.printing.drivers = with pkgs; [
     gutenprint
     gutenprintBin
-    hplip
+    # hplip # TODO: broken
     foo2zjs
   ];
 
