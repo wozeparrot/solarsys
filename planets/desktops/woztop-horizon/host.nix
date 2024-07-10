@@ -3,7 +3,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   networking.hostName = "woztop-horizon";
 
   imports = [
@@ -20,14 +21,16 @@
 
   # boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
   boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos-lto;
-  boot.kernelPatches = [
+  boot.kernelPatches = [ ];
+  boot.kernelParams = [
+    "amd_pstate=active"
+    "psi=1"
   ];
-  boot.kernelParams = ["amd_pstate=active" "psi=1"];
 
   hardware.cpu.amd.updateMicrocode = true;
 
   # nix cross build support
-  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   nix.extraOptions = ''
     extra-platforms = aarch64-linux i686-linux
   '';
@@ -36,21 +39,19 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   hardware.opengl = {
-    extraPackages = with pkgs; [
-      rocmPackages.clr.icd
-    ];
+    extraPackages = with pkgs; [ rocmPackages.clr.icd ];
     driSupport = true;
     driSupport32Bit = true;
   };
   hardware.uinput.enable = true;
   hardware.opentabletdriver.enable = true;
 
-  networking.firewall.allowedTCPPorts = [29999];
-  networking.firewall.allowedUDPPorts = [29999];
+  networking.firewall.allowedTCPPorts = [ 29999 ];
+  networking.firewall.allowedUDPPorts = [ 29999 ];
 
   networking.firewall.interfaces.wg-ss = {
-    allowedUDPPorts = [6504];
-    allowedTCPPorts = [6504];
+    allowedUDPPorts = [ 6504 ];
+    allowedTCPPorts = [ 6504 ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -78,13 +79,14 @@
   programs.adb.enable = true;
   programs.steam.enable = true;
 
-  systemd.tmpfiles.rules = [
-    "f /dev/shm/looking-glass 0660 woze kvm -"
-  ];
+  systemd.tmpfiles.rules = [ "f /dev/shm/looking-glass 0660 woze kvm -" ];
 
   # services.flatpak.enable = true;
 
-  services.xserver.videoDrivers = ["amdgpu" "modesetting"];
+  services.xserver.videoDrivers = [
+    "amdgpu"
+    "modesetting"
+  ];
 
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="amdgpu_bl1", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
@@ -156,7 +158,7 @@
       qemu = {
         ovmf = {
           enable = true;
-          packages = [pkgs.OVMFFull.fd];
+          packages = [ pkgs.OVMFFull.fd ];
         };
         swtpm.enable = true;
       };
@@ -180,7 +182,18 @@
   #   options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
   # };
 
-  users.users.woze.extraGroups = ["docker" "libvirtd" "video" "render" "vboxusers" "libvirt" "corectrl" "adbusers" "wireshark" "kvm"];
+  users.users.woze.extraGroups = [
+    "docker"
+    "libvirtd"
+    "video"
+    "render"
+    "vboxusers"
+    "libvirt"
+    "corectrl"
+    "adbusers"
+    "wireshark"
+    "kvm"
+  ];
   home-manager.users.woze = ./home.nix;
 
   system.stateVersion = "22.11";

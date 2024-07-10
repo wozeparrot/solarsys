@@ -1,8 +1,5 @@
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
   networking.hostName = "auriga";
 
   imports = [
@@ -24,22 +21,16 @@
 
   # --- open ports ---
   networking.firewall = {
-    allowedUDPPorts = [
-      53
-    ];
-    allowedTCPPorts = [
-      53
-    ];
+    allowedUDPPorts = [ 53 ];
+    allowedTCPPorts = [ 53 ];
     interfaces.orion = {
-      allowedUDPPorts = [
-      ];
-      allowedTCPPorts = [
-      ];
+      allowedUDPPorts = [ ];
+      allowedTCPPorts = [ ];
     };
   };
 
   # --- packages ---
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [ ];
 
   # --- metrics ---
   components.common-metrics.enable = true;
@@ -49,9 +40,7 @@
   containered-services.seaweedfs-node = {
     enable = true;
     bindAddress = "10.11.235.22";
-    volumes = [
-      "/mnt/pstore0/seaweedfs/volume"
-    ];
+    volumes = [ "/mnt/pstore0/seaweedfs/volume" ];
   };
 
   # --- blocky ---

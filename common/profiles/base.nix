@@ -3,19 +3,28 @@
   inputs,
   lib,
   ...
-}: {
+}:
+{
   nix = {
     package = pkgs.nixVersions.latest;
-    settings.system-features = ["nixos-test" "benchmark" "big-parallel" "kvm"];
+    settings.system-features = [
+      "nixos-test"
+      "benchmark"
+      "big-parallel"
+      "kvm"
+    ];
 
-    registry = let
-      nixRegistry = {
-        nixpkgs = {flake = inputs.nixpkgs;};
-      };
-    in
+    registry =
+      let
+        nixRegistry = {
+          nixpkgs = {
+            flake = inputs.nixpkgs;
+          };
+        };
+      in
       lib.mkDefault nixRegistry;
 
-    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     # settings.extra-sandbox-paths = ["/bin/sh=${pkgs.bash}/bin/sh"];
 
     gc = {
@@ -26,7 +35,10 @@
 
     settings = {
       connect-timeout = 5;
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       log-lines = 25;
       max-free = 1024 * 1024 * 1024;
       min-free = 128 * 1024 * 1024;

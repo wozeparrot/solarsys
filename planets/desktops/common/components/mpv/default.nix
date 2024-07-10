@@ -1,20 +1,14 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [yt-dlp];
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [ yt-dlp ];
 
   programs.mpv = {
     enable = true;
-    package =
-      pkgs.wrapMpv
-      (
-        pkgs.mpv-unwrapped.override {
-          vapoursynthSupport = true;
-        }
-      )
-      {
-        youtubeSupport = true;
-        scripts = with pkgs.mpvScripts; [mpris];
-      };
-    defaultProfiles = ["gpu-hq"];
+    package = pkgs.wrapMpv (pkgs.mpv-unwrapped.override { vapoursynthSupport = true; }) {
+      youtubeSupport = true;
+      scripts = with pkgs.mpvScripts; [ mpris ];
+    };
+    defaultProfiles = [ "gpu-hq" ];
     config = {
       vo = "gpu-next";
 

@@ -4,18 +4,18 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   orion = import ../../../../networks/orion.nix;
   cfg = config.containered-services.motioneye;
-in {
+in
+{
   options.containered-services.motioneye = {
     enable = mkEnableOption "motioneye";
   };
 
   config = mkIf cfg.enable {
-    networking.firewall.interfaces.orion.allowedTCPPorts = [
-      8765
-    ];
+    networking.firewall.interfaces.orion.allowedTCPPorts = [ 8765 ];
 
     containers.motioneye = {
       autoStart = true;
@@ -28,12 +28,8 @@ in {
           node = "/dev/fuse";
         }
       ];
-      additionalCapabilities = [
-        "CAP_MKNOD"
-      ];
-      extraFlags = [
-        "--bind=/dev/fuse"
-      ];
+      additionalCapabilities = [ "CAP_MKNOD" ];
+      extraFlags = [ "--bind=/dev/fuse" ];
 
       # bind mounts
       bindMounts = {
@@ -43,96 +39,100 @@ in {
         };
       };
 
-      config = {cconfig, ...}: {
-        # mount seaweedfs
-        systemd.services."seaweedfs-mount" = {
-          description = "mount seaweedfs for/in container";
+      config =
+        { cconfig, ... }:
+        {
+          # mount seaweedfs
+          systemd.services."seaweedfs-mount" = {
+            description = "mount seaweedfs for/in container";
 
-          path = with pkgs; [fuse3];
+            path = with pkgs; [ fuse3 ];
 
-          serviceConfig = {
-            ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/motioneye";
-            ExecStart = "${pkgs.seaweedfs.seaweedfs}/bin/weed mount -dir /var/lib/motioneye -filer.path /services/motioneye -filer=10.11.235.1:9302";
-            ExecStartPost = "${pkgs.bash}/bin/bash -c 'while ! ${pkgs.util-linux}/bin/mountpoint -q /var/lib/motioneye; do sleep 1; done'";
-            Restart = "on-failure";
-            RestartSec = "10s";
+            serviceConfig = {
+              ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/motioneye";
+              ExecStart = "${pkgs.seaweedfs.seaweedfs}/bin/weed mount -dir /var/lib/motioneye -filer.path /services/motioneye -filer=10.11.235.1:9302";
+              ExecStartPost = "${pkgs.bash}/bin/bash -c 'while ! ${pkgs.util-linux}/bin/mountpoint -q /var/lib/motioneye; do sleep 1; done'";
+              Restart = "on-failure";
+              RestartSec = "10s";
+            };
+
+            after = [ "network.target" ];
+            before = [ "motioneye.service" ];
+            wantedBy = [ "multi-user.target" ];
           };
 
-          after = ["network.target"];
-          before = ["motioneye.service"];
-          wantedBy = ["multi-user.target"];
-        };
+          systemd.services.motioneye = {
+            description = "motioneye";
 
-        systemd.services.motioneye = {
-          description = "motioneye";
+            serviceConfig =
+              let
+                configFile = pkgs.writeText "motioneye.conf" ''
+                  conf_path /var/lib/motioneye/conf
+                  run_path /run/motioneye
+                  log_path /var/log/motioneye
+                  media_path /var/lib/motioneye/media
 
-          serviceConfig = let
-            configFile = pkgs.writeText "motioneye.conf" ''
-              conf_path /var/lib/motioneye/conf
-              run_path /run/motioneye
-              log_path /var/log/motioneye
-              media_path /var/lib/motioneye/media
+                  log_level info
 
-              log_level info
+                  listen 0.0.0.0
+                  port 8765
 
-              listen 0.0.0.0
-              port 8765
+                  motion_binary ${pkgs.motion}/bin/motion
+                  motion_control_localhost true
+                  motion_control_port 7999
+                  motion_check_interval 10
+                  motion_restart_on_errors false
 
-              motion_binary ${pkgs.motion}/bin/motion
-              motion_control_localhost true
-              motion_control_port 7999
-              motion_check_interval 10
-              motion_restart_on_errors false
+                  mount_check_interval 300
+                  cleanup_interval 43200
 
-              mount_check_interval 300
-              cleanup_interval 43200
+                  remote_request_timeout 10
+                  mjpg_client_timeout 10
+                  mjpg_client_idle_timeout 10
 
-              remote_request_timeout 10
-              mjpg_client_timeout 10
-              mjpg_client_idle_timeout 10
+                  smb_shares false
+                  smb_mount_root /media
 
-              smb_shares false
-              smb_mount_root /media
+                  smtp_timeout 60
+                  list_media_timeout 120
+                  list_media_timeout_email 10
+                  list_media_timeout_telegram 10
+                  zip_timeout 500
+                  timelapse_timeout 500
 
-              smtp_timeout 60
-              list_media_timeout 120
-              list_media_timeout_email 10
-              list_media_timeout_telegram 10
-              zip_timeout 500
-              timelapse_timeout 500
+                  enable_reboot false
+                  add_remove_cameras true
 
-              enable_reboot false
-              add_remove_cameras true
+                  http_basic_auth false
+                '';
+              in
+              {
+                ExecStart = "${pkgs.ss.motioneye}/bin/meyectl startserver -c ${configFile}";
+                Restart = "on-failure";
+                RestartSec = "30s";
 
-              http_basic_auth false
-            '';
-          in {
-            ExecStart = "${pkgs.ss.motioneye}/bin/meyectl startserver -c ${configFile}";
-            Restart = "on-failure";
-            RestartSec = "30s";
+                User = "motioneye";
+                Group = "motioneye";
 
-            User = "motioneye";
-            Group = "motioneye";
+                LogsDirectory = "motioneye";
+                RuntimeDirectory = "motioneye";
+              };
 
-            LogsDirectory = "motioneye";
-            RuntimeDirectory = "motioneye";
+            wantedBy = [ "multi-user.target" ];
           };
 
-          wantedBy = ["multi-user.target"];
-        };
+          users = {
+            users.motioneye = {
+              home = "/var/lib/motioneye";
+              isSystemUser = true;
+              group = "motioneye";
+            };
 
-        users = {
-          users.motioneye = {
-            home = "/var/lib/motioneye";
-            isSystemUser = true;
-            group = "motioneye";
+            groups.motioneye = { };
           };
 
-          groups.motioneye = {};
+          system.stateVersion = config.system.stateVersion;
         };
-
-        system.stateVersion = config.system.stateVersion;
-      };
     };
   };
 }

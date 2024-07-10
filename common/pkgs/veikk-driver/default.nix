@@ -2,7 +2,22 @@
 # or (to get udev rule loaded) to add it in `services.udev.packages. For now, all models seems to use the same file, but in case of doubt double check here
 # https://www.veikk.com/support/download.html
 # Make sure to run a single instance.
-{ stdenv, lib, fetchzip, dpkg, libusb, autoPatchelfHook, libGL, glib, fontconfig, libXi, libX11, dbus, makeWrapper, xkeyboard_config }:
+{
+  stdenv,
+  lib,
+  fetchzip,
+  dpkg,
+  libusb,
+  autoPatchelfHook,
+  libGL,
+  glib,
+  fontconfig,
+  libXi,
+  libX11,
+  dbus,
+  makeWrapper,
+  xkeyboard_config,
+}:
 stdenv.mkDerivation {
   name = "veikk-driver";
   version = "";
@@ -13,7 +28,20 @@ stdenv.mkDerivation {
     sha256 = "sha256-r37och6BZRYp6yCtyhY/vbBD2XQIYCURpaMyJIcS4mw=";
   };
 
-  buildInputs = [ dpkg libusb autoPatchelfHook libGL stdenv.cc.cc.lib glib libX11 libXi dbus fontconfig makeWrapper xkeyboard_config];
+  buildInputs = [
+    dpkg
+    libusb
+    autoPatchelfHook
+    libGL
+    stdenv.cc.cc.lib
+    glib
+    libX11
+    libXi
+    dbus
+    fontconfig
+    makeWrapper
+    xkeyboard_config
+  ];
 
   unpackPhase = ''
     echo "Unpacking";

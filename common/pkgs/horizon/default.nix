@@ -78,7 +78,7 @@ stdenv.mkDerivation {
   meta = with lib; {
     description = "A free EDA software to develop printed circuit boards";
     homepage = "https://horizon-eda.org";
-    maintainers = with maintainers; [guserav];
+    maintainers = with maintainers; [ guserav ];
     license = licenses.gpl3;
     platforms = platforms.linux;
   };

@@ -5,18 +5,25 @@
   modulesPath,
   lib,
   ...
-}: {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+}:
+{
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot = {
     initrd = {
-      availableKernelModules = ["ahci" "ohci_pci" "ehci_pci" "pata_atiixp" "usb_storage" "sd_mod" "sr_mod"];
-      kernelModules = [];
+      availableKernelModules = [
+        "ahci"
+        "ohci_pci"
+        "ehci_pci"
+        "pata_atiixp"
+        "usb_storage"
+        "sd_mod"
+        "sr_mod"
+      ];
+      kernelModules = [ ];
     };
-    kernelModules = ["kvm-amd"];
-    extraModulePackages = [];
+    kernelModules = [ "kvm-amd" ];
+    extraModulePackages = [ ];
   };
 
   fileSystems."/" = {
@@ -24,9 +31,5 @@
     fsType = "xfs";
   };
 
-  swapDevices = [
-    {
-      label = "swap";
-    }
-  ];
+  swapDevices = [ { label = "swap"; } ];
 }

@@ -14,49 +14,51 @@ _: {
     firewall.allowedUDPPorts = [
       5353 # avahi
     ];
-    firewall.interfaces = let
-      fw_config = {
-        allowedUDPPortRanges = [
-          {
-            from = 1714;
-            to = 1764;
-          } # kdeconnect
-        ];
-        allowedTCPPortRanges = [
-          {
-            from = 1714;
-            to = 1764;
-          } # kdeconnect
-        ];
-        allowedTCPPorts = [
-          6600 # mpd
-          8000 # mpd stream
-          8384 # syncthing
-          29999 # extra
+    firewall.interfaces =
+      let
+        fw_config = {
+          allowedUDPPortRanges = [
+            {
+              from = 1714;
+              to = 1764;
+            } # kdeconnect
+          ];
+          allowedTCPPortRanges = [
+            {
+              from = 1714;
+              to = 1764;
+            } # kdeconnect
+          ];
+          allowedTCPPorts = [
+            6600 # mpd
+            8000 # mpd stream
+            8384 # syncthing
+            29999 # extra
 
-          10001 # roc
-          10002 # roc
+            10001 # roc
+            10002 # roc
 
-          47984 # sunshine
-          47989 # sunshine
-          48010 # sunshine
-        ];
-        allowedUDPPorts = [
-          29999 # extra
+            47984 # sunshine
+            47989 # sunshine
+            48010 # sunshine
+          ];
+          allowedUDPPorts = [
+            29999 # extra
 
-          10001 # roc
-          10002 # roc
+            10001 # roc
+            10002 # roc
 
-          47998 # sunshine
-          47999 # sunshine
-          48000 # sunshine
-          48002 # sunshine
-        ];
+            47998 # sunshine
+            47999 # sunshine
+            48000 # sunshine
+            48002 # sunshine
+          ];
+        };
+      in
+      {
+        orion-away = fw_config;
+        orion-home = fw_config;
       };
-    in {
-      orion-away = fw_config;
-      orion-home = fw_config;
-    };
 
     # block certain hosts
     hosts = {
@@ -70,5 +72,5 @@ _: {
 
   services.resolved.enable = true;
 
-  users.users.woze.extraGroups = ["networkmanager"];
+  users.users.woze.extraGroups = [ "networkmanager" ];
 }

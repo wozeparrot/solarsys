@@ -1,11 +1,6 @@
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
-  imports = [
-    ../common/home.nix
-  ];
+  imports = [ ../common/home.nix ];
 
   # Packages
   home.packages = with pkgs; [
@@ -16,21 +11,17 @@
 
     kanshi
 
-    (
-      pkgs.writeShellScriptBin "run_gpu" ''
-        #!/usr/bin/env bash
+    (pkgs.writeShellScriptBin "run_gpu" ''
+      #!/usr/bin/env bash
 
-        DRI_PRIME=1 exec -a "$0" "$@"
-      ''
-    )
+      DRI_PRIME=1 exec -a "$0" "$@"
+    '')
 
-    (
-      pkgs.writeShellScriptBin "run_gamescope" ''
-        #!/usr/bin/env bash
+    (pkgs.writeShellScriptBin "run_gamescope" ''
+      #!/usr/bin/env bash
 
-        exec gamescope --prefer-vk-device 1002:1681 -f -U -- "$@"
-      ''
-    )
+      exec gamescope --prefer-vk-device 1002:1681 -f -U -- "$@"
+    '')
   ];
 
   # kanshi
@@ -66,9 +57,7 @@
             transform = "normal";
           }
         ];
-        profile.exec = [
-          "swww img ${../common/misc/wallpaper.png}"
-        ];
+        profile.exec = [ "swww img ${../common/misc/wallpaper.png}" ];
       }
       {
         profile.name = "docked-away";
@@ -83,9 +72,7 @@
             transform = "normal";
           }
         ];
-        profile.exec = [
-          "swww img ${../common/misc/wallpaper.png}"
-        ];
+        profile.exec = [ "swww img ${../common/misc/wallpaper.png}" ];
       }
       {
         profile.name = "docked-away-vertical";
@@ -100,9 +87,7 @@
             transform = "90";
           }
         ];
-        profile.exec = [
-          "swww img ${../common/misc/wallpaper.png}"
-        ];
+        profile.exec = [ "swww img ${../common/misc/wallpaper.png}" ];
       }
       {
         profile.name = "comma";
@@ -123,9 +108,11 @@
   };
   # add packages to the path
   systemd.user.services.kanshi.Service = {
-    Environment = let
-      path = with pkgs; "${bash}/bin:${jq}/bin:${hyprland.hyprland}/bin:${swww}/bin";
-    in "PATH=${path}";
+    Environment =
+      let
+        path = with pkgs; "${bash}/bin:${jq}/bin:${hyprland.hyprland}/bin:${swww}/bin";
+      in
+      "PATH=${path}";
   };
 
   home.stateVersion = "22.11";

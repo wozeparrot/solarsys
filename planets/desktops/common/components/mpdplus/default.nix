@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # mpd service with fft output
   services.mpd = {
     enable = true;
@@ -54,7 +55,7 @@
   # custom ncmpcpp
   programs.ncmpcpp = {
     enable = true;
-    package = pkgs.ncmpcpp.override {visualizerSupport = true;};
+    package = pkgs.ncmpcpp.override { visualizerSupport = true; };
     settings = {
       mpd_host = "/tmp/mpd.socket";
 
@@ -104,7 +105,5 @@
   };
 
   # cavalier
-  home.packages = with pkgs; [
-    cavalier
-  ];
+  home.packages = with pkgs; [ cavalier ];
 }

@@ -1,7 +1,6 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [
-    shfm
-  ];
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [ shfm ];
 
   xdg.configFile."shfm/opener.sh" = {
     executable = true;

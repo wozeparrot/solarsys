@@ -3,8 +3,10 @@
   pkgs,
   lib,
   ...
-}: let
-  pluginGit = repo: rev: ref:
+}:
+let
+  pluginGit =
+    repo: rev: ref:
     pkgs.vimUtils.buildVimPlugin {
       pname = "${lib.strings.sanitizeDerivationName repo}-${rev}";
       version = rev;
@@ -14,38 +16,42 @@
         inherit rev;
       };
     };
-in {
-  home.packages = with pkgs; [neovide];
+in
+{
+  home.packages = with pkgs; [ neovide ];
 
   programs.neovim = {
     enable = true;
     withNodeJs = true;
 
     extraLuaConfig = builtins.concatStringsSep "\n" [
-      (let
-        colors = config.lib.stylix.colors.withHashtag;
-      in ''
-        vim.g.termguicolors = true;
-        require("base16-colorscheme").setup({
-          base00 = "${colors.base00}",
-          base01 = "${colors.base01}",
-          base02 = "${colors.base02}",
-          base03 = "${colors.base03}",
-          base04 = "${colors.base04}",
-          base05 = "${colors.base05}",
-          base06 = "${colors.base06}",
-          base07 = "${colors.base07}",
-          base08 = "${colors.base08}",
-          base09 = "${colors.base09}",
-          base0A = "${colors.base0A}",
-          base0B = "${colors.base0B}",
-          base0C = "${colors.base0C}",
-          base0D = "${colors.base0D}",
-          base0E = "${colors.base0E}",
-          base0F = "${colors.base0F}",
-        });
-        vim.g.neovide_transparency = 0.9;
-      '')
+      (
+        let
+          colors = config.lib.stylix.colors.withHashtag;
+        in
+        ''
+          vim.g.termguicolors = true;
+          require("base16-colorscheme").setup({
+            base00 = "${colors.base00}",
+            base01 = "${colors.base01}",
+            base02 = "${colors.base02}",
+            base03 = "${colors.base03}",
+            base04 = "${colors.base04}",
+            base05 = "${colors.base05}",
+            base06 = "${colors.base06}",
+            base07 = "${colors.base07}",
+            base08 = "${colors.base08}",
+            base09 = "${colors.base09}",
+            base0A = "${colors.base0A}",
+            base0B = "${colors.base0B}",
+            base0C = "${colors.base0C}",
+            base0D = "${colors.base0D}",
+            base0E = "${colors.base0E}",
+            base0F = "${colors.base0F}",
+          });
+          vim.g.neovide_transparency = 0.9;
+        ''
+      )
       (lib.strings.fileContents ./util.lua)
       (lib.strings.fileContents ./init.lua)
     ];
@@ -117,7 +123,9 @@ in {
       nvim-ts-autotag
 
       # telescope
-      (pluginGit "nvim-telescope/telescope-ui-select.nvim" "6e51d7da30bd139a6950adf2a47fda6df9fa06d2" "master")
+      (pluginGit "nvim-telescope/telescope-ui-select.nvim" "6e51d7da30bd139a6950adf2a47fda6df9fa06d2"
+        "master"
+      )
       telescope-frecency-nvim
       telescope-fzf-native-nvim
       telescope-nvim
@@ -138,7 +146,9 @@ in {
       nvim-cmp
 
       # indent-blankline
-      (pluginGit "lukas-reineke/indent-blankline.nvim" "65e20ab94a26d0e14acac5049b8641336819dfc7" "master")
+      (pluginGit "lukas-reineke/indent-blankline.nvim" "65e20ab94a26d0e14acac5049b8641336819dfc7"
+        "master"
+      )
       rainbow-delimiters-nvim
 
       # nvim-cursorline

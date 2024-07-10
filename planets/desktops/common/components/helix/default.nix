@@ -1,9 +1,4 @@
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
-  home.packages = with pkgs; [
-    master.helix
-  ];
+  home.packages = with pkgs; [ master.helix ];
 }

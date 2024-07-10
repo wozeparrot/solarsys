@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   networking.hostName = "veles";
 
   imports = [
@@ -22,20 +23,16 @@
 
   # --- open ports ---
   networking.firewall = {
-    allowedUDPPorts = [
-    ];
-    allowedTCPPorts = [
-    ];
+    allowedUDPPorts = [ ];
+    allowedTCPPorts = [ ];
     interfaces.wg0 = {
-      allowedUDPPorts = [
-      ];
-      allowedTCPPorts = [
-      ];
+      allowedUDPPorts = [ ];
+      allowedTCPPorts = [ ];
     };
   };
 
   # --- packages ---
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [ ];
 
   # --- metrics ---
   components.common-metrics.enable = true;

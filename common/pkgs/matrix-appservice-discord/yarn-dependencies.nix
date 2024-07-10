@@ -4,7 +4,8 @@
   linkFarm,
   runCommand,
   gnutar,
-}: rec {
+}:
+rec {
   offline_cache = linkFarm "offline" packages;
   packages = [
     {
@@ -937,14 +938,15 @@
     }
     {
       name = "git___github.com_Sorunome_better_discord.js.git";
-      path = let
-        repo = fetchgit {
-          url = "git://github.com/Sorunome/better-discord.js.git";
-          rev = "b5a28499899fe2d9e6aa1aa3b3c5d693ae672117";
-          sha256 = "1iy8as2ax50xqp1bkqb18dspkdjw6qdmvz803xaijp14bwx0shja";
-        };
-      in
-        runCommand "git___github.com_Sorunome_better_discord.js.git" {buildInputs = [gnutar];} ''
+      path =
+        let
+          repo = fetchgit {
+            url = "git://github.com/Sorunome/better-discord.js.git";
+            rev = "b5a28499899fe2d9e6aa1aa3b3c5d693ae672117";
+            sha256 = "1iy8as2ax50xqp1bkqb18dspkdjw6qdmvz803xaijp14bwx0shja";
+          };
+        in
+        runCommand "git___github.com_Sorunome_better_discord.js.git" { buildInputs = [ gnutar ]; } ''
           # Set u+w because tar-fs can't unpack archives with read-only dirs
           # https://github.com/mafintosh/tar-fs/issues/79
           tar cf $out --mode u+w -C ${repo} .
@@ -1632,14 +1634,15 @@
     }
     {
       name = "git___github.com_Sorunome_discord_markdown.git";
-      path = let
-        repo = fetchgit {
-          url = "git://github.com/Sorunome/discord-markdown.git";
-          rev = "7958a03a952ed02cbd588b09eb04bc070b3a11f2";
-          sha256 = "0p7hlgdyfcipfjjx5hxwkqd524cmys9yxgqx29wmqkgjxp8xgwhy";
-        };
-      in
-        runCommand "git___github.com_Sorunome_discord_markdown.git" {buildInputs = [gnutar];} ''
+      path =
+        let
+          repo = fetchgit {
+            url = "git://github.com/Sorunome/discord-markdown.git";
+            rev = "7958a03a952ed02cbd588b09eb04bc070b3a11f2";
+            sha256 = "0p7hlgdyfcipfjjx5hxwkqd524cmys9yxgqx29wmqkgjxp8xgwhy";
+          };
+        in
+        runCommand "git___github.com_Sorunome_discord_markdown.git" { buildInputs = [ gnutar ]; } ''
           # Set u+w because tar-fs can't unpack archives with read-only dirs
           # https://github.com/mafintosh/tar-fs/issues/79
           tar cf $out --mode u+w -C ${repo} .

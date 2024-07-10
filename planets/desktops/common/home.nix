@@ -1,8 +1,5 @@
+{ pkgs, lib, ... }:
 {
-  pkgs,
-  lib,
-  ...
-}: {
   imports = [
     ./components/neovim
     # ./components/helix
@@ -33,11 +30,10 @@
     nom.default
     p7zip
     (python3.withPackages (
-      ps:
-        with ps; [
-          requests
-          tqdm
-        ]
+      ps: with ps; [
+        requests
+        tqdm
+      ]
     ))
     r128gain
     ranger
@@ -79,12 +75,7 @@
 
     # gaming stuff
     master.bottles
-    (lutris.override {
-      extraLibraries = pkgs:
-        with pkgs; [
-          openssl
-        ];
-    })
+    (lutris.override { extraLibraries = pkgs: with pkgs; [ openssl ]; })
     chaotic.gamescope_git
     chaotic.gamescope-wsi_git
     master.protontricks
@@ -126,7 +117,7 @@
     keychain = {
       enable = true;
       enableXsessionIntegration = false;
-      keys = ["id_ed25519"];
+      keys = [ "id_ed25519" ];
     };
 
     mangohud = {

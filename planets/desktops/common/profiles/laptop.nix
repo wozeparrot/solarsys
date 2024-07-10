@@ -1,11 +1,8 @@
 # must be used with:
 # base, graphical
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
-  imports = [./graphical.nix];
+  imports = [ ./graphical.nix ];
 
   # system packages
   environment.systemPackages = with pkgs; [

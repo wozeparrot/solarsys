@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   networking.hostName = "wangshu";
 
   imports = [
@@ -30,20 +31,16 @@
 
   # --- open ports ---
   networking.firewall = {
-    allowedUDPPorts = [
-    ];
-    allowedTCPPorts = [
-    ];
+    allowedUDPPorts = [ ];
+    allowedTCPPorts = [ ];
     interfaces.orion = {
-      allowedUDPPorts = [
-      ];
-      allowedTCPPorts = [
-      ];
+      allowedUDPPorts = [ ];
+      allowedTCPPorts = [ ];
     };
   };
 
   # --- packages ---
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [ ];
 
   # --- metrics ---
   components.common-metrics.enable = true;

@@ -26,25 +26,26 @@ buildPythonPackage rec {
     sha256 = "sha256-0NfJsM+gC9dkabop5pwUwVllAAyPYPRv6yMHwe7NuCM=";
   };
 
-  propagatedBuildInputs =
-    [websockets mutagen]
-    ++ lib.optional hlsEncryptedSupport pycryptodomex;
+  propagatedBuildInputs = [
+    websockets
+    mutagen
+  ] ++ lib.optional hlsEncryptedSupport pycryptodomex;
 
   # Ensure these utilities are available in $PATH:
   # - ffmpeg: post-processing & transcoding support
   # - rtmpdump: download files over RTMP
   # - atomicparsley: embedding thumbnails
-  makeWrapperArgs = let
-    packagesToBinPath =
-      [atomicparsley]
-      ++ lib.optional ffmpegSupport ffmpeg
-      ++ lib.optional rtmpSupport rtmpdump
-      ++ lib.optional phantomjsSupport phantomjs2;
-  in [''--prefix PATH : "${lib.makeBinPath packagesToBinPath}"''];
+  makeWrapperArgs =
+    let
+      packagesToBinPath =
+        [ atomicparsley ]
+        ++ lib.optional ffmpegSupport ffmpeg
+        ++ lib.optional rtmpSupport rtmpdump
+        ++ lib.optional phantomjsSupport phantomjs2;
+    in
+    [ ''--prefix PATH : "${lib.makeBinPath packagesToBinPath}"'' ];
 
-  setupPyBuildFlags = [
-    "build_lazy_extractors"
-  ];
+  setupPyBuildFlags = [ "build_lazy_extractors" ];
 
   # Requires network
   doCheck = false;

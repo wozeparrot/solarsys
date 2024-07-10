@@ -84,5 +84,5 @@ mkDerivation rec {
     patchShebangs ./
   '';
 
-  cmakeFlags = ["-DWANT_SOUNDIO=OFF"];
+  cmakeFlags = [ "-DWANT_SOUNDIO=OFF" ];
 }

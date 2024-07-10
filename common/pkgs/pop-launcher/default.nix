@@ -16,7 +16,7 @@ rustPlatform.buildRustPackage rec {
   };
 
   cargoHash = "sha256-iHzM3sUv+D5p7+24WPAFfrOiYJEBiStj6uru+YAldxk=";
-  cargoBuildFlags = ["-p pop-launcher-bin"];
+  cargoBuildFlags = [ "-p pop-launcher-bin" ];
 
   # this doesn't actually test anything
   doCheck = false;

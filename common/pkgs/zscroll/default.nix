@@ -20,7 +20,7 @@ python3Packages.buildPythonApplication rec {
 
   doCheck = false;
 
-  propagatedBuildInputs = [python3];
+  propagatedBuildInputs = [ python3 ];
 
   meta = with lib; {
     description = "A text scroller for use with panels and shells";

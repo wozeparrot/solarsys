@@ -1,8 +1,5 @@
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
   # home-manager config
   home-manager.users.woze = {
     home.packages = with pkgs; [
@@ -61,12 +58,8 @@
       enable = true;
       package = pkgs.rofi-wayland;
       plugins = with pkgs; [
-        (rofi-calc.override {
-          rofi-unwrapped = rofi-wayland-unwrapped;
-        })
-        (rofi-emoji.override {
-          rofi-unwrapped = rofi-wayland-unwrapped;
-        })
+        (rofi-calc.override { rofi-unwrapped = rofi-wayland-unwrapped; })
+        (rofi-emoji.override { rofi-unwrapped = rofi-wayland-unwrapped; })
       ];
       cycle = true;
       extraConfig = {
@@ -132,9 +125,23 @@
           margin-top = 0;
           margin-bottom = 0;
 
-          modules-left = ["hyprland/window" "tray"];
-          modules-center = ["battery" "custom/powerdraw" "pulseaudio" "backlight" "cpu" "memory" "temperature" "custom/gpu-usage" "custom/gpu-usage-2" "clock"];
-          modules-right = ["custom/media"];
+          modules-left = [
+            "hyprland/window"
+            "tray"
+          ];
+          modules-center = [
+            "battery"
+            "custom/powerdraw"
+            "pulseaudio"
+            "backlight"
+            "cpu"
+            "memory"
+            "temperature"
+            "custom/gpu-usage"
+            "custom/gpu-usage-2"
+            "clock"
+          ];
+          modules-right = [ "custom/media" ];
 
           "hyprland/window" = {
             format = "{}";
@@ -157,7 +164,13 @@
             format-charging = "{capacity}% 󰂄";
             format-plugged = "{capacity}% ";
             format-alt = "{time} {icon}";
-            format-icons = [" " " " " " " " " "];
+            format-icons = [
+              " "
+              " "
+              " "
+              " "
+              " "
+            ];
             tooltip = false;
           };
 
@@ -243,22 +256,22 @@
     systemd.user.targets.tray = {
       Unit = {
         Description = "Home Manager System Tray";
-        Requires = ["graphical-session-pre.target"];
+        Requires = [ "graphical-session-pre.target" ];
       };
     };
 
     systemd.user.targets.wayland-desktop-session = {
       Unit = {
         Description = "wayland desktop session";
-        Documentation = ["man:systemd.special(7)"];
-        BindsTo = ["graphical-session.target"];
-        Wants = ["graphical-session-pre.target"];
-        After = ["graphical-session-pre.target"];
+        Documentation = [ "man:systemd.special(7)" ];
+        BindsTo = [ "graphical-session.target" ];
+        Wants = [ "graphical-session-pre.target" ];
+        After = [ "graphical-session-pre.target" ];
       };
     };
   };
 
   programs.xwayland.enable = true;
 
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
 }

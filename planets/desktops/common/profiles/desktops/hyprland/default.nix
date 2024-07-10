@@ -1,11 +1,6 @@
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
-  imports = [
-    ../common/wayland
-  ];
+  imports = [ ../common/wayland ];
 
   # home-manager config
   home-manager.users.woze = {
@@ -69,9 +64,7 @@
 
   xdg.portal = {
     extraPortals = [
-      (pkgs.xdph.xdg-desktop-portal-hyprland.override {
-        inherit (pkgs.hyprland) hyprland;
-      })
+      (pkgs.xdph.xdg-desktop-portal-hyprland.override { inherit (pkgs.hyprland) hyprland; })
     ];
   };
 }

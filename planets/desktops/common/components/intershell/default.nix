@@ -1,9 +1,6 @@
 # interactive shell config
-{
-  config,
-  pkgs,
-  ...
-}: let
+{ config, pkgs, ... }:
+let
   fishConfig = ''
     # color scheme
     # set -U fish_color_normal normal
@@ -40,10 +37,9 @@
 
     complete -c nom --wraps nix
   '';
-in {
-  home.packages = with pkgs; [
-    github-copilot-cli
-  ];
+in
+{
+  home.packages = with pkgs; [ github-copilot-cli ];
 
   programs = {
     fish = {

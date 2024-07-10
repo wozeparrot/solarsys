@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   networking.hostName = "amateru";
 
   imports = [
@@ -24,10 +25,8 @@
 
   # --- open ports ---
   networking.firewall = {
-    allowedUDPPorts = [
-    ];
-    allowedTCPPorts = [
-    ];
+    allowedUDPPorts = [ ];
+    allowedTCPPorts = [ ];
     interfaces.orion = {
       allowedUDPPorts = [
         8384 # syncthing
@@ -59,14 +58,14 @@
   };
 
   # --- packages ---
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [ ];
 
   # --- metrics ---
   containered-services.metrics = {
     enable = true;
     promLocalPath = "/mnt/pstore1/prom";
   };
-  systemd.services."container@metrics".after = ["container@seaweedfs-master.service"];
+  systemd.services."container@metrics".after = [ "container@seaweedfs-master.service" ];
 
   components.common-metrics.enable = true;
 
@@ -74,15 +73,15 @@
   fileSystems = {
     "/export/anime" = {
       device = "/mnt/pstore1/datas/aninarr/anime";
-      options = ["bind"];
+      options = [ "bind" ];
     };
     "/export/store" = {
       device = "/mnt/pstore1/datas/aninarr/store";
-      options = ["bind"];
+      options = [ "bind" ];
     };
     "/export/export" = {
       device = "/mnt/pstore1/datas/export";
-      options = ["bind"];
+      options = [ "bind" ];
     };
   };
   services.nfs.server = {

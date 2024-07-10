@@ -34,7 +34,15 @@ stdenv.mkDerivation rec {
     fetchSubmodules = true;
   };
 
-  nativeBuildInputs = [zig wayland xwayland scdoc pkg-config makeWrapper wrapGAppsHook];
+  nativeBuildInputs = [
+    zig
+    wayland
+    xwayland
+    scdoc
+    pkg-config
+    makeWrapper
+    wrapGAppsHook
+  ];
 
   dontWrapGApps = true;
 
@@ -72,11 +80,11 @@ stdenv.mkDerivation rec {
   '';
 
   /*
-  Builder patch install dir into river to get default config
-  When installFlags is removed, river becomes half broken.
-  See https://github.com/ifreund/river/blob/7ffa2f4b9e7abf7d152134f555373c2b63ccfc1d/river/main.zig#L56
+    Builder patch install dir into river to get default config
+    When installFlags is removed, river becomes half broken.
+    See https://github.com/ifreund/river/blob/7ffa2f4b9e7abf7d152134f555373c2b63ccfc1d/river/main.zig#L56
   */
-  installFlags = ["DESTDIR=$(out)"];
+  installFlags = [ "DESTDIR=$(out)" ];
 
   meta = with lib; {
     homepage = "https://github.com/ifreund/river";

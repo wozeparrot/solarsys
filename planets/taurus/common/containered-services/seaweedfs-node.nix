@@ -4,16 +4,21 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   orion = import ../../../../networks/orion.nix;
   cfg = config.containered-services.seaweedfs-node;
-in {
+in
+{
   options.containered-services.seaweedfs-node = {
     enable = mkEnableOption "seaweedfs volume server";
 
     bindAddress = mkOption {
       type = types.str;
-      default = (lib.lists.findFirst (x: x.hostname == config.networking.hostName) (builtins.abort "failed to find node in network") orion).address;
+      default =
+        (lib.lists.findFirst (
+          x: x.hostname == config.networking.hostName
+        ) (builtins.abort "failed to find node in network") orion).address;
       description = "IP address to bind to";
     };
     startPort = mkOption {
@@ -34,20 +39,21 @@ in {
 
     volumes = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
       description = "List of directories to start volume servers in";
     };
   };
 
   config = mkIf cfg.enable {
-    networking.firewall.interfaces.orion.allowedTCPPorts = lib.foldl' (cur: acc:
+    networking.firewall.interfaces.orion.allowedTCPPorts = lib.foldl' (
+      cur: acc:
       cur
       ++ [
         (cfg.startPort + acc)
         (cfg.startPort + acc + 10000)
         (cfg.startPort + acc + 20000)
-      ])
-    [] (lib.range 0 ((length cfg.volumes) - 1));
+      ]
+    ) [ ] (lib.range 0 ((length cfg.volumes) - 1));
 
     # oneshot service to ensure that the volume directories exist
     systemd.services.seaweedfs-volume-setup = {
@@ -60,42 +66,53 @@ in {
         '';
       };
 
-      after = ["network.target"];
-      wantedBy = ["multi-user.target"];
+      after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
     };
 
     containers.seaweedfs-node = {
       autoStart = true;
       ephemeral = true;
 
-      bindMounts = lib.lists.foldl' (acc: cur:
+      bindMounts = lib.lists.foldl' (
+        acc: cur:
         acc
         // {
           "/mnt/seaweedfs-${toString cur}" = {
             hostPath = elemAt cfg.volumes cur;
             isReadOnly = false;
           };
-        }) {} (lib.range 0 ((length cfg.volumes) - 1));
+        }
+      ) { } (lib.range 0 ((length cfg.volumes) - 1));
 
-      config = {cconfig, ...}: {
-        systemd.services = lib.foldl' (acc: cur:
-          acc
-          // {
-            "seaweedfs-volume-${toString cur}" = {
-              description = "seaweedfs volume server for ${elemAt cfg.volumes cur}";
+      config =
+        { cconfig, ... }:
+        {
+          systemd.services = lib.foldl' (
+            acc: cur:
+            acc
+            // {
+              "seaweedfs-volume-${toString cur}" = {
+                description = "seaweedfs volume server for ${elemAt cfg.volumes cur}";
 
-              serviceConfig = {
-                ExecStart = "${pkgs.seaweedfs.seaweedfs}/bin/weed volume -ip ${cfg.bindAddress} -port ${toString (cfg.startPort + cur)} -mserver '${cfg.masterAddress}:${toString cfg.masterPort}' -max 0 -dir /mnt/seaweedfs-${toString cur}/ -dataCenter='${config.solarsys.planet}' -rack='${config.networking.hostName}' -index=memory -metricsPort ${toString (cfg.startPort + cur + 20000)}";
+                serviceConfig = {
+                  ExecStart = "${pkgs.seaweedfs.seaweedfs}/bin/weed volume -ip ${cfg.bindAddress} -port ${toString (cfg.startPort + cur)} -mserver '${cfg.masterAddress}:${toString cfg.masterPort}' -max 0 -dir /mnt/seaweedfs-${toString cur}/ -dataCenter='${config.solarsys.planet}' -rack='${config.networking.hostName}' -index=memory -metricsPort ${
+                    toString (cfg.startPort + cur + 20000)
+                  }";
+                };
+
+                after = [ "network.target" ];
+                wantedBy = [ "multi-user.target" ];
               };
+            }
+          ) { } (lib.range 0 ((length cfg.volumes) - 1));
 
-              after = ["network.target"];
-              wantedBy = ["multi-user.target"];
-            };
-          }) {} (lib.range 0 ((length cfg.volumes) - 1));
-
-        system.stateVersion = config.system.stateVersion;
-      };
+          system.stateVersion = config.system.stateVersion;
+        };
     };
-    systemd.services."container@seaweedfs-node".after = ["seaweedfs-volume-setup.service" "container@seaweedfs-master.service"];
+    systemd.services."container@seaweedfs-node".after = [
+      "seaweedfs-volume-setup.service"
+      "container@seaweedfs-master.service"
+    ];
   };
 }

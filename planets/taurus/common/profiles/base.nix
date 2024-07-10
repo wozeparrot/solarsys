@@ -3,10 +3,9 @@
   config,
   lib,
   ...
-}: {
-  imports = [
-    ../../../../common/profiles/base.nix
-  ];
+}:
+{
+  imports = [ ../../../../common/profiles/base.nix ];
 
   # disabled unneeded stuff
   environment.noXlibs = lib.mkDefault true;
@@ -25,7 +24,7 @@
   };
 
   # remove unneeded locales
-  i18n.supportedLocales = [(config.i18n.defaultLocale + "/UTF-8")];
+  i18n.supportedLocales = [ (config.i18n.defaultLocale + "/UTF-8") ];
 
   # remove fonts
   fonts.fontconfig.enable = lib.mkDefault false;
@@ -40,7 +39,10 @@
   ];
 
   # reboot on kernel panic
-  boot.kernelParams = ["panic=1" "boot.panic_on_fail"];
+  boot.kernelParams = [
+    "panic=1"
+    "boot.panic_on_fail"
+  ];
 
   # systemd tweaks
   systemd.enableEmergencyMode = false;
@@ -54,7 +56,7 @@
     firewall = {
       enable = true;
       allowPing = true;
-      allowedTCPPorts = [22];
+      allowedTCPPorts = [ 22 ];
     };
   };
 

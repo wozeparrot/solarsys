@@ -5,19 +5,28 @@
   modulesPath,
   lib,
   ...
-}: {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+}:
+{
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot = {
     initrd = {
       luks.devices."cryptroot".device = "/dev/disk/by-uuid/dcaf7525-88c3-4049-b13a-578a1cf8a21c";
-      availableKernelModules = ["xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "rtsx_usb_sdmmc"];
-      kernelModules = [];
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "usbhid"
+        "usb_storage"
+        "sd_mod"
+        "rtsx_usb_sdmmc"
+      ];
+      kernelModules = [ ];
     };
-    kernelModules = ["kvm-intel" "vfio-pci"];
-    extraModulePackages = [];
+    kernelModules = [
+      "kvm-intel"
+      "vfio-pci"
+    ];
+    extraModulePackages = [ ];
   };
 
   fileSystems = {
@@ -37,7 +46,7 @@
     };
   };
 
-  swapDevices = [];
+  swapDevices = [ ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }

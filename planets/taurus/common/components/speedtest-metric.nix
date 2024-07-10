@@ -4,37 +4,40 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   orion = import ../../../../networks/orion.nix;
   cfg = config.components.speedtest-metric;
-in {
+in
+{
   options.components.speedtest-metric = {
     enable = mkEnableOption "speedtest metric exporter";
     bindAddress = mkOption {
       type = types.str;
-      default = (lib.lists.findFirst (x: x.hostname == config.networking.hostName) (builtins.abort "failed to find node in network") orion).address;
+      default =
+        (lib.lists.findFirst (
+          x: x.hostname == config.networking.hostName
+        ) (builtins.abort "failed to find node in network") orion).address;
       description = "The address to bind the speedtest metric exporter to";
     };
   };
 
   config = mkIf cfg.enable {
-    networking.firewall.interfaces.orion.allowedTCPPorts = [
-      9020
-    ];
+    networking.firewall.interfaces.orion.allowedTCPPorts = [ 9020 ];
 
     users.users.speedtest-metric = {
       isSystemUser = true;
       description = "Speedtest metric exporter";
       group = "speedtest-metric";
     };
-    users.groups.speedtest-metric = {};
+    users.groups.speedtest-metric = { };
 
     systemd.services."prometheus-speedtest-metric" = {
       description = "Prometheus speedtest metric exporter";
-      wantedBy = ["multi-user.target"];
-      after = ["network.target"];
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network.target" ];
 
-      path = [pkgs.ookla-speedtest];
+      path = [ pkgs.ookla-speedtest ];
 
       serviceConfig = {
         ExecStart = ''

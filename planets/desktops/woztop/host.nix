@@ -1,8 +1,5 @@
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
   networking.hostName = "woztop";
 
   imports = [
@@ -18,12 +15,12 @@
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
-  boot.kernelParams = ["intel_iommu=on"];
+  boot.kernelParams = [ "intel_iommu=on" ];
 
   hardware.cpu.intel.updateMicrocode = true;
 
   # nix cross build support
-  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   nix.extraOptions = ''
     extra-platforms = aarch64-linux arm-linux i686-linux
   '';
@@ -32,7 +29,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   hardware.opengl = {
-    extraPackages32 = with pkgs.pkgsi686Linux; [vaapiIntel];
+    extraPackages32 = with pkgs.pkgsi686Linux; [ vaapiIntel ];
     extraPackages = with pkgs; [
       vaapiIntel
       vaapiVdpau
@@ -48,12 +45,12 @@
   hardware.uinput.enable = true;
   hardware.opentabletdriver.enable = true;
 
-  networking.firewall.allowedTCPPorts = [29999];
-  networking.firewall.allowedUDPPorts = [29999];
+  networking.firewall.allowedTCPPorts = [ 29999 ];
+  networking.firewall.allowedUDPPorts = [ 29999 ];
 
   networking.firewall.interfaces.wg-ss = {
-    allowedUDPPorts = [6504];
-    allowedTCPPorts = [6504];
+    allowedUDPPorts = [ 6504 ];
+    allowedTCPPorts = [ 6504 ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -77,14 +74,21 @@
 
   # services.flatpak.enable = true;
 
-  services.xserver.videoDrivers = ["amdgpu" "modesetting"];
+  services.xserver.videoDrivers = [
+    "amdgpu"
+    "modesetting"
+  ];
 
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
   '';
 
   services.printing.enable = true;
-  services.printing.drivers = [pkgs.gutenprint pkgs.gutenprintBin pkgs.hplip];
+  services.printing.drivers = [
+    pkgs.gutenprint
+    pkgs.gutenprintBin
+    pkgs.hplip
+  ];
 
   services.gvfs.enable = true;
 
@@ -125,7 +129,7 @@
       qemu = {
         ovmf = {
           enable = true;
-          packages = [pkgs.OVMFFull.fd];
+          packages = [ pkgs.OVMFFull.fd ];
         };
         swtpm.enable = true;
       };
@@ -137,7 +141,7 @@
       enable = true;
       vgpus = {
         "i915-GVTg_V5_4" = {
-          uuid = ["eb1ec6dc-133e-11eb-a7a0-9714878a69bc"];
+          uuid = [ "eb1ec6dc-133e-11eb-a7a0-9714878a69bc" ];
         };
       };
     };
@@ -154,10 +158,21 @@
   fileSystems."/mnt/ss/infra0/nas0" = {
     device = "10.11.235.1:/";
     fsType = "nfs";
-    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
+    options = [
+      "x-systemd.automount"
+      "noauto"
+      "x-systemd.idle-timeout=600"
+    ];
   };
 
-  users.users.woze.extraGroups = ["docker" "libvirtd" "video" "render" "vboxusers" "libvirt"];
+  users.users.woze.extraGroups = [
+    "docker"
+    "libvirtd"
+    "video"
+    "render"
+    "vboxusers"
+    "libvirt"
+  ];
   home-manager.users.woze = ./home.nix;
 
   system.stateVersion = "21.11";

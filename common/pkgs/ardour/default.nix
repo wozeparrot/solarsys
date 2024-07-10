@@ -150,7 +150,10 @@ stdenv.mkDerivation rec {
       taglib
       vamp-plugin-sdk
     ]
-    ++ lib.optionals videoSupport [harvid xjadeo];
+    ++ lib.optionals videoSupport [
+      harvid
+      xjadeo
+    ];
 
   wafConfigureFlags = [
     "--cxx11"
@@ -184,7 +187,12 @@ stdenv.mkDerivation rec {
     + lib.optionalString videoSupport ''
       # `harvid` and `xjadeo` must be accessible in `PATH` for video to work.
       wrapProgram "$out/bin/ardour${lib.versions.major version}" \
-        --prefix PATH : "${lib.makeBinPath [harvid xjadeo]}"
+        --prefix PATH : "${
+          lib.makeBinPath [
+            harvid
+            xjadeo
+          ]
+        }"
     '';
 
   LINKFLAGS = "-lpthread";
@@ -203,6 +211,10 @@ stdenv.mkDerivation rec {
     homepage = "https://ardour.org/";
     license = licenses.gpl2Plus;
     platforms = platforms.linux;
-    maintainers = with maintainers; [goibhniu magnetophon mitchmindtree];
+    maintainers = with maintainers; [
+      goibhniu
+      magnetophon
+      mitchmindtree
+    ];
   };
 }

@@ -1,11 +1,9 @@
-{
-  config,
-  lib,
-  ...
-}:
-with lib; let
+{ config, lib, ... }:
+with lib;
+let
   cfg = config.solarsys;
-in {
+in
+{
   options.solarsys = {
     planet = mkOption {
       type = types.str;
