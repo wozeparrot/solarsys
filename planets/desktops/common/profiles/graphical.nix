@@ -149,7 +149,7 @@
 
       gtk-engine-murrine
       hicolor-icon-theme
-      gnome.adwaita-icon-theme
+      adwaita-icon-theme
       papirus-icon-theme
 
       libnotify
