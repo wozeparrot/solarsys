@@ -9,8 +9,8 @@
     ./components/keepassxc
     ./components/kitty
     ./components/mpv
-    ./components/shfm
-    ./components/musicprod
+    # ./components/shfm
+    # ./components/musicprod
   ];
 
   # packages
@@ -49,7 +49,7 @@
     audacity
     blender-hip
     darktable
-    freecad
+    # freecad
     ghidra-bin
     gimp
     file-roller
@@ -80,7 +80,7 @@
     chaotic.gamescope-wsi_git
     master.protontricks
     nix-gaming.osu-lazer-bin
-    # the-powder-toy
+    the-powder-toy
     wine64
 
     # wayland/desktop stuff
