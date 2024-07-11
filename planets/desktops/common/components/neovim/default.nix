@@ -81,7 +81,7 @@ in
       nil
       nixd.nixd
       nodePackages.bash-language-server
-      nodePackages.pyright
+      basedpyright
       rust-analyzer
       rustc
       rustfmt
