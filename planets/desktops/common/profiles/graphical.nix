@@ -48,6 +48,7 @@
 
   # main theming
   stylix = {
+    enable = true;
     image = ../misc/wallpaper.png;
     polarity = "dark";
     base16Scheme = {
