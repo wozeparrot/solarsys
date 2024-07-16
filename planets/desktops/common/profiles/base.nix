@@ -23,6 +23,8 @@
     gc.automatic = false;
   };
 
+  boot.initrd.systemd.enable = true;
+
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
 
