@@ -9,7 +9,6 @@
         (builtins.readFile ./hyprland.conf)
         + ''
           plugin = ${pkgs.hyprland-split-monitor-workspaces.split-monitor-workspaces}/lib/libsplit-monitor-workspaces.so
-          plugin = ${pkgs.hyprland-plugins.hyprwinwrap}/lib/libhyprwinwrap.so
         '';
       onChange = ''
         (
@@ -42,7 +41,7 @@
       export XCURSOR_SIZE=24
       export NIXOS_OZONE_WL=1
 
-      exec Hyprland
+      exec dbus-run-session -- Hyprland
     '')
     (pkgs.writeShellScriptBin "hyprland-gamemode" ''
       #!/usr/bin/env sh
