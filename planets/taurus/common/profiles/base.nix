@@ -29,9 +29,6 @@
   # remove fonts
   fonts.fontconfig.enable = lib.mkDefault false;
 
-  # remove sound
-  sound.enable = lib.mkDefault false;
-
   # enable ssh
   services.openssh.enable = lib.mkForce true;
   users.users.root.openssh.authorizedKeys.keys = [
