@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FLK="$(nix eval --impure .#planets --json --apply 'with import <nixpkgs> {}; lib.attrsets.filterAttrsRecursive (n: v: n != "core")')"
+FLK="$(nix eval .#planets --json --apply "(builtins.getFlake \"git+file://\${toString ./.}?rev=$(git rev-parse HEAD)\").lib.attrsets.filterAttrsRecursive (n: v: n != \"core\")")"
 
 # gets planets from flake
 function get_planets {
