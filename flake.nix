@@ -273,6 +273,9 @@
         }
       )
     // {
+      inherit (nixpkgs) lib;
+    }
+    // {
       solar-system = { };
 
       planets =
