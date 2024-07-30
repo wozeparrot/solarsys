@@ -124,9 +124,7 @@ in
       nvim-ts-autotag
 
       # telescope
-      (pluginGit "nvim-telescope/telescope-ui-select.nvim" "6e51d7da30bd139a6950adf2a47fda6df9fa06d2"
-        "master"
-      )
+      telescope-ui-select-nvim
       telescope-frecency-nvim
       telescope-fzf-native-nvim
       telescope-nvim
@@ -147,9 +145,7 @@ in
       nvim-cmp
 
       # indent-blankline
-      (pluginGit "lukas-reineke/indent-blankline.nvim" "65e20ab94a26d0e14acac5049b8641336819dfc7"
-        "master"
-      )
+      indent-blankline-nvim
       rainbow-delimiters-nvim
 
       # nvim-cursorline
@@ -168,12 +164,12 @@ in
       glow-nvim
 
       # language support
-      (pluginGit "DingDean/wgsl.vim" "fdf91e11243266dfe923fc08c2fc9749429bc5aa" "main")
       (pluginGit "avivbeeri/vim-wren" "2514d32c8e476384f3df81bd2cd369908d85bcfe" "fixedStatic")
-      (pluginGit "elkowar/yuck.vim" "9b5e0370f70cc30383e1dabd6c215475915fe5c3" "master")
       (pluginGit "stefanos82/nelua.vim" "ff0a733a586ef0b48cda4999170ed4ca1653a144" "main")
-      zig-vim
       vim-opencl
+      wgsl-vim
+      yuck-vim
+      zig-vim
 
       # lsp language additionals
       crates-nvim
@@ -184,7 +180,7 @@ in
       (pluginGit "zbirenbaum/copilot-cmp" "b6e5286b3d74b04256d0a7e3bd2908eabec34b44" "master")
 
       # firenvim
-      (pluginGit "glacambre/firenvim" "c6e37476ab3b58cf01ababfe80ec9335798e70e5" "master")
+      (pluginGit "glacambre/firenvim" "4d2eef5fd2a7af0e91b76f1a9715228548316125" "master")
     ];
   };
 }

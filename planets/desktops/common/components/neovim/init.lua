@@ -181,7 +181,6 @@ require("bufferline").setup({
 		offsets = { { filetype = "NvimTree", text = "File Explorer", text_align = "left" } },
 		sort_by = "extension",
 		diagnostics = "nvim_lsp",
-		diagnostics_update_in_insert = true,
 		diagnostics_indicator = function(count, level, diagnostics_dict, context)
 			local s = ""
 			for e, n in pairs(diagnostics_dict) do
@@ -196,6 +195,13 @@ require("bufferline").setup({
 			return string.format("%s·%s", opts.raise(opts.id), opts.lower(opts.ordinal))
 		end,
 	},
+})
+vim.diagnostic.config({
+  virtual_text = true,
+  underline = true,
+  signs = true,
+  update_in_insert = false,
+  severity_sort = true,
 })
 -- bind shift hl to move between buffers
 nnoremap("<S-h>", "<cmd>BufferLineCyclePrev<CR>")
