@@ -68,7 +68,7 @@
     sioyek
     solvespace
     ss.horizon
-    thunderbird
+    thunderbird-128
     transmission_4-gtk
     vesktop
     zathura
