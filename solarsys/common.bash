@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FLK="$(nix $NIX_EXTRA_OPTS eval .#planets --json --apply "(builtins.getFlake \"git+file://\${toString ./.}?rev=$(git rev-parse HEAD)\").lib.attrsets.filterAttrsRecursive (n: v: n != \"core\")")"
+FLK="$(nix --extra-experimental-features "nix-command flakes" eval .#planets --json --apply "(builtins.getFlake \"git+file://\${toString ./.}?rev=$(git rev-parse HEAD)\").lib.attrsets.filterAttrsRecursive (n: v: n != \"core\")")"
 
 # gets planets from flake
 function get_planets {
@@ -61,7 +61,7 @@ function build_moon_output {
     local output=$3
 
     # build
-    local build_cmd="nix $NIX_EXTRA_OPTS build --log-format internal-json -v --no-link \".#planets.$planet.moons.$moon.core.$output\" |& nom --json"
+    local build_cmd="nix --extra-experimental-features \"nix-command flakes\" $NIX_EXTRA_OPTS build --log-format internal-json -v --no-link \".#planets.$planet.moons.$moon.core.$output\" |& nom --json"
 
     if eval "$build_cmd"; then
         nix path-info ".#planets.$planet.moons.$moon.core.$output"
