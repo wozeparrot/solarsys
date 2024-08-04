@@ -52,22 +52,22 @@
     image = ../misc/wallpaper.png;
     polarity = "dark";
     base16Scheme = {
-      base00 = "000000";
-      base01 = "111111";
-      base02 = "554856";
-      base03 = "705f72";
-      base04 = "9f95a1";
-      base05 = "bbb3c1";
-      base06 = "d2cad3";
-      base07 = "f8f0f8";
-      base08 = "a52e4d";
-      base09 = "006fc1";
-      base0A = "fa83a2";
-      base0B = "228039";
-      base0C = "33b3f4";
-      base0D = "996f06";
-      base0E = "aa3c9f";
-      base0F = "554d5b";
+      base00 = "000000"; # ---- dark
+      base01 = "111111"; # ---
+      base02 = "554856"; # --
+      base03 = "705f72"; # -
+      base04 = "9f95a1"; # +
+      base05 = "bbb3c1"; # ++
+      base06 = "d2cad3"; # +++
+      base07 = "f8f0f8"; # ++++ light
+      base08 = "a52e4d"; # red
+      base09 = "c4543d"; # orange
+      base0A = "a78f2f"; # yellow
+      base0B = "228039"; # green
+      base0C = "1ba8e8"; # cyan
+      base0D = "006fc1"; # blue
+      base0E = "8656a7"; # purple
+      base0F = "e77ca0"; # pink
     };
     fonts = {
       serif = config.stylix.fonts.sansSerif;
@@ -93,6 +93,8 @@
       };
     };
     cursor = {
+      package = pkgs.phinger-cursors;
+      name = "phinger-cursors-light";
       size = 24;
     };
   };
@@ -152,6 +154,7 @@
       hicolor-icon-theme
       adwaita-icon-theme
       papirus-icon-theme
+      nwg-look
 
       libnotify
       xdg-utils
