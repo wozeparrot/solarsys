@@ -1,6 +1,6 @@
 # must be used with:
 # base, graphical
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
   imports = [ ./graphical.nix ];
 
@@ -21,7 +21,7 @@
   # power management
   services = {
     tlp = {
-      enable = true;
+      enable = lib.mkDefault true;
       settings = {
         CPU_DRIVER_OPMODE_ON_AC = "active";
         CPU_DRIVER_OPMODE_ON_BAT = "active";

@@ -166,6 +166,9 @@
     syncthing.enable = true;
   };
 
+  # fix for flake
+  services.hyprpaper.package = lib.mkDefault pkgs.hyprpaper.hyprpaper;
+
   # xdg config
   xdg.enable = true;
 

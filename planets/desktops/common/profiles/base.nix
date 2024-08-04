@@ -32,7 +32,10 @@
 
   # extra programs
   programs.firejail.enable = true;
-  programs.nix-ld.enable = true;
+  programs.nix-ld = {
+    enable = true;
+    package = pkgs.nix-ld-rs;
+  };
 
   programs.fish.interactiveShellInit = ''
     function bonk

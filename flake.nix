@@ -105,6 +105,11 @@
       nixpkgs.follows = "nixpkgs";
       flake-utils.follows = "flake-utils";
     };
+
+    jovian.url = "github:Jovian-Experiments/Jovian-NixOS";
+    jovian.inputs = {
+      nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -191,6 +196,10 @@
         seaweedfs = {
           inherit (inputs.seaweedfs) packages;
         };
+        jovian = {
+          overlays = inputs.jovian.overlays.default;
+          modules = inputs.jovian.nixosModules;
+        };
       };
 
       overlay =
@@ -223,8 +232,8 @@
                 })
               ]
               ++ overlay
-              ++ (nixpkgs.lib.mapAttrsToList (_: v: v.overlay) (
-                nixpkgs.lib.filterAttrs (_: nixpkgs.lib.hasAttr "overlay") external
+              ++ (nixpkgs.lib.mapAttrsToList (_: v: v.overlays) (
+                nixpkgs.lib.filterAttrs (_: nixpkgs.lib.hasAttr "overlays") external
               ))
               ++ extraOverlays;
           }
