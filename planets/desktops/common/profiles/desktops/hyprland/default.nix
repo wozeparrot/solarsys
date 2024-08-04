@@ -9,13 +9,34 @@
         (builtins.readFile ./hyprland.conf)
         + ''
           plugin = ${pkgs.hyprland-split-monitor-workspaces.split-monitor-workspaces}/lib/libsplit-monitor-workspaces.so
-        '';
+        ''
+        + (
+          let
+            rgb = color: "rgb(${color})";
+            rgba = color: alpha: "rgba(${color}${alpha})";
+          in
+          with config.lib.stylix.colors;
+          ''
+            decoration {
+              col.shadow=${rgba base00 "99"}
+            }
+
+            general {
+              col.active_border=${rgb base0D}
+              col.inactive_border=${rgb base03}
+            }
+          ''
+        );
       onChange = ''
         (
-          shopt -s nullglob
-          for instance in /tmp/hypr/*; do
-            HYPRLAND_INSTANCE_SIGNATURE=''${instance##*/} ${pkgs.hyprland.hyprland}/bin/hyprctl reload config-only || true
-          done
+          XDG_RUNTIME_DIR=''${XDG_RUNTIME_DIR:-/run/user/$(id -u)}
+          if [[ -d "/tmp/hypr" || -d "$XDG_RUNTIME_DIR/hypr" ]]; then
+            for i in $(${pkgs.hyprland.hyprland}/bin/hyprctl instances -j | jq ".[].instance" -r); do
+              ${pkgs.hyprland.hyprland}/bin/hyprctl -i "$i" reload config-only
+              ${pkgs.nixpkgs-wayland.kanshi}/bin/kanshictl reload || true
+              ${pkgs.hyprland.hyprland}/bin/hyprctl -i "$i" hyprpaper wallpaper ,$(${pkgs.hyprland.hyprland}/bin/hyprctl -i "$i" hyprpaper listactive | head -n1 | grep -oP '/.*')
+            done
+          fi
         )
       '';
     };
@@ -45,8 +66,8 @@
     '')
     (pkgs.writeShellScriptBin "hyprland-gamemode" ''
       #!/usr/bin/env sh
-      HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==2{print $2}')
-      if [ "$HYPRGAMEMODE" = 1 ] ; then
+      HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==1{print $2}')
+      if [ "$HYPRGAMEMODE" == 1 ] ; then
           hyprctl --batch "\
               keyword animations:enabled 0;\
               keyword decoration:drop_shadow 0;\

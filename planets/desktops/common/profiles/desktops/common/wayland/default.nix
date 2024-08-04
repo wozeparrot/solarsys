@@ -12,7 +12,6 @@
       pngquant
       slurp
       swappy
-      swww
       wayvnc
       wob
       wofi
@@ -51,6 +50,15 @@
         cliphist list | rofi -dmenu | cliphist decode | wl-copy
       '')
     ];
+
+    services.hyprpaper = {
+      enable = true;
+      package = pkgs.hyprpaper.hyprpaper;
+      settings = {
+        ipc = "on";
+        splash = false;
+      };
+    };
 
     xdg.configFile."fnott/fnott.ini".source = ./fnott.ini;
 
@@ -101,7 +109,6 @@
         drun-use-desktop-cache = false;
         drun-reload-desktop-cache = false;
       };
-      # theme = ./rofi-theme.rasi;
     };
 
     programs.waybar = {

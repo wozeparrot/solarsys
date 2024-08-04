@@ -56,6 +56,16 @@
       nixpkgs.follows = "nixpkgs";
     };
 
+    hyprpaper.url = "git+https://github.com/hyprwm/hyprpaper";
+    hyprpaper.inputs = {
+      nixpkgs.follows = "nixpkgs";
+    };
+
+    hyprcursor-phinger.url = "github:jappie3/hyprcursor-phinger";
+    hyprcursor-phinger.inputs = {
+      nixpkgs.follows = "nixpkgs";
+    };
+
     hyprland-contrib.url = "github:hyprwm/contrib";
     hyprland-contrib.inputs = {
       nixpkgs.follows = "nixpkgs";
@@ -137,6 +147,12 @@
         };
         hyprland = {
           inherit (inputs.hyprland) packages;
+        };
+        hyprpaper = {
+          inherit (inputs.hyprpaper) packages;
+        };
+        hyprcursor-phinger = {
+          hm-modules = inputs.hyprcursor-phinger.homeManagerModules;
         };
         hyprland-contrib = {
           inherit (inputs.hyprland-contrib) packages;
@@ -304,6 +320,13 @@
                         nixpkgs.lib.filterAttrs (_: nixpkgs.lib.hasAttr "cache") external
                       )
                     )
+                  )
+                );
+
+                # import home-manager modules
+                home-manager.sharedModules = (
+                  nixpkgs.lib.mapAttrsToList (n: v: v.hm-modules."${n}") (
+                    nixpkgs.lib.filterAttrs (_: nixpkgs.lib.hasAttr "hm-modules") external
                   )
                 );
 

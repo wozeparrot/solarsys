@@ -40,7 +40,6 @@
         ];
         profile.exec = [
           "$HOME/scripts/clamp_workspaces.sh"
-          "swww img ${../common/misc/wallpaper.png}"
         ];
       }
       {
@@ -57,7 +56,6 @@
             transform = "normal";
           }
         ];
-        profile.exec = [ "swww img ${../common/misc/wallpaper.png}" ];
       }
       {
         profile.name = "docked-away";
@@ -72,7 +70,6 @@
             transform = "normal";
           }
         ];
-        profile.exec = [ "swww img ${../common/misc/wallpaper.png}" ];
       }
       {
         profile.name = "docked-away-vertical";
@@ -87,7 +84,6 @@
             transform = "90";
           }
         ];
-        profile.exec = [ "swww img ${../common/misc/wallpaper.png}" ];
       }
       {
         profile.name = "comma";
@@ -110,7 +106,7 @@
   systemd.user.services.kanshi.Service = {
     Environment =
       let
-        path = with pkgs; "${bash}/bin:${jq}/bin:${hyprland.hyprland}/bin:${swww}/bin";
+        path = with pkgs; "${bash}/bin:${jq}/bin:${hyprland.hyprland}/bin";
       in
       "PATH=${path}";
   };
