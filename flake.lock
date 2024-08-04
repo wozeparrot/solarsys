@@ -1149,16 +1149,15 @@
       "locked": {
         "lastModified": 1679179746,
         "narHash": "sha256-9fEpPprEnvqeHyErD2ll78QIhzzAZoZdtEK5AUa15wE=",
-        "ref": "main",
+        "owner": "wozeparrot",
+        "repo": "n2n-nix",
         "rev": "159454d317d1cc1c91a0d19fb30760de12c08026",
-        "revCount": 6,
-        "type": "git",
-        "url": "ssh://git@github.com/wozeparrot/n2n-nix.git"
+        "type": "github"
       },
       "original": {
-        "ref": "main",
-        "type": "git",
-        "url": "ssh://git@github.com/wozeparrot/n2n-nix.git"
+        "owner": "wozeparrot",
+        "repo": "n2n-nix",
+        "type": "github"
       }
     },
     "n2n_2": {
@@ -1921,16 +1920,15 @@
       "locked": {
         "lastModified": 1688682603,
         "narHash": "sha256-+3gdMNZqOnIrvsQC132yGWRPXp9xZ65aat5sNLvxIz4=",
-        "ref": "main",
+        "owner": "wozeparrot",
+        "repo": "wozey.service",
         "rev": "ac6c6b7aed6a8d0f96e34a262ebe00e9022b5253",
-        "revCount": 211,
-        "type": "git",
-        "url": "ssh://git@github.com/wozeparrot/wozey.service.git"
+        "type": "github"
       },
       "original": {
-        "ref": "main",
-        "type": "git",
-        "url": "ssh://git@github.com/wozeparrot/wozey.service.git"
+        "owner": "wozeparrot",
+        "repo": "wozey.service",
+        "type": "github"
       }
     },
     "xdph": {

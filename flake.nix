@@ -17,13 +17,13 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     # overlays + extra package sets + extra modules
-    wozey.url = "git+ssh://git@github.com/wozeparrot/wozey.service.git?ref=main";
+    wozey.url = "github:wozeparrot/wozey.service";
     wozey.inputs = {
       nixpkgs.follows = "nixpkgs";
       flake-utils.follows = "flake-utils";
     };
 
-    n2n.url = "git+ssh://git@github.com/wozeparrot/n2n-nix.git?ref=main";
+    n2n.url = "github:wozeparrot/n2n-nix";
     n2n.inputs = {
       nixpkgs.follows = "nixpkgs";
       flake-utils.follows = "flake-utils";
