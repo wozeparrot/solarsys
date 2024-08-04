@@ -25,6 +25,7 @@ in
     withNodeJs = true;
 
     extraLuaConfig = builtins.concatStringsSep "\n" [
+      ""
       (
         let
           colors = config.lib.stylix.colors.withHashtag;
@@ -181,6 +182,9 @@ in
 
       # firenvim
       (pluginGit "glacambre/firenvim" "4d2eef5fd2a7af0e91b76f1a9715228548316125" "master")
+
+      # virt-column
+      (pluginGit "xiyaowong/virtcolumn.nvim" "4d385b4aa42aa3af6fa2cb8527462fa4badbd163" "main")
     ];
   };
 }
