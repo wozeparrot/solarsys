@@ -64,7 +64,7 @@ function build_moon_output {
     local build_cmd="nix --extra-experimental-features \"nix-command flakes\" $NIX_EXTRA_OPTS build --log-format internal-json -v --no-link \".#planets.$planet.moons.$moon.core.$output\" |& nom --json"
 
     if eval "$build_cmd"; then
-        nix --extra-experimental-features "nix-command flakes" path-info ".#planets.$planet.moons.$moon.core.$output"
+        nix --extra-experimental-features nix-command --extra-experimental-features flakes path-info ".#planets.$planet.moons.$moon.core.$output"
         return 0
     else
         return 1
