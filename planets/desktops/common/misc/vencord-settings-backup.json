@@ -3,10 +3,8 @@
         "notifyAboutUpdates": true,
         "autoUpdate": false,
         "autoUpdateNotification": true,
-        "useQuickCss": true,
-        "themeLinks": [
-            "https://raw.githubusercontent.com/refact0r/midnight-discord/master/midnight.theme.css"
-        ],
+        "useQuickCss": false,
+        "themeLinks": [],
         "enableReactDevtools": false,
         "frameless": false,
         "transparent": false,
@@ -389,14 +387,14 @@
                 "enabled": true
             },
             "ImageZoom": {
-                "enabled": false,
+                "enabled": true,
                 "saveZoomValues": true,
                 "preventCarouselFromClosingOnClick": true,
-                "invertScroll": false,
+                "invertScroll": true,
                 "nearestNeighbour": false,
-                "square": false,
-                "zoom": 2,
-                "size": 100,
+                "square": true,
+                "zoom": 1.9,
+                "size": 1000,
                 "zoomSpeed": 0.5
             },
             "RelationshipNotifier": {
@@ -517,9 +515,6 @@
                 "enabled": true,
                 "loop": true
             },
-            "ServerProfile": {
-                "enabled": false
-            },
             "ThemeAttributes": {
                 "enabled": true
             },
@@ -607,7 +602,10 @@
                 "sortByAffinity": true
             },
             "MessageLatency": {
-                "enabled": false
+                "enabled": false,
+                "latency": 2,
+                "detectDiscordKotlin": true,
+                "showMillis": false
             },
             "PauseInvitesForever": {
                 "enabled": false
@@ -627,6 +625,89 @@
             "PartyMode": {
                 "enabled": false,
                 "superIntensePartyMode": 0
+            },
+            "AutomodContext": {
+                "enabled": false
+            },
+            "CtrlEnterSend": {
+                "enabled": false
+            },
+            "CustomIdle": {
+                "enabled": false
+            },
+            "FixSpotifyEmbeds": {
+                "enabled": false
+            },
+            "FixYoutubeEmbeds": {
+                "enabled": false
+            },
+            "NoDefaultHangStatus": {
+                "enabled": false
+            },
+            "NoServerEmojis": {
+                "enabled": false
+            },
+            "ReplaceGoogleSearch": {
+                "enabled": false
+            },
+            "ShowTimeoutDuration": {
+                "enabled": false
+            },
+            "ValidReply": {
+                "enabled": false
+            },
+            "XSOverlay": {
+                "enabled": false,
+                "botNotifications": false,
+                "serverNotifications": true,
+                "dmNotifications": true,
+                "groupDmNotifications": true,
+                "callNotifications": true,
+                "pingColor": "#7289da",
+                "channelPingColor": "#8a2be2",
+                "soundPath": "default",
+                "timeout": 3,
+                "lengthBasedTimeout": true,
+                "opacity": 1,
+                "volume": 0.2
+            },
+            "ServerInfo": {
+                "enabled": false
+            },
+            "MessageUpdaterAPI": {
+                "enabled": true
+            },
+            "AppleMusicRichPresence": {
+                "enabled": false
+            },
+            "CopyEmojiMarkdown": {
+                "enabled": false
+            },
+            "DontRoundMyTimestamps": {
+                "enabled": false
+            },
+            "MaskedLinkPaste": {
+                "enabled": false
+            },
+            "NoOnboardingDelay": {
+                "enabled": false
+            },
+            "Summaries": {
+                "enabled": false
+            },
+            "UserSettingsAPI": {
+                "enabled": true
+            },
+            "ConsoleJanitor": {
+                "enabled": false,
+                "disableNoisyLoggers": false,
+                "disableSpotifyLogger": true
+            },
+            "ShowAllRoles": {
+                "enabled": true
+            },
+            "YoutubeAdblock": {
+                "enabled": false
             }
         },
         "notifications": {
@@ -641,9 +722,11 @@
             "authenticated": false,
             "url": "https://api.vencord.dev/",
             "settingsSync": false,
-            "settingsSyncVersion": 1716242492246
+            "settingsSyncVersion": 1722544501527
         },
-        "enabledThemes": []
+        "enabledThemes": [
+            "stylix.theme.css"
+        ]
     },
     "quickCss": ""
 }
