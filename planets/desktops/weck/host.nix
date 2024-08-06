@@ -20,6 +20,7 @@
       user = "woze";
     };
     devices.steamdeck.enable = true;
+    decky-loader.enable = true;
   };
 
   hardware.cpu.amd.updateMicrocode = true;
@@ -41,8 +42,32 @@
 
   networking.firewall.allowedTCPPorts = [ 29999 ];
   networking.firewall.allowedUDPPorts = [ 29999 ];
+  networking.firewall.allowedTCPPortRanges = [
+    {
+      from = 1714;
+      to = 1764;
+    } # kdeconnect
+  ];
+  networking.firewall.allowedUDPPortRanges = [
+    {
+      from = 1714;
+      to = 1764;
+    } # kdeconnect
+  ];
 
-  environment.systemPackages = with pkgs; [ gnomeExtensions.appindicator ];
+  environment.systemPackages = with pkgs; [
+    gnomeExtensions.appindicator
+    gnomeExtensions.gsconnect
+    gnomeExtensions.touch-x
+    gnomeExtensions.paperwm
+    gnomeExtensions.improved-osk
+    gnomeExtensions.gnome-40-ui-improvements
+    extest
+    (writeShellScriptBin "sd-desk" ''
+      #!/usr/bin/env bash
+      LD_PRELOAD=${extest}/lib/libextest.so steam -silent
+    '')
+  ];
 
   programs.fuse.userAllowOther = true;
   programs.steam.enable = true;
@@ -52,6 +77,8 @@
     desktopManager.gnome.enable = true;
   };
   services.gnome.core-utilities.enable = false;
+
+  services.udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
 
   services.tlp.enable = false;
 
