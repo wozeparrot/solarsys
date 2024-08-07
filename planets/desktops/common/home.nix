@@ -31,7 +31,12 @@
     p7zip
     (python3.withPackages (
       ps: with ps; [
+        distro
+        numpy
+        packaging
+        pyudev
         requests
+        systemd
         tqdm
       ]
     ))
