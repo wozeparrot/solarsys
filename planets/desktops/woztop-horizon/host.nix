@@ -27,6 +27,12 @@
     "psi=1"
   ];
 
+  specialisation = {
+    cwsr-disabled.configuration = {
+      boot.kernelParams = [ "amdgpu.cwsr_enable=0" ];
+    };
+  };
+
   hardware.cpu.amd.updateMicrocode = true;
 
   # nix cross build support
