@@ -197,8 +197,7 @@
           inherit (inputs.seaweedfs) packages;
         };
         jovian = {
-          overlays = inputs.jovian.overlays.default;
-          modules = inputs.jovian.nixosModules;
+          packages = inputs.jovian.legacyPackages;
         };
       };
 
@@ -393,14 +392,14 @@
                 weck =
                   let
                     system = "x86_64-linux";
-                    pkgs = configNixpkgs system;
+                    pkgs = configNixpkgs' [ inputs.jovian.overlays.default ] system;
                   in
                   {
                     trajectory = "";
                     orbits = [ ];
                     core = nixpkgs.lib.nixosSystem {
                       inherit system specialArgs;
-                      modules = makeModules pkgs ./planets/desktops/weck/host.nix;
+                      modules = [ inputs.jovian.nixosModules ] ++ makeModules pkgs ./planets/desktops/weck/host.nix;
                     };
                   };
               };
