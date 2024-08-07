@@ -44,6 +44,16 @@
       quantum = 64;
       rate = 48000;
     };
+
+    wireplumber.extraConfig = {
+      "10-disable-camera" = {
+        "wireplumber.profiles" = {
+          "main" = {
+            "monitor.libcamera" = "disabled";
+          };
+        };
+      };
+    };
   };
 
   # main theming
