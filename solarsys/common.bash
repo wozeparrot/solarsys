@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FLK="$(nix --extra-experimental-features "nix-command flakes" $NIX_EXTRA_OPTS eval .#planets --json --apply "(builtins.getFlake \"git+file://\${toString ./.}?rev=$(git rev-parse HEAD)\").lib.attrsets.filterAttrsRecursive (n: v: n != \"core\")")"
+FLK="$(nix --extra-experimental-features "nix-command flakes" eval .#planets --json --apply "(builtins.getFlake \"git+file://\${toString ./.}?rev=$(git rev-parse HEAD)\").lib.attrsets.filterAttrsRecursive (n: v: n != \"core\")")"
 
 # gets planets from flake
 function get_planets {
