@@ -67,7 +67,7 @@
       package = pkgs.rofi-wayland;
       plugins = with pkgs; [
         (rofi-calc.override { rofi-unwrapped = rofi-wayland-unwrapped; })
-        (rofi-emoji.override { rofi-unwrapped = rofi-wayland-unwrapped; })
+        rofi-emoji-wayland
       ];
       cycle = true;
       extraConfig = {
@@ -272,8 +272,8 @@
         Description = "wayland desktop session";
         Documentation = [ "man:systemd.special(7)" ];
         BindsTo = [ "graphical-session.target" ];
-        Wants = [ "graphical-session-pre.target" ];
-        After = [ "graphical-session-pre.target" ];
+        Wants = [ "xdg-desktop-autostart.target" "graphical-session-pre.target" ];
+        After = [ "xdg-desktop-autostart.target" "graphical-session-pre.target" ];
       };
     };
   };
