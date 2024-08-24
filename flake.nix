@@ -399,7 +399,7 @@
                     orbits = [ ];
                     core = nixpkgs.lib.nixosSystem {
                       inherit system specialArgs;
-                      modules = [ inputs.jovian.nixosModules ] ++ makeModules pkgs ./planets/desktops/weck/host.nix;
+                      modules = [ inputs.jovian.nixosModules.default ] ++ makeModules pkgs ./planets/desktops/weck/host.nix;
                     };
                   };
               };

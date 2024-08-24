@@ -56,16 +56,27 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    gnome-tweaks
     gnomeExtensions.appindicator
     gnomeExtensions.gsconnect
     gnomeExtensions.touch-x
     gnomeExtensions.paperwm
-    gnomeExtensions.improved-osk
+    (gnomeExtensions.gjs-osk.overrideAttrs (oldAttrs: {
+      postBuild = ''
+        mkdir keycodes
+        pushd keycodes
+        tar -Jxf ../keycodes.tar.xz -C ./
+        popd
+      '';
+    }))
     gnomeExtensions.gnome-40-ui-improvements
+    gnomeExtensions.auto-activities
+    gnomeExtensions.just-perfection
+    gnome-terminal
     extest
     (writeShellScriptBin "sd-desk" ''
       #!/usr/bin/env bash
-      LD_PRELOAD=${extest}/lib/libextest.so steam -silent
+      LD_PRELOAD=${pkgsi686Linux.extest}/lib/libextest.so steam -silent
     '')
   ];
 

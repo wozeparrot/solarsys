@@ -65,7 +65,7 @@
     krita
     libreoffice-fresh
     libsForQt5.kdenlive
-    nheko
+    # nheko
     openscad
     prismlauncher
     rnote
