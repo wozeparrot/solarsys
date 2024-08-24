@@ -22,7 +22,7 @@
     # spotdl # TODO: broken
     # topydo # TODO: broken
     ffmpeg
-    gurk-rs
+    # gurk-rs
     imv
     iotop
     mpc_cli
