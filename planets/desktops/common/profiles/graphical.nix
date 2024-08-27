@@ -171,7 +171,7 @@
   environment = {
     systemPackages = with pkgs; [
       pulseaudio
-      pavucontrol
+      pwvucontrol
       paprefs
       helvum
       pamixer

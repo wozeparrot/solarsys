@@ -191,7 +191,7 @@
           "pulseaudio" = {
             format = "{volume}% ";
             format-muted = "";
-            on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
+            on-click = "${pkgs.pwvucontrol}/bin/pwvucontrol";
             on-click-right = "${pkgs.pamixer}/bin/pamixer -t";
             tooltip = false;
           };
