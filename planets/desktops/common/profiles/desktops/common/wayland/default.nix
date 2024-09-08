@@ -12,6 +12,7 @@
       pngquant
       slurp
       swappy
+      wayfreeze
       wayvnc
       wob
       wofi
@@ -23,6 +24,12 @@
 
       (pkgs.writeShellScriptBin "wl-screenshot" ''
         grim -g "$(slurp)" - | swappy -f - -o - | pngquant -o - - | wl-copy -t 'image/png'
+      '')
+
+      (pkgs.writeShellScriptBin "wl-freeze-screenshot" ''
+        wayfreeze & PID=$!
+        grim -g "$(slurp)" - | swappy -f - -o - | pngquant -o - - | wl-copy -t 'image/png'
+        kill $PID
       '')
 
       (pkgs.writeShellScriptBin "wl-launcher" ''
