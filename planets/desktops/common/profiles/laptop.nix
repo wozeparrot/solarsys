@@ -1,6 +1,11 @@
 # must be used with:
 # base, graphical
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [ ./graphical.nix ];
 
@@ -19,6 +24,7 @@
   programs.light.enable = true;
 
   # power management
+  boot.kernelParams = [ "rcutree.enable_rcu_lazy=1" ];
   services = {
     tlp = {
       enable = lib.mkDefault true;
@@ -32,7 +38,12 @@
         CPU_SCALING_MIN_FREQ_ON_AC = "400000";
         CPU_SCALING_MAX_FREQ_ON_AC = "4935000";
         CPU_SCALING_MIN_FREQ_ON_BAT = "400000";
-        CPU_SCALING_MAX_FREQ_ON_BAT = "3600000";
+        CPU_SCALING_MAX_FREQ_ON_BAT = "3000000";
+
+        CPU_MIN_PERF_ON_AC = "0";
+        CPU_MAX_PERF_ON_AC = "100";
+        CPU_MIN_PERF_ON_BAT = "0";
+        CPU_MAX_PERF_ON_BAT = "70";
 
         CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
         CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
@@ -47,6 +58,11 @@
         RADEON_DPM_STATE_ON_AC = "performance";
         RADEON_DPM_STATE_ON_BAT = "battery";
 
+        RUNTIME_PM_ON_AC = "on";
+        RUNTIME_PM_ON_BAT = "auto";
+        PCIE_ASPM_ON_AC = "default";
+        PCIE_ASPM_ON_BAT = "powersupersave";
+
         WOL_DISABLE = "Y";
 
         START_CHARGE_THRESH_BAT0 = "0";
@@ -56,7 +72,8 @@
         PLATFORM_PROFILE_ON_BAT = "quiet";
       };
     };
-
-    logind.lidSwitch = "suspend";
   };
+
+  # lid switch
+  services.logind.lidSwitch = "suspend";
 }
