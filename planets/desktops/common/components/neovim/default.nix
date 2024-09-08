@@ -167,6 +167,7 @@ in
       # language support
       (pluginGit "avivbeeri/vim-wren" "2514d32c8e476384f3df81bd2cd369908d85bcfe" "fixedStatic")
       (pluginGit "stefanos82/nelua.vim" "ff0a733a586ef0b48cda4999170ed4ca1653a144" "main")
+      (pluginGit "NlGHT/vim-eel" "7c1357b098629cf952ff7b2b6900295093c1bbeb" "master")
       vim-opencl
       wgsl-vim
       yuck-vim

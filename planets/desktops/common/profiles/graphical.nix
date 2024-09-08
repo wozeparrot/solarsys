@@ -45,11 +45,16 @@
       rate = 48000;
     };
 
-    wireplumber.extraConfig = {
-      "10-disable-camera" = {
-        "wireplumber.profiles" = {
-          "main" = {
-            "monitor.libcamera" = "disabled";
+    extraLv2Packages = [ pkgs.bankstown-lv2 ];
+
+    wireplumber = {
+      extraLv2Packages = [ pkgs.bankstown-lv2 ];
+      extraConfig = {
+        "10-disable-camera" = {
+          "wireplumber.profiles" = {
+            "main" = {
+              "monitor.libcamera" = "disabled";
+            };
           };
         };
       };
@@ -175,6 +180,7 @@
       paprefs
       helvum
       pamixer
+      bankstown-lv2
 
       gtk-engine-murrine
       hicolor-icon-theme
