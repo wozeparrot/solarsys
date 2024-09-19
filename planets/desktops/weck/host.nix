@@ -89,7 +89,7 @@
   };
   services.gnome.core-utilities.enable = false;
 
-  services.udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
+  services.udev.packages = [ pkgs.gnome-settings-daemon ];
 
   services.tlp.enable = false;
 
