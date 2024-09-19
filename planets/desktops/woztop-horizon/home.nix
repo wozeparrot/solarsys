@@ -65,23 +65,14 @@
             position = "0,0";
           }
           {
-            criteria = "Samsung Electric Company SAMSUNG 0x01000E00";
+            criteria = "LG Electronics LG ULTRAGEAR 406NTQD74260";
             position = "1920,0";
             transform = "normal";
           }
-        ];
-      }
-      {
-        profile.name = "docked-away-vertical";
-        profile.outputs = [
           {
-            criteria = "eDP-2";
-            position = "0,720";
-          }
-          {
-            criteria = "Samsung Electric Company SAMSUNG 0x01000E00";
-            position = "1920,0";
-            transform = "90";
+            criteria = "BOE J560T09";
+            position = "1920,1440";
+            transform = "normal";
           }
         ];
       }
