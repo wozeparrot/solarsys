@@ -274,12 +274,7 @@ lspkind.init()
 
 -- trouble
 lazy_require("trouble", {})
-nnoremap("<leader>xx", "<cmd>TroubleToggle<CR>")
-nnoremap("<leader>xw", "<cmd>TroubleToggle worskpace_diagnostics<CR>")
-nnoremap("<leader>xd", "<cmd>TroubleToggle document_diagnostics<CR>")
-nnoremap("<leader>xq", "<cmd>TroubleToggle quickfix<CR>")
-nnoremap("<leader>xl", "<cmd>TroubleToggle loclist<CR>")
-nnoremap("<leader>xr", "<cmd>TroubleToggle lsp_references<CR>")
+nnoremap("<leader>xx", "<cmd>Trouble diagnostics toggle<CR>")
 
 -- lspsaga
 lazy_require("lspsaga", {
