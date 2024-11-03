@@ -45,6 +45,7 @@
     restic
     ruby
     ss.mods
+    swayimg
     unzip
     yt-dlp
 
