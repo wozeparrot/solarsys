@@ -8,7 +8,6 @@
       text =
         (builtins.readFile ./hyprland.conf)
         + ''
-          plugin = ${pkgs.hyprland-split-monitor-workspaces.split-monitor-workspaces}/lib/libsplit-monitor-workspaces.so
         ''
         + (
           let
@@ -45,6 +44,7 @@
   # system config
   environment.systemPackages = with pkgs; [
     hyprland.hyprland
+    pyprland.pyprland
     (pkgs.writeShellScriptBin "hyprland-run" ''
       #!/bin/sh
 

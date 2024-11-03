@@ -7,7 +7,6 @@
       fnott
       fuzzel
       grim
-      hyprlock # TODO: hyprlock.hyprlock
       hyprpicker.hyprpicker
       pngquant
       slurp
@@ -66,6 +65,8 @@
         splash = false;
       };
     };
+
+    programs.hyprlock.enable = true;
 
     xdg.configFile."fnott/fnott.ini".source = ./fnott.ini;
 
@@ -286,6 +287,4 @@
   };
 
   programs.xwayland.enable = true;
-
-  security.pam.services.hyprlock = { };
 }
