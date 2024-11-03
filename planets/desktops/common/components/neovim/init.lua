@@ -292,7 +292,9 @@ nnoremap("<leader>ca", "<cmd>Lspsaga code_action<CR>")
 local lspconfig = require("lspconfig")
 local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, {
-  capabilities = cmp_capabilities,
+  capabilities = vim.tbl_deep_extend("force", cmp_capabilities, {
+    offsetEncoding = "utf-8",
+  }),
 })
 
 -- zig
@@ -303,9 +305,9 @@ lspconfig.zls.setup({
 lspconfig.nil_ls.setup({
   on_attach = default_on_attach,
 })
-lspconfig.nixd.setup({
-  on_attach = default_on_attach,
-})
+-- lspconfig.nixd.setup({
+--   on_attach = default_on_attach,
+-- })
 -- rust
 lspconfig.rust_analyzer.setup({})
 lazy_require("crates", {})
@@ -316,12 +318,12 @@ require("rust-tools").setup({
 })
 require("rust-tools").inlay_hints.enable()
 -- python
--- lspconfig.basedpyright.setup({
--- 	on_attach = default_on_attach,
--- })
-lspconfig.pyright.setup({
-  on_attach = default_on_attach,
+lspconfig.basedpyright.setup({
+	on_attach = default_on_attach,
 })
+-- lspconfig.pyright.setup({
+--   on_attach = default_on_attach,
+-- })
 -- lua
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
