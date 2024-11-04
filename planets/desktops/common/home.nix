@@ -50,7 +50,7 @@
     yt-dlp
 
     # applications
-    antimicroX
+    antimicrox
     antimony
     audacity
     blender-hip
