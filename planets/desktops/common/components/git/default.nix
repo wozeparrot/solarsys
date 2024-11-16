@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    # git-branchless # TODO: broken
+    git-branchless
   ];
 
   programs = {
