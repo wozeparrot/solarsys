@@ -378,6 +378,7 @@ lspconfig.svls.setup({
 })
 lspconfig.verible.setup({
   on_attach = default_on_attach,
+  cmd = { "verible-verilog-ls", "--rules_config_search" },
 })
 -- -- ltex
 -- lspconfig.ltex.setup({
