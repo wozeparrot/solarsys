@@ -55,6 +55,10 @@
     } # kdeconnect
   ];
 
+  # ssh
+  services.openssh.enable = true;
+  services.openssh.startWhenNeeded = true;
+
   environment.systemPackages = with pkgs; [
     gnome-tweaks
     gnomeExtensions.appindicator
