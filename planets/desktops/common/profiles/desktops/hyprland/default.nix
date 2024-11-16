@@ -16,10 +16,6 @@
           in
           with config.lib.stylix.colors;
           ''
-            decoration {
-              col.shadow=${rgba base00 "99"}
-            }
-
             general {
               col.active_border=${rgb base0D}
               col.inactive_border=${rgb base03}
@@ -70,7 +66,7 @@
       if [ "$HYPRGAMEMODE" == 1 ] ; then
           hyprctl --batch "\
               keyword animations:enabled 0;\
-              keyword decoration:drop_shadow 0;\
+              keyword decoration:shadow:enabled 0;\
               keyword decoration:blur:enabled 0;\
               keyword general:gaps_in 0;\
               keyword general:gaps_out 0;\
