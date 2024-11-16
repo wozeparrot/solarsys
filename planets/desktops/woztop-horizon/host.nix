@@ -68,7 +68,7 @@
 
     gpu-screen-recorder
 
-    chaotic.scx
+    scx.full
   ];
 
   programs.nm-applet.enable = true;
@@ -105,7 +105,7 @@
   services.printing.drivers = with pkgs; [
     gutenprint
     gutenprintBin
-    # hplip # TODO: broken
+    hplip
     foo2zjs
   ];
 
