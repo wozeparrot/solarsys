@@ -38,9 +38,6 @@
             position = "0,0";
           }
         ];
-        profile.exec = [
-          "$HOME/scripts/clamp_workspaces.sh"
-        ];
       }
       {
         profile.name = "docked-home";
@@ -70,7 +67,7 @@
             transform = "normal";
           }
           {
-            criteria = "BOE J560T09";
+            criteria = "BOE J560T09 0x01010101";
             position = "1920,1440";
             transform = "normal";
           }
