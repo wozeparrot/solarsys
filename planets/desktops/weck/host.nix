@@ -60,6 +60,7 @@
   services.openssh.startWhenNeeded = true;
 
   environment.systemPackages = with pkgs; [
+    waypipe
     gnome-tweaks
     gnomeExtensions.appindicator
     gnomeExtensions.gsconnect
