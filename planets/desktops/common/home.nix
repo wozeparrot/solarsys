@@ -19,8 +19,8 @@
     appimage-run
     beets-unstable
     chromaprint
-    # spotdl # TODO: broken
-    # topydo # TODO: broken
+    spotdl
+    topydo
     ffmpeg
     # gurk-rs
     imv
@@ -148,7 +148,7 @@
         obs-move-transition
         obs-shaderfilter
         obs-tuna
-        obs-vertical-canvas
+        # obs-vertical-canvas # TODO: broken
         obs-vkcapture
         waveform
         wlrobs
@@ -188,6 +188,7 @@
   stylix.targets.waybar.enable = false;
   stylix.targets.xfce.enable = false;
   stylix.targets.kde.enable = false;
+  stylix.targets.hyprlock.enable = false;
 
   # home stuff
   home = {
