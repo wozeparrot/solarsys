@@ -29,6 +29,8 @@ self: super: {
     speedtest-exporter = self.callPackage ./speedtest-exporter { };
 
     mods = self.callPackage ./mods { };
+
+    xencelabs = self.libsForQt5.callPackage ./xencelabs { };
   };
 
   # yt-dlp = self.python3Packages.callPackage ./yt-dlp { };

@@ -69,6 +69,8 @@
     gpu-screen-recorder
 
     scx.full
+
+    ss.xencelabs
   ];
 
   programs.nm-applet.enable = true;
@@ -99,6 +101,7 @@
   services.udev.packages = with pkgs; [
     openocd
     platformio-core
+    ss.xencelabs
   ];
 
   services.printing.enable = true;

@@ -9,7 +9,7 @@
     radeontop
     amdgpu_top
 
-    kanshi
+    nixpkgs-wayland.kanshi
 
     (writeShellScriptBin "run_gpu" ''
       #!/usr/bin/env bash
