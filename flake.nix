@@ -78,13 +78,6 @@
 
     hyprpicker.url = "github:hyprwm/hyprpicker";
 
-    pyprland.url = "github:hyprland-community/pyprland";
-    pyprland.inputs = {
-      nixpkgs.follows = "nixpkgs";
-    };
-
-    xdph.url = "github:hyprwm/xdg-desktop-portal-hyprland";
-
     hyprsplit = {
       url = "github:shezdy/hyprsplit";
       inputs.hyprland.follows = "hyprland";
@@ -172,12 +165,6 @@
         };
         hyprpicker = {
           inherit (inputs.hyprpicker) packages;
-        };
-        pyprland = {
-          inherit (inputs.pyprland) packages;
-        };
-        xdph = {
-          inherit (inputs.xdph) packages;
         };
         hyprsplit = {
           inherit (inputs.hyprsplit) packages;

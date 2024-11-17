@@ -40,7 +40,6 @@
   # system config
   environment.systemPackages = with pkgs; [
     hyprland.hyprland
-    pyprland.pyprland
     (pkgs.writeShellScriptBin "hyprland-run" ''
       #!/bin/sh
 
@@ -80,7 +79,7 @@
 
   xdg.portal = {
     extraPortals = [
-      (pkgs.xdph.xdg-desktop-portal-hyprland.override { inherit (pkgs.hyprland) hyprland; })
+      (pkgs.hyprland.xdg-desktop-portal-hyprland.override { inherit (pkgs.hyprland) hyprland; })
     ];
   };
 }
