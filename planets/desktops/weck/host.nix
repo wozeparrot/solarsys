@@ -83,6 +83,7 @@
       #!/usr/bin/env bash
       LD_PRELOAD=${pkgsi686Linux.extest}/lib/libextest.so steam -silent
     '')
+    xencelabs
   ];
 
   programs.fuse.userAllowOther = true;
@@ -94,7 +95,10 @@
   };
   services.gnome.core-utilities.enable = false;
 
-  services.udev.packages = [ pkgs.gnome-settings-daemon ];
+  services.udev.packages = with pkgs; [
+    gnome-settings-daemon
+    ss.xencelabs
+  ];
 
   services.tlp.enable = false;
 
