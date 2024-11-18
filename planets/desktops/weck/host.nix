@@ -83,7 +83,7 @@
       #!/usr/bin/env bash
       LD_PRELOAD=${pkgsi686Linux.extest}/lib/libextest.so steam -silent
     '')
-    xencelabs
+    ss.xencelabs
   ];
 
   programs.fuse.userAllowOther = true;

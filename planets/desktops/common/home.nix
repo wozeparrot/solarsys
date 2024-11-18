@@ -24,6 +24,7 @@
     ffmpeg
     # gurk-rs
     imv
+    inotify-tools
     iotop
     mpc_cli
     neofetch
