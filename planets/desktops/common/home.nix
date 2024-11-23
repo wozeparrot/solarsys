@@ -39,6 +39,7 @@
         requests
         systemd
         tqdm
+        bitarray
       ]
     ))
     r128gain

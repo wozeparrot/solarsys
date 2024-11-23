@@ -318,12 +318,12 @@ require("rust-tools").setup({
 })
 require("rust-tools").inlay_hints.enable()
 -- python
-lspconfig.basedpyright.setup({
-	on_attach = default_on_attach,
-})
--- lspconfig.pyright.setup({
---   on_attach = default_on_attach,
+-- lspconfig.basedpyright.setup({
+-- 	on_attach = default_on_attach,
 -- })
+lspconfig.pyright.setup({
+  on_attach = default_on_attach,
+})
 -- lua
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
