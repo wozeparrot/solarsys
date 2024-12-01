@@ -95,6 +95,10 @@
   };
   services.gnome.core-utilities.enable = false;
 
+  services.udev.extraRules = ''
+    # Read write access for all USB3Vision devices
+    SUBSYSTEM=="usb", ATTRS{bDeviceClass}=="ef", ATTRS{bDeviceSubClass}=="02", ATTRS{bDeviceProtocol}=="01", ENV{ID_USB_INTERFACES}=="*:ef0500:*", MODE="0666"
+  '';
   services.udev.packages = with pkgs; [
     gnome-settings-daemon
     ss.xencelabs
