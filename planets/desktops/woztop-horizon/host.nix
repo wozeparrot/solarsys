@@ -71,6 +71,9 @@
     scx.full
 
     ss.xencelabs
+
+    ddcutil
+    inotify-tools
   ];
 
   programs.nm-applet.enable = true;
@@ -100,6 +103,9 @@
 
     # Read write access for all USB3Vision devices
     SUBSYSTEM=="usb", ATTRS{bDeviceClass}=="ef", ATTRS{bDeviceSubClass}=="02", ATTRS{bDeviceProtocol}=="01", ENV{ID_USB_INTERFACES}=="*:ef0500:*", MODE="0666"
+
+    # i2c devices
+    SUBSYSTEM=="i2c-dev", GROUP="i2c", MODE="0660"
   '';
   services.udev.packages = with pkgs; [
     openocd
@@ -192,6 +198,8 @@
   #   options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
   # };
 
+  # add i2c group
+  users.groups.i2c = {};
   users.users.woze.extraGroups = [
     "docker"
     "libvirtd"
@@ -203,6 +211,7 @@
     "adbusers"
     "wireshark"
     "kvm"
+    "i2c"
   ];
   home-manager.users.woze = ./home.nix;
 
