@@ -93,7 +93,7 @@
       };
 
       monospace = {
-        package = pkgs.nerdfonts;
+        package = pkgs.nerd-fonts.agave;
         name = "Agave Nerd Font";
       };
 
@@ -116,7 +116,10 @@
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
-      nerdfonts
+      nerd-fonts.agave
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.fira-code
+      nerd-fonts.fira-mono
 
       # fallback
       noto-fonts
