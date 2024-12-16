@@ -114,7 +114,7 @@
 
     firefox = {
       enable = true;
-      package = pkgs.master.firefox-devedition;
+      package = pkgs.firefox-devedition;
     };
 
     chromium = {
