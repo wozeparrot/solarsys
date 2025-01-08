@@ -31,6 +31,8 @@ self: super: {
     mods = self.callPackage ./mods { };
 
     xencelabs = self.libsForQt5.callPackage ./xencelabs { };
+
+    vulkan-hdr-layer = self.callPackage ./vulkan-hdr-layer { };
   };
 
   # yt-dlp = self.python3Packages.callPackage ./yt-dlp { };
