@@ -15,6 +15,7 @@ let
         inherit ref;
         inherit rev;
       };
+      doCheck = false;
     };
 in
 {
@@ -178,8 +179,8 @@ in
       rust-tools-nvim
 
       # copilot
-      (pluginGit "zbirenbaum/copilot.lua" "86537b286f18783f8b67bccd78a4ef4345679625" "master")
-      (pluginGit "zbirenbaum/copilot-cmp" "b6e5286b3d74b04256d0a7e3bd2908eabec34b44" "master")
+      (pluginGit "zbirenbaum/copilot.lua" "886ee73b6d464b2b3e3e6a7ff55ce87feac423a9" "master")
+      (pluginGit "zbirenbaum/copilot-cmp" "15fc12af3d0109fa76b60b5cffa1373697e261d1" "master")
 
       # firenvim
       (pluginGit "glacambre/firenvim" "4d2eef5fd2a7af0e91b76f1a9715228548316125" "master")
