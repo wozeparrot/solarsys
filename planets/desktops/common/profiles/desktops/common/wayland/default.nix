@@ -21,6 +21,8 @@
       wdisplays
       wlr-randr
 
+      ss.vulkan-hdr-layer
+
       (pkgs.writeShellScriptBin "wl-screenshot" ''
         grim -g "$(slurp)" - | swappy -f - -o - | pngquant -o - - | wl-copy -t 'image/png'
       '')
