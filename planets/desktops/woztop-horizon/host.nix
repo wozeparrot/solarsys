@@ -127,12 +127,14 @@
 
   services.asusd = {
     enable = true;
-    asusdConfig = ''
-      (
-        bat_charge_limit: 60,
-        panel_od: false,
-      )
-    '';
+    asusdConfig = {
+      text = ''
+        (
+          bat_charge_limit: 60,
+          panel_od: false,
+        )
+      '';
+    };
   };
 
   security.pam.loginLimits = [
