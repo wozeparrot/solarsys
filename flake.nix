@@ -133,7 +133,7 @@
           };
         };
         chaotic = {
-          inherit (inputs.chaotic) packages;
+          packages = inputs.chaotic.legacyPackages;
           cache = {
             substituters = [ "https://nyx.chaotic.cx" ];
             trusted-public-keys = [ "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8=" ];
