@@ -42,7 +42,6 @@
     zls.url = "github:zigtools/zls";
     zls.inputs = {
       nixpkgs.follows = "nixpkgs";
-      flake-utils.follows = "flake-utils";
       zig-overlay.follows = "zigf";
     };
 

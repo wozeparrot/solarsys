@@ -179,12 +179,6 @@
   # xdg config
   xdg.enable = true;
 
-  # theming
-  qt = {
-    enable = true;
-    platformTheme.name = "gtk3";
-  };
-
   stylix.targets.xresources.enable = true;
   stylix.targets.waybar.enable = false;
   stylix.targets.xfce.enable = false;

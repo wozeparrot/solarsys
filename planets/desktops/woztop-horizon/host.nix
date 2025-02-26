@@ -74,8 +74,6 @@
 
     scx.full
 
-    ss.xencelabs
-
     ddcutil
     inotify-tools
   ];
@@ -115,7 +113,6 @@
   services.udev.packages = with pkgs; [
     openocd
     platformio-core
-    ss.xencelabs
   ];
 
   services.printing.enable = true;
