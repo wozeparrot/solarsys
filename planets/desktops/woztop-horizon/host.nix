@@ -31,6 +31,10 @@
     cwsr-disabled.configuration = {
       boot.kernelParams = [ "amdgpu.cwsr_enable=0" ];
     };
+
+    amdgpu-od.configuration = {
+      boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
+    };
   };
 
   hardware.cpu.amd.updateMicrocode = true;
@@ -100,6 +104,7 @@
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="amdgpu_bl1", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
     SUBSYSTEM=="usb", ATTRS{idVendor}=="03e7", MODE="0666"
+    ATTRS{idVendor}=="373b", MODE="0666", GROUP="users"
 
     # Read write access for all USB3Vision devices
     SUBSYSTEM=="usb", ATTRS{bDeviceClass}=="ef", ATTRS{bDeviceSubClass}=="02", ATTRS{bDeviceProtocol}=="01", ENV{ID_USB_INTERFACES}=="*:ef0500:*", MODE="0666"
@@ -136,6 +141,7 @@
       '';
     };
   };
+  services.supergfxd.enable = false;
 
   services.sunshine = {
     enable = true;
