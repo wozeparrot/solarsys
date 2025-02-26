@@ -142,7 +142,7 @@
     obs-studio = {
       enable = true;
       plugins = with pkgs.obs-studio-plugins; [
-        droidcam-obs
+        # droidcam-obs # TODO: broken
         input-overlay
         looking-glass-obs
         obs-gstreamer
