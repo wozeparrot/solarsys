@@ -67,7 +67,7 @@
             transform = "normal";
           }
           {
-            criteria = "BOE J560T09 0x01010101";
+            criteria = "BOE J560T09 Unknown";
             position = "1920,1440";
             transform = "normal";
           }
