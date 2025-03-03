@@ -34,7 +34,6 @@
   programs.firejail.enable = true;
   programs.nix-ld = {
     enable = true;
-    package = pkgs.nix-ld-rs;
   };
 
   programs.fish.interactiveShellInit = ''
@@ -50,6 +49,7 @@
     enableNotifications = false;
   };
   services.udisks2.enable = true;
+  services.envfs.enable = true;
 
   # rtkit
   security.rtkit.enable = true;
