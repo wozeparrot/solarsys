@@ -184,6 +184,7 @@
   stylix.targets.xfce.enable = false;
   stylix.targets.kde.enable = false;
   stylix.targets.hyprlock.enable = false;
+  stylix.targets.gnome-text-editor.enable = false;
 
   # home stuff
   home = {
