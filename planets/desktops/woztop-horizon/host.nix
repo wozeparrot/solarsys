@@ -61,6 +61,11 @@
     allowedUDPPorts = [ 6504 ];
     allowedTCPPorts = [ 6504 ];
   };
+  networking.wireless.iwd.settings = {
+    General = {
+      ControlPortOverNL80211 = false;
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     virt-manager
@@ -138,7 +143,6 @@
       '';
     };
   };
-  services.supergfxd.enable = false;
 
   services.sunshine = {
     enable = true;
