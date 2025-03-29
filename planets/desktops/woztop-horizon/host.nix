@@ -20,7 +20,7 @@
   ];
 
   # boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
-  boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos-lto;
+  boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos-rc;
   boot.kernelPatches = [ ];
   boot.kernelParams = [
     "amd_pstate=active"
@@ -98,6 +98,8 @@
   systemd.tmpfiles.rules = [ "f /dev/shm/looking-glass 0660 woze kvm -" ];
 
   # services.flatpak.enable = true;
+
+  hardware.rtl-sdr.enable = true;
 
   services.xserver.videoDrivers = [
     "amdgpu"
