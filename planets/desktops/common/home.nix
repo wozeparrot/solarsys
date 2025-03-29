@@ -62,7 +62,7 @@
     gimp
     file-roller
     gnome-disk-utility
-    jamesdsp
+    # jamesdsp
     keepassxc
     # kicad
     krita
@@ -76,7 +76,7 @@
     sioyek
     solvespace
     ss.horizon
-    thunderbird-128
+    thunderbird-latest
     transmission_4-gtk
     vesktop
     zathura
@@ -185,6 +185,7 @@
   stylix.targets.kde.enable = false;
   stylix.targets.hyprlock.enable = false;
   stylix.targets.gnome-text-editor.enable = false;
+  stylix.targets.firefox.enable = false;
 
   # home stuff
   home = {
