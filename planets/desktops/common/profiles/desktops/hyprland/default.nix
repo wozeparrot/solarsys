@@ -56,6 +56,7 @@
       export _JAVA_AWT_WM_NONREPARENTING=1
       export XCURSOR_SIZE=24
       export NIXOS_OZONE_WL=1
+      export AQ_DRM_DEVICES="/dev/dri/card1:/dev/dri/card0"
 
       exec dbus-run-session -- Hyprland
     '')
