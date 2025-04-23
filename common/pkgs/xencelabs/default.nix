@@ -16,7 +16,7 @@ let
   driversZipFile = fetchzip {
     url = "https://www.xencelabs.com/support/file/id/61/type/1";
     extension = "zip";
-    sha256 = "sha256-9LW4SsSbijL31plt2qMgHXrEQPc2bNEXgL6bFugLZd0=";
+    sha256 = "sha256-FSxR7SekHqvvRXkNMcSpGumw8TTnRWGPP/N/rya1VOk=";
     stripRoot = true;
   };
 in
