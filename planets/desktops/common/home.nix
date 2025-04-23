@@ -30,6 +30,7 @@
     neofetch
     nom.default
     p7zip
+    papis
     (python3.withPackages (
       ps: with ps; [
         distro
