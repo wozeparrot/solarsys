@@ -19,6 +19,7 @@
     appimage-run
     beets-unstable
     chromaprint
+    cryptsetup
     spotdl
     topydo
     ffmpeg
@@ -143,14 +144,14 @@
     obs-studio = {
       enable = true;
       plugins = with pkgs.obs-studio-plugins; [
-        # droidcam-obs # TODO: broken
+        droidcam-obs
         input-overlay
-        looking-glass-obs
+        # looking-glass-obs
         obs-gstreamer
         obs-move-transition
         obs-shaderfilter
         obs-tuna
-        # obs-vertical-canvas # TODO: broken
+        obs-vertical-canvas
         obs-vkcapture
         waveform
         wlrobs
