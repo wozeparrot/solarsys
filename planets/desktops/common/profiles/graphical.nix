@@ -40,9 +40,39 @@
     pulse.enable = true;
 
     lowLatency = {
-      enable = true;
-      quantum = 64;
-      rate = 48000;
+      enable = false;
+      quantum = 96;
+      rate = 96000;
+    };
+
+    extraConfig.pipewire = {
+      "10-clock-rate" = {
+        "context.properties" = {
+          "default.clock.rate" = 48000;
+          "default.clock.allowed-rates" = [
+            44100
+            48000
+            96000
+          ];
+        };
+        "context.modules" = [
+          {
+            name = "libpipewire-module-rtkit";
+            flags = [
+              "ifexists"
+              "nofail"
+            ];
+            args = {
+              nice.level = -15;
+              rt = {
+                prio = 88;
+                time.soft = 200000;
+                time.hard = 200000;
+              };
+            };
+          }
+        ];
+      };
     };
 
     extraLv2Packages = [ pkgs.bankstown-lv2 ];
