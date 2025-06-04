@@ -54,7 +54,7 @@
 
   # custom ncmpcpp
   programs.ncmpcpp = {
-    enable = true;
+    enable = false;
     package = pkgs.ncmpcpp.override { visualizerSupport = true; };
     settings = {
       mpd_host = "/tmp/mpd.socket";
@@ -92,6 +92,10 @@
       selected_item_prefix = "* ";
       media_library_primary_tag = "album_artist";
     };
+  };
+
+  programs.rmpc = {
+    enable = true;
   };
 
   # cava
