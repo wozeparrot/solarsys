@@ -24,6 +24,8 @@
     '')
   ];
 
+  programs.btop.package = pkgs.btop-rocm;
+
   # kanshi
   services.kanshi = {
     enable = true;
