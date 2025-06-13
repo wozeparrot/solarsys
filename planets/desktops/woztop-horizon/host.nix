@@ -21,6 +21,19 @@
 
   # boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
   boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos;
+  boot.kernelModules = [ "v4l2loopback" "snd-aloop" ];
+  boot.extraModulePackages = [
+    # https://github.com/NixOS/nixpkgs/pull/411777
+    (config.boot.kernelPackages.v4l2loopback.overrideAttrs (old: {
+      version = "0.15.0";
+      src = pkgs.fetchFromGitHub {
+        owner = "umlaeute";
+        repo = "v4l2loopback";
+        rev = "v0.15.0";
+        sha256 = "sha256-fa3f8GDoQTkPppAysrkA7kHuU5z2P2pqI8dKhuKYh04=";
+      };
+    }))
+  ];
   boot.kernelPatches = [ ];
   boot.kernelParams = [
     "amd_pstate=active"
@@ -81,10 +94,11 @@
 
     ddcutil
     inotify-tools
+
+    droidcam
   ];
 
   programs.nm-applet.enable = true;
-  programs.droidcam.enable = true;
   programs.wireshark = {
     enable = true;
     package = pkgs.wireshark;
@@ -116,6 +130,13 @@
 
     # i2c devices
     SUBSYSTEM=="i2c-dev", GROUP="i2c", MODE="0660"
+
+    # comma panda
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", MODE="0666"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="3801", ATTRS{idProduct}=="ddcc", MODE="0666"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="3801", ATTRS{idProduct}=="ddee", MODE="0666"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="bbaa", ATTRS{idProduct}=="ddcc", MODE="0666"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="bbaa", ATTRS{idProduct}=="ddee", MODE="0666"
   '';
   services.udev.packages = with pkgs; [
     openocd
