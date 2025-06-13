@@ -107,6 +107,11 @@
     jovian.inputs = {
       nixpkgs.follows = "nixpkgs";
     };
+
+    nixvim.url = "github:nix-community/nixvim";
+    nixvim.inputs = {
+      nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -192,6 +197,9 @@
         };
         jovian = {
           packages = inputs.jovian.legacyPackages;
+        };
+        nixvim = {
+          hm-modules = inputs.nixvim.homeManagerModules;
         };
       };
 

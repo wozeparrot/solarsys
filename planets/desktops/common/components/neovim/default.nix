@@ -21,6 +21,10 @@ in
 {
   home.packages = with pkgs; [ neovide ];
 
+  # programs.nixvim = {
+  #   enable = true;
+  # };
+
   programs.neovim = {
     enable = true;
     withNodeJs = true;
