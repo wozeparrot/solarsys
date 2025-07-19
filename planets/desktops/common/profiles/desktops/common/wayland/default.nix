@@ -123,7 +123,7 @@
 
     programs.waybar = {
       enable = true;
-      package = pkgs.waybar;
+      package = pkgs.waybar.waybar;
       systemd = {
         enable = true;
         target = "wayland-desktop-session.target";
