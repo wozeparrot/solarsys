@@ -25,7 +25,9 @@
       "cpufreq_powersave"
       "i2c-dev"
     ];
-    extraModulePackages = [ ];
+    extraModulePackages = with config.boot.kernelPackages; [
+      rtl8852bu
+    ];
   };
 
   fileSystems = {
