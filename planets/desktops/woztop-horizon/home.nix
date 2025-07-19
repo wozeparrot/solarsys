@@ -84,8 +84,25 @@
           }
           {
             criteria = "Dell Inc. DELL U3219Q 1D093Q2";
+            mode = "3840x2160@60";
             position = "1920,0";
             scale = 1.5;
+            transform = "normal";
+          }
+        ];
+      }
+      {
+        profile.name = "viture-pro";
+        profile.outputs = [
+          {
+            criteria = "eDP-2";
+            position = "0,0";
+          }
+          {
+            criteria = "CVT VITURE 0x88888800";
+            mode = "1920x1080@120";
+            position = "1920,0";
+            scale = 1.;
             transform = "normal";
           }
         ];
