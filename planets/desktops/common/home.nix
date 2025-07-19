@@ -77,7 +77,7 @@
     signal-desktop
     sioyek
     solvespace
-    ss.horizon
+    horizon-eda
     thunderbird-latest
     transmission_4-gtk
     vesktop
@@ -151,7 +151,7 @@
         obs-move-transition
         obs-shaderfilter
         obs-tuna
-        obs-vertical-canvas
+        # obs-vertical-canvas # TODO: broken
         obs-vkcapture
         waveform
         wlrobs
