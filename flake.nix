@@ -84,6 +84,8 @@
 
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
+    waybar.url = "github:Alexays/Waybar";
+
     nom.url = "github:maralorn/nix-output-monitor";
     nom.inputs = {
       flake-utils.follows = "flake-utils";
@@ -181,6 +183,9 @@
               "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
             ];
           };
+        };
+        waybar = {
+          inherit (inputs.waybar) packages;
         };
         nom = {
           inherit (inputs.nom) packages;
