@@ -30,6 +30,7 @@ let
     # set -U fish_color_comment e7c547
 
     set -x GOPATH ~/local/Go
+    set -x PYTHONPYCACHEPREFIX ~/.cache/python/
     set -x HISTSIZE 20000
     set -x HISTFILESIZE 20000
 
@@ -39,7 +40,7 @@ let
   '';
 in
 {
-  home.packages = with pkgs; [ github-copilot-cli ];
+  home.packages = with pkgs; [ gh-copilot ];
 
   programs = {
     fish = {
@@ -48,21 +49,12 @@ in
       interactiveShellInit = fishConfig;
       plugins = [
         {
-          name = "github-copilot-cli-fish";
-          src = pkgs.fetchFromGitHub {
-            owner = "z11i";
-            repo = "github-copilot-cli.fish";
-            rev = "ccb6367bbb3055ea19b9ff0eac1ccf1c5e86419a";
-            hash = "sha256-cnmxvnG3WN2uqtt1aUEf0OFJulQSpFd3RJeeVKpDI9Y=";
-          };
-        }
-        {
           name = "z";
           src = pkgs.fetchFromGitHub {
             owner = "jethrokuan";
             repo = "z";
-            rev = "85f863f20f24faf675827fb00f3a4e15c7838d76";
-            hash = "sha256-+FUBM7CodtZrYKqU542fQD+ZDGrd2438trKM0tIESs0=";
+            rev = "067e867debee59aee231e789fc4631f80fa5788e";
+            hash = "sha256-emmjTsqt8bdI5qpx1bAzhVACkg0MNB/uffaRjjeuFxU=";
           };
         }
       ];
