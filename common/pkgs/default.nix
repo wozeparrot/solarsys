@@ -2,7 +2,6 @@ self: super: {
   ss = rec {
     ardour = self.callPackage ./ardour { };
     discord-canary = self.callPackage ./discord { branch = "canary"; };
-    horizon = self.callPackage ./horizon { };
     lmms = self.libsForQt5.callPackage ./lmms { };
     onagre = self.callPackage ./onagre { inherit pop-launcher; };
     pop-launcher = self.callPackage ./pop-launcher { };
