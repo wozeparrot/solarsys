@@ -61,6 +61,8 @@
         status.submoduleSummary = true;
         diff.submodule = "log";
         submodule.recurse = true;
+
+        push.autoSetupRemote = true;
       };
     };
 
