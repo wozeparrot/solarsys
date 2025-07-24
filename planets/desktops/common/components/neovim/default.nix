@@ -94,7 +94,7 @@ in
       rustfmt
       svls
       verible
-      zls.zls
+      # zls.zls
 
       # formatters
       nixfmt-rfc-style
