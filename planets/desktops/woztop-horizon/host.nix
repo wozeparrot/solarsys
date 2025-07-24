@@ -20,20 +20,9 @@
   ];
 
   # boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
-  boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos;
+  boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos-rc;
   boot.kernelModules = [ "v4l2loopback" "snd-aloop" ];
-  boot.extraModulePackages = [
-    # https://github.com/NixOS/nixpkgs/pull/411777
-    (config.boot.kernelPackages.v4l2loopback.overrideAttrs (old: {
-      version = "0.15.0";
-      src = pkgs.fetchFromGitHub {
-        owner = "umlaeute";
-        repo = "v4l2loopback";
-        rev = "v0.15.0";
-        sha256 = "sha256-fa3f8GDoQTkPppAysrkA7kHuU5z2P2pqI8dKhuKYh04=";
-      };
-    }))
-  ];
+  boot.extraModulePackages = [];
   boot.kernelPatches = [ ];
   boot.kernelParams = [
     "amd_pstate=active"
