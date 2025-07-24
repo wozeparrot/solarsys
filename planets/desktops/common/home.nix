@@ -23,6 +23,7 @@
     spotdl
     topydo
     ffmpeg
+    gemini-cli
     # gurk-rs
     imv
     inotify-tools
@@ -58,13 +59,13 @@
     antimony
     audacity
     blender-hip
-    darktable
+    master.darktable
     # freecad
     ghidra-bin
     gimp
     file-roller
     gnome-disk-utility
-    # jamesdsp
+    jamesdsp
     keepassxc
     # kicad
     krita
@@ -76,7 +77,7 @@
     rnote
     signal-desktop
     sioyek
-    solvespace
+    # solvespace
     horizon-eda
     thunderbird-latest
     transmission_4-gtk
