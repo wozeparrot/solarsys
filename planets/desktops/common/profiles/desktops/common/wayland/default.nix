@@ -256,7 +256,7 @@
           "custom/media" = {
             format = "{}";
             exec = ''
-              ${pkgs.ss.zscroll}/bin/zscroll -p " === " -l 50 -b "  Stopped" -d 0.2 -u t "${pkgs.mpc-cli}/bin/mpc current" -M "${pkgs.mpc-cli}/bin/mpc status" -m "playing" "-s1 -b '  '" -m "paused" "-s0 -b '  '"
+              ${pkgs.zscroll}/bin/zscroll -p " === " -l 50 -b "  Stopped" -d 0.2 -u t "${pkgs.mpc-cli}/bin/mpc current" -M "${pkgs.mpc-cli}/bin/mpc status" -m "playing" "-s1 -b '  '" -m "paused" "-s0 -b '  '"
             '';
             escape = true;
             on-click = "${pkgs.mpc-cli}/bin/mpc toggle";
