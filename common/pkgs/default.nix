@@ -11,7 +11,6 @@ self: super: {
     sonobus = self.callPackage ./sonobus { };
     veikk-driver = self.callPackage ./veikk-driver { };
     zrythm = self.callPackage ./zrythm { };
-    zscroll = self.callPackage ./zscroll { };
 
     matrix-conduit = self.callPackage ./matrix-conduit { };
 
