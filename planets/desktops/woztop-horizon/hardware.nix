@@ -26,7 +26,7 @@
       "i2c-dev"
     ];
     extraModulePackages = with config.boot.kernelPackages; [
-      rtl8852bu
+      # rtl8852bu
     ];
   };
 
