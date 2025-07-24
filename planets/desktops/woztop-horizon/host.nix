@@ -19,7 +19,6 @@
     ../common/profiles/vpn.nix
   ];
 
-  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
   boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos-rc;
   boot.kernelModules = [ "v4l2loopback" "snd-aloop" ];
   boot.extraModulePackages = [];
@@ -36,6 +35,10 @@
 
     amdgpu-od.configuration = {
       boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
+    };
+
+    mainline.configuration = {
+      boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos;
     };
   };
 
