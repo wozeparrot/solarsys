@@ -26,6 +26,10 @@
   services.wayvnc = {
     enable = true;
     autoStart = true;
+    settings = {
+      address = "127.0.0.1";
+      port = 5900;
+    };
   };
 
   home.stateVersion = "25.11";
