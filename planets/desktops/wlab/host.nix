@@ -56,6 +56,10 @@
 
   services.tlp.enable = false;
 
+  services.getty.autologinUser = "woze";
+
+  programs.nm-applet.enalbe = true;
+
   environment.systemPackages = with pkgs; [
     waypipe
   ];
