@@ -56,7 +56,18 @@
 
   services.tlp.enable = false;
 
-  services.getty.autologinUser = "woze";
+  services.greetd = {
+    enable = true;
+    settings = {
+      terminal = {
+        vt = 1;
+      };
+      initial_session = {
+        command = "hyprland-run";
+        user = "woze";
+      };
+    };
+  };
 
   programs.nm-applet.enable = true;
 

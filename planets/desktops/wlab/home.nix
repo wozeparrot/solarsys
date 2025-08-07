@@ -17,12 +17,6 @@
     '')
   ];
 
-  programs.fish.loginShellInit = ''
-    if not set -q WAYLAND_DISPLAY and test "$XDG_VTNR" = "1"
-      hyprland-run
-    end
-  '';
-
   services.wayvnc = {
     enable = true;
     autoStart = true;
