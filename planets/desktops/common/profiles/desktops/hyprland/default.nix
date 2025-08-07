@@ -58,6 +58,10 @@
       export NIXOS_OZONE_WL=1
       export AQ_DRM_DEVICES="/dev/dri/card1:/dev/dri/card0"
 
+      systemctl --user stop graphical-session.target
+      systemctl --user stop graphical-session-pre.target
+      systemctl --user stop wayland-desktop-session.target
+
       exec dbus-run-session -- Hyprland
     '')
     (pkgs.writeShellScriptBin "hyprland-gamemode" ''

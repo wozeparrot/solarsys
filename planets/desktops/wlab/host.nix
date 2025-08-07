@@ -66,6 +66,10 @@
         command = "hyprland-run";
         user = "woze";
       };
+      default_session = {
+        command = "hyprland-run";
+        user = "woze";
+      };
     };
   };
 
