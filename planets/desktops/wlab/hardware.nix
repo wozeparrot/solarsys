@@ -22,7 +22,7 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/ed0bdb3c-78ab-41d0-85cd-43b2e2cb6049";
+    device = "/dev/disk/by-uuid/63bb6212-fffa-4fae-981c-50b114576588";
     fsType = "btrfs";
     options = [
       "subvol=root"
@@ -31,7 +31,7 @@
   };
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/ed0bdb3c-78ab-41d0-85cd-43b2e2cb6049";
+    device = "/dev/disk/by-uuid/63bb6212-fffa-4fae-981c-50b114576588";
     fsType = "btrfs";
     options = [
       "subvol=home"
@@ -40,7 +40,7 @@
   };
 
   fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/ed0bdb3c-78ab-41d0-85cd-43b2e2cb6049";
+    device = "/dev/disk/by-uuid/63bb6212-fffa-4fae-981c-50b114576588";
     fsType = "btrfs";
     options = [
       "subvol=nix"
@@ -50,7 +50,7 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/3229-B083";
+    device = "/dev/disk/by-uuid/5D12-5C28";
     fsType = "vfat";
     options = [
       "fmask=0022"
@@ -61,5 +61,5 @@
   networking.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
