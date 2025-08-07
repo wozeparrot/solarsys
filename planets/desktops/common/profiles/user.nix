@@ -9,15 +9,20 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKPL+OWmcGo4IlL+LUz9uEgOH8hk0JIN3DXEV8sdgxPB wozeparrot"
     ];
     extraGroups = [
-      "wheel"
-      "video"
-      "input"
-      "uinput"
-      "plugdev"
+      "adbusers"
       "audio"
-      "wireshark"
-      "render"
+      "corectrl"
       "dialout"
+      "input"
+      "kvm"
+      "libvirt"
+      "libvirtd"
+      "plugdev"
+      "render"
+      "uinput"
+      "video"
+      "wheel"
+      "wireshark"
     ];
     shell = pkgs.fish;
   };

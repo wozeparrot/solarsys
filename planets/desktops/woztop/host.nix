@@ -70,7 +70,6 @@
   programs.droidcam.enable = true;
   programs.wireshark.enable = true;
   programs.gamemode.enable = true;
-  programs.fuse.userAllowOther = true;
 
   # services.flatpak.enable = true;
 
@@ -95,33 +94,6 @@
   services.ratbagd.enable = true;
 
   services.tlp.settings.WIFI_PWR_ON_BAT = "off";
-
-  security.pam.loginLimits = [
-    {
-      domain = "@audio";
-      item = "memlock";
-      type = "-";
-      value = "unlimited";
-    }
-    {
-      domain = "@audio";
-      item = "rtprio";
-      type = "-";
-      value = "99";
-    }
-    {
-      domain = "@audio";
-      item = "nofile";
-      type = "soft";
-      value = "99999";
-    }
-    {
-      domain = "@audio";
-      item = "nofile";
-      type = "hard";
-      value = "99999";
-    }
-  ];
 
   virtualisation = {
     libvirtd = {

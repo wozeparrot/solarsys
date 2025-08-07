@@ -228,20 +228,19 @@
           import nixpkgs {
             inherit system;
             config.allowUnfree = true;
-            overlays =
-              [
-                (_: _: {
-                  master = import master {
-                    inherit system;
-                    config.allowUnfree = true;
-                  };
-                })
-              ]
-              ++ overlay
-              ++ (nixpkgs.lib.mapAttrsToList (_: v: v.overlays) (
-                nixpkgs.lib.filterAttrs (_: nixpkgs.lib.hasAttr "overlays") external
-              ))
-              ++ extraOverlays;
+            overlays = [
+              (_: _: {
+                master = import master {
+                  inherit system;
+                  config.allowUnfree = true;
+                };
+              })
+            ]
+            ++ overlay
+            ++ (nixpkgs.lib.mapAttrsToList (_: v: v.overlays) (
+              nixpkgs.lib.filterAttrs (_: nixpkgs.lib.hasAttr "overlays") external
+            ))
+            ++ extraOverlays;
           }
           // nixpkgs.lib.mapAttrs (_: v: v.packages."${system}") (
             nixpkgs.lib.filterAttrs (_: p: (builtins.hasAttr "${system}" p.packages)) (
@@ -294,6 +293,7 @@
                 fzf
                 git
                 jq
+                nix-tree
                 nom.default
                 nvd
                 rsync
@@ -316,11 +316,12 @@
               { lib, ... }:
               {
                 # import external modules
-                imports =
-                  [ ./common/modules/solarsys ]
-                  ++ (nixpkgs.lib.mapAttrsToList (n: v: v.modules."${n}") (
-                    nixpkgs.lib.filterAttrs (_: nixpkgs.lib.hasAttr "modules") external
-                  ));
+                imports = [
+                  ./common/modules/solarsys
+                ]
+                ++ (nixpkgs.lib.mapAttrsToList (n: v: v.modules."${n}") (
+                  nixpkgs.lib.filterAttrs (_: nixpkgs.lib.hasAttr "modules") external
+                ));
 
                 solarsys.planet = planet;
                 system.configurationRevision = lib.mkIf (self ? rev) self.rev;
@@ -406,7 +407,24 @@
                     orbits = [ ];
                     core = nixpkgs.lib.nixosSystem {
                       inherit system specialArgs;
-                      modules = [ inputs.jovian.nixosModules.default ] ++ makeModules pkgs ./planets/desktops/weck/host.nix;
+                      modules = [
+                        inputs.jovian.nixosModules.default
+                      ]
+                      ++ makeModules pkgs ./planets/desktops/weck/host.nix;
+                    };
+                  };
+                wlab =
+                  let
+                    system = "x86_64-linux";
+                    pkgs = configNixpkgs system;
+                  in
+                  {
+                    trajectory = "";
+                    orbits = [ ];
+
+                    core = nixpkgs.lib.nixosSystem {
+                      inherit system specialArgs;
+                      modules = makeModules pkgs ./planets/desktops/wlab/host.nix;
                     };
                   };
               };

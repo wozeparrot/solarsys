@@ -7,7 +7,10 @@
   ...
 }:
 {
-  imports = [ ./graphical.nix ];
+  imports = [
+    ./graphical.nix
+    ./efi.nix
+  ];
 
   # system packages
   environment.systemPackages = with pkgs; [
@@ -75,5 +78,5 @@
   };
 
   # lid switch
-  services.logind.lidSwitch = "suspend";
+  services.logind.lidSwitch = lib.mkDefault "suspend";
 }

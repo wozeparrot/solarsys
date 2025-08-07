@@ -23,6 +23,12 @@
     gc.automatic = false;
   };
 
+  # nix cross build support
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  nix.extraOptions = ''
+    extra-platforms = aarch64-linux i686-linux
+  '';
+
   boot.initrd.systemd.enable = true;
 
   home-manager.useUserPackages = true;
@@ -41,6 +47,8 @@
       nix shell ${builtins.toString ../../../../.}#$argv
     end
   '';
+
+  programs.fuse.userAllowOther = true;
 
   # services
   ## oom killer

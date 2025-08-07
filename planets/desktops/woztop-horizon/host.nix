@@ -92,7 +92,6 @@
     package = pkgs.wireshark;
   };
   programs.gamemode.enable = true;
-  programs.fuse.userAllowOther = true;
   programs.corectrl.enable = true;
   programs.adb.enable = true;
   programs.steam.enable = true;
@@ -164,32 +163,6 @@
     capSysAdmin = true;
   };
 
-  security.pam.loginLimits = [
-    {
-      domain = "@audio";
-      item = "memlock";
-      type = "-";
-      value = "unlimited";
-    }
-    {
-      domain = "@audio";
-      item = "rtprio";
-      type = "-";
-      value = "99";
-    }
-    {
-      domain = "@audio";
-      item = "nofile";
-      type = "soft";
-      value = "99999";
-    }
-    {
-      domain = "@audio";
-      item = "nofile";
-      type = "hard";
-      value = "99999";
-    }
-  ];
   security.wrappers."gsr-kms-server" = {
     owner = "root";
     group = "root";

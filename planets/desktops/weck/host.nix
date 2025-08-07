@@ -85,14 +85,10 @@
     '')
   ];
 
-  programs.fuse.userAllowOther = true;
   programs.steam.enable = true;
 
-  services.xserver = {
-    enable = true;
-    desktopManager.gnome.enable = true;
-  };
-  services.gnome.core-utilities.enable = false;
+  services.desktopManager.gnome.enable = true;
+  services.gnome.core-apps.enable = false;
 
   services.udev.extraRules = ''
     # Read write access for all USB3Vision devices
@@ -107,33 +103,6 @@
   services.xserver.videoDrivers = [
     "amdgpu"
     "modesetting"
-  ];
-
-  security.pam.loginLimits = [
-    {
-      domain = "@audio";
-      item = "memlock";
-      type = "-";
-      value = "unlimited";
-    }
-    {
-      domain = "@audio";
-      item = "rtprio";
-      type = "-";
-      value = "99";
-    }
-    {
-      domain = "@audio";
-      item = "nofile";
-      type = "soft";
-      value = "99999";
-    }
-    {
-      domain = "@audio";
-      item = "nofile";
-      type = "hard";
-      value = "99999";
-    }
   ];
 
   virtualisation = {
