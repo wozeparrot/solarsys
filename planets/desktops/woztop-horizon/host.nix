@@ -19,7 +19,7 @@
     ../common/profiles/vpn.nix
   ];
 
-  boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos-rc;
+  boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos-rc;#.cachyOverride { mArch = "NATIVE"; };
   boot.kernelModules = [ "v4l2loopback" "snd-aloop" ];
   boot.extraModulePackages = [];
   boot.kernelPatches = [ ];
@@ -35,10 +35,6 @@
 
     amdgpu-od.configuration = {
       boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
-    };
-
-    mainline.configuration = {
-      boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos;
     };
   };
 
@@ -129,6 +125,9 @@
     SUBSYSTEM=="usb", ATTRS{idVendor}=="3801", ATTRS{idProduct}=="ddee", MODE="0666"
     SUBSYSTEM=="usb", ATTRS{idVendor}=="bbaa", ATTRS{idProduct}=="ddcc", MODE="0666"
     SUBSYSTEM=="usb", ATTRS{idVendor}=="bbaa", ATTRS{idProduct}=="ddee", MODE="0666"
+
+    # viture pro xr (35ca:101d)
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="35ca", ATTRS{idProduct}=="101d", MODE="0666"
   '';
   services.udev.packages = with pkgs; [
     openocd
