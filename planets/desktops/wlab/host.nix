@@ -58,7 +58,7 @@
 
   services.getty.autologinUser = "woze";
 
-  programs.nm-applet.enalbe = true;
+  programs.nm-applet.enable = true;
 
   environment.systemPackages = with pkgs; [
     waypipe
