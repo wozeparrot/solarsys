@@ -26,5 +26,45 @@
     };
   };
 
+  # kanshi
+  services.kanshi = {
+    enable = true;
+    package = pkgs.nixpkgs-wayland.kanshi;
+    systemdTarget = "graphical-session.target";
+    settings = [
+      {
+        profile.name = "dummy";
+        profile.outputs = [
+          {
+            criteria = "HDMI-A-1";
+            mode = "1920x1080@60";
+            position = "0,0";
+            scale = 1.;
+            transform = "normal";
+          }
+        ];
+      }
+      {
+        profile.name = "viture-pro";
+        profile.outputs = [
+          {
+            criteria = "HDMI-A-1";
+            mode = "1920x1080@60";
+            position = "0,0";
+            scale = 1.;
+            transform = "normal";
+          }
+          {
+            criteria = "CVT VITURE 0x88888800";
+            mode = "1920x1080@120";
+            position = "1920,0";
+            scale = 1.;
+            transform = "normal";
+          }
+        ];
+      }
+    ];
+  };
+
   home.stateVersion = "25.11";
 }
