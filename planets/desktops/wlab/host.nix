@@ -79,6 +79,8 @@
     waypipe
   ];
 
+  stylix.image = ../common/misc/black.png;
+
   home-manager.users.woze = ./home.nix;
 
   system.stateVersion = "25.11";
