@@ -120,7 +120,7 @@
   # main theming
   stylix = {
     enable = true;
-    image = ../misc/wallpaper.png;
+    image = lib.mkDefault ../misc/wallpaper.png;
     polarity = "dark";
     base16Scheme = {
       base00 = "000000"; # ---- dark
