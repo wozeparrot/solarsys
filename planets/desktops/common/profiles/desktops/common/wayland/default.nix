@@ -135,7 +135,6 @@
           output = [
             "eDP-1"
             "eDP-2"
-            "DP-1"
           ];
 
           height = 30;

@@ -73,10 +73,11 @@
     };
   };
 
-  programs.nm-applet.enable = true;
+  programs.waybar.enable = false;
 
   environment.systemPackages = with pkgs; [
     waypipe
+    iwgtk
   ];
 
   stylix.image = ../common/misc/black.png;
