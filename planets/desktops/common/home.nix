@@ -74,6 +74,7 @@
     # nheko
     openscad
     prismlauncher
+    prusa-slicer
     rnote
     signal-desktop
     sioyek
