@@ -51,8 +51,14 @@
   ];
 
   # ssh
-  services.openssh.enable = true;
-  services.openssh.startWhenNeeded = true;
+  services.openssh = {
+    enable = true;
+    startWhenNeeded = true;
+    settings = {
+      PermitRootLogin = false;
+      PasswordAuthentication = false;
+    };
+  };
 
   services.tlp.enable = false;
 
