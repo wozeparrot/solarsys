@@ -312,6 +312,7 @@
       planets =
         let
           makeModules' = planet: pkgs: hostFile: [
+            home-manager.nixosModules.home-manager
             (
               { lib, ... }:
               {
@@ -364,7 +365,6 @@
               makeModules =
                 pkgs: hostFile:
                 [
-                  home-manager.nixosModules.home-manager
                   inputs.stylix.nixosModules.stylix
                 ]
                 ++ makeModules' "desktops" pkgs hostFile;
@@ -642,6 +642,35 @@
                     core = nixpkgs.lib.nixosSystem {
                       inherit system specialArgs;
                       modules = makeModules pkgs ./planets/taurus/veles/host.nix;
+                    };
+                  };
+                yanyan =
+                  let
+                    system = "aarch64-linux";
+                    pkgs = configNixpkgs' [
+                      (final: prev: { makeModulesClosure = x: prev.makeModulesClosure (x // { allowMissing = true; }); })
+                    ] system;
+                  in
+                  {
+                    trajectory = {
+                      host = "192.168.8.233";
+                      port = 22;
+                    };
+                    orbits = [ "nas" ];
+                    satellites = {
+                      # wg_private = {
+                      #   path = "./satellites/taurus/arkas/wg_private";
+                      #   destination = "/keys/wg_private";
+                      # };
+                      # ensky_gossip_secret = {
+                      #   path = "./satellites/common/ensky_gossip_secret";
+                      #   destination = "/keys/ensky_gossip_secret";
+                      # };
+                    };
+
+                    core = nixpkgs.lib.nixosSystem {
+                      inherit system specialArgs;
+                      modules = makeModules pkgs ./planets/taurus/yanyan/host.nix;
                     };
                   };
               };

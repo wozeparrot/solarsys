@@ -46,6 +46,7 @@
     AllowSuspend=no
     AllowHibernation=no
   '';
+  boot.initrd.systemd.enable = true;
 
   # firewall
   networking = {
