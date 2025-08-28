@@ -79,6 +79,21 @@
     };
   };
 
+  systemd.services.op3ht = {
+    description = "op3ht service";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      WorkingDirectory = "/home/woze/projects/osmo_pocket_3_head_tracking";
+      RemainAfterExit = true;
+      ExecStart = "${pkgs.tmux}/bin/tmux new-session -d -s op3ht /home/woze/projects/osmo_pocket_3_head_tracking/launch.sh";
+      ExecStop = "${pkgs.tmux}/bin/tmux kill-session -t op3ht";
+      TimeoutStopSec = 1;
+      User = "woze";
+      Group = "users";
+    };
+  };
+
   programs.waybar.enable = false;
 
   environment.systemPackages = with pkgs; [

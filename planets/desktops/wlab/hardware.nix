@@ -18,8 +18,11 @@
     "sdhci_pci"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot.kernelModules = [ "kvm-intel" "v4l2loopback" ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=3 video_nr=11,12,13 exclusive_caps=1,1,1 card_label=X_11,X_12,X_13
+  '';
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/63bb6212-fffa-4fae-981c-50b114576588";
