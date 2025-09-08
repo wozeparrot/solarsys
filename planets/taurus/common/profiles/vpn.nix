@@ -54,8 +54,9 @@ in
       ${pkgs.iptables}/bin/iptables -D FORWARD -i orion -o orion -j ACCEPT
     '';
   };
+
   services.ensky = {
-    enable = true;
+    enable = false;
     package = pkgs.ensky.ensky;
     settings = {
       interface = "orion";

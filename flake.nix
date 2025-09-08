@@ -653,19 +653,19 @@
                   in
                   {
                     trajectory = {
-                      host = "192.168.8.233";
+                      host = "192.168.0.129";
                       port = 22;
                     };
                     orbits = [ "nas" ];
                     satellites = {
-                      # wg_private = {
-                      #   path = "./satellites/taurus/arkas/wg_private";
-                      #   destination = "/keys/wg_private";
-                      # };
-                      # ensky_gossip_secret = {
-                      #   path = "./satellites/common/ensky_gossip_secret";
-                      #   destination = "/keys/ensky_gossip_secret";
-                      # };
+                      wg_private = {
+                        path = "./satellites/taurus/yanyan/wg_private";
+                        destination = "/keys/wg_private";
+                      };
+                      ensky_gossip_secret = {
+                        path = "./satellites/common/ensky_gossip_secret";
+                        destination = "/keys/ensky_gossip_secret";
+                      };
                     };
 
                     core = nixpkgs.lib.nixosSystem {
