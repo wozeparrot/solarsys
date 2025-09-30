@@ -289,46 +289,45 @@ nnoremap("<leader>ll", "<cmd>Lspsaga outline<CR>")
 nnoremap("<leader>ca", "<cmd>Lspsaga code_action<CR>")
 
 --- setup language servers ---
-local lspconfig = require("lspconfig")
-local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, {
-  capabilities = vim.tbl_deep_extend("force", cmp_capabilities, {
-    offsetEncoding = "utf-8",
-  }),
-})
+-- local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, {
+--   capabilities = vim.tbl_deep_extend("force", cmp_capabilities, {
+--     offsetEncoding = "utf-8",
+--   }),
+-- })
 
 -- zig
-lspconfig.zls.setup({
+vim.lsp.enable("zls")
+vim.lsp.config("zls", {
   on_attach = default_on_attach,
 })
 -- nix
-lspconfig.nil_ls.setup({
+vim.lsp.enable("nil_ls")
+vim.lsp.config("nil_ls", {
   on_attach = default_on_attach,
 })
 -- lspconfig.nixd.setup({
 --   on_attach = default_on_attach,
 -- })
 -- rust
-lspconfig.rust_analyzer.setup({})
+vim.lsp.enable("rust_analyzer")
+vim.lsp.config("rust_analyzer", {})
 lazy_require("crates", {})
-require("rust-tools").setup({
-  server = {
-    on_attach = default_on_attach,
-  },
-})
-require("rust-tools").inlay_hints.enable()
+require("rustaceanvim")
 -- python
 -- lspconfig.basedpyright.setup({
 -- 	on_attach = default_on_attach,
 -- })
-lspconfig.pyright.setup({
+vim.lsp.enable("pyright")
+vim.lsp.config("pyright", {
   on_attach = default_on_attach,
 })
 -- lua
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-lspconfig.lua_ls.setup({
+vim.lsp.enable("lua_ls")
+vim.lsp.config("lua_ls", {
   on_attach = default_on_attach,
   settings = {
     Lua = {
@@ -346,7 +345,8 @@ lspconfig.lua_ls.setup({
   },
 })
 -- java
-lspconfig.jdtls.setup({
+vim.lsp.enable("jdtls")
+vim.lsp.config("jdtls", {
   on_attach = default_on_attach,
   cmd = { "jdtls", "-data", "/home/woze/.cache/jdtls/workspace" },
   init_options = {
@@ -354,29 +354,35 @@ lspconfig.jdtls.setup({
   },
 })
 -- bash
-lspconfig.bashls.setup({
+vim.lsp.enable("bashls")
+vim.lsp.config("bashls", {
   on_attach = default_on_attach,
 })
 -- clangd
-lspconfig.clangd.setup({
+vim.lsp.enable("clangd")
+vim.lsp.config("clangd", {
   on_attach = default_on_attach,
 })
 -- deno
-lspconfig.denols.setup({
+vim.lsp.enable("denols")
+vim.lsp.config("denols", {
   on_attach = default_on_attach,
   init_options = {
     lint = true,
   },
 })
 -- html
-lspconfig.html.setup({
+vim.lsp.enable("html")
+vim.lsp.config("html", {
   on_attach = default_on_attach,
 })
 -- verilog
-lspconfig.svls.setup({
+vim.lsp.enable("svls")
+vim.lsp.config("svls", {
   on_attach = default_on_attach,
 })
-lspconfig.verible.setup({
+vim.lsp.enable("verible")
+vim.lsp.config("verible", {
   on_attach = default_on_attach,
   cmd = { "verible-verilog-ls", "--rules_config_search" },
 })
@@ -402,7 +408,8 @@ lspconfig.verible.setup({
 -- 	},
 -- })
 -- go
-lspconfig.gopls.setup({
+vim.lsp.enable("gopls")
+vim.lsp.config("gopls", {
   on_attach = default_on_attach,
 })
 

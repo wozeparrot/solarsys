@@ -180,7 +180,7 @@ in
 
       # lsp language additionals
       crates-nvim
-      rust-tools-nvim
+      rustaceanvim
 
       # copilot
       (pluginGit "zbirenbaum/copilot.lua" "886ee73b6d464b2b3e3e6a7ff55ce87feac423a9" "master")
