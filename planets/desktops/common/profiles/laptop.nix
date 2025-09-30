@@ -78,5 +78,5 @@
   };
 
   # lid switch
-  services.logind.lidSwitch = lib.mkDefault "suspend";
+  services.logind.settings.Login.HandleLidSwitch = lib.mkDefault "suspend";
 }
