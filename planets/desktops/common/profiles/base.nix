@@ -166,6 +166,7 @@
   };
   services.udisks2.enable = true;
   services.envfs.enable = true;
+  services.dbus.implementation = "broker";
 
   # rtkit
   security.rtkit.enable = true;
