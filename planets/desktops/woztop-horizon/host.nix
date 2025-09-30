@@ -65,6 +65,16 @@
   networking.wireless.iwd.settings = {
     General = {
       ControlPortOverNL80211 = false;
+      RoamEnable = false;
+    };
+    Scan = {
+      DisableRoamingScan = true;
+      DisablePeriodicScan = true;
+    };
+  };
+  networking.networkmanager.settings = {
+    connection = {
+      "wifi.bg-scan" = false;
     };
   };
 
