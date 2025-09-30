@@ -204,7 +204,7 @@
           packages = inputs.jovian.legacyPackages;
         };
         nixvim = {
-          hm-modules = inputs.nixvim.homeManagerModules;
+          hm-modules = inputs.nixvim.homeModules;
         };
       };
 
