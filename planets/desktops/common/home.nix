@@ -17,7 +17,7 @@
   home.packages = with pkgs; [
     # cli/tui untilities
     appimage-run
-    beets-unstable
+    beets
     chromaprint
     cryptsetup
     spotdl
@@ -61,6 +61,7 @@
     blender-hip
     master.darktable
     # freecad
+    easyeffects
     ghidra-bin
     gimp
     file-roller
@@ -70,12 +71,13 @@
     # kicad
     krita
     libreoffice-fresh
-    libsForQt5.kdenlive
+    kdePackages.kdenlive
     # nheko
     openscad
     prismlauncher
     prusa-slicer
     rnote
+    roomeqwizard
     signal-desktop
     sioyek
     # solvespace
