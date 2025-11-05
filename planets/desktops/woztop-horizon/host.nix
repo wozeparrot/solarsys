@@ -19,9 +19,13 @@
     ../common/profiles/vpn.nix
   ];
 
-  boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos-rc;#.cachyOverride { mArch = "NATIVE"; };
-  boot.kernelModules = [ "v4l2loopback" "snd-aloop" ];
-  boot.extraModulePackages = [];
+  boot.kernelPackages = lib.mkDefault pkgs.chaotic.linuxPackages_cachyos; # .cachyOverride { mArch = "NATIVE"; };
+  # boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_xanmod_latest;
+  boot.kernelModules = [
+    "v4l2loopback"
+    "snd-aloop"
+  ];
+  boot.extraModulePackages = [ ];
   boot.kernelPatches = [ ];
   boot.kernelParams = [
     "amd_pstate=active"
@@ -29,12 +33,26 @@
   ];
 
   specialisation = {
-    cwsr-disabled.configuration = {
-      boot.kernelParams = [ "amdgpu.cwsr_enable=0" ];
-    };
-
     amdgpu-od.configuration = {
       boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
+    };
+
+    latest.configuration = {
+      boot.kernelPackages = pkgs.linuxPackages_latest;
+    #   boot.kernelPatches = [
+    #     {
+    #       patch = ./patches/kernel/revert-gtt.patch;
+    #       name = "revert-gtt";
+    #     }
+    #     {
+    #       patch = ./patches/kernel/revert-map_bo.patch;
+    #       name = "revert-map_bo";
+    #     }
+    #     {
+    #       patch = ./patches/kernel/revert-mtype_uc.patch;
+    #       name = "revert-mtype_uc";
+    #     }
+    #   ];
     };
   };
 
@@ -65,16 +83,6 @@
   networking.wireless.iwd.settings = {
     General = {
       ControlPortOverNL80211 = false;
-      RoamEnable = false;
-    };
-    Scan = {
-      DisableRoamingScan = true;
-      DisablePeriodicScan = true;
-    };
-  };
-  networking.networkmanager.settings = {
-    connection = {
-      "wifi.bg-scan" = false;
     };
   };
 
@@ -137,6 +145,9 @@
 
     # viture pro xr (35ca:101d)
     SUBSYSTEM=="usb", ATTRS{idVendor}=="35ca", ATTRS{idProduct}=="101d", MODE="0666"
+
+    # dji osmo pocket 3 (2ca3:0023)
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="2ca3", ATTRS{idProduct}=="0023", MODE="0666"
   '';
   services.udev.packages = with pkgs; [
     openocd
@@ -184,10 +195,6 @@
     libvirtd = {
       enable = true;
       qemu = {
-        ovmf = {
-          enable = true;
-          packages = [ pkgs.OVMFFull.fd ];
-        };
         swtpm.enable = true;
       };
 
@@ -211,7 +218,7 @@
   # };
 
   # add i2c group
-  users.groups.i2c = {};
+  users.groups.i2c = { };
   users.users.woze.extraGroups = [
     "docker"
     "libvirtd"
