@@ -24,10 +24,15 @@
       "kvm-amd"
       "cpufreq_powersave"
       "i2c-dev"
+      "v4l2loopback"
     ];
     extraModulePackages = with config.boot.kernelPackages; [
       # rtl8852bu
+      v4l2loopback
     ];
+    extraModprobeConfig = ''
+      options v4l2loopback devices=3 video_nr=11,12,13 exclusive_caps=1,1,1 card_label=X_11,X_12,X_13
+    '';
   };
 
   fileSystems = {
