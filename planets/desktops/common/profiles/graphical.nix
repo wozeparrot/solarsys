@@ -216,7 +216,7 @@
   # i18n
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.inputMethod = {
-    enable = true;
+    enable = false; #TODO: broken
     type = "fcitx5";
     fcitx5 = {
       waylandFrontend = true;
