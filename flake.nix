@@ -184,9 +184,9 @@
             ];
           };
         };
-        waybar = {
-          inherit (inputs.waybar) packages;
-        };
+        # waybar = {
+        #   inherit (inputs.waybar) packages;
+        # };
         nom = {
           inherit (inputs.nom) packages;
         };
