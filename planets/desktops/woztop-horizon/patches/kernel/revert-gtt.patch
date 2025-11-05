@@ -1,0 +1,26 @@
+Subject: [PATCH] Revert "drm/amdgpu: add resource check for VRAM fallback"
+
+This reverts the previous change, removing the `abo->tbo.resource` check
+before setting the TTM_PL_FLAG_FALLBACK flag.
+
+---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+index d90e9daf5a50..d09db052e282 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+@@ -163,8 +163,8 @@ void amdgpu_bo_placement_from_domain(struct amdgpu_bo *abo, u32 domain)
+ 		 * When GTT is just an alternative to VRAM make sure that we
+ 		 * only use it as fallback and still try to fill up VRAM first.
+ 		 */
+-		if (abo->tbo.resource && !(adev->flags & AMD_IS_APU) &&
+-		    domain & abo->preferred_domains & AMDGPU_GEM_DOMAIN_VRAM)
++		if (domain & abo->preferred_domains & AMDGPU_GEM_DOMAIN_VRAM &&
++		    !(adev->flags & AMD_IS_APU))
+ 			places[c].flags |= TTM_PL_FLAG_FALLBACK;
+ 		c++;
+ 	}
+-- 
+2.34.1

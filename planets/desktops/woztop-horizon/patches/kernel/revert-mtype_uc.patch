@@ -1,0 +1,13 @@
+diff --git a/drivers/gpu/drm/amd/amdkfd/kfd_svm.c b/drivers/gpu/drm/amd/amdkfd/kfd_svm.c
+index 273f42e3afdd..f9c5cff17f73 100644
+--- a/drivers/gpu/drm/amd/amdkfd/kfd_svm.c
++++ b/drivers/gpu/drm/amd/amdkfd/kfd_svm.c
+@@ -1277,7 +1277,7 @@ svm_range_get_pte_flags(struct kfd_node *node, struct amdgpu_vm *vm,
+                mapping_flags |= ext_coherent ? AMDGPU_VM_MTYPE_UC : AMDGPU_VM_MTYPE_NC;
+        /* system memory accessed by the dGPU */
+        } else {
+-           if (gc_ip_version < IP_VERSION(9, 5, 0) || ext_coherent)
++           if (gc_ip_version < IP_VERSION(9, 5, 0))
+                mapping_flags |= AMDGPU_VM_MTYPE_UC;
+            else
+                mapping_flags |= AMDGPU_VM_MTYPE_NC;
