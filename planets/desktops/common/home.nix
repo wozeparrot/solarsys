@@ -32,7 +32,7 @@
     neofetch
     nom.default
     p7zip
-    papis
+    # papis # TODO: broken
     (python3.withPackages (
       ps: with ps; [
         distro
@@ -56,7 +56,7 @@
 
     # applications
     antimicrox
-    antimony
+    # antimony
     audacity
     blender-hip
     master.darktable
