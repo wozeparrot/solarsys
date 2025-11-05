@@ -123,7 +123,7 @@
 
     programs.waybar = {
       enable = true;
-      package = pkgs.waybar.waybar;
+      # package = pkgs.waybar.waybar; # TODO: broken
       systemd = {
         enable = true;
         target = "wayland-desktop-session.target";
@@ -235,14 +235,14 @@
           "custom/gpu-usage" = {
             interval = 2;
             format = "{}% ";
-            exec = "${pkgs.coreutils}/bin/cat /sys/class/drm/card0/device/gpu_busy_percent";
+            exec = "${pkgs.coreutils}/bin/cat /sys/class/drm/card1/device/gpu_busy_percent";
             tooltip = false;
           };
 
           "custom/gpu-usage-2" = {
             interval = 2;
             format = "{}% ";
-            exec = "${pkgs.coreutils}/bin/cat /sys/class/drm/card1/device/gpu_busy_percent";
+            exec = "${pkgs.coreutils}/bin/cat /sys/class/drm/card2/device/gpu_busy_percent";
             tooltip = false;
           };
 
