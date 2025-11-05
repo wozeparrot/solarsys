@@ -7,32 +7,28 @@
   programs = {
     git = {
       enable = true;
-
-      userEmail = "wozeparrot@gmail.com";
-      userName = "Woze Parrot";
-
-      aliases = {
-        co = "checkout";
-        br = "branch";
-        ci = "commit";
-        st = "status";
-        last = "log -1 HEAD";
-        cane = "commit --amend --no-edit";
-        d = "diff";
-        lola = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)' --all";
-        a = "add";
-        pl = "pull";
-        ps = "push";
-      };
-
       lfs.enable = true;
 
-      difftastic = {
-        enable = true;
-        background = "dark";
-      };
+      settings = {
+        user = {
+          name = "Woze Parrot";
+          email = "wozeparrot@gmail.com";
+        };
 
-      extraConfig = {
+        alias = {
+          co = "checkout";
+          br = "branch";
+          ci = "commit";
+          st = "status";
+          last = "log -1 HEAD";
+          cane = "commit --amend --no-edit";
+          d = "diff";
+          lola = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)' --all";
+          a = "add";
+          pl = "pull";
+          ps = "push";
+        };
+
         github.user = "wozeparrot@gmail.com";
 
         merge.conflictstyle = "zdiff3";
@@ -75,6 +71,12 @@
 
     gitui = {
       enable = true;
+    };
+
+    difftastic = {
+      enable = true;
+      git.enable = true;
+      options.background = "dark";
     };
   };
 }
