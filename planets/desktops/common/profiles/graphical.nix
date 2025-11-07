@@ -154,7 +154,7 @@
       };
 
       emoji = {
-        package = pkgs.noto-fonts-emoji;
+        package = pkgs.noto-fonts-color-emoji;
         name = "Noto Color Emoji";
       };
 
@@ -179,8 +179,7 @@
 
       # fallback
       noto-fonts
-      noto-fonts-extra
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
 

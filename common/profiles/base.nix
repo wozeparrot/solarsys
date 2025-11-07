@@ -60,7 +60,7 @@
       bat
       btop
       curl
-      du-dust
+      dust
       fd
       file
       git

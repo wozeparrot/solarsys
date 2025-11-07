@@ -28,7 +28,7 @@
     imv
     inotify-tools
     iotop
-    mpc_cli
+    mpc
     neofetch
     nom.default
     p7zip
