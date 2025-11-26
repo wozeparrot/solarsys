@@ -32,7 +32,7 @@
     neofetch
     nom.default
     p7zip
-    # papis # TODO: broken
+    papis
     (python3.withPackages (
       ps: with ps; [
         distro
@@ -40,7 +40,7 @@
         packaging
         pyudev
         requests
-        systemd
+        systemd-python
         tqdm
         bitarray
       ]
@@ -94,6 +94,7 @@
     chaotic.gamescope-wsi_git
     master.protontricks
     nix-gaming.osu-lazer-bin
+    unnamed-sdvx-clone
     the-powder-toy
     wine64
 
