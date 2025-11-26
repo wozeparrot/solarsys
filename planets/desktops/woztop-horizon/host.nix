@@ -34,7 +34,7 @@
 
   specialisation = {
     amdgpu-od.configuration = {
-      boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
+      hardware.amdgpu.overdrive.enable = true;
     };
 
     latest.configuration = {
@@ -183,6 +183,8 @@
     autoStart = true;
     capSysAdmin = true;
   };
+
+  services.lact.enable = true;
 
   security.wrappers."gsr-kms-server" = {
     owner = "root";
