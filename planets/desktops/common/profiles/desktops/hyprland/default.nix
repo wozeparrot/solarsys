@@ -28,8 +28,7 @@
           if [[ -d "/tmp/hypr" || -d "$XDG_RUNTIME_DIR/hypr" ]]; then
             for i in $(${pkgs.hyprland.hyprland}/bin/hyprctl instances -j | jq ".[].instance" -r); do
               ${pkgs.hyprland.hyprland}/bin/hyprctl -i "$i" reload config-only
-              ${pkgs.nixpkgs-wayland.kanshi}/bin/kanshictl reload || true
-              ${pkgs.hyprland.hyprland}/bin/hyprctl -i "$i" hyprpaper wallpaper ,$(${pkgs.hyprland.hyprland}/bin/hyprctl -i "$i" hyprpaper listactive | head -n1 | grep -oP '/.*')
+              # ${pkgs.hyprland.hyprland}/bin/hyprctl -i "$i" hyprpaper wallpaper ,$(${pkgs.hyprland.hyprland}/bin/hyprctl -i "$i" hyprpaper listactive | head -n1 | grep -oP '/.*')
             done
           fi
         )
@@ -62,7 +61,7 @@
       systemctl --user stop graphical-session-pre.target
       systemctl --user stop wayland-desktop-session.target
 
-      exec dbus-run-session -- Hyprland
+      exec dbus-run-session -- start-hyprland
     '')
     (pkgs.writeShellScriptBin "hyprland-gamemode" ''
       #!/usr/bin/env sh
