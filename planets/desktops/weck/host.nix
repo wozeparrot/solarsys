@@ -79,13 +79,10 @@
     gnomeExtensions.just-perfection
     gnome-terminal
     extest
-    (writeShellScriptBin "sd-desk" ''
-      #!/usr/bin/env bash
-      LD_PRELOAD=${pkgsi686Linux.extest}/lib/libextest.so steam -silent
-    '')
   ];
 
   programs.steam.enable = true;
+  programs.steam.extest.enable = true;
 
   services.desktopManager.gnome.enable = true;
   services.gnome.core-apps.enable = false;
