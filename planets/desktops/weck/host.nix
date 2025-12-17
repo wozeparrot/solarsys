@@ -64,7 +64,7 @@
     gnome-tweaks
     gnomeExtensions.appindicator
     gnomeExtensions.gsconnect
-    gnomeExtensions.touch-x
+    gnomeExtensions.touchup
     gnomeExtensions.paperwm
     (gnomeExtensions.gjs-osk.overrideAttrs (oldAttrs: {
       postBuild = ''
