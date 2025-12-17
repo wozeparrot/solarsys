@@ -23,8 +23,8 @@ in
 
 stdenv.mkDerivation rec {
   name = "xencelabs";
-  version = "1.3.2-19";
-  src = "${driversZipFile}/xencelabslinux_${version}.tar.gz";
+  version = "1.3.4-26";
+  src = "${driversZipFile}/xencelabs-${version}.tar.gz";
 
   buildInputs = [ qtbase ];
   nativeBuildInputs = [ wrapQtAppsHook ];
