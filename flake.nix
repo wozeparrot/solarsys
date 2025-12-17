@@ -31,7 +31,7 @@
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
 
     zigf.url = "github:mitchellh/zig-overlay";
     zigf.inputs = {
@@ -138,12 +138,8 @@
             trusted-public-keys = [ "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4=" ];
           };
         };
-        chaotic = {
-          packages = inputs.chaotic.legacyPackages;
-          # cache = {
-          #   substituters = [ "https://nyx.chaotic.cx" ];
-          #   trusted-public-keys = [ "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8=" ];
-          # };
+        nix-cachyos-kernel = {
+          packages = inputs.nix-cachyos-kernel.legacyPackages;
         };
         zigf = {
           inherit (inputs.zigf) packages;
@@ -298,6 +294,7 @@
                 nvd
                 rsync
                 shellcheck
+                socat
               ])
               ++ [ solarsys ];
           };
