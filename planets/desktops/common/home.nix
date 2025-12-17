@@ -90,10 +90,10 @@
     # gaming stuff
     master.bottles
     (lutris.override { extraLibraries = pkgs: with pkgs; [ openssl ]; })
-    chaotic.gamescope_git
-    chaotic.gamescope-wsi_git
+    gamescope
+    gamescope-wsi
     master.protontricks
-    nix-gaming.osu-lazer-bin
+    # nix-gaming.osu-lazer-bin
     unnamed-sdvx-clone
     the-powder-toy
     wine64
