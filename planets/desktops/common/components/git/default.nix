@@ -78,5 +78,7 @@
       git.enable = true;
       options.background = "dark";
     };
+
+    mergiraf.enable = true;
   };
 }
