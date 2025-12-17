@@ -19,7 +19,7 @@
     ../common/profiles/vpn.nix
   ];
 
-  boot.kernelPackages = lib.mkDefault pkgs.chaotic.linuxPackages_cachyos; # .cachyOverride { mArch = "NATIVE"; };
+  boot.kernelPackages = lib.mkDefault pkgs.nix-cachyos-kernel.linuxPackages-cachyos-latest;
   # boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_xanmod_latest;
   boot.kernelModules = [
     "v4l2loopback"
@@ -30,6 +30,7 @@
   boot.kernelParams = [
     "amd_pstate=active"
     "psi=1"
+    "processor.max_cstate=1"
   ];
 
   specialisation = {
@@ -102,6 +103,8 @@
     inotify-tools
 
     droidcam
+
+    ss.xencelabs
   ];
 
   programs.nm-applet.enable = true;
@@ -152,6 +155,7 @@
   services.udev.packages = with pkgs; [
     openocd
     platformio-core
+    ss.xencelabs
   ];
 
   services.printing.enable = true;

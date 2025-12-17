@@ -9,8 +9,6 @@
     radeontop
     amdgpu_top
 
-    nixpkgs-wayland.kanshi
-
     (writeShellScriptBin "run_gpu" ''
       #!/usr/bin/env bash
 
@@ -25,98 +23,6 @@
   ];
 
   programs.btop.package = pkgs.btop-rocm;
-
-  # kanshi
-  services.kanshi = {
-    enable = true;
-    package = pkgs.nixpkgs-wayland.kanshi;
-    systemdTarget = "graphical-session.target";
-    settings = [
-      {
-        profile.name = "undocked";
-        profile.outputs = [
-          {
-            criteria = "eDP-2";
-            position = "0,0";
-          }
-        ];
-      }
-      {
-        profile.name = "docked-home";
-        profile.outputs = [
-          {
-            criteria = "eDP-2";
-            position = "0,1080";
-          }
-          {
-            criteria = "Samsung Electric Company S24B240 HTNCB00984";
-            mode = "1920x1080@75";
-            position = "0,0";
-            transform = "normal";
-          }
-        ];
-      }
-      {
-        profile.name = "docked-away";
-        profile.outputs = [
-          {
-            criteria = "eDP-2";
-            position = "0,0";
-          }
-          {
-            criteria = "LG Electronics LG ULTRAGEAR 406NTQD74260";
-            position = "1920,0";
-            transform = "normal";
-          }
-          {
-            criteria = "BOE J560T09 Unknown";
-            position = "1920,1440";
-            transform = "normal";
-          }
-        ];
-      }
-      {
-        profile.name = "comma";
-        profile.outputs = [
-          {
-            criteria = "eDP-2";
-            position = "0,0";
-          }
-          {
-            criteria = "Dell Inc. DELL U3219Q 1D093Q2";
-            mode = "3840x2160@60";
-            position = "1920,0";
-            scale = 1.5;
-            transform = "normal";
-          }
-        ];
-      }
-      {
-        profile.name = "viture-pro";
-        profile.outputs = [
-          {
-            criteria = "eDP-2";
-            position = "0,0";
-          }
-          {
-            criteria = "CVT VITURE 0x88888800";
-            mode = "1920x1080@120";
-            position = "1920,0";
-            scale = 1.;
-            transform = "normal";
-          }
-        ];
-      }
-    ];
-  };
-  # add packages to the path
-  systemd.user.services.kanshi.Service = {
-    Environment =
-      let
-        path = with pkgs; "${bash}/bin:${jq}/bin:${hyprland.hyprland}/bin";
-      in
-      "PATH=${path}";
-  };
 
   home.stateVersion = "22.11";
 }
