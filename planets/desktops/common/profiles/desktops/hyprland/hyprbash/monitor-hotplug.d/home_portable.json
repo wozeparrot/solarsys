@@ -1,0 +1,13 @@
+{
+  "monitors": [
+    "Thermotrex Corporation TL140VDXP10",
+    "LG Electronics LG ULTRAGEAR 406NTQD74260",
+    "BOE J560T09"
+  ],
+  "commands": [
+    "hyprctl keyword monitor desc:Thermotrex Corporation TL140VDXP10,1920x1200@144,0x0,1",
+    "hyprctl keyword monitor desc:LG Electronics LG ULTRAGEAR 406NTQD74260,2560x1440@165,1920x0,1",
+    "hyprctl keyword monitor desc:BOE J560T09,2560x1600@120,1920x1440,1",
+    "hyprctl hyprpaper wallpaper ,~/projects/solarsys/planets/desktops/common/misc/wallpaper.png"
+  ]
+}
