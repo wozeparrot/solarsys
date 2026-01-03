@@ -394,6 +394,20 @@
                       modules = makeModules pkgs ./planets/desktops/woztop-horizon/host.nix;
                     };
                   };
+                white-dwarf =
+                  let
+                    system = "x86_64-linux";
+                    pkgs = configNixpkgs system;
+                  in
+                  {
+                    trajectory = "";
+                    orbits = [ ];
+
+                    core = nixpkgs.lib.nixosSystem {
+                      inherit system specialArgs;
+                      modules = makeModules pkgs ./planets/desktops/white-dwarf/host.nix;
+                    };
+                  };
                 weck =
                   let
                     system = "x86_64-linux";
