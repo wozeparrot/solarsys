@@ -4,7 +4,9 @@
         "autoUpdate": false,
         "autoUpdateNotification": true,
         "useQuickCss": false,
-        "themeLinks": [],
+        "themeLinks": [
+            "https://raw.githubusercontent.com/DiscordStyles/HorizontalServerList/deploy/HorizontalServerList.theme.css"
+        ],
         "enableReactDevtools": false,
         "frameless": false,
         "transparent": false,
@@ -76,9 +78,6 @@
             "CrashHandler": {
                 "enabled": true
             },
-            "EmoteCloner": {
-                "enabled": true
-            },
             "Experiments": {
                 "enabled": false,
                 "enableIsStaff": false,
@@ -114,7 +113,8 @@
             "MemberCount": {
                 "enabled": true,
                 "memberList": true,
-                "toolTip": true
+                "toolTip": true,
+                "voiceActivity": true
             },
             "MessageLinkEmbeds": {
                 "enabled": false,
@@ -129,7 +129,9 @@
                 "ignoreChannels": "",
                 "ignoreGuilds": "",
                 "logEdits": true,
-                "logDeletes": true
+                "logDeletes": true,
+                "collapseDeleted": false,
+                "inlineEdits": true
             },
             "NoBlockedMessages": {
                 "enabled": false
@@ -162,9 +164,6 @@
                 "messages": true,
                 "colorMobileIndicator": true
             },
-            "PronounDB": {
-                "enabled": false
-            },
             "RevealAllSpoilers": {
                 "enabled": false
             },
@@ -190,7 +189,8 @@
             "SilentTyping": {
                 "enabled": true,
                 "showIcon": true,
-                "isEnabled": false
+                "isEnabled": true,
+                "contextMenu": true
             },
             "SortFriendRequests": {
                 "enabled": false
@@ -277,9 +277,6 @@
             },
             "FxTwitter": {
                 "enabled": true
-            },
-            "HideAttachments": {
-                "enabled": false
             },
             "KeepCurrentChannel": {
                 "enabled": true
@@ -374,7 +371,15 @@
                 "enabled": false
             },
             "BetterFolders": {
-                "enabled": false
+                "enabled": false,
+                "sidebar": true,
+                "sidebarAnim": true,
+                "closeAllFolders": false,
+                "closeAllHomeButton": false,
+                "closeOthers": false,
+                "forceOpen": false,
+                "keepIcons": false,
+                "showFolderIcon": 1
             },
             "FakeProfileThemes": {
                 "enabled": false,
@@ -393,21 +398,18 @@
                 "invertScroll": true,
                 "nearestNeighbour": false,
                 "square": true,
-                "zoom": 1.9,
+                "zoom": 5.799999999999999,
                 "size": 1000,
                 "zoomSpeed": 0.5
             },
             "RelationshipNotifier": {
                 "enabled": true,
-                "notices": false,
+                "notices": true,
                 "offlineRemovals": true,
                 "friends": true,
                 "friendRequestCancels": true,
                 "servers": true,
                 "groups": true
-            },
-            "SearchReply": {
-                "enabled": false
             },
             "UserVoiceShow": {
                 "enabled": false
@@ -703,11 +705,62 @@
                 "disableNoisyLoggers": false,
                 "disableSpotifyLogger": true
             },
-            "ShowAllRoles": {
+            "YoutubeAdblock": {
                 "enabled": true
             },
-            "YoutubeAdblock": {
+            "AlwaysExpandRoles": {
+                "enabled": true
+            },
+            "CopyFileContents": {
+                "enabled": true
+            },
+            "MentionAvatars": {
                 "enabled": false
+            },
+            "NoMaskedUrlPaste": {
+                "enabled": false
+            },
+            "StickerPaste": {
+                "enabled": false
+            },
+            "VolumeBooster": {
+                "enabled": true,
+                "multiplier": 4
+            },
+            "FullSearchContext": {
+                "enabled": false
+            },
+            "UserMessagesPronouns": {
+                "enabled": false
+            },
+            "DynamicImageModalAPI": {
+                "enabled": true
+            },
+            "AccountPanelServerProfile": {
+                "enabled": true,
+                "prioritizeServerProfile": false
+            },
+            "HideMedia": {
+                "enabled": false
+            },
+            "FullUserInChatbox": {
+                "enabled": false
+            },
+            "IrcColors": {
+                "enabled": false
+            },
+            "DisableDeepLinks": {
+                "enabled": true
+            },
+            "ExpressionCloner": {
+                "enabled": true
+            },
+            "CopyStickerLinks": {
+                "enabled": false
+            },
+            "ImageFilename": {
+                "enabled": true,
+                "showFullUrl": false
             }
         },
         "notifications": {
@@ -722,11 +775,14 @@
             "authenticated": false,
             "url": "https://api.vencord.dev/",
             "settingsSync": false,
-            "settingsSyncVersion": 1722544501527
+            "settingsSyncVersion": 1767402424216
         },
-        "enabledThemes": [
-            "stylix.theme.css"
-        ]
+        "enabledThemes": [],
+        "eagerPatches": false,
+        "uiElements": {
+            "chatBarButtons": {},
+            "messagePopoverButtons": {}
+        }
     },
     "quickCss": ""
 }
