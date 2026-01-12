@@ -70,8 +70,6 @@
 
     programs.hyprlock.enable = true;
 
-    xdg.configFile."fnott/fnott.ini".source = ./fnott.ini;
-
     programs.rofi = {
       enable = true;
       package = pkgs.rofi;
@@ -121,6 +119,53 @@
       };
     };
 
+    programs.ironbar = {
+      enable = false;
+      systemd = true;
+      config = {
+        monitors = {
+          eDP-1 = {
+            anchor_to_edges = true;
+            position = "top";
+            height = 30;
+            autohide = 300;
+
+            start = [
+              {
+                type = "focused";
+                icon_size = 16;
+              }
+              {
+                type = "tray";
+              }
+            ];
+
+            center = [
+              { type = "battery"; }
+              { type = "volume"; }
+              {
+                type = "sys_info";
+                format = [
+                  "{cpu_percent}% "
+                  "{memory_percent}% "
+                ];
+              }
+              { type = "clock"; }
+            ];
+
+            end = [
+              {
+                type = "music";
+                player_type = "mpd";
+                marquee.enable = true;
+                music_dir = "$HOME/music";
+              }
+            ];
+          };
+        };
+      };
+    };
+
     programs.waybar = {
       enable = true;
       # package = pkgs.waybar.waybar; # TODO: broken
@@ -131,6 +176,7 @@
       settings = [
         {
           layer = "top";
+          start_hidden = true;
           position = "top";
           output = [
             "eDP-1"
@@ -155,7 +201,7 @@
             "memory"
             "temperature"
             "custom/gpu-usage"
-            "custom/gpu-usage-2"
+            # "custom/gpu-usage-2"
             "clock"
           ];
           modules-right = [ "custom/media" ];
@@ -270,6 +316,19 @@
       style = builtins.readFile ./waybar.css;
     };
 
+    services.fnott = {
+      enable = true;
+      settings = {
+        main = {
+          max-width = 400;
+          max-height = 200;
+          stacking-order = "top-down";
+          max-icon-size = 32;
+          selection-helper = "rofi -dmenu -i p 'Select: '";
+        };
+      };
+    };
+
     systemd.user.targets.tray = {
       Unit = {
         Description = "Home Manager System Tray";
@@ -282,8 +341,14 @@
         Description = "wayland desktop session";
         Documentation = [ "man:systemd.special(7)" ];
         BindsTo = [ "graphical-session.target" ];
-        Wants = [ "xdg-desktop-autostart.target" "graphical-session-pre.target" ];
-        After = [ "xdg-desktop-autostart.target" "graphical-session-pre.target" ];
+        Wants = [
+          "xdg-desktop-autostart.target"
+          "graphical-session-pre.target"
+        ];
+        After = [
+          "xdg-desktop-autostart.target"
+          "graphical-session-pre.target"
+        ];
       };
     };
   };
