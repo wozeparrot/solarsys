@@ -7,8 +7,7 @@
     xdg.configFile."hypr/hyprland.conf" = {
       text =
         (builtins.readFile ./hyprland.conf)
-        + ''
-        ''
+        + ''''
         + (
           let
             rgb = color: "rgb(${color})";
@@ -33,6 +32,26 @@
           fi
         )
       '';
+    };
+
+    services.hyprpolkitagent.enable = false;
+
+    services.hypridle = {
+      enable = true;
+      settings = {
+        general = {
+          before_sleep_cmd = "hyprlock";
+          after_sleep_cmd = "hyprctl dispatch dpms on";
+          lock_cmd = "pidof hyprlock || hyprlock";
+        };
+
+        listener = [
+          {
+            timeout = 180;
+            on-timeout = "hyprlock";
+          }
+        ];
+      };
     };
   };
 
