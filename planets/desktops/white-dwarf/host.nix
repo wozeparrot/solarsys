@@ -25,7 +25,7 @@
     "v4l2loopback"
     "snd-aloop"
   ];
-  boot.extraModulePackages = [ ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ ryzen-smu ];
   boot.kernelPatches = [ ];
   boot.kernelParams = [
     "amd_pstate=active"
@@ -105,6 +105,8 @@
     droidcam
 
     ss.xencelabs
+
+    android-tools
   ];
 
   programs.nm-applet.enable = true;
@@ -114,7 +116,6 @@
   };
   programs.gamemode.enable = true;
   programs.corectrl.enable = true;
-  programs.adb.enable = true;
   programs.steam.enable = true;
 
   systemd.tmpfiles.rules = [ "f /dev/shm/looking-glass 0660 woze kvm -" ];
@@ -151,6 +152,9 @@
 
     # dji osmo pocket 3 (2ca3:0023)
     SUBSYSTEM=="usb", ATTRS{idVendor}=="2ca3", ATTRS{idProduct}=="0023", MODE="0666"
+
+    # mic mute led
+    ACTION=="add", SUBSYSTEM=="leds", KERNEL=="*micmute*", RUN+="${pkgs.coreutils}/bin/chmod g+w /sys/class/leds/%k/brightness", RUN+="${pkgs.coreutils}/bin/chgrp audio /sys/class/leds/%k/brightness"
   '';
   services.udev.packages = with pkgs; [
     openocd
@@ -158,7 +162,11 @@
     ss.xencelabs
   ];
 
-  services.printing.enable = true;
+  services.fwupd.enable = true;
+
+  services.fprintd.enable = true;
+
+  services.printing.enable = false;
   services.printing.drivers = with pkgs; [
     gutenprint
     gutenprintBin
@@ -169,18 +177,6 @@
   services.gvfs.enable = true;
 
   services.ratbagd.enable = true;
-
-  services.asusd = {
-    enable = true;
-    asusdConfig = {
-      text = ''
-        (
-          bat_charge_limit: 60,
-          panel_od: false,
-        )
-      '';
-    };
-  };
 
   services.sunshine = {
     enable = true;
