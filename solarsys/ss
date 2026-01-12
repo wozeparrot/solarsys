@@ -466,7 +466,7 @@ function main {
             satellites "$planet" "$moon"
             ;;
         update)
-            nix flake update --commit-lock-file
+            nix --extra-experimental-features "nix-command flakes" flake update --commit-lock-file
             ;;
         list)
             list
