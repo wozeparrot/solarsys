@@ -24,6 +24,9 @@
     topydo
     ffmpeg
     gemini-cli
+    opencode
+    claude-code
+    claude-code-router
     # gurk-rs
     imv
     inotify-tools
@@ -32,7 +35,7 @@
     neofetch
     nom.default
     p7zip
-    papis
+    # papis
     (python3.withPackages (
       ps: with ps; [
         distro
@@ -58,7 +61,7 @@
     antimicrox
     # antimony
     audacity
-    blender-hip
+    blender
     master.darktable
     # freecad
     easyeffects
@@ -93,7 +96,7 @@
     gamescope
     gamescope-wsi
     master.protontricks
-    # nix-gaming.osu-lazer-bin
+    nix-gaming.osu-lazer-bin
     unnamed-sdvx-clone
     the-powder-toy
     wine64
