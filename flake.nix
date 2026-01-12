@@ -86,6 +86,11 @@
 
     waybar.url = "github:Alexays/Waybar";
 
+    ironbar.url = "github:JakeStanger/ironbar";
+    ironbar.inputs = {
+      nixpkgs.follows = "nixpkgs";
+    };
+
     nom.url = "github:maralorn/nix-output-monitor";
     nom.inputs = {
       flake-utils.follows = "flake-utils";
@@ -183,6 +188,11 @@
         # waybar = {
         #   inherit (inputs.waybar) packages;
         # };
+        ironbar = {
+          hm-modules = {
+            ironbar = inputs.ironbar.homeManagerModules.default;
+          };
+        };
         nom = {
           inherit (inputs.nom) packages;
         };
