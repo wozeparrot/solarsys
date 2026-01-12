@@ -97,7 +97,7 @@ in
       # zls.zls
 
       # formatters
-      nixfmt-rfc-style
+      nixfmt
       stylua
 
       nodePackages.vscode-langservers-extracted

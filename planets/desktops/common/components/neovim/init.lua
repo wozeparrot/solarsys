@@ -416,7 +416,7 @@ vim.lsp.config("gopls", {
 ---- Treesitter Config ----
 local parser_install_dir = vim.fn.stdpath("cache") .. "/treesitters"
 vim.fn.mkdir(parser_install_dir, "p")
-local treesitter = require("nvim-treesitter.configs")
+local treesitter = require("nvim-treesitter")
 treesitter.setup({
   highlight = {
     enable = true,
@@ -435,15 +435,15 @@ treesitter.setup({
     enable = true,
   },
   ensure_installed = {},
-  parser_install_dir = parser_install_dir,
+  install_dir = parser_install_dir,
 })
-local treesitter_parsers = require("nvim-treesitter.parsers").get_parser_configs()
-treesitter_parsers.endron = {
-  install_info = {
-    url = "~/projects/enqy/tree-sitter-endron",
-    files = { "src/parser.c" },
-  },
-}
+-- local treesitter_parsers = require("nvim-treesitter.parsers").get_parser_configs()
+-- treesitter_parsers.endron = {
+--   install_info = {
+--     url = "~/projects/enqy/tree-sitter-endron",
+--     files = { "src/parser.c" },
+--   },
+-- }
 -- set nvim to use treesitter folding
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
