@@ -40,20 +40,20 @@
 
     latest.configuration = {
       boot.kernelPackages = pkgs.linuxPackages_latest;
-    #   boot.kernelPatches = [
-    #     {
-    #       patch = ./patches/kernel/revert-gtt.patch;
-    #       name = "revert-gtt";
-    #     }
-    #     {
-    #       patch = ./patches/kernel/revert-map_bo.patch;
-    #       name = "revert-map_bo";
-    #     }
-    #     {
-    #       patch = ./patches/kernel/revert-mtype_uc.patch;
-    #       name = "revert-mtype_uc";
-    #     }
-    #   ];
+      #   boot.kernelPatches = [
+      #     {
+      #       patch = ./patches/kernel/revert-gtt.patch;
+      #       name = "revert-gtt";
+      #     }
+      #     {
+      #       patch = ./patches/kernel/revert-map_bo.patch;
+      #       name = "revert-map_bo";
+      #     }
+      #     {
+      #       patch = ./patches/kernel/revert-mtype_uc.patch;
+      #       name = "revert-mtype_uc";
+      #     }
+      #   ];
     };
   };
 
@@ -69,7 +69,10 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   hardware.graphics = {
-    extraPackages = with pkgs; [ rocmPackages.clr.icd ];
+    extraPackages = with pkgs; [
+      rocmPackages.clr
+      rocmPackages.clr.icd
+    ];
   };
   hardware.uinput.enable = true;
   hardware.opentabletdriver.enable = true;
