@@ -95,7 +95,7 @@
     gnome-settings-daemon
   ];
 
-  services.tlp.enable = false;
+  services.tuned.enable = false;
 
   services.xserver.videoDrivers = [
     "amdgpu"
