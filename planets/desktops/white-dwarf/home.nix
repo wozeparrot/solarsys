@@ -27,7 +27,7 @@
   systemd.user.services.mic-led-watcher = {
     Unit = {
       Description = "Syncs ZBook Mic LED with PipeWire Events";
-      After = [ "graphical-session-pre.target" ];
+      After = [ "graphical-session.target" ];
       PartOf = [ "graphical-session.target" ];
     };
 
