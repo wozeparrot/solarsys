@@ -57,6 +57,10 @@
         pkill -9 rofi
         cliphist list | rofi -dmenu | cliphist decode | wl-copy
       '')
+
+      (pkgs.writeShellScriptBin "wl-launch-wob" ''
+        rm -f /tmp/wobpipe && mkfifo /tmp/wobpipe && tail -f /tmp/wobpipe | wob
+      '')
     ];
 
     services.hyprpaper = {
@@ -169,10 +173,7 @@
     programs.waybar = {
       enable = true;
       # package = pkgs.waybar.waybar; # TODO: broken
-      systemd = {
-        enable = true;
-        target = "wayland-desktop-session.target";
-      };
+      systemd.enable = true;
       settings = [
         {
           layer = "top";
@@ -195,7 +196,8 @@
           modules-center = [
             "battery"
             "custom/powerdraw"
-            "pulseaudio"
+            "power-profiles-daemon"
+            "wireplumber"
             "backlight"
             "cpu"
             "memory"
@@ -204,7 +206,9 @@
             # "custom/gpu-usage-2"
             "clock"
           ];
-          modules-right = [ "custom/media" ];
+          modules-right = [
+            "custom/media"
+          ];
 
           "hyprland/window" = {
             format = "{}";
@@ -244,11 +248,23 @@
             tooltip = false;
           };
 
-          "pulseaudio" = {
+          "power-profiles-daemon" = {
+            "format" = "{icon}";
+            "tooltip-format" = "Power profile: {profile}\nDriver: {driver}";
+            "tooltip" = true;
+            "format-icons" = {
+              "default" = "";
+              "performance" = "";
+              "balanced" = "";
+              "power-saver" = "";
+            };
+          };
+
+          "wireplumber" = {
             format = "{volume}% ";
             format-muted = "";
             on-click = "${pkgs.pwvucontrol}/bin/pwvucontrol";
-            on-click-right = "${pkgs.pamixer}/bin/pamixer -t";
+            on-click-right = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_SINK@ toggle";
             tooltip = false;
           };
 
@@ -335,23 +351,9 @@
         Requires = [ "graphical-session-pre.target" ];
       };
     };
-
-    systemd.user.targets.wayland-desktop-session = {
-      Unit = {
-        Description = "wayland desktop session";
-        Documentation = [ "man:systemd.special(7)" ];
-        BindsTo = [ "graphical-session.target" ];
-        Wants = [
-          "xdg-desktop-autostart.target"
-          "graphical-session-pre.target"
-        ];
-        After = [
-          "xdg-desktop-autostart.target"
-          "graphical-session-pre.target"
-        ];
-      };
-    };
   };
 
   programs.xwayland.enable = true;
+
+  security.pam.services.hyprlock = { };
 }

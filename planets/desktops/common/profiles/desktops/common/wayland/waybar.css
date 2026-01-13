@@ -28,7 +28,8 @@ window#waybar {
 #tray,
 #battery,
 #custom-powerdraw,
-#pulseaudio,
+#power-profiles-daemon,
+#wireplumber,
 #backlight,
 #cpu,
 #memory,
@@ -36,6 +37,7 @@ window#waybar {
 #custom-gpu-usage,
 #custom-gpu-usage-2,
 #clock,
+#cava,
 #custom-media,
 #custom-lock {
     color: @foreground;
@@ -96,7 +98,11 @@ window#waybar {
     background-color: @background;
 }
 
-#pulseaudio {
+#power-profiles-daemon {
+    background-color: @background;
+}
+
+#wireplumber {
     background-color: @background;
 }
 
