@@ -3,11 +3,14 @@
   # home-manager config
   home-manager.users.woze = {
     home.packages = with pkgs; [
+      bluetui
       cliphist
       fnott
       fuzzel
+      gazelle.default
       grim
       hyprpicker.hyprpicker
+      overskride
       pngquant
       slurp
       swappy
@@ -332,6 +335,10 @@
       style = builtins.readFile ./waybar.css;
     };
 
+    programs.gazelle = {
+      enable = true;
+    };
+
     services.fnott = {
       enable = true;
       settings = {
@@ -352,6 +359,8 @@
       };
     };
   };
+
+  services.blueman.enable = true;
 
   programs.xwayland.enable = true;
 

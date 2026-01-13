@@ -119,6 +119,11 @@
     nixvim.inputs = {
       nixpkgs.follows = "nixpkgs";
     };
+
+    gazelle.url = "github:Zeus-Deus/gazelle-tui";
+    gazelle.inputs = {
+      nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -211,6 +216,10 @@
         };
         nixvim = {
           hm-modules = inputs.nixvim.homeModules;
+        };
+        gazelle = {
+          inherit (inputs.gazelle) packages;
+          hm-modules = inputs.gazelle.homeModules;
         };
       };
 
