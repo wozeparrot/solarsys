@@ -444,6 +444,10 @@ treesitter.setup({
 --     files = { "src/parser.c" },
 --   },
 -- }
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { '<filetype>' },
+  callback = function() vim.treesitter.start() end,
+})
 -- set nvim to use treesitter folding
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
