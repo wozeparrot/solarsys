@@ -60,8 +60,6 @@
     };
   };
 
-  services.tlp.enable = false;
-
   services.greetd = {
     enable = true;
     settings = {
@@ -69,11 +67,11 @@
         vt = 1;
       };
       initial_session = {
-        command = "hyprland-run";
+        command = "uwsm start hyprland-uwsm.desktop";
         user = "woze";
       };
       default_session = {
-        command = "hyprland-run";
+        command = "uwsm start hyprland-uwsm.desktop";
         user = "woze";
       };
     };
