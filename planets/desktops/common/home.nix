@@ -46,6 +46,7 @@
         systemd-python
         tqdm
         bitarray
+        evdev
       ]
     ))
     r128gain
@@ -61,7 +62,7 @@
     antimicrox
     # antimony
     audacity
-    blender
+    pkgsRocm.blender
     master.darktable
     # freecad
     easyeffects
