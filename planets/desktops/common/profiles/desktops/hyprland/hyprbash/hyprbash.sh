@@ -31,6 +31,9 @@ function handle() {
     monitorremoved*)
       monitor_hotplug
     ;;
+    config_changed*)
+      monitor_hotplug
+    ;;
   esac
 }
 
@@ -42,4 +45,16 @@ function init() {
 
 init
 
-socat -U - "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" | while read -r line; do handle "$line"; done
+trap "kill 0" EXIT
+
+
+(
+  socat -U - "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" &
+  inotifywait -m -r -q -e close_write -e create -e delete -e move --format "config_changed" "$CONFIG_DIR" &
+
+  wait -n
+
+  kill $(jobs -p) 2>/dev/null || true
+) | while read -r line; do
+  handle "$line"
+done
