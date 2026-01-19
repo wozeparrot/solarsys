@@ -179,8 +179,6 @@
 
   services.gvfs.enable = true;
 
-  services.ratbagd.enable = true;
-
   services.sunshine = {
     enable = true;
     autoStart = true;
