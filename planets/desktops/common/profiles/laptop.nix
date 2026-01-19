@@ -21,6 +21,11 @@
 
   # enable bluetooth
   hardware.bluetooth.enable = true;
+  hardware.bluetooth.settings = {
+    General = {
+      Experimental = true;
+    };
+  };
 
   # backlight control
   programs.light.enable = true;
