@@ -30,7 +30,6 @@
   boot.kernelParams = [
     "amd_pstate=active"
     "psi=1"
-    "processor.max_cstate=1"
   ];
 
   specialisation = {
@@ -184,6 +183,8 @@
     autoStart = true;
     capSysAdmin = true;
   };
+
+  services.hardware.bolt.enable = true;
 
   services.lact.enable = true;
 
