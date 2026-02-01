@@ -50,12 +50,12 @@
       nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland.url = "github:hyprwm/Hyprland";
     hyprland.inputs = {
       nixpkgs.follows = "nixpkgs";
     };
 
-    hyprpaper.url = "git+https://github.com/hyprwm/hyprpaper";
+    hyprpaper.url = "github:hyprwm/hyprpaper";
     hyprpaper.inputs = {
       nixpkgs.follows = "nixpkgs";
     };
@@ -122,6 +122,11 @@
 
     gazelle.url = "github:Zeus-Deus/gazelle-tui";
     gazelle.inputs = {
+      nixpkgs.follows = "nixpkgs";
+    };
+
+    cq-flake.url = "github:vinszent/cq-flake";
+    cq-flake.inputs = {
       nixpkgs.follows = "nixpkgs";
     };
   };
@@ -220,6 +225,9 @@
         gazelle = {
           inherit (inputs.gazelle) packages;
           hm-modules = inputs.gazelle.homeModules;
+        };
+        cadquery = {
+          inherit (inputs.cq-flake) packages;
         };
       };
 
