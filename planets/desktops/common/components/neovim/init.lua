@@ -28,6 +28,8 @@ vim.opt.hidden = true
 -- split config
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+-- undofile
+vim.opt.undofile = true
 -- sign column config
 vim.opt.signcolumn = "yes"
 vim.opt.number = true
