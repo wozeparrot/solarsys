@@ -255,7 +255,7 @@
         pkill -SIGUSR1 waybar
       fi
 
-      hyprctl keyword workspace w[tv1], gapsout:0
+      hyprctl keyword workspace w[tv1], gapsout:0,rounding:0
     '')
     (pkgs.writeShellScriptBin "hyprland-bar-show" ''
       #!/usr/bin/env bash
@@ -267,7 +267,7 @@
         pkill -SIGUSR1 waybar
       fi
 
-      hyprctl keyword workspace w[tv1], gapsout:16
+      hyprctl keyword workspace w[tv1], gapsout:16,rounding:16
     '')
   ];
 
