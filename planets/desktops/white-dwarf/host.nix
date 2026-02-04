@@ -71,6 +71,7 @@
     extraPackages = with pkgs; [
       rocmPackages.clr
       rocmPackages.clr.icd
+      intel-compute-runtime
     ];
   };
   hardware.uinput.enable = true;
@@ -157,6 +158,10 @@
 
     # mic mute led
     ACTION=="add", SUBSYSTEM=="leds", KERNEL=="*micmute*", RUN+="${pkgs.coreutils}/bin/chmod g+w /sys/class/leds/%k/brightness", RUN+="${pkgs.coreutils}/bin/chgrp audio /sys/class/leds/%k/brightness"
+
+    # usbgpu
+    SUBSYSTEM=="usb", ATTR{idVendor}=="add1", ATTR{idProduct}=="0001", MODE="0666"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="174c", ATTR{idProduct}=="2463", MODE="0666"
   '';
   services.udev.packages = with pkgs; [
     openocd
