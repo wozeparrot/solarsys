@@ -56,6 +56,7 @@
     ss.mods
     swayimg
     unzip
+    waywall
     yt-dlp
 
     # applications
@@ -64,7 +65,7 @@
     audacity
     pkgsRocm.blender
     master.darktable
-    # freecad
+    freecad
     easyeffects
     ghidra-bin
     gimp
@@ -75,7 +76,7 @@
     # kicad
     krita
     libreoffice-fresh
-    kdePackages.kdenlive
+    # kdePackages.kdenlive
     # nheko
     openscad
     prismlauncher
