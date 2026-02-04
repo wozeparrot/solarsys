@@ -1,8 +1,6 @@
 # interactive shell config
 { config, pkgs, ... }:
 {
-  home.packages = with pkgs; [ gh-copilot ];
-
   programs = {
     fish = {
       enable = true;
