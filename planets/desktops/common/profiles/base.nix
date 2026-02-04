@@ -69,7 +69,7 @@
       freetype
       fuse
       gdk-pixbuf
-      glew110
+      glew_1_10
       glib
       gnome2.GConf
       gsettings-desktop-schemas
