@@ -20,17 +20,6 @@
         format "48000:16:2"
       }
 
-      audio_output {
-        type "httpd"
-        name "HTTP stream"
-        encoder "opus"
-        port "8000"
-        bitrate "160000"
-        format "44100:16:2"
-        always_on "yes"
-        tags "yes"
-      }
-
       replaygain "auto"
 
       auto_update "yes"
