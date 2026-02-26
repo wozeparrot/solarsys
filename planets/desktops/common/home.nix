@@ -47,6 +47,7 @@
         tqdm
         bitarray
         evdev
+        mfusepy
       ]
     ))
     r128gain
