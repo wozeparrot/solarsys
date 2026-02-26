@@ -162,6 +162,11 @@
     # usbgpu
     SUBSYSTEM=="usb", ATTR{idVendor}=="add1", ATTR{idProduct}=="0001", MODE="0666"
     SUBSYSTEM=="usb", ATTR{idVendor}=="174c", ATTR{idProduct}=="2463", MODE="0666"
+
+    # qudelix t71
+    SUBSYSTEM=="usb", ATTR{idVendor}=="1fc9", ATTR{manufacturer}=="Qudelix,Inc.", MODE="0666", GROUP="plugdev", TAG+="uaccess", TAG+="udev-acl"
+    SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ATTRS{idVendor}=="1fc9", MODE="0666", GROUP="plugdev"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="1fc9", ATTR{manufacturer}=="Qudelix,Inc.", ENV{DEVTYPE}=="usb_device", MODE="0666", GROUP="plugdev", TAG+="uaccess"
   '';
   services.udev.packages = with pkgs; [
     openocd
