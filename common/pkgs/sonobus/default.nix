@@ -1,5 +1,4 @@
 {
-  lib,
   stdenv,
   fetchFromGitHub,
   cmake,
@@ -7,7 +6,11 @@
   libjack2,
   libopus,
   opusTools,
-  xorg,
+  libx11,
+  libxext,
+  libxinerama,
+  libxrandr,
+  libxcursor,
   alsa-lib,
   libGL,
   freetype,
@@ -35,11 +38,11 @@ stdenv.mkDerivation rec {
     libopus
     opusTools
     alsa-lib
-    xorg.libX11
-    xorg.libXext
-    xorg.libXinerama
-    xorg.libXrandr
-    xorg.libXcursor
+    libx11
+    libxext
+    libxinerama
+    libxrandr
+    libxcursor
     libGL
     freetype
     curl

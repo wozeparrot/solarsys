@@ -6,7 +6,9 @@
   wrapQtAppsHook,
   lib,
   libusb1,
-  xorg,
+  libx11,
+  libxtst,
+  libxrandr,
   libsForQt5,
   libglvnd,
   qtbase,
@@ -53,9 +55,9 @@ stdenv.mkDerivation rec {
       # we prepare our library path in the let clause to avoid it become part of the input of mkDerivation
       libPath = lib.makeLibraryPath [
         libusb1 # libusb-1.0.so.0
-        xorg.libX11 # libX11.so.6
-        xorg.libXtst # libXtst.so.6
-        xorg.libXrandr # libXrandr.so.2
+        libx11 # libX11.so.6
+        libxtst # libXtst.so.6
+        libxrandr # libXrandr.so.2
         libsForQt5.qt5.qtx11extras # libQt5X11Extras.so.5
         libsForQt5.qt5.qtsvg # libQt5Svg.so.5
         libsForQt5.qt5.qtbase # libQt5Widgets.so.5 libQt5Gui.so.5 libQt5Xml.so.5 libQt5Network.so.5 libQt5Core.so.5

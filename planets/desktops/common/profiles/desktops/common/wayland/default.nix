@@ -19,7 +19,7 @@
       wob
       wofi
       wtype
-      xorg.xrdb
+      xrdb
 
       wdisplays
       wlr-randr

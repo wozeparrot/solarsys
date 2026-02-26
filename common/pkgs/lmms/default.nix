@@ -1,5 +1,4 @@
 {
-  lib,
   fetchFromGitHub,
   cmake,
   qttools,
@@ -28,7 +27,7 @@
   flac,
   carla,
   SDL2,
-  xorg,
+  libxdmcp,
   wine64,
   mkDerivation,
 }:
@@ -76,7 +75,7 @@ mkDerivation rec {
     flac
     carla
     SDL2
-    xorg.libXdmcp
+    libxdmcp
     wine64
   ];
 

@@ -45,10 +45,10 @@ self: super: {
         libpulseaudio
         libvorbis
         stdenv.cc.cc.lib
-        xorg.libXScrnSaver
-        xorg.libXcursor
-        xorg.libXi
-        xorg.libXinerama
+        libxscrnsaver
+        libxcursor
+        libxi
+        libxinerama
       ];
   };
   inherit (self.master) android-tools;
