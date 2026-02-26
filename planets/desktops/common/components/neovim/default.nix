@@ -29,7 +29,7 @@ in
     enable = true;
     withNodeJs = true;
 
-    extraLuaConfig = builtins.concatStringsSep "\n" [
+    initLua = builtins.concatStringsSep "\n" [
       ""
       (
         let

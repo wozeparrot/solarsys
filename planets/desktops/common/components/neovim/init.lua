@@ -299,36 +299,35 @@ nnoremap("<leader>ca", "<cmd>Lspsaga code_action<CR>")
 -- })
 
 -- zig
-vim.lsp.enable("zls")
 vim.lsp.config("zls", {
   on_attach = default_on_attach,
 })
+vim.lsp.enable("zls")
 -- nix
-vim.lsp.enable("nil_ls")
 vim.lsp.config("nil_ls", {
   on_attach = default_on_attach,
 })
+vim.lsp.enable("nil_ls")
 -- lspconfig.nixd.setup({
 --   on_attach = default_on_attach,
 -- })
 -- rust
-vim.lsp.enable("rust_analyzer")
 vim.lsp.config("rust_analyzer", {})
+vim.lsp.enable("rust_analyzer")
 lazy_require("crates", {})
 require("rustaceanvim")
 -- python
 -- lspconfig.basedpyright.setup({
 -- 	on_attach = default_on_attach,
 -- })
-vim.lsp.enable("pyright")
 vim.lsp.config("pyright", {
   on_attach = default_on_attach,
 })
+vim.lsp.enable("pyright")
 -- lua
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-vim.lsp.enable("lua_ls")
 vim.lsp.config("lua_ls", {
   on_attach = default_on_attach,
   settings = {
@@ -346,8 +345,8 @@ vim.lsp.config("lua_ls", {
     },
   },
 })
+vim.lsp.enable("lua_ls")
 -- java
-vim.lsp.enable("jdtls")
 vim.lsp.config("jdtls", {
   on_attach = default_on_attach,
   cmd = { "jdtls", "-data", "/home/woze/.cache/jdtls/workspace" },
@@ -355,39 +354,40 @@ vim.lsp.config("jdtls", {
     workspace = "/home/woze/.cache/jdtls/workspace",
   },
 })
+vim.lsp.enable("jdtls")
 -- bash
-vim.lsp.enable("bashls")
 vim.lsp.config("bashls", {
   on_attach = default_on_attach,
 })
+vim.lsp.enable("bashls")
 -- clangd
-vim.lsp.enable("clangd")
 vim.lsp.config("clangd", {
   on_attach = default_on_attach,
 })
+vim.lsp.enable("clangd")
 -- deno
-vim.lsp.enable("denols")
 vim.lsp.config("denols", {
   on_attach = default_on_attach,
   init_options = {
     lint = true,
   },
 })
+vim.lsp.enable("denols")
 -- html
-vim.lsp.enable("html")
 vim.lsp.config("html", {
   on_attach = default_on_attach,
 })
+vim.lsp.enable("html")
 -- verilog
-vim.lsp.enable("svls")
 vim.lsp.config("svls", {
   on_attach = default_on_attach,
 })
-vim.lsp.enable("verible")
+vim.lsp.enable("svls")
 vim.lsp.config("verible", {
   on_attach = default_on_attach,
   cmd = { "verible-verilog-ls", "--rules_config_search" },
 })
+vim.lsp.enable("verible")
 -- -- ltex
 -- lspconfig.ltex.setup({
 -- 	on_attach = default_on_attach,
@@ -410,10 +410,10 @@ vim.lsp.config("verible", {
 -- 	},
 -- })
 -- go
-vim.lsp.enable("gopls")
 vim.lsp.config("gopls", {
   on_attach = default_on_attach,
 })
+vim.lsp.enable("gopls")
 
 ---- Treesitter Config ----
 local parser_install_dir = vim.fn.stdpath("cache") .. "/treesitters"
