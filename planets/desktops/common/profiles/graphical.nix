@@ -215,14 +215,13 @@
   # i18n
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.inputMethod = {
-    enable = false; #TODO: broken
+    enable = true;
     type = "fcitx5";
     fcitx5 = {
       waylandFrontend = true;
       addons = with pkgs; [
         fcitx5-mozc
         fcitx5-pinyin-moegirl
-        fcitx5-chinese-addons
         fcitx5-tokyonight
       ];
     };
