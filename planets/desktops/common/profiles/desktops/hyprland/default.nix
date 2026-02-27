@@ -207,14 +207,16 @@
 
               src = ./hyprbash;
 
-              buildInputs = with pkgs; [
-                socat
-                inotify-tools
-              ];
+              nativeBuildInputs = [ pkgs.makeWrapper ];
 
               installPhase = ''
                 mkdir -p $out/bin
                 cp -r ./* $out/bin/
+              '';
+
+              postFixup = ''
+                wrapProgram $out/bin/hyprbash.sh \
+                  --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.socat pkgs.inotify-tools pkgs.coreutils pkgs.gawk pkgs.jq pkgs.hyprland.hyprland ]}
               '';
             };
           in
