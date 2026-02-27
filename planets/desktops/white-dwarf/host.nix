@@ -30,6 +30,7 @@
   boot.kernelParams = [
     "amd_pstate=active"
     "psi=1"
+    "amd_iommu=off"
   ];
 
   specialisation = {
