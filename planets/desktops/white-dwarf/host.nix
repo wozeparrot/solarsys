@@ -2,8 +2,22 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
+let
+  customKernel = pkgs.nix-cachyos-kernel.linux-cachyos-latest.override {
+    lto = "thin";
+    processorOpt = "zen4";
+    bbr3 = true;
+  };
+  helpers = pkgs.callPackage "${inputs.nix-cachyos-kernel}/helpers.nix" {};
+  customKernelPackages = (helpers.kernelModuleLLVMOverride (pkgs.linuxKernel.packagesFor customKernel)).extend (self: super: {
+    ryzen-smu = super.ryzen-smu.override {
+      stdenv = pkgs.stdenv;
+    };
+  });
+in
 {
   networking.hostName = "white-dwarf";
 
@@ -19,7 +33,7 @@
     ../common/profiles/vpn.nix
   ];
 
-  boot.kernelPackages = lib.mkDefault pkgs.nix-cachyos-kernel.linuxPackages-cachyos-latest;
+  boot.kernelPackages = lib.mkDefault customKernelPackages;
 
   boot.kernelModules = [
     "v4l2loopback"
