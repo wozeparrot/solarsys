@@ -134,6 +134,16 @@
       package = pkgs.ungoogled-chromium;
     };
 
+    ssh = {
+      enable = true;
+      enableDefaultConfig = false;
+      matchBlocks."*" = {
+        controlMaster = "auto";
+        controlPath = "~/.ssh/sockets/%r@%h-%p";
+        controlPersist = "10m";
+      };
+    };
+
     keychain = {
       enable = true;
       enableXsessionIntegration = false;
@@ -199,6 +209,23 @@
   stylix.targets.hyprlock.enable = false;
   stylix.targets.gnome-text-editor.enable = false;
   stylix.targets.firefox.enable = false;
+
+  # ensure ssh socket directory exists
+  home.file.".ssh/sockets/.keep".text = "";
+  # home-manager wrongly thinks it doesn't manage (and thus shouldn't clobber) this file due to the activation script
+  home.file.".ssh/config".force = true;
+
+  home.activation = {
+    # https://github.com/nix-community/home-manager/issues/322
+    fixSshPermissions = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+      run install -d -m 0700 "$HOME/.ssh"
+      if [ -L "$HOME/.ssh/config" ]; then
+        src="$(readlink -f "$HOME/.ssh/config")"
+        run rm -f "$HOME/.ssh/config"
+        run install -m 0600 "$src" "$HOME/.ssh/config"
+      fi
+    '';
+  };
 
   # home stuff
   home = {

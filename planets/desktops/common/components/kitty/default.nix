@@ -1,5 +1,9 @@
 { pkgs, lib, ... }:
 {
+  xdg.configFile."kitty/ssh.conf".text = ''
+    share_connections yes
+  '';
+
   programs.kitty = {
     enable = true;
     font = {
@@ -38,6 +42,12 @@
       window_padding_width = 8;
 
       allow_remote_control = true;
+    };
+    keybindings = {
+      "ctrl+shift+enter" = "launch --cwd=current --type=window";
+      "ctrl+shift+t" = "launch --cwd=current --type=tab";
+      "ctrl+shift+alt+enter" = "launch --type=window";
+      "ctrl+shift+alt+t" = "launch --type=tab";
     };
   };
 }
