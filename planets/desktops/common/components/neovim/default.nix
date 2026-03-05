@@ -138,15 +138,15 @@ in
       }
       {
         mode = "n";
-        key = "<leader>bbn";
+        key = "<S-k>";
         action = "<cmd>BufferLineMoveNext<CR>";
-        options.silent = true;
+        options = { silent = true; desc = "Move buffer right"; };
       }
       {
         mode = "n";
-        key = "<leader>bbm";
+        key = "<S-j>";
         action = "<cmd>BufferLineMovePrev<CR>";
-        options.silent = true;
+        options = { silent = true; desc = "Move buffer left"; };
       }
       {
         mode = "n";
@@ -564,7 +564,6 @@ in
       fd
       ripgrep
       glow
-      black
       cargo
       deno
       go
@@ -624,7 +623,10 @@ in
               "diff"
             ];
             lualine_c = [
-              "filename"
+              {
+                __unkeyed-1 = "filename";
+                path = 1;
+              }
               {
                 __unkeyed-1 = "diagnostics";
                 sources = [ "nvim_lsp" ];
@@ -683,15 +685,15 @@ in
             left_trunc_marker = "";
             right_trunc_marker = "";
             separator_style = "thin";
-            max_name_length = 18;
-            max_prefix_length = 15;
-            tab_size = 18;
+            max_name_length = 30;
+            max_prefix_length = 25;
+            tab_size = 1;
             show_buffer_icons = true;
             show_buffer_close_icons = true;
             show_close_icon = true;
             show_tab_indicators = true;
             persist_buffer_sort = true;
-            enforce_regular_tabs = true;
+            enforce_regular_tabs = false;
             always_show_bufferline = true;
             offsets = [
               {
@@ -973,7 +975,13 @@ in
         servers = {
           zls.enable = true;
           nil_ls.enable = true;
-          pyright.enable = true;
+          basedpyright = {
+            enable = true;
+            settings.basedpyright.analysis = {
+              typeCheckingMode = "standard";
+            };
+          };
+          ruff.enable = true;
           lua_ls = {
             enable = true;
             settings = {
@@ -1018,7 +1026,7 @@ in
         settings = {
           formatters_by_ft = {
             nix = [ "nixfmt" ];
-            python = [ "black" ];
+            python = [ "ruff_format" ];
             lua = [ "stylua" ];
           };
         };
@@ -1076,6 +1084,10 @@ in
           };
           completion = {
             menu.auto_show = true;
+            documentation = {
+              auto_show = true;
+              auto_show_delay_ms = 200;
+            };
           };
         };
       };
