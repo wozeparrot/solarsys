@@ -14,8 +14,11 @@ function monitor_hotplug() {
     info "checking monitor hotplug config: $(basename "$file") with signature: $file_sig"
 
     if [[ "$current_sig" == "$file_sig" ]]; then
+      local layout_name="${file##*/}"
+      layout_name="${layout_name%.json}"
       info "applying monitor hotplug config: $(basename "$file")"
       eval "$(jq -r '.commands[]' "$file")"
+      hyprctl notify 1 5000 0 "Monitor layout: $layout_name"
       return 0
     fi
   done

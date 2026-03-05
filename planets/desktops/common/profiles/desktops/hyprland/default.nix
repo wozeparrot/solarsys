@@ -1,4 +1,43 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
+let
+  system = pkgs.stdenv.hostPlatform.system;
+  hyprDeps = inputs.hyprland.inputs;
+
+  edge-glow = pkgs.stdenv.mkDerivation {
+    pname = "hyprland-edge-glow";
+    version = "0.1.0";
+    src = ./edge-glow;
+
+    nativeBuildInputs = [ pkgs.pkg-config ];
+    buildInputs = [
+      pkgs.hyprland.hyprland.dev
+      hyprDeps.aquamarine.packages.${system}.aquamarine.dev
+      hyprDeps.hyprcursor.packages.${system}.hyprcursor.dev
+      hyprDeps.hyprgraphics.packages.${system}.hyprgraphics.dev
+      hyprDeps.hyprlang.packages.${system}.hyprlang.dev
+      hyprDeps.hyprutils.packages.${system}.hyprutils.dev
+      pkgs.libinput.dev
+      pkgs.libdrm.dev
+      pkgs.cairo.dev
+      pkgs.libxkbcommon.dev
+      pkgs.wayland.dev
+      pkgs.xorg.libxcb.dev
+      pkgs.xorg.xcbutilwm.dev
+      pkgs.xorg.xcbutilerrors.dev
+      pkgs.pixman
+      pkgs.libGL.dev
+      pkgs.mesa
+    ];
+
+    env.HYPRLAND_COMMIT = inputs.hyprland.rev;
+
+    buildPhase = "make";
+    installPhase = ''
+      mkdir -p $out/lib
+      cp edge-glow.so $out/lib/
+    '';
+  };
+in
 {
   imports = [ ../common/wayland ];
 
@@ -18,6 +57,14 @@
             general {
               col.active_border=${rgb base0D}
               col.inactive_border=${rgb base03}
+            }
+
+            exec-once = hyprctl plugin load ${edge-glow}/lib/edge-glow.so
+
+            plugin:edge-glow {
+              range = 24
+              power = 2.0
+              alpha = 1.0
             }
           ''
         );
@@ -271,6 +318,7 @@
 
       hyprctl keyword workspace w[tv1], gapsout:16,rounding:16
     '')
+    hyprshutdown
   ];
 
   programs.hyprland = {
