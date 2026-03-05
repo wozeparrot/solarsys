@@ -227,6 +227,12 @@
     };
   };
 
+  console = {
+    earlySetup = true;
+    font = "ter-v24n";
+    packages = [ pkgs.terminus_font ];
+  };
+
   services.udev.packages = [ pkgs.gnome-settings-daemon ];
 
   # environment
