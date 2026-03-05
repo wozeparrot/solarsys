@@ -31,9 +31,10 @@
       '')
 
       (pkgs.writeShellScriptBin "wl-freeze-screenshot" ''
-        wayfreeze & PID=$!
-        grim -g "$(slurp)" - | swappy -f - -o - | pngquant -o - - | wl-copy -t 'image/png'
-        kill $PID
+        TMP=$(mktemp /tmp/screenshot-XXXXXX.png)
+        wayfreeze --after-freeze-cmd "grim -g \"\$(slurp)\" $TMP; kill \$PPID"
+        swappy -f "$TMP" -o - | pngquant -o - - | wl-copy -t 'image/png'
+        rm -f "$TMP"
       '')
 
       (pkgs.writeShellScriptBin "wl-launcher" ''
