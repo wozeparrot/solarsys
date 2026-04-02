@@ -27,6 +27,7 @@ let
       pkgs.pixman
       pkgs.libGL.dev
       pkgs.mesa
+      pkgs.glslang
     ];
 
     env.HYPRLAND_COMMIT = inputs.hyprland.rev;
