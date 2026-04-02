@@ -8,38 +8,14 @@
 #include <hyprland/src/render/Renderer.hpp>
 #include <hyprland/src/render/Shader.hpp>
 #include <hyprland/src/render/Texture.hpp>
-#include <hyprland/src/render/pass/PassElement.hpp>
 #include <hyprland/src/protocols/types/SurfaceState.hpp>
 #include <hyprland/src/protocols/core/Compositor.hpp>
+#include <hyprland/src/protocols/core/Subcompositor.hpp>
 #include <hyprland/src/debug/log/Logger.hpp>
+#include <set>
 #include "Shaders.hpp"
 
 extern HANDLE PHANDLE;
-
-// ── Render pass element ──────────────────────────────────────────────────────
-
-class CGlowPassElement : public IPassElement {
-  public:
-    struct SGlowData {
-        CEdgeGlow* deco = nullptr;
-        float      a    = 1.0f;
-    };
-
-    CGlowPassElement(const SGlowData& data) : m_data(data) {}
-    virtual ~CGlowPassElement() = default;
-
-    virtual void draw(const CRegion& damage) override {
-        m_data.deco->render(g_pHyprOpenGL->m_renderData.pMonitor.lock(), m_data.a);
-    }
-
-    virtual bool        needsLiveBlur() override { return false; }
-    virtual bool        needsPrecomputeBlur() override { return false; }
-    virtual bool        disableSimplification() override { return true; }
-    virtual const char* passName() override { return "CGlowPassElement"; }
-
-  private:
-    SGlowData m_data;
-};
 
 // ── Shader globals ───────────────────────────────────────────────────────────
 
@@ -126,15 +102,71 @@ static void ensureShaders() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
+// ── Subsurface texture helper ─────────────────────────────────────────────────
+
+static SP<ITexture> getWindowTexture(PHLWINDOW window) {
+    auto res = window->resource();
+    if (!res)
+        return nullptr;
+
+    // Walk the full surface tree (toplevel + subsurfaces) and pick the
+    // largest texture.  This handles both simple single-surface clients
+    // and subsurface-heavy apps like Firefox / Thunderbird whose toplevel
+    // surface may only carry a tiny placeholder buffer.
+    SP<ITexture> best;
+    double       bestArea = 0;
+    int          surfCount = 0, texCount = 0;
+    res->breadthfirst([&](SP<CWLSurfaceResource> surf, const Vector2D& offset, void*) {
+        surfCount++;
+        auto tex = surf->m_current.texture;
+        if (!tex)
+            return;
+        texCount++;
+        double area = surf->m_current.size.x * surf->m_current.size.y;
+        if (area > bestArea) {
+            bestArea = area;
+            best     = tex;
+        }
+    }, nullptr);
+
+    if (!best) {
+        static std::set<std::string> s_seenNoTex;
+        if (!s_seenNoTex.contains(window->m_class)) {
+            s_seenNoTex.insert(window->m_class);
+            HyprlandAPI::addNotification(PHANDLE,
+                std::format("[edge-glow] no texture: surfs={} withTex={} class={}",
+                    surfCount, texCount, window->m_class),
+                CHyprColor{1.0, 0.5, 0.0, 1.0}, 5000);
+        }
+    }
+    return best;
+}
+
 // ── IHyprWindowDecoration ────────────────────────────────────────────────────
 
 CEdgeGlow::CEdgeGlow(PHLWINDOW pWindow) : IHyprWindowDecoration(pWindow), m_pWindow(pWindow) {
-    auto res = pWindow->resource();
-    if (res)
-        m_commitListener = res->m_events.commit.listen([this]() { damageEntire(); });
+    updateSubsurfaceListeners();
 }
 
 CEdgeGlow::~CEdgeGlow() {}
+
+void CEdgeGlow::updateSubsurfaceListeners() {
+    m_subsurfaceCommitListeners.clear();
+
+    const auto PWINDOW = m_pWindow.lock();
+    if (!PWINDOW)
+        return;
+
+    auto res = PWINDOW->resource();
+    if (!res)
+        return;
+
+    res->breadthfirst([this](SP<CWLSurfaceResource> surf, const Vector2D& offset, void*) {
+        m_subsurfaceCommitListeners.emplace_back(
+            surf->m_events.commit.listen([this]() { damageEntire(); })
+        );
+    }, nullptr);
+}
 
 SDecorationPositioningInfo CEdgeGlow::getPositioningInfo() {
     SDecorationPositioningInfo info;
@@ -152,6 +184,7 @@ eDecorationType CEdgeGlow::getDecorationType() {
 }
 
 void CEdgeGlow::updateWindow(PHLWINDOW pWindow) {
+    updateSubsurfaceListeners();
     damageEntire();
 }
 
@@ -185,7 +218,7 @@ uint64_t CEdgeGlow::getDecorationFlags() {
     return DECORATION_PART_OF_MAIN_WINDOW | DECORATION_NON_SOLID;
 }
 
-// draw() enqueues a render pass element — no direct GL here
+// draw() enqueues a pass element — rendered via hooked IHyprRenderer::draw()
 void CEdgeGlow::draw(PHLMONITOR pMonitor, float const& a) {
     const auto PWINDOW = m_pWindow.lock();
     if (!PWINDOW || !PWINDOW->m_isMapped)
@@ -203,6 +236,16 @@ void CEdgeGlow::draw(PHLMONITOR pMonitor, float const& a) {
 
     m_wasGlowing = true;
 
+    {
+        static std::set<std::string> s_seenDraw;
+        if (!s_seenDraw.contains(PWINDOW->m_class)) {
+            s_seenDraw.insert(PWINDOW->m_class);
+            HyprlandAPI::addNotification(PHANDLE,
+                std::format("[edge-glow] draw() focused class={}", PWINDOW->m_class),
+                CHyprColor{0.2, 0.6, 1.0, 1.0}, 3000);
+        }
+    }
+
     ensureShaders();
     if (!g_pGlowShader || !g_vao)
         return;
@@ -213,7 +256,7 @@ void CEdgeGlow::draw(PHLMONITOR pMonitor, float const& a) {
     g_pHyprRenderer->m_renderPass.add(makeUnique<CGlowPassElement>(data));
 }
 
-// render() does the actual GL work — called by CGlowPassElement::draw()
+// render() does the actual GL work — called from hooked IHyprRenderer::draw()
 void CEdgeGlow::render(PHLMONITOR pMonitor, float const& a) {
     const auto PWINDOW = m_pWindow.lock();
     if (!PWINDOW || !pMonitor)
@@ -249,36 +292,30 @@ void CEdgeGlow::render(PHLMONITOR pMonitor, float const& a) {
     glowBox.h += 2 * std::round(scaledRange);
 
     // Apply render modifications (matches window surface rendering pipeline)
-    g_pHyprOpenGL->m_renderData.renderModif.applyToBox(glowBox);
+    g_pHyprRenderer->m_renderData.renderModif.applyToBox(glowBox);
 
     if (glowBox.w < 1 || glowBox.h < 1)
         return;
 
-    // Get window texture
-    auto pResource = PWINDOW->resource();
-    if (!pResource) {
-        static bool s_loggedNoResource = false;
-        if (!s_loggedNoResource) {
-            Log::logger->log(Log::WARN, "[edge-glow] focused window has null resource()");
-            s_loggedNoResource = true;
-        }
+    // Get window texture (picks largest surface in tree — handles subsurface apps)
+    auto tex = getWindowTexture(PWINDOW);
+    if (!tex)
         return;
-    }
-    auto tex = pResource->m_current.texture;
-    if (!tex) {
-        static bool s_loggedNoTexture = false;
-        if (!s_loggedNoTexture) {
-            Log::logger->log(Log::WARN, "[edge-glow] focused window has null m_current.texture");
-            s_loggedNoTexture = true;
-        }
-        return;
-    }
 
     // Select shader variant
     bool isExternal = (tex->m_type == TEXTURE_EXTERNAL);
     auto& shader    = isExternal ? g_pGlowShaderExt : g_pGlowShader;
-    if (!shader)
+    if (!shader) {
+        static bool s_notified = false;
+        if (!s_notified) {
+            s_notified = true;
+            HyprlandAPI::addNotification(PHANDLE,
+                std::format("[edge-glow] {} shader is null! class={}",
+                    isExternal ? "external" : "standard", PWINDOW->m_class),
+                CHyprColor{1.0, 0.2, 0.2, 1.0}, 5000);
+        }
         return;
+    }
 
     GLuint prog        = shader->program();
     GLint locProj      = isExternal ? g_locProjExt      : g_locProj;
@@ -292,8 +329,7 @@ void CEdgeGlow::render(PHLMONITOR pMonitor, float const& a) {
     GLint locAlpha     = isExternal ? g_locAlphaExt      : g_locAlpha;
 
     // Projection matrix
-    Mat3x3 matrix   = g_pHyprOpenGL->m_renderData.monitorProjection.projectBox(glowBox, HYPRUTILS_TRANSFORM_NORMAL, glowBox.rot);
-    Mat3x3 glMatrix = g_pHyprOpenGL->m_renderData.projection.copy().multiply(matrix);
+    Mat3x3 glMatrix = g_pHyprRenderer->projectBoxToTarget(glowBox);
 
     // Pixel-space values — derive window bounds from glowBox to avoid rounding mismatch
     float roundingPx = PWINDOW->rounding() * pMonitor->m_scale;
@@ -328,7 +364,7 @@ void CEdgeGlow::render(PHLMONITOR pMonitor, float const& a) {
     glUniform1f(locRounding, roundingPx);
     glUniform1f(locAlpha, glowAlpha * a);
 
-    g_pHyprOpenGL->blend(true);
+    g_pHyprRenderer->blend(true);
 
     glBindVertexArray(g_vao);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);

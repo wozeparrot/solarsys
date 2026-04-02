@@ -87,9 +87,12 @@ inline const std::string GLOW_FRAG_TEMPLATE = R"(#version 300 es
                        + texture(tex, uv3) * 0.17;
 
         float falloff = pow(1.0 - dist / range, power);
-        // use edge alpha; texture is premultiplied so scale rgb by our falloff only
         float fa = falloff * alpha;
-        fragColor = vec4(edgeColor.rgb * fa, edgeColor.a * fa);
+        // For RGBA premultiplied: edgeColor.rgb = true_rgb * a, so dividing
+        // by a recovers true_rgb. For XRGB (DMA-BUF): a may be 0 but rgb
+        // holds raw colors — treat as opaque (a=1).
+        vec3 rgb = edgeColor.a > 0.004 ? edgeColor.rgb / edgeColor.a : edgeColor.rgb;
+        fragColor = vec4(rgb * fa, fa);
     }
 )";
 
