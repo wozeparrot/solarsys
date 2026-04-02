@@ -176,7 +176,6 @@
 
     programs.waybar = {
       enable = true;
-      # package = pkgs.waybar.waybar; # TODO: broken
       systemd.enable = true;
       settings = [
         {
@@ -274,8 +273,8 @@
 
           "backlight" = {
             format = "{percent}% ";
-            on-scroll-up = "${pkgs.light}/bin/light -A 1";
-            on-scroll-down = "${pkgs.light}/bin/light -U 1";
+            on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl s +1%";
+            on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl s 1%-";
           };
 
           "cpu" = {
