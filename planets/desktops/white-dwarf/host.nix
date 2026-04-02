@@ -83,14 +83,17 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
     extraPackages = with pkgs; [
-      rocmPackages.clr
-      rocmPackages.clr.icd
+      mesa.opencl
       intel-compute-runtime
     ];
   };
+  hardware.amdgpu.opencl.enable = true;
   hardware.uinput.enable = true;
   hardware.opentabletdriver.enable = true;
+  hardware.enableAllFirmware = true;
 
   networking.firewall.allowedTCPPorts = [ 29999 ];
   networking.firewall.allowedUDPPorts = [ 29999 ];
@@ -182,6 +185,12 @@ in
     SUBSYSTEM=="usb", ATTR{idVendor}=="1fc9", ATTR{manufacturer}=="Qudelix,Inc.", MODE="0666", GROUP="plugdev", TAG+="uaccess", TAG+="udev-acl"
     SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ATTRS{idVendor}=="1fc9", MODE="0666", GROUP="plugdev"
     SUBSYSTEM=="usb", ATTR{idVendor}=="1fc9", ATTR{manufacturer}=="Qudelix,Inc.", ENV{DEVTYPE}=="usb_device", MODE="0666", GROUP="plugdev", TAG+="uaccess"
+
+    # sunxi fel
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="1f3a", ATTRS{idProduct}=="efe8", MODE="0666", TAG+="uaccess"
+
+    # test
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="0001", MODE="0666", TAG+="uaccess"
   '';
   services.udev.packages = with pkgs; [
     openocd
