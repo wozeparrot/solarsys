@@ -17,25 +17,26 @@
   home.packages = with pkgs; [
     # cli/tui untilities
     appimage-run
-    beets
+    # beets # TODO: https://github.com/NixOS/nixpkgs/pull/495609
     chromaprint
     cryptsetup
     spotdl
-    topydo
+    # topydo # TODO: broken
     ffmpeg
+    exiftool
     gemini-cli
     opencode
     claude-code
     claude-code-router
-    # gurk-rs
+    # gurk-rs # TODO: broken
     imv
     inotify-tools
     iotop
     mpc
-    neofetch
+    fastfetch
     nom.default
     p7zip
-    # papis
+    # papis # TODO: broken
     (python3.withPackages (
       ps: with ps; [
         distro
@@ -62,7 +63,7 @@
 
     # applications
     antimicrox
-    # antimony
+    # antimony # TODO: broken
     audacity
     pkgsRocm.blender
     master.darktable
@@ -74,11 +75,13 @@
     gnome-disk-utility
     jamesdsp
     keepassxc
-    # kicad
+    # kicad # TODO: broken
     krita
     libreoffice-fresh
-    # kdePackages.kdenlive
-    # nheko
+    davinci-resolve-studio
+    kdePackages.kdenlive # TODO: broken
+    flowblade
+    # nheko # TODO: broken
     openscad
     prismlauncher
     prusa-slicer
@@ -86,7 +89,7 @@
     roomeqwizard
     signal-desktop
     sioyek
-    # solvespace
+    # solvespace # TODO: broken
     horizon-eda
     thunderbird-latest
     transmission_4-gtk
@@ -167,7 +170,7 @@
       plugins = with pkgs.obs-studio-plugins; [
         droidcam-obs
         input-overlay
-        # looking-glass-obs
+        # looking-glass-obs # TODO: broken
         obs-gstreamer
         obs-move-transition
         obs-shaderfilter
