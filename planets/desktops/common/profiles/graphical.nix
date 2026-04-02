@@ -227,12 +227,6 @@
     };
   };
 
-  console = {
-    earlySetup = true;
-    font = "ter-v24n";
-    packages = [ pkgs.terminus_font ];
-  };
-
   services.udev.packages = [ pkgs.gnome-settings-daemon ];
 
   # environment
@@ -240,7 +234,7 @@
     systemPackages = with pkgs; [
       pwvucontrol
       paprefs
-      helvum
+      crosspipe
       pamixer
       bankstown-lv2
 
