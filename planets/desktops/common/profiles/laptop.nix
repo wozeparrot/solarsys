@@ -17,6 +17,7 @@
     acpi
     lm_sensors
     wirelesstools
+    brightnessctl
   ];
 
   # enable bluetooth
@@ -26,9 +27,6 @@
       Experimental = true;
     };
   };
-
-  # backlight control
-  programs.light.enable = true;
 
   # power management
   boot.kernelParams = [ "rcutree.enable_rcu_lazy=1" ];
@@ -41,4 +39,5 @@
 
   # lid switch
   services.logind.settings.Login.HandleLidSwitch = lib.mkDefault "suspend";
+  services.logind.settings.Login.HandleBrightnessKey = "ignore";
 }
