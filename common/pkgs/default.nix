@@ -31,6 +31,9 @@ self: super: {
     xencelabs = self.libsForQt5.callPackage ./xencelabs { };
 
     vulkan-hdr-layer = self.callPackage ./vulkan-hdr-layer { };
+
+    davinci-resolve = self.callPackage ./davinci-resolve { };
+    davinci-resolve-studio = self.callPackage ./davinci-resolve { studioVariant = true; };
   };
 
   # yt-dlp = self.python3Packages.callPackage ./yt-dlp { };
