@@ -10,10 +10,10 @@
     yabridgectl
 
     # Plugins
-    infamousPlugins # TODO: broken
-    CHOWTapeModel
-    ChowKick
-    LibreArp-lv2
+    infamousPlugins
+    chow-tape-model
+    chow-kick
+    librearp-lv2
     aeolus
     aether-lv2
     airwindows-lv2
@@ -24,7 +24,6 @@
     calf
     cardinal
     delayarchitect
-    distrho
     dragonfly-reverb
     drumgizmo
     drumkv1
@@ -41,7 +40,7 @@
     magnetophonDSP.LazyLimiter
     magnetophonDSP.MBdistortion
     magnetophonDSP.RhythmDelay
-    # magnetophonDSP.VoiceOfFaust # TODO: broken
+    magnetophonDSP.VoiceOfFaust
     magnetophonDSP.faustCompressors
     magnetophonDSP.shelfMultiBand
     mda_lv2
@@ -61,7 +60,7 @@
     x42-plugins
     yoshimi
     zam-plugins
-    zyn-fusion
+    zynaddsubfx
   ];
 
   home.sessionVariables = {
