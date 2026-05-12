@@ -2,7 +2,6 @@
 
 #include <hyprland/src/render/decorations/IHyprWindowDecoration.hpp>
 #include <hyprland/src/render/pass/PassElement.hpp>
-#include <hyprland/src/helpers/signal/Signal.hpp>
 
 class CEdgeGlow : public IHyprWindowDecoration {
   public:
@@ -21,15 +20,12 @@ class CEdgeGlow : public IHyprWindowDecoration {
     void                                    render(PHLMONITOR, float const& a);
 
   private:
-    void                                    updateSubsurfaceListeners();
-
     PHLWINDOWREF                            m_pWindow;
-    std::vector<CHyprSignalListener>        m_subsurfaceCommitListeners;
     CBox                                    m_lastDamageBox;
     bool                                    m_wasGlowing = false;
 };
 
-// Pass element for the glow effect — dispatched via hooked IHyprRenderer::draw()
+// Pass element for the glow effect — uses EK_CUSTOM + virtual draw()
 class CGlowPassElement : public IPassElement {
   public:
     struct SGlowData {
@@ -40,11 +36,12 @@ class CGlowPassElement : public IPassElement {
     CGlowPassElement(const SGlowData& data) : m_data(data) {}
     virtual ~CGlowPassElement() = default;
 
+    virtual std::vector<UP<IPassElement>> draw() override;
     virtual bool             needsLiveBlur() override { return false; }
     virtual bool             needsPrecomputeBlur() override { return false; }
     virtual bool             disableSimplification() override { return true; }
     virtual const char*      passName() override { return "CGlowPassElement"; }
-    virtual ePassElementType type() override { return EK_UNKNOWN; }
+    virtual ePassElementType type() override { return EK_CUSTOM; }
 
     SGlowData m_data;
 };

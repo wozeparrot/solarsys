@@ -10,12 +10,23 @@
 #include <hyprland/src/render/Texture.hpp>
 #include <hyprland/src/protocols/types/SurfaceState.hpp>
 #include <hyprland/src/protocols/core/Compositor.hpp>
-#include <hyprland/src/protocols/core/Subcompositor.hpp>
 #include <hyprland/src/debug/log/Logger.hpp>
 #include <set>
 #include "Shaders.hpp"
 
+using Render::ITexture;
+using Render::TEXTURE_EXTERNAL;
+
 extern HANDLE PHANDLE;
+
+// ── CGlowPassElement::draw — called by the render pass during execution ──────
+
+std::vector<UP<IPassElement>> CGlowPassElement::draw() {
+    m_data.deco->render(
+        g_pHyprRenderer->m_renderData.pMonitor.lock(),
+        m_data.a);
+    return {};
+}
 
 // ── Shader globals ───────────────────────────────────────────────────────────
 
@@ -144,29 +155,9 @@ static SP<ITexture> getWindowTexture(PHLWINDOW window) {
 
 // ── IHyprWindowDecoration ────────────────────────────────────────────────────
 
-CEdgeGlow::CEdgeGlow(PHLWINDOW pWindow) : IHyprWindowDecoration(pWindow), m_pWindow(pWindow) {
-    updateSubsurfaceListeners();
-}
+CEdgeGlow::CEdgeGlow(PHLWINDOW pWindow) : IHyprWindowDecoration(pWindow), m_pWindow(pWindow) {}
 
 CEdgeGlow::~CEdgeGlow() {}
-
-void CEdgeGlow::updateSubsurfaceListeners() {
-    m_subsurfaceCommitListeners.clear();
-
-    const auto PWINDOW = m_pWindow.lock();
-    if (!PWINDOW)
-        return;
-
-    auto res = PWINDOW->resource();
-    if (!res)
-        return;
-
-    res->breadthfirst([this](SP<CWLSurfaceResource> surf, const Vector2D& offset, void*) {
-        m_subsurfaceCommitListeners.emplace_back(
-            surf->m_events.commit.listen([this]() { damageEntire(); })
-        );
-    }, nullptr);
-}
 
 SDecorationPositioningInfo CEdgeGlow::getPositioningInfo() {
     SDecorationPositioningInfo info;
@@ -184,26 +175,22 @@ eDecorationType CEdgeGlow::getDecorationType() {
 }
 
 void CEdgeGlow::updateWindow(PHLWINDOW pWindow) {
-    updateSubsurfaceListeners();
     damageEntire();
 }
 
 void CEdgeGlow::damageEntire() {
     const auto PWINDOW = m_pWindow.lock();
-    if (!PWINDOW)
+    if (!PWINDOW || !PWINDOW->m_isMapped)
         return;
 
-    static auto PRANGE = CConfigValue<Hyprlang::INT>("plugin:edge-glow:range");
-    const int   range = *PRANGE;
+    const int range = std::any_cast<Hyprlang::INT>(HyprlandAPI::getConfigValue(PHANDLE, "plugin:edge-glow:range")->getValue());
 
-    // Use animated position/size so damage tracks resize/move animations
     auto pos = PWINDOW->m_realPosition->value();
     auto siz = PWINDOW->m_realSize->value();
     CBox dmg = {pos.x - range, pos.y - range,
                 siz.x + 2 * range, siz.y + 2 * range};
     g_pHyprRenderer->damageBox(dmg);
 
-    // Also damage the previous glow area to clear old artifacts on resize/move
     if (m_lastDamageBox.w > 0 && m_lastDamageBox.h > 0)
         g_pHyprRenderer->damageBox(m_lastDamageBox);
 
@@ -218,7 +205,7 @@ uint64_t CEdgeGlow::getDecorationFlags() {
     return DECORATION_PART_OF_MAIN_WINDOW | DECORATION_NON_SOLID;
 }
 
-// draw() enqueues a pass element — rendered via hooked IHyprRenderer::draw()
+// draw() enqueues a pass element — rendered via CGlowPassElement::draw()
 void CEdgeGlow::draw(PHLMONITOR pMonitor, float const& a) {
     const auto PWINDOW = m_pWindow.lock();
     if (!PWINDOW || !PWINDOW->m_isMapped)
@@ -256,66 +243,46 @@ void CEdgeGlow::draw(PHLMONITOR pMonitor, float const& a) {
     g_pHyprRenderer->m_renderPass.add(makeUnique<CGlowPassElement>(data));
 }
 
-// render() does the actual GL work — called from hooked IHyprRenderer::draw()
+// render() does the actual GL work — called from CGlowPassElement::draw()
 void CEdgeGlow::render(PHLMONITOR pMonitor, float const& a) {
     const auto PWINDOW = m_pWindow.lock();
     if (!PWINDOW || !pMonitor)
         return;
 
-    static auto PRANGE = CConfigValue<Hyprlang::INT>("plugin:edge-glow:range");
-    static auto PPOWER = CConfigValue<Hyprlang::FLOAT>("plugin:edge-glow:power");
-    static auto PALPHA = CConfigValue<Hyprlang::FLOAT>("plugin:edge-glow:alpha");
-    const int   range     = *PRANGE;
-    const float power     = static_cast<float>(*PPOWER);
-    const float glowAlpha = static_cast<float>(*PALPHA);
+    const int   range     = std::any_cast<Hyprlang::INT>(HyprlandAPI::getConfigValue(PHANDLE, "plugin:edge-glow:range")->getValue());
+    const float power     = std::any_cast<Hyprlang::FLOAT>(HyprlandAPI::getConfigValue(PHANDLE, "plugin:edge-glow:power")->getValue());
+    const float glowAlpha = std::any_cast<Hyprlang::FLOAT>(HyprlandAPI::getConfigValue(PHANDLE, "plugin:edge-glow:alpha")->getValue());
 
-    // Window box from animated position/size (tracks resize smoothly)
     CBox windowBox = {PWINDOW->m_realPosition->value().x, PWINDOW->m_realPosition->value().y,
                       PWINDOW->m_realSize->value().x, PWINDOW->m_realSize->value().y};
 
-    // Workspace offset
     const auto PWORKSPACE      = PWINDOW->m_workspace;
     const auto WORKSPACEOFFSET = PWORKSPACE && !PWINDOW->m_pinned ? PWORKSPACE->m_renderOffset->value() : Vector2D();
 
-    // Scale window box first (same rounding as the window itself),
-    // then expand by scaled range in pixel space
     float scaledRange = range * pMonitor->m_scale;
 
     CBox glowBox = windowBox;
     glowBox.translate(-pMonitor->m_position + WORKSPACEOFFSET);
     glowBox.translate(PWINDOW->m_floatingOffset);
     glowBox.scale(pMonitor->m_scale).round();
-    // expand in pixel space so center matches the window's rounded position
     glowBox.x -= std::round(scaledRange);
     glowBox.y -= std::round(scaledRange);
     glowBox.w += 2 * std::round(scaledRange);
     glowBox.h += 2 * std::round(scaledRange);
 
-    // Apply render modifications (matches window surface rendering pipeline)
     g_pHyprRenderer->m_renderData.renderModif.applyToBox(glowBox);
 
     if (glowBox.w < 1 || glowBox.h < 1)
         return;
 
-    // Get window texture (picks largest surface in tree — handles subsurface apps)
     auto tex = getWindowTexture(PWINDOW);
     if (!tex)
         return;
 
-    // Select shader variant
     bool isExternal = (tex->m_type == TEXTURE_EXTERNAL);
     auto& shader    = isExternal ? g_pGlowShaderExt : g_pGlowShader;
-    if (!shader) {
-        static bool s_notified = false;
-        if (!s_notified) {
-            s_notified = true;
-            HyprlandAPI::addNotification(PHANDLE,
-                std::format("[edge-glow] {} shader is null! class={}",
-                    isExternal ? "external" : "standard", PWINDOW->m_class),
-                CHyprColor{1.0, 0.2, 0.2, 1.0}, 5000);
-        }
+    if (!shader)
         return;
-    }
 
     GLuint prog        = shader->program();
     GLint locProj      = isExternal ? g_locProjExt      : g_locProj;
@@ -328,31 +295,26 @@ void CEdgeGlow::render(PHLMONITOR pMonitor, float const& a) {
     GLint locRounding  = isExternal ? g_locRoundingExt   : g_locRounding;
     GLint locAlpha     = isExternal ? g_locAlphaExt      : g_locAlpha;
 
-    // Projection matrix
     Mat3x3 glMatrix = g_pHyprRenderer->projectBoxToTarget(glowBox);
 
-    // Pixel-space values — derive window bounds from glowBox to avoid rounding mismatch
     float roundingPx = PWINDOW->rounding() * pMonitor->m_scale;
     float roundedRange = std::round(scaledRange);
-    float overlap = 2.0f; // pixels of glow extending under window edge
+    float overlap = 2.0f;
     float winL = roundedRange + overlap;
     float winT = roundedRange + overlap;
     float winR = glowBox.w - roundedRange - overlap;
     float winB = glowBox.h - roundedRange - overlap;
 
-    // Save GL state
     GLint prevProg = 0;
     glGetIntegerv(GL_CURRENT_PROGRAM, &prevProg);
     GLint prevVao = 0;
     glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &prevVao);
 
-    // Bind window texture
     glActiveTexture(GL_TEXTURE0);
     tex->bind();
 
     glUseProgram(prog);
 
-    // Set uniforms (all spatial values in pixels)
     auto mat = glMatrix.getMatrix();
     glUniformMatrix3fv(locProj, 1, GL_TRUE, mat.data());
     glUniform1i(locTex, 0);
@@ -369,7 +331,6 @@ void CEdgeGlow::render(PHLMONITOR pMonitor, float const& a) {
     glBindVertexArray(g_vao);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
-    // Restore GL state
     glBindVertexArray(prevVao);
     glUseProgram(prevProg);
     tex->unbind();
