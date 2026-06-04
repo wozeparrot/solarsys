@@ -9,6 +9,8 @@
     ../common/containered-services/blocky.nix
   ];
 
+  ss.orion.externalInterface = "enP4p1s0";
+
   # --- open ports ---
   networking.firewall = {
     allowedUDPPorts = [ ];
