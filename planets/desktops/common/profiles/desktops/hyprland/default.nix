@@ -21,9 +21,9 @@ let
       pkgs.cairo.dev
       pkgs.libxkbcommon.dev
       pkgs.wayland.dev
-      pkgs.xorg.libxcb.dev
-      pkgs.xorg.xcbutilwm.dev
-      pkgs.xorg.xcbutilerrors.dev
+      pkgs.libxcb.dev
+      pkgs.libxcb-wm.dev
+      pkgs.libxcb-errors.dev
       pkgs.pixman
       pkgs.libGL.dev
       pkgs.mesa
