@@ -24,12 +24,20 @@ in
       autoStart = true;
       ephemeral = true;
 
+      bindMounts = {
+        "/var/lib/nats" = {
+          hostPath = "/var/lib/nats";
+          isReadOnly = false;
+        };
+      };
+
       config =
         { cconfig, ... }:
         {
           services.nats = {
             enable = true;
             serverName = config.networking.hostName;
+            jetstream = true;
           };
 
           system.stateVersion = config.system.stateVersion;
