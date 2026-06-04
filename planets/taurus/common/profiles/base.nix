@@ -42,10 +42,10 @@
 
   # systemd tweaks
   systemd.enableEmergencyMode = false;
-  systemd.sleep.extraConfig = ''
-    AllowSuspend=no
-    AllowHibernation=no
-  '';
+  systemd.sleep.settings.Sleep = {
+    AllowSuspend = "no";
+    AllowHibernation = "no";
+  };
   boot.initrd.systemd.enable = true;
 
   # firewall
