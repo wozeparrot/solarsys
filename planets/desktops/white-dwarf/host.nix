@@ -13,9 +13,23 @@ let
   };
   helpers = pkgs.callPackage "${inputs.nix-cachyos-kernel}/helpers.nix" {};
   customKernelPackages = (helpers.kernelModuleLLVMOverride (pkgs.linuxKernel.packagesFor customKernel)).extend (self: super: {
-    ryzen-smu = super.ryzen-smu.override {
-      stdenv = pkgs.stdenv;
-    };
+    ryzen-smu = super.ryzen-smu.overrideAttrs (old: {
+      makeFlags = (old.makeFlags or []) ++ helpers.ltoMakeflags;
+      postPatch = (old.postPatch or "") + ''
+        substituteInPlace userspace/Makefile --replace-fail "gcc" "cc"
+      '';
+      postBuild = (old.postBuild or "") + ''
+        make -C userspace
+      '';
+      installPhase = let
+        modDirVersion = super.kernel.modDirVersion;
+      in ''
+        runHook preInstall
+        install ryzen_smu.ko -Dm444 -t $out/lib/modules/${modDirVersion}/kernel/drivers/ryzen_smu
+        install userspace/monitor_cpu -Dm755 -t $out/bin
+        runHook postInstall
+      '';
+    });
   });
 in
 {
@@ -137,7 +151,14 @@ in
   };
   programs.gamemode.enable = true;
   programs.corectrl.enable = true;
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    extest.enable = true;
+    extraPackages = with pkgs; [
+      hidapi
+    ];
+  };
+  hardware.steam-hardware.enable = true;
 
   systemd.tmpfiles.rules = [ "f /dev/shm/looking-glass 0660 woze kvm -" ];
 
