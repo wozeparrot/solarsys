@@ -327,6 +327,7 @@
                 rsync
                 shellcheck
                 socat
+                natscli
               ])
               ++ [ solarsys ];
           };
