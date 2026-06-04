@@ -11,6 +11,7 @@ self: super: {
     sonobus = self.callPackage ./sonobus { };
     veikk-driver = self.callPackage ./veikk-driver { };
     zrythm = self.callPackage ./zrythm { };
+    reaper = self.callPackage ./reaper { };
 
     matrix-conduit = self.callPackage ./matrix-conduit { };
 
@@ -35,7 +36,7 @@ self: super: {
     davinci-resolve = self.callPackage ./davinci-resolve { };
     davinci-resolve-studio = self.callPackage ./davinci-resolve { studioVariant = true; };
 
-    reaper-js-reascriptapi-extension = self.callPackage ./reaper-js_reascriptapi-extension { };
+    reaper-js_reascriptapi-extension = self.callPackage ./reaper-js_reascriptapi-extension { };
     reaper-reaimgui-extension = self.callPackage ./reaper-reaimgui-extension { };
   };
 
