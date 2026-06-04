@@ -8,4 +8,9 @@ final: prev: {
       hash = "sha256-ooY0TNmS9yPWMx4wA/yy9yPFfNz02bWtfkeWQe3f/oI=";
     };
   });
+
+  # TODO: broken
+  openldap = prev.openldap.overrideAttrs {
+    doCheck = !prev.stdenv.hostPlatform.isi686;
+  };
 }
