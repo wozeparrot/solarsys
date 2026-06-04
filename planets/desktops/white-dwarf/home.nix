@@ -24,6 +24,26 @@
 
   programs.btop.package = pkgs.btop-rocm;
 
+  # surround quad
+  services.pipewire = {
+    clientConfigs = {
+      "99-simple-upmix" = {
+        "stream.properties" = {
+          "channelmix.upmix" = true;
+          "channelmix.upmix-method" = "psd";
+        };
+      };
+    };
+    pulseConfigs = {
+      "99-simple-upmix" = {
+        "stream.properties" = {
+          "channelmix.upmix" = true;
+          "channelmix.upmix-method" = "psd";
+        };
+      };
+    };
+  };
+
   systemd.user.services.mic-led-watcher = {
     Unit = {
       Description = "Syncs ZBook Mic LED with PipeWire Events";
