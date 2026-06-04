@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 {
   imports = [
     ./components/neovim
@@ -10,25 +10,24 @@
     ./components/kitty
     ./components/mpv
     # ./components/shfm
-    # ./components/musicprod
+    ./components/musicprod
   ];
 
   # packages
   home.packages = with pkgs; [
     # cli/tui untilities
     appimage-run
-    # beets # TODO: https://github.com/NixOS/nixpkgs/pull/495609
+    beets
     chromaprint
     cryptsetup
     spotdl
-    # topydo # TODO: broken
+    topydo
     ffmpeg
     exiftool
     gemini-cli
     opencode
-    claude-code
-    claude-code-router
-    # gurk-rs # TODO: broken
+    nur.repos.charmbracelet.crush
+    master.claude-code
     imv
     inotify-tools
     iotop
@@ -36,7 +35,7 @@
     fastfetch
     nom.default
     p7zip
-    # papis # TODO: broken
+    papis
     (python3.withPackages (
       ps: with ps; [
         distro
@@ -49,6 +48,7 @@
         bitarray
         evdev
         mfusepy
+        sounddevice
       ]
     ))
     r128gain
@@ -63,45 +63,43 @@
 
     # applications
     antimicrox
-    # antimony # TODO: broken
+    antimony
     audacity
-    pkgsRocm.blender
-    master.darktable
-    freecad
+    davinci-resolve-studio
     easyeffects
+    file-roller
+    freecad
     ghidra-bin
     gimp
-    file-roller
     gnome-disk-utility
+    horizon-eda
     jamesdsp
     keepassxc
-    # kicad # TODO: broken
+    kicad
     krita
     libreoffice-fresh
-    davinci-resolve-studio
-    kdePackages.kdenlive # TODO: broken
-    flowblade
-    # nheko # TODO: broken
-    openscad
+    master.darktable
+    openscad-unstable
+    pear-desktop
+    pkgsRocm.blender
     prismlauncher
     prusa-slicer
     rnote
     roomeqwizard
     signal-desktop
     sioyek
-    # solvespace # TODO: broken
-    horizon-eda
+    solvespace
     thunderbird-latest
     transmission_4-gtk
     vesktop
     zathura
 
     # gaming stuff
-    master.bottles
+    bottles
     (lutris.override { extraLibraries = pkgs: with pkgs; [ openssl ]; })
     gamescope
     gamescope-wsi
-    master.protontricks
+    protontricks
     nix-gaming.osu-lazer-bin
     unnamed-sdvx-clone
     the-powder-toy
@@ -212,6 +210,9 @@
   stylix.targets.hyprlock.enable = false;
   stylix.targets.gnome-text-editor.enable = false;
   stylix.targets.firefox.enable = false;
+
+  # themeing
+  gtk.gtk4.theme = config.gtk.theme;
 
   # ensure ssh socket directory exists
   home.file.".ssh/sockets/.keep".text = "";
