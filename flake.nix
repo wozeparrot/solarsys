@@ -16,6 +16,10 @@
     # flake stuff
     flake-utils.url = "github:numtide/flake-utils";
 
+    # nur
+    nur.url = "github:nix-community/NUR";
+    nur.inputs.nixpkgs.follows = "nixpkgs";
+
     # overlays + extra package sets + extra modules
     wozey.url = "github:wozeparrot/wozey.service";
     wozey.inputs = {
@@ -41,7 +45,6 @@
     zls.url = "github:zigtools/zls";
     zls.inputs = {
       nixpkgs.follows = "nixpkgs";
-      zig-overlay.follows = "zigf";
     };
 
     stylix.url = "github:danth/stylix";
@@ -142,6 +145,9 @@
     let
       # external/third-party stuff
       external = {
+        nur = {
+          overlays = inputs.nur.overlays.default;
+        };
         wozey = {
           inherit (inputs.wozey) packages;
         };
