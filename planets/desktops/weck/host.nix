@@ -81,7 +81,12 @@
     extest
   ];
 
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    extraPackages = with pkgs; [
+      hidapi
+    ];
+  };
   programs.steam.extest.enable = true;
 
   services.desktopManager.gnome.enable = true;
