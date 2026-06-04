@@ -34,6 +34,9 @@ self: super: {
 
     davinci-resolve = self.callPackage ./davinci-resolve { };
     davinci-resolve-studio = self.callPackage ./davinci-resolve { studioVariant = true; };
+
+    reaper-js-reascriptapi-extension = self.callPackage ./reaper-js_reascriptapi-extension { };
+    reaper-reaimgui-extension = self.callPackage ./reaper-reaimgui-extension { };
   };
 
   # yt-dlp = self.python3Packages.callPackage ./yt-dlp { };
