@@ -11,6 +11,8 @@
       size = 12;
     };
     settings = {
+      auto_reload_config = -1;
+
       editor = "nvim";
       disable_ligatures = "cursor";
       scrollback_lines = 10000;
