@@ -23,6 +23,8 @@ in
   home.packages = with pkgs; [ neovide ];
 
   programs.nixvim = {
+    nixpkgs.useGlobalPackages = true;
+
     enable = true;
     withNodeJs = true;
     luaLoader.enable = true;
