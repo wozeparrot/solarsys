@@ -136,10 +136,6 @@
 
     mcsr-nixos.url = "https://git.uku3lig.net/uku/mcsr-nixos/archive/main.tar.gz";
     mcsr-nixos.inputs.nixpkgs.follows = "nixpkgs";
-
-    ninjabrain-bot.url = "https://tangled.org/althaea.zone/ninjabrain-bot-nix/archive/trunk?format=tar.gz";
-    ninjabrain-bot.inputs.nixpkgs.follows = "nixpkgs";
-    ninjabrain-bot.inputs.mcsr-nixos.follows = "mcsr-nixos";
   };
 
   outputs =
@@ -250,11 +246,6 @@
           inherit (inputs.mcsr-nixos) packages;
           hm-modules = {
             mcsr-nixos = inputs.mcsr-nixos.homeManagerModules.waywall;
-          };
-        };
-        ninjabrain-bot = {
-          hm-modules = {
-            ninjabrain-bot = inputs.ninjabrain-bot.homeModules.default;
           };
         };
       };
