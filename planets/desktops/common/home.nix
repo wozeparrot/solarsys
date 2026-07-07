@@ -11,6 +11,7 @@
     ./components/mpv
     # ./components/shfm
     ./components/musicprod
+    ./components/mcsr
   ];
 
   # packages
@@ -58,14 +59,13 @@
     ss.mods
     swayimg
     unzip
-    waywall
     yt-dlp
 
     # applications
     antimicrox
     antimony
     audacity
-    davinci-resolve-studio
+    ss.davinci-resolve-studio
     easyeffects
     file-roller
     freecad
@@ -91,7 +91,6 @@
     solvespace
     thunderbird-latest
     transmission_4-gtk
-    vesktop
     zathura
 
     # gaming stuff
@@ -128,6 +127,7 @@
     firefox = {
       enable = true;
       package = pkgs.firefox-devedition;
+      configPath = "${config.xdg.configHome}/mozilla/firefox-devedition";
     };
 
     chromium = {
@@ -138,10 +138,10 @@
     ssh = {
       enable = true;
       enableDefaultConfig = false;
-      matchBlocks."*" = {
-        controlMaster = "auto";
-        controlPath = "~/.ssh/sockets/%r@%h-%p";
-        controlPersist = "10m";
+      settings."*" = {
+        ControlMaster = "auto";
+        ControlPath = "~/.ssh/sockets/%r@%h-%p";
+        ControlPersist = "10m";
       };
     };
 
@@ -188,6 +188,73 @@
         swap_disk = false;
       };
     };
+
+    nixcord = {
+      enable = true;
+      discord.enable = false;
+      vesktop = {
+        enable = true;
+        settings = {
+          discordBranch = "canary";
+          minimizeToTray = false;
+          arRPC = false;
+          hardwareAcceleration = true;
+          hardwareVideoAcceleration = true;
+          disableMinSize = true;
+        };
+      };
+
+      config = {
+        themeLinks = [
+          "https://raw.githubusercontent.com/DiscordStyles/HorizontalServerList/deploy/HorizontalServerList.theme.css"
+        ];
+        enabledThemes = [
+          "https://raw.githubusercontent.com/DiscordStyles/HorizontalServerList/deploy/HorizontalServerList.theme.css"
+        ];
+
+        frameless = true;
+
+        plugins = {
+          betterGifAltText.enable = true;
+          memberCount.enable = true;
+          messageLogger = {
+            enable = true;
+            ignoreSelf = true;
+            ignoreSelfEdits = true;
+            separatedDiffs = true;
+            showEditDiffs = true;
+          };
+          platformIndicators.enable = true;
+          reverseImageSearch.enable = true;
+          unindent.enable = true;
+          voiceChatDoubleClick.enable = true;
+          clearUrls.enable = true;
+          whoReacted.enable = true;
+          viewIcons.enable = true;
+          typingIndicator.enable = true;
+          typingTweaks.enable = true;
+          viewRaw.enable = true;
+          gifPaste.enable = true;
+          implicitRelationships.enable = true;
+          relationshipNotifier.enable = true;
+          showAllMessageButtons.enable = true;
+          permissionsViewer.enable = true;
+          favoriteGifSearch.enable = true;
+          showConnections.enable = true;
+          copyUserUrls.enable = true;
+          webKeybinds.enable = true;
+          webScreenShareFixes.enable = true;
+          copyFileContents.enable = true;
+          alwaysExpandRoles.enable = true;
+          volumeBooster = {
+            enable = true;
+            multiplier = 4.0;
+          };
+          disableDeepLinks.enable = true;
+          imageFilename.enable = true;
+        };
+      };
+    };
   };
 
   # extra services
@@ -210,9 +277,6 @@
   stylix.targets.hyprlock.enable = false;
   stylix.targets.gnome-text-editor.enable = false;
   stylix.targets.firefox.enable = false;
-
-  # themeing
-  gtk.gtk4.theme = config.gtk.theme;
 
   # ensure ssh socket directory exists
   home.file.".ssh/sockets/.keep".text = "";
