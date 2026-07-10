@@ -35,7 +35,7 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
         HyprlandAPI::addWindowDecoration(PHANDLE, pWindow, makeUnique<CEdgeGlow>(pWindow));
     });
 
-    for (auto& w : g_pCompositor->m_windows) {
+    for (auto& w : Desktop::windowState()->windows()) {
         if (!w->m_isMapped)
             continue;
         HyprlandAPI::addWindowDecoration(PHANDLE, w, makeUnique<CEdgeGlow>(w));

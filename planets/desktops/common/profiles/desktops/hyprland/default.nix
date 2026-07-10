@@ -19,6 +19,7 @@ let
       pkgs.libinput.dev
       pkgs.libdrm.dev
       pkgs.cairo.dev
+      pkgs.pango.dev
       pkgs.libxkbcommon.dev
       pkgs.wayland.dev
       pkgs.libxcb.dev
